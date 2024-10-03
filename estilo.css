@@ -2,8 +2,7 @@
     background-color: lightblue;
 }
 .titulo {
-    position: absolute;
-    color: lightblue;
+    color: blue;
     font-family: 'Bauhaus 93';
 }
 .texto {
