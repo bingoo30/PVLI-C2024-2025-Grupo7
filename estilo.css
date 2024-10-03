@@ -2,15 +2,15 @@
     background-color: lightblue;
 }
 .titulo {
+    font-size: 60px;
     color: cornflowerblue;
     font-family: 'Bauhaus 93';
     text-align: center;
+    background-color:azure;
 }
 .texto {
     color: black;
     text-align: center;
-    font-size: 20px;
+    font-size: 15px;
     font-family: Arial;
-    margin-right: 300px;
-    margin-left: 300px;
 }
