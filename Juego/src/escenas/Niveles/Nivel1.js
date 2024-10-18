@@ -13,7 +13,7 @@ export default class Animation extends Phaser.Scene {
 	
 	preload(){
 		this.load.image('suelo', 'assets/suelo.jpg');
-		this.load.spritesheet('player', 'assets/player.png', {frameWidth: 72, frameHeight: 86})
+		this.load.spritesheet('player', 'assets/player.jpg', {frameWidth: 72, frameHeight: 86})
 	}
 	
 	/**
@@ -29,8 +29,6 @@ export default class Animation extends Phaser.Scene {
 		//Instanciamos nuestro personaje, que es un caballero, y la plataforma invisible que hace de suelo
 		let player = new Player(this, 50, 0);
 		let floor = new Floor(this, 50);
-
-		knight.body.onCollide = true; // Activamos onCollide para poder detectar la colisión del caballero con el suelo
 
 		let scene = this; // Nos guardamos una referencia a la escena para usarla en la función anidada que viene a continuación
 		
