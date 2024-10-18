@@ -1,0 +1,150 @@
+/*.body {
+    background-color: lightblue;
+}*/
+
+.titulo {
+    font-size: 60px;
+    color: cornflowerblue;
+    font-family: Lobster;
+    text-align: center;
+    background-color: azure;
+}
+
+.texto {
+    color: white;
+    text-align: center;
+    font-size: 22px;
+    font-family: Lobster;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Lobster;
+    background-color: #0A0A0A;
+    color: #f00;
+}
+
+header {
+    background-color: #111;
+    font-family: Lobster;
+    padding: 20px;
+    text-align: center;
+    color: #f00;
+    font-size: 3.5em;
+    border-bottom: 2px solid #f00;
+}
+
+nav {
+    text-align: center;
+    margin: 20px 0;
+}
+
+    nav a {
+        text-decoration: none;
+        color: #f00;
+        font-size: 1.2em;
+        margin: 0 15px;
+        transition: color 0.3s;
+    }
+
+        nav a:hover {
+            color: #ffffff;
+        }
+
+.banner {
+    background-image: url('https://preview.redd.it/1920x1080-topography-wallpapers-made-by-me-request-for-v0-j8m6ykh6ar1a1.jpg?width=640&crop=smart&auto=webp&s=c3e4e9e6a60581cf1399fc84e2f56702972c8868'); /* Placeholder image URL */
+    background-size: cover;
+    background-position: center;
+    padding: 20px 0;
+    text-align: center;
+}
+
+    .banner h1 {
+        font-size: 3.5em;
+        color: #f00;
+    }
+
+    .banner p {
+        font-size: 1.5em;
+        margin-top: 10px;
+    }
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.card {
+    background-color: #111;
+    border: 2px solid #FFD700;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    margin: 20px;
+    transition: transform 0.3s;
+}
+
+    .card:hover {
+        transform: scale(1.05);
+    }
+
+    .card img {
+        width: 100px;
+        height: auto;
+    }
+
+    .card h2 {
+        color: #f00;
+        margin-top: 10px;
+    }
+
+    .card p {
+        color: #f00;
+    }
+
+.content {
+    flex: 1;
+    padding: 100px;
+    background-color: #0A0A0A;
+}
+
+
+
+.cards {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+footer {
+    background-color: #111;
+    padding: 20px;
+    text-align: center;
+    color: #f00;
+    border-top: 2px solid #f00;
+    margin-top: 40px;
+}
+
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* 100% de la altura de la ventana */
+}
+
+.footer-icons {
+    margin-top: 10px;
+}
+
+    .footer-icons img {
+        width: 30px;
+        height: auto;
+        margin: 0 10px;
+        transition: transform 0.3s;
+    }
+
+        .footer-icons img:hover {
+            transform: scale(1.2);
+        }

@@ -1,5 +1,5 @@
-import Player from '../objetos/Player/player.js';
-import Floor from '../objetos/Escenario/floor.js';
+import Player from '../../objetos/Player/player.js';
+import Floor from '../../objetos/Escenario/floor.js';
 
 /**
  * Escena principal de juego.

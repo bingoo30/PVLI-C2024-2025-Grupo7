@@ -1,4 +1,4 @@
-import Maingame from './escenas/Niveles/Nivel1.js';
+import Nivel1 from './escenas/Niveles/Nivel1.js';
 
 
 let config = {

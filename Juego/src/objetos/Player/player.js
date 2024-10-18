@@ -1,4 +1,4 @@
-import character from "./character";
+import character from "./character.js";
 
 /**
  * @extends character
