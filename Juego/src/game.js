@@ -1,19 +1,49 @@
+import Maingame from './escenas/maingame.js';
+import Title from './escenas/title.js';
+import Gameover from './escenas/gameover.js'
+
 let config = {
 	type: Phaser.AUTO,
+	parent: 'juego',
+
+
 	width: 800,
 	height: 600,
 	pixelArt: true,
 	scale: {
-		autoCenter: Phaser.Scale.CENTER_HORIZONTALLY
+		autoCenter: Phaser.Scale.CENTER_HORIZONTALLY,
+
+		mode: Phaser.Scale.FIT,
+		min: {
+			width: 400,
+			height: 300
+		},
+		max: {
+			width: 1600,
+			height: 1200
+		},
+		zoom: 1
+
 	},
-	scene: [Habilidad, Pausa, Inicio, Creditos,Loading, Nivel1, Nivel2, Nivel3, Nivel4],	// Decimos a Phaser cual es nuestra escena
+	scene: [Loading, Inicio, Nivel1, Nivel2, Nivel3, Nivel4, Habilidad, Pausa, Creditos],	// Decimos a Phaser cual es nuestra escena
 	physics: {
 		default: 'arcade',
 		arcade: {
-			gravity: { y: 200 },
-			debug: false
+			gravity: { y: 0 },
+			debug: true
+		},
+
+		checkCollision: {
+			up: true,
+			down: true,
+			left: true,
+			right: true
 		}
-	}
+
+	},
+	title: "Madness",
+	version: "1.0.0"
+
 };
 
 new Phaser.Game(config);
