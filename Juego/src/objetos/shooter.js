@@ -4,11 +4,13 @@
 //Ciclyzar//Ciclyzar//Ciclyzar//Ciclyzar//Ciclyzar//Ciclyzar//Ciclyzar//Ciclyzar//Ciclyzar//Ciclyzar//Ciclyzar//Ciclyzar//Ciclyzar//Ciclyzar//Ciclyzar//Ciclyzar
 //Ciclyzar//Ciclyzar//Ciclyzar//Ciclyzar//Ciclyzar//Ciclyzar//Ciclyzar//Ciclyzar//Ciclyzar//Ciclyzar//Ciclyzar//Ciclyzar//Ciclyzar//Ciclyzar//Ciclyzar
 
-export default class Shooter extends Phaser.GameObject.component {
+
+import Bullet, {Bullet} from './bullet.js'
+
+export default class Shooter extends Phaser.GameObject.Sprite {
+
 
     generateBullet(shooter, target) {
-
-        //wtf????
 
 
 

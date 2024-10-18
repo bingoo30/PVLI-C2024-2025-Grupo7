@@ -6,14 +6,14 @@ export default class Bullet extends Phaser.GameObject.Sprite {
      * @param {number} speed - velocidad de la bala
      * @param {number} range - alcance max
      */
-    constructor(scene, damage, speed, range) {
+    constructor(scene, damage, speed, range, xSpeed, ySpeed) {
         super(scene, 0, 0, 'bullet');
 
         this.damage = damage;  
         this.speed = speed; 
         this.range = range; 
-        this.xSpeed = 0;
-        this.ySpeed = 0;
+        this.xSpeed = xSpeed;
+        this.ySpeed = ySpeed;
         this.direction = 0;
 
         this.setActive(false);
