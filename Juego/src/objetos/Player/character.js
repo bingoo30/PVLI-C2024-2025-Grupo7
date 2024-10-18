@@ -25,6 +25,7 @@ export default class character extends Phaser.GameObjects.Image {
         super(scene, x, y, 'character');
         scene.add.existing(this);
 
+        
         // Inicializar las propiedades
         this.life = life;
         this.damage = damage; 
