@@ -13,7 +13,7 @@ export default class Animation extends Phaser.Scene {
 	
 	preload(){
 		this.load.image('suelo', 'assets/suelo.gif');
-		this.load.image('player', 'assets/player.png')
+		this.load.image('Player', 'assets/player.png');
 	}
 	
 	/**
@@ -24,10 +24,9 @@ export default class Animation extends Phaser.Scene {
 
 		//Imagen de fondo
 		this.add.image(0, 0, 'suelo').setOrigin(0, 0);
-
 		
 		//Instanciamos nuestro personaje, que es un caballero, y la plataforma invisible que hace de suelo
-		let player = new Player(this, 50, 0);
+		let player = new Player(this, 100, 100);
 		let floor = new Floor(this, 50);
 
 		let scene = this; // Nos guardamos una referencia a la escena para usarla en la función anidada que viene a continuación

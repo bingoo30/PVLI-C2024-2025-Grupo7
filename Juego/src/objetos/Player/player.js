@@ -20,9 +20,9 @@ export default class Player extends Phaser.GameObjects.Sprite {
         //(DE MOMENTO LO HAGO TODO EN EL PLAYER)
         //heredo de la clase character
         //this.character = character;
-        this.xSpeed = 0;
-        this.ySpeed = 0;
 
+        this.speed = new Phaser.Math.Vector2(0,0);
+        this.speedFactor = 100;
         //lo añado a la escena
         this.scene.add.existing(this);
 
@@ -48,19 +48,24 @@ export default class Player extends Phaser.GameObjects.Sprite {
     preUpdate(t, dt) {
         super.preUpdate(t, dt);
         if (this.aKey.isDown) {
-            this.xSpeed = -1;
+            this.speed.x = -1;
         }
         else if (this.dKey.isDown) {
-            this.xSpeed = 1;
+            this.speed.x = 1;
         }
+        else this.speed.x = 0;
 
         if (this.wKey.isDown) {
-            this.ySpeed = 1;
+            this.speed.y = -1;
         }
         else if (this.sKey.isDown) {
-            this.ySpeed = -1;
+            this.speed.y = 1;
         }
+        else this.speed.y = 0;
 
-        this.body.setVelocity(this.xSpeed, this.ySpeed);
+        this.speed.normalize();
+        //this.speed *= this.speedFactor;
+
+        this.body.setVelocity(this.speed.x, this.speed.y);
     }
 }
