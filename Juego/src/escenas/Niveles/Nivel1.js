@@ -12,8 +12,8 @@ export default class Animation extends Phaser.Scene {
 	}
 	
 	preload(){
-		this.load.image('suelo', 'assets/suelo.jpg');
-		this.load.spritesheet('player', 'assets/player.jpg', {frameWidth: 72, frameHeight: 86})
+		this.load.image('suelo', 'assets/suelo.gif');
+		this.load.image('player', 'assets/player.png')
 	}
 	
 	/**
