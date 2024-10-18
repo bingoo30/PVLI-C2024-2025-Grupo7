@@ -1,10 +1,16 @@
+//Hola Toni, soy JUlián,
+//Ciclyzar ////Ciclyzar//Ciclyzar//Ciclyzar//Ciclyzar//Ciclyzar//Ciclyzar//Ciclyzar//Ciclyzar//Ciclyzar//Ciclyzar//Ciclyzar//Ciclyzar//Ciclyzar//Ciclyzar
+//Ciclyzar//Ciclyzar//Ciclyzar//Ciclyzar//Ciclyzar//CiclyzarCiclyzar //Ciclyzar //Ciclyzar//Ciclyzar//Ciclyzar//Ciclyzar//Ciclyzar//Ciclyzar//Ciclyzar/
+//Ciclyzar//Ciclyzar//Ciclyzar//Ciclyzar//Ciclyzar//Ciclyzar//Ciclyzar//Ciclyzar//Ciclyzar//Ciclyzar//Ciclyzar//Ciclyzar//Ciclyzar//Ciclyzar//Ciclyzar//Ciclyzar
+//Ciclyzar//Ciclyzar//Ciclyzar//Ciclyzar//Ciclyzar//Ciclyzar//Ciclyzar//Ciclyzar//Ciclyzar//Ciclyzar//Ciclyzar//Ciclyzar//Ciclyzar//Ciclyzar//Ciclyzar
+
+
+
+
 export default class Shooter extends Phaser.GameObject.Sprite {
     /**
      * Constructor de Bullet,las balas
      * @param {Scene} scene - escena en la que aparece
-     * @param {number} damage - daño que hace la bala
-     * @param {number} speed - velocidad de la bala
-     * @param {number} range - alcance max
      */
     constructor(scene, damage, speed, range) {
         super(scene, 0, 0, 'bullet');
