@@ -6,7 +6,7 @@ let config = {
 	scale: {
 		autoCenter: Phaser.Scale.CENTER_HORIZONTALLY
 	},
-	scene: [Nivel1, Nivel2, Nivel3, Nivel4,Skill, Pausa, Inicio,Credits],	// Decimos a Phaser cual es nuestra escena
+	scene: [Habilidad, Pausa, Inicio, Creditos,Loading, Nivel1, Nivel2, Nivel3, Nivel4],	// Decimos a Phaser cual es nuestra escena
 	physics: {
 		default: 'arcade',
 		arcade: {
