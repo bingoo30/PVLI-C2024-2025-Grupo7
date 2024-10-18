@@ -4,7 +4,7 @@ const DEFAULT_SPEED = 1;
 const DEFAULT_DAMAGE = 1;
 const DEFAULT_SHOOTSPEED = 1;
 const DEFAULT_CRIT = 0;
-export default class character extends Phaser.GameObjects.Image {
+export default class character extends Phaser.GameObjects.Sprite {
     /**
      * 
      * @param {Phaser.Scene} scene La escena del juego
