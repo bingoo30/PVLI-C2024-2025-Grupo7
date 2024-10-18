@@ -1,6 +1,5 @@
-import Maingame from './escenas/maingame.js';
-import Title from './escenas/title.js';
-import Gameover from './escenas/gameover.js'
+import Maingame from './escenas/Niveles/Nivel1.js';
+
 
 let config = {
 	type: Phaser.AUTO,
@@ -25,7 +24,8 @@ let config = {
 		zoom: 1
 
 	},
-	scene: [Loading, Inicio, Nivel1, Nivel2, Nivel3, Nivel4, Habilidad, Pausa, Creditos],	// Decimos a Phaser cual es nuestra escena
+	//scene: [Loading, Inicio, Nivel1, Nivel2, Nivel3, Nivel4, Habilidad, Pausa, Creditos],	// Decimos a Phaser cual es nuestra escena
+	scene: [Nivel1],
 	physics: {
 		default: 'arcade',
 		arcade: {
