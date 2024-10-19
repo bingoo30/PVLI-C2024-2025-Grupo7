@@ -5,14 +5,14 @@ export default class Bullet extends Phaser.GameObject.Sprite {
      * @param {number} damage - daño que hace la bala
      * @param {number} range - alcance max
      * @param {number} startX - ejeX inicial
-     * @param {number} startY - ejeY inical
+     * @param {number} startY - ejeY inical\
+     * @param {number} range - alcance max
      */
-    constructor(scene, damage, xSpeed, ySpeed, range) {
+    constructor(scene, damage, speed, range) {
         super(scene, x, y, 'bullet');
         this.scene.add.existing(this);
         this.damage = damage;  
-        this.xSpeed = xSpeed;
-        this.ySpeed = ySpeed;
+        this.speed = speed;
         this.range = range;
         this.startX = x; //posicion de la bala al ser disparado
         this.startY = y;
@@ -20,7 +20,7 @@ export default class Bullet extends Phaser.GameObject.Sprite {
 
     }
     update(time, delta) {
-        this.body.setVelocity(this.xSpeed, this.ySpeed);
+        this.body.setVelocity(speed);
         const distance = Phaser.Math.Distance.Between(this.startX, this.startY, this.x, this.y); //calcula la ditancia
         if (distance >= this.range) {
             this.destroyBullet();

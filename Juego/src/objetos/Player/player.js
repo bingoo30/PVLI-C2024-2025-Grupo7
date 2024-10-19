@@ -66,6 +66,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
         this.speed.normalize();
         //this.speed *= this.speedFactor;
 
-        this.body.setVelocity(this.speed.x, this.speed.y);
+
+        this.body.setVelocity(this.speed.x*this.speedFactor, this.speed.y*this.speedFactor);
     }
 }
