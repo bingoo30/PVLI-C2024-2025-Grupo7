@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="estilo.css"> <!-- Esto cargaria un archivo de estilo, pero no es necesario en Fiddle porque lo hace automáticamente -->
     <script src="./lib/phaser.js"></script>
+    <script src="./lib/script.js"></script>
 </head>
 <body class="body">
     <script src="./src/game.js" type="module"></script>
@@ -14,9 +15,22 @@
 
     <nav>
         <a href="#">Juego</a>
-        <a href="#">Descripción</a>
-        <a href="#">Controles</a>
-        <a href="#">Contacto</a>
+        <a href="#" onclick="muestraClase('descripcion'),
+                     escondeClase('controles'),
+                     escondeClase('contacto'),
+                     escondeClase('creditos')">Descripción</a>
+        <a href="#" onclick="muestraClase('controles'),
+                     escondeClase('descripcion'),
+                     escondeClase('contacto'),
+                     escondeClase('creditos')">Controles</a>
+        <a href="#" onclick="muestraClase('creditos'),
+                     escondeClase('controles'),
+                     escondeClase('contacto'),
+                     escondeClase('descripcion')">Créditos</a>
+        <a href="#" onclick="muestraClase('contacto'),
+                     escondeClase('controles'),
+                     escondeClase('descripcion'),
+                     escondeClase('creditos')">Contacto</a>
     </nav>
     <div class="wrapper">
         <div id="juego">
