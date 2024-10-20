@@ -16,9 +16,7 @@ export default class Title extends Phaser.Scene {
 	 */
 	preload(){
 		this.load.image('start', 'assets/GUI/start.png');
-		this.load.image('castle', 'assets/castle.gif');
-		this.load.spritesheet('knight', 'assets/Knight/knight.png', {frameWidth: 72, frameHeight: 86})
-		this.load.spritesheet('box', 'assets/Box/box.png', {frameWidth: 64, frameHeight: 64})
+		this.load.image('castle', 'assets/suelo.gif');
 	}
 	
 	/**
@@ -40,7 +38,7 @@ export default class Title extends Phaser.Scene {
 	    });
 
 	    sprite.on('pointerup', pointer => {
-			this.scene.start('maingame'); //Cambiamos a la escena de juego
+			this.scene.start('nivel1'); //Cambiamos a la escena de juego
 
 	    });
 

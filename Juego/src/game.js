@@ -1,4 +1,5 @@
 import Nivel1 from './escenas/Niveles/Nivel1.js';
+import Title from './escenas/title.js';
 
 
 let config = {
@@ -25,7 +26,7 @@ let config = {
 
 	},
 	//scene: [Loading, Inicio, Nivel1, Nivel2, Nivel3, Nivel4, Habilidad, Pausa, Creditos],	// Decimos a Phaser cual es nuestra escena
-	scene: [Nivel1],
+	scene: [Title, Nivel1],
 	physics: {
 		default: 'arcade',
 		arcade: {
