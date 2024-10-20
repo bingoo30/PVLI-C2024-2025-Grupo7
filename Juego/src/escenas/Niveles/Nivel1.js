@@ -32,23 +32,6 @@ export default class Animation extends Phaser.Scene {
 		let scene = this; // Nos guardamos una referencia a la escena para usarla en la función anidada que viene a continuación
 		
 	
-
-
-		/*
-		 * Escuchamos los eventos de colisión en el mundo para poder actuar ante ellos
-		 * En este caso queremos detectar cuando el caballero colisiona con el suelo para activar el salto del personaje
-		 * El salto del caballero lo desactivamos en su "clase" (archivo knight.js) para evitar dobles saltos
-		 * También comprobamos si está en contacto con alguna caja mientras ataca, en ese caso destruimos la caja
-		 */
-		scene.physics.world.on('collide', function(gameObject1, gameObject2, body1, body2) {
-			// Comprobamos si la colisión es del caballero con una caja (grupo boxes)
-			if (gameObject1 === player && boxes.contains(gameObject2)){
-				if(gameObject1.isAttackInProcess()) {
-					gameObject2.destroyMe()
-				} 				
-			}
-		});	
-
 	}
 
 	init(){

@@ -14,9 +14,9 @@ export default class Title extends Phaser.Scene {
 	/**
 	 * Cargamos todos los assets que vamos a necesitar
 	 */
-	preload(){
+	preload() {
 		this.load.image('start', 'assets/GUI/start.png');
-		this.load.image('castle', 'assets/suelo.gif');
+		this.load.image('background', 'assets/GUI/fondoinicio.png');
 	}
 	
 	/**
@@ -26,10 +26,10 @@ export default class Title extends Phaser.Scene {
 		console.log("me he creado", this.scene.key);
 
 		//Pintamos un fondo
-		var back = this.add.image(0, 0, 'castle').setOrigin(0, 0);
+		var back = this.add.image(0, 0, 'background').setOrigin(0, 0);
 
 		//Pintamos un botón de Empezar
-		var sprite = this.add.image(this.sys.game.canvas.width/2, this.sys.game.canvas.height/2, 'start')
+		var sprite = this.add.image(this.sys.game.canvas.width/2, this.sys.game.canvas.height/2 + 100, 'start')
 		sprite.setInteractive(); // Hacemos el sprite interactivo para que lance eventos
 
 		// Escuchamos los eventos del ratón cuando interactual con nuestro sprite de "Start"
