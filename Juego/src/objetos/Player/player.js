@@ -30,6 +30,9 @@ export default class Player extends Phaser.GameObjects.Sprite {
         scene.physics.add.existing(this);
         //this.body.setCollideWorldBounds();
 
+        this.body.setSize(16,8);
+        this.body.setOffset(8,24);
+
 
         //input
         // Seteamos las teclas para mover al personaje
