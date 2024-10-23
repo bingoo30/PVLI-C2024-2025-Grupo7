@@ -22,7 +22,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
         //this.character = character;
 
         this.speed = new Phaser.Math.Vector2(0,0);
-        this.speedFactor = 100;
+        this.speedFactor = 400;
         //lo añado a la escena
         this.scene.add.existing(this);
 

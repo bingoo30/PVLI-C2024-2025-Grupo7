@@ -34,18 +34,18 @@ export default class Animation extends Phaser.Scene {
 		const sueloLayer = map.createLayer('suelo', tileset);
 		const paredLayer = map.createLayer('pared', tileset);
 
-		sueloLayer.setPosition(0, -1024*2.5);
-		paredLayer.setPosition(0, -1024*2.5);
+		sueloLayer.setOrigin(0, -1);
+		paredLayer.setOrigin(0, -1);
 
 
-		paredLayer.setCollisionFromCollisionGroup();
+		paredLayer.setCollisionByProperty({ collides: true });
 
-		sueloLayer.setScale(3);
-		paredLayer.setScale(3);
+		sueloLayer.setScale(4);
+		paredLayer.setScale(4);
 		
 		//Instanciamos nuestro personaje, que es un caballero, y la plataforma invisible que hace de suelo
 		let player = new Player(this, 200, 200);
-		player.setScale(2.5);
+		player.setScale(4);
 
 		//let floor = new Floor(this, 50);
 		let scene = this; // Nos guardamos una referencia a la escena para usarla en la función anidada que viene a continuación
@@ -54,12 +54,7 @@ export default class Animation extends Phaser.Scene {
 
 		this.cameras.main.startFollow(player);
 
-		const debugGraphics = this.add.graphics();
-		paredLayer.renderDebug(debugGraphics, {
-			tileColor: null, // No colorear los tiles
-			collidingTileColor: new Phaser.Display.Color(243, 134, 48, 200), // Color para los tiles colisionables
-			faceColor: new Phaser.Display.Color(40, 39, 37, 255) // Color para los bordes de colisión
-		});
+		
 
 	}
 
