@@ -28,7 +28,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
 
         // Agregamos fisicas
         scene.physics.add.existing(this);
-        this.body.setCollideWorldBounds();
+        //this.body.setCollideWorldBounds();
 
 
         //input

@@ -52,6 +52,8 @@ export default class Animation extends Phaser.Scene {
 
 		this.physics.add.collider(player, paredLayer);
 
+		this.cameras.main.startFollow(player);
+
 		const debugGraphics = this.add.graphics();
 		paredLayer.renderDebug(debugGraphics, {
 			tileColor: null, // No colorear los tiles
