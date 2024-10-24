@@ -13,9 +13,9 @@ export default class Animation extends Phaser.Scene {
 	
 	preload(){
 		//this.load.image('suelo', 'assets/suelo.gif');
-		this.load.image('Player', 'assets/player.png');
-		this.load.tilemapTiledJSON('mapa1', 'assets/map/mapa1.json');
-		this.load.image('tileset', 'assets/map/mapTiles.png');
+		//this.load.image('Player', 'assets/player.png');
+		//this.load.tilemapTiledJSON('mapa1', 'assets/map/mapa1.json');
+		//this.load.image('tileset', 'assets/map/mapTiles.png');
 
 	}
 	
