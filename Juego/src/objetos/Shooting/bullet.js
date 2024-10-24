@@ -5,10 +5,9 @@ export default class Bullet extends Phaser.GameObject.Sprite {
      * @param {number} damage - daño que hace la bala
      * @param {number} range - alcance max
      * @param {number} startX - ejeX inicial
-     * @param {number} startY - ejeY inical\
-     * @param {number} range - alcance max
+     * @param {number} startY - ejeY inical
      */
-    constructor(scene, damage, speed, range) {
+    constructor(scene, damage, speed, range, x, y) {
         super(scene, x, y, 'bullet');
         this.scene.add.existing(this);
         this.damage = damage;  

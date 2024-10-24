@@ -19,8 +19,6 @@ export default class Shooter extends Phaser.GameObject.Sprite {
         this.setActive(true);
         this.setVisible(true);
 
-
-
         // this.setPosition(shooter.x, shooter.y); // Initial position
         // this.startX = shooter.x; //posicion de la bala al ser disparado
         // this.startY = shotter.y;
