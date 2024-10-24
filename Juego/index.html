@@ -14,30 +14,39 @@
     </header>
 
     <nav>
-        <a href="#">Juego</a>
+        <a href="#" onclick="muestraID('juego'),
+                     escondeClase('descripcion'),
+                     escondeClase('controles'),
+                     escondeClase('contacto'),
+                     escondeClase('creditos')">Juego</a>
         <a href="#" onclick="muestraClase('descripcion'),
                      escondeClase('controles'),
                      escondeClase('contacto'),
-                     escondeClase('creditos')">Descripción</a>
+                     escondeClase('creditos'),
+                     escondeID('juego')">Descripción</a>
         <a href="#" onclick="muestraClase('controles'),
                      escondeClase('descripcion'),
                      escondeClase('contacto'),
-                     escondeClase('creditos')">Controles</a>
+                     escondeClase('creditos'),
+                     escondeID('juego')">Controles</a>
         <a href="#" onclick="muestraClase('creditos'),
                      escondeClase('controles'),
                      escondeClase('contacto'),
-                     escondeClase('descripcion')">Créditos</a>
+                     escondeClase('descripcion'),
+                     escondeID('juego')">Créditos</a>
         <a href="#" onclick="muestraClase('contacto'),
                      escondeClase('controles'),
                      escondeClase('descripcion'),
-                     escondeClase('creditos')">Contacto</a>
+                     escondeClase('creditos'),
+                     escondeID('juego')">Contacto</a>
     </nav>
     <div class="wrapper">
-        <div id="juego">
 
-        </div>
         <div class="banner">
             <h1>NextStationGames</h1>
+
+        </div>
+        <div id="juego">
 
         </div>
         <div class="content">
