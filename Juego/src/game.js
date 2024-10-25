@@ -6,11 +6,10 @@ import Loading from './escenas/loading.js';
 let config = {
 	type: Phaser.AUTO,
 	parent: 'juego',
-
-
 	width: 1000,
 	height: 600,
 	pixelArt: true,
+	mipmapFilter: 'LINEAR_MIPMAP_LINEAR',
 	scale: {
 		autoCenter: Phaser.Scale.CENTER_HORIZONTALLY,
 
@@ -28,6 +27,7 @@ let config = {
 	},
 	//scene: [Loading, Inicio, Nivel1, Nivel2, Nivel3, Nivel4, Habilidad, Pausa, Creditos],	// Decimos a Phaser cual es nuestra escena
 	scene: [Loading, Title, Nivel1],
+
 	physics: {
 		default: 'arcade',
 		arcade: {
@@ -43,6 +43,18 @@ let config = {
 		}
 
 	},
+
+	plugins: {
+		scene: [
+			{
+				key: "PhaserNavMeshPlugin", // Key to store the plugin class under in cache
+				plugin: PhaserNavMeshPlugin, // Class that constructs plugins
+				mapping: "navMeshPlugin", // Property mapping to use for the scene, e.g. this.navMeshPlugin
+				start: true
+			}
+		]
+	},
+
 	title: "Madness",
 	version: "1.0.0"
 

@@ -29,7 +29,7 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
         this.speed = 100;
         // Agregamos fisicas
         scene.physics.add.existing(this);
-        this.body.setCollideWorldBounds();
+        //this.body.setCollideWorldBounds();
 
         this.body.setSize(16,8);
         this.body.setOffset(8,24);
