@@ -34,7 +34,7 @@ export default class Title extends Phaser.Scene {
 
 		// Escuchamos los eventos del ratón cuando interactual con nuestro sprite de "Start"
 	    sprite.on('pointerdown', pointer => {
-	    	// console.log("pulsando");
+	    	 console.log("pulsando");
 	    });
 
 	    sprite.on('pointerup', pointer => {

@@ -15,7 +15,7 @@ export default class Player extends Character {
 
         //(DE MOMENTO LO HAGO TODO EN EL PLAYER)
         //heredo de la clase character
-        this.character = character;
+        this.character = 'Player';
         this.speed = new Phaser.Math.Vector2(0,0);
         this.speedFactor = 400;
 
@@ -79,15 +79,15 @@ export default class Player extends Character {
         }
         else this.speed.y = 0;
 
-        // Input de mouse
-        if(this.mouse.leftButtonDown()){
+       //Input de mouse
+       if(this.mouse.leftButtonDown()){
             // Todo esto se debería mover al Shooter
-            //this.characterShoot();
-            if(this.sCooldown < )
+            this.characterShoot();
+            //if (this.sCooldown < );
 
 
             new Bullet(this.scene, 1, 10, 20, this.x, this.y);  
-        }
+       }
 
         this.speed.normalize();
         //this.speed *= this.speedFactor;

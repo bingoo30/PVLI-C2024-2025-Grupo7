@@ -2,87 +2,8 @@ import Player from '../../objetos/Player/player.js';
 import Enemy from '../../objetos/Enemies/enemy.js';
 import Floor from '../../objetos/Escenario/floor.js';
 
-
-const WALKABLE_RECTANGLES = [
-    {
-        "height": 176,
-        "id": 5,
-        "name": "",
-        "rotation": 0,
-        "type": "",
-        "visible": true,
-        "width": 368,
-        "x": 1000,
-        "y": 1096
-    },
-    {
-        "height": 176,
-        "id": 7,
-        "name": "",
-        "rotation": 0,
-        "type": "",
-        "visible": true,
-        "width": 336,
-        "x": 1416,
-        "y": 1160
-    },
-    {
-        "height": 16,
-        "id": 9,
-        "name": "",
-        "rotation": 0,
-        "type": "",
-        "visible": true,
-        "width": 48,
-        "x": 1368,
-        "y": 1256
-    },
-    {
-        "height": 232,
-        "id": 10,
-        "name": "",
-        "rotation": 0,
-        "type": "",
-        "visible": true,
-        "width": 48,
-        "x": 1256,
-        "y": 864
-    },
-    {
-        "height": 120,
-        "id": 15,
-        "name": "",
-        "rotation": 0,
-        "type": "",
-        "visible": true,
-        "width": 240,
-        "x": 936,
-        "y": 864
-    },
-    {
-        "height": 184,
-        "id": 17,
-        "name": "",
-        "rotation": 0,
-        "type": "",
-        "visible": true,
-        "width": 432,
-        "x": 936,
-        "y": 680
-    },
-    {
-        "height": 112,
-        "id": 18,
-        "name": "",
-        "rotation": 0,
-        "type": "",
-        "visible": true,
-        "width": 64,
-        "x": 1368,
-        "y": 744
-    }
-]
-
+//constante
+const SCALE = 4;
 
 
 /**
@@ -113,27 +34,26 @@ export default class Animation extends Phaser.Scene {
 		//this.add.image(0, 0, 'suelo').setOrigin(0, 0);
         //https://medium.com/@tajammalmaqbool11/mastering-2d-game-path-finding-with-phaser3-ai-path-finding-301807c74ba3
 		//Tilemap
-		const map = this.make.tilemap({ key: 'mapa1' });
+		const map = this.make.tilemap({ key: 'mapa1', tileWidth: 32, tileHeight: 32 });
 		const tileset = map.addTilesetImage('mapTiles', 'tileset');
 		const sueloLayer = map.createLayer('suelo', tileset);
 		const paredLayer = map.createLayer('pared', tileset);
 
+		const positionLayer = map.getObjectLayer('position', tileset);
 
-		sueloLayer.setPosition(-1024*3.5,-1024*3.5);
-		paredLayer.setPosition(-1024*3.5,-1024*3.5);
-
+		//sueloLayer.setPosition(-1024*3.5,-1024*3.5);
+		//paredLayer.setPosition(-1024*3.5,-1024*3.5);
 
 		paredLayer.setCollisionByProperty({ collides: true });
-
-		sueloLayer.setScale(4);
-		paredLayer.setScale(4);
-
+		sueloLayer.setScale(SCALE);
+		paredLayer.setScale(SCALE);
 
 		const navMesh = this.navMeshPlugin.buildMeshFromTilemap("mesh", map, [sueloLayer]);
 
+		/*
 		const path = navMesh.findPath({ x: 400, y: 40 }, { x: 1000, y: -100 });
 
-		console.log(path);
+		//console.log(path);
 
 		let graphics = this.add.graphics();
 
@@ -146,22 +66,23 @@ export default class Animation extends Phaser.Scene {
 		}
 
 		graphics.strokePath();
+		*/
+
+		//buscamos la capa de objetos donde estan las posiciones iniciales
+		const objectLayer = map.getObjectLayer('position');
+		const playerPos = objectLayer.objects.find(obj => obj.name == 'playerPosition');
+
+		// Verificar si el objeto fue encontrado
+		if (!playerPos) console.log('Position player no encontrado.');
+		const playerX = playerPos.x * SCALE;
+		const playerY = playerPos.y * SCALE;
+
+		this.player = new Player(this, playerX, playerY);
+		this.player.setScale(SCALE);
 
 
-
-
-		
-		//Instanciamos nuestro personaje, que es un caballero, y la plataforma invisible que hace de suelo
-		//let player = new Player(this, 200, 200);
-		//player.setScale(4);
-
-		this.player = new Player(this, 200, 200);
-		this.player.setScale(4);
-
-
-		this.enemy = new Enemy(this, 200, 200, this.player);
-		this.enemy.setScale(4);
-		//let floor = new Floor(this, 50);
+		this.enemy = new Enemy(this, playerX, playerY, this.player);
+		this.enemy.setScale(SCALE);
 
 		let scene = this; // Nos guardamos una referencia a la escena para usarla en la función anidada que viene a continuación
 		this.physics.add.collider(this.enemy, paredLayer);
