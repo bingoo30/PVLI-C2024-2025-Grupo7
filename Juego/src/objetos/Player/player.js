@@ -9,21 +9,12 @@ import Bullet from "../Shooting/bullet.js";
 	 * @param {number} y - coordenada y
  */
 export default class Player extends Character {
-    /**
-     * Constructor de Player, nuestro caballero medieval con espada y escudo
-     * @param {Scene} scene - escena en la que aparece
-     * @param {number} x - coordenada x
-     * @param {number} y - coordenada y
-    */
     constructor(scene, x, y) {
         //heredo de la clase character
         super(scene, x, y, 'Player');
-        this.scene.add.existing(this);
+
+        //añadir a la escena despues de llamar al constructor del character
         this.init(400, 1, 5, 1, 0);
-        //this.speed = new Phaser.Math.Vector2(0,0);
-        //this.speedFactor = 400;
-        //lo a�ado a la escena
-        //this.scene.add.existing(this);
 
         // Agregamos fisicas
         scene.physics.add.existing(this);

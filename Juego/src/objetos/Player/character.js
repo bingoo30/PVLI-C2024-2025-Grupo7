@@ -5,9 +5,10 @@ const DEFAULT_SPEEDFACTOR = 400;
 const DEFAULT_DAMAGE = 1;
 const DEFAULT_SHOOTSPEED = 1;
 const DEFAULT_CRIT = 0;
-export default class Character extends Phaser.GameObjects.Sprite {
-    /**
-     * 
+
+/**
+     * @extends Phaser.GameObjects.Sprite
+     
      * @param {Phaser.Scene} scene La escena del juego
      * @param {number} x Posici�n X
      * @param {number} y Posici�n Y
@@ -18,8 +19,10 @@ export default class Character extends Phaser.GameObjects.Sprite {
      * @param {number} shootspeed Velocidad de disparo
      * @param {number} prob Probabilidad de ataque cr�tico
      */
+export default class Character extends Phaser.GameObjects.Sprite {
     constructor(scene, x, y, type) {
         super(scene, x, y, [type]);
+        this.scene.add.existing(this);
         // Inicializar las propiedades por defecto
         this.speed = DEFAULT_SPEED;
         this.speedFactor = DEFAULT_SPEEDFACTOR;

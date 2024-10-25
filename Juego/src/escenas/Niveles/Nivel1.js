@@ -48,7 +48,6 @@ export default class Animation extends Phaser.Scene {
 		//let player = new Player(this, 200, 200);
 		//player.setScale(4);
 
-		//tipo,speedFactor, shootspeed, life, damage, prob
 		this.player = new Player(this, 200, 200);
 		this.player.setScale(4);
 
