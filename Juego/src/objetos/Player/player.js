@@ -21,9 +21,12 @@ export default class Player extends Phaser.GameObjects.Sprite {
         //(DE MOMENTO LO HAGO TODO EN EL PLAYER)
         //heredo de la clase character
         this.character = character;
-
         this.speed = new Phaser.Math.Vector2(0,0);
         this.speedFactor = 400;
+
+        //Medidor de tiempo para los disparos
+
+
         //lo a�ado a la escena
         this.scene.add.existing(this);
 
@@ -42,8 +45,11 @@ export default class Player extends Phaser.GameObjects.Sprite {
         this.sKey = this.scene.input.keyboard.addKey('S'); //parar animaci�n
         this.dKey = this.scene.input.keyboard.addKey('D'); //derecha
         
-        //Seteamos mouse
+        // Seteamos mouse
         this.mouse = this.scene.input.activePointer;
+
+        // Seteamos
+
     }
 
     /**
@@ -72,9 +78,12 @@ export default class Player extends Phaser.GameObjects.Sprite {
 
         // Input de mouse
         if(this.mouse.leftButtonDown()){
+            // Todo esto se debería mover al Shooter
+            //this.characterShoot();
+            if(this.sCooldown < )
 
-            new Bullet(this.scene, 1, 10, 20, this.x, this.y);
 
+            new Bullet(this.scene, 1, 10, 20, this.x, this.y);  
         }
 
         this.speed.normalize();
