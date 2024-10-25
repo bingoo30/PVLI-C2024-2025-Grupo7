@@ -26,18 +26,32 @@ body {
 }
 
 header {
+    background-image: url('https://preview.redd.it/1920x1080-topography-wallpapers-made-by-me-request-for-v0-j8m6ykh6ar1a1.jpg?width=640&crop=smart&auto=webp&s=c3e4e9e6a60581cf1399fc84e2f56702972c8868'); /* Placeholder image URL */
+    background-size: cover;
+    background-position: center;
+    text-align: center;
     background-color: #111;
     font-family: Lobster;
-    padding: 20px;
-    text-align: center;
+    padding: 5px;
     color: #f00;
-    font-size: 3.5em;
     border-bottom: 2px solid #f00;
 }
+    header .title {
+        font-size: 4em;
+        margin: 0;
+    }
+
+    /* Estilo para el banner */
+    header .banner {
+        font-size: 1.2em;
+        margin-top: 2px;
+        opacity: 0.7;
+    }
+
 
 nav {
     text-align: center;
-    margin: 20px 0;
+    margin: 15px 0;
 }
 
     nav a {
@@ -52,23 +66,6 @@ nav {
             color: #ffffff;
         }
 
-.banner {
-    background-image: url('https://preview.redd.it/1920x1080-topography-wallpapers-made-by-me-request-for-v0-j8m6ykh6ar1a1.jpg?width=640&crop=smart&auto=webp&s=c3e4e9e6a60581cf1399fc84e2f56702972c8868'); /* Placeholder image URL */
-    background-size: cover;
-    background-position: center;
-    padding: 20px 0;
-    text-align: center;
-}
-
-    .banner h1 {
-        font-size: 3.5em;
-        color: #f00;
-    }
-
-    .banner p {
-        font-size: 1.5em;
-        margin-top: 10px;
-    }
 
 .container {
     max-width: 1200px;
