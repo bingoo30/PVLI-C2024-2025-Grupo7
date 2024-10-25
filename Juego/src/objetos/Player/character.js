@@ -1,52 +1,43 @@
 //constantes por defecto
 const DEFAULT_LIFE = 10;
-const DEFAULT_SPEED = 1;
 const DEFAULT_COOLDOWN = 1000;
+const DEFAULT_SPEED = new Phaser.Math.Vector2(0,0);
+const DEFAULT_SPEEDFACTOR = 400;
 const DEFAULT_DAMAGE = 1;
 const DEFAULT_SHOOTSPEED = 1;
 const DEFAULT_CRIT = 0;
-export default class character extends Phaser.GameObjects.Sprite {
-    /**
-     * 
+
+/**
+     * @extends Phaser.GameObjects.Sprite
+     
      * @param {Phaser.Scene} scene La escena del juego
      * @param {number} x Posici�n X
      * @param {number} y Posici�n Y
-     * @param {number} [life=DEFAULT_LIFE] Vida del personaje
-     * @param {number} [damage=DEFAULT_DAMAGE] Da�o que inflige el personaje
-     * @param {number} [velocidad=DEFAULT_SPEED] Velocidad de movimiento
-     * @param {number} [fDisparo=DEFAULT_SHOOTSPEED] Velocidad de disparo
-     * @param {number} [prob=DEFAULT_CRIT] Probabilidad de ataque cr�tico
-     * @param {number} [sCooldown=DEFAULT_COOLDOWN] Tiempo mínimo entre disparos
+     * @param {number} life Vida del personaje
+     * @param {number} damage Da�o que inflige el personaje
+     * @param {Phaser.Math.Vector2} speed direccion del movimiento
+     * @param {number} speedFactor Velocidad de movimiento
+     * @param {number} shootspeed Velocidad de disparo
+     * @param {number} prob Probabilidad de ataque cr�tico
      */
-    constructor(scene, x, y,
-        life = DEFAULT_LIFE,
-        damage = DEFAULT_DAMAGE,
-        velocidad = DEFAULT_SPEED,
-        fDisparo = DEFAULT_SHOOTSPEED,
-        sCooldown = DEFAULT_COOLDOWN,
-        prob = DEFAULT_CRIT) {
-        super(scene, x, y, 'character');
-        scene.add.existing(this);
-        this.characterShoot();
-
-        
-        // Inicializar las propiedades
-        this.life = life;
-        this.damage = damage; 
-        this.velocidad = velocidad;
-        this.fDisparo = fDisparo;
-        this.prob = prob;
-        this.sCooldown = this.sCooldown;
+export default class Character extends Phaser.GameObjects.Sprite {
+    constructor(scene, x, y, type) {
+        super(scene, x, y, [type]);
+        this.scene.add.existing(this);
+        // Inicializar las propiedades por defecto
+        this.speed = DEFAULT_SPEED;
+        this.speedFactor = DEFAULT_SPEEDFACTOR;
+        this.shootSpeed = DEFAULT_SHOOTSPEED;
+        this.life = DEFAULT_LIFE;
+        this.damage = DEFAULT_DAMAGE;
+        this.prob = DEFAULT_CRIT;
     }
-    /**
-     * M�todo gen�rico para incrementar el valor de un atributo espec�fico
-     * 
-     * @param {string} attribute El nombre del atributo a modificar.
-     * @param {number} amount La cantidad a incrementar.
-     */
-    incrementAttribute(attribute, amount) {
-        if (this.hasOwnProperty(attribute) && typeof this[attribute] === 'number') {
-            this[attribute] += amount;
+    onGotHit(damageTaken) {
+        if (this.life > 0) {
+            this.life -= damageTaken;
+        }
+        if (this.life <= 0) {
+            //llamar metodo muerto
         }
     }
     /**

@@ -1,4 +1,4 @@
-import character from "./character.js";
+import Character from "./character.js";
 import Bullet from "../Shooting/bullet.js";
 
 /**
@@ -8,14 +8,9 @@ import Bullet from "../Shooting/bullet.js";
 	 * @param {number} x - coordenada x
 	 * @param {number} y - coordenada y
  */
-export default class Player extends Phaser.GameObjects.Sprite {
-    /**
-     * Constructor de Player, nuestro caballero medieval con espada y escudo
-     * @param {Scene} scene - escena en la que aparece
-     * @param {number} x - coordenada x
-     * @param {number} y - coordenada y
-    */
-    constructor(scene, x, y, character) {
+export default class Player extends Character {
+    constructor(scene, x, y) {
+        //heredo de la clase character
         super(scene, x, y, 'Player');
 
         //(DE MOMENTO LO HAGO TODO EN EL PLAYER)
@@ -29,6 +24,8 @@ export default class Player extends Phaser.GameObjects.Sprite {
 
         //lo a�ado a la escena
         this.scene.add.existing(this);
+        //añadir a la escena despues de llamar al constructor del character
+        this.init(400, 1, 5, 1, 0);
 
         // Agregamos fisicas
         scene.physics.add.existing(this);
@@ -51,7 +48,13 @@ export default class Player extends Phaser.GameObjects.Sprite {
         // Seteamos
 
     }
-
+    init(speedFactor, shootSpeed, life, damage, prob) {
+        this.speedFactor = speedFactor;
+        this.shootSpeed = shootSpeed;
+        this.life = life;
+        this.damage = damage;
+        this.prob = prob;
+    }
     /**
      * Bucle principal del personaje, actualizamos su posici�n y ejecutamos acciones seg�n el Input
      * @param {number} t - Tiempo total

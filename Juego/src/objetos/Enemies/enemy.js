@@ -14,12 +14,12 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
      * @param {number} x - coordenada x
      * @param {number} y - coordenada y
     */
-    constructor(scene, x, y, character, texture, target) {
-        super(scene, x, y, 'Player');
+    constructor(scene, x, y, target) {
+        super(scene, x, y, 'Player', 0);
         this.scene = scene;
+
         //heredo de la clase character
         //this.character = character;
-        this.sprite = scene.physics.add.sprite(x, y, texture);
         this.target = target;
         console.log("Enemy target:", this.target);
         //this.speed = new Phaser.Math.Vector2(0,0);
@@ -29,7 +29,7 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
         this.speed = 100;
         // Agregamos fisicas
         scene.physics.add.existing(this);
-        this.body.setCollideWorldBounds();
+        //this.body.setCollideWorldBounds();
 
         this.body.setSize(16,8);
         this.body.setOffset(8,24);
@@ -41,9 +41,6 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
         this.target = target;
         //console.log("Target set to:", this.target);
     }
-
-
-
 
 
     /**
@@ -59,21 +56,21 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
 
         if (this.target && this.target.x !== undefined && this.target.y !== undefined) {
             
-            const distX = this.target.x - this.sprite.x;
-            const distY = this.target.y - this.sprite.y;
-            const distance = Math.sqrt(distX * distX + distY * distY);
+            const distX = this.target.x - this.x; // distancia en la x
+            const distY = this.target.y - this.y; // distancia en la y 
+            const distance = Math.sqrt(distX * distX + distY * distY); 
 
-            if (distance > 10) {
+            if (distance > 100) {
                 const angle = Math.atan2(distY, distX);
-                this.sprite.setVelocityX(Math.cos(angle) * this.speed);
-                this.sprite.setVelocityY(Math.sin(angle) * this.speed);
+                this.body.setVelocityX(Math.cos(angle) * this.speed);
+                this.body.setVelocityY(Math.sin(angle) * this.speed);
             } else {
-                this.sprite.setVelocity(0, 0);
+                this.body.setVelocity(0, 0);
             }
         } else {
             // Log error if target is not valid
             //console.log("Enemy target not defined or invalid.");
         }
-        this.body.setVelocity(this.speed.x * this.speedFactor, this.speed.y * this.speedFactor);
+        //this.body.setVelocity(this.speed.x * this.speedFactor, this.speed.y * this.speedFactor);
     }
 }
