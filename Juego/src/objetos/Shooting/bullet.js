@@ -1,4 +1,4 @@
-export default class Bullet extends Phaser.GameObject.Sprite {
+export default class Bullet extends Phaser.GameObjects.Sprite {
     /**
      * Constructor de Bullet,las balas
      * @param {Scene} scene - escena en la que aparece

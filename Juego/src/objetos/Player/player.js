@@ -1,5 +1,5 @@
 import character from "./character.js";
-//import Bullet from "../Shooting/bullet.js";
+import Bullet from "../Shooting/bullet.js";
 
 /**
  * @extends character
@@ -72,8 +72,9 @@ export default class Player extends Phaser.GameObjects.Sprite {
 
         // Input de mouse
         if(this.mouse.leftButtonDown()){
-            //let bullet = new Bullet (this.scene, 1, 10, this.x, this.y)
-            
+
+            new Bullet(this.scene, 1, 10, 20, this.x, this.y);
+
         }
 
         this.speed.normalize();
