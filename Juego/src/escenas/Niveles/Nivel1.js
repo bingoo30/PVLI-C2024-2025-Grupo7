@@ -35,8 +35,8 @@ export default class Animation extends Phaser.Scene {
 		const sueloLayer = map.createLayer('suelo', tileset);
 		const paredLayer = map.createLayer('pared', tileset);
 
-		sueloLayer.setOrigin(0, 1);
-		paredLayer.setOrigin(0, 1);
+		sueloLayer.setPosition(-100,-1024*3.5);
+		paredLayer.setPosition(-100,-1024*3.5);
 
 
 		paredLayer.setCollisionByProperty({ collides: true });
