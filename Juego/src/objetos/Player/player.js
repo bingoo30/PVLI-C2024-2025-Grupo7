@@ -13,7 +13,6 @@ export default class Player extends Character {
         //heredo de la clase character
         super(scene, x, y, 'Player');
 
-        //(DE MOMENTO LO HAGO TODO EN EL PLAYER)
         //heredo de la clase character
         this.character = 'Player';
         this.speed = new Phaser.Math.Vector2(0,0);
@@ -54,6 +53,11 @@ export default class Player extends Character {
         this.life = life;
         this.damage = damage;
         this.prob = prob;
+    }
+    onPlayerGotHit(enemy) {
+        if (enemy instanceof Enemy) {
+            player.onGotHit(this.damage); // Aplica daño al jugador
+        }
     }
     /**
      * Bucle principal del personaje, actualizamos su posici�n y ejecutamos acciones seg�n el Input

@@ -9,22 +9,24 @@ const DEFAULT_CRIT = 0;
 
 /**
      * @extends Phaser.GameObjects.Sprite
-     
+     Lo que recibe
      * @param {Phaser.Scene} scene La escena del juego
      * @param {number} x Posici�n X
      * @param {number} y Posici�n Y
-     * @param {number} life Vida del personaje
-     * @param {number} damage Da�o que inflige el personaje
-     * @param {Phaser.Math.Vector2} speed direccion del movimiento
-     * @param {number} speedFactor Velocidad de movimiento
-     * @param {number} shootspeed Velocidad de disparo
-     * @param {number} prob Probabilidad de ataque cr�tico
+     atributos
+     * @param {number} _life Vida del personaje
+     * @param {number} _damage Da�o que inflige el personaje
+     * @param {Phaser.Math.Vector2} _speed direccion del movimiento
+     * @param {number} _speedFactor Velocidad de movimiento
+     * @param {number} _shootspeed Velocidad de disparo
+     * @param {number} _prob Probabilidad de ataque cr�tico
      */
 export default class Character extends Phaser.GameObjects.Sprite {
     constructor(scene, x, y, type) {
         super(scene, x, y, [type]);
         this.scene.add.existing(this);
         // Inicializar las propiedades por defecto
+        this.type = type;
         this.speed = DEFAULT_SPEED;
         this.speedFactor = DEFAULT_SPEEDFACTOR;
         this.shootSpeed = DEFAULT_SHOOTSPEED;
@@ -32,23 +34,46 @@ export default class Character extends Phaser.GameObjects.Sprite {
         this.damage = DEFAULT_DAMAGE;
         this.prob = DEFAULT_CRIT;
     }
+    /* #region getters
+    get speed(){
+        return this._speed;
+    }
+    get speedFactor() {
+        return this._speedFactor;
+    }
+    get damage() {
+        return this._damage;
+    }
+    get life() {
+        return this._life;
+    }
+    get type() {
+        return this._type;
+    }
+    get prob() {
+        return this._prob;
+    }
+    // #endregion */
+
+    // #region metodos
+    /** 
+     * Funcion para restar vida
+     * Para que no sea negativo cojo el maximo entre la resta y el 0
+     * @param {number} damageTaken Daño que va a recibir
+     */
     onGotHit(damageTaken) {
-        if (this.life > 0) {
-            this.life -= damageTaken;
-        }
+        this.life = Math.max(0, this.life - damageTaken);
         if (this.life <= 0) {
-            //llamar metodo muerto
+            this.onDeath();
         }
     }
-    /**
-     * Funci�n para restar vida
-     * Para que no sea negativo cojo el maximo entre la resta y el 0
-     */
-    reduceLife(amount) {
-        this.life = Math.max(0, this.life - amount);
+    onDeath() {
+        console.log(`${this.texture.key} ha muerto`);
+        this.destroy(); // Elimina el objeto de la escena
     }
 
     characterShoot() {
         console.log("pum pum");
     }
+    // #endregion
 }

@@ -1,12 +1,4 @@
 //import character from "./character.js";
-
-/**
- * @extends character
- * Constructor de Player, nuestro caballero medieval con espada y escudo
-	 * @param {Scene} scene - escena en la que aparece
-	 * @param {number} x - coordenada x
-	 * @param {number} y - coordenada y
- */
 export default class Enemy extends Phaser.GameObjects.Sprite {
     /**
      * Constructor de Player, nuestro caballero medieval con espada y escudo

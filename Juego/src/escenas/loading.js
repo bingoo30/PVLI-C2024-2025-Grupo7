@@ -22,6 +22,9 @@ export default class Loading extends Phaser.Scene {
 		this.load.tilemapTiledJSON('mapa1', 'assets/map/mapa1.json');
 		this.load.image('tileset', 'assets/map/mapTiles.png');
 
+		//prueba solo
+		this.load.image('BichoPrueba', 'assets/bichoPrueba.png');
+
 		this.load.scenePlugin({
 			key: 'PhaserNavMeshPlugin',
 			url: PhaserNavMeshPlugin,

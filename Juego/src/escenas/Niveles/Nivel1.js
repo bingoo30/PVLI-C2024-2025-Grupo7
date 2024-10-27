@@ -1,6 +1,8 @@
 import Player from '../../objetos/Player/player.js';
 import Enemy from '../../objetos/Enemies/enemy.js';
 import Floor from '../../objetos/Escenario/floor.js';
+import Character from '../../objetos/Player/character.js';
+import BichoPrueba from '../../objetos/Enemies/bichoPrueba.js';
 
 //constante
 const SCALE = 4;
@@ -80,7 +82,6 @@ export default class Animation extends Phaser.Scene {
 		this.player = new Player(this, playerX, playerY);
 		this.player.setScale(SCALE);
 
-
 		this.enemy = new Enemy(this, playerX, playerY, this.player);
 		this.enemy.setScale(SCALE);
 
@@ -90,15 +91,16 @@ export default class Animation extends Phaser.Scene {
 		this.physics.add.collider(this.player, paredLayer);
 		this.cameras.main.startFollow(this.player);
 
-
+		/*
+		this.physics.add.collider(this.player, this.enemy, (player, enemy) => {
+			player.onPlayerGotHit(enemy.getDamage());
+			enemy.onDeath();
+		});
+		*/
 	}
 
-	init(){
-
-	}
-
-	update(time, dt) {
-		
+	update(t, dt) {
+		super(t,dt);
 		if (this.enemy && !this.enemy.target) {
 			//console.log("pasando el player");
 			this.enemy.setTarget(this.player);
