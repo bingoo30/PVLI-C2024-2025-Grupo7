@@ -19,17 +19,18 @@ export default class Player extends Character {
         this.speedFactor = 400;
 
         //Medidor de tiempo para los disparos
-
+        this.cooldownCont = 0;
+        this.canShoot = true;
 
         //lo a�ado a la escena
         this.scene.add.existing(this);
         //añadir a la escena despues de llamar al constructor del character
-        this.init(400, 1, 5, 1, 0);
+        this.init(400, 200, 5, 1, 0);
 
         // Agregamos fisicas
         scene.physics.add.existing(this);
-        //this.body.setCollideWorldBounds();
 
+        //this.body.setCollideWorldBounds();
         this.body.setSize(16,8);
         this.body.setOffset(8,24);
 
@@ -86,12 +87,13 @@ export default class Player extends Character {
        //Input de mouse
        if(this.mouse.leftButtonDown()){
             // Todo esto se debería mover al Shooter
-            this.characterShoot();
-            //if (this.sCooldown < );
-
-
-            new Bullet(this.scene, 1, 10, 20, this.x, this.y);  
+            if(this.cooldownCont < 0){
+                    new Bullet(this.scene, 1, 10, 20, this.x, this.y);  
+                    this.cooldownCont = this.shootSpeed;
+                }
        }
+       
+       this.cooldownCont = this.cooldownCont - dt;
 
         this.speed.normalize();
         //this.speed *= this.speedFactor;
