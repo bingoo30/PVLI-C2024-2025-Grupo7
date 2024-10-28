@@ -63,7 +63,8 @@ export default class Character extends Phaser.GameObjects.Sprite {
      */
     onGotHit(damageTaken) {
         this.life = Math.max(0, this.life - damageTaken);
-        if (this.life <= 0) {
+        console.log(this.life);
+        if (this.life <= 0){
             this.onDeath();
         }
     }

@@ -1,5 +1,6 @@
 import Character from "./character.js";
 import Bullet from "../Shooting/bullet.js";
+import Enemy from '../../objetos/Enemies/enemy.js';
 
 /**
  * @extends character
@@ -55,10 +56,8 @@ export default class Player extends Character {
         this.damage = damage;
         this.prob = prob;
     }
-    onPlayerGotHit(enemy) {
-        if (enemy instanceof Enemy) {
-            player.onGotHit(this.damage); // Aplica daño al jugador
-        }
+    onPlayerGotHit(damage) {
+        this.onGotHit(damage); // Aplica daño al jugador
     }
     /**
      * Bucle principal del personaje, actualizamos su posici�n y ejecutamos acciones seg�n el Input

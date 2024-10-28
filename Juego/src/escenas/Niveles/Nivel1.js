@@ -81,7 +81,7 @@ export default class Animation extends Phaser.Scene {
 		this.player = new Player(this, playerX, playerY);
 		this.player.setScale(SCALE);
 
-		this.enemy = new Enemy(this, playerX, playerY, this.player);
+		this.enemy = new Enemy(this, playerX-100, playerY-100, this.player);
 		this.enemy.setScale(SCALE);
 
 		let scene = this; // Nos guardamos una referencia a la escena para usarla en la función anidada que viene a continuación
@@ -90,12 +90,12 @@ export default class Animation extends Phaser.Scene {
 		this.physics.add.collider(this.player, paredLayer);
 		this.cameras.main.startFollow(this.player);
 
-		/*
+		
 		this.physics.add.collider(this.player, this.enemy, (player, enemy) => {
 			player.onPlayerGotHit(enemy.getDamage());
 			enemy.onDeath();
 		});
-		*/
+		
 	}
 
 	update(t, dt) {

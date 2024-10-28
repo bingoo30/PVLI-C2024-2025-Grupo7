@@ -26,6 +26,7 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
         this.body.setSize(16,8);
         this.body.setOffset(8,24);
 
+        this.damage = 1;
 
     }
 
@@ -33,7 +34,13 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
         this.target = target;
         //console.log("Target set to:", this.target);
     }
-
+    getDamage() {
+        return this.damage;
+    }
+    onDeath() {
+        this.setVisible(false);
+        this.destroy();
+    }
 
     /**
      * Bucle principal del personaje, actualizamos su posición y ejecutamos acciones según el Input
