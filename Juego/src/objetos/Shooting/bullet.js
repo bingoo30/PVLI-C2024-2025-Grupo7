@@ -7,58 +7,26 @@ export default class Bullet extends Phaser.GameObjects.Sprite {
      * @param {number} startX - ejeX inicial
      * @param {number} startY - ejeY inical
      */
-    constructor(scene, damage, speed, range, xStart, yStart, xEnd, yEnd) {
+    constructor(scene, damage, speed, range, xStart, yStart, xObj, yObj) {
         super(scene, xStart, yStart, 'bullet');
         this.scene.add.existing(this);
         this.damage = damage;  
         this.speed = 500;
         this.range = 1500;
-        this.xSpeed = 400;
-        this.ySpeed = 0;
         this.startX = xStart; //posicion de la bala al ser disparada
         this.startY = yStart;
         this.scene.physics.add.existing(this);
 
-        // direccion de disparo
-        this.body.setVelocity(this.xSpeed, this.ySpeed);
-
+        // direccion de disparo 
+        var pointSpeed = new Phaser.Math.Vector2(xObj - 500, yObj - 300);   // Usa como referencia el centro de la pantalla
+        pointSpeed.normalize();
+        this.body.setVelocity(this.speed * pointSpeed.x, this.speed * pointSpeed.y);
     }
     Update(time, delta) {
         const distance = Phaser.Math.Distance.Between(this.startX, this.startY, this.x, this.y); //calcula la distancia
         if (distance >= this.range) {
             this.destroyBullet();
         }
-    }
-
-    fire(shooter, target) {
-        // if (target.y >= this.y) {
-        //     this.xSpeed = this.speed * Math.sin(this.direction);
-        //     this.ySpeed = this.speed * Math.cos(this.direction);
-        // }
-        // else {
-        //     this.xSpeed = -this.speed * Math.sin(this.direction);
-        //     this.ySpeed = -this.speed * Math.cos(this.direction);
-        // }
-        // this.setActive(true);
-        // this.setVisible(true);
-
-        // this.setPosition(shooter.x, shooter.y); // Initial position
-        // this.startX = shooter.x; //posicion de la bala al ser disparado
-        // this.startY = shotter.y;
-        // this.direction = Math.atan((target.x - this.x) / (target.y - this.y));
-
-        // this.setRotation(shooter.rotation);
-
-        // if (target.y >= this.y) {
-        //     this.xSpeed = this.speed * Math.sin(this.direction);
-        //     this.ySpeed = this.speed * Math.cos(this.direction);
-        // }
-        // else {
-        //     this.xSpeed = -this.speed * Math.sin(this.direction);
-        //     this.ySpeed = -this.speed * Math.cos(this.direction);
-        // }
-        // this.setActive(true);
-        // this.setVisible(true);
     }
 
     destroyBullet() {

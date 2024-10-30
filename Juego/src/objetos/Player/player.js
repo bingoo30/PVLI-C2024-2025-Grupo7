@@ -88,7 +88,6 @@ export default class Player extends Character {
             // Todo esto se debería mover al Shooter
             if(this.cooldownCont < 0){
                     new Bullet(this.scene, 1, 10, 20, this.x, this.y, this.mouse.x, this.mouse.y);  
-                    console.log(this.mouse.x, this.mouse.y);
                     this.cooldownCont = this.shootSpeed;
                 }
        }
