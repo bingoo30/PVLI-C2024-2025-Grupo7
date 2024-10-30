@@ -81,8 +81,9 @@ export default class Animation extends Phaser.Scene {
 		this.player = new Player(this, playerX, playerY);
 		this.player.setScale(SCALE);
 
-		this.enemy = new Enemy(this, playerX-100, playerY-100, this.player);
+		this.enemy = new Enemy(this, playerX+100, playerY-100, this.player);
 		this.enemy.setScale(SCALE);
+
 
 		let scene = this; // Nos guardamos una referencia a la escena para usarla en la función anidada que viene a continuación
 		this.physics.add.collider(this.enemy, paredLayer);
@@ -93,13 +94,12 @@ export default class Animation extends Phaser.Scene {
 		
 		this.physics.add.collider(this.player, this.enemy, (player, enemy) => {
 			player.onPlayerGotHit(enemy.getDamage());
-			enemy.onDeath();
+			enemy.onEnemyDeath();
 		});
 		
 	}
 
 	update(t, dt) {
-		//super(t,dt);
 		if (this.enemy && !this.enemy.target) {
 			//console.log("pasando el player");
 			this.enemy.setTarget(this.player);

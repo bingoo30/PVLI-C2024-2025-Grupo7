@@ -1,9 +1,8 @@
 import Character from "./character.js";
 import Bullet from "../Shooting/bullet.js";
-import Enemy from '../../objetos/Enemies/enemy.js';
 
 /**
- * @extends character
+ * @extends Character
  * Constructor de Player, nuestro caballero medieval con espada y escudo
 	 * @param {Scene} scene - escena en la que aparece
 	 * @param {number} x - coordenada x
@@ -14,18 +13,13 @@ export default class Player extends Character {
         //heredo de la clase character
         super(scene, x, y, 'Player');
 
-        //heredo de la clase character
-        this.character = 'Player';
-        this.speed = new Phaser.Math.Vector2(0,0);
-        this.speedFactor = 400;
-
         //Medidor de tiempo para los disparos
         this.cooldownCont = 0;
         this.canShoot = true;
 
         //lo a�ado a la escena
         this.scene.add.existing(this);
-        //añadir a la escena despues de llamar al constructor del character
+        //configurar los atributos correspondientes despues de llamar al constructor del character
         this.init(400, 200, 5, 1, 0);
 
         // Agregamos fisicas
@@ -87,7 +81,7 @@ export default class Player extends Character {
        if(this.mouse.leftButtonDown()){
             // Todo esto se debería mover al Shooter
             if(this.cooldownCont < 0){
-                    new Bullet(this.scene, 1, 10, 20, this.x, this.y, this.mouse.x, this.mouse.y);  
+                    new Bullet(this.scene, this.damage, this.shootSpeed, 20, this.x, this.y, this.mouse.x, this.mouse.y);  
                     this.cooldownCont = this.shootSpeed;
                 }
        }
@@ -95,7 +89,6 @@ export default class Player extends Character {
        this.cooldownCont = this.cooldownCont - dt;
 
         this.speed.normalize();
-        //this.speed *= this.speedFactor;
 
         this.body.setVelocity(this.speed.x*this.speedFactor, this.speed.y*this.speedFactor);
     }

@@ -4,7 +4,7 @@ const DEFAULT_COOLDOWN = 1000;
 const DEFAULT_SPEED = new Phaser.Math.Vector2(0,0);
 const DEFAULT_SPEEDFACTOR = 400;
 const DEFAULT_DAMAGE = 1;
-const DEFAULT_SHOOTSPEED = 1;
+const DEFAULT_SHOOTSPEED = 10;
 const DEFAULT_CRIT = 0;
 
 /**
@@ -63,8 +63,7 @@ export default class Character extends Phaser.GameObjects.Sprite {
      */
     onGotHit(damageTaken) {
         this.life = Math.max(0, this.life - damageTaken);
-        console.log(this.life);
-        if (this.life <= 0){
+        if (this.life == 0) {
             this.onDeath();
         }
     }
