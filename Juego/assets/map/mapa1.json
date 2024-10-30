@@ -194,6 +194,12 @@
                  "height":176,
                  "id":5,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"walkable_tiles",
+                         "type":"bool",
+                         "value":true
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -205,6 +211,12 @@
                  "height":176,
                  "id":7,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"walkable_tiles",
+                         "type":"bool",
+                         "value":true
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -216,6 +228,12 @@
                  "height":16,
                  "id":9,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"walkable_tiles",
+                         "type":"bool",
+                         "value":true
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -227,6 +245,12 @@
                  "height":240,
                  "id":10,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"walkable_tiles",
+                         "type":"bool",
+                         "value":true
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -238,6 +262,12 @@
                  "height":128,
                  "id":15,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"walkable_tiles",
+                         "type":"bool",
+                         "value":true
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -249,6 +279,12 @@
                  "height":176,
                  "id":17,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"walkable_tiles",
+                         "type":"bool",
+                         "value":true
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -260,6 +296,12 @@
                  "height":112,
                  "id":18,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"walkable_tiles",
+                         "type":"bool",
+                         "value":true
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -271,6 +313,12 @@
                  "height":16,
                  "id":24,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"walkable_tiles",
+                         "type":"bool",
+                         "value":true
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -282,6 +330,12 @@
                  "height":272,
                  "id":28,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"walkable_tiles",
+                         "type":"bool",
+                         "value":true
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -293,6 +347,12 @@
                  "height":112,
                  "id":29,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"walkable_tiles",
+                         "type":"bool",
+                         "value":true
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -304,6 +364,12 @@
                  "height":48,
                  "id":31,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"walkable_tiles",
+                         "type":"bool",
+                         "value":true
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -315,6 +381,12 @@
                  "height":336,
                  "id":32,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"walkable_tiles",
+                         "type":"bool",
+                         "value":true
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -326,6 +398,12 @@
                  "height":80,
                  "id":34,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"walkable_tiles",
+                         "type":"bool",
+                         "value":true
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -337,6 +415,12 @@
                  "height":256,
                  "id":38,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"walkable_tiles",
+                         "type":"bool",
+                         "value":true
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -348,6 +432,12 @@
                  "height":48,
                  "id":39,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"walkable_tiles",
+                         "type":"bool",
+                         "value":true
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -359,6 +449,12 @@
                  "height":112,
                  "id":41,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"walkable_tiles",
+                         "type":"bool",
+                         "value":true
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -370,6 +466,12 @@
                  "height":240,
                  "id":42,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"walkable_tiles",
+                         "type":"bool",
+                         "value":true
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -381,6 +483,12 @@
                  "height":32,
                  "id":43,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"walkable_tiles",
+                         "type":"bool",
+                         "value":true
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -392,6 +500,12 @@
                  "height":240,
                  "id":52,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"walkable_tiles",
+                         "type":"bool",
+                         "value":true
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -403,6 +517,12 @@
                  "height":48,
                  "id":54,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"walkable_tiles",
+                         "type":"bool",
+                         "value":true
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -414,6 +534,12 @@
                  "height":96,
                  "id":56,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"walkable_tiles",
+                         "type":"bool",
+                         "value":true
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -425,6 +551,12 @@
                  "height":48,
                  "id":57,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"walkable_tiles",
+                         "type":"bool",
+                         "value":true
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -436,6 +568,12 @@
                  "height":160,
                  "id":58,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"walkable_tiles",
+                         "type":"bool",
+                         "value":true
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -447,6 +585,12 @@
                  "height":48,
                  "id":59,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"walkable_tiles",
+                         "type":"bool",
+                         "value":true
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -458,6 +602,12 @@
                  "height":176,
                  "id":61,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"walkable_tiles",
+                         "type":"bool",
+                         "value":true
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -469,6 +619,12 @@
                  "height":96,
                  "id":62,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"walkable_tiles",
+                         "type":"bool",
+                         "value":true
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -480,6 +636,12 @@
                  "height":176,
                  "id":64,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"walkable_tiles",
+                         "type":"bool",
+                         "value":true
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -491,6 +653,12 @@
                  "height":48,
                  "id":65,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"walkable_tiles",
+                         "type":"bool",
+                         "value":true
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -502,6 +670,12 @@
                  "height":128,
                  "id":66,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"walkable_tiles",
+                         "type":"bool",
+                         "value":true
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -513,6 +687,12 @@
                  "height":16,
                  "id":68,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"walkable_tiles",
+                         "type":"bool",
+                         "value":true
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -524,6 +704,12 @@
                  "height":16,
                  "id":69,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"walkable_tiles",
+                         "type":"bool",
+                         "value":true
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -535,6 +721,12 @@
                  "height":240,
                  "id":70,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"walkable_tiles",
+                         "type":"bool",
+                         "value":true
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -546,6 +738,12 @@
                  "height":208,
                  "id":72,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"walkable_tiles",
+                         "type":"bool",
+                         "value":true
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -557,6 +755,12 @@
                  "height":240,
                  "id":73,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"walkable_tiles",
+                         "type":"bool",
+                         "value":true
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -568,6 +772,12 @@
                  "height":192,
                  "id":77,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"walkable_tiles",
+                         "type":"bool",
+                         "value":true
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -579,6 +789,12 @@
                  "height":48,
                  "id":78,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"walkable_tiles",
+                         "type":"bool",
+                         "value":true
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -590,6 +806,12 @@
                  "height":48,
                  "id":79,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"walkable_tiles",
+                         "type":"bool",
+                         "value":true
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -601,6 +823,12 @@
                  "height":240,
                  "id":80,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"walkable_tiles",
+                         "type":"bool",
+                         "value":true
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -612,6 +840,12 @@
                  "height":48,
                  "id":81,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"walkable_tiles",
+                         "type":"bool",
+                         "value":true
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -623,6 +857,12 @@
                  "height":240,
                  "id":82,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"walkable_tiles",
+                         "type":"bool",
+                         "value":true
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -634,6 +874,12 @@
                  "height":48,
                  "id":83,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"walkable_tiles",
+                         "type":"bool",
+                         "value":true
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -645,6 +891,12 @@
                  "height":240,
                  "id":84,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"walkable_tiles",
+                         "type":"bool",
+                         "value":true
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -656,6 +908,12 @@
                  "height":48,
                  "id":85,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"walkable_tiles",
+                         "type":"bool",
+                         "value":true
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -667,6 +925,12 @@
                  "height":320,
                  "id":87,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"walkable_tiles",
+                         "type":"bool",
+                         "value":true
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -678,6 +942,12 @@
                  "height":48,
                  "id":88,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"walkable_tiles",
+                         "type":"bool",
+                         "value":true
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -689,6 +959,12 @@
                  "height":272,
                  "id":89,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"walkable_tiles",
+                         "type":"bool",
+                         "value":true
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -700,6 +976,12 @@
                  "height":112,
                  "id":90,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"walkable_tiles",
+                         "type":"bool",
+                         "value":true
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -711,6 +993,12 @@
                  "height":80,
                  "id":91,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"walkable_tiles",
+                         "type":"bool",
+                         "value":true
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -722,6 +1010,12 @@
                  "height":48,
                  "id":92,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"walkable_tiles",
+                         "type":"bool",
+                         "value":true
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -733,6 +1027,12 @@
                  "height":48,
                  "id":97,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"walkable_tiles",
+                         "type":"bool",
+                         "value":true
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -744,6 +1044,12 @@
                  "height":48,
                  "id":98,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"walkable_tiles",
+                         "type":"bool",
+                         "value":true
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -755,6 +1061,12 @@
                  "height":32,
                  "id":99,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"walkable_tiles",
+                         "type":"bool",
+                         "value":true
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -766,6 +1078,12 @@
                  "height":176,
                  "id":101,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"walkable_tiles",
+                         "type":"bool",
+                         "value":true
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -777,6 +1095,12 @@
                  "height":144,
                  "id":102,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"walkable_tiles",
+                         "type":"bool",
+                         "value":true
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -788,6 +1112,12 @@
                  "height":176,
                  "id":103,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"walkable_tiles",
+                         "type":"bool",
+                         "value":true
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -799,6 +1129,12 @@
                  "height":48,
                  "id":104,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"walkable_tiles",
+                         "type":"bool",
+                         "value":true
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -810,6 +1146,12 @@
                  "height":144,
                  "id":106,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"walkable_tiles",
+                         "type":"bool",
+                         "value":true
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -821,6 +1163,12 @@
                  "height":368,
                  "id":107,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"walkable_tiles",
+                         "type":"bool",
+                         "value":true
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -832,6 +1180,12 @@
                  "height":144,
                  "id":108,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"walkable_tiles",
+                         "type":"bool",
+                         "value":true
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -843,6 +1197,12 @@
                  "height":224,
                  "id":109,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"walkable_tiles",
+                         "type":"bool",
+                         "value":true
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -1053,6 +1413,15 @@
                         }]
                 }, 
                 {
+                 "id":30,
+                 "properties":[
+                        {
+                         "name":"collides",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
                  "id":32,
                  "properties":[
                         {
@@ -1251,6 +1620,15 @@
                         }]
                 }, 
                 {
+                 "id":57,
+                 "properties":[
+                        {
+                         "name":"collides",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
                  "id":58,
                  "properties":[
                         {
@@ -1314,6 +1692,15 @@
                         }]
                 }, 
                 {
+                 "id":66,
+                 "properties":[
+                        {
+                         "name":"collides",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
                  "id":67,
                  "properties":[
                         {
@@ -1332,7 +1719,34 @@
                         }]
                 }, 
                 {
+                 "id":69,
+                 "properties":[
+                        {
+                         "name":"collides",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":70,
+                 "properties":[
+                        {
+                         "name":"collides",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
                  "id":72,
+                 "properties":[
+                        {
+                         "name":"collides",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":73,
                  "properties":[
                         {
                          "name":"collides",
@@ -1546,7 +1960,8 @@
                          "type":"bool",
                          "value":true
                         }]
-                }, 
+                },
+            
                 {
                  "id":110,
                  "properties":[
@@ -1593,6 +2008,15 @@
                         }]
                 }, 
                 {
+                 "id":124,
+                 "properties":[
+                        {
+                         "name":"collides",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
                  "id":125,
                  "properties":[
                         {
@@ -1600,8 +2024,7 @@
                          "type":"bool",
                          "value":true
                         }]
-                },
-            
+                }, 
                 {
                  "id":126,
                  "properties":[
@@ -1640,6 +2063,15 @@
                 }, 
                 {
                  "id":139,
+                 "properties":[
+                        {
+                         "name":"collides",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":140,
                  "properties":[
                         {
                          "name":"collides",
@@ -1882,6 +2314,24 @@
                         }]
                 }, 
                 {
+                 "id":193,
+                 "properties":[
+                        {
+                         "name":"collides",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":194,
+                 "properties":[
+                        {
+                         "name":"collides",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
                  "id":195,
                  "properties":[
                         {
@@ -1919,6 +2369,15 @@
                 }, 
                 {
                  "id":199,
+                 "properties":[
+                        {
+                         "name":"collides",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":200,
                  "properties":[
                         {
                          "name":"collides",
