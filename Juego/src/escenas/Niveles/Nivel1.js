@@ -40,8 +40,6 @@ export default class Animation extends Phaser.Scene {
 		const sueloLayer = map.createLayer('suelo', tileset);
 		const paredLayer = map.createLayer('pared', tileset);
 
-		const positionLayer = map.getObjectLayer('position', tileset);
-
 		//sueloLayer.setPosition(-1024*3.5,-1024*3.5);
 		//paredLayer.setPosition(-1024*3.5,-1024*3.5);
 
