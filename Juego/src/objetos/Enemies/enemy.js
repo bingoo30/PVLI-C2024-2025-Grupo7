@@ -7,21 +7,31 @@ export default class Enemy extends Character {
      * @param {number} y - coordenada y
      * @param {string} type Tipo de character
     */
-    constructor(scene, x, y, target) {
+    constructor(scene, x, y, player) {
         //heredo de la clase character
         super(scene, x, y, 'Enemy');
         this.scene = scene;
-        this.target = target;
-        //console.log("Enemy target:", this.target);
+        this.player = player;
+        this.navMesh = scene.navMesh;
         
         scene.physics.add.existing(this);
         //configurar los atributos correspondientes despues de llamar al constructor del character
         this.init(200, 200, 5, 1, 0);
 
         this.body.setSize(16,8);
-        this.body.setOffset(8,24);
+        this.body.setOffset(8, 24);
+
+        this.pathIndex = 0;
 
     }
+
+    setPath(path) {
+        this.path = path;
+        this.currentNodeIndex = 0;
+    }
+
+
+
     init(speedFactor, shootSpeed, life, damage, prob) {
         this.speedFactor = speedFactor;
         this.shootSpeed = shootSpeed;
@@ -29,46 +39,72 @@ export default class Enemy extends Character {
         this.damage = damage;
         this.prob = prob;
     }
-    setTarget(target) {
-        this.target = target;
-        //console.log("Target set to:", this.target);
-    }
+    
     getDamage() {
         return this.damage;
     }
+
     onEnemyGotHit(damage) {
         this.onGotHit(damage); // Aplica daño al jugador
     }
+
     onEnemyDeath() {
         this.onDeath();
     }
+
+
+
     /**
      * Bucle principal del personaje, actualizamos su posición y ejecutamos acciones según el Input
      * @param {number} t - Tiempo total
      * @param {number} dt - Tiempo entre frames
      */
-    preUpdate(t, dt) {
-        super.preUpdate(t, dt);
+    update(t, dt) {
+        const tileSize = 32 * this.scene.scale;
+        //console.log("player", tileSize);
 
+        const playerTile = {
+            x: Math.floor(this.player.x / tileSize), y: Math.floor(this.player.y / tileSize)
+        };
+        console.log(playerTile);
 
-        //this.speed *= this.speedFactor;
+        const enemyTile = {
+            x: Math.floor(this.x / tileSize), y: Math.floor(this.y / tileSize)
+        };
 
-        if (this.target && this.target.x !== undefined && this.target.y !== undefined) {
-            
-            const distX = this.target.x - this.x; // distancia en la x
-            const distY = this.target.y - this.y; // distancia en la y 
-            const distance = Math.sqrt(distX * distX + distY * distY); 
+        console.log(enemyTile);
 
-            if (distance > 100) {
-                const angle = Math.atan2(distY, distX);
-                this.body.setVelocityX(Math.cos(angle) * this.speedFactor);
-                this.body.setVelocityY(Math.sin(angle) * this.speedFactor);
+        // Encontrar la ruta usando `findPath`
+        const path = this.navMesh.findPath(enemyTile.x, enemyTile.y, playerTile.x, playerTile.y);
+
+        // Si hay una ruta, mover al enemigo hacia el primer nodo de la ruta
+        if (path.length > 0) {
+            const nextNode = path[0];
+            console.log("Next Node:", nextNode);
+            const targetX = nextNode.x * 32 * tileSize;
+            const targetY = nextNode.y * 32 * tileSize;
+
+            // Calcular el movimiento hacia el próximo nodo
+            const deltaX = targetX - this.x;
+            const deltaY = targetY - this.y;
+            const distance = Math.sqrt(deltaX ** 2 + deltaY ** 2);
+
+            if (distance < 2) {
+                this.body.setVelocity(0);
+                path.shift();  // Si está cerca del nodo, pasamos al siguiente
             } else {
-                this.body.setVelocity(0, 0);
+                // Mover en dirección al próximo nodo
+                //this.x += (deltaX / distance) * this.speedFactor * (dt / 1000);
+                //this.y += (deltaY / distance) * this.speedFactor * (dt / 1000);
+
+                const velocityX = (deltaX / distance) * this.speedFactor; // Normalizar y multiplicar por la velocidad
+                const velocityY = (deltaY / distance) * this.speedFactor; 
+                this.body.setVelocity(velocityX, velocityY);
+                console.log("mov enemy")
+
             }
         } else {
-            // Log error if target is not valid
-            //console.log("Enemy target not defined or invalid.");
+            console.log("no hay path")
         }
     }
 }

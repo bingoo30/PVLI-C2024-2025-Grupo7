@@ -2,7 +2,6 @@ import Nivel1 from './escenas/Niveles/Nivel1.js';
 import Title from './escenas/title.js';
 import Loading from './escenas/loading.js';
 
-
 let config = {
 	type: Phaser.AUTO,
 	parent: 'juego',
@@ -47,10 +46,12 @@ let config = {
 	plugins: {
 		scene: [
 			{
-				key: "PhaserNavMeshPlugin", // Key to store the plugin class under in cache
-				plugin: PhaserNavMeshPlugin, // Class that constructs plugins
-				mapping: "navMeshPlugin", // Property mapping to use for the scene, e.g. this.navMeshPlugin
-				start: true
+				key: 'PhaserNavMeshPlugin',
+				plugin: PhaserNavMeshPlugin,
+				mapping: 'navMeshPlugin',
+				start: true,
+				
+
 			}
 		]
 	},

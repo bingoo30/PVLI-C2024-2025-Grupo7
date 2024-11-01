@@ -1,12 +1,11 @@
 import Player from '../../objetos/Player/player.js';
 import Enemy from '../../objetos/Enemies/enemy.js';
+import NavMesh from '../../objetos/NavMesh/navmesh.js';
 import Floor from '../../objetos/Escenario/floor.js';
 import Character from '../../objetos/Player/character.js';
 
 //constante
 const SCALE = 4;
-
-
 /**
  * Escena principal de juego.
  * @extends Phaser.Scene
@@ -17,13 +16,6 @@ export default class Animation extends Phaser.Scene {
 		super({ key: 'nivel1' });
 	}
 	
-	preload(){
-		//this.load.image('suelo', 'assets/suelo.gif');
-		//this.load.image('Player', 'assets/player.png');
-		//this.load.tilemapTiledJSON('mapa1', 'assets/map/mapa1.json');
-		//this.load.image('tileset', 'assets/map/mapTiles.png');
-
-	}
 	
 	/**  
 	* Creación de los elementos de la escena principal de juego
@@ -39,6 +31,73 @@ export default class Animation extends Phaser.Scene {
 		const tileset = map.addTilesetImage('mapTiles', 'tileset');
 		const sueloLayer = map.createLayer('suelo', tileset);
 		const paredLayer = map.createLayer('pared', tileset);
+		this.scale = SCALE;
+
+		/*
+		// Load navmesh data
+		const jsonData = this.cache.json.get('navmesh');
+		console.log("JSON Data:", jsonData);
+		// Validate JSON data
+		if (!jsonData || !jsonData.layers) {
+			console.error("Unable to find layers in the JSON data.");
+			return;
+		}
+
+		const navMeshLayer = jsonData.layers.find(layer => layer.name === 'navmesh');
+		if (!navMeshLayer || !navMeshLayer.objects) {
+			console.error("Unable to find navmesh layer or objects in the JSON data.");
+			return;
+		}
+
+		navMeshObjects = navMeshLayer.objects;
+		if (!navMeshObjects) {
+			console.error("Unable to find objects in the navmesh layer.");
+			return;
+		}
+
+		navMeshObjects.forEach((rectangle) => {
+			const rect = this.add.rectangle(rectangle.x, rectangle.y, rectangle.width, rectangle.height, 0x000000);
+			rect.setOrigin(0, 0);
+		});
+
+		// Convert objects to polygons
+		const polygons = navMeshObjects.map(obj => {
+			const { x, y, width, height } = obj;
+			return [
+				{ x: x, y: y },
+				{ x: x + width, y: y },
+				{ x: x + width, y: y + height },
+				{ x: x, y: y + height }
+			];
+		});
+
+		/*
+		// Flatten polygons into an array of vertices
+		const vertices = polygons.reduce((acc, polygon) => {
+			polygon.forEach(vertex => acc.push(vertex.x, vertex.y));
+			return acc;
+		}, []);
+		*/
+
+		/*
+		// Build the navigation mesh
+		this.objectLayer = this.createObjectLayer();
+		this.navMesh = this.navMeshPlugin.buildMeshFromTiled('navmesh', polygons, 32);  // name, objectLayer, TileSize
+		
+		// Test finding a path
+		const path = this.navMesh.findPath({ x: 50, y: 50 }, { x: 400, y: 300 });
+		console.log(path);
+		*/
+
+
+
+
+		
+
+		// Create the NavMesh based on the tilemap
+		this.navMesh = new NavMesh(sueloLayer, 1);
+
+
 
 		//sueloLayer.setPosition(-1024*3.5,-1024*3.5);
 		//paredLayer.setPosition(-1024*3.5,-1024*3.5);
@@ -47,7 +106,7 @@ export default class Animation extends Phaser.Scene {
 		sueloLayer.setScale(SCALE);
 		paredLayer.setScale(SCALE);
 
-		const navMesh = this.navMeshPlugin.buildMeshFromTilemap("mesh", map, [sueloLayer]);
+		//const navMesh = this.navMeshPlugin.buildMeshFromTilemap("mesh", map, [sueloLayer]);
 
 		/*
 		const path = navMesh.findPath({ x: 400, y: 40 }, { x: 1000, y: -100 });
@@ -79,7 +138,7 @@ export default class Animation extends Phaser.Scene {
 		this.player = new Player(this, playerX, playerY);
 		this.player.setScale(SCALE);
 
-		this.enemy = new Enemy(this, playerX+100, playerY-100, this.player);
+		this.enemy = new Enemy(this, playerX+200, playerY, this.player);
 		this.enemy.setScale(SCALE);
 
 
@@ -89,19 +148,17 @@ export default class Animation extends Phaser.Scene {
 		this.physics.add.collider(this.player, paredLayer);
 		this.cameras.main.startFollow(this.player);
 
-		
 		this.physics.add.collider(this.player, this.enemy, (player, enemy) => {
 			player.onPlayerGotHit(enemy.getDamage());
 			enemy.onEnemyDeath();
 		});
-		
+
 	}
 
+	
 	update(t, dt) {
-		if (this.enemy && !this.enemy.target) {
-			//console.log("pasando el player");
-			this.enemy.setTarget(this.player);
-		}
+
+		this.enemy.update(dt);
 	}
 
 }
