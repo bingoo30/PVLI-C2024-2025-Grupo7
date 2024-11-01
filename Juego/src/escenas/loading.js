@@ -18,6 +18,7 @@ export default class Loading extends Phaser.Scene {
 		this.load.image('start', 'assets/GUI/start.png');
 		this.load.image('background', 'assets/GUI/fondoinicio.png');
 		this.load.image('Player', 'assets/player.png');
+		this.load.image('Bala', 'assets/bala.png');
 		this.load.image('Enemy', 'assets/player.png');
 		this.load.tilemapTiledJSON('mapa1', 'assets/map/mapa1.json');
 		this.load.image('tileset', 'assets/map/mapTiles.png');
