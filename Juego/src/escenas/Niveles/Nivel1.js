@@ -34,19 +34,39 @@ export default class Animation extends Phaser.Scene {
 		const paredLayer = map.createLayer('pared', tileset);
 		this.scale = SCALE;
 
+		if (!sueloLayer) {
+			console.error("La capa 'suelo' no se ha creado correctamente.");
+		}
+
+		this.marker = this.add.graphics();
+		this.marker.lineStyle(3, 0xffffff, 1);
+		this.marker.strokeRect(0, 0, this.map.tileWidth, this.map.tileHeight);
+
+		console.log(this.map.tileWidth)
+		console.log(map.tileWidth)
+		console.log(map.height)
+
+
 		this.finder = new EasyStar.js();
 
-		var grid = [];
-		for (var y = 0; y < map.height; y++) {
-			var col = [];
-			for (var x = 0; x < map.width; x++) {
-				// In each cell we store the ID of the tile, which corresponds
-				// to its index in the tileset of the map ("ID" field in Tiled)
-				const tile = this.map.getTileAt(x, y);
+		if (this.map) {
+			var grid = [];
+			for (var y = 0; y < sueloLayer.height; y++) {
+				var col = [];
+				for (var x = 0; x < sueloLayer.width; x++) {
+					const tile = sueloLayer.getTileAt(x, y);
+					//console.error("El tile", tile);
 
-				col.push(tile);
+					if (tile) {
+						col.push(tile.index);  // Usa tile.index para obtener el índice del tile
+					} else {
+						col.push(-1);  // Usa un valor predeterminado para los tiles no encontrados
+					}
+				}
+				grid.push(col);
 			}
-			grid.push(col);
+		} else {
+			console.error("El mapa no está definido.");
 		}
 		this.finder.setGrid(grid);
 
@@ -65,11 +85,6 @@ export default class Animation extends Phaser.Scene {
 			if (properties[i].cost) this.finder.setTileCost(i + 1, properties[i].cost); // If there is a cost attached to the tile, let's register it
 		}
 		this.finder.setAcceptableTiles(acceptableTiles);
-
-
-		// Create the NavMesh based on the tilemap
-		//this.navMesh = new NavMesh(sueloLayer, 32);
-
 
 
 		//sueloLayer.setPosition(-1024*3.5,-1024*3.5);
@@ -111,16 +126,51 @@ export default class Animation extends Phaser.Scene {
 		});
 
 	}
-	getTileID(x, y) {
-		var tile = this.map.getTileAt(x, y);
-		return tile.index;
-	};
 	
+
+	checkCollision(x, y) {
+		var tile = this.map.getTileAt(x, y);
+		console.log(tile)
+		return tile.properties.collide == true;
+	};
+
+
+
+	handleClick(pointer) {
+		var x = this.camera.scrollX + pointer.x;
+		var y = this.camera.scrollY + pointer.y;
+		var toX = Math.floor(x / 32);
+		var toY = Math.floor(y / 32);
+		var fromX = Math.floor(this.player.x / 32);
+		var fromY = Math.floor(this.player.y / 32);
+		console.log('going from (' + fromX + ',' + fromY + ') to (' + toX + ',' + toY + ')');
+
+		this.finder.findPath(fromX, fromY, toX, toY, function (path) {
+			if (path === null) {
+				console.warn("Path was not found.");
+			} else {
+				console.log(path);
+				Game.moveCharacter(path);
+			}
+		});
+		this.finder.calculate(); // don't forget, otherwise nothing happens
+	};
+
+
 	update(t, dt) {
 
-		this.enemy.update(dt);
+		var worldPoint = this.input.activePointer.positionToCamera(this.cameras.main);
 
-	
+		// Rounds down to nearest tile
+		var pointerTileX = this.map.worldToTileX(worldPoint.x);
+		var pointerTileY = this.map.worldToTileY(worldPoint.y);
+		this.marker.x = this.map.tileToWorldX(pointerTileX);
+		this.marker.y = this.map.tileToWorldY(pointerTileY);
+
+		
+		var tile = this.map.getTileAt(pointerTileX, pointerTileY);
+		console.log(tile)
+		this.marker.setVisible(!tile);
 
 	}
 

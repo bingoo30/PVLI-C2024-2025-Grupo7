@@ -33,12 +33,12 @@ export default class Enemy extends Character {
         this.playerTile = {
             x: Math.floor(this.player.x / this.tileSize), y: Math.floor(this.player.y / this.tileSize)
         };
-        console.log(this.playerTile);
+        //console.log(this.playerTile);
 
         this.enemyTile = {
             x: Math.floor(this.x / this.tileSize), y: Math.floor(this.y / this.tileSize)
         };
-        console.log(this.enemyTile);
+        //console.log(this.enemyTile);
     }
 
 
@@ -62,7 +62,7 @@ export default class Enemy extends Character {
         this.dead = true;
         this.onDeath();
     }
-
+    /*
     obtenerSiguienteNodo() {
         if (this.path.length > 0) {
             return this.path.shift(); // Retorna el siguiente nodo de la ruta
@@ -142,7 +142,7 @@ export default class Enemy extends Character {
         }
     }
 
-
+    */
 
     /**
      * Bucle principal del personaje, actualizamos su posición y ejecutamos acciones según el Input
