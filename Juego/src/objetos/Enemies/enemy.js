@@ -1,4 +1,9 @@
 import Character from '../../objetos/Player/character.js';
+
+
+const TILE_SIZE = 32;
+let contadorIntentos = 0;
+const LIMITE_INTENTOS = 10
 export default class Enemy extends Character {
     /**
      * Constructor de Player, nuestro caballero medieval con espada y escudo
@@ -13,7 +18,6 @@ export default class Enemy extends Character {
         this.scene = scene;
         this.player = player;
         this.navMesh = scene.navMesh;
-        
         scene.physics.add.existing(this);
         //configurar los atributos correspondientes despues de llamar al constructor del character
         this.init(200, 200, 5, 1, 0);
@@ -21,9 +25,21 @@ export default class Enemy extends Character {
         this.body.setSize(16,8);
         this.body.setOffset(8, 24);
         this.path = [];
-    }
+        this.dead = false;
 
-  
+
+        this.tileSize = TILE_SIZE * this.scene.scale;
+
+        this.playerTile = {
+            x: Math.floor(this.player.x / this.tileSize), y: Math.floor(this.player.y / this.tileSize)
+        };
+        console.log(this.playerTile);
+
+        this.enemyTile = {
+            x: Math.floor(this.x / this.tileSize), y: Math.floor(this.y / this.tileSize)
+        };
+        console.log(this.enemyTile);
+    }
 
 
     init(speedFactor, shootSpeed, life, damage, prob) {
@@ -43,21 +59,90 @@ export default class Enemy extends Character {
     }
 
     onEnemyDeath() {
+        this.dead = true;
         this.onDeath();
     }
 
-    moveTo(node) {
-        this.sprite.x = node.x * this.navMesh.tileSize;
-        this.sprite.y = node.y * this.navMesh.tileSize;
+    obtenerSiguienteNodo() {
+        if (this.path.length > 0) {
+            return this.path.shift(); // Retorna el siguiente nodo de la ruta
+        }
+        console.warn("No hay nodos en la ruta.");
+        return null; // Devuelve null si no hay nodos
     }
 
-    isAtPosition(node) {
-        return this.x === node.x * this.navMesh.tileSize && this.y === node.y * this.navMesh.tileSize;
+    moverA(destino) {
+        if (!destino) {
+            console.error("Destino inválido:", destino);
+            return; // Si destino es inválido, salir
+        }
+
+        // Asegúrate de que la posición del destino sea válida
+        const targetX = destino.x * this.navMesh.tileSize;
+        const targetY = destino.y * this.navMesh.tileSize;
+        console.log(`targetX: `, targetX, `targetY: `, targetY);
+
+        const velocidad = 1; // Velocidad en píxeles por segundo
+
+        // Calcula la distancia hasta el destino
+        const dx = targetX - this.body.position.x;
+        const dy = targetY - this.body.position.y;
+        console.log(`dx: `, dx, `dy: `, dy);
+
+        const distancia = Math.sqrt(dx * dx + dy * dy);
+
+        // Verifica si el enemigo ha llegado al destino
+        if (distancia < velocidad * this.scene.physics.world.step) {
+            // Si está cerca, posiciona al enemigo en el nodo destino y detén el movimiento
+            this.body.position.x = targetX; // Actualiza usando el tamaño de los tiles
+            this.body.position.y = targetY;
+            this.body.setVelocity(0, 0); // Detiene cualquier velocidad residual
+            console.log(`Enemigo ha llegado al nodo: (${destino.x}, ${destino.y})`);
+            return true; // Indica que el nodo ha sido alcanzado
+        } else {
+            const proporcion = velocidad * this.scene.physics.world.step / distancia; // Mantiene la proporción
+            const velocidadX = dx * proporcion;
+            const velocidadY = dy * proporcion;
+            console.log(`Enemigo velocidad a: `,velocidadX,velocidadY);
+
+            this.body.setVelocity(velocidadX, velocidadY);
+            console.log(`Enemigo moviéndose a: (${this.body.position.x.toFixed(2)}, ${this.body.position.y.toFixed(2)})`);
+            return false; // Indica que el nodo aún no ha sido alcanzado
+        }
     }
 
-    setPath(path) {
-        this.path = path; // Asegúrate de que el camino sea un array de nodos válidos
+
+
+    moverEnemigo() {
+        const nextNode = this.obtenerSiguienteNodo();
+
+        if (!nextNode) {
+            console.warn("No hay siguiente nodo para mover al enemigo.");
+            return; // No hay siguiente nodo, salir
+        }
+
+        // Asegúrate de que nextNode tenga propiedades válidas
+        if (nextNode.x === undefined || nextNode.y === undefined) {
+            console.error("Nodo inválido:", nextNode);
+            return; // Salir si el nodo es inválido
+        }
+
+        // Comprobar si el nodo es caminable
+        if (!this.navMesh.isWalkable(nextNode.x, nextNode.y)) {
+            this.contadorIntentos++;
+            if (this.contadorIntentos >= LIMITE_INTENTOS) {
+                console.log("Enemigo atascado, buscando nueva ruta...");
+                this.path = this.navMesh.findPath(this.enemyTile.x, this.enemyTile.y, this.playerTile.x, this.playerTile.y);
+                this.contadorIntentos = 0; // Reinicia el contador
+                return;
+            }
+        } else {
+            this.contadorIntentos = 0; // Reinicia si se mueve correctamente
+            this.moverA(nextNode); // Mueve al enemigo hacia el siguiente nodo
+        }
     }
+
+
 
     /**
      * Bucle principal del personaje, actualizamos su posición y ejecutamos acciones según el Input
@@ -65,65 +150,24 @@ export default class Enemy extends Character {
      * @param {number} dt - Tiempo entre frames
      */
     update(t, dt) {
-        //const tileSize = 32 * this.scene.scale;
-        ////console.log("player", tileSize);
+        if (!this.dead) {
+            this.enemyTile = {
+                x: Math.floor(this.body.position.x / this.tileSize),
+                y: Math.floor(this.body.position.y / this.tileSize)
+            };
 
-        //const playerTile = {
-        //    x: Math.floor(this.player.x / tileSize), y: Math.floor(this.player.y / tileSize)
-        //};
-        //console.log(playerTile);
+            this.playerTile = {
+                x: Math.floor(this.player.x / this.tileSize),
+                y: Math.floor(this.player.y / this.tileSize)
+            };
 
-        //const enemyTile = {
-        //    x: Math.floor(this.x / tileSize), y: Math.floor(this.y / tileSize)
-        //};
-
-        //console.log(enemyTile);
-
-        //// Encontrar la ruta usando `findPath`
-
-        //if (!this.path || this.path.length === 0) {
-        //    this.path = this.navMesh.findPath(enemyTile.x, enemyTile.y, playerTile.x, playerTile.y);
-        //    console.log('Path:', this.path);
-        //}
-
-        
-        //// Si hay una ruta, mover al enemigo hacia el primer nodo de la ruta
-        //if (this.path.length > 0) {
-        //    const nextNode = this.path[0];
-        //    console.log("Next Node:", nextNode);
-        //    const targetX = nextNode.x * 32 * tileSize;
-        //    const targetY = nextNode.y * 32 * tileSize;
-
-        //    // Calcular el movimiento hacia el próximo nodo
-        //    const deltaX = targetX - this.x;
-        //    const deltaY = targetY - this.y;
-        //    const distance = Math.sqrt(deltaX ** 2 + deltaY ** 2);
-
-        //    if (distance < 2) {
-        //        this.path.shift();  // Si está cerca del nodo, pasamos al siguiente
-        //    } else {
-        //        // Mover en dirección al próximo nodo
-        //        //this.x += (deltaX / distance /10) *  (dt / 1000);
-        //        //this.y += (deltaY / distance / 10) *  (dt / 1000);
-        //        console.log(`Moving to (${targetX}, ${targetY})`);
-        //        const velocityX = (deltaX / distance) * this.speedFactor; // Normalizar y multiplicar por la velocidad
-        //        const velocityY = (deltaY / distance) * this.speedFactor; 
-        //        this.body.setVelocity(velocityX, velocityY);
-        //        //console.log("mov enemy")
-
-        //    }
-        //} else {
-        //    console.log("no hay path")
-        //}
-
-        if (this.path.length > 0) {
-            console.log("a");
-            const nextNode = this.path[0];
-            this.moveTo(nextNode);
-            if (this.isAtPosition(nextNode)) {
-                this.path.shift(); // Elimina el nodo alcanzado
+            // Si no hay un camino, encuentra uno
+            if (this.path.length === 0) {
+                this.path = this.navMesh.findPath(this.enemyTile.x, this.enemyTile.y, this.playerTile.x, this.playerTile.y);
             }
-        }
 
+            this.moverEnemigo();
+        }
     }
+
 }

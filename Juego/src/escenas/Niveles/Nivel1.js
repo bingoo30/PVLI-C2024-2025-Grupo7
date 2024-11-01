@@ -25,7 +25,7 @@ export default class Animation extends Phaser.Scene {
 
 		//Imagen de fondo
 		//this.add.image(0, 0, 'suelo').setOrigin(0, 0);
-        //https://medium.com/@tajammalmaqbool11/mastering-2d-game-path-finding-with-phaser3-ai-path-finding-301807c74ba3
+		//https://medium.com/@tajammalmaqbool11/mastering-2d-game-path-finding-with-phaser3-ai-path-finding-301807c74ba3
 		//Tilemap
 		const map = this.make.tilemap({ key: 'mapa1', tileWidth: 32, tileHeight: 32 });
 		const tileset = map.addTilesetImage('mapTiles', 'tileset');
@@ -34,8 +34,44 @@ export default class Animation extends Phaser.Scene {
 		this.scale = SCALE;
 
 
+
+
+
+
+
+
+
+
+
+		var easystar = new EasyStar.js();
+
+		easystar.setGrid(sueloLayer);
+		easystar.setAcceptableTiles([0]);
+		easystar.enableDiagonals();
+
+		easystar.enableCornerCutting();
+
+
+
+		easystar.findPath(0, 0, 4, 0, function (path) {
+			if (path === null) {
+				console.log("The path to the destination point was not found.");
+			} else {
+
+				for (var i = 0; i < path.length; i++) {
+					console.log("P: " + i + ", X:", path[i].x,  ",Y: " + path[i].y);
+	    		}
+
+			}
+		});
+
+
+
+
+
+
 		// Create the NavMesh based on the tilemap
-		this.navMesh = new NavMesh(sueloLayer, 32);
+		//this.navMesh = new NavMesh(sueloLayer, 32);
 
 
 
@@ -62,7 +98,7 @@ export default class Animation extends Phaser.Scene {
 		this.player = new Player(this, playerX, playerY);
 		this.player.setScale(SCALE);
 
-		this.enemy = new Enemy(this, playerX+200, playerY, this.player);
+		this.enemy = new Enemy(this, playerX+200, playerY+100, this.player);
 		this.enemy.setScale(SCALE);
 	
 

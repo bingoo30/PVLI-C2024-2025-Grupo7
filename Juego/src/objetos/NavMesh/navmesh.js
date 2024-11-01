@@ -22,6 +22,12 @@ export default class NavMesh {
         };
     }
 
+    generarCamino(origen, destino) {
+        let camino = []; // Genera el camino aquí
+        return camino.filter(nodo => esCaminable(nodo)); // Filtra nodos no caminables
+    }
+
+
     heuristic(nodeA, nodeB) {
         return Math.abs(nodeA.x - nodeB.x) + Math.abs(nodeA.y - nodeB.y);
     }
@@ -61,6 +67,8 @@ export default class NavMesh {
             ];
 
             for (const { x: dx, y: dy } of neighbors) {
+               
+
                 const nx = currentNode.x + dx;
                 const ny = currentNode.y + dy;
 
@@ -72,26 +80,27 @@ export default class NavMesh {
                     continue;
                 }
 
-                console.log("Caminable",nx);
 
                 const g = currentNode.g + 1;
                 let neighborNode = openSet.find(node => node.x === nx && node.y === ny);
 
                 if (!neighborNode) {
+                    console.log("No caminable");
+
                     neighborNode = this.createNode(nx, ny, currentNode);
                     neighborNode.g = g;
                     neighborNode.h = this.heuristic(neighborNode, endNode);
                     neighborNode.f = neighborNode.g + neighborNode.h;
                     openSet.push(neighborNode);
                 } else if (g < neighborNode.g) {
+                    console.log("Caminable:", nx, ny);
+
                     neighborNode.g = g;
                     neighborNode.parent = currentNode;
                     neighborNode.f = neighborNode.g + neighborNode.h;
                 }
             }
         }
-
-        console.error("No path found.");
         return [];
     }
 }
