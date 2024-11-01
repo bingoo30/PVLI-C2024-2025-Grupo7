@@ -17,19 +17,13 @@ export default class Enemy extends Character {
         scene.physics.add.existing(this);
         //configurar los atributos correspondientes despues de llamar al constructor del character
         this.init(200, 200, 5, 1, 0);
-
+        this.currentNode = { x: x, y: y };
         this.body.setSize(16,8);
         this.body.setOffset(8, 24);
-
-        this.pathIndex = 0;
-
+        this.path = [];
     }
 
-    setPath(path) {
-        this.path = path;
-        this.currentNodeIndex = 0;
-    }
-
+  
 
 
     init(speedFactor, shootSpeed, life, damage, prob) {
@@ -52,7 +46,18 @@ export default class Enemy extends Character {
         this.onDeath();
     }
 
+    moveTo(node) {
+        this.sprite.x = node.x * this.navMesh.TILE_SIZE;
+        this.sprite.y = node.y * TILE_SIZE;
+    }
 
+    isAtPosition(node) {
+        return this.x === node.x * TILE_SIZE && this.y === node.y * TILE_SIZE;
+    }
+
+    setPath(path) {
+        this.path = path; // Asegúrate de que el camino sea un array de nodos válidos
+    }
 
     /**
      * Bucle principal del personaje, actualizamos su posición y ejecutamos acciones según el Input
@@ -60,51 +65,65 @@ export default class Enemy extends Character {
      * @param {number} dt - Tiempo entre frames
      */
     update(t, dt) {
-        const tileSize = 32 * this.scene.scale;
-        //console.log("player", tileSize);
+        //const tileSize = 32 * this.scene.scale;
+        ////console.log("player", tileSize);
 
-        const playerTile = {
-            x: Math.floor(this.player.x / tileSize), y: Math.floor(this.player.y / tileSize)
-        };
-        console.log(playerTile);
+        //const playerTile = {
+        //    x: Math.floor(this.player.x / tileSize), y: Math.floor(this.player.y / tileSize)
+        //};
+        //console.log(playerTile);
 
-        const enemyTile = {
-            x: Math.floor(this.x / tileSize), y: Math.floor(this.y / tileSize)
-        };
+        //const enemyTile = {
+        //    x: Math.floor(this.x / tileSize), y: Math.floor(this.y / tileSize)
+        //};
 
-        console.log(enemyTile);
+        //console.log(enemyTile);
 
-        // Encontrar la ruta usando `findPath`
-        const path = this.navMesh.findPath(enemyTile.x, enemyTile.y, playerTile.x, playerTile.y);
+        //// Encontrar la ruta usando `findPath`
 
-        // Si hay una ruta, mover al enemigo hacia el primer nodo de la ruta
-        if (path.length > 0) {
-            const nextNode = path[0];
-            console.log("Next Node:", nextNode);
-            const targetX = nextNode.x * 32 * tileSize;
-            const targetY = nextNode.y * 32 * tileSize;
+        //if (!this.path || this.path.length === 0) {
+        //    this.path = this.navMesh.findPath(enemyTile.x, enemyTile.y, playerTile.x, playerTile.y);
+        //    console.log('Path:', this.path);
+        //}
 
-            // Calcular el movimiento hacia el próximo nodo
-            const deltaX = targetX - this.x;
-            const deltaY = targetY - this.y;
-            const distance = Math.sqrt(deltaX ** 2 + deltaY ** 2);
+        
+        //// Si hay una ruta, mover al enemigo hacia el primer nodo de la ruta
+        //if (this.path.length > 0) {
+        //    const nextNode = this.path[0];
+        //    console.log("Next Node:", nextNode);
+        //    const targetX = nextNode.x * 32 * tileSize;
+        //    const targetY = nextNode.y * 32 * tileSize;
 
-            if (distance < 2) {
-                this.body.setVelocity(0);
-                path.shift();  // Si está cerca del nodo, pasamos al siguiente
-            } else {
-                // Mover en dirección al próximo nodo
-                //this.x += (deltaX / distance) * this.speedFactor * (dt / 1000);
-                //this.y += (deltaY / distance) * this.speedFactor * (dt / 1000);
+        //    // Calcular el movimiento hacia el próximo nodo
+        //    const deltaX = targetX - this.x;
+        //    const deltaY = targetY - this.y;
+        //    const distance = Math.sqrt(deltaX ** 2 + deltaY ** 2);
 
-                const velocityX = (deltaX / distance) * this.speedFactor; // Normalizar y multiplicar por la velocidad
-                const velocityY = (deltaY / distance) * this.speedFactor; 
-                this.body.setVelocity(velocityX, velocityY);
-                console.log("mov enemy")
+        //    if (distance < 2) {
+        //        this.path.shift();  // Si está cerca del nodo, pasamos al siguiente
+        //    } else {
+        //        // Mover en dirección al próximo nodo
+        //        //this.x += (deltaX / distance /10) *  (dt / 1000);
+        //        //this.y += (deltaY / distance / 10) *  (dt / 1000);
+        //        console.log(`Moving to (${targetX}, ${targetY})`);
+        //        const velocityX = (deltaX / distance) * this.speedFactor; // Normalizar y multiplicar por la velocidad
+        //        const velocityY = (deltaY / distance) * this.speedFactor; 
+        //        this.body.setVelocity(velocityX, velocityY);
+        //        //console.log("mov enemy")
 
+        //    }
+        //} else {
+        //    console.log("no hay path")
+        //}
+
+        if (this.path.length > 0) {
+            console.log("a");
+            const nextNode = this.path[0];
+            this.moveTo(nextNode);
+            if (this.isAtPosition(nextNode)) {
+                this.path.shift(); // Elimina el nodo alcanzado
             }
-        } else {
-            console.log("no hay path")
         }
+
     }
 }
