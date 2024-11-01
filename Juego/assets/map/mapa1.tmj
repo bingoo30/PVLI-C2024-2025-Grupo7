@@ -1,12 +1,4 @@
 { "compressionlevel":-1,
- "editorsettings":
-    {
-     "export":
-        {
-         "format":"json",
-         "target":"mapa1..tmj"
-        }
-    },
  "height":60,
  "infinite":false,
  "layers":[

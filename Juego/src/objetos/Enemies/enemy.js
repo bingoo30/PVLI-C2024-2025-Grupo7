@@ -150,6 +150,7 @@ export default class Enemy extends Character {
      * @param {number} dt - Tiempo entre frames
      */
     update(t, dt) {
+        /*
         if (!this.dead) {
             this.enemyTile = {
                 x: Math.floor(this.body.position.x / this.tileSize),
@@ -168,6 +169,7 @@ export default class Enemy extends Character {
 
             this.moverEnemigo();
         }
+        */
     }
 
 }

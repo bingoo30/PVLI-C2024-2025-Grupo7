@@ -28,46 +28,43 @@ export default class Animation extends Phaser.Scene {
 		//https://medium.com/@tajammalmaqbool11/mastering-2d-game-path-finding-with-phaser3-ai-path-finding-301807c74ba3
 		//Tilemap
 		const map = this.make.tilemap({ key: 'mapa1', tileWidth: 32, tileHeight: 32 });
+		this.map = map;
 		const tileset = map.addTilesetImage('mapTiles', 'tileset');
 		const sueloLayer = map.createLayer('suelo', tileset);
 		const paredLayer = map.createLayer('pared', tileset);
 		this.scale = SCALE;
 
+		this.finder = new EasyStar.js();
 
+		var grid = [];
+		for (var y = 0; y < map.height; y++) {
+			var col = [];
+			for (var x = 0; x < map.width; x++) {
+				// In each cell we store the ID of the tile, which corresponds
+				// to its index in the tileset of the map ("ID" field in Tiled)
+				const tile = this.map.getTileAt(x, y);
 
-
-
-
-
-
-
-
-
-		var easystar = new EasyStar.js();
-
-		easystar.setGrid(sueloLayer);
-		easystar.setAcceptableTiles([0]);
-		easystar.enableDiagonals();
-
-		easystar.enableCornerCutting();
-
-
-
-		easystar.findPath(0, 0, 4, 0, function (path) {
-			if (path === null) {
-				console.log("The path to the destination point was not found.");
-			} else {
-
-				for (var i = 0; i < path.length; i++) {
-					console.log("P: " + i + ", X:", path[i].x,  ",Y: " + path[i].y);
-	    		}
-
+				col.push(tile);
 			}
-		});
+			grid.push(col);
+		}
+		this.finder.setGrid(grid);
+
+		var tiles = this.map.tilesets[0];
+		var properties = tiles.tileProperties;
+		var acceptableTiles = [];
 
 
-
-
+		for (var i = tiles.firstgid - 1; i < tileset.total; i++) { // firstgid and total are fields from Tiled that indicate the range of IDs that the tiles can take in that tileset
+			if (!properties.hasOwnProperty(i)) {
+				// If there is no property indicated at all, it means it's a walkable tile
+				acceptableTiles.push(i + 1);
+				continue;
+			}
+			if (!properties[i].collide) acceptableTiles.push(i + 1);
+			if (properties[i].cost) this.finder.setTileCost(i + 1, properties[i].cost); // If there is a cost attached to the tile, let's register it
+		}
+		this.finder.setAcceptableTiles(acceptableTiles);
 
 
 		// Create the NavMesh based on the tilemap
@@ -114,7 +111,10 @@ export default class Animation extends Phaser.Scene {
 		});
 
 	}
-
+	getTileID(x, y) {
+		var tile = this.map.getTileAt(x, y);
+		return tile.index;
+	};
 	
 	update(t, dt) {
 

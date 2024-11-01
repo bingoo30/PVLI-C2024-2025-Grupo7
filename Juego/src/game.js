@@ -43,18 +43,6 @@ let config = {
 
 	},
 
-	plugins: {
-		scene: [
-			{
-				key: 'PhaserNavMeshPlugin',
-				plugin: PhaserNavMeshPlugin,
-				mapping: 'navMeshPlugin',
-				start: true,
-				
-
-			}
-		]
-	},
 
 	title: "Madness",
 	version: "1.0.0"

@@ -26,17 +26,6 @@ export default class Loading extends Phaser.Scene {
 		//prueba solo
 		this.load.image('BichoPrueba', 'assets/bichoPrueba.png');
 
-
-		
-
-		this.load.scenePlugin({
-			key: 'PhaserNavMeshPlugin',
-			url: PhaserNavMeshPlugin,
-			sceneKey: 'navMeshPlugin'
-		});
-		
-
-
 		this.load.on('complete', function (f) {
 			this.scene.time.addEvent({
 				delay: 2000,
