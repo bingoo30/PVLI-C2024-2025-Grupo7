@@ -47,12 +47,12 @@ export default class Enemy extends Character {
     }
 
     moveTo(node) {
-        this.sprite.x = node.x * this.navMesh.TILE_SIZE;
-        this.sprite.y = node.y * TILE_SIZE;
+        this.sprite.x = node.x * this.navMesh.tileSize;
+        this.sprite.y = node.y * this.navMesh.tileSize;
     }
 
     isAtPosition(node) {
-        return this.x === node.x * TILE_SIZE && this.y === node.y * TILE_SIZE;
+        return this.x === node.x * this.navMesh.tileSize && this.y === node.y * this.navMesh.tileSize;
     }
 
     setPath(path) {
