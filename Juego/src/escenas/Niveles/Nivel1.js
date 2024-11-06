@@ -125,6 +125,13 @@ export default class Animation extends Phaser.Scene {
 			enemy.onEnemyDeath();
 		});
 
+
+
+
+
+
+
+
 	}
 	
 
@@ -135,7 +142,7 @@ export default class Animation extends Phaser.Scene {
 	};
 
 
-
+	// test
 	handleClick(pointer) {
 		var x = this.camera.scrollX + pointer.x;
 		var y = this.camera.scrollY + pointer.y;

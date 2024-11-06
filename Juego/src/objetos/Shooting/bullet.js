@@ -10,6 +10,7 @@ export default class Bullet extends Phaser.GameObjects.Sprite {
     constructor(scene, damage, speed, range, xStart, yStart, xObj, yObj) {
         super(scene, xStart, yStart, 'Bala');
         this.setScale(4);
+        this.scene = scene;
         this.scene.add.existing(this);
         this.damage = damage;  
         this.speed = 500;
@@ -22,6 +23,18 @@ export default class Bullet extends Phaser.GameObjects.Sprite {
         var pointSpeed = new Phaser.Math.Vector2(xObj - xStart, yObj - yStart);   // Usa como referencia el centro de la pantalla
         pointSpeed.normalize();
         this.body.setVelocity(this.speed * pointSpeed.x, this.speed * pointSpeed.y);
+
+        this.scene.add.particles(0, 0, 'Bala', {
+            x: () => {
+                return this.x;
+            },
+            y: () => {
+                return this.y;
+            },
+            speed: 200,
+            lifespan: 2000,
+            scale: 0.5
+        });
     }
     Update(time, delta) {
         const distance = Phaser.Math.Distance.Between(this.startX, this.startY, this.x, this.y); //calcula la distancia
