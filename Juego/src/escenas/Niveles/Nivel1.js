@@ -169,7 +169,7 @@ export default class Animation extends Phaser.Scene {
 
 		
 		var tile = this.map.getTileAt(pointerTileX, pointerTileY);
-		console.log(tile)
+		//console.log(tile)
 		this.marker.setVisible(!tile);
 
 	}

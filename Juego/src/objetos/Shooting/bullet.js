@@ -19,7 +19,7 @@ export default class Bullet extends Phaser.GameObjects.Sprite {
         this.scene.physics.add.existing(this);
 
         // direccion de disparo 
-        var pointSpeed = new Phaser.Math.Vector2(xObj - 500, yObj - 300);   // Usa como referencia el centro de la pantalla
+        var pointSpeed = new Phaser.Math.Vector2(xObj - xStart, yObj - yStart);   // Usa como referencia el centro de la pantalla
         pointSpeed.normalize();
         this.body.setVelocity(this.speed * pointSpeed.x, this.speed * pointSpeed.y);
     }
