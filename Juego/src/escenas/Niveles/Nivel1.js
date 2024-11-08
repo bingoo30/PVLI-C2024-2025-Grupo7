@@ -58,6 +58,9 @@ export default class Animation extends Phaser.Scene {
 
 		// #region Enemy
 
+		var phaserGuy = this.add.image(32, 32, 'Crac');
+		phaserGuy.setOrigin(playerX, playerY);
+		this.player2 = phaserGuy;
 
 		this.Crac = new Crac(this, playerX + 200, playerY + 100, this.player);
 		this.Crac.setScale(0.3);
@@ -81,12 +84,13 @@ export default class Animation extends Phaser.Scene {
 		// #region Navmesh
 		this.marker = this.add.graphics();
 		this.marker.lineStyle(3, 0xffffff, 1);
-		this.marker.strokeRect(0, 0, this.map.tileWidth, this.map.tileHeight);
+		this.marker.strokeRect(0, 0, this.map.tileWidth*SCALE, this.map.tileHeight*SCALE);
 
 		console.log(this.map.tileWidth)
 		console.log(this.map.tileWidth)
 		console.log(this.map.height)
 		this.finder = new EasyStar.js();
+		console.log("suelo",this.sueloLayer)
 
 		if (this.map) {
 			var grid = [];
@@ -94,7 +98,6 @@ export default class Animation extends Phaser.Scene {
 				var col = [];
 				for (var x = 0; x < this.sueloLayer.width; x++) {
 					const tile = this.sueloLayer.getTileAt(x, y);
-					//console.error("El tile", tile);
 
 					if (tile) {
 						col.push(tile.index);  // Usa tile.index para obtener el índice del tile
@@ -107,8 +110,11 @@ export default class Animation extends Phaser.Scene {
 		} else {
 			console.error("El mapa no está definido.");
 		}
+		console.log(grid);
+		console.log(this.map)
 		this.finder.setGrid(grid);
 		var tiles = this.map.tilesets[0];
+		console.log(tiles)
 		var properties = tiles.tileProperties;
 		var acceptableTiles = [];
 
@@ -119,10 +125,14 @@ export default class Animation extends Phaser.Scene {
 				acceptableTiles.push(i + 1);
 				continue;
 			}
-			if (!properties[i].collide) acceptableTiles.push(i + 1);
-			if (properties[i].cost) this.finder.setTileCost(i + 1, properties[i].cost); // If there is a cost attached to the tile, let's register it
+			if (!properties[i].collides) acceptableTiles.push(i + 1);
+			if (properties[i].cost) {
+				this.finder.setTileCost(i + 1, properties[i].cost); // If there is a cost attached to the tile, let's register it
+				//console.log("con coste")
+			}
 		}
 		this.finder.setAcceptableTiles(acceptableTiles);
+		//console.log(acceptableTiles);
 
 
 		// #endregion
@@ -166,7 +176,7 @@ export default class Animation extends Phaser.Scene {
 	}
 
 	checkCollision(x, y) {
-		var tile = this.map.getTileAt(x, y);
+		var tile = this.sueloLayer.getTileAt(x, y);
 		if (!tile) {
 			console.log("no hay tile");
 			return;
@@ -182,8 +192,8 @@ export default class Animation extends Phaser.Scene {
 		var y = this.camera.scrollY + pointer.y;
 		var toX = Math.floor(x / 32);
 		var toY = Math.floor(y / 32);
-		var fromX = Math.floor(this.player.x / 32);
-		var fromY = Math.floor(this.player.y / 32);
+		var fromX = Math.floor(this.player2.x / 32);
+		var fromY = Math.floor(this.player2.y / 32);
 		console.log('going from (' + fromX + ',' + fromY + ') to (' + toX + ',' + toY + ')');
 
 		this.finder.findPath(fromX, fromY, toX, toY, function (path) {
@@ -191,7 +201,7 @@ export default class Animation extends Phaser.Scene {
 				console.warn("Path was not found.");
 			} else {
 				console.log(path);
-				Game.moveCharacter(path);
+				this.moveCharacter(path);
 			}
 		});
 		this.finder.calculate(); // don't forget, otherwise nothing happens
@@ -204,7 +214,7 @@ export default class Animation extends Phaser.Scene {
 			var ex = path[i + 1].x;
 			var ey = path[i + 1].y;
 			tweens.push({
-				targets: this.player,
+				targets: this.player2,
 				x: { value: ex * this.map.tileWidth, duration: 200 },
 				y: { value: ey * this.map.tileHeight, duration: 200 }
 			});
