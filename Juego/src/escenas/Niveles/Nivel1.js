@@ -1,6 +1,7 @@
 import Player from '../../objetos/Player/player.js';
 import Crac from '../../objetos/Enemies/Crac.js'
 import Enemy from '../../objetos/Enemies/enemy.js';
+import EnemyShooter from '../../objetos/Enemies/enemyShooter.js';
 import NavMesh from '../../objetos/NavMesh/navmesh.js';
 import Floor from '../../objetos/Escenario/floor.js';
 
