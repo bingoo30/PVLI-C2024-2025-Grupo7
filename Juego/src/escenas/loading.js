@@ -23,9 +23,8 @@ export default class Loading extends Phaser.Scene {
 		this.load.tilemapTiledJSON('mapa1', 'assets/map/mapa1.json');
 		this.load.image('tileset', 'assets/map/mapTiles.png');
 		this.load.json('navmesh', 'assets/map/mapa1.json');
-
-		//prueba solo
-		this.load.image('BichoPrueba', 'assets/bichoPrueba.png');
+		this.load.image('Crac', 'assets/Crac.png');
+		this.load.audio('MainSample', 'assets/audio/batallaPrincipal.wav');
 
 		this.load.on('complete', function (f) {
 			this.scene.time.addEvent({

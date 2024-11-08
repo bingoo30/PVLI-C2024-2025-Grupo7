@@ -6,21 +6,22 @@ let contadorIntentos = 0;
 const LIMITE_INTENTOS = 10
 export default class Enemy extends Character {
     /**
-     * Constructor de Player, nuestro caballero medieval con espada y escudo
+     * Constructor de los enemigos
      * @param {Scene} scene - escena en la que aparece
      * @param {number} x - coordenada x
      * @param {number} y - coordenada y
-     * @param {string} type Tipo de character
+     * @param {phaser.Character} type Tipo de character
+     * @param {phaser.player} player Jugador (target) a perseguir
+     * 
     */
-    constructor(scene, x, y, player) {
+    constructor(scene, x, y, player, typeEnemy) {
         //heredo de la clase character
-        super(scene, x, y, 'Enemy');
+        super(scene, x, y, [typeEnemy]);
         this.scene = scene;
         this.player = player;
         this.navMesh = scene.navMesh;
         scene.physics.add.existing(this);
         //configurar los atributos correspondientes despues de llamar al constructor del character
-        this.init(200, 200, 5, 1, 0);
         this.currentNode = { x: x, y: y };
         this.body.setSize(16,8);
         this.body.setOffset(8, 24);

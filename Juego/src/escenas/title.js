@@ -25,6 +25,7 @@ export default class Title extends Phaser.Scene {
 	create() {
 		console.log("me he creado", this.scene.key);
 
+		
 		//Pintamos un fondo
 		var back = this.add.image(0, 0, 'background').setOrigin(0, 0);
 

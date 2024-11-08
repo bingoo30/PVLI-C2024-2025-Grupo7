@@ -1,8 +1,8 @@
 import Player from '../../objetos/Player/player.js';
+import Crac from '../../objetos/Enemies/Crac.js'
 import Enemy from '../../objetos/Enemies/enemy.js';
 import NavMesh from '../../objetos/NavMesh/navmesh.js';
 import Floor from '../../objetos/Escenario/floor.js';
-import Character from '../../objetos/Player/character.js';
 
 //constante
 const SCALE = 4;
@@ -59,18 +59,13 @@ export default class Animation extends Phaser.Scene {
 		// #region Enemy
 
 
-		this.enemy = new Enemy(this, playerX + 200, playerY + 100, this.player);
-		this.enemy.setScale(SCALE);
+		this.Crac = new Crac(this, playerX + 200, playerY + 100, this.player);
+		this.Crac.setScale(0.3);
 
+		this.enemy = this.add.group();
+		this.enemy.add(this.Crac);
 
 		// #endregion
-
-		// #endregion
-
-			//Imagen de fondo
-			//this.add.image(0, 0, 'suelo').setOrigin(0, 0);
-			//https://medium.com/@tajammalmaqbool11/mastering-2d-game-path-finding-with-phaser3-ai-path-finding-301807c74ba3
-
 
 
 		// #region Debug
@@ -150,6 +145,11 @@ export default class Animation extends Phaser.Scene {
 		// #endregion
 
 		this.cameras.main.startFollow(this.player);
+
+		// #region sonido
+		this.MainSample = this.sound.add('MainSample');
+		this.MainSample.play();
+		// #endregion
 	}
 	
 	update(t, dt) {

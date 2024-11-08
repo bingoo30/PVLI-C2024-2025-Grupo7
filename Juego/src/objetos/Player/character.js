@@ -71,9 +71,5 @@ export default class Character extends Phaser.GameObjects.Sprite {
         console.log(`${this.texture.key} ha muerto`);
         this.destroy(); // Elimina el objeto de la escena
     }
-
-    characterShoot() {
-        console.log("pum pum");
-    }
     // #endregion
 }
