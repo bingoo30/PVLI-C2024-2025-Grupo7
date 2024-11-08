@@ -22,6 +22,7 @@ export default class Animation extends Phaser.Scene {
 	*/
 	create() {
 		console.log("me he creado", this.scene.key);
+		//this.input.on('pointerup', this.handleClick, this);
 
 		// #region Entities
 
@@ -58,12 +59,14 @@ export default class Animation extends Phaser.Scene {
 
 		// #region Enemy
 
-		var phaserGuy = this.add.image(32, 32, 'Crac');
-		phaserGuy.setOrigin(playerX, playerY);
-		this.player2 = phaserGuy;
+		this.phaserGuy = this.add.sprite(32, 32, 'Crac');
+		this.phaserGuy.setScale(SCALE);
+
+		this.phaserGuy.setOrigin(playerX, playerY);
+		console.log(this.phaserGuy)
 
 		this.Crac = new Crac(this, playerX + 200, playerY + 100, this.player);
-		this.Crac.setScale(0.3);
+		this.Crac.setScale(SCALE);
 
 		this.enemy = this.add.group();
 		this.enemy.add(this.Crac);
@@ -160,21 +163,66 @@ export default class Animation extends Phaser.Scene {
 		this.MainSample = this.sound.add('MainSample');
 		this.MainSample.play();
 		// #endregion
+
+
+		this.currentPath = null;
 	}
 	
 	update(t, dt) {
+		const playerTileX = this.map.worldToTileX(this.player.x);
+		const playerTileY = this.map.worldToTileY(this.player.y);
+		const CracTileX = this.map.worldToTileX(this.Crac.x);
+		const CracTileY = this.map.worldToTileY(this.Crac.y);
+		if (
+			Phaser.Math.Distance.Between(this.phaserGuy.x, this.phaserGuy.y, this.player.x, this.player.y) < 5
+		) {
+			return;
+		}
 
-		var worldPoint = this.input.activePointer.positionToCamera(this.cameras.main);
+		// Calculate a path if there's none or it's complete
+		if (!this.currentPath || this.currentPath.length === 0) {
+			this.finder.findPath(CracTileX, CracTileY, playerTileX, playerTileY, (path) => {
+				if (path === null) {
+					console.warn("Path not found.");
+				} else {
+					console.warn("Path found.");
 
-		// Rounds down to nearest tile
-		var pointerTileX = this.map.worldToTileX(worldPoint.x);
-		var pointerTileY = this.map.worldToTileY(worldPoint.y);
-		this.marker.x = this.map.tileToWorldX(pointerTileX);
-		this.marker.y = this.map.tileToWorldY(pointerTileY);
-		this.marker.setVisible(!this.checkCollision(pointerTileX, pointerTileY));
+					this.currentPath = path;
+					this.moveAlongPath();
+				}
+			});
+			this.finder.calculate();
+		}
 
 	}
+	moveAlongPath() {
+		if (!this.currentPath || this.currentPath.length === 0) return;
+		console.warn("Moving.");
 
+		// Get the next step in the path
+		const nextStep = this.currentPath.shift();
+		if (!nextStep) return;
+
+		// Convert tile coordinates to world coordinates
+		const targetX = this.map.tileToWorldX(nextStep.x) + this.map.tileWidth * SCALE ;
+		const targetY = this.map.tileToWorldY(nextStep.y) + this.map.tileHeight * SCALE ;
+		console.warn("PlayerCalc:", targetX);
+		console.warn("Player:", this.player.x);
+
+		// Tween `phaserGuy` to the next step
+		this.tweens.add({
+			targets: this.Crac,
+			x: targetX,
+			y: targetY,
+			duration: 200,
+			onComplete: () => {
+				// When the current tween completes, move to the next step
+				if (this.currentPath.length > 0) {
+					this.moveAlongPath();
+				}
+			}
+		});
+	}
 	checkCollision(x, y) {
 		var tile = this.sueloLayer.getTileAt(x, y);
 		if (!tile) {
@@ -187,16 +235,17 @@ export default class Animation extends Phaser.Scene {
 
 
 	// test
-	handleClick(pointer) {
-		var x = this.camera.scrollX + pointer.x;
-		var y = this.camera.scrollY + pointer.y;
+	handleClick = (pointer) => {
+		var x = this.cameras.scrollX + pointer.x;
+		var y = this.cameras.scrollY + pointer.y;
 		var toX = Math.floor(x / 32);
 		var toY = Math.floor(y / 32);
-		var fromX = Math.floor(this.player2.x / 32);
-		var fromY = Math.floor(this.player2.y / 32);
+		console.log(this.phaserGuy);
+		var fromX = Math.floor(this.phaserGuy.x / 32);
+		var fromY = Math.floor(this.phaserGuy.y / 32);
 		console.log('going from (' + fromX + ',' + fromY + ') to (' + toX + ',' + toY + ')');
 
-		this.finder.findPath(fromX, fromY, toX, toY, function (path) {
+		this.finder.findPath(fromX, fromY, toX, toY, (path) => {
 			if (path === null) {
 				console.warn("Path was not found.");
 			} else {
@@ -204,7 +253,7 @@ export default class Animation extends Phaser.Scene {
 				this.moveCharacter(path);
 			}
 		});
-		this.finder.calculate(); // don't forget, otherwise nothing happens
+		this.finder.calculate();
 	};
 
 	moveCharacter(path) {
