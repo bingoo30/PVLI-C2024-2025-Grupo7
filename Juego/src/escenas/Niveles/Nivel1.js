@@ -65,7 +65,7 @@ export default class Animation extends Phaser.Scene {
 		this.phaserGuy.setOrigin(playerX, playerY);
 		console.log(this.phaserGuy)
 
-		this.Crac = new Crac(this, playerX + 200, playerY + 100, this.player);
+		this.Crac = new Crac(this, playerX + 200, playerY + 100, this.player, SCALE);
 		this.Crac.setScale(SCALE);
 
 		this.enemy = this.add.group();
@@ -169,6 +169,7 @@ export default class Animation extends Phaser.Scene {
 	}
 	
 	update(t, dt) {
+		/*
 		const playerTileX = this.map.worldToTileX(this.player.x);
 		const playerTileY = this.map.worldToTileY(this.player.y);
 		const CracTileX = this.map.worldToTileX(this.Crac.x);
@@ -192,8 +193,8 @@ export default class Animation extends Phaser.Scene {
 				}
 			});
 			this.finder.calculate();
-		}
-
+		}*/
+		this.Crac.update();
 	}
 	moveAlongPath() {
 		if (!this.currentPath || this.currentPath.length === 0) return;
@@ -214,7 +215,7 @@ export default class Animation extends Phaser.Scene {
 			targets: this.Crac,
 			x: targetX,
 			y: targetY,
-			duration: 200,
+			duration: 900,
 			onComplete: () => {
 				// When the current tween completes, move to the next step
 				if (this.currentPath.length > 0) {

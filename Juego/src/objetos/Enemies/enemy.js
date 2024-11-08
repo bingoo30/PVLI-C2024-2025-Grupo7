@@ -14,11 +14,12 @@ export default class Enemy extends Character {
      * @param {phaser.player} player Jugador (target) a perseguir
      * 
     */
-    constructor(scene, x, y, player, typeEnemy) {
+    constructor(scene, x, y, player, typeEnemy, SCALE) {
         //heredo de la clase character
         super(scene, x, y, [typeEnemy]);
         this.scene = scene;
         this.player = player;
+        this.scale = SCALE;
         this.navMesh = scene.navMesh;
         scene.physics.add.existing(this);
         //configurar los atributos correspondientes despues de llamar al constructor del character
@@ -27,19 +28,6 @@ export default class Enemy extends Character {
         this.body.setOffset(8, 24);
         this.path = [];
         this.dead = false;
-
-
-        this.tileSize = TILE_SIZE * this.scene.scale;
-
-        this.playerTile = {
-            x: Math.floor(this.player.x / this.tileSize), y: Math.floor(this.player.y / this.tileSize)
-        };
-        //console.log(this.playerTile);
-
-        this.enemyTile = {
-            x: Math.floor(this.x / this.tileSize), y: Math.floor(this.y / this.tileSize)
-        };
-        //console.log(this.enemyTile);
     }
 
 
@@ -63,87 +51,7 @@ export default class Enemy extends Character {
         this.dead = true;
         this.onDeath();
     }
-    /*
-    obtenerSiguienteNodo() {
-        if (this.path.length > 0) {
-            return this.path.shift(); // Retorna el siguiente nodo de la ruta
-        }
-        console.warn("No hay nodos en la ruta.");
-        return null; // Devuelve null si no hay nodos
-    }
-
-    moverA(destino) {
-        if (!destino) {
-            console.error("Destino inválido:", destino);
-            return; // Si destino es inválido, salir
-        }
-
-        // Asegúrate de que la posición del destino sea válida
-        const targetX = destino.x * this.navMesh.tileSize;
-        const targetY = destino.y * this.navMesh.tileSize;
-        console.log(`targetX: `, targetX, `targetY: `, targetY);
-
-        const velocidad = 1; // Velocidad en píxeles por segundo
-
-        // Calcula la distancia hasta el destino
-        const dx = targetX - this.body.position.x;
-        const dy = targetY - this.body.position.y;
-        console.log(`dx: `, dx, `dy: `, dy);
-
-        const distancia = Math.sqrt(dx * dx + dy * dy);
-
-        // Verifica si el enemigo ha llegado al destino
-        if (distancia < velocidad * this.scene.physics.world.step) {
-            // Si está cerca, posiciona al enemigo en el nodo destino y detén el movimiento
-            this.body.position.x = targetX; // Actualiza usando el tamaño de los tiles
-            this.body.position.y = targetY;
-            this.body.setVelocity(0, 0); // Detiene cualquier velocidad residual
-            console.log(`Enemigo ha llegado al nodo: (${destino.x}, ${destino.y})`);
-            return true; // Indica que el nodo ha sido alcanzado
-        } else {
-            const proporcion = velocidad * this.scene.physics.world.step / distancia; // Mantiene la proporción
-            const velocidadX = dx * proporcion;
-            const velocidadY = dy * proporcion;
-            console.log(`Enemigo velocidad a: `,velocidadX,velocidadY);
-
-            this.body.setVelocity(velocidadX, velocidadY);
-            console.log(`Enemigo moviéndose a: (${this.body.position.x.toFixed(2)}, ${this.body.position.y.toFixed(2)})`);
-            return false; // Indica que el nodo aún no ha sido alcanzado
-        }
-    }
-
-
-
-    moverEnemigo() {
-        const nextNode = this.obtenerSiguienteNodo();
-
-        if (!nextNode) {
-            console.warn("No hay siguiente nodo para mover al enemigo.");
-            return; // No hay siguiente nodo, salir
-        }
-
-        // Asegúrate de que nextNode tenga propiedades válidas
-        if (nextNode.x === undefined || nextNode.y === undefined) {
-            console.error("Nodo inválido:", nextNode);
-            return; // Salir si el nodo es inválido
-        }
-
-        // Comprobar si el nodo es caminable
-        if (!this.navMesh.isWalkable(nextNode.x, nextNode.y)) {
-            this.contadorIntentos++;
-            if (this.contadorIntentos >= LIMITE_INTENTOS) {
-                console.log("Enemigo atascado, buscando nueva ruta...");
-                this.path = this.navMesh.findPath(this.enemyTile.x, this.enemyTile.y, this.playerTile.x, this.playerTile.y);
-                this.contadorIntentos = 0; // Reinicia el contador
-                return;
-            }
-        } else {
-            this.contadorIntentos = 0; // Reinicia si se mueve correctamente
-            this.moverA(nextNode); // Mueve al enemigo hacia el siguiente nodo
-        }
-    }
-
-    */
+    
 
     /**
      * Bucle principal del personaje, actualizamos su posición y ejecutamos acciones según el Input
@@ -151,26 +59,59 @@ export default class Enemy extends Character {
      * @param {number} dt - Tiempo entre frames
      */
     update(t, dt) {
-        /*
-        if (!this.dead) {
-            this.enemyTile = {
-                x: Math.floor(this.body.position.x / this.tileSize),
-                y: Math.floor(this.body.position.y / this.tileSize)
-            };
+        if (this.dead) return;
+        // Calcula la distancia entre Crac y el jugador
+        const distance = Phaser.Math.Distance.Between(this.x, this.y, this.player.x, this.player.y);
 
-            this.playerTile = {
-                x: Math.floor(this.player.x / this.tileSize),
-                y: Math.floor(this.player.y / this.tileSize)
-            };
-
-            // Si no hay un camino, encuentra uno
-            if (this.path.length === 0) {
-                this.path = this.navMesh.findPath(this.enemyTile.x, this.enemyTile.y, this.playerTile.x, this.playerTile.y);
-            }
-
-            this.moverEnemigo();
+        // Solo calcula un nuevo camino si está lo suficientemente lejos del jugador
+        if (distance > 5 && (this.path.length === 0 || this.atPathEnd())) {
+            this.calculatePath();
         }
-        */
+
+        // Moverse a lo largo del camino si existe
+        if (this.path.length > 0) {
+            this.moveAlongPath();
+        }
+
+    }
+    calculatePath() {
+        // Coordenadas del jugador y de Crac en tiles
+        const startX = this.scene.map.worldToTileX(this.x);
+        const startY = this.scene.map.worldToTileY(this.y);
+        const targetX = this.scene.map.worldToTileX(this.player.x);
+        const targetY = this.scene.map.worldToTileY(this.player.y);
+
+        // Encuentra el camino y asigna a `this.path`
+        this.scene.finder.findPath(startX, startY, targetX, targetY, (path) => {
+            if (path === null) {
+                console.warn("Path no encontrado.");
+            } else {
+                this.path = path;
+            }
+        });
+        this.scene.finder.calculate();
     }
 
+    moveAlongPath() {
+        // El siguiente paso del camino
+        const nextStep = this.path.shift();
+        if (!nextStep) return;
+
+        // Convierte coordenadas de tile a coordenadas de mundo
+        const targetX = this.scene.map.tileToWorldX(nextStep.x) + this.scene.map.tileWidth * this.scale;
+        const targetY = this.scene.map.tileToWorldY(nextStep.y) + this.scene.map.tileHeight * this.scale;
+
+        // Tweens para moverse al siguiente paso
+        this.scene.tweens.add({
+            targets: this,
+            x: targetX,
+            y: targetY,
+            duration: 500,  // Ajusta la duración según la velocidad deseada
+        });
+    }
+
+    atPathEnd() {
+        // Verifica si ha alcanzado el último punto del camino
+        return this.path.length === 0;
+    }
 }
