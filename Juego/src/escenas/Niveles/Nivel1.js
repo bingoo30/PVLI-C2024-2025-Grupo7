@@ -23,38 +23,82 @@ export default class Animation extends Phaser.Scene {
 	create() {
 		console.log("me he creado", this.scene.key);
 
-		//Imagen de fondo
-		//this.add.image(0, 0, 'suelo').setOrigin(0, 0);
-		//https://medium.com/@tajammalmaqbool11/mastering-2d-game-path-finding-with-phaser3-ai-path-finding-301807c74ba3
-		//Tilemap
-		const map = this.make.tilemap({ key: 'mapa1', tileWidth: 32, tileHeight: 32 });
-		this.map = map;
-		const tileset = map.addTilesetImage('mapTiles', 'tileset');
-		const sueloLayer = map.createLayer('suelo', tileset);
-		const paredLayer = map.createLayer('pared', tileset);
-		this.scale = SCALE;
+		// #region Entities
 
-		if (!sueloLayer) {
+		// #region Map
+
+		this.map = this.make.tilemap({ key: 'mapa1', tileWidth: 32, tileHeight: 32 });
+		this.tileset = this.map.addTilesetImage('mapTiles', 'tileset');
+		this.sueloLayer = this.map.createLayer('suelo', this.tileset);
+		if (!this.sueloLayer) {
 			console.error("La capa 'suelo' no se ha creado correctamente.");
 		}
+		this.paredLayer = this.map.createLayer('pared', this.tileset);
+		if (!this.paredLayer) {
+			console.error("La capa 'suelo' no se ha creado correctamente.");
+		}
+		this.sueloLayer.setScale(SCALE);
+		this.paredLayer.setScale(SCALE);
 
+		// #endregion
+
+
+		// #region Player
+
+		const objectLayer = this.map.getObjectLayer('position');
+		const playerPos = objectLayer.objects.find(obj => obj.name == 'playerPosition');
+		// Verificar si el objeto fue encontrado
+		if (!playerPos) console.log('Position player no encontrado.');
+		const playerX = playerPos.x * SCALE;
+		const playerY = playerPos.y * SCALE;
+		this.player = new Player(this, playerX, playerY);
+		this.player.setScale(SCALE);
+
+		// #endregion
+
+		// #region Enemy
+
+
+		this.enemy = new Enemy(this, playerX + 200, playerY + 100, this.player);
+		this.enemy.setScale(SCALE);
+
+
+		// #endregion
+
+		// #endregion
+
+			//Imagen de fondo
+			//this.add.image(0, 0, 'suelo').setOrigin(0, 0);
+			//https://medium.com/@tajammalmaqbool11/mastering-2d-game-path-finding-with-phaser3-ai-path-finding-301807c74ba3
+
+
+
+		// #region Debug
+		const debugGraphics = this.add.graphics();
+		this.paredLayer.renderDebug(debugGraphics, {
+			tileColor: null, // No colorear los tiles
+			collidingTileColor: new Phaser.Display.Color(243, 134, 48, 200), // Color para los tiles colisionables
+			faceColor: new Phaser.Display.Color(40, 39, 37, 255) // Color para los bordes de colisión
+		});
+		// #endregion
+		
+
+		// #region Navmesh
 		this.marker = this.add.graphics();
 		this.marker.lineStyle(3, 0xffffff, 1);
 		this.marker.strokeRect(0, 0, this.map.tileWidth, this.map.tileHeight);
 
 		console.log(this.map.tileWidth)
-		console.log(map.tileWidth)
-		console.log(map.height)
-
-
+		console.log(this.map.tileWidth)
+		console.log(this.map.height)
 		this.finder = new EasyStar.js();
 
 		if (this.map) {
 			var grid = [];
-			for (var y = 0; y < sueloLayer.height; y++) {
+			for (var y = 0; y < this.sueloLayer.height; y++) {
 				var col = [];
-				for (var x = 0; x < sueloLayer.width; x++) {
-					const tile = sueloLayer.getTileAt(x, y);
+				for (var x = 0; x < this.sueloLayer.width; x++) {
+					const tile = this.sueloLayer.getTileAt(x, y);
 					//console.error("El tile", tile);
 
 					if (tile) {
@@ -69,13 +113,12 @@ export default class Animation extends Phaser.Scene {
 			console.error("El mapa no está definido.");
 		}
 		this.finder.setGrid(grid);
-
 		var tiles = this.map.tilesets[0];
 		var properties = tiles.tileProperties;
 		var acceptableTiles = [];
 
 
-		for (var i = tiles.firstgid - 1; i < tileset.total; i++) { // firstgid and total are fields from Tiled that indicate the range of IDs that the tiles can take in that tileset
+		for (var i = tiles.firstgid - 1; i < this.tileset.total; i++) { // firstgid and total are fields from Tiled that indicate the range of IDs that the tiles can take in that tileset
 			if (!properties.hasOwnProperty(i)) {
 				// If there is no property indicated at all, it means it's a walkable tile
 				acceptableTiles.push(i + 1);
@@ -87,58 +130,49 @@ export default class Animation extends Phaser.Scene {
 		this.finder.setAcceptableTiles(acceptableTiles);
 
 
-		//sueloLayer.setPosition(-1024*3.5,-1024*3.5);
-		//paredLayer.setPosition(-1024*3.5,-1024*3.5);
+		// #endregion
 
-		paredLayer.setCollisionByProperty({ collides: true });
-		sueloLayer.setScale(SCALE);
-		paredLayer.setScale(SCALE);
 
-		//const navMesh = this.navMeshPlugin.buildMeshFromTilemap("mesh", map, [sueloLayer]);
+		// #region Collision
 
+		this.paredLayer.setCollisionByProperty({ collides: true });
 		
 
-		//buscamos la capa de objetos donde estan las posiciones iniciales
-		const objectLayer = map.getObjectLayer('position');
-		const playerPos = objectLayer.objects.find(obj => obj.name == 'playerPosition');
+		this.physics.add.collider(this.enemy, this.paredLayer);
 
-		// Verificar si el objeto fue encontrado
-		if (!playerPos) console.log('Position player no encontrado.');
-		const playerX = playerPos.x * SCALE;
-		const playerY = playerPos.y * SCALE;
-
-		this.player = new Player(this, playerX, playerY);
-		this.player.setScale(SCALE);
-
-		this.enemy = new Enemy(this, playerX+200, playerY+100, this.player);
-		this.enemy.setScale(SCALE);
-	
-
-		let scene = this; // Nos guardamos una referencia a la escena para usarla en la función anidada que viene a continuación
-		this.physics.add.collider(this.enemy, paredLayer);
-
-		this.physics.add.collider(this.player, paredLayer);
-		this.cameras.main.startFollow(this.player);
+		this.physics.add.collider(this.player, this.paredLayer);
 
 		this.physics.add.collider(this.player, this.enemy, (player, enemy) => {
 			player.onPlayerGotHit(enemy.getDamage());
 			enemy.onEnemyDeath();
-		});
+		})
 
+		// #endregion
 
-
-
-
-
-
-
+		this.cameras.main.startFollow(this.player);
 	}
 	
+	update(t, dt) {
+
+		var worldPoint = this.input.activePointer.positionToCamera(this.cameras.main);
+
+		// Rounds down to nearest tile
+		var pointerTileX = this.map.worldToTileX(worldPoint.x);
+		var pointerTileY = this.map.worldToTileY(worldPoint.y);
+		this.marker.x = this.map.tileToWorldX(pointerTileX);
+		this.marker.y = this.map.tileToWorldY(pointerTileY);
+		this.marker.setVisible(!this.checkCollision(pointerTileX, pointerTileY));
+
+	}
 
 	checkCollision(x, y) {
 		var tile = this.map.getTileAt(x, y);
+		if (!tile) {
+			console.log("no hay tile");
+			return;
+		}
 		console.log(tile)
-		return tile.properties.collide == true;
+		return tile.properties.collides == true;
 	};
 
 
@@ -163,22 +197,24 @@ export default class Animation extends Phaser.Scene {
 		this.finder.calculate(); // don't forget, otherwise nothing happens
 	};
 
+	moveCharacter(path) {
+		// Sets up a list of tweens, one for each tile to walk, that will be chained by the timeline
+		var tweens = [];
+		for (var i = 0; i < path.length - 1; i++) {
+			var ex = path[i + 1].x;
+			var ey = path[i + 1].y;
+			tweens.push({
+				targets: this.player,
+				x: { value: ex * this.map.tileWidth, duration: 200 },
+				y: { value: ey * this.map.tileHeight, duration: 200 }
+			});
+		}
 
-	update(t, dt) {
+		this.scene.tweens.timeline({
+			tweens: tweens
+		});
+	};
 
-		var worldPoint = this.input.activePointer.positionToCamera(this.cameras.main);
-
-		// Rounds down to nearest tile
-		var pointerTileX = this.map.worldToTileX(worldPoint.x);
-		var pointerTileY = this.map.worldToTileY(worldPoint.y);
-		this.marker.x = this.map.tileToWorldX(pointerTileX);
-		this.marker.y = this.map.tileToWorldY(pointerTileY);
-
-		
-		var tile = this.map.getTileAt(pointerTileX, pointerTileY);
-		//console.log(tile)
-		this.marker.setVisible(!tile);
-
-	}
+	
 
 }
