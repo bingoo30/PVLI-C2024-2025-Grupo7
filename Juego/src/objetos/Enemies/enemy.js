@@ -21,6 +21,8 @@ export default class Enemy extends Character {
         this.player = player;
         this.navMesh = scene.navMesh;
         scene.physics.add.existing(this);
+        this.currentPath = [];
+        this.targetPoint = null;  // Próximo punto objetivo
         //configurar los atributos correspondientes despues de llamar al constructor del character
         this.currentNode = { x: x, y: y };
         this.body.setSize(16,8);
@@ -63,87 +65,7 @@ export default class Enemy extends Character {
         this.dead = true;
         this.onDeath();
     }
-    /*
-    obtenerSiguienteNodo() {
-        if (this.path.length > 0) {
-            return this.path.shift(); // Retorna el siguiente nodo de la ruta
-        }
-        console.warn("No hay nodos en la ruta.");
-        return null; // Devuelve null si no hay nodos
-    }
-
-    moverA(destino) {
-        if (!destino) {
-            console.error("Destino inválido:", destino);
-            return; // Si destino es inválido, salir
-        }
-
-        // Asegúrate de que la posición del destino sea válida
-        const targetX = destino.x * this.navMesh.tileSize;
-        const targetY = destino.y * this.navMesh.tileSize;
-        console.log(`targetX: `, targetX, `targetY: `, targetY);
-
-        const velocidad = 1; // Velocidad en píxeles por segundo
-
-        // Calcula la distancia hasta el destino
-        const dx = targetX - this.body.position.x;
-        const dy = targetY - this.body.position.y;
-        console.log(`dx: `, dx, `dy: `, dy);
-
-        const distancia = Math.sqrt(dx * dx + dy * dy);
-
-        // Verifica si el enemigo ha llegado al destino
-        if (distancia < velocidad * this.scene.physics.world.step) {
-            // Si está cerca, posiciona al enemigo en el nodo destino y detén el movimiento
-            this.body.position.x = targetX; // Actualiza usando el tamaño de los tiles
-            this.body.position.y = targetY;
-            this.body.setVelocity(0, 0); // Detiene cualquier velocidad residual
-            console.log(`Enemigo ha llegado al nodo: (${destino.x}, ${destino.y})`);
-            return true; // Indica que el nodo ha sido alcanzado
-        } else {
-            const proporcion = velocidad * this.scene.physics.world.step / distancia; // Mantiene la proporción
-            const velocidadX = dx * proporcion;
-            const velocidadY = dy * proporcion;
-            console.log(`Enemigo velocidad a: `,velocidadX,velocidadY);
-
-            this.body.setVelocity(velocidadX, velocidadY);
-            console.log(`Enemigo moviéndose a: (${this.body.position.x.toFixed(2)}, ${this.body.position.y.toFixed(2)})`);
-            return false; // Indica que el nodo aún no ha sido alcanzado
-        }
-    }
-
-
-
-    moverEnemigo() {
-        const nextNode = this.obtenerSiguienteNodo();
-
-        if (!nextNode) {
-            console.warn("No hay siguiente nodo para mover al enemigo.");
-            return; // No hay siguiente nodo, salir
-        }
-
-        // Asegúrate de que nextNode tenga propiedades válidas
-        if (nextNode.x === undefined || nextNode.y === undefined) {
-            console.error("Nodo inválido:", nextNode);
-            return; // Salir si el nodo es inválido
-        }
-
-        // Comprobar si el nodo es caminable
-        if (!this.navMesh.isWalkable(nextNode.x, nextNode.y)) {
-            this.contadorIntentos++;
-            if (this.contadorIntentos >= LIMITE_INTENTOS) {
-                console.log("Enemigo atascado, buscando nueva ruta...");
-                this.path = this.navMesh.findPath(this.enemyTile.x, this.enemyTile.y, this.playerTile.x, this.playerTile.y);
-                this.contadorIntentos = 0; // Reinicia el contador
-                return;
-            }
-        } else {
-            this.contadorIntentos = 0; // Reinicia si se mueve correctamente
-            this.moverA(nextNode); // Mueve al enemigo hacia el siguiente nodo
-        }
-    }
-
-    */
+   
 
     /**
      * Bucle principal del personaje, actualizamos su posición y ejecutamos acciones según el Input
@@ -171,6 +93,49 @@ export default class Enemy extends Character {
             this.moverEnemigo();
         }
         */
+    
+
+
+        if (this.dead) return;
+        if (!this.targetPoint) return;
+
+        // Comprobar si ha alcanzado el próximo punto
+        const distanceToTarget = Phaser.Math.Distance.Between(this.x, this.y, this.targetPoint.x, this.targetPoint.y);
+        if (distanceToTarget < 4) {  // Precisión al llegar al punto
+            this.moveToNextPoint();  // Mover al siguiente punto
+        }
+
+    }
+    setPath(path) {
+        // Establece el camino calculado con EasyStar
+        this.currentPath = path;
+        this.moveToNextPoint();  // Inicia el movimiento hacia el primer punto
     }
 
+    moveToNextPoint() {
+        if (this.currentPath.length === 0) {
+            // Si no hay más puntos, detén el movimiento
+            this.body.setVelocity(0, 0);
+            return;
+        }
+
+        // Siguiente paso en la ruta
+        const nextStep = this.currentPath.shift();
+        if (!nextStep) return;
+
+        // Convertir coordenadas de tiles a coordenadas del mundo
+        const targetX = this.scene.map.tileToWorldX(nextStep.x) + this.scene.map.tileWidth * 0.5;
+        const targetY = this.scene.map.tileToWorldY(nextStep.y) + this.scene.map.tileHeight * 0.5;
+
+        // Calcular la dirección hacia el próximo punto
+        const directionX = targetX - this.x;
+        const directionY = targetY - this.y;
+        const distance = Math.sqrt(directionX * directionX + directionY * directionY);
+
+        // Normalizar la dirección y establecer la velocidad
+        this.body.setVelocity((directionX / distance) * this.speed, (directionY / distance) * this.speed);
+
+        // Guardar el punto de destino actual
+        this.targetPoint = { x: targetX, y: targetY };
+    }
 }
