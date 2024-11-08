@@ -1,7 +1,11 @@
-import Enemy from "./enemy";
-import Bullet from "../Shooting/bullet";
+import Enemy from "./enemy.js";
+import Bullet from "../Shooting/bullet.js";
+import { fire } from "../Shooting/shooter.js";
 
-export default class character extends Enemy
+const TILE_SIZE = 32;
+let contadorIntentos = 0;
+const LIMITE_INTENTOS = 10;
+export default class EnemyShooter extends Enemy
 {
     /**
      * Constructor de Player, nuestro caballero medieval con espada y escudo
@@ -12,7 +16,7 @@ export default class character extends Enemy
     */
     constructor(scene, x, y, player) {
         //heredo de la clase character
-        super(scene, x, y, 'Enemy');
+        super(scene, x, y, 'EnemyShooter');
         this.scene = scene;
         this.player = player;
         this.navMesh = scene.navMesh;
@@ -24,7 +28,10 @@ export default class character extends Enemy
         this.body.setOffset(8, 24);
         this.path = [];
         this.dead = false;
-
+        //atributos del shooter
+        this.shootSpeed = 1250;
+        this.cooldownCont = 0;
+        this.canShoot = true;
 
         this.tileSize = TILE_SIZE * this.scene.scale;
 
@@ -37,5 +44,15 @@ export default class character extends Enemy
             x: Math.floor(this.x / this.tileSize), y: Math.floor(this.y / this.tileSize)
         };
         //console.log(this.enemyTile);
+    }
+
+    preUpdate(t, dt){
+
+        if(this.cooldownCont < 0){
+//            new Bullet(this.scene, this.damage, this.shootSpeed, 20, this.x, this.y, this.player.x, this.player.y);  
+            this.cooldownCont = this.shootSpeed;
+            fire(this, this.player, this.scene, this.damage, this.shootSpeed);
+        }
+        this.cooldownCont = this.cooldownCont - dt;
     }
 }    
