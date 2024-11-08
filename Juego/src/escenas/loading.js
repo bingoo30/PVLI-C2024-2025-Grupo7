@@ -15,16 +15,43 @@ export default class Loading extends Phaser.Scene {
 	 * Cargamos todos los assets que vamos a necesitar
 	 */
 	preload() {
+		// #region Images
+
+		// #region UI
+
 		this.load.image('start', 'assets/GUI/start.png');
 		this.load.image('background', 'assets/GUI/fondoinicio.png');
+
+		// #endregion
+
+		// #region Player
+
 		this.load.image('Player', 'assets/player.png');
 		this.load.image('Bala', 'assets/bala.png');
-		this.load.image('Enemy', 'assets/player.png');
+
+		// #endregion
+
+		// #region Enemies
+
+		this.load.image('Bob', 'assets/Bob.png');
+		this.load.image('Crac', 'assets/Crac.png');
+		this.load.image('Letus', 'assets/Letus.png');
+
+		// #endregion
+
+		// #region Tilemaps
+
 		this.load.tilemapTiledJSON('mapa1', 'assets/map/mapa1.json');
 		this.load.image('tileset', 'assets/map/mapTiles.png');
 		this.load.json('navmesh', 'assets/map/mapa1.json');
-		this.load.image('Crac', 'assets/Crac.png');
+
+		// #endregion
+
+		// #region Audio
+
 		this.load.audio('MainSample', 'assets/audio/batallaPrincipal.wav');
+
+		// #endregion
 
 		this.load.on('complete', function (f) {
 			this.scene.time.addEvent({
