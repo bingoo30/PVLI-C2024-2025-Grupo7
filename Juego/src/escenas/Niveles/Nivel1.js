@@ -165,7 +165,9 @@ export default class Animation extends Phaser.Scene {
 		// #endregion
 
 
-		this.currentPath = null;
+		const startTile = this.map.worldToTileXY(this.Crac.x, this.Crac.y);
+		const endTile = this.map.worldToTileXY(400, 400);  // Destino deseado
+		this.findPath(startTile, endTile);
 	}
 	
 	update(t, dt) {
@@ -234,47 +236,16 @@ export default class Animation extends Phaser.Scene {
 		return tile.properties.collides == true;
 	};
 
-
-	// test
-	handleClick = (pointer) => {
-		var x = this.cameras.scrollX + pointer.x;
-		var y = this.cameras.scrollY + pointer.y;
-		var toX = Math.floor(x / 32);
-		var toY = Math.floor(y / 32);
-		console.log(this.phaserGuy);
-		var fromX = Math.floor(this.phaserGuy.x / 32);
-		var fromY = Math.floor(this.phaserGuy.y / 32);
-		console.log('going from (' + fromX + ',' + fromY + ') to (' + toX + ',' + toY + ')');
-
-		this.finder.findPath(fromX, fromY, toX, toY, (path) => {
+	findPath(startTile, endTile) {
+		// Encontrar la ruta desde el punto de inicio al de destino
+		this.finder.findPath(startTile.x, startTile.y, endTile.x, endTile.y, path => {
 			if (path === null) {
-				console.warn("Path was not found.");
-			} else {
-				console.log(path);
-				this.moveCharacter(path);
+				console.warn("No se encontró un camino.");
+				return;
 			}
+			this.Crac.setPath(path);  // Establecer el camino en el enemigo
 		});
-		this.finder.calculate();
-	};
-
-	moveCharacter(path) {
-		// Sets up a list of tweens, one for each tile to walk, that will be chained by the timeline
-		var tweens = [];
-		for (var i = 0; i < path.length - 1; i++) {
-			var ex = path[i + 1].x;
-			var ey = path[i + 1].y;
-			tweens.push({
-				targets: this.player2,
-				x: { value: ex * this.map.tileWidth, duration: 200 },
-				y: { value: ey * this.map.tileHeight, duration: 200 }
-			});
-		}
-
-		this.scene.tweens.timeline({
-			tweens: tweens
-		});
-	};
-
-	
+		this.finder.calculate();  // Comenzar el cálculo
+	}
 
 }

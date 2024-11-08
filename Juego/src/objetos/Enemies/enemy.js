@@ -59,59 +59,45 @@ export default class Enemy extends Character {
      * @param {number} dt - Tiempo entre frames
      */
     update(t, dt) {
-        if (this.dead) return;
-        // Calcula la distancia entre Crac y el jugador
-        const distance = Phaser.Math.Distance.Between(this.x, this.y, this.player.x, this.player.y);
+        if (!this.targetPoint) return;
 
-        // Solo calcula un nuevo camino si está lo suficientemente lejos del jugador
-        if (distance > 5 && (this.path.length === 0 || this.atPathEnd())) {
-            this.calculatePath();
-        }
-
-        // Moverse a lo largo del camino si existe
-        if (this.path.length > 0) {
-            this.moveAlongPath();
+        // Comprobar si ha alcanzado el próximo punto
+        const distanceToTarget = Phaser.Math.Distance.Between(this.x, this.y, this.targetPoint.x, this.targetPoint.y);
+        if (distanceToTarget < 4) {  // Precisión al llegar al punto
+            this.moveToNextPoint();  // Mover al siguiente punto
         }
 
     }
-    calculatePath() {
-        // Coordenadas del jugador y de Crac en tiles
-        const startX = this.scene.map.worldToTileX(this.x);
-        const startY = this.scene.map.worldToTileY(this.y);
-        const targetX = this.scene.map.worldToTileX(this.player.x);
-        const targetY = this.scene.map.worldToTileY(this.player.y);
-
-        // Encuentra el camino y asigna a `this.path`
-        this.scene.finder.findPath(startX, startY, targetX, targetY, (path) => {
-            if (path === null) {
-                console.warn("Path no encontrado.");
-            } else {
-                this.path = path;
-            }
-        });
-        this.scene.finder.calculate();
+    setPath(path) {
+        // Establece el camino calculado con EasyStar
+        this.currentPath = path;
+        this.moveToNextPoint();  // Inicia el movimiento hacia el primer punto
     }
 
-    moveAlongPath() {
-        // El siguiente paso del camino
-        const nextStep = this.path.shift();
+    moveToNextPoint() {
+        if (this.currentPath.length === 0) {
+            // Si no hay más puntos, detén el movimiento
+            this.body.setVelocity(0, 0);
+            return;
+        }
+
+        // Siguiente paso en la ruta
+        const nextStep = this.currentPath.shift();
         if (!nextStep) return;
 
-        // Convierte coordenadas de tile a coordenadas de mundo
-        const targetX = this.scene.map.tileToWorldX(nextStep.x) + this.scene.map.tileWidth * this.scale;
-        const targetY = this.scene.map.tileToWorldY(nextStep.y) + this.scene.map.tileHeight * this.scale;
+        // Convertir coordenadas de tiles a coordenadas del mundo
+        const targetX = this.scene.map.tileToWorldX(nextStep.x) + this.scene.map.tileWidth * 0.5;
+        const targetY = this.scene.map.tileToWorldY(nextStep.y) + this.scene.map.tileHeight * 0.5;
 
-        // Tweens para moverse al siguiente paso
-        this.scene.tweens.add({
-            targets: this,
-            x: targetX,
-            y: targetY,
-            duration: 500,  // Ajusta la duración según la velocidad deseada
-        });
-    }
+        // Calcular la dirección hacia el próximo punto
+        const directionX = targetX - this.x;
+        const directionY = targetY - this.y;
+        const distance = Math.sqrt(directionX * directionX + directionY * directionY);
 
-    atPathEnd() {
-        // Verifica si ha alcanzado el último punto del camino
-        return this.path.length === 0;
+        // Normalizar la dirección y establecer la velocidad
+        this.body.setVelocity((directionX / distance) * this.speed, (directionY / distance) * this.speed);
+
+        // Guardar el punto de destino actual
+        this.targetPoint = { x: targetX, y: targetY };
     }
 }
