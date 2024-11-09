@@ -8,9 +8,10 @@ export default class Bullet extends Phaser.GameObjects.Sprite {
      * @param {number} startY - ejeY inical
      */
     constructor(scene, x, y, exp) {
-        super(scene, x, y, 'Bala');
+        super(scene, x, y, 'Coin');
         this.setScale(4);
         this.scene = scene;
+        this.exp = exp
         this.scene.add.existing(this);
         this.scene.physics.add.existing(this);
 

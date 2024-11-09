@@ -28,6 +28,7 @@ export default class Loading extends Phaser.Scene {
 
 		this.load.image('Player', 'assets/player.png');
 		this.load.image('Bala', 'assets/bala.png');
+		this.load.image('Coin', 'assets/coin.png');
 
 		// #endregion
 
