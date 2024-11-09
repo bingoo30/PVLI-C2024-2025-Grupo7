@@ -1,5 +1,6 @@
 import Character from "./character.js";
 import Bullet from "../Shooting/bullet.js";
+import { fire } from "../Shooting/shooter.js";
 
 /**
  * @extends Character
@@ -24,11 +25,14 @@ export default class Player extends Character {
 
         // Agregamos fisicas
         scene.physics.add.existing(this);
-
-        //this.body.setCollideWorldBounds();
         this.body.setSize(16,8);
         this.body.setOffset(8,24);
 
+        // #region Sistema de experiencia
+        this.level = 1; 
+        this.xpAcumulator = 0;
+        this.xpToLevelUp = 20;
+        // #endregion
 
         //input
         // Seteamos las teclas para mover al personaje
@@ -40,7 +44,6 @@ export default class Player extends Character {
         // Seteamos mouse
         this.mouse = this.scene.input.activePointer;
 
-        // Seteamos
 
     }
     init(speedFactor, shootSpeed, life, damage, prob) {
@@ -52,6 +55,17 @@ export default class Player extends Character {
     }
     onPlayerGotHit(damage) {
         this.onGotHit(damage); // Aplica daño al jugador
+    }
+    onPlayerCollectedXP(value) {
+        this.xpAcumulator += value;
+        if (this.xpAcumulator >= this.xpToLevelUp) {
+            this.LevelUp();
+        }
+    }
+    LevelUp() {
+        this.level++;
+        this.xpAcumulator = 0;
+        this.xpToLevelUp += 1;
     }
     /**
      * Bucle principal del personaje, actualizamos su posici�n y ejecutamos acciones seg�n el Input
@@ -88,8 +102,8 @@ export default class Player extends Character {
 
        this.cooldownCont = this.cooldownCont - dt;
 
-        this.speed.normalize();
+       this.speed.normalize();
 
-        this.body.setVelocity(this.speed.x*this.speedFactor, this.speed.y*this.speedFactor);
+       this.body.setVelocity(this.speed.x*this.speedFactor, this.speed.y*this.speedFactor);
     }
 }

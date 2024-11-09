@@ -1,6 +1,7 @@
 import Player from '../../objetos/Player/player.js';
 import Crac from '../../objetos/Enemies/Crac.js'
 import Enemy from '../../objetos/Enemies/enemy.js';
+import EnemyShooter from '../../objetos/Enemies/enemyShooter.js';
 import NavMesh from '../../objetos/NavMesh/navmesh.js';
 import Floor from '../../objetos/Escenario/floor.js';
 
@@ -58,12 +59,6 @@ export default class Animation extends Phaser.Scene {
 		// #endregion
 
 		// #region Enemy
-
-		this.phaserGuy = this.add.sprite(32, 32, 'Crac');
-		this.phaserGuy.setScale(SCALE);
-
-		this.phaserGuy.setOrigin(playerX, playerY);
-		console.log(this.phaserGuy)
 
 		this.Crac = new Crac(this, playerX + 200, playerY + 100, this.player, SCALE);
 		this.Crac.setScale(SCALE);
@@ -168,6 +163,7 @@ export default class Animation extends Phaser.Scene {
 		const startTile = this.map.worldToTileXY(this.Crac.x, this.Crac.y);
 		const endTile = this.map.worldToTileXY(400, 400);  // Destino deseado
 		this.findPath(startTile, endTile);
+
 	}
 	
 	update(t, dt) {
@@ -189,6 +185,7 @@ export default class Animation extends Phaser.Scene {
 					console.warn("Path not found.");
 				} else {
 					console.warn("Path found.");
+
 
 					this.currentPath = path;
 					this.moveAlongPath();
@@ -226,6 +223,7 @@ export default class Animation extends Phaser.Scene {
 			}
 		});
 	}
+
 	checkCollision(x, y) {
 		var tile = this.sueloLayer.getTileAt(x, y);
 		if (!tile) {
@@ -248,4 +246,45 @@ export default class Animation extends Phaser.Scene {
 		this.finder.calculate();  // Comenzar el cálculo
 	}
 
+	findPath(startTile, endTile) {
+		// Encontrar la ruta desde el punto de inicio al de destino
+		this.finder.findPath(startTile.x, startTile.y, endTile.x, endTile.y, path => {
+			if (path === null) {
+				console.warn("No se encontró un camino.");
+				return;
+			}
+			this.Crac.setPath(path);  // Establecer el camino en el enemigo
+		});
+		this.finder.calculate();  // Comenzar el cálculo
+	}
+
+
+	moveAlongPath() {
+		if (!this.currentPath || this.currentPath.length === 0) return;
+		console.warn("Moving.");
+
+		// Get the next step in the path
+		const nextStep = this.currentPath.shift();
+		if (!nextStep) return;
+
+		// Convert tile coordinates to world coordinates
+		const targetX = this.map.tileToWorldX(nextStep.x) + this.map.tileWidth * SCALE ;
+		const targetY = this.map.tileToWorldY(nextStep.y) + this.map.tileHeight * SCALE ;
+		console.warn("PlayerCalc:", targetX);
+		console.warn("Player:", this.player.x);
+
+		// Tween `phaserGuy` to the next step
+		this.tweens.add({
+			targets: this.Crac,
+			x: targetX,
+			y: targetY,
+			duration: 900,
+			onComplete: () => {
+				// When the current tween completes, move to the next step
+				if (this.currentPath.length > 0) {
+					this.moveAlongPath();
+				}
+			}
+		});
+	}
 }

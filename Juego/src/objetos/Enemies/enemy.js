@@ -22,6 +22,8 @@ export default class Enemy extends Character {
         this.scale = SCALE;
         this.navMesh = scene.navMesh;
         scene.physics.add.existing(this);
+        this.currentPath = [];
+        this.targetPoint = null;  // Pr贸ximo punto objetivo
         //configurar los atributos correspondientes despues de llamar al constructor del character
         this.currentNode = { x: x, y: y };
         this.body.setSize(16,8);
@@ -44,26 +46,26 @@ export default class Enemy extends Character {
     }
 
     onEnemyGotHit(damage) {
-        this.onGotHit(damage); // Aplica da駉 al jugador
+        this.onGotHit(damage); // Aplica da帽o al jugador
     }
 
     onEnemyDeath() {
         this.dead = true;
         this.onDeath();
     }
-    
+
 
     /**
-     * Bucle principal del personaje, actualizamos su posici髇 y ejecutamos acciones seg鷑 el Input
+     * Bucle principal del personaje, actualizamos su posici贸n y ejecutamos acciones seg煤n el Input
      * @param {number} t - Tiempo total
      * @param {number} dt - Tiempo entre frames
      */
     update(t, dt) {
         if (!this.targetPoint) return;
 
-        // Comprobar si ha alcanzado el pr髕imo punto
+        // Comprobar si ha alcanzado el pr贸ximo punto
         const distanceToTarget = Phaser.Math.Distance.Between(this.x, this.y, this.targetPoint.x, this.targetPoint.y);
-        if (distanceToTarget < 4) {  // Precisi髇 al llegar al punto
+        if (distanceToTarget < 4) {  // Precisi贸n al llegar al punto
             this.moveToNextPoint();  // Mover al siguiente punto
         }
 
@@ -76,7 +78,40 @@ export default class Enemy extends Character {
 
     moveToNextPoint() {
         if (this.currentPath.length === 0) {
-            // Si no hay m醩 puntos, det閚 el movimiento
+            // Si no hay m谩s puntos, det茅n el movimiento
+            this.body.setVelocity(0, 0);
+            return;
+        }
+
+
+        // Siguiente paso en la ruta
+        const nextStep = this.currentPath.shift();
+        if (!nextStep) return;
+
+
+        
+    
+
+
+        if (this.dead) return;
+        if (!this.targetPoint) return;
+
+        // Comprobar si ha alcanzado el pr贸ximo punto
+        const distanceToTarget = Phaser.Math.Distance.Between(this.x, this.y, this.targetPoint.x, this.targetPoint.y);
+        if (distanceToTarget < 4) {  // Precisi贸n al llegar al punto
+            this.moveToNextPoint();  // Mover al siguiente punto
+        }
+
+    }
+    setPath(path) {
+        // Establece el camino calculado con EasyStar
+        this.currentPath = path;
+        this.moveToNextPoint();  // Inicia el movimiento hacia el primer punto
+    }
+
+    moveToNextPoint() {
+        if (this.currentPath.length === 0) {
+            // Si no hay m谩s puntos, det茅n el movimiento
             this.body.setVelocity(0, 0);
             return;
         }
@@ -89,12 +124,12 @@ export default class Enemy extends Character {
         const targetX = this.scene.map.tileToWorldX(nextStep.x) + this.scene.map.tileWidth * 0.5;
         const targetY = this.scene.map.tileToWorldY(nextStep.y) + this.scene.map.tileHeight * 0.5;
 
-        // Calcular la direcci髇 hacia el pr髕imo punto
+        // Calcular la direcci贸n hacia el pr贸ximo punto
         const directionX = targetX - this.x;
         const directionY = targetY - this.y;
         const distance = Math.sqrt(directionX * directionX + directionY * directionY);
 
-        // Normalizar la direcci髇 y establecer la velocidad
+        // Normalizar la direcci贸n y establecer la velocidad
         this.body.setVelocity((directionX / distance) * this.speed, (directionY / distance) * this.speed);
 
         // Guardar el punto de destino actual
