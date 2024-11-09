@@ -9,7 +9,7 @@ export default class Bullet extends Phaser.GameObjects.Sprite {
      */
     constructor(scene, x, y, exp) {
         super(scene, x, y, 'Coin');
-        this.setScale(4);
+        this.setScale(2);
         this.scene = scene;
         this.exp = exp
         this.scene.add.existing(this);
