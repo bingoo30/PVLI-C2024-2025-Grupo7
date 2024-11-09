@@ -4,7 +4,7 @@ import Enemy from '../../objetos/Enemies/enemy.js';
 import EnemyShooter from '../../objetos/Enemies/enemyShooter.js';
 import NavMesh from '../../objetos/NavMesh/navmesh.js';
 import Floor from '../../objetos/Escenario/floor.js';
-
+import Bob from '../../objetos/Enemies/Bob.js'
 //constante
 const SCALE = 4;
 /**
@@ -63,8 +63,12 @@ export default class Animation extends Phaser.Scene {
 		this.Crac = new Crac(this, playerX + 200, playerY + 100, this.player, SCALE);
 		this.Crac.setScale(SCALE);
 
+		this.Bob = new Bob(this, playerX + 300, playerY + 100, this.player, SCALE);
+		this.Bob.setScale(SCALE);
+
 		this.enemy = this.add.group();
 		this.enemy.add(this.Crac);
+		this.enemy.add(this.Bob);
 
 		// #endregion
 
