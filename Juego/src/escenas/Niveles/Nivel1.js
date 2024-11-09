@@ -23,6 +23,7 @@ export default class Animation extends Phaser.Scene {
 	*/
 	create() {
 		console.log("me he creado", this.scene.key);
+		//this.input.on('pointerup', this.handleClick, this);
 
 		// #region Entities
 
@@ -59,7 +60,6 @@ export default class Animation extends Phaser.Scene {
 
 		// #region Enemy
 
-
 		this.Crac = new Crac(this, playerX + 200, playerY + 100, this.player, SCALE);
 		this.Crac.setScale(SCALE);
 
@@ -82,12 +82,13 @@ export default class Animation extends Phaser.Scene {
 		// #region Navmesh
 		this.marker = this.add.graphics();
 		this.marker.lineStyle(3, 0xffffff, 1);
-		this.marker.strokeRect(0, 0, this.map.tileWidth, this.map.tileHeight);
+		this.marker.strokeRect(0, 0, this.map.tileWidth*SCALE, this.map.tileHeight*SCALE);
 
 		console.log(this.map.tileWidth)
 		console.log(this.map.tileWidth)
 		console.log(this.map.height)
 		this.finder = new EasyStar.js();
+		console.log("suelo",this.sueloLayer)
 
 		if (this.map) {
 			var grid = [];
@@ -95,7 +96,6 @@ export default class Animation extends Phaser.Scene {
 				var col = [];
 				for (var x = 0; x < this.sueloLayer.width; x++) {
 					const tile = this.sueloLayer.getTileAt(x, y);
-					//console.error("El tile", tile);
 
 					if (tile) {
 						col.push(tile.index);  // Usa tile.index para obtener el índice del tile
@@ -108,8 +108,11 @@ export default class Animation extends Phaser.Scene {
 		} else {
 			console.error("El mapa no está definido.");
 		}
+		console.log(grid);
+		console.log(this.map)
 		this.finder.setGrid(grid);
 		var tiles = this.map.tilesets[0];
+		console.log(tiles)
 		var properties = tiles.tileProperties;
 		var acceptableTiles = [];
 
@@ -120,10 +123,14 @@ export default class Animation extends Phaser.Scene {
 				acceptableTiles.push(i + 1);
 				continue;
 			}
-			if (!properties[i].collide) acceptableTiles.push(i + 1);
-			if (properties[i].cost) this.finder.setTileCost(i + 1, properties[i].cost); // If there is a cost attached to the tile, let's register it
+			if (!properties[i].collides) acceptableTiles.push(i + 1);
+			if (properties[i].cost) {
+				this.finder.setTileCost(i + 1, properties[i].cost); // If there is a cost attached to the tile, let's register it
+				//console.log("con coste")
+			}
 		}
 		this.finder.setAcceptableTiles(acceptableTiles);
+		//console.log(acceptableTiles);
 
 
 		// #endregion
@@ -152,6 +159,7 @@ export default class Animation extends Phaser.Scene {
 		this.MainSample.play();
 		// #endregion
 
+
 		const startTile = this.map.worldToTileXY(this.Crac.x, this.Crac.y);
 		const endTile = this.map.worldToTileXY(400, 400);  // Destino deseado
 		this.findPath(startTile, endTile);
@@ -159,13 +167,65 @@ export default class Animation extends Phaser.Scene {
 	}
 	
 	update(t, dt) {
+		/*
+		const playerTileX = this.map.worldToTileX(this.player.x);
+		const playerTileY = this.map.worldToTileY(this.player.y);
+		const CracTileX = this.map.worldToTileX(this.Crac.x);
+		const CracTileY = this.map.worldToTileY(this.Crac.y);
+		if (
+			Phaser.Math.Distance.Between(this.phaserGuy.x, this.phaserGuy.y, this.player.x, this.player.y) < 5
+		) {
+			return;
+		}
+
+		// Calculate a path if there's none or it's complete
+		if (!this.currentPath || this.currentPath.length === 0) {
+			this.finder.findPath(CracTileX, CracTileY, playerTileX, playerTileY, (path) => {
+				if (path === null) {
+					console.warn("Path not found.");
+				} else {
+					console.warn("Path found.");
 
 
+					this.currentPath = path;
+					this.moveAlongPath();
+				}
+			});
+			this.finder.calculate();
+		}*/
+		this.Crac.update();
+	}
+	moveAlongPath() {
+		if (!this.currentPath || this.currentPath.length === 0) return;
+		console.warn("Moving.");
+
+		// Get the next step in the path
+		const nextStep = this.currentPath.shift();
+		if (!nextStep) return;
+
+		// Convert tile coordinates to world coordinates
+		const targetX = this.map.tileToWorldX(nextStep.x) + this.map.tileWidth * SCALE ;
+		const targetY = this.map.tileToWorldY(nextStep.y) + this.map.tileHeight * SCALE ;
+		console.warn("PlayerCalc:", targetX);
+		console.warn("Player:", this.player.x);
+
+		// Tween `phaserGuy` to the next step
+		this.tweens.add({
+			targets: this.Crac,
+			x: targetX,
+			y: targetY,
+			duration: 900,
+			onComplete: () => {
+				// When the current tween completes, move to the next step
+				if (this.currentPath.length > 0) {
+					this.moveAlongPath();
+				}
+			}
+		});
 	}
 
-
 	checkCollision(x, y) {
-		var tile = this.map.getTileAt(x, y);
+		var tile = this.sueloLayer.getTileAt(x, y);
 		if (!tile) {
 			console.log("no hay tile");
 			return;
@@ -174,47 +234,17 @@ export default class Animation extends Phaser.Scene {
 		return tile.properties.collides == true;
 	};
 
-
-	// test
-	handleClick(pointer) {
-		var x = this.camera.scrollX + pointer.x;
-		var y = this.camera.scrollY + pointer.y;
-		var toX = Math.floor(x / 32);
-		var toY = Math.floor(y / 32);
-		var fromX = Math.floor(this.player.x / 32);
-		var fromY = Math.floor(this.player.y / 32);
-		console.log('going from (' + fromX + ',' + fromY + ') to (' + toX + ',' + toY + ')');
-
-		this.finder.findPath(fromX, fromY, toX, toY, function (path) {
+	findPath(startTile, endTile) {
+		// Encontrar la ruta desde el punto de inicio al de destino
+		this.finder.findPath(startTile.x, startTile.y, endTile.x, endTile.y, path => {
 			if (path === null) {
-				console.warn("Path was not found.");
-			} else {
-				console.log(path);
-				Game.moveCharacter(path);
+				console.warn("No se encontró un camino.");
+				return;
 			}
+			this.Crac.setPath(path);  // Establecer el camino en el enemigo
 		});
-		this.finder.calculate(); // don't forget, otherwise nothing happens
-	};
-
-	moveCharacter(path) {
-		// Sets up a list of tweens, one for each tile to walk, that will be chained by the timeline
-		var tweens = [];
-		for (var i = 0; i < path.length - 1; i++) {
-			var ex = path[i + 1].x;
-			var ey = path[i + 1].y;
-			tweens.push({
-				targets: this.player,
-				x: { value: ex * this.map.tileWidth, duration: 200 },
-				y: { value: ey * this.map.tileHeight, duration: 200 }
-			});
-		}
-
-		this.scene.tweens.timeline({
-			tweens: tweens
-		});
-	};
-
-	
+		this.finder.calculate();  // Comenzar el cálculo
+	}
 
 	findPath(startTile, endTile) {
 		// Encontrar la ruta desde el punto de inicio al de destino
