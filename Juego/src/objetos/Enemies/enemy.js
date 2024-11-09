@@ -1,5 +1,5 @@
 import Character from '../../objetos/Player/character.js';
-
+import { drop } from '../../objetos/Enemies/drop.js';
 
 const TILE_SIZE = 32;
 let contadorIntentos = 0;
@@ -14,13 +14,15 @@ export default class Enemy extends Character {
      * @param {phaser.player} player Jugador (target) a perseguir
      * 
     */
-    constructor(scene, x, y, player, typeEnemy, SCALE) {
+    constructor(scene, x, y, player, typeEnemy, SCALE, exp) {
         //heredo de la clase character
         super(scene, x, y, [typeEnemy]);
         this.scene = scene;
         this.player = player;
         this.scale = SCALE;
+        this.exp = exp;
         this.navMesh = scene.navMesh;
+        this.drop = drop;
         scene.physics.add.existing(this);
         this.currentPath = [];
         this.targetPoint = null;  // Próximo punto objetivo
@@ -51,6 +53,7 @@ export default class Enemy extends Character {
 
     onEnemyDeath() {
         this.dead = true;
+        drop(this.scene, this.x, this.y, this.exp);
         this.onDeath();
     }
 

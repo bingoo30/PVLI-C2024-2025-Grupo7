@@ -97,7 +97,7 @@ export default class Player extends Character {
             if(this.cooldownCont < 0){
                     new Bullet(this.scene, this.damage, this.shootSpeed, 20, this.x, this.y, this.mouse.worldX, this.mouse.worldY);  
                     this.cooldownCont = this.shootSpeed;
-                }
+            }
        }
 
        this.cooldownCont = this.cooldownCont - dt;

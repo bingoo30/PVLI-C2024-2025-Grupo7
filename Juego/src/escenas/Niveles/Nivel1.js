@@ -59,7 +59,7 @@ export default class Animation extends Phaser.Scene {
 		// #endregion
 
 		// #region Enemy
-
+		
 		this.Crac = new Crac(this, playerX + 200, playerY + 100, this.player, SCALE);
 		this.Crac.setScale(SCALE);
 
