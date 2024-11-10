@@ -18,7 +18,7 @@ export default class Loading extends Phaser.Scene {
 		// #region Images
 
 		// #region UI
-		this.cameras.main.setBackgroundColor('#d3d3d3'); 
+		this.cameras.main.setBackgroundColor('#d3d3d3');
 		this.load.image('start', 'assets/GUI/start.png');
 		this.load.image('background', 'assets/GUI/fondoinicio.png');
 		this.load.image('end', 'assets/GUI/gameover.png');
@@ -69,17 +69,18 @@ export default class Loading extends Phaser.Scene {
 				callback: () => { this.scene.scene.start("title") }
 			})
 		});
-		
+
 
 	}
-	
+
 	/**
 	* Creación de los elementos de la escena principal de juego
 	*/
 	create() {
+		console.log("me he creado", this.scene.key);
 
 		this.anims.create({
-			key: 'loading',
+			key: 'PiuLoad',
 			frames: this.anims.generateFrameNumbers('PiuAnim', { start: 0, end: 17 }),
 			frameRate: 15,  // Velocidad de animación
 			repeat: -1      // -1 para repetir indefinidamente
@@ -87,25 +88,31 @@ export default class Loading extends Phaser.Scene {
 
 		// Añadir el sprite animado al centro de la pantalla
 		let loadingSprite = this.add.sprite(this.cameras.main.width / 2, this.cameras.main.height / 2, 'PiuAnim');
-		loadingSprite.play('loading');
+
+		loadingSprite.play('PiuLoad');
 		loadingSprite.setScale(8); // Escalar el sprite al doble de su tamaño
 
-		//console.log("me he creado", this.scene.key);
 
-		//this.loadingText = this.add.text(400, 300, 'Loading', { fontSize: '32px', fill: '#fff' }).setOrigin(0.5);
+		this.loadingText = this.add.text(
+			loadingSprite.x,                    // Colocar el texto en el centro horizontal del sprite
+			loadingSprite.y + loadingSprite.displayHeight / 2 + 20, // Justo debajo del sprite (20 píxeles debajo)
+			'.',                                 // Texto inicial
+			{ fontSize: '32px', fill: '#000' }
+		).setOrigin(0.5); // Centrar el texto horizontalmente
 
-		//this.dots = '.';
-		//this.time.addEvent({
-		//	delay: 300,
-		//	callback: this.updateDots,
-		//	callbackScope: this,
-		//	loop: true
-		//});
+		// Configurar el evento de puntos animados
+		this.dots = '.';
+		this.time.addEvent({
+			delay: 300,
+			callback: this.updateDots,
+			callbackScope: this,
+			loop: true
+		});
 	}
 
 	updateDots() {
-		// Add dots up to three and reset
-		this.dots = this.dots.length < 3 ? this.dots + '.' : '';
-		this.loadingText.setText('Loading' + this.dots);
+		// Añadir puntos hasta tres y reiniciar
+		this.dots = this.dots.length < 3 ? this.dots + '.' : '.';
+		this.loadingText.setText(this.dots);
 	}
 }
