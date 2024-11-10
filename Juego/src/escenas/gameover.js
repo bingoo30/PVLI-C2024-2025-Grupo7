@@ -28,19 +28,5 @@ export default class Gameover extends Phaser.Scene {
 			this.scene.start('title'); //Cambiamos a la escena de juego
 	    });
 
-	    // Mostramos el número de cajas destruidas mediante texto
-	    let scoreText = this.add.text(0, this.sys.game.canvas.height/2+50,
-	    	"Cajas destruidas: "+this.score);
-	    scoreText.setFontSize(34);
-	    scoreText.setStroke('#b30098', 3);
-	    scoreText.x = this.sys.game.canvas.width/2 - scoreText.width/2;
-
-	    // Mostramos el tiempo de juego mediante texto
-	    let timeText = this.add.text(0, this.sys.game.canvas.height/2+100,
-	    	"Tiempo total: "+this.time+" segundos");
-	    timeText.setFontSize(34);
-	    timeText.setStroke('#b30098', 3);
-	    timeText.x = this.sys.game.canvas.width/2 - timeText.width/2;
-
 	}
 }
