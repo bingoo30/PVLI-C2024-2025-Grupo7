@@ -9,10 +9,6 @@ export default class Gameover extends Phaser.Scene {
 		this.time = (data.time/1000).toFixed(2); // Cambiamos el tiempo de milisegundos a segundos con dos decimales
 	}
 
-	preload(){
-		this.load.image('end', 'assets/GUI/gameover.png');
-	}
-	
 	/**
 	* Creación de los elementos de la escena principal de juego
 	*/
