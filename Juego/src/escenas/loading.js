@@ -82,7 +82,7 @@ export default class Loading extends Phaser.Scene {
 		this.anims.create({
 			key: 'PiuLoad',
 			frames: this.anims.generateFrameNumbers('PiuAnim', { start: 0, end: 17 }),
-			frameRate: 15,  // Velocidad de animación
+			frameRate: 8,  // Velocidad de animación
 			repeat: -1      // -1 para repetir indefinidamente
 		});
 
