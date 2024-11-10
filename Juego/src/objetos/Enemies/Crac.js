@@ -17,7 +17,7 @@ export default class Crac extends Enemy {
 
         if(this.cooldownCont <= 0){
             this.cooldownCont = this.shootSpeed;
-            fire(this, this.player, this.scene, this.damage, this.shootSpeed);
+            fire(this, this.player, this.scene, this.damage, this.shootSpeed, 'Bala', 4);
         }
         this.cooldownCont = this.cooldownCont - dt;
 	}

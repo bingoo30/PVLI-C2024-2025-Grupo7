@@ -7,9 +7,9 @@ export default class Bullet extends Phaser.GameObjects.Sprite {
      * @param {number} startX - ejeX inicial
      * @param {number} startY - ejeY inical
      */
-    constructor(scene, damage, speed, range, xStart, yStart, xObj, yObj) {
-        super(scene, xStart, yStart, 'Bala');
-        this.setScale(4);
+    constructor(scene, damage, speed, range, xStart, yStart, xObj, yObj, bala, scale) {
+        super(scene, xStart, yStart, bala);
+        this.setScale(scale);
         this.scene = scene;
         this.scene.add.existing(this);
         this.damage = damage;  
@@ -24,15 +24,15 @@ export default class Bullet extends Phaser.GameObjects.Sprite {
         pointSpeed.normalize();
         this.body.setVelocity(this.speed * pointSpeed.x, this.speed * pointSpeed.y);
 
-        this.scene.add.particles(0, 0, 'Bala', {
+        this.scene.add.particles(0, 0, 'Particle', {
             x: () => {
                 return this.x;
             },
             y: () => {
                 return this.y;
             },
-            speed: 200,
-            lifespan: 2000,
+            speed: 100,
+            lifespan: 100,
             scale: 0.5
         });
     }
