@@ -44,5 +44,4 @@ export default class Shooter{
 export function fire(shooter, target, scene, damage, speed)
 {  
     new Bullet(scene, damage, speed, 20, shooter.x, shooter.y, target.x, target.y);
-
 }
