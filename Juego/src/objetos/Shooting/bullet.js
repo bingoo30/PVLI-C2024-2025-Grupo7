@@ -33,7 +33,7 @@ export default class Bullet extends Phaser.GameObjects.Sprite {
             },
             speed: 100,
             lifespan: 100,
-            scale: 0.5
+            scale: 2
         });
     }
     Update(time, delta) {
