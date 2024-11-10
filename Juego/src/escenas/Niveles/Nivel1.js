@@ -1,10 +1,9 @@
 import Player from '../../objetos/Player/player.js';
 import Crac from '../../objetos/Enemies/Crac.js'
-import Enemy from '../../objetos/Enemies/enemy.js';
-import EnemyShooter from '../../objetos/Enemies/enemyShooter.js';
 import NavMesh from '../../objetos/NavMesh/navmesh.js';
 import Floor from '../../objetos/Escenario/floor.js';
 import Bob from '../../objetos/Enemies/Bob.js'
+//import Coin from '../../objetos/Enemies/coin.js'
 //constante
 const SCALE = 4;
 /**
@@ -72,7 +71,7 @@ export default class Animation extends Phaser.Scene {
 
 		// #endregion
 
-
+		
 		// #region Debug
 		const debugGraphics = this.add.graphics();
 		this.paredLayer.renderDebug(debugGraphics, {
@@ -151,9 +150,12 @@ export default class Animation extends Phaser.Scene {
 
 		this.physics.add.collider(this.player, this.enemy, (player, enemy) => {
 			player.onPlayerGotHit(enemy.getDamage());
-			enemy.onEnemyDeath();
-		})
-
+			//enemy.onEnemyDeath();
+		});
+		//this.physics.add.collider(this.player, this.coin, (player, coin) => {
+		//	player.onPlayerCollectedXP(coin.getExp());
+		//	coin.destroyCoin();
+		//});
 		// #endregion
 
 		this.cameras.main.startFollow(this.player);
@@ -161,6 +163,7 @@ export default class Animation extends Phaser.Scene {
 		// #region sonido
 		this.MainSample = this.sound.add('MainSample');
 		this.MainSample.play();
+		this.MainSample.setLoop(true);
 		// #endregion
 
 

@@ -31,7 +31,7 @@ export default class Player extends Character {
         // #region Sistema de experiencia
         this.level = 1; 
         this.xpAcumulator = 0;
-        this.xpToLevelUp = 20;
+        this.xpToLevelUp = 1;
         // #endregion
 
         //input
@@ -57,15 +57,17 @@ export default class Player extends Character {
         this.onGotHit(damage); // Aplica daño al jugador
     }
     onPlayerCollectedXP(value) {
-        this.xpAcumulator += value;
+        this.xpAcumulator += value; 
         if (this.xpAcumulator >= this.xpToLevelUp) {
             this.LevelUp();
         }
+        console.log("xp: " + this.xpAcumulator);
     }
     LevelUp() {
         this.level++;
-        this.xpAcumulator = 0;
+        this.xpAcumulator = this.xpAcumulator-this.xpToLevelUp;
         this.xpToLevelUp += 1;
+        console.log("me he subido de nivel");
     }
     /**
      * Bucle principal del personaje, actualizamos su posici�n y ejecutamos acciones seg�n el Input

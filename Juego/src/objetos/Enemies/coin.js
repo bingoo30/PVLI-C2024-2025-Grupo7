@@ -1,4 +1,4 @@
-export default class Bullet extends Phaser.GameObjects.Sprite {
+export default class Coin extends Phaser.GameObjects.Sprite {
     /**
      * Constructor de Bullet,las balas
      * @param {Scene} scene - escena en la que aparece
@@ -16,12 +16,13 @@ export default class Bullet extends Phaser.GameObjects.Sprite {
         this.scene.physics.add.existing(this);
 
     }
-
-    Update(time, delta) {
-        
+    preUpdate(t, dt) {
+        super.preUpdate(t,dt);
     }
-
-    destoyCoin() {
+    getExp() {
+        return this.exp;
+    }
+    destroyCoin() {
         this.destroy(); 
     }
 }
