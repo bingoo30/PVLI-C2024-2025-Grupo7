@@ -2,7 +2,9 @@ import Player from '../../objetos/Player/player.js';
 import Crac from '../../objetos/Enemies/Crac.js'
 import NavMesh from '../../objetos/NavMesh/navmesh.js';
 import Floor from '../../objetos/Escenario/floor.js';
-import Bob from '../../objetos/Enemies/Bob.js'
+import Bob from '../../objetos/Enemies/Bob.js';
+import HealthBar from '../../UI/HealthBar.js';
+
 //import Coin from '../../objetos/Enemies/coin.js'
 //constante
 const SCALE = 4;
@@ -54,6 +56,7 @@ export default class Animation extends Phaser.Scene {
 		const playerY = playerPos.y * SCALE;
 		this.player = new Player(this, playerX, playerY);
 		this.player.setScale(SCALE);
+
 
 		// #endregion
 
@@ -138,6 +141,10 @@ export default class Animation extends Phaser.Scene {
 
 		// #endregion
 
+		//#region UI
+		this.healthBar = new HealthBar(this);
+		console.log(this.healthBar);
+		//#endregion
 
 		// #region Collision
 
@@ -150,8 +157,11 @@ export default class Animation extends Phaser.Scene {
 
 		this.physics.add.collider(this.player, this.enemy, (player, enemy) => {
 			player.onPlayerGotHit(enemy.getDamage());
+			this.healthBar.updateHealth(this.player.life, this.player.maxLife);
+			console.log('jugador:reducir vida')
 			//enemy.onEnemyDeath();
 		});
+
 		//this.physics.add.collider(this.player, this.coin, (player, coin) => {
 		//	player.onPlayerCollectedXP(coin.getExp());
 		//	coin.destroyCoin();
@@ -159,6 +169,8 @@ export default class Animation extends Phaser.Scene {
 		// #endregion
 
 		this.cameras.main.startFollow(this.player);
+
+
 
 		// #region sonido
 		this.MainSample = this.sound.add('MainSample');

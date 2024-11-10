@@ -22,6 +22,8 @@ export default class Loading extends Phaser.Scene {
 		this.load.image('start', 'assets/GUI/start.png');
 		this.load.image('background', 'assets/GUI/fondoinicio.png');
 		this.load.image('end', 'assets/GUI/gameover.png');
+		this.load.image('healthBarBackground', 'assets/GUI/healthBar1.png')
+		this.load.image('healthBar', 'assets/GUI/healthBar2.png')
 
 		this.load.spritesheet('PiuAnim', 'assets/Piu.png', {
 			frameWidth: 25,  // Ancho de cada cuadro

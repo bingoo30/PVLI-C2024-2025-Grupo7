@@ -21,7 +21,7 @@ export default class Player extends Character {
         //lo a�ado a la escena
         this.scene.add.existing(this);
         //configurar los atributos correspondientes despues de llamar al constructor del character
-        this.init(400, 200, 5, 1, 0);
+        this.init(400, 200, 20, 1, 0);
 
         // Agregamos fisicas
         scene.physics.add.existing(this);
@@ -52,6 +52,7 @@ export default class Player extends Character {
         this.life = life;
         this.damage = damage;
         this.prob = prob;
+        this.maxLife = life;
     }
     onPlayerGotHit(damage) {
         this.onGotHit(damage); // Aplica daño al jugador
@@ -67,6 +68,7 @@ export default class Player extends Character {
         this.level++;
         this.xpAcumulator = this.xpAcumulator-this.xpToLevelUp;
         this.xpToLevelUp += 1;
+        this.maxLife++;
         console.log("me he subido de nivel");
     }
     /**
