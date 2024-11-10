@@ -172,8 +172,14 @@ export default class Animation extends Phaser.Scene {
 		this.findPath(startTile, endTile);
 
 	}
+	changeScene() {
+		this.scene.start("gameover") 
+		
+	}
 	
 	update(t, dt) {
+
+
 		/*
 		const playerTileX = this.map.worldToTileX(this.player.x);
 		const playerTileY = this.map.worldToTileY(this.player.y);
