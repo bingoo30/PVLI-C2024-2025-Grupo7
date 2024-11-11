@@ -68,10 +68,12 @@ export default class Animation extends Phaser.Scene {
 		this.Bob = new Bob(this, playerX + 300, playerY + 100, this.player, SCALE);
 		this.Bob.setScale(SCALE);
 
-		this.enemy = this.add.group();
-		this.enemy.add(this.Crac);
-		this.enemy.add(this.Bob);
+		this.enemies = this.add.group();
+		this.enemies.add(this.Crac);
+		this.enemies.add(this.Bob);
 
+		this.playerBullets = this.add.group();
+		this.enemyBullets = this.add.group();
 		// #endregion
 
 		
@@ -154,14 +156,23 @@ export default class Animation extends Phaser.Scene {
 
 		this.physics.add.collider(this.player, this.paredLayer);
 
-		this.physics.add.collider(this.player, this.enemy, (player, enemy) => {
+		this.physics.add.collider(this.player, this.enemies, (player, enemy) => {
 			player.onPlayerGotHit(enemy.getDamage());
 			this.healthBar.updateHealth(this.player.life, this.player.maxLife);
 			console.log('jugador:reducir vida')
-			//enemy.onEnemyDeath();
 		});
-
-
+		//colision bala player-enemigos
+		this.physics.add.collider(this.playerBullets, this.enemies, (playerBullets, enemy) => {
+			enemy.onEnemyGotHit(this.player.getDamage());
+			// mandaria a la pool de las balas de player otra vez
+			playerBullets.destroy();
+		});
+		//colision bala enemigos-player
+		this.physics.add.collider(this.enemyBullets, this.player, (enemyBullets, player) => {
+			player.onPlayerGotHit(enemyBullets.getDamage());
+			// mandaria a la pool de las balas de los enemigos otra vez
+			enemyBullet.destroy();
+		});
 		//this.physics.add.collider(this.player, this.coin, (player, coin) => {
 		//	player.onPlayerCollectedXP(coin.getExp());
 		//	coin.destroyCoin();
