@@ -149,7 +149,6 @@ export default class Animation extends Phaser.Scene {
 		// #region Collision
 
 		this.paredLayer.setCollisionByProperty({ collides: true });
-		
 
 		this.physics.add.collider(this.enemy, this.paredLayer);
 
@@ -186,6 +185,7 @@ export default class Animation extends Phaser.Scene {
 
 	}
 	changeScene() {
+		this.MainSample.stop();
 		this.scene.start("gameover") 
 		
 	}
