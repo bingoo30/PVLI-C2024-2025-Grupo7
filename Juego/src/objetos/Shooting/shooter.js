@@ -41,7 +41,7 @@ export default class Shooter{
 
 }
 
-export function fire(shooter, target, scene, damage, speed, bala, scale)
+export function fire(shooter, target, scene, damage, speed, sprite, scale)
 {  
-    new Bullet(scene, damage, speed, 20, shooter.x, shooter.y, target.x, target.y, bala, scale);
+    new Bullet(scene, damage, speed, 20, shooter.x, shooter.y, target.x, target.y, sprite, scale);
 }

@@ -162,6 +162,7 @@ export default class Animation extends Phaser.Scene {
 			//enemy.onEnemyDeath();
 		});
 
+
 		//this.physics.add.collider(this.player, this.coin, (player, coin) => {
 		//	player.onPlayerCollectedXP(coin.getExp());
 		//	coin.destroyCoin();
