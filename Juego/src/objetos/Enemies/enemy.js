@@ -64,14 +64,26 @@ export default class Enemy extends Character {
      * @param {number} dt - Tiempo entre frames
      */
     update(t, dt) {
-        if (!this.targetPoint) return;
-
+        //if (!this.targetPoint) return;
+        console.log("a");
         // Comprobar si ha alcanzado el próximo punto
-        const distanceToTarget = Phaser.Math.Distance.Between(this.x, this.y, this.targetPoint.x, this.targetPoint.y);
-        if (distanceToTarget < 4) {  // Precisión al llegar al punto
-            this.moveToNextPoint();  // Mover al siguiente punto
-        }
+        //const distanceToTarget = Phaser.Math.Distance.Between(this.x, this.y, this.targetPoint.x, this.targetPoint.y);
+        //if (distanceToTarget < 4) {  // Precisión al llegar al punto
+        //    this.moveToNextPoint();  // Mover al siguiente punto
+        //}
+        let directionX = this.player.x - this.x;
+        let directionY = this.player.y - this.y;
 
+        // Calcular la longitud del vector para normalizarlo
+        let distance = Math.sqrt(directionX * directionX + directionY * directionY);
+        if (distance > 0) { // Evitar dividir por 0
+            // Normalizar el vector de dirección
+            directionX /= distance;
+            directionY /= distance;
+
+            // Aplicar la velocidad al enemigo en la dirección del jugador
+            this.body.setVelocity(directionX * this.speedFactor, directionY * this.speedFactor);
+        }
     }
     setPath(path) {
         // Establece el camino calculado con EasyStar
