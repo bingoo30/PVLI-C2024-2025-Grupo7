@@ -17,6 +17,7 @@ export default class Title extends Phaser.Scene {
 	preload() {
 		this.load.image('start', 'assets/GUI/start.png');
 		this.load.image('background', 'assets/GUI/fondoinicio.png');
+		this.load.audio('TitleSample', 'assets/audio/MenuPrincipal.mp3');
 	}
 	
 	/**
@@ -25,6 +26,9 @@ export default class Title extends Phaser.Scene {
 	create() {
 		console.log("me he creado", this.scene.key);
 
+		var TitleSample = this.sound.add('TitleSample');
+		TitleSample.setLoop(true);
+		TitleSample.play();
 		
 		//Pintamos un fondo
 		var back = this.add.image(0, 0, 'background').setOrigin(0, 0);
@@ -33,12 +37,14 @@ export default class Title extends Phaser.Scene {
 		var sprite = this.add.image(this.sys.game.canvas.width/2, this.sys.game.canvas.height/2 + 100, 'start')
 		sprite.setInteractive(); // Hacemos el sprite interactivo para que lance eventos
 
+
 		// Escuchamos los eventos del ratón cuando interactual con nuestro sprite de "Start"
 	    sprite.on('pointerdown', pointer => {
 	    	 console.log("pulsando");
 	    });
 
 	    sprite.on('pointerup', pointer => {
+			TitleSample.stop();
 			this.scene.start('nivel1'); //Cambiamos a la escena de juego
 
 	    });

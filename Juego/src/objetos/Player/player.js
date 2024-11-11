@@ -54,8 +54,10 @@ export default class Player extends Character {
         this.prob = prob;
         this.maxLife = life;
     }
-    onPlayerGotHit(damage) {
+    onPlayerGotHit(damage, isEnemy) {
         this.onGotHit(damage); // Aplica daño al jugador
+        //solo hago el knockback cuando me choco con un enemigo (o no)
+        //if (isEnemy && !this) this.knockback(isEnemy, 200);
     }
     onPlayerCollectedXP(value) {
         this.xpAcumulator += value; 
@@ -63,6 +65,23 @@ export default class Player extends Character {
             this.LevelUp();
         }
         console.log("xp: " + this.xpAcumulator);
+    }
+    knockback(enemy,value) {
+        // Calcular la dirección de empuje en la dirección opuesta al enemigo
+        const directionX = this.x - enemy.x;
+        const directionY = this.y - enemy.y;
+        let dir = new Phaser.Math.Vector2(directionX, directionY);
+        dir.normalize();
+        // Aplicar el knockback en esa dirección usando `setVelocity`
+        this.body.setVelocity(
+            dir.x * value,
+            dir.y * value
+        );
+
+        //Detener el movimiento después de un corto periodo para que el knockback no sea indefinido
+        //this.scene.time.delayedCall(200, () => {
+        //    this.body.setVelocity(0); // Detener al jugador después del knockback
+        //});
     }
     LevelUp() {
         this.level++;
