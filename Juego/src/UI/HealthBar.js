@@ -8,16 +8,16 @@ export default class HealthBar {
         this.x = 20;
         this.y = 10;
 
+        this.container = scene.add.container(this.x, this.y);
+
         this.background = scene.add.sprite(this.x, this.y, 'healthBarBackground').setOrigin(0, 0);
         this.background.setDisplaySize(this.maxWidth, this.height);
 
         this.bar = scene.add.sprite(this.x, this.y, 'healthBar').setOrigin(0, 0);
         this.bar.setDisplaySize(this.maxWidth, this.height); 
 
-        this.background.setScrollFactor(0);
-        this.bar.setScrollFactor(0);  
-
-        console.log('healthBar creada');
+        this.container.add([this.bar, this.background]);
+        this.container.setScrollFactor(0);
     }
     updateHealth(currentHealth, maxHealth) {
 
