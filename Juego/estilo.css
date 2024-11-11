@@ -1,17 +1,28 @@
 
 @font-face {
     font-family: 'Fuente1';
-    src: url('assets/font/Aclonica-Regular.ttf') format('truetype');
+    src: url('assets/font/Inspiration-Regular.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
 @font-face {
     font-family: 'Fuente2';
-    src: url('assets/font/Pompiere-Regular.ttf') format('truetype');
+    src: url('assets/font/LoveYaLikeASister-Regular.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
-
+@font-face {
+    font-family: 'Fuente3';
+    src: url('assets/font/Molle-Italic.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Fuente4';
+    src: url('assets/font/Cookie-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
 .texto {
     background-color: #212121;
     color: white;
@@ -47,14 +58,15 @@ header {
     /* Estilo para el banner */
     header .banner {
         font-size: 1.2em;
+        font-family: Fuente4,sans-serif;
         margin-top: 3px;
-        margin-left:10px;
+        margin-left: 10px;
         opacity: 0.9;
     }
 
 
 nav {
-    font-family: Fuente1,sans-serif;
+    font-family: Fuente3,sans-serif;
     text-align: center;
     margin: 15px 0;
 }
@@ -108,11 +120,9 @@ nav {
 
 .content {
     flex: 1;
-    padding: 100px;
+    padding: 10px;
     background-color: #212121;
 }
-
-
 
 
 
