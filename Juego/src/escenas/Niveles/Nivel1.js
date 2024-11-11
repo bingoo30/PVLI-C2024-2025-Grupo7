@@ -152,27 +152,28 @@ export default class Animation extends Phaser.Scene {
 
 		this.paredLayer.setCollisionByProperty({ collides: true });
 
-		this.physics.add.collider(this.enemy, this.paredLayer);
+		this.physics.add.collider(this.enemies, this.paredLayer);
 
 		this.physics.add.collider(this.player, this.paredLayer);
 
 		this.physics.add.collider(this.player, this.enemies, (player, enemy) => {
-			player.onPlayerGotHit(enemy.getDamage());
+			player.onPlayerGotHit(enemy.getDamage(),enemy);
 			this.healthBar.updateHealth(this.player.life, this.player.maxLife);
-			console.log('jugador:reducir vida')
+			console.log('jugador:reducir vida');
+
 		});
 		//colision bala player-enemigos
-		this.physics.add.collider(this.playerBullets, this.enemies, (playerBullets, enemy) => {
-			enemy.onEnemyGotHit(this.player.getDamage());
+		//this.physics.add.collider(this.playerBullets, this.enemies, (playerBullets, enemy) => {
+		//	enemy.onEnemyGotHit(this.player.getDamage());
 			// mandaria a la pool de las balas de player otra vez
-			playerBullets.destroy();
-		});
+		//	playerBullets.destroy();
+		//});
 		//colision bala enemigos-player
-		this.physics.add.collider(this.enemyBullets, this.player, (enemyBullets, player) => {
-			player.onPlayerGotHit(enemyBullets.getDamage());
+		//this.physics.add.collider(this.enemyBullets, this.player, (enemyBullets, player) => {
+		//	player.onPlayerGotHit(enemyBullets.getDamage());
 			// mandaria a la pool de las balas de los enemigos otra vez
-			enemyBullet.destroy();
-		});
+		//	enemyBullet.destroy();
+		//});
 		//this.physics.add.collider(this.player, this.coin, (player, coin) => {
 		//	player.onPlayerCollectedXP(coin.getExp());
 		//	coin.destroyCoin();
