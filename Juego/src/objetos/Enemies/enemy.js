@@ -65,7 +65,7 @@ export default class Enemy extends Character {
      */
     update(t, dt) {
         //if (!this.targetPoint) return;
-        console.log("a");
+        //console.log("a");
         // Comprobar si ha alcanzado el próximo punto
         //const distanceToTarget = Phaser.Math.Distance.Between(this.x, this.y, this.targetPoint.x, this.targetPoint.y);
         //if (distanceToTarget < 4) {  // Precisión al llegar al punto
