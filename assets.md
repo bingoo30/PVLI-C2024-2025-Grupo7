@@ -13,6 +13,12 @@ Los enemigos y las fichas están inspirados en elementos de póker, con colores 
 
 Las fuentes utilizadas en el juego y en la página web fueron seleccionadas de Google Fonts, asegurando accesibilidad y licencia gratuita para su uso en proyectos comerciales.
 
+**Música**
+
+Creada por nuestro compañero Bingcheng Wang.
+
+Instagram: @bxxcxxw / Spotify y otras plataformas: @Bingoo30
+
 **Licencia Propietaria**
 
 Los assets, creados internamente, están protegidos bajo una licencia propietaria. Esto permite su uso y modificación en proyectos comerciales sin redistribuir ni revender los recursos.
