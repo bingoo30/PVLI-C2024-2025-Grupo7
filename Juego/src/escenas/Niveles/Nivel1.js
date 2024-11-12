@@ -1,9 +1,13 @@
 import Player from '../../objetos/Player/player.js';
 import Crac from '../../objetos/Enemies/Crac.js'
+import Pool from '../../objetos/OurPool.js'
 import NavMesh from '../../objetos/NavMesh/navmesh.js';
 import Floor from '../../objetos/Escenario/floor.js';
 import Bob from '../../objetos/Enemies/Bob.js';
 import HealthBar from '../../UI/HealthBar.js';
+import Coin from '../../objetos/Enemies/coin.js';
+import Bullet from '../../objetos/Shooting/bullet.js';
+
 
 //import Coin from '../../objetos/Enemies/coin.js'
 //constante
@@ -27,7 +31,7 @@ export default class Animation extends Phaser.Scene {
 		//this.input.on('pointerup', this.handleClick, this);
 
 		// #region Entities
-
+		
 		// #region Map
 
 		this.map = this.make.tilemap({ key: 'mapa1', tileWidth: 32, tileHeight: 32 });
@@ -56,8 +60,6 @@ export default class Animation extends Phaser.Scene {
 		const playerY = playerPos.y * SCALE;
 		this.player = new Player(this, playerX, playerY);
 		this.player.setScale(SCALE);
-
-
 		// #endregion
 
 		// #region Enemy
@@ -72,10 +74,39 @@ export default class Animation extends Phaser.Scene {
 		this.enemies.add(this.Crac);
 		this.enemies.add(this.Bob);
 
-		this.playerBullets = this.add.group();
-		this.enemyBullets = this.add.group();
 		// #endregion
+		
+		// #region Pools
 
+		//coins
+		const MAX = 300;
+		let toAdds = [];
+		this.coins = new Pool(this, MAX, 'Coin');
+		for (let i = 0; i < MAX; i++) {
+			let toAdd = new Coin(this, 0, 0, 1);
+			toAdds.push(toAdd);
+		}
+		this.coins.addMultipleEntity(toAdds);
+
+		//bullets
+		toAdds = [];
+		this.playerBullets = new Pool(this, MAX,'Bullet');
+		for (let i = 0; i < MAX; i++) {
+			let toAdd = new Bullet(this, 0,0,'Bala2');
+			toAdds.push(toAdd);
+		}
+		this.playerBullets.addMultipleEntity(toAdds);
+		this.player.setPool(this.playerBullets);
+
+		toAdds = [];
+		this.enemyBullets = new Pool(this, MAX,'Bullet');
+		for (let i = 0; i < MAX; i++) {
+			let toAdd = new Bullet(this, 0, 0, 'Bala');
+			toAdds.push(toAdd);
+		}
+		this.enemyBullets.addMultipleEntity(toAdds);
+		this.Crac.setPool(this.enemyBullets);
+		// #endregion
 		
 		// #region Debug
 		const debugGraphics = this.add.graphics();
@@ -85,7 +116,6 @@ export default class Animation extends Phaser.Scene {
 			faceColor: new Phaser.Display.Color(40, 39, 37, 255) // Color para los bordes de colisión
 		});
 		// #endregion
-		
 
 		// #region Navmesh
 		this.marker = this.add.graphics();
@@ -163,21 +193,31 @@ export default class Animation extends Phaser.Scene {
 
 		});
 		//colision bala player-enemigos
-		//this.physics.add.collider(this.playerBullets, this.enemies, (playerBullets, enemy) => {
-		//	enemy.onEnemyGotHit(this.player.getDamage());
+		this.physics.add.collider(this.playerBullets.getPhaserGroup(), this.enemies, (playerBullet, enemy) => {
+			enemy.onEnemyGotHit(this.player.getDamage());
 			// mandaria a la pool de las balas de player otra vez
-		//	playerBullets.destroy();
-		//});
+			playerBullet.destroyBullet(this.playerBullets);
+		});
 		//colision bala enemigos-player
-		//this.physics.add.collider(this.enemyBullets, this.player, (enemyBullets, player) => {
-		//	player.onPlayerGotHit(enemyBullets.getDamage());
+		this.physics.add.collider(this.enemyBullets.getPhaserGroup(), this.player, (enemyBullet, player) => {
+			player.onPlayerGotHit(enemyBullet.getDamage());
+			this.healthBar.updateHealth(this.player.life, this.player.maxLife);
+			console.log('jugador:reducir vida');
 			// mandaria a la pool de las balas de los enemigos otra vez
-		//	enemyBullet.destroy();
-		//});
-		//this.physics.add.collider(this.player, this.coin, (player, coin) => {
-		//	player.onPlayerCollectedXP(coin.getExp());
-		//	coin.destroyCoin();
-		//});
+			enemyBullet.destroyBullet(this.enemyBullets);
+		});
+		//colision fichas-player
+		this.physics.add.collider(this.player, this.coins.getPhaserGroup(), (player, coin) => {
+			player.onPlayerCollectedXP(coin.getExp());
+			coin.destroyCoin(this.coins);
+		});
+		//colision balas-paredes
+		this.physics.add.collider(this.playerBullets.getPhaserGroup(), this.paredLayer, (bullet, wall) => {
+			bullet.destroyBullet(this.playerBullets);
+		});
+		this.physics.add.collider(this.enemyBullets.getPhaserGroup(), this.paredLayer, (bullet, wall) => {
+			bullet.destroyBullet(this.enemyBullets);
+		});
 		// #endregion
 
 		this.cameras.main.startFollow(this.player);

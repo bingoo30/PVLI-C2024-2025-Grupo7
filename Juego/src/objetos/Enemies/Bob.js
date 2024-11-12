@@ -6,7 +6,7 @@ export default class Bob extends Enemy{
         this.scene = scene;
         this.player = player;
         this.scene.add.existing(this);
-        this.init(100, 0, 10, 1, 0);
+        this.init(100, 0, 5, 1, 0);
 
     }
     init(speedFactor, shootSpeed, life, damage, prob) {
@@ -14,9 +14,5 @@ export default class Bob extends Enemy{
     }
     preUpdate(t,dt){
         super.preUpdate(t, dt);
-
-        this.update(t, dt);
-
-
     }
 }
