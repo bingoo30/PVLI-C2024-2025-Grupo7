@@ -12,14 +12,20 @@ Julie, una joven obsesionada con el póker, es secuestrada y llevada al mundo de
 Al llegar allí, se olvida de su pasado y lo único que sabe es que, para recuperar su libertad, deberá encontrar al Joker quien la espera en el último piso. A lo largo de la travesía, te enfrentarás a numerosos enemigos mientras descubres los misterios del pasado de Julie.   
 
 ## Capturas:  
-![Captura 1](Juego/capturas/loading.jpg)
+
+![image](https://github.com/user-attachments/assets/1b18da63-18db-4bb0-bd16-144a60320b8f)
 *Loading*
 
-![Captura 2](Juego/capturas/PantallaInicio.jpg)
+
+![image](https://github.com/user-attachments/assets/dde17858-2933-49a0-b948-e9c4088c6830)
 *Pantalla de inicio*
 
-![Captura 3](Juego/capturas/juego1.jpg)
+
+![image](https://github.com/user-attachments/assets/f0466ae0-ad26-4812-bb29-57b1b27146c0)
 *Juego*
+
+![image](https://github.com/user-attachments/assets/8532efb9-7a79-4dbd-8a50-fc6ddb138622)
+*GameOver*
 
 ## Web: 
 Puedes jugar la versión publicada del juego en el siguiente enlace:
