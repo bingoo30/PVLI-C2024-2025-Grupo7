@@ -1,5 +1,4 @@
 import Character from '../../objetos/Player/character.js';
-import { drop } from '../../objetos/Enemies/drop.js';
 
 const TILE_SIZE = 32;
 let contadorIntentos = 0;
@@ -22,7 +21,6 @@ export default class Enemy extends Character {
         this.scale = SCALE;
         this.exp = exp;
         this.navMesh = scene.navMesh;
-        this.drop = drop;
         scene.physics.add.existing(this);
         this.currentPath = [];
         this.targetPoint = null;  // Próximo punto objetivo
@@ -50,20 +48,13 @@ export default class Enemy extends Character {
     onEnemyGotHit(damage) {
         this.onGotHit(damage); // Aplica daño al jugador
     }
-
-    onEnemyDeath() {
-        this.dead = true;
-        drop(this.scene, this.x, this.y, this.exp);
-        this.onDeath();
-    }
-
-
     /**
      * Bucle principal del personaje, actualizamos su posición y ejecutamos acciones según el Input
      * @param {number} t - Tiempo total
      * @param {number} dt - Tiempo entre frames
      */
-    update(t, dt) {
+    preUpdate(t, dt) {
+        super.preUpdate(t, dt);
         //if (!this.targetPoint) return;
         //console.log("a");
         // Comprobar si ha alcanzado el próximo punto

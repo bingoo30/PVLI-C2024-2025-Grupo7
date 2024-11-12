@@ -1,3 +1,4 @@
+
 export default class Coin extends Phaser.GameObjects.Sprite {
     /**
      * Constructor de Bullet,las balas
@@ -14,6 +15,7 @@ export default class Coin extends Phaser.GameObjects.Sprite {
         this.exp = exp
         this.scene.add.existing(this);
         this.scene.physics.add.existing(this);
+        this.active = false;
 
     }
     preUpdate(t, dt) {
@@ -22,7 +24,14 @@ export default class Coin extends Phaser.GameObjects.Sprite {
     getExp() {
         return this.exp;
     }
-    destroyCoin() {
-        this.destroy(); 
+    setExp(value) {
+        this.exp = value;
+    }
+    setPosition(x,y) {
+        this.x = x;
+        this.y = y;
+    }
+    destroyCoin(pool) {
+        pool.release(this);
     }
 }

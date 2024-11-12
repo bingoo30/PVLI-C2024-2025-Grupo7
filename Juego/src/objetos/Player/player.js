@@ -1,5 +1,4 @@
 import Character from "./character.js";
-import Bullet from "../Shooting/bullet.js";
 import { fire } from "../Shooting/shooter.js";
 
 /**
@@ -21,12 +20,12 @@ export default class Player extends Character {
         //lo a�ado a la escena
         this.scene.add.existing(this);
         //configurar los atributos correspondientes despues de llamar al constructor del character
-        this.init(400, 200, 20, 1, 0);
+        this.init(400, 1250, 20, 1, 0);
 
         // Agregamos fisicas
         scene.physics.add.existing(this);
         this.body.setSize(16,8);
-        this.body.setOffset(8,24);
+        this.body.setOffset(8, 24);
 
         // #region Sistema de experiencia
         this.level = 1; 
@@ -53,6 +52,9 @@ export default class Player extends Character {
         this.damage = damage;
         this.prob = prob;
         this.maxLife = life;
+    }
+    getDamage() {
+        return this.damage;
     }
     onPlayerGotHit(damage, isEnemy) {
         this.onGotHit(damage); // Aplica daño al jugador
@@ -117,9 +119,12 @@ export default class Player extends Character {
        //Input de mouse
        if(this.mouse.leftButtonDown()){
             // Todo esto se debería mover al Shooter
-            if(this.cooldownCont < 0){
-                new Bullet(this.scene, this.damage, this.shootSpeed, 20, this.x, this.y, this.mouse.worldX, this.mouse.worldY, 'Bala2', 2);  
-                this.cooldownCont = this.shootSpeed;
+           if (this.cooldownCont < 0) {
+               let target = new Phaser.Math.Vector2(this.mouse.x + this.scene.cameras.main.scrollX, this.mouse.y + this.scene.cameras.main.scrollY);
+               // Calcula la dirección desde el personaje hacia el cursor
+               //let direction = new Phaser.Math.Vector2(target.x - this.x, target.y - this.y).normalize();
+               fire(this, target, this.damage, this.shootSpeed, 'Bala2', 4, this.pool);
+               this.cooldownCont = this.shootSpeed;
             }
        }
 

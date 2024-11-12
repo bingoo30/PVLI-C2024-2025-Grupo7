@@ -1,6 +1,4 @@
-import Coin from "./Enemies/coin";
-import Bullet from "./Shooting/bullet";
-export default class Pool {
+export default class OurPool {
 	/**
 	 * Pool de objetos. En este caso usaremos la pool para reutilizar las cajas del juego y tener un máximo.
 	 * La pool nos evita, además, tener que hacer todo el rato new y destroy de los objetos. Nos evitamos perder
@@ -10,14 +8,12 @@ export default class Pool {
 	 * @param {Number} max - elemento html que define la cantidad máxima de la pool sobre la que no queremos que crezca más
 	 * @param {Boolean} reuse - decimos si queremos reutilizar elementos de la pool que están vivos si no hay más remedio
 	 */
-	constructor(scene, max, reuse,type) {
-		this._group = scene.add.group(); // https://photonstorm.github.io/phaser3-docs/Phaser.GameObjects.Group.html		
+	constructor(scene, max, type) {
+		this._group = scene.add.group();
 		this.max = max;
 		this.scene = scene;
-		this.reuse = reuse;
 		this.type = type;
 	}
-
 	/**
 	 * Método para añadir nuevos objetos a la pool.
 	 * Nos servirá para crear una pool inicial si no lo hemos hecho en el constructor.
@@ -31,18 +27,10 @@ export default class Pool {
 			c.body.checkCollision.none = true;
 		});
 	}
-
-
-	spawn(x, y, sprite,animationKey = 'none') {
-		// Intentamos encontrar la primera entidad "muerta" que tenga el sprite
-		let entity = this._group.getChildren().find(ent => !ent.active && ent.sprite === sprite);
-
-
+	spawn(x, y, animationKey = 'none') {
 		// Si no se encontró una entidad con el valor deseado, buscamos la primera "muerta" disponible
-		if (!entity) {
-			entity = this._group.getFirstDead();
-		}
-	
+		let entity = this._group.getFirstDead();
+
 		/* 
 			En caso de no tener entidades disponibles en la pool, hay que decidir que hacer
 			Aquí podemos seguir varias estrategias, por ejemplo:
@@ -60,7 +48,7 @@ export default class Pool {
 						entity = new Bullet(this.scene, 1, 100, this.type, 4);
 					}
 					else if (this.type == 'Coin') {
-						entity = new Coin(this.scene, 0,0,0);
+						entity = new Coin(this.scene, 0, 0, 0);
 					}
 					newEntities.push(entity);
 				}
@@ -81,7 +69,6 @@ export default class Pool {
 		console.log(entity)
 		return entity;
 	}
-
 	/**
 	 * Método para liberar una entidad
 	 * @param {Object} entity - entidad de la pool que queremos marcar como libre
@@ -95,4 +82,5 @@ export default class Pool {
 	getPhaserGroup() {
 		return this._group;
 	}
+
 }
