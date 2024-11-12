@@ -24,7 +24,7 @@ export default class Title extends Phaser.Scene {
 	* Creación de los elementos de la escena principal de juego
 	*/
 	create() {
-		console.log("me he creado", this.scene.key);
+		//console.log("me he creado", this.scene.key);
 
 		var TitleSample = this.sound.add('TitleSample');
 		TitleSample.setLoop(true);
@@ -40,7 +40,7 @@ export default class Title extends Phaser.Scene {
 
 		// Escuchamos los eventos del ratón cuando interactual con nuestro sprite de "Start"
 	    sprite.on('pointerdown', pointer => {
-	    	 console.log("pulsando");
+	    	 //console.log("pulsando");
 	    });
 
 	    sprite.on('pointerup', pointer => {

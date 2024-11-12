@@ -61,12 +61,12 @@ export default class OurPool {
 		if (entity) {
 			entity.x = x;
 			entity.y = y;
-			entity.play(animationKey);
+			//entity.play(animationKey);
 			entity.setActive(true);
 			entity.setVisible(true);
 			entity.body.checkCollision.none = false;
 		}
-		console.log(entity)
+		//console.log(entity)
 		return entity;
 	}
 	/**

@@ -30,7 +30,7 @@ export default class Loading extends Phaser.Scene {
 		this.load.spritesheet('PiuAnim', 'assets/Piu.png', {
 			frameWidth: 25,  // Ancho de cada cuadro
 			frameHeight: 10, // Altura de cada cuadro
-			endFrame: 17      // Número de cuadros en el sprite sheet
+			endFrame: 16      // Número de cuadros en el sprite sheet
 		});
 
 		// #endregion
@@ -81,11 +81,11 @@ export default class Loading extends Phaser.Scene {
 	* Creación de los elementos de la escena principal de juego
 	*/
 	create() {
-		console.log("me he creado", this.scene.key);
+		//console.log("me he creado", this.scene.key);
 
 		this.anims.create({
 			key: 'PiuLoad',
-			frames: this.anims.generateFrameNumbers('PiuAnim', { start: 0, end: 17 }),
+			frames: this.anims.generateFrameNumbers('PiuAnim', { start: 0, end: 16 }),
 			frameRate: 8,  // Velocidad de animación
 			repeat: -1      // -1 para repetir indefinidamente
 		});

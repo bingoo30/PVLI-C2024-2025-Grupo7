@@ -2,7 +2,6 @@ import Player from '../../objetos/Player/player.js';
 import Crac from '../../objetos/Enemies/Crac.js'
 import Pool from '../../objetos/OurPool.js'
 import NavMesh from '../../objetos/NavMesh/navmesh.js';
-import Floor from '../../objetos/Escenario/floor.js';
 import Bob from '../../objetos/Enemies/Bob.js';
 import HealthBar from '../../UI/HealthBar.js';
 import ExpBar from '../../UI/ExpBar.js';
@@ -28,7 +27,7 @@ export default class Animation extends Phaser.Scene {
 	* Creación de los elementos de la escena principal de juego
 	*/
 	create() {
-		console.log("me he creado", this.scene.key);
+		//console.log("me he creado", this.scene.key);
 		//this.input.on('pointerup', this.handleClick, this);
 
 		// #region Entities
@@ -123,11 +122,11 @@ export default class Animation extends Phaser.Scene {
 		this.marker.lineStyle(3, 0xffffff, 1);
 		this.marker.strokeRect(0, 0, this.map.tileWidth*SCALE, this.map.tileHeight*SCALE);
 
-		console.log(this.map.tileWidth)
-		console.log(this.map.tileWidth)
-		console.log(this.map.height)
+		//console.log(this.map.tileWidth)
+		//console.log(this.map.tileWidth)
+		//console.log(this.map.height)
 		this.finder = new EasyStar.js();
-		console.log("suelo",this.sueloLayer)
+		//console.log("suelo",this.sueloLayer)
 
 		if (this.map) {
 			var grid = [];
@@ -147,11 +146,11 @@ export default class Animation extends Phaser.Scene {
 		} else {
 			console.error("El mapa no está definido.");
 		}
-		console.log(grid);
-		console.log(this.map)
+		//console.log(grid);
+		//console.log(this.map)
 		this.finder.setGrid(grid);
 		var tiles = this.map.tilesets[0];
-		console.log(tiles)
+		//console.log(tiles)
 		var properties = tiles.tileProperties;
 		var acceptableTiles = [];
 
@@ -187,6 +186,7 @@ export default class Animation extends Phaser.Scene {
 
 		this.physics.add.collider(this.player, this.paredLayer);
 
+		//colision player-enemigos
 		this.physics.add.collider(this.player, this.enemies, (player, enemy) => {
 			player.onPlayerGotHit(enemy.getDamage(),enemy);
 			this.healthBar.updateHealth(this.player.life, this.player.maxLife);
@@ -208,13 +208,12 @@ export default class Animation extends Phaser.Scene {
 		//colision fichas-player
 		this.physics.add.collider(this.player, this.coins.getPhaserGroup(), (player, coin) => {
 			player.onPlayerCollectedXP(coin.getExp());
-			this.expBar.updateExp(player.getXpAcu(), player.getXpToLevelUp());
 			if (player.getXpAcu() >= player.getXpToLevelUp()) {
 				player.levelUp();
 			}
 			this.expBar.updateExp(player.getXpAcu(), player.getXpToLevelUp());
 			coin.destroyCoin(this.coins);
-			console.log(this.expBar);
+			//console.log(this.expBar);
 		});
 		//colision balas-paredes
 		this.physics.add.collider(this.playerBullets.getPhaserGroup(), this.paredLayer, (bullet, wall) => {
@@ -321,7 +320,7 @@ export default class Animation extends Phaser.Scene {
 		// Encontrar la ruta desde el punto de inicio al de destino
 		this.finder.findPath(startTile.x, startTile.y, endTile.x, endTile.y, path => {
 			if (path === null) {
-				console.warn("No se encontró un camino.");
+				//console.warn("No se encontró un camino.");
 				return;
 			}
 			this.Crac.setPath(path);  // Establecer el camino en el enemigo
@@ -333,7 +332,7 @@ export default class Animation extends Phaser.Scene {
 		// Encontrar la ruta desde el punto de inicio al de destino
 		this.finder.findPath(startTile.x, startTile.y, endTile.x, endTile.y, path => {
 			if (path === null) {
-				console.warn("No se encontró un camino.");
+				//console.warn("No se encontró un camino.");
 				return;
 			}
 			this.Crac.setPath(path);  // Establecer el camino en el enemigo

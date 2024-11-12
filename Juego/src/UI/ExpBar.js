@@ -23,7 +23,7 @@ export default class ExpBar {
         const expPer = Phaser.Math.Clamp(currentExp / max, 0, 1);
 
         this.bar.setDisplaySize(this.maxWidth * expPer, this.height);
-        console.log("Porcentaje"+expPer);
+        //console.log("Porcentaje"+expPer);
     }
 
 }

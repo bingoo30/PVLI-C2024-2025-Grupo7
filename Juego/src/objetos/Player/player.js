@@ -20,7 +20,7 @@ export default class Player extends Character {
         //lo a�ado a la escena
         this.scene.add.existing(this);
         //configurar los atributos correspondientes despues de llamar al constructor del character
-        this.init(400, 1250, 20, 5, 0);
+        this.init(400, 1250, 25, 2, 0);
 
         // Agregamos fisicas
         scene.physics.add.existing(this);
@@ -69,34 +69,25 @@ export default class Player extends Character {
     }
     onPlayerCollectedXP(value) {
         this.xpAcumulator += value; 
-        console.log(this.xpAcumulator);
-        console.log(this.xpToLevelUp);
+        //console.log(this.xpAcumulator);
+        //console.log(this.xpToLevelUp);
     }
     knockback(enemy,value) {
-        // Calcular la dirección de empuje en la dirección opuesta al enemigo
-        const directionX = this.x - enemy.x;
-        const directionY = this.y - enemy.y;
-        let dir = new Phaser.Math.Vector2(directionX, directionY);
-        dir.normalize();
-        // Aplicar el knockback en esa dirección usando `setVelocity`
-        this.body.setVelocity(
-            dir.x * value,
-            dir.y * value
-        );
-
         //Detener el movimiento después de un corto periodo para que el knockback no sea indefinido
-        //this.scene.time.delayedCall(200, () => {
-        //    this.body.setVelocity(0); // Detener al jugador después del knockback
-        //});
+        this.scene.time.delayedCall(500, () => {
+            this.body.setVelocity(0); // Detener al jugador después del knockback
+        });
+
+        this.body.setBounce(value);
     }
     levelUp() {
         this.level++;
         this.xpAcumulator = this.xpAcumulator-this.xpToLevelUp;
         this.xpToLevelUp += 1;
         this.maxLife++;
-        console.log(this.xpAcumulator);
-        console.log(this.xpToLevelUp);
-        console.log("me he subido de nivel");
+        //console.log(this.xpAcumulator);
+        //console.log(this.xpToLevelUp);
+        //console.log("me he subido de nivel");
     }
     /**
      * Bucle principal del personaje, actualizamos su posici�n y ejecutamos acciones seg�n el Input
