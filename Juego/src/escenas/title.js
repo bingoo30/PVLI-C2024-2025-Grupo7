@@ -15,9 +15,10 @@ export default class Title extends Phaser.Scene {
 	 * Cargamos todos los assets que vamos a necesitar
 	 */
 	preload() {
-		this.load.image('start', 'assets/GUI/start.png');
-		this.load.image('background', 'assets/GUI/fondoinicio.png');
-		this.load.audio('TitleSample', 'assets/audio/MenuPrincipal.mp3');
+		//'start', '/PVLI-C2024-2025-Grupo7/Juego/assets/GUI/start.png'
+		this.load.image('start', '/PVLI-C2024-2025-Grupo7/Juego/assets/GUI/start.png');
+		this.load.image('background', '/PVLI-C2024-2025-Grupo7/Juego/assets/GUI/fondoinicio.png');
+		this.load.audio('TitleSample', '/PVLI-C2024-2025-Grupo7/Juego/assets/audio/MenuPrincipal.mp3');
 	}
 	
 	/**
