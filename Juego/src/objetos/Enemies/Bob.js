@@ -1,8 +1,8 @@
 import Enemy from "./enemy.js";
 
 export default class Bob extends Enemy{
-    constructor(scene, x, y, player){
-        super(scene, x, y, player, 'Bob');
+    constructor(scene, x, y, player, exp){
+        super(scene, x, y, player, 'Bob', exp);
         this.scene = scene;
         this.player = player;
         this.scene.add.existing(this);

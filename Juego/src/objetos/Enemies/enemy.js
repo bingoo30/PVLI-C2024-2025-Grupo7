@@ -13,21 +13,21 @@ export default class Enemy extends Character {
      * @param {phaser.player} player Jugador (target) a perseguir
      * 
     */
-    constructor(scene, x, y, player, typeEnemy, SCALE, exp) {
+    constructor(scene, x, y, player, typeEnemy, SCALE, exp =1) {
         //heredo de la clase character
         super(scene, x, y, [typeEnemy]);
         this.scene = scene;
         this.player = player;
         this.scale = SCALE;
-        this.exp = exp;
+        this.exp =exp;
         this.navMesh = scene.navMesh;
         scene.physics.add.existing(this);
         this.currentPath = [];
         this.targetPoint = null;  // Próximo punto objetivo
         //configurar los atributos correspondientes despues de llamar al constructor del character
         this.currentNode = { x: x, y: y };
-        this.body.setSize(16,8);
-        this.body.setOffset(8, 24);
+        //this.body.setSize(16,8);
+        //this.body.setOffset(8, 24);
         this.path = [];
         this.dead = false;
     }
@@ -45,8 +45,8 @@ export default class Enemy extends Character {
         return this.damage;
     }
 
-    onEnemyGotHit(damage) {
-        this.onGotHit(damage); // Aplica daño al jugador
+    onEnemyGotHit(damage, pool) {
+        this.onGotHit(damage, this.exp, pool); // Aplica daño al jugador
     }
     /**
      * Bucle principal del personaje, actualizamos su posición y ejecutamos acciones según el Input
@@ -108,11 +108,6 @@ export default class Enemy extends Character {
             this.moveToNextPoint();  // Mover al siguiente punto
         }
 
-    }
-    setPath(path) {
-        // Establece el camino calculado con EasyStar
-        this.currentPath = path;
-        this.moveToNextPoint();  // Inicia el movimiento hacia el primer punto
     }
 
     moveToNextPoint() {

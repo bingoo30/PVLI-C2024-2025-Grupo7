@@ -30,7 +30,7 @@ export default class Player extends Character {
         // #region Sistema de experiencia
         this.level = 1; 
         this.xpAcumulator = 0;
-        this.xpToLevelUp = 1;
+        this.xpToLevelUp = 2;
         // #endregion
 
         //input
@@ -56,6 +56,12 @@ export default class Player extends Character {
     getDamage() {
         return this.damage;
     }
+    getXpAcu() {
+        return this.xpAcumulator;
+    }
+    getXpToLevelUp() {
+        return this.xpToLevelUp;
+    }
     onPlayerGotHit(damage, isEnemy) {
         this.onGotHit(damage); // Aplica daño al jugador
         //solo hago el knockback cuando me choco con un enemigo (o no)
@@ -63,10 +69,6 @@ export default class Player extends Character {
     }
     onPlayerCollectedXP(value) {
         this.xpAcumulator += value; 
-        if (this.xpAcumulator >= this.xpToLevelUp) {
-            this.LevelUp();
-        }
-        console.log("xp: " + this.xpAcumulator);
     }
     knockback(enemy,value) {
         // Calcular la dirección de empuje en la dirección opuesta al enemigo
@@ -85,7 +87,7 @@ export default class Player extends Character {
         //    this.body.setVelocity(0); // Detener al jugador después del knockback
         //});
     }
-    LevelUp() {
+    levelUp() {
         this.level++;
         this.xpAcumulator = this.xpAcumulator-this.xpToLevelUp;
         this.xpToLevelUp += 1;

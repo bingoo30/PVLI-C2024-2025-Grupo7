@@ -5,6 +5,7 @@ import NavMesh from '../../objetos/NavMesh/navmesh.js';
 import Floor from '../../objetos/Escenario/floor.js';
 import Bob from '../../objetos/Enemies/Bob.js';
 import HealthBar from '../../UI/HealthBar.js';
+import ExpBar from '../../UI/ExpBar.js';
 import Coin from '../../objetos/Enemies/coin.js';
 import Bullet from '../../objetos/Shooting/bullet.js';
 
@@ -64,10 +65,10 @@ export default class Animation extends Phaser.Scene {
 
 		// #region Enemy
 		
-		this.Crac = new Crac(this, playerX + 200, playerY + 100, this.player, SCALE);
+		this.Crac = new Crac(this, playerX + 200, playerY + 100, this.player, 1);
 		this.Crac.setScale(SCALE);
 
-		this.Bob = new Bob(this, playerX + 300, playerY + 100, this.player, SCALE);
+		this.Bob = new Bob(this, playerX + 300, playerY + 100, this.player, 1);
 		this.Bob.setScale(SCALE);
 
 		this.enemies = this.add.group();
@@ -174,8 +175,8 @@ export default class Animation extends Phaser.Scene {
 		// #endregion
 
 		//#region UI
-		this.healthBar = new HealthBar(this);
-		console.log(this.healthBar);
+		this.expBar = new ExpBar(this, 20, 30);
+		this.healthBar = new HealthBar(this, 20, 10);
 		//#endregion
 
 		// #region Collision
@@ -189,12 +190,11 @@ export default class Animation extends Phaser.Scene {
 		this.physics.add.collider(this.player, this.enemies, (player, enemy) => {
 			player.onPlayerGotHit(enemy.getDamage(),enemy);
 			this.healthBar.updateHealth(this.player.life, this.player.maxLife);
-			console.log('jugador:reducir vida');
 
 		});
 		//colision bala player-enemigos
 		this.physics.add.collider(this.playerBullets.getPhaserGroup(), this.enemies, (playerBullet, enemy) => {
-			enemy.onEnemyGotHit(this.player.getDamage());
+			enemy.onEnemyGotHit(this.player.getDamage(), this.coins);
 			// mandaria a la pool de las balas de player otra vez
 			playerBullet.destroyBullet(this.playerBullets);
 		});
@@ -202,14 +202,18 @@ export default class Animation extends Phaser.Scene {
 		this.physics.add.collider(this.enemyBullets.getPhaserGroup(), this.player, (enemyBullet, player) => {
 			player.onPlayerGotHit(enemyBullet.getDamage());
 			this.healthBar.updateHealth(this.player.life, this.player.maxLife);
-			console.log('jugador:reducir vida');
 			// mandaria a la pool de las balas de los enemigos otra vez
 			enemyBullet.destroyBullet(this.enemyBullets);
 		});
 		//colision fichas-player
 		this.physics.add.collider(this.player, this.coins.getPhaserGroup(), (player, coin) => {
 			player.onPlayerCollectedXP(coin.getExp());
+			if (player.getXpAcu() >= player.getXpToLevelUp()) {
+				player.levelUp();
+			}
+			this.expBar.updateExp(player.getXpAcu(), player.getXpToLevelUp());
 			coin.destroyCoin(this.coins);
+			console.log(this.expBar);
 		});
 		//colision balas-paredes
 		this.physics.add.collider(this.playerBullets.getPhaserGroup(), this.paredLayer, (bullet, wall) => {

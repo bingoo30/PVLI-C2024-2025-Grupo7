@@ -1,5 +1,5 @@
 
-export default class HealthBar {
+export default class Text {
     constructor(scene, x, y) {
         this.scene = scene;
         this.maxWidth = 300;

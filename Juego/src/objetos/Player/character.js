@@ -1,3 +1,4 @@
+import { drop } from "../Enemies/drop.js";
 
 
 //constantes por defecto
@@ -68,7 +69,8 @@ export default class Character extends Phaser.GameObjects.Sprite {
         this.life = Math.max(0, this.life - damageTaken);
         if (this.life == 0) {
             if (this.type == 'Player') this.scene.changeScene();
-            else if (this.type == 'Enemy') {
+            //solo le paso el valor de xp cuando es un enemigo
+            else if (xp !== undefined) {
                 drop(this.x, this.y, xp, pool);
             }
             this.onDeath();
