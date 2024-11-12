@@ -194,7 +194,7 @@ Mecánica 2: Levanta el cetro y hace que caigan corazones en el suelo. Si los co
 
 *(Opcional) Mecánica 5:* Fase 2 - Se mueve más rápido.
 
-## 2.	Diseño de nivel
+## 2. Diseño de nivel
 
 El jugador deberá explorar el mapa y encontrar llaves en las salas para poder ascender de planta. Cada planta representará un nivel, y dentro de cada nivel habrá diferentes salas donde el jugador tendrá que explorar y enfrentarse a enemigos para obtener la llave.
 Dentro de cada planta, habrá una sala que contendrá un boss. Cada boss tendrá sus propias habilidades y formas de ataque, lo que aportará diversidad y evitará que las salas se vuelvan monótonas. Además, habrá puzles, salas grandes, entre otros elementos.
@@ -203,20 +203,20 @@ Dentro de cada planta, habrá una sala que contendrá un boss. Cada boss tendrá
 ![image](https://github.com/user-attachments/assets/4624c38b-4ee6-48d3-8b6b-20b1060210d5)
 
 	
-### 2.1.	Descripción de partida típica
+### 2.1. Descripción de partida típica
 
 En una partida normal el jugador empezará en el hall del primer piso, donde se encontrará con un NPC que le dará una explicación sobre ese mundo. Al finalizar la explicación el jugador podrá salir del hall y empezar su busca por la puerta del próximo piso y derrotar el boss que tendrá la llave para abrirla. Al largo de los niveles, el jugador aprenderá sobre la historia de la protagonista mientras ella va recuperando sus recuerdos y también aprenderás mejor sobre como funciona ese mundo. Al llegar a último piso, el jugador tendrá que derrotar al joker para que se acabe el juego.
 
 Si el jugador muere en el camino, volverá al checkpoint de cada piso, es decir, tendrá que reiniciar el nivel.
 
 
-## 3.	HUD
+## 3. HUD
 
-### 3.1.	Mockup del HUD
+### 3.1. Mockup del HUD
 
 ![image](https://github.com/user-attachments/assets/55ed58f3-b8e6-4bdf-8d9d-3c21d3b4f4c0)
 
-### 3.2.	Explicación de los elementos del HUD y su funcionamiento.
+### 3.2. Explicación de los elementos del HUD y su funcionamiento.
 **Imagen de protagonista:** Función casi completamente estética, muestra un retrato del personaje jugado. 
 
 **Vida:** Barra que muestra el porcentaje de salud que le queda al jugador.
@@ -233,26 +233,26 @@ Si el jugador muere en el camino, volverá al checkpoint de cada piso, es decir,
 
 El apartado visual será bastante abstracto, cada nivel tendrá muchos elementos que no se relacionan unos con otros y algunas salas con colores vibrantes y otras con colores muy oscuros, con la intención de pasar una sensación de que ese mundo es una extensión de la personalidad del Joker, el amo de ese mundo.
 
-## 4.	Moodboard
+## 4. Moodboard
 [Pinterest](https://pin.it/5GXh8RoGd)
 
 
-## 5.	Menús y flujo de juego
+## 5. Menús y flujo de juego
 
 En cuanto a los menús, se trata de una cosa bastante simple. Tendremos un botón de inicio y un botón de configuraciones (opcional) en la pantalla inicial. Para mostrar el menú de pausa hay que pulsar la tecla “P”. Aparecerán opciones como continuar el juego, volver a la pantalla y guardar el progreso (opcional).
 
-### 5.1.	Flujo de juego
+### 5.1. Flujo de juego
 
 ![image](https://github.com/user-attachments/assets/596f17ab-4388-43c9-afb0-1b0a162a6aac)
 
 
-## 6.	Contenido
+## 6. Contenido
 
-### 6.1.	Historia
+### 6.1. Historia
 
 La protagonista se despierta en una sala donde un NPC le explica que se encuentra en el mundo creado por Joker, conocido como el mundo de las cartas. Gracias a la explicación del NPC, la protagonista comprende que está en la primera planta y que debe llegar hasta la cuarta planta para enfrentarse a Joker y así poder salir de ese mundo. Para lograrlo, necesita encontrar la escalera y la llave, las cuales están escondidas en las salas que pueden contener peligros. Además, se da cuenta de que no recuerda nada, ni siquiera quién es. Solo sabe que debe salir de este mundo tan abstracto. Siente que podría recuperar todos sus recuerdos cuando se enfrente a Joker. Durante su aventura, se encuentra con diferentes cartas que complican su camino.
 
-### 6.2.	Personajes
+### 6.2. Personajes
 
 
 **Julie:** Una chica joven de unos 22 años que ha olvidado quién era. Según lo que han contado, fue secuestrada al mundo extraño de Joker. Durante su aventura, irá recordando su pasado
@@ -268,7 +268,7 @@ La protagonista se despierta en una sala donde un NPC le explica que se encuentr
  ***Piu:*** Gato de Julie, estará en el cuarto piso y se recordará de los momentos felices antes de apostar.
 
 
-### 6.3.	Enemigos
+### 6.3. Enemigos
 
 **Bosses:**
 ***Joker:*** Personaje que secuestra a la protagonista y es el amo del mundo de las cartas y actúa como jefe final. (Es la parte de culpa de la prota, quien le dice las cosas malas que ha hecho, y se entera de está intentando cambiar)
@@ -282,7 +282,7 @@ J: Boss del primer piso, se entera de que apuesta.
 
 **Enemigos normales:** Criaturas inspiradas en cartas de poker.
 
-### 6.4.	Objetos
+### 6.4. Objetos
 
 **Llave:** Es esencial para poder subir de piso y estará escondida en alguna sala.
 
@@ -296,7 +296,7 @@ Lápiz roto.
 
 Teclado sin teclas.
 
-### 6.5.	Logros
+### 6.5. Logros
 
 Salir del primer piso.
 
@@ -334,7 +334,7 @@ Encontrar a Piu.
 
 (opcional) Trampar a un mimic.
 
-## 7.Referencias
+## 7. Referencias
 Mecánicas: The Binding of isaac, Darkest Dungeon.
 
 Temática: Poker.
