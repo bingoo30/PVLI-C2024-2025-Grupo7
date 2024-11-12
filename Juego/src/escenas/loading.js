@@ -19,15 +19,15 @@ export default class Loading extends Phaser.Scene {
 
 		// #region UI
 		this.cameras.main.setBackgroundColor('#d3d3d3');
-		this.load.image('start', '../../assets/GUI/start.png');
-		this.load.image('background', '../../assets/GUI/fondoinicio.png');
-		this.load.image('end', '../../assets/GUI/gameover.png');
-		this.load.image('healthBarBackground', '../../assets/GUI/healthBar1.png');
-		this.load.image('healthBar', '../../assets/GUI/healthBar2.png');
-		this.load.image('expBarBackground', '../../assets/GUI/expBarBackground.png');
-		this.load.image('expBar', '../../assets/GUI/expBar.png');
+		this.load.image('start', '/PVLI-C2024-2025-Grupo7/Juego/assets/GUI/start.png');
+		this.load.image('background', '/PVLI-C2024-2025-Grupo7/Juego/assets/GUI/fondoinicio.png');
+		this.load.image('end', '/PVLI-C2024-2025-Grupo7/Juego/assets/GUI/gameover.png');
+		this.load.image('healthBarBackground', '/PVLI-C2024-2025-Grupo7/Juego/assets/GUI/healthBar1.png');
+		this.load.image('healthBar', '/PVLI-C2024-2025-Grupo7/Juego/assets/GUI/healthBar2.png');
+		this.load.image('expBarBackground', '/PVLI-C2024-2025-Grupo7/Juego/assets/GUI/expBarBackground.png');
+		this.load.image('expBar', '/PVLI-C2024-2025-Grupo7/Juego/assets/GUI/expBar.png');
 
-		this.load.spritesheet('PiuAnim', '../../assets/Piu.png', {
+		this.load.spritesheet('PiuAnim', '/PVLI-C2024-2025-Grupo7/Juego/assets/Piu.png', {
 			frameWidth: 25,  // Ancho de cada cuadro
 			frameHeight: 10, // Altura de cada cuadro
 			endFrame: 16      // Número de cuadros en el sprite sheet
@@ -37,33 +37,33 @@ export default class Loading extends Phaser.Scene {
 
 		// #region Player
 
-		this.load.image('Player', '../../assets/player.png');
-		this.load.image('Bala', '../../assets/bala.png');
-		this.load.image('Bala2', '../../assets/bala2.png');
-		this.load.image('Particle', '../../assets/particles.png');
-		this.load.image('Coin', '../../assets/coin.png');
+		this.load.image('Player', '/PVLI-C2024-2025-Grupo7/Juego/assets/player.png');
+		this.load.image('Bala', '/PVLI-C2024-2025-Grupo7/Juego/assets/bala.png');
+		this.load.image('Bala2', '/PVLI-C2024-2025-Grupo7/Juego/assets/bala2.png');
+		this.load.image('Particle', '/PVLI-C2024-2025-Grupo7/Juego/assets/particles.png');
+		this.load.image('Coin', '/PVLI-C2024-2025-Grupo7/Juego/assets/coin.png');
 
 		// #endregion
 
 		// #region Enemies
 
-		this.load.image('Bob', '../../assets/Bob.png');
-		this.load.image('Crac', '../../assets/Crac.png');
-		this.load.image('Letus', '../../assets/Letus.png');
+		this.load.image('Bob', '/PVLI-C2024-2025-Grupo7/Juego/assets/Bob.png');
+		this.load.image('Crac', '/PVLI-C2024-2025-Grupo7/Juego/assets/Crac.png');
+		this.load.image('Letus', '/PVLI-C2024-2025-Grupo7/Juego/assets/Letus.png');
 
 		// #endregion
 
 		// #region Tilemaps
 
-		this.load.tilemapTiledJSON('mapa1', '../../assets/map/mapa1.json');
-		this.load.image('tileset', '../../assets/map/mapTiles.png');
-		this.load.json('navmesh', '../../assets/map/mapa1.json');
+		this.load.tilemapTiledJSON('mapa1', '/PVLI-C2024-2025-Grupo7/Juego/assets/map/mapa1.json');
+		this.load.image('tileset', '/PVLI-C2024-2025-Grupo7/Juego/assets/map/mapTiles.png');
+		this.load.json('navmesh', '/PVLI-C2024-2025-Grupo7/Juego/assets/map/mapa1.json');
 
 		// #endregion
 
 		// #region Audio
 
-		this.load.audio('MainSample', '../../assets/audio/batallaPrincipal.wav');
+		this.load.audio('MainSample', '/PVLI-C2024-2025-Grupo7/Juego/assets/audio/batallaPrincipal.wav');
 
 		// #endregion
 
