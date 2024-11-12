@@ -20,7 +20,7 @@ export default class Player extends Character {
         //lo a�ado a la escena
         this.scene.add.existing(this);
         //configurar los atributos correspondientes despues de llamar al constructor del character
-        this.init(400, 1250, 20, 1, 0);
+        this.init(400, 1250, 20, 5, 0);
 
         // Agregamos fisicas
         scene.physics.add.existing(this);
@@ -69,6 +69,8 @@ export default class Player extends Character {
     }
     onPlayerCollectedXP(value) {
         this.xpAcumulator += value; 
+        console.log(this.xpAcumulator);
+        console.log(this.xpToLevelUp);
     }
     knockback(enemy,value) {
         // Calcular la dirección de empuje en la dirección opuesta al enemigo
@@ -92,6 +94,8 @@ export default class Player extends Character {
         this.xpAcumulator = this.xpAcumulator-this.xpToLevelUp;
         this.xpToLevelUp += 1;
         this.maxLife++;
+        console.log(this.xpAcumulator);
+        console.log(this.xpToLevelUp);
         console.log("me he subido de nivel");
     }
     /**

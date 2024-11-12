@@ -208,6 +208,7 @@ export default class Animation extends Phaser.Scene {
 		//colision fichas-player
 		this.physics.add.collider(this.player, this.coins.getPhaserGroup(), (player, coin) => {
 			player.onPlayerCollectedXP(coin.getExp());
+			this.expBar.updateExp(player.getXpAcu(), player.getXpToLevelUp());
 			if (player.getXpAcu() >= player.getXpToLevelUp()) {
 				player.levelUp();
 			}
