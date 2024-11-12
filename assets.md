@@ -10,6 +10,7 @@ Los assets del primer nivel siguen una estética de pixel art simple de 32x32 px
 Los enemigos y las fichas están inspirados en elementos de póker, con colores rojo, blanco y negro en alta saturación. En contraste, la protagonista tiene un diseño final llamativo con colores vibrantes: verde, rosa fucsia, azul y negro.
 
 **Tipografía**
+
 Las fuentes utilizadas en el juego y en la página web fueron seleccionadas de Google Fonts, asegurando accesibilidad y licencia gratuita para su uso en proyectos comerciales.
 
 **Licencia Propietaria**
