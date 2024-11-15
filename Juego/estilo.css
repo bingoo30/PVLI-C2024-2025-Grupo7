@@ -52,7 +52,7 @@ header {
 }
     header .title {
         font-size: 4em;
-        margin: 10px;
+        margin: 0px;
     }
 
     /* Estilo para el banner */

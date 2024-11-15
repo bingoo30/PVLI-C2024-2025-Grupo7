@@ -15,7 +15,6 @@ export default class HealthBar {
 
         this.bar = scene.add.sprite(this.x, this.y, 'healthBar').setOrigin(0, 0);
         this.bar.setDisplaySize(this.maxWidth, this.height); 
-
         this.container.add([this.bar, this.background]);
         this.container.setScrollFactor(0);
     }
