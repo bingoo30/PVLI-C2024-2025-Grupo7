@@ -16,7 +16,7 @@ export default class OurPool {
 	}
 	/**
 	 * Método para añadir nuevos objetos a la pool.
-	 * Nos servirá para crear una pool inicial si no lo hemos hecho en el constructor.
+	 * Nos servir?para crear una pool inicial si no lo hemos hecho en el constructor.
 	 * Todos los elementos añadidos los activamos como disponibles para reutilizar
 	 * @param {Array} entities - array de objetos que añadir a la pool
 	 */
@@ -28,12 +28,12 @@ export default class OurPool {
 		});
 	}
 	spawn(x, y, animationKey = 'none') {
-		// Si no se encontró una entidad con el valor deseado, buscamos la primera "muerta" disponible
+		// Si no se encontr?una entidad con el valor deseado, buscamos la primera "muerta" disponible
 		let entity = this._group.getFirstDead();
 
 		/* 
 			En caso de no tener entidades disponibles en la pool, hay que decidir que hacer
-			Aquí podemos seguir varias estrategias, por ejemplo:
+			Aqu?podemos seguir varias estrategias, por ejemplo:
 			 - aumentar el tamaño de la pool en una cantidad concreta 
 			 - duplicar el tamaño
 			 - reutilizar la entidad que más tiempo ha estado viva

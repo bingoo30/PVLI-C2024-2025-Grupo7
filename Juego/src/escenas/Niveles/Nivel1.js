@@ -8,6 +8,8 @@ import ExpBar from '../../UI/ExpBar.js';
 import Coin from '../../objetos/Enemies/coin.js';
 import Bullet from '../../objetos/Shooting/bullet.js';
 
+import DialogueManager from '../../UI/DialogManager.js';
+import DialogText from '../../UI/dialog_plugin.js';
 
 //import Coin from '../../objetos/Enemies/coin.js'
 //constante
@@ -21,7 +23,9 @@ export default class Animation extends Phaser.Scene {
 	constructor() {
 		super({ key: 'nivel1' });
 	}
-	
+	preload() {
+		this.load.json('dialogues', 'assets/Dialogues/dialogues_intro.json');
+	}
 	
 	/**  
 	* Creación de los elementos de la escena principal de juego
@@ -31,7 +35,6 @@ export default class Animation extends Phaser.Scene {
 		//this.input.on('pointerup', this.handleClick, this);
 
 		// #region Entities
-		
 		// #region Map
 
 		this.map = this.make.tilemap({ key: 'mapa1', tileWidth: 32, tileHeight: 32 });
@@ -48,7 +51,6 @@ export default class Animation extends Phaser.Scene {
 		this.paredLayer.setScale(SCALE);
 
 		// #endregion
-
 
 		// #region Player
 
@@ -176,6 +178,34 @@ export default class Animation extends Phaser.Scene {
 		//#region UI
 		this.expBar = new ExpBar(this, 20, 30);
 		this.healthBar = new HealthBar(this, 20, 10);
+
+		const dialogos = this.cache.json.get('dialogues');
+
+		this.dialog = new DialogText(this, {
+			borderThickness: 4,
+			borderColor: 0xcb3234,
+			borderAlpha: 1,
+			windowAlpha: 0.6,
+			windowColor: 0xff6961,
+			windowHeight: 150,
+			padding: 32,
+			closeBtnColor: 'darkgoldenrod',
+			dialogSpeed: 3,
+			fontSize: 24,
+			fontFamily: "Arial"
+		});
+
+		this.dialogManager = new DialogueManager(this, dialogos);
+		this.dialogManager.initialize(this.dialog);
+		this.dialogManager.showDialogue();
+
+		this.input.on('pointerdown', () => {
+			if(this.dialog.visible)this.dialogManager.advanceDialogue(); // Avanza al siguiente diálogo
+		});
+		this.dialog.closeBtn.on('pointerdown', () => {
+			this.dialogManager.skipDialogue();
+		});
+		
 		//#endregion
 
 		// #region Collision
@@ -226,20 +256,18 @@ export default class Animation extends Phaser.Scene {
 
 		this.cameras.main.startFollow(this.player);
 
-
-
 		// #region sonido
 		this.MainSample = this.sound.add('MainSample');
 		this.MainSample.play();
 		this.MainSample.setLoop(true);
 		// #endregion
 
-
 		const startTile = this.map.worldToTileXY(this.Crac.x, this.Crac.y);
 		const endTile = this.map.worldToTileXY(400, 400);  // Destino deseado
 		this.findPath(startTile, endTile);
 
 	}
+
 	changeScene() {
 		this.MainSample.stop();
 		this.scene.start("gameover") 

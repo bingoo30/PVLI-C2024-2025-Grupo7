@@ -1,0 +1,82 @@
+[
+  {
+    "speaker": " ",
+    "text": "Ugh… Mi cabeza…",
+    "isPlayer": true
+  },
+  {
+    "speaker": "?",
+    "text": "¡Oh! ¿Qué tenemos aquí, una recién llegada? ¡Bienvenida a los dominios del Joker!",
+    "isPlayer": false
+  },
+  {
+    "speaker": "Julie",
+    "text": "¿Quién es el Joker? ¿Cóm-?",
+    "isPlayer": true
+  },
+  {
+    "speaker": "Flush",
+    "text": "Cálmese señorita, entiendo tu confusión, a todos nos pasaría lo mismo estando en tu situación.",
+    "isPlayer": false
+  },
+  {
+    "speaker": "Flush",
+    "text": "Estás en un mundo creado por el Joker, este sitio tiene poco que ver del que vienes y es peligroso especialmente para gente como tú, así que anda con cuidado.",
+    "isPlayer": false
+  },
+  {
+    "speaker": "Julie",
+    "text": "Ya veo… ¿Cómo puedo volver? Siento que olvidé algo importante. ¿Mi familia? ¿Mis amigos? Me van a buscar, ¿verdad? No puedo quedarme aquí...",
+    "isPlayer": true
+  },
+  {
+    "speaker": "Flush",
+    "text": "Mmmmm, lo mejor que podrías hacer es intentar encontrar al Joker y convencerle, de una forma u otra, de que te devuelva a tu mundo. Lo encontrarás en el último piso.",
+    "isPlayer": false
+  },
+  {
+    "speaker": "Julie",
+    "text": "Muchas gracias, iré de inmediato.",
+    "isPlayer": true
+  },
+  {
+    "speaker": "Flush",
+    "text": "¡ESPERA! Los jóvenes de hoy en día vais demasiado rápido con muy poca paciencia. ¿Recuerdas lo que dije de que esto era un sitio peligroso?",
+    "isPlayer": false
+  },
+  {
+    "speaker": "Julie",
+    "text": "Si…",
+    "isPlayer": true
+  },
+  {
+    "speaker": "Flush",
+    "text": "Pues deberás saber, que el mayor de los peligros es la presencia de monstruos que te atacaran a la mínima oportunidad.",
+    "isPlayer": false
+  },
+  {
+    "speaker": "Julie",
+    "text": "!!!",
+    "isPlayer": true
+  },
+  {
+    "speaker": "Flush",
+    "text": "Por suerte, hay una forma de defenderte de ellos. En este mundo puedes lanzar proyectiles que te ayudarán a defenderte. Simplemente, concéntrate en el objetivo (apunta con el cursor del ratón) y libera tu energía en su dirección (pulsa el botón izquierdo del ratón). ¿Lo entendiste?",
+    "isPlayer": false
+  },
+  {
+    "speaker": "Julie",
+    "text": "Creo que sí…",
+    "isPlayer": true
+  },
+  {
+    "speaker": "Flush",
+    "text": "¡Bien! Sé que suena complicado, pero le pillarás el truco rápido y serás una profesional en menos que canta un gallo. Suerte y ten mucho cuidado.",
+    "isPlayer": false
+  },
+  {
+    "speaker": "Julie",
+    "text": "¡Muchas gracias!",
+    "isPlayer": true
+  }
+]
