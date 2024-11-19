@@ -40,10 +40,6 @@ export default class Enemy extends Character {
         this.damage = damage;
         this.prob = prob;
     }
-    
-    getDamage() {
-        return this.damage;
-    }
 
     onEnemyGotHit(damage, pool) {
         this.onGotHit(damage, this.exp, pool); // Aplica daño al jugador
@@ -62,18 +58,18 @@ export default class Enemy extends Character {
         //if (distanceToTarget < 4) {  // Precisión al llegar al punto
         //    this.moveToNextPoint();  // Mover al siguiente punto
         //}
-        let directionX = this.player.x - this.x;
-        let directionY = this.player.y - this.y;
+        this.speed.x = this.player.x - this.x;
+        this.speed.y = this.player.y - this.y;
 
         // Calcular la longitud del vector para normalizarlo
-        let distance = Math.sqrt(directionX * directionX + directionY * directionY);
+        let distance = Math.sqrt(this.speed.x * this.speed.x + this.speed.y * this.speed.y);
         if (distance > 0) { // Evitar dividir por 0
             // Normalizar el vector de dirección
-            directionX /= distance;
-            directionY /= distance;
+            this.speed.x /= distance;
+            this.speed.y /= distance;
 
             // Aplicar la velocidad al enemigo en la dirección del jugador
-            this.body.setVelocity(directionX * this.speedFactor, directionY * this.speedFactor);
+            this.body.setVelocity(this.speed.x * this.speedFactor, this.speed.y * this.speedFactor);
         }
     }
     setPath(path) {

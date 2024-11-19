@@ -209,7 +209,8 @@ export default class Animation extends Phaser.Scene {
 
 		//colision player-enemigos
 		this.physics.add.collider(this.player, this.enemies, (player, enemy) => {
-			player.onPlayerGotHit(enemy.getDamage(),enemy);
+			player.knockback(500, enemy);
+			player.onPlayerGotHit(enemy.getDamage());
 			this.healthBar.updateHealth(this.player.life, this.player.maxLife);
 
 		});
@@ -221,6 +222,7 @@ export default class Animation extends Phaser.Scene {
 		});
 		//colision bala enemigos-player
 		this.physics.add.collider(this.enemyBullets.getPhaserGroup(), this.player, (enemyBullet, player) => {
+			player.knockback(200, enemyBullet);
 			player.onPlayerGotHit(enemyBullet.getDamage());
 			this.healthBar.updateHealth(this.player.life, this.player.maxLife);
 			// mandaria a la pool de las balas de los enemigos otra vez

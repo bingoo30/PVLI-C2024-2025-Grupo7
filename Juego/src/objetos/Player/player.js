@@ -26,6 +26,8 @@ export default class Player extends Character {
         scene.physics.add.existing(this);
         this.body.setSize(16,8);
         this.body.setOffset(8, 24);
+        // Establecer el estado de knockback
+        this.isKnockedBack = false;
 
         // #region Sistema de experiencia
         this.level = 1; 
@@ -62,28 +64,34 @@ export default class Player extends Character {
     getXpToLevelUp() {
         return this.xpToLevelUp;
     }
-    onPlayerGotHit(damage, isEnemy) {
+    onPlayerGotHit(damage) {
         this.onGotHit(damage); // Aplica daño al jugador
         // solo hago el knockback cuando me choco con un enemigo (o no)
-        if (isEnemy &&this.active) this.knockback(200, isEnemy);
+
     }
     onPlayerCollectedXP(value) {
         this.xpAcumulator += value; 
         //console.log(this.xpAcumulator);
         //console.log(this.xpToLevelUp);
     }
+
     knockback(strength, attacker) {
-        // Asegúrate de tener las coordenadas del atacante (puede ser un enemigo o un evento)
-        const directionX = this.x - attacker.x; // Diferencia en X
-        const directionY = this.y - attacker.y; // Diferencia en Y
+        this.isKnockedBack = true;
+        // Calcula el vector de dirección
+        const directionX = this.x - attacker.x;
+        const directionY = this.y - attacker.y;
 
-        // Normalizamos la dirección para obtener una dirección proporcional
-        let normalized = new Phaser.Math.Vector2(directionX, directionY);
-        normalized.normalize();
+        // Normaliza la dirección
+        let normalized = new Phaser.Math.Vector2(directionX, directionY).normalize();
+        console.log("Knockback speed: " + normalized.x + ", " + normalized.y);
+        // Aplica velocidad inicial al cuerpo
+        this.body.setVelocity(normalized.x * strength, normalized.y * strength);
 
-        // Aplicamos el knockback multiplicado por la fuerza
-        this.x += normalized.x * strength;
-        this.y += normalized.y * strength;
+        // Detén el movimiento después de un corto tiempo
+        this.scene.time.delayedCall(300, () => {
+            this.body.setVelocity(0, 0); // Detener después del knockback
+            this.isKnockedBack = false;
+        });
     }
     levelUp() {
         this.level++;
@@ -100,6 +108,9 @@ export default class Player extends Character {
      * @param {number} dt - Tiempo entre frames
      */
     preUpdate(t, dt) {
+        if (this.isKnockedBack) {
+            return;
+        }
         // Input de teclas
         super.preUpdate(t, dt);
         if (this.aKey.isDown) {
