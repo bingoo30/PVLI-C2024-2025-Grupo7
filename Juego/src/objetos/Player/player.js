@@ -64,21 +64,26 @@ export default class Player extends Character {
     }
     onPlayerGotHit(damage, isEnemy) {
         this.onGotHit(damage); // Aplica daño al jugador
-        //solo hago el knockback cuando me choco con un enemigo (o no)
-        //if (isEnemy && !this) this.knockback(isEnemy, 200);
+        // solo hago el knockback cuando me choco con un enemigo (o no)
+        if (isEnemy &&this.active) this.knockback(200, isEnemy);
     }
     onPlayerCollectedXP(value) {
         this.xpAcumulator += value; 
         //console.log(this.xpAcumulator);
         //console.log(this.xpToLevelUp);
     }
-    knockback(enemy,value) {
-        //Detener el movimiento después de un corto periodo para que el knockback no sea indefinido
-        this.scene.time.delayedCall(500, () => {
-            this.body.setVelocity(0); // Detener al jugador después del knockback
-        });
+    knockback(strength, attacker) {
+        // Asegúrate de tener las coordenadas del atacante (puede ser un enemigo o un evento)
+        const directionX = this.x - attacker.x; // Diferencia en X
+        const directionY = this.y - attacker.y; // Diferencia en Y
 
-        this.body.setBounce(value);
+        // Normalizamos la dirección para obtener una dirección proporcional
+        let normalized = new Phaser.Math.Vector2(directionX, directionY);
+        normalized.normalize();
+
+        // Aplicamos el knockback multiplicado por la fuerza
+        this.x += normalized.x * strength;
+        this.y += normalized.y * strength;
     }
     levelUp() {
         this.level++;
