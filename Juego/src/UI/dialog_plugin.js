@@ -192,7 +192,7 @@ export default class DialogText{
 			style: {
 				font: 'bold 18px TimesNewRoman',
 				fill: this.closeBtnColor,
-				 align: 'center'
+				align: 'center'
 			}
 		});
 		

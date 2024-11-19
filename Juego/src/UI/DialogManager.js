@@ -1,3 +1,8 @@
+/**
+ * Clase para manejar el dialog_plugin cuando hay varios dialogos
+ * 
+ */
+
 export default class DialogueManager {
     constructor(scene, dialogues) {
         this.scene = scene; 

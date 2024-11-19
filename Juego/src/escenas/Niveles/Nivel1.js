@@ -189,10 +189,9 @@ export default class Animation extends Phaser.Scene {
 			windowColor: 0xff6961,
 			windowHeight: 150,
 			padding: 32,
-			closeBtnColor: 'darkgoldenrod',
 			dialogSpeed: 3,
 			fontSize: 24,
-			fontFamily: "Arial"
+			fontFamily: "TimesNewRoman"
 		});
 
 		this.dialogManager = new DialogueManager(this, dialogos);
