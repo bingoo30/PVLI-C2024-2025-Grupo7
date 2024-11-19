@@ -198,14 +198,6 @@ export default class Animation extends Phaser.Scene {
 		this.dialogManager = new DialogueManager(this, dialogos);
 		this.dialogManager.initialize(this.dialog);
 		this.dialogManager.showDialogue();
-
-		this.input.on('pointerdown', () => {
-			if(this.dialog.visible)this.dialogManager.advanceDialogue(); // Avanza al siguiente diálogo
-		});
-		this.dialog.closeBtn.on('pointerdown', () => {
-			this.dialogManager.skipDialogue();
-		});
-		
 		//#endregion
 
 		// #region Collision

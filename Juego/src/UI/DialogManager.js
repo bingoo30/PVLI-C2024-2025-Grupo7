@@ -8,6 +8,16 @@ export default class DialogueManager {
 
     initialize(dialogPlugin) {
         this.dialogPlugin = dialogPlugin;
+
+        this.scene.input.on('pointerdown', () => {
+            if (this.dialogPlugin.visible) {
+                this.advanceDialogue();
+            }
+        });
+
+        this.dialogPlugin.closeBtn.on('pointerdown', () => {
+            this.skipDialogue();
+        });
     }
 
     showDialogue() {
