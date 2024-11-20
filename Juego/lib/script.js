@@ -17,3 +17,4 @@ function escondeClase(ID) {
 function escondeID(ID) {
     document.getElementById(ID).style.display = 'none';
 }
+

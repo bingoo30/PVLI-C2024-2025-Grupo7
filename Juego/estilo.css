@@ -1,55 +1,72 @@
-/*.body {
-    background-color: lightblue;
-}*/
 
-.titulo {
-    font-size: 60px;
-    color: cornflowerblue;
-    font-family: Lobster;
-    text-align: center;
-    background-color: azure;
+@font-face {
+    font-family: 'Fuente1';
+    src: url('assets/font/Inspiration-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
 }
-
+@font-face {
+    font-family: 'Fuente2';
+    src: url('assets/font/LoveYaLikeASister-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Fuente3';
+    src: url('assets/font/Molle-Italic.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Fuente4';
+    src: url('assets/font/Cookie-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
 .texto {
+    background-color: #212121;
     color: white;
     text-align: center;
-    font-size: 22px;
-    font-family: Lobster;
+    font-size: 30px;
+    font-family: Fuente2,sans-serif;
 }
 
 body {
     margin: 0;
     padding: 0;
-    font-family: Lobster;
-    background-color: #0A0A0A;
+    background-color: #212121;
     color: #f00;
 }
 
 header {
-    background-image: url('https://preview.redd.it/1920x1080-topography-wallpapers-made-by-me-request-for-v0-j8m6ykh6ar1a1.jpg?width=640&crop=smart&auto=webp&s=c3e4e9e6a60581cf1399fc84e2f56702972c8868'); /* Placeholder image URL */
+    display: flex; 
+    align-items: center; 
     background-size: cover;
     background-position: center;
     text-align: center;
     background-color: #111;
-    font-family: Lobster;
+    font-family: Fuente1,sans-serif;
     padding: 5px;
     color: #f00;
     border-bottom: 2px solid #f00;
 }
     header .title {
         font-size: 4em;
-        margin: 0;
+        margin: 0px;
     }
 
     /* Estilo para el banner */
     header .banner {
         font-size: 1.2em;
-        margin-top: 2px;
-        opacity: 0.7;
+        font-family: Fuente4,sans-serif;
+        margin-top: 3px;
+        margin-left: 10px;
+        opacity: 0.9;
     }
 
 
 nav {
+    font-family: Fuente3,sans-serif;
     text-align: center;
     margin: 15px 0;
 }
@@ -103,17 +120,11 @@ nav {
 
 .content {
     flex: 1;
-    padding: 100px;
-    background-color: #0A0A0A;
+    padding: 10px;
+    background-color: #212121;
 }
 
 
-
-.cards {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-}
 
 footer {
     background-color: #111;
@@ -128,13 +139,12 @@ footer {
 .wrapper {
     display: flex;
     flex-direction: column;
-    min-height: 100vh; /* 100% de la altura de la ventana */
+    min-height: 100vh;
 }
 
 .footer-icons {
     margin-top: 10px;
 }
-
     .footer-icons img {
         width: 30px;
         height: auto;

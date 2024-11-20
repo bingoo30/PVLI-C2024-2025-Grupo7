@@ -31,7 +31,6 @@ export default class EnemyShooter extends Enemy
         //atributos del shooter
         this.shootSpeed = 1250;
         this.cooldownCont = 0;
-        this.canShoot = true;
 
         this.tileSize = TILE_SIZE * this.scene.scale;
 
@@ -47,12 +46,11 @@ export default class EnemyShooter extends Enemy
     }
 
     preUpdate(t, dt){
-
+        if (this.scene.isGamePaused) { return; }
         if(this.cooldownCont < 0){
-//            new Bullet(this.scene, this.damage, this.shootSpeed, 20, this.x, this.y, this.player.x, this.player.y);  
             this.cooldownCont = this.shootSpeed;
             fire(this, this.player, this.scene, this.damage, this.shootSpeed);
         }
         this.cooldownCont = this.cooldownCont - dt;
     }
-}    
+}   

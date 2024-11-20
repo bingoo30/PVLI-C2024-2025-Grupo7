@@ -1,5 +1,4 @@
 import Character from "./character.js";
-import Bullet from "../Shooting/bullet.js";
 import { fire } from "../Shooting/shooter.js";
 
 /**
@@ -21,17 +20,19 @@ export default class Player extends Character {
         //lo a�ado a la escena
         this.scene.add.existing(this);
         //configurar los atributos correspondientes despues de llamar al constructor del character
-        this.init(400, 200, 5, 1, 0);
+        this.init(400, 1250, 25, 2, 0);
 
         // Agregamos fisicas
         scene.physics.add.existing(this);
         this.body.setSize(16,8);
-        this.body.setOffset(8,24);
+        this.body.setOffset(8, 24);
+        // Establecer el estado de knockback
+        this.isKnockedBack = false;
 
         // #region Sistema de experiencia
         this.level = 1; 
         this.xpAcumulator = 0;
-        this.xpToLevelUp = 20;
+        this.xpToLevelUp = 2;
         // #endregion
 
         //input
@@ -52,20 +53,54 @@ export default class Player extends Character {
         this.life = life;
         this.damage = damage;
         this.prob = prob;
+        this.maxLife = life;
+    }
+    getDamage() {
+        return this.damage;
+    }
+    getXpAcu() {
+        return this.xpAcumulator;
+    }
+    getXpToLevelUp() {
+        return this.xpToLevelUp;
     }
     onPlayerGotHit(damage) {
         this.onGotHit(damage); // Aplica daño al jugador
+        // solo hago el knockback cuando me choco con un enemigo (o no)
+
     }
     onPlayerCollectedXP(value) {
-        this.xpAcumulator += value;
-        if (this.xpAcumulator >= this.xpToLevelUp) {
-            this.LevelUp();
-        }
+        this.xpAcumulator += value; 
+        //console.log(this.xpAcumulator);
+        //console.log(this.xpToLevelUp);
     }
-    LevelUp() {
+
+    knockback(strength, attacker) {
+        this.isKnockedBack = true;
+        // Calcula el vector de dirección
+        const directionX = this.x - attacker.x;
+        const directionY = this.y - attacker.y;
+
+        // Normaliza la dirección
+        let normalized = new Phaser.Math.Vector2(directionX, directionY).normalize();
+        //console.log("Knockback speed: " + normalized.x + ", " + normalized.y);
+        // Aplica velocidad inicial al cuerpo
+        this.body.setVelocity(normalized.x * strength, normalized.y * strength);
+
+        // Detén el movimiento después de un corto tiempo
+        this.scene.time.delayedCall(300, () => {
+            this.body.setVelocity(0, 0); // Detener después del knockback
+            this.isKnockedBack = false;
+        });
+    }
+    levelUp() {
         this.level++;
-        this.xpAcumulator = 0;
+        this.xpAcumulator = this.xpAcumulator-this.xpToLevelUp;
         this.xpToLevelUp += 1;
+        this.maxLife++;
+        //console.log(this.xpAcumulator);
+        //console.log(this.xpToLevelUp);
+        //console.log("me he subido de nivel");
     }
     /**
      * Bucle principal del personaje, actualizamos su posici�n y ejecutamos acciones seg�n el Input
@@ -73,6 +108,10 @@ export default class Player extends Character {
      * @param {number} dt - Tiempo entre frames
      */
     preUpdate(t, dt) {
+        if (this.scene.isGamePaused) { return; }
+        if (this.isKnockedBack) {
+            return;
+        }
         // Input de teclas
         super.preUpdate(t, dt);
         if (this.aKey.isDown) {
@@ -94,10 +133,13 @@ export default class Player extends Character {
        //Input de mouse
        if(this.mouse.leftButtonDown()){
             // Todo esto se debería mover al Shooter
-            if(this.cooldownCont < 0){
-                    new Bullet(this.scene, this.damage, this.shootSpeed, 20, this.x, this.y, this.mouse.worldX, this.mouse.worldY);  
-                    this.cooldownCont = this.shootSpeed;
-                }
+           if (this.cooldownCont < 0) {
+               let target = new Phaser.Math.Vector2(this.mouse.x + this.scene.cameras.main.scrollX, this.mouse.y + this.scene.cameras.main.scrollY);
+               // Calcula la dirección desde el personaje hacia el cursor
+               //let direction = new Phaser.Math.Vector2(target.x - this.x, target.y - this.y).normalize();
+               fire(this, target, this.damage, this.shootSpeed, 'Bala2', 4, this.pool);
+               this.cooldownCont = this.shootSpeed;
+            }
        }
 
        this.cooldownCont = this.cooldownCont - dt;
