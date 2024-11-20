@@ -140,69 +140,149 @@ export default class Animation extends Phaser.Scene {
 
 		// #endregion
 		
+		this.enemy = this.add.group();
+		this.enemy.add(this.Crac);
+
+
+
+
+		// Crear grupos para cada tipo de enemigo
+
+		let crac = this.map.createFromObjects('position', { name : 'Crac', key: 'Crac' });
+
+
+		// Iterar sobre los objetos de la capa de Tiled y crear enemigos
+		for (const objeto of objectLayer.objects) {
+			const posX = objeto.x * SCALE; // Asegurarse de que las posiciones sean escaladas
+			const posY = objeto.y * SCALE;
+			let ene;
+
+			if (objeto.name == "Bob") {
+				ene = new new Bob(this, posX, posY, this.player, 1);
+			} else if (objeto.name == "Crac") {
+				ene = new new Bob(this, posX, posY, this.player, 1);
+			}
+
+			this.enemies.add(ene);
+
+			// Verificar que 'name' esté definido y que el nombre esté en nuestro mapeo de enemigos
+			//if (objeto.name && enemyClasses[objeto.name]) {
+			//	// Obtener la clase del enemigo desde el mapeo utilizando el nombre
+			//	const EnemyClass = enemyClasses[objeto.name];
+
+			//	// Instanciar el enemigo utilizando la clase correspondiente
+			//	const enemy = new EnemyClass(this, posX, posY, this.player, 1);
+			//	enemy.setScale(SCALE); // Establecer escala del enemigo
+
+			//	// Agregar al grupo específico de tipo de enemigo y al grupo general
+			//	this.enemyGroups[objeto.name].add(enemy);
+			//	this.enemies.add(enemy);
+			//} else {
+			//	console.warn(`Enemigo desconocido o sin nombre: ${JSON.stringify(objeto)}`);
+			//}
+		}
+
+
+
+		//this.Crac = new Crac(this, playerX + 1500, playerY + 100, this.player, 1);
+		//this.Crac.setScale(SCALE);
+
+		//this.Bob = new Bob(this, playerX + 1200, playerY + 200, this.player, 1);
+		//this.Bob.setScale(SCALE);
+
+		//this.enemies = this.add.group();
+		//this.enemies.add(this.Crac);
+		//this.enemies.add(this.Bob);
+
+
+
+		// #endregion
+
+
+		//coins
+
+		const MAX = 300;
+
+		let toAdds = [];
+
+
+		//this.pools = {
+		//	coins: new Pool(this, MAX, 'Coin'),
+		//	playerBullets: new Pool(this, MAX, 'Bullet'),
+		//	enemyBullets: new Pool(this, MAX, 'Bullet'),
+		//};
+
+
+		//['coins', 'playerBullets', 'enemyBullets'].forEach(poolName => {
+		//	const entities = [];
+		//	for (let i = 0; i < MAX; i++) {
+		//		const entityType = poolName === 'coins' ? Coin : Bullet;
+		//		const entity = new entityType(this, 0, 0, poolName === 'coins' ? 1 : poolName === 'playerBullets' ? 'Bala2' : 'Bala');
+		//		entities.push(entity);
+		//	}
+		//	this.pools[poolName].addMultipleEntity(entities);
+		//});
+
+		this.coins = new Pool(this, MAX, 'Coin');
+		for (let i = 0; i < MAX; i++) {
+			let toAdd = new Coin(this, 0, 0, 1);
+			toAdds.push(toAdd);
+		}
+		this.coins.addMultipleEntity(toAdds);
+
+		//bullets
+		toAdds = [];
+		this.playerBullets = new Pool(this, MAX, 'Bullet');
+		for (let i = 0; i < MAX; i++) {
+			let toAdd = new Bullet(this, 0, 0, 'Bala2');
+			toAdds.push(toAdd);
+		}
+		this.playerBullets.addMultipleEntity(toAdds);
+
+
+		// Asignar el pool de balas al jugador
+		this.player.setPool(this.playerBullets);
+
+
+		toAdds = [];
+		this.enemyBullets = new Pool(this, MAX, 'Bullet');
+		for (let i = 0; i < MAX; i++) {
+			let toAdd = new Bullet(this, 0, 0, 'Bala');
+			toAdds.push(toAdd);
+		}
+		this.enemyBullets.addMultipleEntity(toAdds);
+
+
+		// Asignar el pool de balas a todos los enemigos en el grupo general
+		this.enemies.children.each(enemy => {
+			if (enemy.setPool) {
+				enemy.setPool(this.enemyBullets); // Asignar el pool solo si el enemigo tiene el método setPool
+			}
+		});
+
+
+		// #endregion
+		
+
 		// #region Debug
+
+
 		const debugGraphics = this.add.graphics();
 		this.paredLayer.renderDebug(debugGraphics, {
 			tileColor: null, // No colorear los tiles
 			collidingTileColor: new Phaser.Display.Color(243, 134, 48, 200), // Color para los tiles colisionables
 			faceColor: new Phaser.Display.Color(40, 39, 37, 255) // Color para los bordes de colisión
+
+
 		});
 		// #endregion
+
 
 		// #region Navmesh
 
 		this.marker = this.add.graphics();
 		this.marker.lineStyle(3, 0xffffff, 1);
 		this.marker.strokeRect(0, 0, this.map.tileWidth*SCALE, this.map.tileHeight*SCALE);
-
-		//console.log(this.map.tileWidth)
-		//console.log(this.map.tileWidth)
-		//console.log(this.map.height)
-		this.finder = new EasyStar.js();
-		//console.log("suelo",this.sueloLayer)
-
-		if (this.map) {
-			var grid = [];
-			for (var y = 0; y < this.sueloLayer.height; y++) {
-				var col = [];
-				for (var x = 0; x < this.sueloLayer.width; x++) {
-					const tile = this.sueloLayer.getTileAt(x, y);
-
-					if (tile) {
-						col.push(tile.index);  // Usa tile.index para obtener el índice del tile
-					} else {
-						col.push(-1);  // Usa un valor predeterminado para los tiles no encontrados
-					}
-				}
-				grid.push(col);
-			}
-		} else {
-			console.error("El mapa no está definido.");
-		}
-
-		//console.log(grid);
-		//console.log(this.map)
-		this.finder.setGrid(grid);
-		var tiles = this.map.tilesets[0];
-		//console.log(tiles)
-		var properties = tiles.tileProperties;
-		var acceptableTiles = [];
-
-
-		for (var i = tiles.firstgid - 1; i < this.tileset.total; i++) { // firstgid and total are fields from Tiled that indicate the range of IDs that the tiles can take in that tileset
-			if (!properties.hasOwnProperty(i)) {
-				// If there is no property indicated at all, it means it's a walkable tile
-				acceptableTiles.push(i + 1);
-				continue;
-			}
-			if (!properties[i].collides) acceptableTiles.push(i + 1);
-			if (properties[i].cost) {
-				this.finder.setTileCost(i + 1, properties[i].cost); // If there is a cost attached to the tile, let's register it
-				//console.log("con coste")
-			}
-		}
-		this.finder.setAcceptableTiles(acceptableTiles);
-		//console.log(acceptableTiles);
 
 
 		// #endregion
@@ -249,12 +329,17 @@ export default class Animation extends Phaser.Scene {
 
 		// #region Collision
 
+		console.log(this.pools); // Verifica que 'this.pools' tenga las claves 'playerBullets', 'enemyBullets', etc.
+		console.log(this.playerBullets); // Verifica que 'playerBullets' no sea undefined
+		console.log(this.playerBullets.getPhaserGroup()); // Verifica que 'getPhaserGroup()' devuelva un grupo válido
+
+
 		this.paredLayer.setCollisionByProperty({ collides: true });
 
 		this.physics.add.collider(this.enemies, this.paredLayer);
 
 		this.physics.add.collider(this.player, this.paredLayer);
-
+		
 		this.physics.add.collider(this.player, this.Flush);
 
 		//colision player-enemigos
@@ -296,6 +381,51 @@ export default class Animation extends Phaser.Scene {
 			bullet.destroyBullet(this.enemyBullets);
 		});
 
+	
+		this.physics.add.collider(this.player, this.enemy, (player, enemy) => {
+			player.onPlayerGotHit(enemy.getDamage());
+			enemy.onEnemyDeath();
+		})
+		
+
+		//colision bala player-enemigos
+		this.physics.add.collider(this.playerBullets.getPhaserGroup(), this.enemies, (playerBullet, enemy) => {
+			if (this.pools.playerBullets && typeof this.pools.playerBullets.getPhaserGroup === 'function') {
+				console.log("playerBullets group:", this.pools.playerBullets.getPhaserGroup()); // Verificar el grupo de balas
+			} else {
+				console.error('Error: playerBullets pool is not correctly initialized or getPhaserGroup is not a function');
+			}
+			enemy.onEnemyGotHit(this.player.getDamage(), this.coins);
+			// mandaria a la pool de las balas de player otra vez
+			playerBullet.destroyBullet(this.playerBullets);
+		});
+
+		//colision bala enemigos-player
+		this.physics.add.collider(this.enemyBullets.getPhaserGroup(), this.player, (enemyBullet, player) => {
+			console.log("enemyBullets group:", this.pools.enemyBullets.getPhaserGroup()); // Verificar el grupo de balas
+			player.knockback(200, enemyBullet);
+			player.onPlayerGotHit(enemyBullet.getDamage());
+			this.healthBar.updateHealth(this.player.life, this.player.maxLife);
+			// mandaria a la pool de las balas de los enemigos otra vez
+			enemyBullet.destroyBullet(this.enemyBullets);
+		});
+		//colision fichas-player
+		this.physics.add.collider(this.player, this.coins.getPhaserGroup(), (player, coin) => {
+			player.onPlayerCollectedXP(coin.getExp());
+			if (player.getXpAcu() >= player.getXpToLevelUp()) {
+				player.levelUp();
+			}
+			this.expBar.updateExp(player.getXpAcu(), player.getXpToLevelUp());
+			coin.destroyCoin(this.coins);
+			//console.log(this.expBar);
+		});
+		//colision balas-paredes
+		this.physics.add.collider(this.playerBullets.getPhaserGroup(), this.paredLayer, (bullet, wall) => {
+			bullet.destroyBullet(this.playerBullets);
+		});
+		this.physics.add.collider(this.enemyBullets.getPhaserGroup(), this.paredLayer, (bullet, wall) => {
+			bullet.destroyBullet(this.enemyBullets);
+		});
 		// #endregion
 
 		this.cameras.main.startFollow(this.player);
@@ -306,9 +436,6 @@ export default class Animation extends Phaser.Scene {
 		this.MainSample.setLoop(true);
 		// #endregion
 
-		const startTile = this.map.worldToTileXY(this.Crac.x, this.Crac.y);
-		const endTile = this.map.worldToTileXY(400, 400);  // Destino deseado
-		this.findPath(startTile, endTile);
 
 	}
 
@@ -354,6 +481,7 @@ export default class Animation extends Phaser.Scene {
 		}
 
 		this.Crac.update();
+
 	}
 	moveAlongPath() {
 		if (!this.currentPath || this.currentPath.length === 0) return;
