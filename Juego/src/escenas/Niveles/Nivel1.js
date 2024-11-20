@@ -221,6 +221,8 @@ export default class Animation extends Phaser.Scene {
 
 		this.physics.add.collider(this.player, this.paredLayer);
 
+		this.physics.add.collider(this.player, this.Flush);
+
 		//colision player-enemigos
 		this.physics.add.collider(this.player, this.enemies, (player, enemy) => {
 			player.knockback(500, enemy);
@@ -259,6 +261,7 @@ export default class Animation extends Phaser.Scene {
 		this.physics.add.collider(this.enemyBullets.getPhaserGroup(), this.paredLayer, (bullet, wall) => {
 			bullet.destroyBullet(this.enemyBullets);
 		});
+
 		// #endregion
 
 		this.cameras.main.startFollow(this.player);

@@ -27,8 +27,8 @@ export default class NPC extends Phaser.GameObjects.Sprite {
         this.scene.add.existing(this);
 
         // Texto de interacci¨®n inicialmente invisible
-        this.text = this.scene.add.text(this.x - 10, this.y - 70, 'Presiona E para interactuar', {
-            font: '16px Arial',
+        this.text = this.scene.add.text(this.x - 10, this.y - 100, 'Presiona E para interactuar', {
+            font: '14px Arial',
             fill: '#ffffff',
             backgroundColor: '#000000',
             padding: 4,
@@ -36,8 +36,9 @@ export default class NPC extends Phaser.GameObjects.Sprite {
         this.text.setVisible(false);
 
         scene.physics.add.existing(this);
-        this.body.setSize(16, 8);
-        this.body.setOffset(8, 24);
+        this.body.setSize(16, 10);
+        this.body.setOffset(10, 24);
+        this.body.setImmovable(true);
 
         this.interactionArea = new Phaser.Geom.Circle(this.x, this.y, 100);
 
