@@ -57,15 +57,29 @@ export default class Animation extends Phaser.Scene {
 		// #endregion
 
 		// #region Player
+		// #region Player Position
 
 		const objectLayer = this.map.getObjectLayer('position');
+
 		const playerPos = objectLayer.objects.find(obj => obj.name == 'playerPosition');
+
 		// Verificar si el objeto fue encontrado
 		if (!playerPos) console.log('Position player no encontrado.');
+
 		const playerX = playerPos.x * SCALE;
 		const playerY = playerPos.y * SCALE;
+
+		// #endregion
+
+		
 		this.player = new Player(this, playerX, playerY);
+		// #region Player Scale
+
 		this.player.setScale(SCALE);
+
+		// #endregion
+
+
 		// #endregion
 
 
