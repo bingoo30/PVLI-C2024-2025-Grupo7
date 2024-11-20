@@ -10,6 +10,7 @@ import Bullet from '../../objetos/Shooting/bullet.js';
 
 import DialogueManager from '../../UI/DialogManager.js';
 import DialogText from '../../UI/dialog_plugin.js';
+import NPC from '../../objetos/NPC/NPC.js'
 
 //import Coin from '../../objetos/Enemies/coin.js'
 //constante
@@ -25,6 +26,8 @@ export default class Animation extends Phaser.Scene {
 	}
 	preload() {
 		this.load.json('dialogues', 'assets/Dialogues/dialogues_intro.json');
+		this.load.json('dialogues_Flush', 'assets/Dialogues/dialogues_Flush.json');
+		this.load.image('Flush', 'assets/Character/Flush.png');
 	}
 	
 	/**  
@@ -63,6 +66,7 @@ export default class Animation extends Phaser.Scene {
 		this.player = new Player(this, playerX, playerY);
 		this.player.setScale(SCALE);
 		// #endregion
+
 
 		// #region Enemy
 		
@@ -186,18 +190,28 @@ export default class Animation extends Phaser.Scene {
 			borderColor: 0xcb3234,
 			borderAlpha: 1,
 			windowAlpha: 0.6,
-			windowColor: 0xff6961,
+			windowColor: 0x000000,
 			windowHeight: 150,
 			padding: 32,
-			dialogSpeed: 3,
+			closeBtnColor: 'white',
+			dialogSpeed: 4,
 			fontSize: 24,
 			fontFamily: "TimesNewRoman"
 		});
 
-		this.dialogManager = new DialogueManager(this, dialogos);
-		this.dialogManager.initialize(this.dialog);
+		this.dialogManager = new DialogueManager(this);
+		this.dialogManager.initialize(this.dialog, dialogos);
 		this.dialogManager.showDialogue();
 		//#endregion
+
+		// #region NPC
+		const NPCX = (playerPos.x + 200) * SCALE;
+		const NPCY = (playerPos.y + 10) * SCALE;
+		
+		this.Flush = new NPC(this, NPCX, NPCY, 'Flush', 'dialogues_Flush');
+		this.Flush.setScale(SCALE);
+
+		// #endregion
 
 		// #region Collision
 
@@ -269,7 +283,11 @@ export default class Animation extends Phaser.Scene {
 	
 	update(t, dt) {
 
-
+		if (this.dialogManager.isDialogueActive) {
+			this.physics.world.pause();
+		} else {
+			this.physics.world.resume();
+		}
 		/*
 		const playerTileX = this.map.worldToTileX(this.player.x);
 		const playerTileY = this.map.worldToTileY(this.player.y);

@@ -254,8 +254,8 @@ export default class DialogText{
 
 		if (speaker != " ") {
 			//posicion donde se va situar el nombre de quien esta hablando
-			var speakerX = isPlayer ? this.padding + 10 : this._getGameWidth() - this.padding - 200;
-			var speakerY = this._getGameHeight() - this.windowHeight - this.padding - 20;
+			var speakerX = isPlayer ? this.padding + 10 : this._getGameWidth() - this.padding - 50;
+			var speakerY = this._getGameHeight() - this.windowHeight - this.padding - 25;
 
 			this.speakerText = this.scene.make.text({
 				x: speakerX,
@@ -297,7 +297,7 @@ export default class DialogText{
 
 		this.speakerBorder= this.speakerBorderGraphics.strokeRect(x - borderPadding, y - borderPadding,
 			this.speakerText.width + (borderPadding * 2),
-			this.speakerText.height + (borderPadding * 2));
+			this.speakerText.height + (borderPadding));
 
 		this.speakerBorderGraphics.setScrollFactor(0);
 	}

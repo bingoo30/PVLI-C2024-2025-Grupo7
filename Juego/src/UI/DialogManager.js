@@ -4,18 +4,22 @@
  */
 
 export default class DialogueManager {
-    constructor(scene, dialogues) {
-        this.scene = scene; 
-        this.dialogues = dialogues; //dialogos
-        this.currentDialogueIndex = 0; //dialogo actual
+    constructor(scene) {
+        this.scene = scene;
         this.dialogPlugin = null;
+        this.isDialogueActive = true;
+        this.isWaitingForInput = false; 
     }
+    initialize(dialogPlugin, dialogues) {
 
-    initialize(dialogPlugin) {
+        this.currentDialogueIndex = 0;
         this.dialogPlugin = dialogPlugin;
+        this.dialogues = dialogues;
+
+        if (!this.dialogPlugin.visible) this.dialogPlugin.toggleWindow();
 
         this.scene.input.on('pointerdown', () => {
-            if (this.dialogPlugin.visible) {
+            if (this.dialogPlugin.visible && this.isWaitingForInput) {
                 this.advanceDialogue();
             }
         });
@@ -30,6 +34,9 @@ export default class DialogueManager {
             console.error("DialogueManager: dialogPlugin no inicializado.");
             return;
         }
+        this.isDialogueActive = true;
+        this.isWaitingForInput = false;
+
         const currentDialogue = this.dialogues[this.currentDialogueIndex];
         if (currentDialogue) {
             this.dialogPlugin.setText(
@@ -39,6 +46,10 @@ export default class DialogueManager {
                 currentDialogue.isPlayer  // es player o no
             );
         }
+
+        this.scene.time.delayedCall(500, () => {  // Retraso para el input
+            this.isWaitingForInput = true;
+        });
     }
     
     advanceDialogue() {
@@ -46,11 +57,15 @@ export default class DialogueManager {
             this.currentDialogueIndex++;
             this.showDialogue();
         }
-        else this.dialogPlugin.toggleWindow();
+        else {
+            this.dialogPlugin.toggleWindow();
+            this.isDialogueActive = false;
+        }
 
     }
     skipDialogue() {
         this.currentDialogueIndex = this.dialogues.length; // Salta al final
         this.dialogPlugin.toggleWindow();
+        this.isDialogueActive = false;
     }
 }
