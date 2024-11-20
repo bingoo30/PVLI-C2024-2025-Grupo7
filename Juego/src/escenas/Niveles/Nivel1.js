@@ -23,6 +23,7 @@ export default class Animation extends Phaser.Scene {
 	
 	constructor() {
 		super({ key: 'nivel1' });
+		this.isGamePaused = false;
 	}
 	preload() {
 		this.load.json('dialogues', 'assets/Dialogues/dialogues_intro.json');
@@ -198,7 +199,6 @@ export default class Animation extends Phaser.Scene {
 			fontSize: 24,
 			fontFamily: "TimesNewRoman"
 		});
-
 		this.dialogManager = new DialogueManager(this);
 		this.dialogManager.initialize(this.dialog, dialogos);
 		this.dialogManager.showDialogue();
@@ -286,11 +286,6 @@ export default class Animation extends Phaser.Scene {
 	
 	update(t, dt) {
 
-		if (this.dialogManager.isDialogueActive) {
-			this.physics.world.pause();
-		} else {
-			this.physics.world.resume();
-		}
 		/*
 		const playerTileX = this.map.worldToTileX(this.player.x);
 		const playerTileY = this.map.worldToTileY(this.player.y);
@@ -317,6 +312,13 @@ export default class Animation extends Phaser.Scene {
 			});
 			this.finder.calculate();
 		}*/
+		if (this.isGamePaused) {
+			this.physics.world.pause();
+			return;
+		} else {
+			this.physics.world.resume();
+		}
+
 		this.Crac.update();
 	}
 	moveAlongPath() {

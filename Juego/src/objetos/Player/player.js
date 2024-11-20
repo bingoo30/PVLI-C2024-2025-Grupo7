@@ -83,7 +83,7 @@ export default class Player extends Character {
 
         // Normaliza la dirección
         let normalized = new Phaser.Math.Vector2(directionX, directionY).normalize();
-        console.log("Knockback speed: " + normalized.x + ", " + normalized.y);
+        //console.log("Knockback speed: " + normalized.x + ", " + normalized.y);
         // Aplica velocidad inicial al cuerpo
         this.body.setVelocity(normalized.x * strength, normalized.y * strength);
 
@@ -108,6 +108,7 @@ export default class Player extends Character {
      * @param {number} dt - Tiempo entre frames
      */
     preUpdate(t, dt) {
+        if (this.scene.isGamePaused) { return; }
         if (this.isKnockedBack) {
             return;
         }

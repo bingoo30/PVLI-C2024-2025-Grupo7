@@ -46,7 +46,7 @@ export default class EnemyShooter extends Enemy
     }
 
     preUpdate(t, dt){
-
+        if (this.scene.isGamePaused) { return; }
         if(this.cooldownCont < 0){
             this.cooldownCont = this.shootSpeed;
             fire(this, this.player, this.scene, this.damage, this.shootSpeed);

@@ -1,13 +1,14 @@
 /**
  * Clase para manejar el dialog_plugin cuando hay varios dialogos
  * 
+ * 
  */
 
 export default class DialogueManager {
     constructor(scene) {
         this.scene = scene;
         this.dialogPlugin = null;
-        this.isDialogueActive = true;
+        this.isDialogueActive = false;
         this.isWaitingForInput = false; 
     }
     initialize(dialogPlugin, dialogues) {
@@ -36,7 +37,7 @@ export default class DialogueManager {
         }
         this.isDialogueActive = true;
         this.isWaitingForInput = false;
-
+        this.scene.isGamePaused = true;
         const currentDialogue = this.dialogues[this.currentDialogueIndex];
         if (currentDialogue) {
             this.dialogPlugin.setText(
@@ -60,6 +61,7 @@ export default class DialogueManager {
         else {
             this.dialogPlugin.toggleWindow();
             this.isDialogueActive = false;
+            this.scene.isGamePaused = false;
         }
 
     }
@@ -67,5 +69,6 @@ export default class DialogueManager {
         this.currentDialogueIndex = this.dialogues.length; // Salta al final
         this.dialogPlugin.toggleWindow();
         this.isDialogueActive = false;
+        this.scene.isGamePaused = false;
     }
 }

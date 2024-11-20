@@ -51,6 +51,7 @@ export default class Enemy extends Character {
      */
     preUpdate(t, dt) {
         super.preUpdate(t, dt);
+        if (this.scene.isGamePaused) return; 
         //if (!this.targetPoint) return;
         //console.log("a");
         // Comprobar si ha alcanzado el próximo punto
