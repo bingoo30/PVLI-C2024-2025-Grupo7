@@ -70,9 +70,6 @@ export default class Animation extends Phaser.Scene {
 
 
 		// #region Enemy
-
-
-		// #region Enemy
 		
 		this.Crac = new Crac(this, playerX + 1500, playerY + 100, this.player, 1);
 		this.Crac.setScale(SCALE);
@@ -123,12 +120,11 @@ export default class Animation extends Phaser.Scene {
 
 
 
+
 		// Crear grupos para cada tipo de enemigo
-		const enemyClasses = {
-			'Bob': Bob,  // Clases directamente importadas o definidas
-			'Crac': Crac,
-			//'Letus': Letus
-		};
+
+		let crac = this.map.createFromObjects('position', { name : 'Crac', key: 'Crac' });
+
 
 		// Iterar sobre los objetos de la capa de Tiled y crear enemigos
 		for (const objeto of objectLayer.objects) {
@@ -172,6 +168,7 @@ export default class Animation extends Phaser.Scene {
 		//this.enemies = this.add.group();
 		//this.enemies.add(this.Crac);
 		//this.enemies.add(this.Bob);
+
 
 
 		// #endregion
@@ -255,22 +252,57 @@ export default class Animation extends Phaser.Scene {
 		});
 		// #endregion
 
-		// #region Navmesh
+	
+		
+		//console.log(this.map.tileWidth)
+		//console.log(this.map.tileWidth)
+		//console.log(this.map.height)
+
+		//this.finder = new EasyStar.js();
+
+		//console.log("suelo",this.sueloLayer)
+
+		//if (this.map) {
+		//	var grid = [];
+		//	for (var y = 0; y < this.sueloLayer.height; y++) {
+		//		var col = [];
+		//		for (var x = 0; x < this.sueloLayer.width; x++) {
+		//			const tile = this.sueloLayer.getTileAt(x, y);
+
+		//			if (tile) {
+		//				col.push(tile.index);  // Usa tile.index para obtener el índice del tile
+		//			} else {
+		//				col.push(-1);  // Usa un valor predeterminado para los tiles no encontrados
+		//			}
+		//		}
+		//		grid.push(col);
+		//	}
+		//} else {
+		//	console.error("El mapa no está definido.");
+		//}
+		//console.log(grid);
+		//console.log(this.map)
+		//this.finder.setGrid(grid);
+		//var tiles = this.map.tilesets[0];
+		//console.log(tiles)
+		//var properties = tiles.tileProperties;
+		//var acceptableTiles = [];
 
 
-		for (var i = tiles.firstgid - 1; i < this.tileset.total; i++) { // firstgid and total are fields from Tiled that indicate the range of IDs that the tiles can take in that tileset
-			if (!properties.hasOwnProperty(i)) {
-				// If there is no property indicated at all, it means it's a walkable tile
-				acceptableTiles.push(i + 1);
-				continue;
-			}
-			if (!properties[i].collides) acceptableTiles.push(i + 1);
-			if (properties[i].cost) {
-				this.finder.setTileCost(i + 1, properties[i].cost); // If there is a cost attached to the tile, let's register it
-				//console.log("con coste")
-			}
-		}
-		this.finder.setAcceptableTiles(acceptableTiles);
+		//for (var i = tiles.firstgid - 1; i < this.tileset.total; i++) { // firstgid and total are fields from Tiled that indicate the range of IDs that the tiles can take in that tileset
+		//	if (!properties.hasOwnProperty(i)) {
+		//		// If there is no property indicated at all, it means it's a walkable tile
+		//		acceptableTiles.push(i + 1);
+		//		continue;
+		//	}
+		//	if (!properties[i].collides) acceptableTiles.push(i + 1);
+		//	if (properties[i].cost) {
+		//		this.finder.setTileCost(i + 1, properties[i].cost); // If there is a cost attached to the tile, let's register it
+		//		//console.log("con coste")
+		//	}
+		//}
+		//this.finder.setAcceptableTiles(acceptableTiles);
+
 		//console.log(acceptableTiles);
 
 
@@ -321,7 +353,7 @@ export default class Animation extends Phaser.Scene {
 		this.physics.add.collider(this.enemies, this.paredLayer);
 
 		this.physics.add.collider(this.player, this.paredLayer);
-
+		
 		this.physics.add.collider(this.player, this.Flush);
 
 		//colision player-enemigos
@@ -363,7 +395,12 @@ export default class Animation extends Phaser.Scene {
 			bullet.destroyBullet(this.enemyBullets);
 		});
 
-		});
+	
+		this.physics.add.collider(this.player, this.enemy, (player, enemy) => {
+			player.onPlayerGotHit(enemy.getDamage());
+			enemy.onEnemyDeath();
+		})
+		
 
 		//colision bala player-enemigos
 		this.physics.add.collider(this.playerBullets.getPhaserGroup(), this.enemies, (playerBullet, enemy) => {
@@ -412,7 +449,6 @@ export default class Animation extends Phaser.Scene {
 		this.MainSample.play();
 		this.MainSample.setLoop(true);
 		// #endregion
-
 
 
 	}
