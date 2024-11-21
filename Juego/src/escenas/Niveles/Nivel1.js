@@ -96,11 +96,13 @@ export default class Animation extends Phaser.Scene {
 		this.enemies.add(this.Bob);
 
 		// #endregion
-		
+
 		// #region Pools
 
-		//coins
 		const MAX = 300;
+
+		// #region Coins
+
 		let toAdds = [];
 		this.coins = new Pool(this, MAX, 'Coin');
 		for (let i = 0; i < MAX; i++) {
@@ -109,7 +111,10 @@ export default class Animation extends Phaser.Scene {
 		}
 		this.coins.addMultipleEntity(toAdds);
 
-		//bullets
+		// #endregion
+
+		// #region Player Bullets
+
 		toAdds = [];
 		this.playerBullets = new Pool(this, MAX,'Bullet');
 		for (let i = 0; i < MAX; i++) {
@@ -119,6 +124,10 @@ export default class Animation extends Phaser.Scene {
 		this.playerBullets.addMultipleEntity(toAdds);
 		this.player.setPool(this.playerBullets);
 
+		// #endregion
+
+		// #region Enemy Bullets
+
 		toAdds = [];
 		this.enemyBullets = new Pool(this, MAX,'Bullet');
 		for (let i = 0; i < MAX; i++) {
@@ -127,6 +136,8 @@ export default class Animation extends Phaser.Scene {
 		}
 		this.enemyBullets.addMultipleEntity(toAdds);
 		this.Crac.setPool(this.enemyBullets);
+		// #endregion
+
 		// #endregion
 		
 		// #region Debug
@@ -139,6 +150,7 @@ export default class Animation extends Phaser.Scene {
 		// #endregion
 
 		// #region Navmesh
+
 		this.marker = this.add.graphics();
 		this.marker.lineStyle(3, 0xffffff, 1);
 		this.marker.strokeRect(0, 0, this.map.tileWidth*SCALE, this.map.tileHeight*SCALE);
@@ -167,6 +179,7 @@ export default class Animation extends Phaser.Scene {
 		} else {
 			console.error("El mapa no está definido.");
 		}
+
 		//console.log(grid);
 		//console.log(this.map)
 		this.finder.setGrid(grid);
@@ -195,10 +208,14 @@ export default class Animation extends Phaser.Scene {
 		// #endregion
 
 		//#region UI
+
 		this.expBar = new ExpBar(this, 20, 30);
+
 		this.healthBar = new HealthBar(this, 20, 10);
 
 		const dialogos = this.cache.json.get('dialogues');
+
+		//#region Dialog
 
 		this.dialog = new DialogText(this, {
 			borderThickness: 4,
@@ -216,10 +233,13 @@ export default class Animation extends Phaser.Scene {
 		this.dialogManager = new DialogueManager(this);
 		this.dialogManager.initialize(this.dialog, dialogos);
 		this.dialogManager.showDialogue();
+
+		// #endregion
+
 		//#endregion
 
 		// #region NPC
-		const NPCX = (playerPos.x + 200) * SCALE;
+		const NPCX = (playerPos.x + 100) * SCALE;
 		const NPCY = (playerPos.y + 10) * SCALE;
 		
 		this.Flush = new NPC(this, NPCX, NPCY, 'Flush', 'dialogues_Flush');
