@@ -13,12 +13,11 @@ export default class Enemy extends Character {
      * @param {phaser.player} player Jugador (target) a perseguir
      * 
     */
-    constructor(scene, x, y, player, typeEnemy, SCALE, exp =1) {
+    constructor(scene, x, y, player, typeEnemy, exp =1) {
         //heredo de la clase character
         super(scene, x, y, [typeEnemy]);
         this.scene = scene;
         this.player = player;
-        this.scale = SCALE;
         this.exp =exp;
         this.navMesh = scene.navMesh;
         scene.physics.add.existing(this);

@@ -8,6 +8,7 @@ import { fire } from "../Shooting/shooter.js";
 	 * @param {number} x - coordenada x
 	 * @param {number} y - coordenada y
  */
+
 export default class Player extends Character {
     constructor(scene, x, y) {
         //heredo de la clase character
@@ -33,6 +34,15 @@ export default class Player extends Character {
         this.level = 1; 
         this.xpAcumulator = 0;
         this.xpToLevelUp = 2;
+        // #endregion
+
+        // #region puntos de control status
+        this.statusPoint = 0;
+        this.speedFactorStatus = 0;
+        this.shootSpeedStatus = 0;
+        this.maxLifeStatus = 0;
+        this.probStatus = 0;
+        this.damageStatus = 0;
         // #endregion
 
         //input
@@ -101,6 +111,32 @@ export default class Player extends Character {
         //console.log(this.xpAcumulator);
         //console.log(this.xpToLevelUp);
         //console.log("me he subido de nivel");
+    }
+    //funcion para subir un status
+    upgrateStatus(status) {
+        switch(status){
+            case 'speedFactor': {
+                this.speedFactorStatus++;
+            }
+                break;
+            case 'shootSpeed': {
+                this.shootSpeedStatus++;
+            }
+                break;
+            case 'damage': {
+                this.damageStatus++;
+            }
+                break;
+            case 'maxLife': {
+                this.maxLifeStatus++;
+            }
+                break;
+            case 'prob': {
+                this.probStatus++;
+            }
+                break;
+        }
+
     }
     /**
      * Bucle principal del personaje, actualizamos su posici�n y ejecutamos acciones seg�n el Input
