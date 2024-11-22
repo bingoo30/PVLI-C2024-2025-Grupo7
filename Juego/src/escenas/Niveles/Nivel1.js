@@ -7,10 +7,12 @@ import HealthBar from '../../UI/HealthBar.js';
 import ExpBar from '../../UI/ExpBar.js';
 import Coin from '../../objetos/Enemies/coin.js';
 import Bullet from '../../objetos/Shooting/bullet.js';
+import Letus from '../../objetos/Enemies/Letus.js';
+import Zaro from '../../objetos/Enemies/Zaro.js';
 
 import DialogueManager from '../../UI/DialogManager.js';
 import DialogText from '../../UI/dialog_plugin.js';
-import NPC from '../../objetos/NPC/NPC.js'
+import NPC from '../../objetos/ObjetosInteractuables/NPC.js'
 
 //import Coin from '../../objetos/Enemies/coin.js'
 //constante
@@ -20,7 +22,7 @@ const SCALE = 4;
  * @extends Phaser.Scene
  */
 export default class Animation extends Phaser.Scene {
-	
+
 	constructor() {
 		super({ key: 'nivel1' });
 		this.isGamePaused = false;
@@ -30,7 +32,7 @@ export default class Animation extends Phaser.Scene {
 		this.load.json('dialogues_Flush', 'assets/Dialogues/dialogues_Flush.json');
 		this.load.image('Flush', 'assets/Character/Flush.png');
 	}
-	
+
 	/**  
 	* Creación de los elementos de la escena principal de juego
 	*/
@@ -71,17 +73,39 @@ export default class Animation extends Phaser.Scene {
 
 		// #endregion
 
-		
-		this.player = new Player(this, playerX, playerY);
-		// #region Player Scale
 
+		// #region Player
+		this.player = new Player(this, playerX, playerY);
 		this.player.setScale(SCALE);
 
 		// #endregion
 
-
 		// #endregion
 
+
+
+		// #region Enemy
+
+
+		let crac = this.map.createFromObjects('Crac', { name: 'crac', classType: Character, key: "Crac" });
+
+
+
+		//this.Crac = new Crac(this, playerX + 1500, playerY + 100, this.player, 1);
+		//this.Crac.setScale(SCALE);
+
+		//this.Bob = new Bob(this, playerX + 1200, playerY + 200, this.player, 1);
+		//this.Bob.setScale(SCALE);
+
+		//this.Zaro = new Zaro(this, playerX + 1800, playerY - 100, this.player, 1);
+		//this.Zaro.setScale(SCALE);
+
+		//this.enemies = this.add.group();
+		//this.enemies.add(this.Crac);
+		//this.enemies.add(this.Bob);
+		//this.enemies.add(this.Zaro);
+
+		// #endregion
 
 		// #region Pools
 
@@ -122,6 +146,9 @@ export default class Animation extends Phaser.Scene {
 		}
 		this.enemyBullets.addMultipleEntity(toAdds);
 
+
+		//this.Crac.setPool(this.enemyBullets);
+		//this.Zaro.setPool(this.enemyBullets);
 
 		// #endregion
 
@@ -166,9 +193,6 @@ export default class Animation extends Phaser.Scene {
 
 		// #region Navmesh
 
-		//this.marker = this.add.graphics();
-		//this.marker.lineStyle(3, 0xffffff, 1);
-		//this.marker.strokeRect(0, 0, this.map.tileWidth*SCALE, this.map.tileHeight*SCALE);
 
 		//console.log(this.map.tileWidth)
 		//console.log(this.map.tileWidth)
@@ -256,7 +280,7 @@ export default class Animation extends Phaser.Scene {
 		// #region NPC
 		const NPCX = (playerPos.x + 100) * SCALE;
 		const NPCY = (playerPos.y + 10) * SCALE;
-		
+
 		this.Flush = new NPC(this, NPCX, NPCY, 'Flush', 'dialogues_Flush');
 		this.Flush.setScale(SCALE);
 
@@ -275,20 +299,20 @@ export default class Animation extends Phaser.Scene {
 		//colision player-enemigos
 		this.physics.add.collider(this.player, this.enemies, (player, enemy) => {
 			player.knockback(500, enemy);
-			player.onPlayerGotHit(enemy.getDamage());
+			player.onGotHit(enemy.getDamage());
 			this.healthBar.updateHealth(this.player.life, this.player.maxLife);
 
 		});
 		//colision bala player-enemigos
 		this.physics.add.collider(this.playerBullets.getPhaserGroup(), this.enemies, (playerBullet, enemy) => {
-			enemy.onEnemyGotHit(this.player.getDamage(), this.coins);
+			enemy.onGotHit(this.player.getDamage(), this.coins);
 			// mandaria a la pool de las balas de player otra vez
 			playerBullet.destroyBullet(this.playerBullets);
 		});
 		//colision bala enemigos-player
 		this.physics.add.collider(this.enemyBullets.getPhaserGroup(), this.player, (enemyBullet, player) => {
 			player.knockback(200, enemyBullet);
-			player.onPlayerGotHit(enemyBullet.getDamage());
+			player.onGotHit(enemyBullet.getDamage());
 			this.healthBar.updateHealth(this.player.life, this.player.maxLife);
 			// mandaria a la pool de las balas de los enemigos otra vez
 			enemyBullet.destroyBullet(this.enemyBullets);
@@ -310,6 +334,11 @@ export default class Animation extends Phaser.Scene {
 		this.physics.add.collider(this.enemyBullets.getPhaserGroup(), this.paredLayer, (bullet, wall) => {
 			bullet.destroyBullet(this.enemyBullets);
 		});
+		//colision balas-fichas
+		this.physics.add.collider(this.coins, this.playerBullets.getPhaserGroup(), (coin, bullet) => {
+			coin.body.setBounce(0);
+			bullet.body.setBounce(0);
+		});
 
 		// #endregion
 
@@ -320,11 +349,6 @@ export default class Animation extends Phaser.Scene {
 		this.MainSample.play();
 		this.MainSample.setLoop(true);
 		// #endregion
-
-		//const startTile = this.map.worldToTileXY(this.Crac.x, this.Crac.y);
-		//const endTile = this.map.worldToTileXY(400, 400);  // Destino deseado
-		//this.findPath(startTile, endTile);
-
 	}
 
 	changeScene() {
@@ -367,7 +391,7 @@ export default class Animation extends Phaser.Scene {
 		} else {
 			this.physics.world.resume();
 		}
-		
+
 	}
 	moveAlongPath() {
 		if (!this.currentPath || this.currentPath.length === 0) return;

@@ -50,6 +50,7 @@ export default class Loading extends Phaser.Scene {
 		this.load.image('Bob', 'assets/Bob.png');
 		this.load.image('Crac', 'assets/Crac.png');
 		this.load.image('Letus', 'assets/Letus.png');
+		this.load.image('Zaro', 'assets/Zaro-placeholder.png');
 
 		// #endregion
 

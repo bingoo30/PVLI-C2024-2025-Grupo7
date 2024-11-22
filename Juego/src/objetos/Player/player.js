@@ -1,5 +1,6 @@
 import Character from "./character.js";
 import { fire } from "../Shooting/shooter.js";
+import Inventory from "./Inventory.js";
 
 /**
  * @extends Character
@@ -36,8 +37,10 @@ export default class Player extends Character {
         this.xpToLevelUp = 2;
         // #endregion
 
+        // inventorios
+        this.Inventory = new Inventory(this);
         // #region puntos de control status
-        this.statusPoint = 0;
+        this.statusPoint = 0; //status points restantes
         this.speedFactorStatus = 0;
         this.shootSpeedStatus = 0;
         this.maxLifeStatus = 0;
@@ -55,7 +58,14 @@ export default class Player extends Character {
         // Seteamos mouse
         this.mouse = this.scene.input.activePointer;
 
+        //eventos
+        this.scene.events.on("IKilledAnEnemy", () => {
+            console.log("i killed it");
+            this.Inventory.addKilledEnemies();
+        });
+        this.scene.events.on("playerIsDead", () => {
 
+        });
     }
     init(speedFactor, shootSpeed, life, damage, prob) {
         this.speedFactor = speedFactor;
@@ -65,6 +75,18 @@ export default class Player extends Character {
         this.prob = prob;
         this.maxLife = life;
     }
+    // #region getters para el inventario
+    getLvel() {
+        return this.level;
+    }
+    getStatusPoint() {
+        return this.statusPoint;
+    }
+    setKilledEnemy() {
+        this.Inventory.addKilledEnemies();
+    }
+    // #endregion
+
     getDamage() {
         return this.damage;
     }
@@ -74,9 +96,11 @@ export default class Player extends Character {
     getXpToLevelUp() {
         return this.xpToLevelUp;
     }
-    onPlayerGotHit(damage) {
-        this.onGotHit(damage); // Aplica daño al jugador
-        // solo hago el knockback cuando me choco con un enemigo (o no)
+    onGotHit(damage) {
+        super.onGotHit(damage); // Aplica daño al jugador
+        if (this.life == 0) {
+            this.onDeath();
+        }
 
     }
     onPlayerCollectedXP(value) {

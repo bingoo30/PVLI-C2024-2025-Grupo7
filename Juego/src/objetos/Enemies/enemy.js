@@ -1,4 +1,5 @@
 import Character from '../../objetos/Player/character.js';
+import { drop } from './drop.js';
 
 const TILE_SIZE = 32;
 let contadorIntentos = 0;
@@ -29,6 +30,8 @@ export default class Enemy extends Character {
         //this.body.setOffset(8, 24);
         this.path = [];
         this.dead = false;
+
+        this.scene.events.emit("enemyIsDead");
     }
 
 
@@ -40,8 +43,14 @@ export default class Enemy extends Character {
         this.prob = prob;
     }
 
-    onEnemyGotHit(damage, pool) {
-        this.onGotHit(damage, this.exp, pool); // Aplica daño al jugador
+    onGotHit(damage, pool) {
+        super.onGotHit(damage);
+        if (this.life == 0) {
+            this.scene.events.emit("IKilledAnEnemy");
+            drop(this.x, this.y, this.exp, pool);
+            this.onDeath();
+        }
+            
     }
     /**
      * Bucle principal del personaje, actualizamos su posición y ejecutamos acciones según el Input
