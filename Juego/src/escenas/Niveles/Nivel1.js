@@ -81,32 +81,6 @@ export default class Animation extends Phaser.Scene {
 		// #endregion
 
 		// #endregion
-
-
-
-		// #region Enemy
-
-
-		let crac = this.map.createFromObjects('Crac', { name: 'crac', classType: Character, key: "Crac" });
-
-
-
-		//this.Crac = new Crac(this, playerX + 1500, playerY + 100, this.player, 1);
-		//this.Crac.setScale(SCALE);
-
-		//this.Bob = new Bob(this, playerX + 1200, playerY + 200, this.player, 1);
-		//this.Bob.setScale(SCALE);
-
-		//this.Zaro = new Zaro(this, playerX + 1800, playerY - 100, this.player, 1);
-		//this.Zaro.setScale(SCALE);
-
-		//this.enemies = this.add.group();
-		//this.enemies.add(this.Crac);
-		//this.enemies.add(this.Bob);
-		//this.enemies.add(this.Zaro);
-
-		// #endregion
-
 		// #region Pools
 
 		const MAX = 300;
@@ -158,29 +132,76 @@ export default class Animation extends Phaser.Scene {
 
 		// #region Enemy
 
+		this.arrayCracs = [];
+		const cracLayer = this.map.getObjectLayer('CracPosition');
+		cracLayer.objects.forEach(obj => {
+			if (obj.name === 'Crac') { // Filtra por nombre
+				const crac = new Crac(this, obj.x * SCALE, obj.y *SCALE, this.player, this.pool, this.exp);
+				crac.setScale(SCALE);
+				crac.setPool(this.enemyBullets);
+				// Agregar el Crac a la escena y al array
+				//this.add.existing(crac);
+				this.arrayCracs.push(crac);
+			}
+		});
+
+		console.log(this.arrayCracs); // Depuración: verificar el contenido del array
+
+
+		this.enemies = this.add.group();
+		this.enemies.addMultiple(this.arrayCracs);
+
+		// //Configura cada objeto con su pool y jugador después de crearlo
+		//cracObjects.forEach(crac => {
+		//	crac.setPool(this.enemyBullets);   // Asocia el pool
+		//	//this.Crac.setPool(this.enemyBullets);
+
+		//	crac.player = this.player; // Asocia el jugador
+		//});
+
+
+		//objectLayer.objects.forEach(obj => {
+		//	const bob = new Bob(this, obj.x, obj.y, this.player, 1);
+		//	this.add.existing(bob);
+		//});
+
+		//this.enemies = this.add.group();
+		//let cracs = [];
+
+		//const cracsLayer = this.map.getObjectLayer('position');
+
+		//cracsLayer.objects.forEach(crac => {
+		//	// Asignar posición directamente desde el objeto crac
+		//	let enemy = new Crac(this, crac.x * SCALE, crac.y * SCALE, this.player, 1);
+		//	enemy.setPool();
+		//	// Añadir al grupo de enemigos
+		//	cracs.push(enemy);
+		//});
+
+		//this.enemies.addMultiple(cracs);
+
+		// #endregion
+
+
+		// #region Enemy
+
+
+		
+
 		//this.Crac = new Crac(this, playerX + 1500, playerY + 100, this.player, 1);
 		//this.Crac.setScale(SCALE);
 
 		//this.Bob = new Bob(this, playerX + 1200, playerY + 200, this.player, 1);
 		//this.Bob.setScale(SCALE);
-		
 
-		this.enemies = this.add.group();
-		let cracs = [];
-		
-		const cracsLayer = this.map.getObjectLayer('position');
-
-		cracsLayer.objects.forEach(crac => {
-			// Asignar posición directamente desde el objeto crac
-			let enemy = new Crac(this, crac.x * SCALE, crac.y * SCALE, this.player, 1);
-			enemy.setPool();
-			// Añadir al grupo de enemigos
-			cracs.push(enemy);
-		});
-		
-		this.enemies.addMultiple(cracs);
+		//this.Zaro = new Zaro(this, playerX + 1800, playerY - 100, this.player, 1);
+		//this.Zaro.setScale(SCALE);
+		//this.enemies.add(this.Bob);
+		//this.enemies.add(this.Zaro);
 
 		// #endregion
+
+		
 		
 		// #region Debug
 		const debugGraphics = this.add.graphics();
