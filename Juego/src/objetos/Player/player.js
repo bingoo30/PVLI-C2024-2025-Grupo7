@@ -54,6 +54,7 @@ export default class Player extends Character {
         this.aKey = this.scene.input.keyboard.addKey('A'); //izquierda
         this.sKey = this.scene.input.keyboard.addKey('S'); //parar animaci�n
         this.dKey = this.scene.input.keyboard.addKey('D'); //derecha
+        this.eKey = this.scene.input.keyboard.addKey('E'); //interactuar
         
         // Seteamos mouse
         this.mouse = this.scene.input.activePointer;
@@ -189,6 +190,10 @@ export default class Player extends Character {
             this.speed.y = 1;
         }
         else this.speed.y = 0;
+
+        if (this.eKey.isDown) {
+            this.scene.events.emit('Interact');
+        }
 
        //Input de mouse
        if(this.mouse.leftButtonDown()){
