@@ -24,21 +24,7 @@ export default class PickableObjects extends InteractableObjects {
     onInteract() {
         if (this.canInteract && !this.isPick) {
             this.isPick = true;
-            //llamar al DialogManager de la escena
-            const dialogos = this.scene.cache.json.get(this.dialogues);
-            const dialogManager = this.scene.dialogManager;
-            const dialogPlugin = this.scene.dialog;
-
-            if (dialogManager) {
-
-                dialogManager.initialize(dialogPlugin, dialogos);
-                dialogManager.showDialogue();
-
-                if (!dialogManager.isDialogActive) this.isDialogActive = false;
-            }
-            else {
-                console.error("El DialogManager no est¨¢ disponible en la escena.");
-            }
+           
         }
     }
 }
