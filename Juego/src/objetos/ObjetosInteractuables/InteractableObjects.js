@@ -7,7 +7,6 @@
      * @param {String} texture - sprite que va tener
      Atributos
      * @param {boolean} canInteract  - booleano para saber si se puede interactar
-     * @param {boolean} isPlayerInside  - booleano para saber si el jugador esta dentro de la area de interaccion o no
      * @param {Text} text - texto que se va hacer visible cuando esta dentro de una area
      * 
      */
@@ -17,7 +16,6 @@ export default class InteractableObjects extends Phaser.GameObjects.Sprite {
 
         this.scene = scene;
         this.canInteract = false;
-        this.isPlayerInside = false;
 
         // Texto de interacci¨®n inicialmente invisible
         this.text = this.scene.add.text(this.x - 10, this.y - 100, 'Presiona E para interactuar', {
@@ -28,10 +26,8 @@ export default class InteractableObjects extends Phaser.GameObjects.Sprite {
         });
         this.text.setVisible(false);
 
-        this.scene.physics.add.existing(this);
-
         this.interactionArea = new Phaser.Geom.Circle(this.x, this.y, 100);
-        this.scene.events.on('Interact', () => { this.onInteract() });
+        this.scene.events.on('Interact', () => {this.onInteract() });
     }
 
     preUpdate(t, dt) {
@@ -39,10 +35,10 @@ export default class InteractableObjects extends Phaser.GameObjects.Sprite {
 
         const playerInRange = Phaser.Geom.Circle.Contains(this.interactionArea, this.scene.player.x, this.scene.player.y);
 
-        if (playerInRange && !this.isPlayerInside) {
+        if (playerInRange) {
             this.onOverlap();
         }
-        else if (!playerInRange && this.isPlayerInside) {
+        else if (!playerInRange) {
             this.onExitOverlap();
         }
     }
@@ -51,14 +47,12 @@ export default class InteractableObjects extends Phaser.GameObjects.Sprite {
         if (this.text) {
             this.text.setVisible(true);
         }
-        this.isPlayerInside = true;
     }
     onExitOverlap() { //sale
         this.canInteract = false;
         if (this.text) {
             this.text.setVisible(false);
         }
-        this.isPlayerInside = false;
     }
 }
 

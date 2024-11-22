@@ -16,6 +16,7 @@ export default class NPC extends InteractableObjects {
         this.dialogues = dialogues;
         this.isDialogActive = false;
 
+        this.scene.physics.add.existing(this);
         this.scene.add.existing(this);
         this.body.setSize(16, 10);
         this.body.setOffset(10, 24);
