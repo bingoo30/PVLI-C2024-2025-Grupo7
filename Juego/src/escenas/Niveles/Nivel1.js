@@ -83,20 +83,6 @@ export default class Animation extends Phaser.Scene {
 		// #endregion
 
 
-		// #region Enemy
-		
-		this.Crac = new Crac(this, playerX + 1500, playerY + 100, this.player, 1);
-		this.Crac.setScale(SCALE);
-
-		this.Bob = new Bob(this, playerX + 1200, playerY + 200, this.player, 1);
-		this.Bob.setScale(SCALE);
-
-		this.enemies = this.add.group();
-		this.enemies.add(this.Crac);
-		this.enemies.add(this.Bob);
-
-		// #endregion
-		//aSAAS
 		// #region Pools
 
 		const MAX = 300;
@@ -116,9 +102,9 @@ export default class Animation extends Phaser.Scene {
 		// #region Player Bullets
 
 		toAdds = [];
-		this.playerBullets = new Pool(this, MAX,'Bullet');
+		this.playerBullets = new Pool(this, MAX, 'Bullet');
 		for (let i = 0; i < MAX; i++) {
-			let toAdd = new Bullet(this, 0,0,'Bala2');
+			let toAdd = new Bullet(this, 0, 0, 'Bala2');
 			toAdds.push(toAdd);
 		}
 		this.playerBullets.addMultipleEntity(toAdds);
@@ -129,14 +115,43 @@ export default class Animation extends Phaser.Scene {
 		// #region Enemy Bullets
 
 		toAdds = [];
-		this.enemyBullets = new Pool(this, MAX,'Bullet');
+		this.enemyBullets = new Pool(this, MAX, 'Bullet');
 		for (let i = 0; i < MAX; i++) {
 			let toAdd = new Bullet(this, 0, 0, 'Bala');
 			toAdds.push(toAdd);
 		}
 		this.enemyBullets.addMultipleEntity(toAdds);
-		this.Crac.setPool(this.enemyBullets);
+
+
 		// #endregion
+
+		// #endregion
+
+
+
+		// #region Enemy
+
+		//this.Crac = new Crac(this, playerX + 1500, playerY + 100, this.player, 1);
+		//this.Crac.setScale(SCALE);
+
+		//this.Bob = new Bob(this, playerX + 1200, playerY + 200, this.player, 1);
+		//this.Bob.setScale(SCALE);
+		
+
+		this.enemies = this.add.group();
+		let cracs = [];
+		
+		const cracsLayer = this.map.getObjectLayer('position');
+
+		cracsLayer.objects.forEach(crac => {
+			// Asignar posición directamente desde el objeto crac
+			let enemy = new Crac(this, crac.x * SCALE, crac.y * SCALE, this.player, 1);
+			enemy.setPool();
+			// Añadir al grupo de enemigos
+			cracs.push(enemy);
+		});
+		
+		this.enemies.addMultiple(cracs);
 
 		// #endregion
 		
@@ -151,57 +166,57 @@ export default class Animation extends Phaser.Scene {
 
 		// #region Navmesh
 
-		this.marker = this.add.graphics();
-		this.marker.lineStyle(3, 0xffffff, 1);
-		this.marker.strokeRect(0, 0, this.map.tileWidth*SCALE, this.map.tileHeight*SCALE);
+		//this.marker = this.add.graphics();
+		//this.marker.lineStyle(3, 0xffffff, 1);
+		//this.marker.strokeRect(0, 0, this.map.tileWidth*SCALE, this.map.tileHeight*SCALE);
 
 		//console.log(this.map.tileWidth)
 		//console.log(this.map.tileWidth)
 		//console.log(this.map.height)
-		this.finder = new EasyStar.js();
+		//this.finder = new EasyStar.js();
 		//console.log("suelo",this.sueloLayer)
 
-		if (this.map) {
-			var grid = [];
-			for (var y = 0; y < this.sueloLayer.height; y++) {
-				var col = [];
-				for (var x = 0; x < this.sueloLayer.width; x++) {
-					const tile = this.sueloLayer.getTileAt(x, y);
+		//if (this.map) {
+		//	var grid = [];
+		//	for (var y = 0; y < this.sueloLayer.height; y++) {
+		//		var col = [];
+		//		for (var x = 0; x < this.sueloLayer.width; x++) {
+		//			const tile = this.sueloLayer.getTileAt(x, y);
 
-					if (tile) {
-						col.push(tile.index);  // Usa tile.index para obtener el índice del tile
-					} else {
-						col.push(-1);  // Usa un valor predeterminado para los tiles no encontrados
-					}
-				}
-				grid.push(col);
-			}
-		} else {
-			console.error("El mapa no está definido.");
-		}
+		//			if (tile) {
+		//				col.push(tile.index);  // Usa tile.index para obtener el índice del tile
+		//			} else {
+		//				col.push(-1);  // Usa un valor predeterminado para los tiles no encontrados
+		//			}
+		//		}
+		//		grid.push(col);
+		//	}
+		//} else {
+		//	console.error("El mapa no está definido.");
+		//}
 
 		//console.log(grid);
 		//console.log(this.map)
-		this.finder.setGrid(grid);
-		var tiles = this.map.tilesets[0];
-		//console.log(tiles)
-		var properties = tiles.tileProperties;
-		var acceptableTiles = [];
+		//this.finder.setGrid(grid);
+		//var tiles = this.map.tilesets[0];
+		////console.log(tiles)
+		//var properties = tiles.tileProperties;
+		//var acceptableTiles = [];
 
 
-		for (var i = tiles.firstgid - 1; i < this.tileset.total; i++) { // firstgid and total are fields from Tiled that indicate the range of IDs that the tiles can take in that tileset
-			if (!properties.hasOwnProperty(i)) {
-				// If there is no property indicated at all, it means it's a walkable tile
-				acceptableTiles.push(i + 1);
-				continue;
-			}
-			if (!properties[i].collides) acceptableTiles.push(i + 1);
-			if (properties[i].cost) {
-				this.finder.setTileCost(i + 1, properties[i].cost); // If there is a cost attached to the tile, let's register it
-				//console.log("con coste")
-			}
-		}
-		this.finder.setAcceptableTiles(acceptableTiles);
+		//for (var i = tiles.firstgid - 1; i < this.tileset.total; i++) { // firstgid and total are fields from Tiled that indicate the range of IDs that the tiles can take in that tileset
+		//	if (!properties.hasOwnProperty(i)) {
+		//		// If there is no property indicated at all, it means it's a walkable tile
+		//		acceptableTiles.push(i + 1);
+		//		continue;
+		//	}
+		//	if (!properties[i].collides) acceptableTiles.push(i + 1);
+		//	if (properties[i].cost) {
+		//		this.finder.setTileCost(i + 1, properties[i].cost); // If there is a cost attached to the tile, let's register it
+		//		//console.log("con coste")
+		//	}
+		//}
+		//this.finder.setAcceptableTiles(acceptableTiles);
 		//console.log(acceptableTiles);
 
 
@@ -306,9 +321,9 @@ export default class Animation extends Phaser.Scene {
 		this.MainSample.setLoop(true);
 		// #endregion
 
-		const startTile = this.map.worldToTileXY(this.Crac.x, this.Crac.y);
-		const endTile = this.map.worldToTileXY(400, 400);  // Destino deseado
-		this.findPath(startTile, endTile);
+		//const startTile = this.map.worldToTileXY(this.Crac.x, this.Crac.y);
+		//const endTile = this.map.worldToTileXY(400, 400);  // Destino deseado
+		//this.findPath(startTile, endTile);
 
 	}
 
@@ -352,8 +367,7 @@ export default class Animation extends Phaser.Scene {
 		} else {
 			this.physics.world.resume();
 		}
-
-		this.Crac.update();
+		
 	}
 	moveAlongPath() {
 		if (!this.currentPath || this.currentPath.length === 0) return;
