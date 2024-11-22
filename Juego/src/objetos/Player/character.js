@@ -1,6 +1,3 @@
-import { drop } from "../Enemies/drop.js";
-
-
 //constantes por defecto
 const DEFAULT_LIFE = 10;
 const DEFAULT_COOLDOWN = 1000;
@@ -44,23 +41,6 @@ export default class Character extends Phaser.GameObjects.Sprite {
     getDamage() {
         return this.damage;
     }
-    /* #region getters
-    get speedFactor() {
-        return this._speedFactor;
-    }
-    get damage() {
-        return this._damage;
-    }
-    get life() {
-        return this._life;
-    }
-    get type() {
-        return this._type;
-    }
-    get prob() {
-        return this._prob;
-    }
-    // #endregion */
 
     // #region metodos
     /** 
@@ -68,16 +48,8 @@ export default class Character extends Phaser.GameObjects.Sprite {
      * Para que no sea negativo cojo el maximo entre la resta y el 0
      * @param {number} damageTaken Daño que va a recibir
      */
-    onGotHit(damageTaken, xp, pool) {
+    onGotHit(damageTaken) {
         this.life = Math.max(0, this.life - damageTaken);
-        if (this.life == 0) {
-            if (this.type == 'Player') this.scene.changeScene();
-            //solo le paso el valor de xp cuando es un enemigo
-            else if (xp !== undefined) {
-                drop(this.x, this.y, xp, pool);
-            }
-            this.onDeath();
-        }
     }
     onDeath() {
         //console.log(`${this.texture.key} ha muerto`);

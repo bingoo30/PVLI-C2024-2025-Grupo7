@@ -18,13 +18,14 @@ export default class Zaro extends Enemy {
     }
     preUpdate(t, dt) {
         super.preUpdate(t, dt);
-
-        if(this.getDistance() < TELEPORT_RANGE && this.teleportCont < 0){
+        /**
+         * if(this.getDistance() < TELEPORT_RANGE && this.teleportCont < 0){
             console.log("jsdfnajfn");
 
             this.teleportCont = TELEPORT_COOLDOWN;
         }
 
         this.teleportCont = this.teleportCont - dt;
+         */
     }
 }

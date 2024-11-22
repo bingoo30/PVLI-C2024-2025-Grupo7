@@ -21,6 +21,7 @@ export default class Inventory {
     }
     //metodo auxiliar para crear los eventos
     createEvents() {
+        //cambiar todos los emits por on
         //basicos
         this.scene.events.emit("levelUp");
         this.scene.events.emit("hasCollectedStatusPoint");

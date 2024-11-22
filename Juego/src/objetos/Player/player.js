@@ -63,6 +63,9 @@ export default class Player extends Character {
             console.log("i killed it");
             this.Inventory.addKilledEnemies();
         });
+        this.scene.events.on("playerIsDead", () => {
+
+        });
     }
     init(speedFactor, shootSpeed, life, damage, prob) {
         this.speedFactor = speedFactor;
@@ -93,9 +96,11 @@ export default class Player extends Character {
     getXpToLevelUp() {
         return this.xpToLevelUp;
     }
-    onPlayerGotHit(damage) {
-        this.onGotHit(damage); // Aplica daño al jugador
-        // solo hago el knockback cuando me choco con un enemigo (o no)
+    onGotHit(damage) {
+        super.onGotHit(damage); // Aplica daño al jugador
+        if (this.life == 0) {
+            this.onDeath();
+        }
 
     }
     onPlayerCollectedXP(value) {

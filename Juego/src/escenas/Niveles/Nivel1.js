@@ -74,16 +74,11 @@ export default class Animation extends Phaser.Scene {
 		// #endregion
 
 
+		// #region Player
 		this.player = new Player(this, playerX, playerY);
-		// #region Player Scale
-
 		this.player.setScale(SCALE);
 
 		// #endregion
-
-
-		// #endregion
-
 
 		// #region Enemy
 		
@@ -267,20 +262,20 @@ export default class Animation extends Phaser.Scene {
 		//colision player-enemigos
 		this.physics.add.collider(this.player, this.enemies, (player, enemy) => {
 			player.knockback(500, enemy);
-			player.onPlayerGotHit(enemy.getDamage());
+			player.onGotHit(enemy.getDamage());
 			this.healthBar.updateHealth(this.player.life, this.player.maxLife);
 
 		});
 		//colision bala player-enemigos
 		this.physics.add.collider(this.playerBullets.getPhaserGroup(), this.enemies, (playerBullet, enemy) => {
-			enemy.onEnemyGotHit(this.player.getDamage(), this.coins);
+			enemy.onGotHit(this.player.getDamage(), this.coins);
 			// mandaria a la pool de las balas de player otra vez
 			playerBullet.destroyBullet(this.playerBullets);
 		});
 		//colision bala enemigos-player
 		this.physics.add.collider(this.enemyBullets.getPhaserGroup(), this.player, (enemyBullet, player) => {
 			player.knockback(200, enemyBullet);
-			player.onPlayerGotHit(enemyBullet.getDamage());
+			player.onGotHit(enemyBullet.getDamage());
 			this.healthBar.updateHealth(this.player.life, this.player.maxLife);
 			// mandaria a la pool de las balas de los enemigos otra vez
 			enemyBullet.destroyBullet(this.enemyBullets);
