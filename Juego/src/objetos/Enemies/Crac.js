@@ -3,6 +3,7 @@ import { fire } from '../Shooting/shooter.js';
 
 
 const SHOOTING_RANGE = 700;
+const SHOOTING_COOLDOWN = 2000;
 export default class Crac extends Enemy {
 	constructor(scene, x, y, player, exp) {
 		super(scene, x, y, player, 'Crac', exp);
@@ -16,7 +17,7 @@ export default class Crac extends Enemy {
 		super.preUpdate(t, dt);
 
         if(this.cooldownCont <= 0 && this.getDistance() < SHOOTING_RANGE){
-            this.cooldownCont = 2000;
+            this.cooldownCont = SHOOTING_COOLDOWN;
             fire(this, this.player, this.damage, this.shootSpeed, 'Bala', 4, this.pool);
         }
         this.cooldownCont = this.cooldownCont - dt;
