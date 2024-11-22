@@ -12,7 +12,7 @@ import Zaro from '../../objetos/Enemies/Zaro.js';
 
 import DialogueManager from '../../UI/DialogManager.js';
 import DialogText from '../../UI/dialog_plugin.js';
-import NPC from '../../objetos/NPC/NPC.js'
+import NPC from '../../objetos/ObjetosInteractuables/NPC.js'
 
 //import Coin from '../../objetos/Enemies/coin.js'
 //constante

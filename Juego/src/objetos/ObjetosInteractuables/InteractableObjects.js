@@ -4,27 +4,20 @@
      * @param {Phaser.Scene} scene La escena del juego
      * @param {number} x - Posici¨®n X
      * @param {number} y - Posici¨®n Y
-     * @param {String} texture - key del sprite del NPC
-     * @param {String} dialogues - key del dialogo del NPC
+     * @param {String} texture - sprite que va tener
      Atributos
-     * @param {boolean} isDialogActive  - booleano para saber si esta en dialogo
-     * @param {boolean} canInteract  - booleano para saber si se puede interactar el NPC (cuando esta dentro de una area)
+     * @param {boolean} canInteract  - booleano para saber si se puede interactar
      * @param {boolean} isPlayerInside  - booleano para saber si el jugador esta dentro de la area de interaccion o no
      * @param {Text} text - texto que se va hacer visible cuando esta dentro de una area
      * 
      */
-export default class NPC extends Phaser.GameObjects.Sprite {
-    constructor(scene, x, y, texture, dialogues) {
+export default class InteractableObjects extends Phaser.GameObjects.Sprite {
+    constructor(scene, x, y, texture) {
         super(scene, x, y, [texture]);
 
         this.scene = scene;
-        this.dialogues = dialogues;
-
-        this.isDialogActive = false;
         this.canInteract = false;
         this.isPlayerInside = false;
-
-        this.scene.add.existing(this);
 
         // Texto de interacci¨®n inicialmente invisible
         this.text = this.scene.add.text(this.x - 10, this.y - 100, 'Presiona E para interactuar', {
@@ -35,22 +28,14 @@ export default class NPC extends Phaser.GameObjects.Sprite {
         });
         this.text.setVisible(false);
 
-        scene.physics.add.existing(this);
-        this.body.setSize(16, 10);
-        this.body.setOffset(10, 24);
-        this.body.setImmovable(true);
+        this.scene.physics.add.existing(this);
 
         this.interactionArea = new Phaser.Geom.Circle(this.x, this.y, 100);
-
-        this.eKey = this.scene.input.keyboard.addKey('E'); //interactuar
+        this.scene.events.on('Interact', () => { this.onInteract() });
     }
 
     preUpdate(t, dt) {
         super.preUpdate(t, dt);
-
-        if (this.eKey.isDown) {
-            this.onInteract();
-        }
 
         const playerInRange = Phaser.Geom.Circle.Contains(this.interactionArea, this.scene.player.x, this.scene.player.y);
 
@@ -73,29 +58,7 @@ export default class NPC extends Phaser.GameObjects.Sprite {
         if (this.text) {
             this.text.setVisible(false);
         }
-        this.isPlayerInside = false; 
-    }
-
-    onInteract() {
-        if (this.canInteract && !this.isDialogActive) {
-            this.isDialogActive = true;
-
-            //llamar al DialogManager de la escena
-            const dialogos = this.scene.cache.json.get(this.dialogues); 
-            const dialogManager = this.scene.dialogManager;
-            const dialogPlugin = this.scene.dialog;
-
-            if (dialogManager) {
-
-                dialogManager.initialize(dialogPlugin, dialogos);
-                dialogManager.showDialogue();
-
-                if (!dialogManager.isDialogActive) this.isDialogActive = false;
-            }
-            else {
-                console.error("El DialogManager no est¨¢ disponible en la escena.");
-            }
-        }
+        this.isPlayerInside = false;
     }
 }
 
