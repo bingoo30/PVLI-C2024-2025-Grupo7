@@ -1,11 +1,12 @@
-import Crac from './Crac.js';
+import Enemy from "./enemy.js";
+
 
 const TELEPORT_RANGE = 700;
 const TELEPORT_COOLDOWN = 3000; 
 
-export default class Zaro extends Crac {
-    constructor(scene, x, y, player, exp, type) {
-        super(scene, x, y, player, exp, type);
+export default class Zaro extends Enemy {
+    constructor(scene, x, y, player, exp) {
+        super(scene, x, y, player, "Zaro",exp);
         this.scene = scene;
         this.player = player;
         this.scene.add.existing(this);

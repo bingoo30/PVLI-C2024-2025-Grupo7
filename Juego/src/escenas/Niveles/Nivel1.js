@@ -22,7 +22,7 @@ const SCALE = 4;
  * @extends Phaser.Scene
  */
 export default class Animation extends Phaser.Scene {
-	
+
 	constructor() {
 		super({ key: 'nivel1' });
 		this.isGamePaused = false;
@@ -32,7 +32,7 @@ export default class Animation extends Phaser.Scene {
 		this.load.json('dialogues_Flush', 'assets/Dialogues/dialogues_Flush.json');
 		this.load.image('Flush', 'assets/Character/Flush.png');
 	}
-	
+
 	/**  
 	* Creación de los elementos de la escena principal de juego
 	*/
@@ -73,7 +73,7 @@ export default class Animation extends Phaser.Scene {
 
 		// #endregion
 
-		
+
 		this.player = new Player(this, playerX, playerY);
 		// #region Player Scale
 
@@ -87,13 +87,13 @@ export default class Animation extends Phaser.Scene {
 
 		// #region Enemy
 		
-		this.Crac = new Crac(this, playerX + 1500, playerY + 100, this.player, 1, 'Crac');
+		this.Crac = new Crac(this, playerX + 1500, playerY + 100, this.player, 1);
 		this.Crac.setScale(SCALE);
 
 		this.Bob = new Bob(this, playerX + 1200, playerY + 200, this.player, 1);
 		this.Bob.setScale(SCALE);
 
-		this.Zaro = new Zaro(this, playerX + 1800, playerY - 100, this.player, 1, 'Zaro');
+		this.Zaro = new Zaro(this, playerX + 1800, playerY - 100, this.player, 1);
 		this.Zaro.setScale(SCALE);
 
 		this.enemies = this.add.group();
@@ -122,9 +122,9 @@ export default class Animation extends Phaser.Scene {
 		// #region Player Bullets
 
 		toAdds = [];
-		this.playerBullets = new Pool(this, MAX,'Bullet');
+		this.playerBullets = new Pool(this, MAX, 'Bullet');
 		for (let i = 0; i < MAX; i++) {
-			let toAdd = new Bullet(this, 0,0,'Bala2');
+			let toAdd = new Bullet(this, 0, 0, 'Bala2');
 			toAdds.push(toAdd);
 		}
 		this.playerBullets.addMultipleEntity(toAdds);
@@ -135,7 +135,7 @@ export default class Animation extends Phaser.Scene {
 		// #region Enemy Bullets
 
 		toAdds = [];
-		this.enemyBullets = new Pool(this, MAX,'Bullet');
+		this.enemyBullets = new Pool(this, MAX, 'Bullet');
 		for (let i = 0; i < MAX; i++) {
 			let toAdd = new Bullet(this, 0, 0, 'Bala');
 			toAdds.push(toAdd);
@@ -146,7 +146,7 @@ export default class Animation extends Phaser.Scene {
 		// #endregion
 
 		// #endregion
-		
+
 		// #region Debug
 		const debugGraphics = this.add.graphics();
 		this.paredLayer.renderDebug(debugGraphics, {
@@ -160,7 +160,7 @@ export default class Animation extends Phaser.Scene {
 
 		this.marker = this.add.graphics();
 		this.marker.lineStyle(3, 0xffffff, 1);
-		this.marker.strokeRect(0, 0, this.map.tileWidth*SCALE, this.map.tileHeight*SCALE);
+		this.marker.strokeRect(0, 0, this.map.tileWidth * SCALE, this.map.tileHeight * SCALE);
 
 		//console.log(this.map.tileWidth)
 		//console.log(this.map.tileWidth)
@@ -248,7 +248,7 @@ export default class Animation extends Phaser.Scene {
 		// #region NPC
 		const NPCX = (playerPos.x + 100) * SCALE;
 		const NPCY = (playerPos.y + 10) * SCALE;
-		
+
 		this.Flush = new NPC(this, NPCX, NPCY, 'Flush', 'dialogues_Flush');
 		this.Flush.setScale(SCALE);
 
@@ -302,6 +302,11 @@ export default class Animation extends Phaser.Scene {
 		this.physics.add.collider(this.enemyBullets.getPhaserGroup(), this.paredLayer, (bullet, wall) => {
 			bullet.destroyBullet(this.enemyBullets);
 		});
+		//colision balas-fichas
+		this.physics.add.collider(this.coins, this.playerBullets.getPhaserGroup(), (coin, bullet) => {
+			coin.body.setBounce(0);
+			bullet.body.setBounce(0);
+		});
 
 		// #endregion
 
@@ -316,7 +321,7 @@ export default class Animation extends Phaser.Scene {
 		const startTile = this.map.worldToTileXY(this.Crac.x, this.Crac.y);
 		const endTile = this.map.worldToTileXY(400, 400);  // Destino deseado
 		this.findPath(startTile, endTile);
-
+		// #endregion
 	}
 
 	changeScene() {
@@ -359,8 +364,6 @@ export default class Animation extends Phaser.Scene {
 		} else {
 			this.physics.world.resume();
 		}
-
-		this.Crac.update();
 	}
 	moveAlongPath() {
 		if (!this.currentPath || this.currentPath.length === 0) return;
