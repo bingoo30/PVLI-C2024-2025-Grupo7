@@ -1,9 +1,7 @@
 import Character from '../../objetos/Player/character.js';
 import { drop } from './drop.js';
 
-const TILE_SIZE = 32;
-let contadorIntentos = 0;
-const LIMITE_INTENTOS = 10
+const FOLLOW_RANGE = 500;
 export default class Enemy extends Character {
     /**
      * Constructor de los enemigos
@@ -67,20 +65,40 @@ export default class Enemy extends Character {
         //if (distanceToTarget < 4) {  // Precisión al llegar al punto
         //    this.moveToNextPoint();  // Mover al siguiente punto
         //}
-        this.speed.x = this.player.x - this.x;
-        this.speed.y = this.player.y - this.y;
-
-        // Calcular la longitud del vector para normalizarlo
-        let distance = Math.sqrt(this.speed.x * this.speed.x + this.speed.y * this.speed.y);
-        if (distance > 0) { // Evitar dividir por 0
-            // Normalizar el vector de dirección
-            this.speed.x /= distance;
-            this.speed.y /= distance;
-
-            // Aplicar la velocidad al enemigo en la dirección del jugador
-            this.body.setVelocity(this.speed.x * this.speedFactor, this.speed.y * this.speedFactor);
+        const distanceToPlayer = Phaser.Math.Distance.Between(this.x, this.y, this.player.x, this.player.y);
+        if (distanceToPlayer <= FOLLOW_RANGE) {
+            this.moveTowards(this.player.x, this.player.y);
+        } else {
+            this.stopMovement();
         }
     }
+
+
+    // Método para moverse hacia una posición específica
+    moveTowards(targetX, targetY) {
+        const angle = Phaser.Math.Angle.Between(this.x, this.y, targetX, targetY);
+        const velocity = this.speedFactor * this.scene.physics.world.timeScale;
+
+        this.body.setVelocity(Math.cos(angle) * velocity, Math.sin(angle) * velocity);
+    }
+
+    // Método para detener el movimiento del enemigo
+    stopMovement() {
+        this.body.setVelocity(0, 0); // Detiene al enemigo
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
     setPath(path) {
         // Establece el camino calculado con EasyStar
         this.currentPath = path;
