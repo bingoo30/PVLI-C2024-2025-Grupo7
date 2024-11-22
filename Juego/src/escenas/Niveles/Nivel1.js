@@ -7,6 +7,8 @@ import HealthBar from '../../UI/HealthBar.js';
 import ExpBar from '../../UI/ExpBar.js';
 import Coin from '../../objetos/Enemies/coin.js';
 import Bullet from '../../objetos/Shooting/bullet.js';
+import Letus from '../../objetos/Enemies/Letus.js';
+import Zaro from '../../objetos/Enemies/Zaro.js';
 
 import DialogueManager from '../../UI/DialogManager.js';
 import DialogText from '../../UI/dialog_plugin.js';
@@ -85,15 +87,19 @@ export default class Animation extends Phaser.Scene {
 
 		// #region Enemy
 		
-		this.Crac = new Crac(this, playerX + 1500, playerY + 100, this.player, 1);
+		this.Crac = new Crac(this, playerX + 1500, playerY + 100, this.player, 1, 'Crac');
 		this.Crac.setScale(SCALE);
 
 		this.Bob = new Bob(this, playerX + 1200, playerY + 200, this.player, 1);
 		this.Bob.setScale(SCALE);
 
+		this.Zaro = new Zaro(this, playerX + 1800, playerY - 100, this.player, 1, 'Zaro');
+		this.Zaro.setScale(SCALE);
+
 		this.enemies = this.add.group();
 		this.enemies.add(this.Crac);
 		this.enemies.add(this.Bob);
+		this.enemies.add(this.Zaro);
 
 		// #endregion
 
@@ -136,6 +142,7 @@ export default class Animation extends Phaser.Scene {
 		}
 		this.enemyBullets.addMultipleEntity(toAdds);
 		this.Crac.setPool(this.enemyBullets);
+		this.Zaro.setPool(this.enemyBullets);
 		// #endregion
 
 		// #endregion
