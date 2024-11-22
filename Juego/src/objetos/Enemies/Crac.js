@@ -10,7 +10,7 @@ export default class Crac extends Enemy {
 		this.cooldownCont = 0;
 		this.init(85, 500, 3, 1, 0);
 
-		console.log(this);
+		//console.log(this);
 	}
 	init(speedFactor, shootSpeed, life, damage, prob) {
 		super.init(speedFactor, shootSpeed, life, damage, prob);
@@ -18,7 +18,7 @@ export default class Crac extends Enemy {
 	preUpdate(t, dt) {
 		super.preUpdate(t, dt);
 
-		console.log(this);
+		//console.log(this);
 
         if(this.cooldownCont <= 0 && this.getDistance() < SHOOTING_RANGE){
             this.cooldownCont = SHOOTING_COOLDOWN;

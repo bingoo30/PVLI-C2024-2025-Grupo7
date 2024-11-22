@@ -16,21 +16,38 @@ export default class Coin extends Phaser.GameObjects.Sprite {
         this.scene.add.existing(this);
         this.scene.physics.add.existing(this);
         this.active = false;
+        console.log("aa");
+        //this.scene.tweens.add({
+        //    targets: this,
+        //    x: this.x + 200,
+        //    y: this.y - 100,
+        //    angle: 360,
+        //    duration: 10000000,
+        //    ease: 'Sine.easeInOut',
+        //    repeat: -1,
+        //    yoyo: true,
+        //});
 
     }
     preUpdate(t, dt) {
-        super.preUpdate(t,dt);
+        super.preUpdate(t, dt);
+
     }
+   
+
     getExp() {
         return this.exp;
     }
+
     setExp(value) {
         this.exp = value;
     }
-    setPosition(x,y) {
+
+    setPosition(x, y) {
         this.x = x;
         this.y = y;
     }
+
     destroyCoin(pool) {
         pool.release(this);
     }

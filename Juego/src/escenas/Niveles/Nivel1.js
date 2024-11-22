@@ -128,8 +128,6 @@ export default class Animation extends Phaser.Scene {
 
 		// #endregion
 
-
-
 		// #region Enemy
 
 		this.arrayCracs = [];
@@ -145,7 +143,7 @@ export default class Animation extends Phaser.Scene {
 			}
 		});
 
-		console.log(this.arrayCracs); // Depuración: verificar el contenido del array
+		//console.log(this.arrayCracs); // Depuración: verificar el contenido del array
 
 
 		this.enemies = this.add.group();
@@ -164,7 +162,7 @@ export default class Animation extends Phaser.Scene {
 			}
 		});
 
-		console.log(this.arrayBobs); // Depuración: verificar el contenido del array
+		//console.log(this.arrayBobs); // Depuración: verificar el contenido del array
 
 		this.enemies.addMultiple(this.arrayBobs);
 
