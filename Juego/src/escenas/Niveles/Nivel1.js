@@ -136,7 +136,7 @@ export default class Animation extends Phaser.Scene {
 		const cracLayer = this.map.getObjectLayer('CracPosition');
 		cracLayer.objects.forEach(obj => {
 			if (obj.name === 'Crac') { // Filtra por nombre
-				const crac = new Crac(this, obj.x * SCALE, obj.y *SCALE, this.player, this.pool, this.exp);
+				const crac = new Crac(this, obj.x * SCALE, obj.y *SCALE, this.player, this.exp);
 				crac.setScale(SCALE);
 				crac.setPool(this.enemyBullets);
 				// Agregar el Crac a la escena y al array
@@ -150,6 +150,26 @@ export default class Animation extends Phaser.Scene {
 
 		this.enemies = this.add.group();
 		this.enemies.addMultiple(this.arrayCracs);
+
+
+		this.arrayBobs = [];
+		const bobLayer = this.map.getObjectLayer('BobPosition');
+		bobLayer.objects.forEach(obj => {
+			if (obj.name === 'Bob') { // Filtra por nombre
+				const bob = new Bob(this, obj.x * SCALE, obj.y * SCALE, this.player, this.exp);
+				bob.setScale(SCALE);
+				// Agregar el Crac a la escena y al array
+				//this.add.existing(crac);
+				this.arrayBobs.push(bob);
+			}
+		});
+
+		console.log(this.arrayBobs); // Depuración: verificar el contenido del array
+
+		this.enemies.addMultiple(this.arrayBobs);
+
+
+
 
 		// //Configura cada objeto con su pool y jugador después de crearlo
 		//cracObjects.forEach(crac => {
