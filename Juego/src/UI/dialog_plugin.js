@@ -184,13 +184,13 @@ export default class DialogText{
 		this.closeBtn = this.scene.make.text({
 			//se crea el boton con las posiciones x e y siguientes
 			// se calculan de forma dinámica para que funcione para diferentes tamaños de pantalla
-			x: this._getGameWidth() - this.padding - 50,
-			y: this._getGameHeight() - this.windowHeight - this.padding + 5,
+			x: this._getGameWidth() - this.padding - 55,
+			y: this._getGameHeight() - this.padding -30,
 			
 			//el boton queda representado como una X con su estilo debajo
 			text: 'SKIP',
 			style: {
-				font: 'bold 18px TimesNewRoman',
+				font: 'bold 20px PixelArt',
 				fill: this.closeBtnColor,
 				align: 'center'
 			}
@@ -220,11 +220,12 @@ export default class DialogText{
 
 	// Se crea el borde del botón
 	_createCloseModalButtonBorder() {
-		var x = this._getGameWidth() - this.padding - 50;
-		var y = this._getGameHeight() - this.windowHeight - this.padding;
-		
+		var x = this._getGameWidth() - this.padding - 60;
+		var y = this._getGameHeight() - this.padding - 35;
+
+		this.graphics.lineStyle(this.borderThickness, this.borderColor, this.borderAlpha);
 		//Se crea el borde del botón sin relleno
-		this.graphics.strokeRect(x, y, 50, 30);
+		this.graphics.strokeRect(x, y, 55, 30);
 	}
 
 	// Hace aparecer al texto lentamente en pantalla
@@ -247,15 +248,14 @@ export default class DialogText{
 		if (this.speakerText) this.speakerText.destroy();
 		if (this.speakerBorder) this.speakerBorder.destroy();
 
-		var x = this.padding + 10;
-		var y = this._getGameHeight() - this.windowHeight - this.padding + 10;
-
+		var x = this.padding + 20;
+		var y = this._getGameHeight() - this.windowHeight - this.padding + 60;
 
 
 		if (speaker != " ") {
 			//posicion donde se va situar el nombre de quien esta hablando
-			var speakerX = isPlayer ? this.padding + 10 : this._getGameWidth() - this.padding - 50;
-			var speakerY = this._getGameHeight() - this.windowHeight - this.padding - 25;
+			var speakerX = isPlayer ? this.padding + 30 : this._getGameWidth() - this.padding - 100;
+			var speakerY = this._getGameHeight() - this.windowHeight - this.padding + 15;
 
 			this.speakerText = this.scene.make.text({
 				x: speakerX,

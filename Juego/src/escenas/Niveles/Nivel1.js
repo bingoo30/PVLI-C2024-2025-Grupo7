@@ -296,17 +296,17 @@ export default class Animation extends Phaser.Scene {
 		//#region Dialog
 
 		this.dialog = new DialogText(this, {
-			borderThickness: 4,
+			borderThickness: 2,
 			borderColor: 0xcb3234,
 			borderAlpha: 1,
-			windowAlpha: 0.6,
+			windowAlpha: 0.8,
 			windowColor: 0x000000,
-			windowHeight: 150,
+			windowHeight: 180,
 			padding: 32,
 			closeBtnColor: 'white',
 			dialogSpeed: 4,
-			fontSize: 24,
-			fontFamily: "TimesNewRoman"
+			fontSize: 25,
+			fontFamily: "PixelArt"
 		});
 		this.dialogManager = new DialogueManager(this);
 		this.dialogManager.initialize(this.dialog, dialogos);

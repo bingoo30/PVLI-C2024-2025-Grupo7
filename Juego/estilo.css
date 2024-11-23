@@ -23,6 +23,13 @@
     font-weight: normal;
     font-style: normal;
 }
+@font-face {
+    font-family: 'PixelArt';
+    src: url('assets/font/Jersey25-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 .texto {
     background-color: #212121;
     color: white;
