@@ -67,6 +67,7 @@ export default class Player extends Character {
         this.scene.events.on("playerIsDead", () => {
 
         });
+
     }
     init(speedFactor, shootSpeed, life, damage, prob) {
         this.speedFactor = speedFactor;
@@ -175,21 +176,52 @@ export default class Player extends Character {
         }
         // Input de teclas
         super.preUpdate(t, dt);
+
+        let animationKey = null; // Clave de la animación actual
+
+        // Lógica de movimiento horizontal
         if (this.aKey.isDown) {
             this.speed.x = -1;
-        }
-        else if (this.dKey.isDown) {
+            animationKey = 'playerWalkLeft';
+        } else if (this.dKey.isDown) {
             this.speed.x = 1;
+            animationKey = 'playerWalkRight';
         }
         else this.speed.x = 0;
 
+        // Lógica de movimiento vertical
         if (this.wKey.isDown) {
             this.speed.y = -1;
-        }
-        else if (this.sKey.isDown) {
+            animationKey = 'playerWalkUp';
+        } else if (this.sKey.isDown) {
             this.speed.y = 1;
+            animationKey = 'playerWalkDown';
         }
         else this.speed.y = 0;
+
+        if (this.speed.x === 0 && this.speed.y === 0) {
+            switch (this.anims.currentAnim?.key) {
+                case 'playerWalkLeft':
+                    animationKey = 'playerIdleLeft';
+                    break;
+                case 'playerWalkRight':
+                    animationKey = 'playerIdleRight';
+                    break;
+                case 'playerWalkUp':
+                    animationKey = 'playerIdleUp';
+                    break;
+                case 'playerWalkDown':
+                    animationKey = 'playerIdleDown';
+                    break;
+                default:
+                    animationKey = 'playerIdleDown';
+                    break;
+            }
+        }
+
+        if (animationKey && this.anims.currentAnim?.key !== animationKey) {
+            this.play(animationKey);
+        }
 
         if (this.eKey.isDown) {
             this.scene.events.emit('Interact');
@@ -211,6 +243,6 @@ export default class Player extends Character {
 
        this.speed.normalize();
 
-       this.body.setVelocity(this.speed.x*this.speedFactor, this.speed.y*this.speedFactor);
+        this.body.setVelocity(this.speed.x * this.speedFactor, this.speed.y * this.speedFactor);
     }
 }

@@ -43,6 +43,12 @@ export default class Loading extends Phaser.Scene {
 		this.load.image('Particle', 'assets/particles.png');
 		this.load.image('Coin', 'assets/coin.png');
 
+		this.load.spritesheet('playerSheet', 'assets/Character/player-sheet.png',{
+			frameWidth: 32,  // Ancho de cada cuadro
+			frameHeight: 32, // Altura de cada cuadro
+			endFrame: 13      // Número de cuadros en el sprite sheet
+		});
+
 		// #endregion
 
 		// #region Enemies
@@ -82,6 +88,36 @@ export default class Loading extends Phaser.Scene {
 	* Creación de los elementos de la escena principal de juego
 	*/
 	create() {
+
+		//#region animaciones
+		// Definimos las animaciones en un array
+		const animations = [
+			{ key: 'playerIdleDown', start: 1, end: 1, frameRate: 5, repeat:0 },
+			{ key: 'playerIdleRight', start: 3, end: 3, frameRate: 5, repeat: 0 },
+			{ key: 'playerIdleUp', start: 8, end: 8, frameRate: 5, repeat: 0 },
+			{ key: 'playerIdleLeft', start: 11, end: 11, frameRate: 5, repeat: 0 },
+			{ key: 'playerWalkDown', start: 0, end: 2, frameRate: 8, repeat: -1 },
+			{ key: 'playerWalkRight', start: 3, end: 6, frameRate: 8, repeat: -1 },
+			{ key: 'playerWalkUp', start: 7, end: 9, frameRate: 8, repeat: -1 },
+			{ key: 'playerWalkLeft', start: 10, end: 13, frameRate: 8, repeat: -1 }
+		];
+
+		animations.forEach(({ key, start, end, frameRate, repeat }) => {
+			this.anims.create({
+				key,
+				frames: this.anims.generateFrameNumbers('playerSheet', { start, end }),
+				frameRate,
+				repeat
+			});
+		});
+
+
+
+
+		//#endregion
+
+
+
 		//console.log("me he creado", this.scene.key);
 
 		this.anims.create({
