@@ -16,7 +16,7 @@ export default class Coin extends Phaser.GameObjects.Sprite {
         this.scene.add.existing(this);
         this.scene.physics.add.existing(this);
         this.active = false;
-        console.log("aa");
+        //console.log("aa");
         //this.scene.tweens.add({
         //    targets: this,
         //    x: this.x + 200,

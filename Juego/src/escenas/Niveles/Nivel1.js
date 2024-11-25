@@ -156,17 +156,13 @@ export default class Animation extends Phaser.Scene {
 			if (obj.name === 'Bob') { // Filtra por nombre
 				const bob = new Bob(this, obj.x * SCALE, obj.y * SCALE, this.player, this.exp);
 				bob.setScale(SCALE);
-				// Agregar el Crac a la escena y al array
-				//this.add.existing(crac);
 				this.arrayBobs.push(bob);
 			}
 		});
 
-		//console.log(this.arrayBobs); // Depuración: verificar el contenido del array
-
 		this.enemies.addMultiple(this.arrayBobs);
 
-
+		//console.log(this.arrayBobs); // Depuración: verificar el contenido del array
 
 
 		// //Configura cada objeto con su pool y jugador después de crearlo
@@ -211,11 +207,12 @@ export default class Animation extends Phaser.Scene {
 
 		//this.Bob = new Bob(this, playerX + 1200, playerY + 200, this.player, 1);
 		//this.Bob.setScale(SCALE);
+		// this.enemies.add(this.Bob);
 
-		//this.Zaro = new Zaro(this, playerX + 1800, playerY - 100, this.player, 1);
-		//this.Zaro.setScale(SCALE);
-		//this.enemies.add(this.Bob);
-		//this.enemies.add(this.Zaro);
+		this.Zaro = new Zaro(this, playerX + 1800, playerY - 100, this.player, 1);
+		this.Zaro.setScale(SCALE);
+		this.Zaro.setPool(this.enemyBullets);
+		this.enemies.add(this.Zaro);
 
 		// #endregion
 
