@@ -1,0 +1,62 @@
+[
+  {
+    "title": "El comienzo de todo",
+    "unlockedSprite": "nivel1Icon",
+    "info": "Salir del primer piso"
+  },
+  {
+    "title": "Sí, hay más...",
+    "unlockedSprite": "nivel2Icon",
+    "info": "Salir del segundo piso"
+  },
+  {
+    "title": "Vamos por el buen camino",
+    "unlockedSprite": "nivel3Icon",
+    "info": "Logro 3: Recolectaste 100 monedas"
+  },
+  {
+    "title": "Desafío superado! ...seguro?",
+    "unlockedSprite": "nivel4Icon",
+    "info": "Salir del cuarto piso"
+  },
+  {
+    "title": "Amigo o enemigo?",
+    "unlockedSprite": "jokerIcon",
+    "info": "Encontrar a Joker"
+  },
+  {
+    "title": "Máxima puntería",
+    "unlockedSprite": "ramaIcon",
+    "info": "Desbloquear una rama entera del árbol"
+  },
+  {
+    "title": "La Batalla Comienza",
+    "unlockedSprite": "50enemigosIcon",
+    "info": "Matar a 50 enemigos"
+  },
+  {
+    "title": "Asaltante Feroz",
+    "unlockedSprite": "100enemigosIcon",
+    "info": "Matar a 100 enemigos"
+  },
+  {
+    "title": "Dominante de la guerra",
+    "unlockedSprite": "150enemigosIcon",
+    "info": "Matar a 150 enemigos"
+  },
+  {
+    "title": "Destructor del mundo",
+    "unlockedSprite": "200enemigosIcon",
+    "info": "Matar a 200 enemigos"
+  },
+  {
+    "title": "Cogiendo el ritmillo",
+    "unlockedSprite": "5nivelesIcon",
+    "info": "Llegar al nivel 5"
+  },
+  {
+    "title": "Buena racha",
+    "unlockedSprite": "10nivelesIcon",
+    "info": "Llegar al nivel 10"
+  }
+]
