@@ -2,6 +2,8 @@ import Nivel1 from './escenas/Niveles/Nivel1.js';
 import Title from './escenas/title.js';
 import Loading from './escenas/loading.js';
 import GameOver from './escenas/gameover.js';
+import AchievementScene from './escenas/Logros/AchievementScene.js';
+
 
 let config = {
 	type: Phaser.AUTO,
@@ -26,7 +28,7 @@ let config = {
 
 	},
 	//scene: [Loading, Inicio, Nivel1, Nivel2, Nivel3, Nivel4, Habilidad, Pausa, GameOver,Creditos],	// Decimos a Phaser cual es nuestra escena
-	scene: [Loading, Title, Nivel1, GameOver],
+	scene: [Loading, Title, Nivel1, GameOver, AchievementScene],
 
 	physics: {
 		default: 'arcade',

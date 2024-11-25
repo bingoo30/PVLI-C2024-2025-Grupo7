@@ -1,4 +1,4 @@
-import Achievement from "../../UI/Achievement";
+import Achievement from "../../UI/Achievement.js";
 
 
 export default class AchievementScene extends Phaser.Scene {
@@ -23,43 +23,72 @@ export default class AchievementScene extends Phaser.Scene {
         this.load.image('LockedAchievement', 'assets/locked.png');
 
         // Cargar el archivo JSON de logros.
-        this.load.json('achievementData', 'assets/achievements.json');
+        this.load.json('achievementData', 'src/escenas/Logros/achievements_datas.json');
 
-        // Precargar dinámicamente los sprites de logros.
-        const achievementData = this.cache.json.get('achievementData');
-        achievementData.forEach(data => {
-            this.load.image(data.unlockedSprite, `assets/${data.unlockedSprite}.png`);
+        // Escucha el evento de finalización de carga.
+        this.load.on('complete', () => {
+            // Obtener los datos del JSON una vez cargados.
+            const achievementDatas = this.cache.json.get('achievementData');
+
+            // Precargar dinámicamente los sprites de logros.
+            achievementDatas.forEach(data => {
+                this.load.image(data.unlockedSprite, `assets/${data.unlockedSprite}.png`);
+            });
         });
     }
     /**
      * Creación de los elementos de la escena.
      */
     create() {
-        // Fondo de la escena.
-        this.wallpaper = this.add.image(0, 0, 'background').setOrigin(0, 0);
 
-        // Obtener datos de logros.
-        const achievementData = this.getAchievementData();
+        // Fondo de la escena.
+        const wallpaper = this.add.image(0, 0, 'achievement').setOrigin(0, 0);
+        wallpaper.setDisplaySize(this.scale.width, this.scale.height);
 
         // Array para almacenar logros.
         this.achievements = [];
 
+        const achievementData = this.cache.json.get('achievementData');
+        const numIz = 3; // Usamos el índice para la posición.
+        var j = 0;
         // Crear logros y agregarlos al array.
-        achievementData.forEach((data, index) => {
-            const x = 100 + (index % 4) * 150; // Posición X (4 columnas).
-            const y = 100 + Math.floor(index / 4) * 150; // Posición Y (4 filas).
+        for (let i = 0; i < achievementData.length && i < numIz*numIz; i++) {
+            const data = achievementData[i]; // Obtener los datos del logro actual.
+            const x = 100 + (i % numIz) * 150; // Posición X (3 columnas).
+            const y = 200 + Math.floor(i / numIz) * 125; // Posición Y (3 filas).
+
             const achievement = new Achievement(
                 this,                  // Escena.
                 x,                    // Posición X.
                 y,                    // Posición Y.
-                'LockedAchievement',   // Sprite bloqueado.
                 data.unlockedSprite,   // Sprite desbloqueado.
                 data.title,            // Título/ID.
                 data.info              // Información/Descripción.
             );
+
             this.add.existing(achievement); // Añadir a la escena.
             this.achievements.push(achievement);
-        });
+            j++; //para guarda el ultimo indice para el lado derecho
+        }
+        // Crear logros y agregarlos al array.
+        for (let n = 0; j < achievementData.length && n < numIz * numIz; n++) {
+            const data = achievementData[j]; // Obtener los datos del logro actual.
+            const x = 625 + (n % numIz) * 150; // Posición X (3 columnas).
+            const y = 200 + Math.floor(n / numIz) * 125; // Posición Y (3 filas).
+
+            const achievement = new Achievement(
+                this,                  // Escena.
+                x,                    // Posición X.
+                y,                    // Posición Y.
+                data.unlockedSprite,   // Sprite desbloqueado.
+                data.title,            // Título/ID.
+                data.info              // Información/Descripción.
+            );
+
+            this.add.existing(achievement); // Añadir a la escena.
+            this.achievements.push(achievement);
+            j++; //para guarda el ultimo indice para el lado derecho
+        }
 
         // Paginación.
         this.currentPage = 0;

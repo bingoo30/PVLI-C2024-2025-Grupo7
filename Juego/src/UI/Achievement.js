@@ -11,9 +11,10 @@
  */
 export default class Achievement extends Phaser.GameObjects.Sprite {
     constructor(scene, x, y, unlockedSprite, title, info) {
-        super(x, y, "LockedAchievement");
+        super(scene, x, y, "LockedAchievement");
         // #region atributos
         this.scene = scene;
+        this.scale = 0.25;
         this.unlockedSprite = unlockedSprite;
         this.locked = true;
         this.title = title;
@@ -24,8 +25,19 @@ export default class Achievement extends Phaser.GameObjects.Sprite {
         this.scene.add.existing(this);
         this.setInteractive();
 
+        // Texto del título.
+        const titleText = this.scene.add.text(x, y + 50, title, {
+            font: "14px Arial",
+            color: "#ffffff",
+            align: "center",
+            wordWrap: {
+            width: 125, // Ancho máximo antes de dividir en una nueva línea.
+            useAdvancedWrap: true, // Habilita el ajuste avanzado para cortar palabras.
+        },
+        }).setOrigin(0.5);
+
         // Tooltip
-        this.tooltip = this.scene.add.text(x, y - 20, "", {
+        this.tooltip = this.scene.add.text(x, y + 80, "", {
             font: "16px Arial",
             color: "#ffffff",
             backgroundColor: "#000000",

@@ -34,28 +34,35 @@ export default class Title extends Phaser.Scene {
 		var back = this.add.image(0, 0, 'background').setOrigin(0, 0);
 
 		//Pintamos un botón de Empezar
-		var sprite = this.add.image(this.sys.game.canvas.width/2, this.sys.game.canvas.height/2 + 100, 'start')
-		sprite.setInteractive(); // Hacemos el sprite interactivo para que lance eventos
+		var startButton = this.add.image(this.sys.game.canvas.width/2, this.sys.game.canvas.height/2 + 100, 'start')
+		startButton.setInteractive(); // Hacemos el sprite interactivo para que lance eventos
 
 
 		// Escuchamos los eventos del ratón cuando interactual con nuestro sprite de "Start"
-	    sprite.on('pointerdown', pointer => {
+		startButton.on('pointerdown', pointer => {
 	    	 //console.log("pulsando");
 	    });
 
-	    sprite.on('pointerup', pointer => {
+		startButton.on('pointerup', pointer => {
 			TitleSample.stop();
 			this.scene.start('nivel1'); //Cambiamos a la escena de juego
 
-	    });
+		});
 
-		sprite.on('pointerover', () => {
-			// console.log('puntero dentro')
-	    });
+		//Pintamos un botón de Empezar
+		var acvButton = this.add.image(this.sys.game.canvas.width / 2, this.sys.game.canvas.height / 2 + 200, 'start')
+		acvButton.setInteractive(); // Hacemos el sprite interactivo para que lance eventos
 
-	    sprite.on('pointerout', () => {
-			// console.log('puntero fuera')
-	    });
+
+		// Escuchamos los eventos del ratón cuando interactual con nuestro sprite de "Start"
+		acvButton.on('pointerdown', pointer => {
+			//console.log("pulsando");
+		});
+
+		acvButton.on('pointerup', pointer => {
+			this.scene.start('AchievementScene'); //Cambiamos a la escena de juego
+
+		});
 
 	}
 }

@@ -5,17 +5,17 @@
     "info": "Salir del primer piso"
   },
   {
-    "title": "Sí, hay más...",
+    "title": "Si, hay mas...",
     "unlockedSprite": "nivel2Icon",
     "info": "Salir del segundo piso"
   },
   {
     "title": "Vamos por el buen camino",
     "unlockedSprite": "nivel3Icon",
-    "info": "Logro 3: Recolectaste 100 monedas"
+    "info": "Salir del tercer piso"
   },
   {
-    "title": "Desafío superado! ...seguro?",
+    "title": "Desafio superado! ...seguro?",
     "unlockedSprite": "nivel4Icon",
     "info": "Salir del cuarto piso"
   },
@@ -25,9 +25,9 @@
     "info": "Encontrar a Joker"
   },
   {
-    "title": "Máxima puntería",
+    "title": "Maxima punteria",
     "unlockedSprite": "ramaIcon",
-    "info": "Desbloquear una rama entera del árbol"
+    "info": "Desbloquear una rama entera del arbol"
   },
   {
     "title": "La Batalla Comienza",
