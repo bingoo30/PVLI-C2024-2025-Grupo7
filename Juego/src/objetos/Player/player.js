@@ -201,15 +201,19 @@ export default class Player extends Character {
 
         if (this.speed.x === 0 && this.speed.y === 0) {
             switch (this.anims.currentAnim?.key) {
+                case 'playerIdleLeft':
                 case 'playerWalkLeft':
                     animationKey = 'playerIdleLeft';
                     break;
+                case 'playerIdleRight':
                 case 'playerWalkRight':
                     animationKey = 'playerIdleRight';
                     break;
+                case 'playerIdleUp':
                 case 'playerWalkUp':
                     animationKey = 'playerIdleUp';
                     break;
+                case 'playerIdleDown':
                 case 'playerWalkDown':
                     animationKey = 'playerIdleDown';
                     break;
