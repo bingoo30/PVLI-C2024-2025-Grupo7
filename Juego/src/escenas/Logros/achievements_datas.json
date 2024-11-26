@@ -25,11 +25,6 @@
     "info": "Encontrar a Joker"
   },
   {
-    "title": "Maxima punteria",
-    "unlockedSprite": "ramaIcon",
-    "info": "Desbloquear una rama entera del arbol"
-  },
-  {
     "title": "La Batalla Comienza",
     "unlockedSprite": "50enemigosIcon",
     "info": "Matar a 50 enemigos"
@@ -50,6 +45,22 @@
     "info": "Matar a 200 enemigos"
   },
   {
+    "title": "Caballero generoso",
+    "unlockedSprite": "flushIcon",
+    "info": "Hablar con Flush"
+  },
+  {
+    "title": "Choque cultural",
+    "unlockedSprite": "weiyoungIcon",
+    "info": "Hablar con Flush"
+  },
+
+  {
+    "title": "...y Julieta?",
+    "unlockedSprite": "romeoIcon",
+    "info": "Hablar con Romeo"
+  },
+  {
     "title": "Cogiendo el ritmillo",
     "unlockedSprite": "5nivelesIcon",
     "info": "Llegar al nivel 5"
@@ -58,5 +69,75 @@
     "title": "Buena racha",
     "unlockedSprite": "10nivelesIcon",
     "info": "Llegar al nivel 10"
+  },
+  {
+    "title": "Mucha fuerza",
+    "unlockedSprite": "20nivelesIcon",
+    "info": "Llegar al nivel 20"
+  },
+  {
+    "title": "En la Cima",
+    "unlockedSprite": "30nivelesIcon",
+    "info": "Llegar al nivel 30"
+  },
+  {
+    "title": "La primera no cuenta",
+    "unlockedSprite": "1muerteIcon",
+    "info": "Morirte 1 vez"
+  },
+  {
+    "title": "Este no es mi momento",
+    "unlockedSprite": "5muerteIcon",
+    "info": "Morirte 5 veces"
+  },
+  {
+    "title": "Demasiado hardcore",
+    "unlockedSprite": "10muerteIcon",
+    "info": "Morirte 10 veces"
+  },
+  {
+    "title": "Insignia para novatos (no llores, te queremos)",
+    "unlockedSprite": "20muerteIcon",
+    "info": "Morirte 20 veces"
+  },
+  {
+    "title": "1 UP!",
+    "unlockedSprite": "1muertePorNivelIcon",
+    "info": "Pasarte de un nivel sin morirte ninguna vez"
+  },
+  {
+    "title": "Maxima punteria",
+    "unlockedSprite": "ramaIcon",
+    "info": "Desbloquear una rama entera del arbol"
+  },
+  {
+    "title": "Julie Pro",
+    "unlockedSprite": "julieProIcon",
+    "info": "Tener todos los estatus mejorados al maximo"
+  },
+  {
+    "title": "Julie Pro Max",
+    "unlockedSprite": "julieProMaxIcon",
+    "info": "Desbloquear las tres ramas de habilidades"
+  },
+  {
+    "title": "Cascos de un lloron",
+    "unlockedSprite": "bingIcon",
+    "info": "Encontrar los cascos que reproducen en bucle llorerias (easter egg)"
+  },
+  {
+    "title": "lapiz en tiles",
+    "unlockedSprite": "haoshuangIcon",
+    "info": "Encontrar un lapiz roto, el cual te hace recordar los malos recuerdos con animar en pixel-art (easter egg)"
+  },
+  {
+    "title": "teclados machacados",
+    "unlockedSprite": "mauroIcon",
+    "info": "Encontrar un teclado sin algunas teclas. Faltan: p,h,a,s,e,r (easter egg)"
+  },
+  {
+    "title": "gatitu!!!!",
+    "unlockedSprite": "mariaIcon",
+    "info": "Interactuar con Piu. A que es muy majete"
   }
 ]

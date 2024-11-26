@@ -21,7 +21,8 @@ export default class AchievementScene extends Phaser.Scene {
     preload() {
         this.load.image('achievement', 'assets/achievement.png');
         this.load.image('LockedAchievement', 'assets/locked.png');
-
+        this.load.image('PrevButton', 'assets/previous.png');
+        this.load.image('NextButton', 'assets/next.png');
         // Cargar el archivo JSON de logros.
         this.load.json('achievementData', 'src/escenas/Logros/achievements_datas.json');
 
@@ -47,15 +48,12 @@ export default class AchievementScene extends Phaser.Scene {
 
         // Array para almacenar logros.
         this.achievements = [];
-
         const achievementData = this.cache.json.get('achievementData');
-        const numIz = 3; // Usamos el índice para la posición.
-        var j = 0;
-        // Crear logros y agregarlos al array.
-        for (let i = 0; i < achievementData.length && i < numIz*numIz; i++) {
+        // Crear logros y agregarlos al array
+        for (let i = 0; i < achievementData.length; i++) {
             const data = achievementData[i]; // Obtener los datos del logro actual.
-            const x = 100 + (i % numIz) * 150; // Posición X (3 columnas).
-            const y = 200 + Math.floor(i / numIz) * 125; // Posición Y (3 filas).
+            const x = 0; // Posición X (3 columnas).
+            const y = 0; // Posición Y (3 filas).
 
             const achievement = new Achievement(
                 this,                  // Escena.
@@ -65,39 +63,34 @@ export default class AchievementScene extends Phaser.Scene {
                 data.title,            // Título/ID.
                 data.info              // Información/Descripción.
             );
-
-            this.add.existing(achievement); // Añadir a la escena.
             this.achievements.push(achievement);
-            j++; //para guarda el ultimo indice para el lado derecho
-        }
-        // Crear logros y agregarlos al array.
-        for (let n = 0; j < achievementData.length && n < numIz * numIz; n++) {
-            const data = achievementData[j]; // Obtener los datos del logro actual.
-            const x = 625 + (n % numIz) * 150; // Posición X (3 columnas).
-            const y = 200 + Math.floor(n / numIz) * 125; // Posición Y (3 filas).
-
-            const achievement = new Achievement(
-                this,                  // Escena.
-                x,                    // Posición X.
-                y,                    // Posición Y.
-                data.unlockedSprite,   // Sprite desbloqueado.
-                data.title,            // Título/ID.
-                data.info              // Información/Descripción.
-            );
-
-            this.add.existing(achievement); // Añadir a la escena.
-            this.achievements.push(achievement);
-            j++; //para guarda el ultimo indice para el lado derecho
         }
 
         // Paginación.
         this.currentPage = 0;
-        this.totalPages = Math.ceil(this.achievements.length / 16);
+        this.num = 3; //cuantos elementos hay en una fila y columna
+        this.acvPerPage = 2 * this.num*this.num;
+        this.totalPages = Math.ceil(this.achievements.length / this.acvPerPage);
         this.updatePage();
 
-        // Controles de cambio de página.
-        this.input.keyboard.on('keydown-RIGHT', () => this.nextPage());
-        this.input.keyboard.on('keydown-LEFT', () => this.previousPage());
+        //botones para pasar pagina
+        var prevButton = this.add.image(100, 100, 'PrevButton').setScale(0.35);
+        prevButton.setInteractive(); // Hacemos el sprite interactivo para que lance eventos
+
+
+        // Escuchamos los eventos del ratón cuando interactual con nuestro sprite de "Start"
+        prevButton.on('pointerdown', pointer => {
+            this.previousPage();
+        });
+
+        var nextButton = this.add.image(925, 100, 'NextButton').setScale(0.35);
+        nextButton.setInteractive(); // Hacemos el sprite interactivo para que lance eventos
+
+
+        // Escuchamos los eventos del ratón cuando interactual con nuestro sprite de "Start"
+        nextButton.on('pointerdown', pointer => {
+            this.nextPage();
+        });
     }
 
     
@@ -106,19 +99,56 @@ export default class AchievementScene extends Phaser.Scene {
      * Actualiza los logros visibles según la página actual.
      */
     updatePage() {
-        const startIndex = this.currentPage * 16;
-        const endIndex = startIndex + 16;
-
-        this.achievements.forEach((achievement, index) => {
-            achievement.setVisible(index >= startIndex && index < endIndex);
+        this.achievements.forEach((acv) => {
+            this.hide(acv);
         });
-    }
+        const startIndex = this.currentPage * this.acvPerPage;
 
+        let n = 0;
+        // pintar todos los logros 
+        for (let i = startIndex; i < this.achievements.length && n < this.num*this.num; i++) {
+            const data = this.achievements[i]; // Obtener los datos del logro actual.
+            const x = 100 + (n % this.num) * 150; // Posición X (3 columnas).
+            const y = 200 + Math.floor(n / this.num) * 125; // Posición Y (3 filas).
+
+            this.appear(x, y, this.achievements[i]); 
+            n++;
+
+        }
+        n = 0;
+        // recolocar los logros del lado derecho
+        for (let i = startIndex + this.num * this.num; i < this.achievements.length && n < this.num * this.num; i++) {
+            const data = this.achievements[i]; // Obtener los datos del logro actual.
+            const x = 625 + (n % this.num) * 150; // Posición X (3 columnas).
+            const y = 200 + Math.floor(n / this.num) * 125; // Posición Y (3 filas).
+
+            this.appear(x, y, this.achievements[i]);
+            n++
+        } 
+    }
+    /**
+     * Mostrar en pantalla un logro
+     */
+    appear(x, y, icon) {
+        icon.X(x);
+        icon.Y(y);
+        icon.setInteractive(true);
+        icon.setVisible(true);
+        icon.TitleText(true);
+    }
+    /**
+     * Esconder un logro
+     */
+    hide(icon) {
+        icon.setInteractive(false);
+        icon.setVisible(false);
+        icon.TitleText(false);
+    }
     /**
      * Cambia a la página siguiente.
      */
     nextPage() {
-        if (this.currentPage < this.totalPages - 1) {
+        if (this.currentPage < this.totalPages-1) {
             this.currentPage++;
             this.updatePage();
         }
