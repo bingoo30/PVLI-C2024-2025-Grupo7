@@ -330,7 +330,10 @@ export default class Animation extends Phaser.Scene {
 
 		this.physics.add.collider(this.player, this.paredLayer);
 
-		this.physics.add.collider(this.player, this.Flush);
+		this.physics.add.collider(this.player, this.Flush, () => {
+			//desbloquear el logro de hablar con flush
+			this.game.events.emit(`unlock_Caballero generoso`);
+		});
 
 		//colision player-enemigos
 		this.physics.add.collider(this.player, this.enemies, (player, enemy) => {

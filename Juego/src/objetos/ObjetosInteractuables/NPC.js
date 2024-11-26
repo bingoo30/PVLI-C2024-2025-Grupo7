@@ -41,7 +41,6 @@ export default class NPC extends InteractableObjects {
 
                 dialogManager.initialize(dialogPlugin, dialogos);
                 dialogManager.showDialogue();
-
                 if (!dialogManager.isDialogActive) this.isDialogActive = false;
             }
             else {
