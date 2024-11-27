@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="left-up" width="80" height="60" tilewidth="32" tileheight="32" infinite="0" nextlayerid="13" nextobjectid="223">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="left-up" width="80" height="60" tilewidth="32" tileheight="32" infinite="0" nextlayerid="13" nextobjectid="240">
  <editorsettings>
-  <export target="mapa1.json" format="json"/>
+  <export format="json"/>
  </editorsettings>
  <tileset firstgid="1" name="mapTiles" tilewidth="32" tileheight="32" tilecount="256" columns="16">
-  <image source="mapTiles.png" width="512" height="512"/>
+  <image source="map_tiles.png" width="512" height="512"/>
   <tile id="0">
    <properties>
     <property name="collides" type="bool" value="true"/>
@@ -781,9 +781,25 @@
   </object>
  </objectgroup>
  <objectgroup id="12" name="Door">
-  <object id="209" name="verticalDoor" x="1000" y="1192" width="16" height="56"/>
+  <object id="209" name="verticalDoor" x="1000" y="1192" width="8" height="56"/>
   <object id="216" name="horizontalDoor" x="1088" y="1280" width="64" height="32"/>
   <object id="221" name="verticalDoor" x="1416" y="1224" width="16" height="56"/>
+  <object id="223" name="verticalDoor" x="936" y="840" width="8" height="56"/>
+  <object id="224" name="verticalDoor" x="1480" y="776" width="8" height="56"/>
+  <object id="225" name="verticalDoor" x="1264" y="360" width="8" height="56"/>
+  <object id="226" name="verticalDoor" x="1840" y="872" width="8" height="88"/>
+  <object id="227" name="verticalDoor" x="2216" y="1672" width="8" height="88"/>
+  <object id="228" name="verticalDoor" x="600" y="1640" width="8" height="88"/>
+  <object id="229" name="verticalDoor" x="304" y="840" width="8" height="88"/>
+  <object id="230" name="horizontalDoor" x="1280" y="1056" width="64" height="32"/>
+  <object id="231" name="horizontalDoor" x="384" y="1504" width="64" height="32"/>
+  <object id="232" name="horizontalDoor" x="416" y="1024" width="64" height="32"/>
+  <object id="233" name="horizontalDoor" x="1344" y="640" width="64" height="32"/>
+  <object id="234" name="horizontalDoor" x="1696" y="288" width="64" height="32"/>
+  <object id="235" name="horizontalDoor" x="2080" y="736" width="64" height="32"/>
+  <object id="236" name="horizontalDoor" x="2016" y="1120" width="64" height="32"/>
+  <object id="238" name="horizontalDoor" x="2016" y="1280" width="64" height="32"/>
+  <object id="239" name="horizontalDoor" x="1888" y="1632" width="64" height="32"/>
  </objectgroup>
  <objectgroup id="8" name="Letus">
   <object id="167" name="Letus" x="1731.34" y="1037.85">
