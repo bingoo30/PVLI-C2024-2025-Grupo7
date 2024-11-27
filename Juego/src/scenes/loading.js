@@ -19,13 +19,13 @@ export default class Loading extends Phaser.Scene {
 
 		// #region UI
 		this.cameras.main.setBackgroundColor('#d3d3d3');
-		this.load.image('start', 'assets/gui/start_button.png');
+		this.load.image('start', 'assets/GUI/start_button.png');
 		//this.load.image('background', 'assets/GUI/fondoinicio1.png');
-		this.load.image('end', 'assets/gui/gameover.png');
-		this.load.image('healthBarBackground', 'assets/gui/health_bar_1.png');
-		this.load.image('healthBar', 'assets/gui/health_bar_2.png');
-		this.load.image('expBarBackground', 'assets/gui/exp_bar_background.png');
-		this.load.image('expBar', 'assets/gui/exp_bar.png');
+		this.load.image('end', 'assets/GUI/gameover.png');
+		this.load.image('healthBarBackground', 'assets/GUI/health_bar_1.png');
+		this.load.image('healthBar', 'assets/GUI/health_bar_2.png');
+		this.load.image('expBarBackground', 'assets/GUI/exp_bar_background.png');
+		this.load.image('expBar', 'assets/GUI/exp_bar.png');
 
 		this.load.spritesheet('PiuAnim', 'assets/piu/piu.png', {
 			frameWidth: 25,  // Ancho de cada cuadro

@@ -1,6 +1,6 @@
 import Character from "./character.js";
-import { fire } from "../Shooting/shooter.js";
-import Inventory from "./Inventory.js";
+import { fire } from "../shooting/shooter.js";
+import Inventory from "./inventory.js";
 
 /**
  * @extends Character
