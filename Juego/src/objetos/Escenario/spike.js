@@ -1,4 +1,4 @@
-import Obstacle from "./Obstacle";
+import Obstacle from "./obstacle.js";
 
 const SPIKE_DAMAGE = 5;
 /**
