@@ -15,9 +15,9 @@ export default class Title extends Phaser.Scene {
 	 * Cargamos todos los assets que vamos a necesitar
 	 */
 	preload() {
-		this.load.image('start', 'assets/GUI/start.png');
-		this.load.image('logros', 'assets/GUI/logros.png');
-		this.load.image('background', 'assets/GUI/fondoinicio.png');
+		this.load.image('start', 'assets/GUI/start_button.png');
+		this.load.image('logros', 'assets/GUI/achievements.png');
+		this.load.image('background', 'assets/GUI/beckground_start_1.png');
 		this.load.audio('TitleSample', 'assets/audio/MenuPrincipal.mp3');
 	}
 	

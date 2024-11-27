@@ -31,8 +31,8 @@ export default class Animation extends Phaser.Scene {
 		this.load.json('dialogues', 'assets/dialogues/dialogues_intro.json');
 		this.load.json('dialogues_Flush', 'assets/dialogues/dialogues_Flush.json');
 		this.load.image('Flush', 'assets/character/flush.png');
-		this.load.image('verticalDoor', 'assets/map/verticalDoor1.png');
-		this.load.image('horizontalDoor', 'assets/map/horizontalDoor1.png');
+		this.load.image('verticalDoor', 'assets/map/vertical_door_1.png');
+		this.load.image('horizontalDoor', 'assets/map/horizontal_door_1.png');
 	}
 
 	/**  

@@ -23,7 +23,7 @@ export default class Loading extends Phaser.Scene {
 		//this.load.image('background', 'assets/GUI/fondoinicio1.png');
 		this.load.image('end', 'assets/GUI/gameover.png');
 		this.load.image('healthBarBackground', 'assets/GUI/health_bar_1.png');
-		this.load.image('healthBar', 'assets/GUI/health_bar_2.png');
+		this.load.image('healthBar', 'assets/GUI/health_bar_2_b.png');
 		this.load.image('expBarBackground', 'assets/GUI/exp_bar_background.png');
 		this.load.image('expBar', 'assets/GUI/exp_bar.png');
 
@@ -40,7 +40,7 @@ export default class Loading extends Phaser.Scene {
 		this.load.image('Player', 'assets/character/player.png');
 		this.load.image('Bala', 'assets/bullet/bullet_1.png');
 		this.load.image('Bala2', 'assets/bullet/bullet_2.png');
-		this.load.image('Particle', 'assets/effects/particles.png');
+		this.load.image('Particle', 'assets/effects/particles_1.png');
 		this.load.image('Coin', 'assets/coin/coin.png');
 
 		this.load.spritesheet('playerSheet', 'assets/character/player_sheet.png',{
@@ -62,7 +62,7 @@ export default class Loading extends Phaser.Scene {
 
 		// #region Tilemaps
 
-		this.load.tilemapTiledJSON('mapa1', 'assets/map/map_1/mapa1.json');
+		this.load.tilemapTiledJSON('mapa1', 'assets/map/map_1/mapa_1.json');
 		this.load.image('tileset', 'assets/map/map_1/map_tiles.png');
 		this.load.json('navmesh', 'assets/map/map_1/mapa_1.json');
 

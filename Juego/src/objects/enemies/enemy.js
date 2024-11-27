@@ -1,4 +1,4 @@
-import Character from '../../objetos/player/character.js';
+import Character from '../../objects/player/character.js';
 import { drop } from './drop.js';
 
 const FOLLOW_RANGE = 500;
