@@ -1,8 +1,8 @@
-import Nivel1 from './escenas/Niveles/Nivel1.js';
+import Nivel1 from './escenas/Niveles/nivel1.js';
 import Title from './escenas/title.js';
 import Loading from './escenas/loading.js';
 import GameOver from './escenas/gameover.js';
-import AchievementScene from './escenas/0logros/achievement_scene.js';
+import AchievementScene from './escenas/Logros/achievement_scene.js';
 
 
 let config = {

@@ -11,7 +11,7 @@
 /**
  * Hemos hecho modificaciones para que ajuste a nuestro juego
  * @param {String} speakerText - hablante, puede ser el narrador, NPC, o player
- * 
+ * cambio de close button a Skip button
  */
 export default class DialogText{
 
