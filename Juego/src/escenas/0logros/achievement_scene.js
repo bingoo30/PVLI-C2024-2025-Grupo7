@@ -1,4 +1,4 @@
-import Achievement from "../../UI/Achievement.js";
+import Achievement from "../../UI/achievements.js";
 
 
 export default class AchievementScene extends Phaser.Scene {
@@ -8,11 +8,11 @@ export default class AchievementScene extends Phaser.Scene {
     }
 
     /**
-     * Inicialización de la escena.
+     * Inicializaciï¿½n de la escena.
      * @param {Object} inventory - Inventario del jugador.
      */
     init(inventory) {
-        this.inventory = inventory; // Información del inventario (si es necesario).
+        this.inventory = inventory; // Informaciï¿½n del inventario (si es necesario).
     }
 
     /**
@@ -26,19 +26,19 @@ export default class AchievementScene extends Phaser.Scene {
         // Cargar el archivo JSON de logros.
         this.load.json('achievementData', 'src/escenas/Logros/achievements_datas.json');
 
-        // Escucha el evento de finalización de carga.
+        // Escucha el evento de finalizaciï¿½n de carga.
         this.load.on('complete', () => {
             // Obtener los datos del JSON una vez cargados.
             const achievementDatas = this.cache.json.get('achievementData');
 
-            // Precargar dinámicamente los sprites de logros.
+            // Precargar dinï¿½micamente los sprites de logros.
             achievementDatas.forEach(data => {
                 this.load.image(data.unlockedSprite, `assets/${data.unlockedSprite}.png`);
             });
         });
     }
     /**
-     * Creación de los elementos de la escena.
+     * Creaciï¿½n de los elementos de la escena.
      */
     create() {
 
@@ -52,21 +52,21 @@ export default class AchievementScene extends Phaser.Scene {
         // Crear logros y agregarlos al array
         for (let i = 0; i < achievementData.length; i++) {
             const data = achievementData[i]; // Obtener los datos del logro actual.
-            const x = 0; // Posición X (3 columnas).
-            const y = 0; // Posición Y (3 filas).
+            const x = 0; // Posiciï¿½n X (3 columnas).
+            const y = 0; // Posiciï¿½n Y (3 filas).
 
             const achievement = new Achievement(
                 this,                  // Escena.
-                x,                    // Posición X.
-                y,                    // Posición Y.
+                x,                    // Posiciï¿½n X.
+                y,                    // Posiciï¿½n Y.
                 data.unlockedSprite,   // Sprite desbloqueado.
-                data.title,            // Título/ID.
-                data.info              // Información/Descripción.
+                data.title,            // Tï¿½tulo/ID.
+                data.info              // Informaciï¿½n/Descripciï¿½n.
             );
             this.achievements.push(achievement);
         }
 
-        // Paginación.
+        // Paginaciï¿½n.
         this.currentPage = 0;
         this.num = 3; //cuantos elementos hay en una fila y columna
         this.acvPerPage = 2 * this.num*this.num;
@@ -78,7 +78,7 @@ export default class AchievementScene extends Phaser.Scene {
         prevButton.setInteractive(); // Hacemos el sprite interactivo para que lance eventos
 
 
-        // Escuchamos los eventos del ratón cuando interactual con nuestro sprite de "Start"
+        // Escuchamos los eventos del ratï¿½n cuando interactual con nuestro sprite de "Start"
         prevButton.on('pointerdown', pointer => {
             this.previousPage();
         });
@@ -87,7 +87,7 @@ export default class AchievementScene extends Phaser.Scene {
         nextButton.setInteractive(); // Hacemos el sprite interactivo para que lance eventos
 
 
-        // Escuchamos los eventos del ratón cuando interactual con nuestro sprite de "Start"
+        // Escuchamos los eventos del ratï¿½n cuando interactual con nuestro sprite de "Start"
         nextButton.on('pointerdown', pointer => {
             this.nextPage();
         });
@@ -96,7 +96,7 @@ export default class AchievementScene extends Phaser.Scene {
     
 
     /**
-     * Actualiza los logros visibles según la página actual.
+     * Actualiza los logros visibles segï¿½n la pï¿½gina actual.
      */
     updatePage() {
         this.achievements.forEach((acv) => {
@@ -108,8 +108,8 @@ export default class AchievementScene extends Phaser.Scene {
         // pintar todos los logros 
         for (let i = startIndex; i < this.achievements.length && n < this.num*this.num; i++) {
             const data = this.achievements[i]; // Obtener los datos del logro actual.
-            const x = 100 + (n % this.num) * 150; // Posición X (3 columnas).
-            const y = 200 + Math.floor(n / this.num) * 125; // Posición Y (3 filas).
+            const x = 100 + (n % this.num) * 150; // Posiciï¿½n X (3 columnas).
+            const y = 200 + Math.floor(n / this.num) * 125; // Posiciï¿½n Y (3 filas).
 
             this.appear(x, y, this.achievements[i]); 
             n++;
@@ -119,8 +119,8 @@ export default class AchievementScene extends Phaser.Scene {
         // recolocar los logros del lado derecho
         for (let i = startIndex + this.num * this.num; i < this.achievements.length && n < this.num * this.num; i++) {
             const data = this.achievements[i]; // Obtener los datos del logro actual.
-            const x = 625 + (n % this.num) * 150; // Posición X (3 columnas).
-            const y = 200 + Math.floor(n / this.num) * 125; // Posición Y (3 filas).
+            const x = 625 + (n % this.num) * 150; // Posiciï¿½n X (3 columnas).
+            const y = 200 + Math.floor(n / this.num) * 125; // Posiciï¿½n Y (3 filas).
 
             this.appear(x, y, this.achievements[i]);
             n++
@@ -145,7 +145,7 @@ export default class AchievementScene extends Phaser.Scene {
         icon.TitleText(false);
     }
     /**
-     * Cambia a la página siguiente.
+     * Cambia a la pï¿½gina siguiente.
      */
     nextPage() {
         if (this.currentPage < this.totalPages-1) {
@@ -155,7 +155,7 @@ export default class AchievementScene extends Phaser.Scene {
     }
 
     /**
-     * Cambia a la página anterior.
+     * Cambia a la pï¿½gina anterior.
      */
     previousPage() {
         if (this.currentPage > 0) {

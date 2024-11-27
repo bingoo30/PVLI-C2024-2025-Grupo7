@@ -2,7 +2,7 @@ import Nivel1 from './escenas/Niveles/Nivel1.js';
 import Title from './escenas/title.js';
 import Loading from './escenas/loading.js';
 import GameOver from './escenas/gameover.js';
-import AchievementScene from './escenas/Logros/AchievementScene.js';
+import AchievementScene from './escenas/0logros/achievement_scene.js';
 
 
 let config = {

@@ -1,20 +1,20 @@
 import Player from '../../objetos/Player/player.js';
 import Crac from '../../objetos/Enemies/Crac.js'
-import Pool from '../../objetos/OurPool.js'
+import OurPool from '../../objetos/our_pool.js';
 import NavMesh from '../../objetos/NavMesh/navmesh.js';
 import Bob from '../../objetos/Enemies/Bob.js';
-import HealthBar from '../../UI/HealthBar.js';
-import ExpBar from '../../UI/ExpBar.js';
+import HealthBar from '../../UI/health_bar.js';
+import ExpBar from '../../UI/exp_bar.js';
 import Coin from '../../objetos/Enemies/coin.js';
 import Bullet from '../../objetos/Shooting/bullet.js';
 import Letus from '../../objetos/Enemies/Letus.js';
 import Zaro from '../../objetos/Enemies/Zaro.js';
 
-import DialogueManager from '../../UI/DialogManager.js';
+import DialogueManager from '../../UI/dialog_manager.js';
 import DialogText from '../../UI/dialog_plugin.js';
 import NPC from '../../objetos/ObjetosInteractuables/npc.js';
 import Door from '../../objetos/ObjetosInteractuables/door.js';
-//import Coin from '../../objetos/Enemies/coin.js'
+
 //constante
 const SCALE = 4;
 /**
@@ -107,7 +107,7 @@ export default class Animation extends Phaser.Scene {
 		// #region Coins
 
 		let toAdds = [];
-		this.coins = new Pool(this, MAX, 'Coin');
+		this.coins = new OurPool(this, MAX, 'Coin');
 		for (let i = 0; i < MAX; i++) {
 			let toAdd = new Coin(this, 0, 0, 1);
 			toAdds.push(toAdd);
@@ -119,7 +119,7 @@ export default class Animation extends Phaser.Scene {
 		// #region Player Bullets
 
 		toAdds = [];
-		this.playerBullets = new Pool(this, MAX, 'Bullet');
+		this.playerBullets = new OurPool(this, MAX, 'Bullet');
 		for (let i = 0; i < MAX; i++) {
 			let toAdd = new Bullet(this, 0, 0, 'Bala2');
 			toAdds.push(toAdd);
@@ -132,7 +132,7 @@ export default class Animation extends Phaser.Scene {
 		// #region Enemy Bullets
 
 		toAdds = [];
-		this.enemyBullets = new Pool(this, MAX, 'Bullet');
+		this.enemyBullets = new OurPool(this, MAX, 'Bullet');
 		for (let i = 0; i < MAX; i++) {
 			let toAdd = new Bullet(this, 0, 0, 'Bala');
 			toAdds.push(toAdd);
