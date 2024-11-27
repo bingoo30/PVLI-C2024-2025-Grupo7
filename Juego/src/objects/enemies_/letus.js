@@ -1,5 +1,5 @@
 //import Enemy from "./enemy.js";
-import Crac from "./Crac.js";
+import Crac from "./crac.js";
 
 export default class Letus extends Crac {
     constructor(scene, x, y, player, exp) {

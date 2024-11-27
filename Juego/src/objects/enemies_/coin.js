@@ -1,4 +1,3 @@
-
 export default class Coin extends Phaser.GameObjects.Sprite {
     /**
      * Constructor de Bullet,las balas
