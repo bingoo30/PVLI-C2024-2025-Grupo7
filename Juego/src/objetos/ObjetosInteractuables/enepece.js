@@ -3,18 +3,20 @@
      Lo que recibe
      * @param {String} texture - key del sprite del NPC
      * @param {String} dialogues - key del dialogo del NPC
+     * 
      Atributos
      * @param {boolean} isDialogActive  - booleano para saber si esta en dialogo
      * 
      */
 import InteractableObjects from './interactable_objects.js';
 export default class NPC extends InteractableObjects {
-    constructor(scene, x, y, texture, dialogues) {
+    constructor(scene, x, y, texture, dialogues, acv) {
         super(scene, x, y, [texture]);
 
         this.scene = scene;
         this.dialogues = dialogues;
         this.isDialogActive = false;
+        this.achievement = acv;
 
         this.scene.physics.add.existing(this);
         this.scene.add.existing(this);
@@ -42,6 +44,7 @@ export default class NPC extends InteractableObjects {
                 dialogManager.initialize(dialogPlugin, dialogos);
                 dialogManager.showDialogue();
                 if (!dialogManager.isDialogActive) this.isDialogActive = false;
+                this.scene.events.emit(`unlock_${this.achievement}`);
             }
             else {
                 console.error("El DialogManager no est¨¢ disponible en la escena.");

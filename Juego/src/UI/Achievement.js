@@ -59,7 +59,7 @@ export default class Achievement extends Phaser.GameObjects.Sprite {
         this.on('pointerout', () => this.hideTooltip());
 
         // Evento para desbloquear logro
-        this.scene.events.on(`unlock_${title}`, () => {
+        this.scene.events.on(`unlock_${title}`, () => { 
             this.unlock();
         });
     }

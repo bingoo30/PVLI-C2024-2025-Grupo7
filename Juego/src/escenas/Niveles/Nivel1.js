@@ -336,7 +336,7 @@ export default class Animation extends Phaser.Scene {
 		const NPCX = (playerPos.x + 100) * SCALE;
 		const NPCY = (playerPos.y + 10) * SCALE;
 
-		this.Flush = new NPC(this, NPCX, NPCY, 'Flush', 'dialogues_Flush');
+		this.Flush = new NPC(this, NPCX, NPCY, 'Flush', 'dialogues_Flush','Caballero generoso');
 		this.Flush.setScale(SCALE);
 
 		// #endregion
