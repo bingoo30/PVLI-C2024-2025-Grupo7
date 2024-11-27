@@ -59,16 +59,17 @@ export default class Animation extends Phaser.Scene {
 		this.paredLayer.setScale(SCALE);
 
 		//#region puerta
+
+		// la escala de la puerta lo hace en la constructora de la clase door
 		this.doorGroup = this.add.group();
 		this.doorLayer = this.map.getObjectLayer('Door');
 		console.log(this.doorLayer);
 		this.doorLayer.objects.forEach((objD) => {
-			const door = new Door(this, objD.x * SCALE, objD.y * SCALE,
+			const door = new Door(this, objD.x, objD.y,
 				objD.name,  // El tipo de puerta ('verticalDoor' o 'horizontalDoor')
 				objD.width,  // El tamaño de la puerta en Tiled
 				objD.height, // El tamaño de la puerta en Tiled
 			);
-			door.setScale(SCALE);
 			// Añadir la puerta al grupo de puertas
 			this.doorGroup.add(door);
 		});
