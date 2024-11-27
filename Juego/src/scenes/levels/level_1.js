@@ -1,19 +1,19 @@
-import Player from '../../objetos/Player/player.js';
-import Crac from '../../objetos/Enemies/crac.js'
-import Pool from '../../objetos/our_pool.js'
-import NavMesh from '../../objetos/NavMesh/navmesh.js';
-import Bob from '../../objetos/Enemies/bob.js';
+import Player from '../../objects/player/player.js';
+import Crac from '../../objects/enemies/crac.js'
+import Pool from '../../objects/our_pool.js'
+import NavMesh from '../../objects/navmesh/navmesh.js';
+import Bob from '../../objects/enemies/bob.js';
 import HealthBar from '../../UI/health_bar.js';
 import ExpBar from '../../UI/exp_bar.js';
-import Coin from '../../objetos/Enemies/coin.js';
-import Bullet from '../../objetos/Shooting/bullet.js';
-import Letus from '../../objetos/Enemies/letus.js';
-import Zaro from '../../objetos/Enemies/zaro.js';
+import Coin from '../../objects/enemies/coin.js';
+import Bullet from '../../objects/shooting/bullet.js';
+import Letus from '../../objects/enemies/letus.js';
+import Zaro from '../../objects/enemies/zaro.js';
 
 import DialogueManager from '../../UI/dialog_manager.js';
 import DialogText from '../../UI/dialog_plugin.js';
-import NPC from '../../objetos/ObjetosInteractuables/npc.js';
-import Door from '../../objetos/ObjetosInteractuables/door.js';
+import NPC from '../../objects/interactable_objects/npc.js';
+import Door from '../../objects/interactable_objects/door.js';
 //import Coin from '../../objetos/Enemies/coin.js'
 //constante
 const SCALE = 4;
@@ -28,9 +28,9 @@ export default class Animation extends Phaser.Scene {
 		this.isGamePaused = false;
 	}
 	preload() {
-		this.load.json('dialogues', 'assets/Dialogues/dialogues_intro.json');
-		this.load.json('dialogues_Flush', 'assets/Dialogues/dialogues_Flush.json');
-		this.load.image('Flush', 'assets/Character/Flush.png');
+		this.load.json('dialogues', 'assets/dialogues/dialogues_intro.json');
+		this.load.json('dialogues_Flush', 'assets/dialogues/dialogues_Flush.json');
+		this.load.image('Flush', 'assets/character/flush.png');
 		this.load.image('verticalDoor', 'assets/map/verticalDoor1.png');
 		this.load.image('horizontalDoor', 'assets/map/horizontalDoor1.png');
 	}

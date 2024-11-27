@@ -19,15 +19,15 @@ export default class Loading extends Phaser.Scene {
 
 		// #region UI
 		this.cameras.main.setBackgroundColor('#d3d3d3');
-		this.load.image('start', 'assets/GUI/start.png');
+		this.load.image('start', 'assets/gui/start_button.png');
 		//this.load.image('background', 'assets/GUI/fondoinicio1.png');
-		this.load.image('end', 'assets/GUI/gameover.png');
-		this.load.image('healthBarBackground', 'assets/GUI/healthBar1.png');
-		this.load.image('healthBar', 'assets/GUI/healthBar2.png');
-		this.load.image('expBarBackground', 'assets/GUI/expBarBackground.png');
-		this.load.image('expBar', 'assets/GUI/expBar.png');
+		this.load.image('end', 'assets/gui/gameover.png');
+		this.load.image('healthBarBackground', 'assets/gui/health_bar_1.png');
+		this.load.image('healthBar', 'assets/gui/health_bar_2.png');
+		this.load.image('expBarBackground', 'assets/gui/exp_bar_background.png');
+		this.load.image('expBar', 'assets/gui/exp_bar.png');
 
-		this.load.spritesheet('PiuAnim', 'assets/Piu.png', {
+		this.load.spritesheet('PiuAnim', 'assets/piu/piu.png', {
 			frameWidth: 25,  // Ancho de cada cuadro
 			frameHeight: 10, // Altura de cada cuadro
 			endFrame: 16      // Número de cuadros en el sprite sheet
@@ -37,13 +37,13 @@ export default class Loading extends Phaser.Scene {
 
 		// #region Player
 
-		this.load.image('Player', 'assets/player.png');
-		this.load.image('Bala', 'assets/bala.png');
-		this.load.image('Bala2', 'assets/bala2.png');
-		this.load.image('Particle', 'assets/particles.png');
-		this.load.image('Coin', 'assets/coin.png');
+		this.load.image('Player', 'assets/character/player.png');
+		this.load.image('Bala', 'assets/bullet/bullet_1.png');
+		this.load.image('Bala2', 'assets/bullet/bullet_2.png');
+		this.load.image('Particle', 'assets/effects/particles.png');
+		this.load.image('Coin', 'assets/coin/coin.png');
 
-		this.load.spritesheet('playerSheet', 'assets/Character/player-sheet.png',{
+		this.load.spritesheet('playerSheet', 'assets/character/player_sheet.png',{
 			frameWidth: 32,  // Ancho de cada cuadro
 			frameHeight: 32, // Altura de cada cuadro
 			endFrame: 13      // Número de cuadros en el sprite sheet
@@ -53,18 +53,18 @@ export default class Loading extends Phaser.Scene {
 
 		// #region Enemies
 
-		this.load.image('Bob', 'assets/Bob.png');
-		this.load.image('Crac', 'assets/Crac.png');
-		this.load.image('Letus', 'assets/Letus.png');
-		this.load.image('Zaro', 'assets/Zaro-placeholder.png');
+		this.load.image('Bob', 'assets/enemies/bob.png');
+		this.load.image('Crac', 'assets/enemies/crac.png');
+		this.load.image('Letus', 'assets/enemies/letus.png');
+		this.load.image('Zaro', 'assets/enemies/zaro_placeholder.png');
 
 		// #endregion
 
 		// #region Tilemaps
 
-		this.load.tilemapTiledJSON('mapa1', 'assets/map/mapa1.json');
-		this.load.image('tileset', 'assets/map/mapTiles.png');
-		this.load.json('navmesh', 'assets/map/mapa1.json');
+		this.load.tilemapTiledJSON('mapa1', 'assets/map/map_1/mapa1.json');
+		this.load.image('tileset', 'assets/map/map_1/map_tiles.png');
+		this.load.json('navmesh', 'assets/map/map_1/mapa_1.json');
 
 		// #endregion
 

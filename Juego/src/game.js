@@ -1,8 +1,8 @@
-import Nivel1 from './escenas/Niveles/nivel1.js';
-import Title from './escenas/title.js';
-import Loading from './escenas/loading.js';
-import GameOver from './escenas/gameover.js';
-import AchievementScene from './escenas/Logros/achievement_scene.js';
+import Level1 from './scenes/levels/level_1.js';
+import Title from './scenes/title.js';
+import Loading from './scenes/loading.js';
+import GameOver from './scenes/gameover.js';
+import AchievementScene from './scenes/achievements/achievement_scene.js';
 
 
 let config = {
@@ -28,7 +28,7 @@ let config = {
 
 	},
 	//scene: [Loading, Inicio, Nivel1, Nivel2, Nivel3, Nivel4, Habilidad, Pausa, GameOver,Creditos],	// Decimos a Phaser cual es nuestra escena
-	scene: [Loading, Title, Nivel1, GameOver, AchievementScene],
+	scene: [Loading, Title, Level1, GameOver, AchievementScene],
 
 	physics: {
 		default: 'arcade',
