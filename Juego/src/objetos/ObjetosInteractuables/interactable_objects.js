@@ -6,39 +6,42 @@
      * @param {number} y - Posici¨®n Y
      * @param {String} texture - sprite que va tener
      Atributos
-     * @param {boolean} canInteract  - booleano para saber si se puede interactar
+     * @param {Boolean} canInteract  - booleano para saber si se puede interactar
      * @param {Text} text - texto que se va hacer visible cuando esta dentro de una area
-     * 
+     * @param {Boolean} playerInRange - si player esta en una area
      */
 export default class InteractableObjects extends Phaser.GameObjects.Sprite {
-    constructor(scene, x, y, texture) {
+    constructor(scene, x, y, texture, range = 100, textDistance=100) {
         super(scene, x, y, [texture]);
 
         this.scene = scene;
         this.canInteract = false;
-
+        this.playerInRange;
         // Texto de interacci¨®n inicialmente invisible
-        this.text = this.scene.add.text(this.x - 10, this.y - 100, 'Presiona E para interactuar', {
+        this.text = this.scene.add.text(this.x - 10, this.y - textDistance, 'Presiona E para interactuar', {
             font: '14px Arial',
             fill: '#ffffff',
             backgroundColor: '#000000',
             padding: 4,
         });
         this.text.setVisible(false);
+        this.isWaitingInput=true;
 
-        this.interactionArea = new Phaser.Geom.Circle(this.x, this.y, 100);
-        this.scene.events.on('Interact', () => {this.onInteract() });
+        this.interactionArea = new Phaser.Geom.Circle(this.x, this.y, range);
+        this.scene.events.on('Interact', () => {
+            if(this.isWaitingInput)this.onInteract()
+        });
     }
 
     preUpdate(t, dt) {
         super.preUpdate(t, dt);
 
-        const playerInRange = Phaser.Geom.Circle.Contains(this.interactionArea, this.scene.player.x, this.scene.player.y);
+        this.playerInRange = Phaser.Geom.Circle.Contains(this.interactionArea, this.scene.player.x, this.scene.player.y);
 
-        if (playerInRange) {
+        if (this.playerInRange) {
             this.onOverlap();
         }
-        else if (!playerInRange) {
+        else if (!this.playerInRange) {
             this.onExitOverlap();
         }
     }

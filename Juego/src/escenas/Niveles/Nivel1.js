@@ -12,8 +12,8 @@ import Zaro from '../../objetos/Enemies/Zaro.js';
 
 import DialogueManager from '../../UI/DialogManager.js';
 import DialogText from '../../UI/dialog_plugin.js';
-import NPC from '../../objetos/ObjetosInteractuables/NPC.js'
-
+import NPC from '../../objetos/ObjetosInteractuables/npc.js';
+import Door from '../../objetos/ObjetosInteractuables/door.js';
 //import Coin from '../../objetos/Enemies/coin.js'
 //constante
 const SCALE = 4;
@@ -31,6 +31,8 @@ export default class Animation extends Phaser.Scene {
 		this.load.json('dialogues', 'assets/Dialogues/dialogues_intro.json');
 		this.load.json('dialogues_Flush', 'assets/Dialogues/dialogues_Flush.json');
 		this.load.image('Flush', 'assets/Character/Flush.png');
+		this.load.image('verticalDoor', 'assets/map/verticalDoor1.png');
+		this.load.image('horizontalDoor', 'assets/map/horizontalDoor1.png');
 	}
 
 	/**  
@@ -55,6 +57,23 @@ export default class Animation extends Phaser.Scene {
 		}
 		this.sueloLayer.setScale(SCALE);
 		this.paredLayer.setScale(SCALE);
+
+		//#region puerta
+		this.doorGroup = this.add.group();
+		this.doorLayer = this.map.getObjectLayer('Door');
+		console.log(this.doorLayer);
+		this.doorLayer.objects.forEach((objD) => {
+			const door = new Door(this, objD.x * SCALE, objD.y * SCALE,
+				objD.name,  // El tipo de puerta ('verticalDoor' o 'horizontalDoor')
+				objD.width,  // El tamaño de la puerta en Tiled
+				objD.height, // El tamaño de la puerta en Tiled
+			);
+			door.setScale(SCALE);
+			// Añadir la puerta al grupo de puertas
+			this.doorGroup.add(door);
+		});
+
+		//#endregion
 
 		// #endregion
 
@@ -131,7 +150,7 @@ export default class Animation extends Phaser.Scene {
 		// #region Enemy
 
 		this.arrayCracs = [];
-		const cracLayer = this.map.getObjectLayer('CracPosition');
+		const cracLayer = this.map.getObjectLayer('Crac');
 		cracLayer.objects.forEach(obj => {
 			if (obj.name === 'Crac') { // Filtra por nombre
 				const crac = new Crac(this, obj.x * SCALE, obj.y *SCALE, this.player, this.exp);
@@ -151,7 +170,7 @@ export default class Animation extends Phaser.Scene {
 
 
 		this.arrayBobs = [];
-		const bobLayer = this.map.getObjectLayer('BobPosition');
+		const bobLayer = this.map.getObjectLayer('Bob');
 		bobLayer.objects.forEach(obj => {
 			if (obj.name === 'Bob') { // Filtra por nombre
 				const bob = new Bob(this, obj.x * SCALE, obj.y * SCALE, this.player, this.exp);
@@ -330,6 +349,11 @@ export default class Animation extends Phaser.Scene {
 
 		this.physics.add.collider(this.player, this.paredLayer);
 
+		//collisiones con la puerta
+		this.physics.add.collider(this.player, this.doorGroup);
+
+		this.physics.add.collider(this.enemies, this.doorGroup);
+
 		this.physics.add.collider(this.player, this.Flush, () => {
 			//desbloquear el logro de hablar con flush
 			this.game.events.emit(`unlock_Caballero generoso`);
@@ -378,6 +402,8 @@ export default class Animation extends Phaser.Scene {
 			coin.body.setBounce(0);
 			bullet.body.setBounce(0);
 		});
+
+
 
 		// #endregion
 

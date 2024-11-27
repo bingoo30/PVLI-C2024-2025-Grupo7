@@ -7,7 +7,7 @@
      * @param {boolean} isDialogActive  - booleano para saber si esta en dialogo
      * 
      */
-import InteractableObjects from './InteractableObjects.js';
+import InteractableObjects from './interactable_objects.js';
 export default class NPC extends InteractableObjects {
     constructor(scene, x, y, texture, dialogues) {
         super(scene, x, y, [texture]);

@@ -6,7 +6,7 @@
      Atributos
      * @param {boolean} isPick  - booleano para saber si esta cogido o no
      */
-import InteractableObjects from './InteractableObjects.js';
+import InteractableObjects from './interactable_objects.js';
 export default class PickableObjects extends InteractableObjects {
     constructor(scene, x, y, texture, name) {
         super(scene, x, y, [texture]);
