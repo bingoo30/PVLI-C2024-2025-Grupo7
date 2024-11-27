@@ -7,24 +7,26 @@
      * @param {String} texture - key del sprite del objeto
      * @param {int} sizeW - ancho del collider de la puerta
      * @param {int} sizeH - altura del collider de la puerta
+     * @param {int} scale - escala de la mapa
      Atributos
      * @param {boolean} isOpen  - booleano para saber si la puerta esta abierto o no
      */
 import InteractableObjects from './interactable_objects.js';
 export default class Door extends InteractableObjects {
-    constructor(scene, x, y, doorClass, sizeW = 32, sizeH = 32) {
-        super(scene, x, y, [doorClass === 'verticalDoor' ? 'verticalDoor' : 'horizontalDoor'], 300, 50);
+    constructor(scene, x, y, doorClass, sizeW = 32, sizeH = 32, scale = 4) {
+        super(scene, x * scale, y * scale, [doorClass === 'verticalDoor' ? 'verticalDoor' : 'horizontalDoor'], 200, 50);
 
         this.scene = scene;
         this.isOpen = false;
-        this.width = sizeW;
-        this.height = sizeH;
+        this.setDisplaySize(sizeW * scale, sizeH * scale);
         this.scene.add.existing(this);
+
         this.scene.physics.add.existing(this);
         this.body.setImmovable(true);
-        
-        this.body.setSize(sizeW, sizeH);
+        //this.body.setSize(sizeW, sizeH);
+        this.body.setOffset(0, 0);
         this.setOrigin(0, 0);
+
     }
 
     preUpdate(t, dt) {
