@@ -27,19 +27,40 @@ export default class Title extends Phaser.Scene {
 		// Cargar el archivo JSON de logros.
 		this.load.json('achievementData', 'src/scenes/achievements/achievements_datas.json');
 
-		// Escucha el evento de finalizaci�n de carga.
+		// Primero, registramos las imágenes de los logros
+		this.load.on('filecomplete', (file) => {
+				const achievementDatas = this.cache.json.get('achievementData');
+
+				// Precargar dinámicamente los sprites de logros
+				achievementDatas.forEach(data => {
+					this.load.image(data.unlockedSprite, `assets/achievs/${data.unlockedSprite}.png`);
+				});
+		});
+
+		// Escuchar el evento de finalización de carga
 		this.load.on('complete', () => {
-			// Obtener los datos del JSON una vez cargados.
+			// Obtener los datos del JSON una vez cargados
 			const achievementDatas = this.cache.json.get('achievementData');
 
-			// Precargar din�micamente los sprites de logros.
+			// Después de la carga, puedes acceder a las texturas
 			achievementDatas.forEach(data => {
-				this.load.image(data.unlockedSprite, `assets/achievs/${data.unlockedSprite}.png`);
-				console.log(data.unlockedSprite);
+				const textureKey = data.unlockedSprite; // Clave de la imagen cargada.
+
+				// Verifica si la textura está disponible
+				const texture = this.textures.get(textureKey);
+				if (texture) {
+					const image = texture.getSourceImage();
+					console.log(
+						"%c ",
+						`font-size: 100px; background: url(${image.src}) no-repeat center; background-size: contain;`
+					);
+				} else {
+					console.error(`No se encontró la textura: ${textureKey}`);
+				}
 			});
 		});
+
 	}
-	
 	/**
 	* Creación de los elementos de la escena principal de juego
 	*/
