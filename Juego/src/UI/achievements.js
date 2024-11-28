@@ -10,13 +10,15 @@
      * @param {boolean} locked -booleano que indica que esta desbloquedo un logro
  */
 export default class Achievement extends Phaser.GameObjects.Sprite {
-    constructor(scene, x, y, unlockedSprite, title, info) {
-        super(scene, x, y, "LockedAchievement");
+    constructor(scene, x, y, unlockedSprite, title, info, locked) {
+        let key = "LockedAchievement";
+        if (!locked) key = unlockedSprite; 
+        super(scene, x, y, key);
         // #region atributos
         this.scene = scene;
         this.scale = 0.25;
         this.unlockedSprite = unlockedSprite;
-        this.locked = true;
+        this.locked = locked;
         this.title = title;
         this.info = info;
 
@@ -24,9 +26,6 @@ export default class Achievement extends Phaser.GameObjects.Sprite {
         this.scene.add.existing(this);
         this.setInteractive();
 
-        //por defecto, todos estan desactivados
-        this.setInteractive(false);
-        this.visible = false;
         // #endregion
 
         // Texto del título.
@@ -57,11 +56,6 @@ export default class Achievement extends Phaser.GameObjects.Sprite {
         // Eventos de interacción
         this.on('pointerover', () => this.showTooltip());
         this.on('pointerout', () => this.hideTooltip());
-
-        // Evento para desbloquear logro
-        this.scene.events.on(`unlock_${title}`, () => { 
-            this.unlock();
-        });
     }
     /**
      * Setters de posicion.
@@ -81,15 +75,6 @@ export default class Achievement extends Phaser.GameObjects.Sprite {
      */
     TitleText(state) {
         this.titleText.setVisible(state);
-    }
-    /**
-     * Desbloquea el logro y cambia el icono.
-     */
-    unlock() {
-        if (this.locked) {
-            this.locked = false;
-            this.setTexture(this.unlockedSprite);
-        }
     }
 
     /**

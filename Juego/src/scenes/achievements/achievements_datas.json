@@ -1,143 +1,165 @@
 [
   {
     "title": "El comienzo de todo",
-    "unlockedSprite": "nivel1Icon",
-    "info": "Salir del primer piso"
+    "unlockedSprite": "nivel1_icon",
+    "info": "Salir del primer piso",
+    "locked": true
   },
   {
     "title": "Si, hay mas...",
-    "unlockedSprite": "nivel2Icon",
-    "info": "Salir del segundo piso"
+    "unlockedSprite": "nivel2_icon",
+    "info": "Salir del segundo piso",
+    "locked": true
   },
   {
     "title": "Vamos por el buen camino",
-    "unlockedSprite": "nivel3Icon",
-    "info": "Salir del tercer piso"
+    "unlockedSprite": "nivel3_icon",
+    "info": "Salir del tercer piso",
+    "locked": true
   },
   {
     "title": "Desafio superado! ...seguro?",
-    "unlockedSprite": "nivel4Icon",
-    "info": "Salir del cuarto piso"
+    "unlockedSprite": "nivel_icon",
+    "info": "Salir del cuarto piso",
+    "locked": true
   },
   {
     "title": "Amigo o enemigo?",
-    "unlockedSprite": "jokerIcon",
-    "info": "Encontrar a Joker"
+    "unlockedSprite": "joker_icon",
+    "info": "Encontrar a Joker",
+    "locked": true
   },
   {
     "title": "La Batalla Comienza",
-    "unlockedSprite": "50enemigosIcon",
-    "info": "Matar a 50 enemigos"
+    "unlockedSprite": "50enemigos_icon",
+    "info": "Matar a 50 enemigos",
+    "locked": true
   },
   {
     "title": "Asaltante Feroz",
-    "unlockedSprite": "100enemigosIcon",
-    "info": "Matar a 100 enemigos"
+    "unlockedSprite": "100enemigos_icon",
+    "info": "Matar a 100 enemigos",
+    "locked": true
   },
   {
     "title": "Dominante de la guerra",
-    "unlockedSprite": "150enemigosIcon",
-    "info": "Matar a 150 enemigos"
+    "unlockedSprite": "150enemigos_icon",
+    "info": "Matar a 150 enemigos",
+    "locked": true
   },
   {
     "title": "Destructor del mundo",
-    "unlockedSprite": "200enemigosIcon",
-    "info": "Matar a 200 enemigos"
+    "unlockedSprite": "200enemigos_icon",
+    "info": "Matar a 200 enemigos",
+    "locked": true
   },
   {
     "title": "Caballero generoso",
-    "unlockedSprite": "flushIcon",
-    "info": "Hablar con Flush"
+    "unlockedSprite": "flush_icon",
+    "info": "Hablar con Flush",
+    "locked": true
   },
   {
     "title": "Choque cultural",
-    "unlockedSprite": "weiyoungIcon",
-    "info": "Hablar con Weiyoung"
+    "unlockedSprite": "weiyoung_icon",
+    "info": "Hablar con Weiyoung",
+    "locked": true
   },
 
   {
     "title": "...y Julieta?",
-    "unlockedSprite": "romeoIcon",
-    "info": "Hablar con Romeo"
+    "unlockedSprite": "romeo_icon",
+    "info": "Hablar con Romeo",
+    "locked": true
   },
   {
     "title": "Cogiendo el ritmillo",
-    "unlockedSprite": "5nivelesIcon",
-    "info": "Llegar al nivel 5"
+    "unlockedSprite": "5niveles_icon",
+    "info": "Llegar al nivel 5",
+    "locked": true
   },
   {
     "title": "Buena racha",
-    "unlockedSprite": "10nivelesIcon",
-    "info": "Llegar al nivel 10"
+    "unlockedSprite": "10niveles_icon",
+    "info": "Llegar al nivel 10",
+    "locked": true
   },
   {
     "title": "Mucha fuerza",
-    "unlockedSprite": "20nivelesIcon",
-    "info": "Llegar al nivel 20"
+    "unlockedSprite": "20niveles_icon",
+    "info": "Llegar al nivel 20",
+    "locked": true
   },
   {
     "title": "En la Cima",
-    "unlockedSprite": "30nivelesIcon",
-    "info": "Llegar al nivel 30"
+    "unlockedSprite": "30niveles_icon",
+    "info": "Llegar al nivel 30",
+    "locked": true
   },
   {
     "title": "La primera no cuenta",
-    "unlockedSprite": "1muerteIcon",
-    "info": "Morirte 1 vez"
+    "unlockedSprite": "1muerte_icon",
+    "info": "Morirte 1 vez",
+    "locked": true
   },
   {
     "title": "Este no es mi momento",
-    "unlockedSprite": "5muerteIcon",
-    "info": "Morirte 5 veces"
+    "unlockedSprite": "5muerte_icon",
+    "info": "Morirte 5 veces",
+    "locked": true
   },
   {
     "title": "Demasiado hardcore",
-    "unlockedSprite": "10muerteIcon",
-    "info": "Morirte 10 veces"
+    "unlockedSprite": "10muerte_icon",
+    "info": "Morirte 10 veces",
+    "locked": true
   },
   {
     "title": "Insignia para novatos (no llores, te queremos)",
-    "unlockedSprite": "20muerteIcon",
-    "info": "Morirte 20 veces"
-  },
-  {
-    "title": "1 UP!",
-    "unlockedSprite": "1muertePorNivelIcon",
-    "info": "Pasarte de un nivel sin morirte ninguna vez"
+    "unlockedSprite": "20muerte_icon",
+    "info": "Morirte 20 veces",
+    "locked": true
   },
   {
     "title": "Maxima punteria",
-    "unlockedSprite": "ramaIcon",
-    "info": "Desbloquear una rama entera del arbol"
+    "unlockedSprite": "rama_icon",
+    "info": "Desbloquear una rama entera del arbol",
+    "locked": true
   },
   {
     "title": "Julie Pro",
-    "unlockedSprite": "julieProIcon",
-    "info": "Tener todos los estatus mejorados al maximo"
+    "unlockedSprite": "juliePro_icon",
+    "info": "Tener todos los estatus mejorados al maximo",
+    "locked": true
   },
   {
     "title": "Julie Pro Max",
-    "unlockedSprite": "julieProMaxIcon",
-    "info": "Desbloquear las tres ramas de habilidades"
+    "unlockedSprite": "julieProMax_icon",
+    "info": "Desbloquear las tres ramas de habilidades",
+    "locked": true
   },
   {
     "title": "Cascos de un lloron",
-    "unlockedSprite": "bingIcon",
-    "info": "Encontrar los cascos que reproducen en bucle llorerias (easter egg)"
+    "unlockedSprite": "bing_icon",
+    "info": "Encontrar los cascos que reproducen en bucle llorerias (easter egg)",
+    "locked": true
   },
   {
     "title": "lapiz en tiles",
-    "unlockedSprite": "haoshuangIcon",
-    "info": "Encontrar un lapiz roto, el cual te hace recordar los malos recuerdos con animar en pixel-art (easter egg)"
+    "unlockedSprite": "haoshuang_icon",
+    "info": "Encontrar un lapiz roto, el cual te hace recordar los malos recuerdos con animar en pixel-art (easter egg)",
+    "locked": true
   },
   {
     "title": "teclados machacados",
-    "unlockedSprite": "mauroIcon",
-    "info": "Encontrar un teclado sin algunas teclas. Faltan: p,h,a,s,e,r (easter egg)"
+    "unlockedSprite": "mauro_icon",
+    "info": "Encontrar un teclado sin algunas teclas. Faltan: p,h,a,s,e,r (easter egg)",
+    "locked": true
   },
   {
     "title": "gatitu!!!!",
-    "unlockedSprite": "mariaIcon",
-    "info": "Interactuar con Piu. A que es muy majete"
+    "unlockedSprite": "maria_icon",
+    "info": "Interactuar con Piu. A que es muy majete (easter egg)",
+    "locked": true
   }
 ]

@@ -19,6 +19,25 @@ export default class Title extends Phaser.Scene {
 		this.load.image('logros', 'assets/GUI/achievements.png');
 		this.load.image('background', 'assets/GUI/beckground_start_1.png');
 		this.load.audio('TitleSample', 'assets/audio/MenuPrincipal.mp3');
+
+		this.load.image('achievement', 'assets/achievs/achievement.png');
+		this.load.image('LockedAchievement', 'assets/achievs/locked.png');
+		this.load.image('PrevButton', 'assets/achievs/previous.png');
+		this.load.image('NextButton', 'assets/achievs/next.png');
+		// Cargar el archivo JSON de logros.
+		this.load.json('achievementData', 'src/scenes/achievements/achievements_datas.json');
+
+		// Escucha el evento de finalizaci�n de carga.
+		this.load.on('complete', () => {
+			// Obtener los datos del JSON una vez cargados.
+			const achievementDatas = this.cache.json.get('achievementData');
+
+			// Precargar din�micamente los sprites de logros.
+			achievementDatas.forEach(data => {
+				this.load.image(data.unlockedSprite, `assets/achievs/${data.unlockedSprite}.png`);
+				console.log(data.unlockedSprite);
+			});
+		});
 	}
 	
 	/**
@@ -65,7 +84,7 @@ export default class Title extends Phaser.Scene {
 		});
 
 		acvButton.on('pointerup', pointer => {
-			this.scene.start('AchievementScene'); //Cambiamos a la escena de juego
+			this.scene.start('AchievementScene');
 
 		});
 

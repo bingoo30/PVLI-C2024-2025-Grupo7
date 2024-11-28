@@ -26,6 +26,7 @@ export default class Character extends Phaser.GameObjects.Sprite {
         super(scene, x, y, [type]);
         this.scene.add.existing(this);
         // Inicializar las propiedades por defecto
+        this.scene = scene;
         this.type = type;
         this.speed = DEFAULT_SPEED;
         this.speedFactor = DEFAULT_SPEEDFACTOR;

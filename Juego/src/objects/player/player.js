@@ -19,8 +19,6 @@ export default class Player extends Character {
         this.cooldownCont = 0;
         this.canShoot = true;
 
-        //lo a�ado a la escena
-        this.scene.add.existing(this);
         //configurar los atributos correspondientes despues de llamar al constructor del character
         this.init(400, 1250, 25, 2, 0);
 
@@ -57,7 +55,7 @@ export default class Player extends Character {
         this.sKey = this.scene.input.keyboard.addKey('S'); //parar animaci�n
         this.dKey = this.scene.input.keyboard.addKey('D'); //derecha
         this.eKey = this.scene.input.keyboard.addKey('E'); //interactuar
-        
+        this.pKey = this.scene.input.keyboard.addKey('P'); //activar la escena de logros
         // Seteamos mouse
         this.mouse = this.scene.input.activePointer;
 
@@ -231,6 +229,10 @@ export default class Player extends Character {
 
         if (this.eKey.isDown) {
             this.scene.events.emit('Interact');
+        }
+
+        if (this.pKey.isDown) {
+            this.scene.game.scene.start("AchievementScene");
         }
 
        //Input de mouse

@@ -8,6 +8,7 @@
      * @param {boolean} isDialogActive  - booleano para saber si esta en dialogo
      * 
      */
+import { unlock } from '../../scenes/achievements/unlock.js';
 import InteractableObjects from './interactable_objects.js';
 export default class NPC extends InteractableObjects {
     constructor(scene, x, y, texture, dialogues, acv) {
@@ -44,11 +45,11 @@ export default class NPC extends InteractableObjects {
                 dialogManager.initialize(dialogPlugin, dialogos);
                 dialogManager.showDialogue();
                 if (!dialogManager.isDialogActive) this.isDialogActive = false;
-                this.scene.events.emit(`unlock_${this.achievement}`);
             }
             else {
                 console.error("El DialogManager no est¨¢ disponible en la escena.");
             }
+            unlock(this.scene,this.achievement);
         }
     }
 }

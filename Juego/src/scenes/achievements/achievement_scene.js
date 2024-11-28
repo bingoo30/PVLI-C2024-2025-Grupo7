@@ -8,34 +8,10 @@ export default class AchievementScene extends Phaser.Scene {
     }
 
     /**
-     * Inicializaci�n de la escena.
-     * @param {Object} inventory - Inventario del jugador.
-     */
-    init(inventory) {
-        this.inventory = inventory; // Informaci�n del inventario (si es necesario).
-    }
-
-    /**
      * Precarga de recursos.
      */
     preload() {
-        this.load.image('achievement', 'assets/achievement.png');
-        this.load.image('LockedAchievement', 'assets/locked.png');
-        this.load.image('PrevButton', 'assets/previous.png');
-        this.load.image('NextButton', 'assets/next.png');
-        // Cargar el archivo JSON de logros.
-        this.load.json('achievementData', 'src/escenas/Logros/achievements_datas.json');
-
-        // Escucha el evento de finalizaci�n de carga.
-        this.load.on('complete', () => {
-            // Obtener los datos del JSON una vez cargados.
-            const achievementDatas = this.cache.json.get('achievementData');
-
-            // Precargar din�micamente los sprites de logros.
-            achievementDatas.forEach(data => {
-                this.load.image(data.unlockedSprite, `assets/${data.unlockedSprite}.png`);
-            });
-        });
+      
     }
     /**
      * Creaci�n de los elementos de la escena.
@@ -54,14 +30,14 @@ export default class AchievementScene extends Phaser.Scene {
             const data = achievementData[i]; // Obtener los datos del logro actual.
             const x = 0; // Posici�n X (3 columnas).
             const y = 0; // Posici�n Y (3 filas).
-
             const achievement = new Achievement(
                 this,                  // Escena.
                 x,                    // Posici�n X.
                 y,                    // Posici�n Y.
                 data.unlockedSprite,   // Sprite desbloqueado.
                 data.title,            // T�tulo/ID.
-                data.info              // Informaci�n/Descripci�n.
+                data.info,              // Informaci�n/Descripci�n.
+                data.locked
             );
             this.achievements.push(achievement);
         }
@@ -91,9 +67,20 @@ export default class AchievementScene extends Phaser.Scene {
         nextButton.on('pointerdown', pointer => {
             this.nextPage();
         });
+
+        var exitButton = this.add.image(50, 50, 'NextButton').setScale(0.35);
+        exitButton.setInteractive(); // Hacemos el sprite interactivo para que lance eventos
+
+
+        //para salir //problema, cuando solo cuando quito la escena en title, no queda ninguna 
+        exitButton.on('pointerdown', pointer => {
+            this.scene.stop(); // Detiene la escena actual.
+        });
     }
 
-    
+    update(time, dt) {
+        super.update(time, dt);
+    }
 
     /**
      * Actualiza los logros visibles seg�n la p�gina actual.
