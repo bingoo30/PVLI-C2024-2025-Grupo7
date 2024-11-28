@@ -178,6 +178,18 @@
                  "width":0,
                  "x":2384,
                  "y":1658
+                }, 
+                {
+                 "height":0,
+                 "id":240,
+                 "name":"FlushPosition",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":1000,
+                 "y":1152
                 }],
          "offsetx":-64,
          "offsety":16,
@@ -1934,7 +1946,7 @@
          "y":0
         }],
  "nextlayerid":13,
- "nextobjectid":240,
+ "nextobjectid":241,
  "orientation":"orthogonal",
  "renderorder":"left-up",
  "tiledversion":"1.11.0",

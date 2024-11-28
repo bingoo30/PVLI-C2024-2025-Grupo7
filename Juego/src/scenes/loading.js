@@ -93,7 +93,7 @@ export default class Loading extends Phaser.Scene {
 		// Definimos las animaciones en un array
 		const animations = [
 			{ key: 'playerIdleDown', start: 1, end: 1, frameRate: 5, repeat:0 },
-			{ key: 'playerIdleRight', start: 4, end: 4, frameRate: 5, repeat: 0 },
+			{ key: 'playerIdleRight', start: 3, end: 3, frameRate: 5, repeat: 0 },
 			{ key: 'playerIdleUp', start: 8, end: 8, frameRate: 5, repeat: 0 },
 			{ key: 'playerIdleLeft', start: 11, end: 11, frameRate: 5, repeat: 0 },
 			{ key: 'playerWalkDown', start: 0, end: 2, frameRate: 8, repeat: -1 },

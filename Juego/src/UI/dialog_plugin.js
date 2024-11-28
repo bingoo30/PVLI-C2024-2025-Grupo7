@@ -15,10 +15,10 @@
  */
 export default class DialogText{
 
-	constructor(scene, opts){
+	constructor(scene, opts, depth =3){
 		this.scene = scene;
+		this.depth = depth;
 		this.init(opts);
-		
 	}
 
 	init(opts) {
@@ -51,6 +51,8 @@ export default class DialogText{
 		this.dialog;
 		this.graphics;
 		this.closeBtn;
+
+
 		
 		//Crea la ventana de dialogo
 		this._createWindow();
@@ -165,6 +167,7 @@ export default class DialogText{
 		//Se calcula la dimension de la ventana de diálogo
 		var dimensions = this._calculateWindowDimensions(gameWidth, gameHeight);
 		this.graphics = this.scene.add.graphics();
+		this.graphics.setDepth(this.depth);
 		
 		//Se crean las ventanas interior y exterior
 		this._createOuterWindow(dimensions.x, dimensions.y, dimensions.rectWidth, dimensions.rectHeight);
@@ -195,8 +198,9 @@ export default class DialogText{
 				align: 'center'
 			}
 		});
-		
+		this.closeBtn.setDepth(this.depth);
 		this.closeBtn.setInteractive(); //hace interactuable el boton de cierre
+
 		this.closeBtn.on('pointerover', function () {
 			this.setTint(0xff0000); //cuando el cursor se encuentra encima se cambia de color
 		});
@@ -285,8 +289,14 @@ export default class DialogText{
 			}
 		});
 
-		if (this.text) this.text.setScrollFactor(0);
-		if (this.speakerText) this.speakerText.setScrollFactor(0);
+		if (this.text) {
+			this.text.setScrollFactor(0);
+			this.text.setDepth(this.depth);
+		}
+		if (this.speakerText) {
+			this.speakerText.setScrollFactor(0);
+			this.speakerText.setDepth(this.depth);
+		}
 	}
 
 	//crear recuadro al rededor del nombre del hablante
@@ -300,5 +310,6 @@ export default class DialogText{
 			this.speakerText.height + (borderPadding));
 
 		this.speakerBorderGraphics.setScrollFactor(0);
+		this.speakerBorderGraphics.setDepth(this.depth);
 	}
 };

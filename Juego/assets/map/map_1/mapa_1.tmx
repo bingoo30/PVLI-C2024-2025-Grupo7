@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="left-up" width="80" height="60" tilewidth="32" tileheight="32" infinite="0" nextlayerid="13" nextobjectid="240">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="left-up" width="80" height="60" tilewidth="32" tileheight="32" infinite="0" nextlayerid="13" nextobjectid="241">
  <editorsettings>
-  <export format="json"/>
+  <export target="mapa_1.tmj" format="json"/>
  </editorsettings>
  <tileset firstgid="1" name="mapTiles" tilewidth="32" tileheight="32" tilecount="256" columns="16">
   <image source="map_tiles.png" width="512" height="512"/>
@@ -777,6 +777,9 @@
    <point/>
   </object>
   <object id="145" name="Llave" x="2384" y="1658">
+   <point/>
+  </object>
+  <object id="240" name="FlushPosition" x="1000" y="1152">
    <point/>
   </object>
  </objectgroup>

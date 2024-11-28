@@ -48,6 +48,8 @@ export default class Player extends Character {
         this.damageStatus = 0;
         // #endregion
 
+        this.setDepth(2);
+
         //input
         // Seteamos las teclas para mover al personaje
         this.wKey = this.scene.input.keyboard.addKey('W'); //saltar

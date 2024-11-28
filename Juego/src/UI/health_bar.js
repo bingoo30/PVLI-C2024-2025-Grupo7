@@ -1,6 +1,6 @@
 
 export default class HealthBar {
-    constructor(scene, x, y) {
+    constructor(scene, x, y, depth=3) {
         this.scene = scene;
         this.maxWidth = 300;
         this.height = 30; 
@@ -17,6 +17,7 @@ export default class HealthBar {
         this.bar.setDisplaySize(this.maxWidth, this.height); 
         this.container.add([this.bar, this.background]);
         this.container.setScrollFactor(0);
+        this.container.setDepth(depth);
     }
     updateHealth(currentHealth, maxHealth) {
 

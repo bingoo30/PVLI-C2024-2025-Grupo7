@@ -1,5 +1,5 @@
 export default class ExpBar {
-    constructor(scene, x, y) {
+    constructor(scene, x, y, depth=3) {
         this.scene = scene;
         this.maxWidth = 150;
         this.height = 15;
@@ -17,6 +17,7 @@ export default class ExpBar {
 
         this.container.add([this.bar, this.background]);
         this.container.setScrollFactor(0);
+        this.container.setDepth(depth);
     }
     updateExp(currentExp, max) {
 

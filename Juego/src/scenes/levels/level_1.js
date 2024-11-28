@@ -87,7 +87,6 @@ export default class Animation extends Phaser.Scene {
 
 		// Verificar si el objeto fue encontrado
 		if (!playerPos) console.log('Position player no encontrado.');
-
 		const playerX = playerPos.x * SCALE;
 		const playerY = playerPos.y * SCALE;
 
@@ -334,8 +333,9 @@ export default class Animation extends Phaser.Scene {
 		//#endregion
 
 		// #region NPC
-		const NPCX = (playerPos.x + 100) * SCALE;
-		const NPCY = (playerPos.y + 10) * SCALE;
+		const NPCpos = objectLayer.objects.find(obj => obj.name == 'FlushPosition');
+		const NPCX = NPCpos.x * SCALE;
+		const NPCY = NPCpos.y * SCALE;
 
 		this.Flush = new NPC(this, NPCX, NPCY, 'Flush', 'dialogues_Flush');
 		this.Flush.setScale(SCALE);
