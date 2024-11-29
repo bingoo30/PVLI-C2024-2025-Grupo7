@@ -8,7 +8,6 @@ import ExpBar from '../../UI/exp_bar.js';
 import Coin from '../../objects/enemies/coin.js';
 import Bullet from '../../objects/shooting/bullet.js';
 import Letus from '../../objects/enemies/letus.js';
-import Zaro from '../../objects/enemies/zaro.js';
 
 import DialogueManager from '../../UI/dialog_manager.js';
 import DialogText from '../../UI/dialog_plugin.js';
@@ -165,7 +164,6 @@ export default class Animation extends Phaser.Scene {
 
 		//console.log(this.arrayCracs); // Depuración: verificar el contenido del array
 
-
 		this.enemies = this.add.group();
 		this.enemies.addMultiple(this.arrayCracs);
 
@@ -181,6 +179,19 @@ export default class Animation extends Phaser.Scene {
 		});
 
 		this.enemies.addMultiple(this.arrayBobs);
+
+
+		this.arrayLetus = [];
+		const letusLayer = this.map.getObjectLayer('Letus');
+		letusLayer.objects.forEach(obj => {
+			if (obj.name === 'Letus') { // Filtra por nombre
+				const letus = new Letus(this, obj.x * SCALE, obj.y * SCALE, this.player, this.exp);
+				letus.setScale(SCALE);
+				this.arrayLetus.push(letus);
+			}
+		});
+
+		this.enemies.addMultiple(this.arrayLetus);
 
 		//console.log(this.arrayBobs); // Depuración: verificar el contenido del array
 
@@ -229,10 +240,7 @@ export default class Animation extends Phaser.Scene {
 		//this.Bob.setScale(SCALE);
 		// this.enemies.add(this.Bob);
 
-		this.Zaro = new Zaro(this, playerX + 1800, playerY - 100, this.player, 1);
-		this.Zaro.setScale(SCALE);
-		this.Zaro.setPool(this.enemyBullets);
-		this.enemies.add(this.Zaro);
+	
 
 		// #endregion
 

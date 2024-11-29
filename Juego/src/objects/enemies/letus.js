@@ -1,18 +1,12 @@
-//import Enemy from "./enemy.js";
-import Crac from "./crac.js";
+import Enemy from "./enemy.js";
 
-export default class Letus extends Crac {
+export default class Letus extends Enemy {
     constructor(scene, x, y, player, exp) {
         // hereda de enemy
         super(scene, x, y, player, 'Letus', exp);
-        this.scene = scene;
-        this.player = player;
+        this.
         this.scene.add.existing(this);
-        this.init(0, 500, 5, 2, 0);
-
-        //hereda de Crac
-        this.cooldownCont = 0;
-
+        this.init(100, 0, 5, 2, 0);
     }
     init(speedFactor, shootSpeed, life, damage, prob) {
         super.init(speedFactor, shootSpeed, life, damage, prob);
