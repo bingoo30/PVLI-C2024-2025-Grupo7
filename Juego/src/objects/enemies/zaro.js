@@ -1,5 +1,5 @@
 import Enemy from "./enemy.js";
-import { fire } from '../shooting/shooter.js';
+import { fire } from '../habilities/shooting/fire.js';
 
 // Constantes shooter
 const SHOOTING_RANGE = 700;
