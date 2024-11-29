@@ -6,7 +6,7 @@ import Bob from '../../objects/enemies/bob.js';
 import HealthBar from '../../UI/health_bar.js';
 import ExpBar from '../../UI/exp_bar.js';
 import Coin from '../../objects/enemies/coin.js';
-import Bullet from '../../objects/habilities/shooting/bullet.js';
+import Bullet from '../../objects/shooting/bullet.js';
 import Letus from '../../objects/enemies/letus.js';
 
 import DialogueManager from '../../UI/dialog_manager.js';

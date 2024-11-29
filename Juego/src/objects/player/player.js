@@ -1,5 +1,5 @@
 import Character from "./character.js";
-import { fire } from "../habilities/shooting/fire.js";
+import { fire } from "../shooting/shooter.js";
 import Inventory from "./inventory.js";
 
 /**
