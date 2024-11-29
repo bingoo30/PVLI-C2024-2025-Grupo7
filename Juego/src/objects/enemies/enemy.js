@@ -30,7 +30,6 @@ export default class Enemy extends Character {
         this.dead = false;
         this.followRange = DEFAULT_FOLLOW_RANGE;
 
-        this.scene.events.emit("enemyIsDead");
     }
 
 
