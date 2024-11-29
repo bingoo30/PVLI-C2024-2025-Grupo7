@@ -52,7 +52,7 @@ export default class Zaro extends Enemy {
     {
         this.x = (Math.random() * ((this.player.x - TELEPORT_MAX_DISTANCE) - this.player.x + TELEPORT_MAX_DISTANCE)) + (this.player.x - TELEPORT_MAX_DISTANCE);
         this.y = (Math.random() * ((this.player.y - TELEPORT_MAX_DISTANCE) - this.player.y + TELEPORT_MAX_DISTANCE)) + (this.player.y - TELEPORT_MAX_DISTANCE);
-        console.log("Teletransportandome a:" +  this.x + "/" + this.y);
-        console.log("El player está en:" + this.player.x + "/" + this.player.y);
+        // console.log("Teletransportandome a:" +  this.x + "/" + this.y);
+        // console.log("El player está en:" + this.player.x + "/" + this.player.y);
     }
 }
