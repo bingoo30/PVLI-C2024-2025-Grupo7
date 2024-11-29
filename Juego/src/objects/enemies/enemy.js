@@ -1,7 +1,7 @@
 import Character from '../../objects/player/character.js';
 import { drop } from './drop.js';
 
-const FOLLOW_RANGE = 500;
+const DEFAULT_FOLLOW_RANGE = 500;
 export default class Enemy extends Character {
     /**
      * Constructor de los enemigos
@@ -28,6 +28,7 @@ export default class Enemy extends Character {
         //this.body.setOffset(8, 24);
         this.path = [];
         this.dead = false;
+        this.followRange = DEFAULT_FOLLOW_RANGE;
 
         this.scene.events.emit("enemyIsDead");
     }
@@ -66,7 +67,7 @@ export default class Enemy extends Character {
         //    this.moveToNextPoint();  // Mover al siguiente punto
         //}
         const distanceToPlayer = Phaser.Math.Distance.Between(this.x, this.y, this.player.x, this.player.y);
-        if (distanceToPlayer <= FOLLOW_RANGE) {
+        if (distanceToPlayer <= this.followRange) {
             this.moveTowards(this.player.x, this.player.y);
         } else {
             this.stopMovement();
@@ -87,18 +88,6 @@ export default class Enemy extends Character {
         this.body.setVelocity(0, 0); // Detiene al enemigo
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
     setPath(path) {
         // Establece el camino calculado con EasyStar
         this.currentPath = path;
@@ -116,12 +105,6 @@ export default class Enemy extends Character {
         // Siguiente paso en la ruta
         const nextStep = this.currentPath.shift();
         if (!nextStep) return;
-
-
-        
-    
-
-
         if (this.dead) return;
         if (!this.targetPoint) return;
 

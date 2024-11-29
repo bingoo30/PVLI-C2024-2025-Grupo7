@@ -1,10 +1,13 @@
 import Enemy from "./enemy.js";
 import { fire } from '../shooting/shooter.js';
 
+// Constantes shooter
 const SHOOTING_RANGE = 700;
 const SHOOTING_COOLDOWN = 2000;
-const TELEPORT_RANGE = 700;
-const TELEPORT_COOLDOWN = 3000; 
+// Constantes teleportacion
+const TELEPORT_RANGE = 500;
+const TELEPORT_COOLDOWN = 3000;
+const TELEPORT_MAX_DISTANCE = 200;
 
 export default class Zaro extends Enemy {
     constructor(scene, x, y, player, exp) {
@@ -15,6 +18,7 @@ export default class Zaro extends Enemy {
         this.init(0, 500, 5, 2, 0);
         this.teleportCont = 3000;		
         this.shootCont = 0;
+        this.followRange = 0;
     }
     init(speedFactor, shootSpeed, life, damage, prob) {
         super.init(speedFactor, shootSpeed, life, damage, prob);
@@ -29,8 +33,7 @@ export default class Zaro extends Enemy {
         this.shootCont = this.shootCont - dt;
 
         if(this.getDistance() < TELEPORT_RANGE && this.teleportCont < 0){
-            console.log("jsdfnajfn");
-
+            this.teleportNearPlayer();
             this.teleportCont = TELEPORT_COOLDOWN;
         }
 
@@ -44,4 +47,12 @@ export default class Zaro extends Enemy {
 
 		return Math.sqrt(p1*p1 + p2*p2);
 	}
+
+    teleportNearPlayer(dt)
+    {
+        this.x = (Math.random() * ((this.player.x - TELEPORT_MAX_DISTANCE) - this.player.x + TELEPORT_MAX_DISTANCE)) + (this.player.x - TELEPORT_MAX_DISTANCE);
+        this.y = (Math.random() * ((this.player.y - TELEPORT_MAX_DISTANCE) - this.player.y + TELEPORT_MAX_DISTANCE)) + (this.player.y - TELEPORT_MAX_DISTANCE);
+        console.log("Teletransportandome a:" +  this.x + "/" + this.y);
+        console.log("El player está en:" + this.player.x + "/" + this.player.y);
+    }
 }
