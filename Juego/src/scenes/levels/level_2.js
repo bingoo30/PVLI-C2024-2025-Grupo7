@@ -193,38 +193,8 @@ export default class Animation extends Phaser.Scene {
 		});
 
 		this.enemies.addMultiple(this.arrayLetus);
-
-		//console.log(this.arrayBobs); // Depuración: verificar el contenido del array
-
-
-		// //Configura cada objeto con su pool y jugador después de crearlo
-		//cracObjects.forEach(crac => {
-		//	crac.setPool(this.enemyBullets);   // Asocia el pool
-		//	//this.Crac.setPool(this.enemyBullets);
-
-		//	crac.player = this.player; // Asocia el jugador
-		//});
-
-
-		//objectLayer.objects.forEach(obj => {
-		//	const bob = new Bob(this, obj.x, obj.y, this.player, 1);
-		//	this.add.existing(bob);
-		//});
-
-		//this.enemies = this.add.group();
-		//let cracs = [];
-
-		//const cracsLayer = this.map.getObjectLayer('position');
-
-		//cracsLayer.objects.forEach(crac => {
-		//	// Asignar posición directamente desde el objeto crac
-		//	let enemy = new Crac(this, crac.x * SCALE, crac.y * SCALE, this.player, 1);
-		//	enemy.setPool();
-		//	// Añadir al grupo de enemigos
-		//	cracs.push(enemy);
-		//});
-
-		//this.enemies.addMultiple(cracs);
+		
+		
 
 		// #endregion
 

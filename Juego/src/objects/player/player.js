@@ -65,7 +65,7 @@ export default class Player extends Character {
             this.Inventory.addKilledEnemies();
         });
         this.scene.events.on("playerIsDead", () => {
-
+            this.scene.changeToGameover();
         });
 
     }
@@ -101,6 +101,7 @@ export default class Player extends Character {
     onGotHit(damage) {
         super.onGotHit(damage); // Aplica daño al jugador
         if (this.life == 0) {
+            this.scene.events.emit('playerIsDead');
             this.onDeath();
         }
 

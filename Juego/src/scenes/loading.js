@@ -33,6 +33,16 @@ export default class Loading extends Phaser.Scene {
 			endFrame: 16      // Número de cuadros en el sprite sheet
 		});
 
+		this.load.image('start', 'assets/GUI/start_button.png');
+		this.load.image('logros', 'assets/GUI/achievements.png');
+		this.load.image('background', 'assets/GUI/beckground_start_1.png');
+		this.load.audio('TitleSample', 'assets/audio/MenuPrincipal.mp3');
+
+		this.load.image('achievement', 'assets/achievs/achievement.png');
+		this.load.image('LockedAchievement', 'assets/achievs/locked.png');
+		this.load.image('PrevButton', 'assets/achievs/previous.png');
+		this.load.image('NextButton', 'assets/achievs/next.png');
+
 		// #endregion
 
 		// #region Player

@@ -15,15 +15,7 @@ export default class Title extends Phaser.Scene {
 	 * Cargamos todos los assets que vamos a necesitar
 	 */
 	preload() {
-		this.load.image('start', 'assets/GUI/start_button.png');
-		this.load.image('logros', 'assets/GUI/achievements.png');
-		this.load.image('background', 'assets/GUI/beckground_start_1.png');
-		this.load.audio('TitleSample', 'assets/audio/MenuPrincipal.mp3');
-
-		this.load.image('achievement', 'assets/achievs/achievement.png');
-		this.load.image('LockedAchievement', 'assets/achievs/locked.png');
-		this.load.image('PrevButton', 'assets/achievs/previous.png');
-		this.load.image('NextButton', 'assets/achievs/next.png');
+		
 		// Cargar el archivo JSON de logros.
 		this.load.json('achievementData', 'src/scenes/achievements/achievements_datas.json');
 
