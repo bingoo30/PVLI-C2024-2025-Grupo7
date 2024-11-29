@@ -94,6 +94,7 @@ export default class Animation extends Phaser.Scene {
 
 
 		// #region Player
+
 		this.player = new Player(this, playerX, playerY);
 		this.player.setScale(SCALE);
 
@@ -367,12 +368,14 @@ export default class Animation extends Phaser.Scene {
 			this.healthBar.updateHealth(this.player.life, this.player.maxLife);
 
 		});
+
 		//colision bala player-enemigos
 		this.physics.add.collider(this.playerBullets.getPhaserGroup(), this.enemies, (playerBullet, enemy) => {
 			enemy.onGotHit(this.player.getDamage(), this.coins);
 			// mandaria a la pool de las balas de player otra vez
 			playerBullet.destroyBullet(this.playerBullets);
 		});
+
 		//colision bala enemigos-player
 		this.physics.add.collider(this.enemyBullets.getPhaserGroup(), this.player, (enemyBullet, player) => {
 			player.knockback(200, enemyBullet);
@@ -381,6 +384,7 @@ export default class Animation extends Phaser.Scene {
 			// mandaria a la pool de las balas de los enemigos otra vez
 			enemyBullet.destroyBullet(this.enemyBullets);
 		});
+
 		//colision fichas-player
 		this.physics.add.collider(this.player, this.coins.getPhaserGroup(), (player, coin) => {
 			player.onPlayerCollectedXP(coin.getExp());
@@ -391,6 +395,7 @@ export default class Animation extends Phaser.Scene {
 			coin.destroyCoin(this.coins);
 			//console.log(this.expBar);
 		});
+
 		//colision balas-paredes
 		this.physics.add.collider(this.playerBullets.getPhaserGroup(), this.paredLayer, (bullet, wall) => {
 			bullet.destroyBullet(this.playerBullets);
@@ -398,6 +403,7 @@ export default class Animation extends Phaser.Scene {
 		this.physics.add.collider(this.enemyBullets.getPhaserGroup(), this.paredLayer, (bullet, wall) => {
 			bullet.destroyBullet(this.enemyBullets);
 		});
+
 		//colision balas-fichas
 		this.physics.add.collider(this.coins, this.playerBullets.getPhaserGroup(), (coin, bullet) => {
 			coin.body.setBounce(0);
