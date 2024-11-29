@@ -24,15 +24,11 @@ const SCALE = 4;
 export default class Animation extends Phaser.Scene {
 
 	constructor() {
-		super({ key: 'nivel1' });
+		super({ key: 'level2' });
 		this.isGamePaused = false;
 	}
 	preload() {
-		this.load.json('dialogues', 'assets/dialogues/dialogues_intro.json');
-		this.load.json('dialogues_Flush', 'assets/dialogues/dialogues_Flush.json');
-		this.load.image('Flush', 'assets/character/flush.png');
-		this.load.image('verticalDoor', 'assets/map/vertical_door_1.png');
-		this.load.image('horizontalDoor', 'assets/map/horizontal_door_1.png');
+		// dialogos level2
 	}
 
 	/**  
@@ -198,34 +194,6 @@ export default class Animation extends Phaser.Scene {
 
 		// #endregion
 
-
-		// #region Enemy
-
-
-
-
-		//this.Crac = new Crac(this, playerX + 1500, playerY + 100, this.player, 1);
-		//this.Crac.setScale(SCALE);
-
-		//this.Bob = new Bob(this, playerX + 1200, playerY + 200, this.player, 1);
-		//this.Bob.setScale(SCALE);
-		// this.enemies.add(this.Bob);
-
-
-
-		// #endregion
-
-
-
-		// #region Debug
-		const debugGraphics = this.add.graphics();
-		this.paredLayer.renderDebug(debugGraphics, {
-			tileColor: null, // No colorear los tiles
-			collidingTileColor: new Phaser.Display.Color(243, 134, 48, 200), // Color para los tiles colisionables
-			faceColor: new Phaser.Display.Color(40, 39, 37, 255) // Color para los bordes de colisión
-		});
-		// #endregion
-
 		// #region Navmesh
 
 		
@@ -257,20 +225,15 @@ export default class Animation extends Phaser.Scene {
 			fontFamily: "PixelArt"
 		});
 		this.dialogManager = new DialogueManager(this);
-		this.dialogManager.initialize(this.dialog, dialogos);
-		this.dialogManager.showDialogue();
+		//this.dialogManager.initialize(this.dialog, dialogos);
+		//this.dialogManager.showDialogue();
 
 		// #endregion
 
 		//#endregion
 
 		// #region NPC
-		const NPCpos = objectLayer.objects.find(obj => obj.name == 'FlushPosition');
-		const NPCX = NPCpos.x * SCALE;
-		const NPCY = NPCpos.y * SCALE;
-
-		this.Flush = new NPC(this, NPCX, NPCY, 'Flush', 'dialogues_Flush', "Caballero generoso");
-		this.Flush.setScale(SCALE);
+	
 
 		// #endregion
 
@@ -287,11 +250,7 @@ export default class Animation extends Phaser.Scene {
 
 		this.physics.add.collider(this.enemies, this.doorGroup);
 
-		this.physics.add.collider(this.player, this.Flush, () => {
-			//desbloquear el logro de hablar con flush
-			this.game.events.emit(`unlock_Caballero generoso`);
-		});
-
+		
 		//colision player-enemigos
 		this.physics.add.collider(this.player, this.enemies, (player, enemy) => {
 			player.knockback(500, enemy);
@@ -354,10 +313,14 @@ export default class Animation extends Phaser.Scene {
 		// #endregion
 	}
 
-	changeScene() {
+	changeToGameover() {
 		this.MainSample.stop();
 		this.scene.start("gameover")
+	}
 
+	changeToNextLevel() {
+		this.MainSample.stop();
+		this.scene.start("level3")
 	}
 
 	update(t, dt) {
@@ -368,14 +331,4 @@ export default class Animation extends Phaser.Scene {
 			this.physics.world.resume();
 		}
 	}
-
-	checkCollision(x, y) {
-		var tile = this.sueloLayer.getTileAt(x, y);
-		if (!tile) {
-			console.log("no hay tile");
-			return;
-		}
-		console.log(tile)
-		return tile.properties.collides == true;
-	};
 }

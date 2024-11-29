@@ -81,7 +81,7 @@ export default class Title extends Phaser.Scene {
 
 		startButton.on('pointerup', pointer => {
 			TitleSample.stop();
-			this.scene.start('nivel1'); //Cambiamos a la escena de juego
+			this.scene.start('level1'); //Cambiamos a la escena de juego
 
 		});
 

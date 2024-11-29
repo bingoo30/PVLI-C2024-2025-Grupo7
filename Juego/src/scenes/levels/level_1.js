@@ -6,7 +6,7 @@ import Bob from '../../objects/enemies/bob.js';
 import HealthBar from '../../UI/health_bar.js';
 import ExpBar from '../../UI/exp_bar.js';
 import Coin from '../../objects/enemies/coin.js';
-import Bullet from '../../objects/shooting/bullet.js';
+import Bullet from '../../objects/habilities/shooting/bullet.js';
 import Letus from '../../objects/enemies/letus.js';
 
 import DialogueManager from '../../UI/dialog_manager.js';
@@ -23,7 +23,7 @@ const SCALE = 4;
 export default class Animation extends Phaser.Scene {
 
 	constructor() {
-		super({ key: 'nivel1' });
+		super({ key: 'level1' });
 		this.isGamePaused = false;
 	}
 	preload() {
@@ -193,9 +193,6 @@ export default class Animation extends Phaser.Scene {
 
 		this.enemies.addMultiple(this.arrayLetus);
 		
-		// #region Navmesh
-
-		// #endregion
 
 		//#region UI
 
@@ -257,10 +254,12 @@ export default class Animation extends Phaser.Scene {
 		});
 
 		//colision player-enemigos
-		this.physics.add.collider(this.player, this.enemies, (player, enemy) => {
-			player.knockback(500, enemy);
-			player.onGotHit(enemy.getDamage());
-			this.healthBar.updateHealth(this.player.life, this.player.maxLife);
+		this.physics.add.overlap(this.player, this.enemies, (player, enemy) => {
+			if (enemy.visible) {
+				player.knockback(500, enemy);
+				player.onGotHit(enemy.getDamage());
+				this.healthBar.updateHealth(this.player.life, this.player.maxLife);
+			}
 
 		});
 
@@ -321,37 +320,16 @@ export default class Animation extends Phaser.Scene {
 	changeToGameover() {
 		this.MainSample.stop();
 		this.scene.start("gameover") 
-		
 	}
-	
+
+	changeToNextLevel() {
+		this.MainSample.stop();
+		this.scene.start("level2")
+	}
+
+
 	update(t, dt) {
 
-		/*
-		const playerTileX = this.map.worldToTileX(this.player.x);
-		const playerTileY = this.map.worldToTileY(this.player.y);
-		const CracTileX = this.map.worldToTileX(this.Crac.x);
-		const CracTileY = this.map.worldToTileY(this.Crac.y);
-		if (
-			Phaser.Math.Distance.Between(this.phaserGuy.x, this.phaserGuy.y, this.player.x, this.player.y) < 5
-		) {
-			return;
-		}
-
-		// Calculate a path if there's none or it's complete
-		if (!this.currentPath || this.currentPath.length === 0) {
-			this.finder.findPath(CracTileX, CracTileY, playerTileX, playerTileY, (path) => {
-				if (path === null) {
-					console.warn("Path not found.");
-				} else {
-					console.warn("Path found.");
-
-
-					this.currentPath = path;
-					this.moveAlongPath();
-				}
-			});
-			this.finder.calculate();
-		}*/
 		if (this.isGamePaused) {
 			this.physics.world.pause();
 			return;
