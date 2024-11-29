@@ -1,8 +1,7 @@
 import Zaro from '../../objects/enemies/zaro.js';
 import Player from '../../objects/player/player.js';
 import Crac from '../../objects/enemies/crac.js'
-import Pool from '../../objects/our_pool.js'
-import NavMesh from '../../objects/navmesh/navmesh.js';
+import Pool from '../../objects/our_pool.js';
 import Bob from '../../objects/enemies/bob.js';
 import HealthBar from '../../UI/health_bar.js';
 import ExpBar from '../../UI/exp_bar.js';
@@ -190,7 +189,18 @@ export default class Animation extends Phaser.Scene {
 
 		this.enemies.addMultiple(this.arrayLetus);
 		
-		
+
+		this.arrayZaros = [];
+		const zaroLayer = this.map.getObjectLayer('Letus');
+		zaroLayer.objects.forEach(obj => {
+			if (obj.name === 'Letus') { // Filtra por nombre
+				const zaros = new Letus(this, obj.x * SCALE, obj.y * SCALE, this.player, this.exp);
+				letus.setScale(SCALE);
+				this.arrayZaros.push(zaros);
+			}
+		});
+
+		this.enemies.addMultiple(this.arrayZaros);
 
 		// #endregion
 

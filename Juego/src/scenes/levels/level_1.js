@@ -1,7 +1,6 @@
 import Player from '../../objects/player/player.js';
 import Crac from '../../objects/enemies/crac.js'
 import Pool from '../../objects/our_pool.js'
-import NavMesh from '../../objects/navmesh/navmesh.js';
 import Bob from '../../objects/enemies/bob.js';
 import HealthBar from '../../UI/health_bar.js';
 import ExpBar from '../../UI/exp_bar.js';
