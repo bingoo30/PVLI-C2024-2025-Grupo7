@@ -1,13 +1,40 @@
-export function fire(shooter, target, damage, speed, sprite, scale, pool)
+export function fire(shooter, target, damage, speed, sprite, scale, pool, num, critChance = 0, critMultiplier = 2)
 {  
-    //extrae la bala de la Pool de balas
-    let bullet = pool.spawn(shooter.x, shooter.y, sprite);
-    //la pongo a escala correcta
-    bullet.setScale(scale);
-    //configuro la velocidad y daño(por si saco una bala nueva)
-    bullet.setSpeed(speed);
-    bullet.setDamage(damage);
-    //la muevo
-    bullet.move(shooter.x, shooter.y, target.x, target.y);
+    // Calcular el ángulo base hacia el objetivo
+    const angleToTarget = Phaser.Math.Angle.Between(shooter.x, shooter.y, target.x, target.y);
 
+    // Configurar el rango de dispersión (en radianes)
+    const spread = Phaser.Math.DegToRad(8); // Rango total del spread
+    const angleStep = num > 1 ? spread / (num - 1) : 0; // Evitar división por cero
+    const startAngle = angleToTarget - spread / 2;
+
+    for (let i = 0; i < num; i++) {
+        // Calcular el ángulo para esta bala
+        const angle = startAngle + i * angleStep;
+
+        // Determinar si esta bala es un crítico y calcular el daño final
+        const isCritical = Math.random() < critChance; // Probabilidad de crítico
+        const finalDamage = isCritical ? damage * critMultiplier : damage;
+
+        // Calcular la dirección de la bala a partir del ángulo ajustado
+        const dx = Math.cos(angle);
+        const dy = Math.sin(angle);
+
+        // Extrae la bala de la pool
+        let bullet = pool.spawn(shooter.x, shooter.y, sprite);
+
+        // Configurar la bala
+        bullet.setScale(scale);
+        bullet.setSpeed(speed);
+        bullet.setDamage(finalDamage);
+
+        // Mover la bala hacia la posición calculada
+        //uso dx y dy por el disparo en abanico si lo hay
+        bullet.move(shooter.x, shooter.y, shooter.x + dx * 1000, shooter.y + dy * 1000);
+
+        // Mensaje de ataque crítico (opcional)
+        if (isCritical) {
+            console.log(`¡Ataque crítico! Daño: ${finalDamage}`);
+        }
+    }
 }

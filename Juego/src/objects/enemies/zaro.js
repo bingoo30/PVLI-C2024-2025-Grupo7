@@ -37,7 +37,7 @@ export default class Zaro extends Enemy {
         if (this.visible) {
             if (this.shootCont <= 0 && this.getDistance() < SHOOTING_RANGE) {
                 this.shootCont = SHOOTING_COOLDOWN;
-                fire(this, this.player, this.damage, this.shootSpeed, 'Bala', 4, this.pool);
+                fire(this, this.player, this.damage, this.shootSpeed, 'Bala', 4, this.pool,1);
             }
             this.shootCont = this.shootCont - dt;
         }

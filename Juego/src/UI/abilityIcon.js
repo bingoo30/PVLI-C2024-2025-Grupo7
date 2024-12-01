@@ -61,8 +61,10 @@ export default class AbilityIcon extends Phaser.GameObjects.Sprite {
         this.on('pointerout', () => this.hideTooltip());
 
         this.on('pointerdown', () => {
-            let avaliablePoints = this.player.getAbilityPoints(); 
-            this.unlockAbility(avaliablePoints);
+            if (this.locked) {
+                let avaliablePoints = this.player.getAbilityPoints();
+                this.unlockAbility(avaliablePoints);
+            }
         });
     }
     /**
@@ -96,7 +98,21 @@ export default class AbilityIcon extends Phaser.GameObjects.Sprite {
         }
         else {
             //lanzo el evento con la habilidad a desloquear y los puntos restantes
-            this.scene.game.events.emit('getANewAbility', this.title, p--);
+            this.player.getANewAbility(this.title);
+
+            const treeData = this.scene.cache.json.get('treeData');
+
+            // Buscar el árbol o nodo correspondiente usando el título (ajusta el criterio de búsqueda si es necesario)
+            const treeObj = treeData.find(item => item.title === this.title);
+
+            // Cambiar el estado de "locked"
+            treeObj.locked = false;
+
+            // Guardar los datos actualizados en localStorage
+            localStorage.setItem('treeData', JSON.stringify(treeData));
+
+            this.setTexture(this.unlockedSprite);
+            this.locked = false;
         }
     }
 }

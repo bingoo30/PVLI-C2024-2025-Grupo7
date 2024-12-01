@@ -18,9 +18,10 @@ export default class Player extends Character {
         //Medidor de tiempo para los disparos
         this.cooldownCont = 0;
         this.canShoot = true;
+        this.bulletNumbers = 1;
 
         //configurar los atributos correspondientes despues de llamar al constructor del character
-        this.init(400, 1250, 25, 2, 0);
+        this.init(400, 1250, 25, 2, 0.05);
 
         // Agregamos fisicas
         scene.physics.add.existing(this);
@@ -39,7 +40,7 @@ export default class Player extends Character {
         this.Inventory = new Inventory(this);
         // #region puntos de control status
         this.statusPoint = 0; //status points restantes
-        this.abilityPoint = 0;
+        this.abilityPoint = 1;
         this.speedFactorStatus = 0;
         this.shootSpeedStatus = 0;
         this.maxLifeStatus = 0;
@@ -67,9 +68,6 @@ export default class Player extends Character {
         });
         this.scene.events.on("playerIsDead", () => {
             this.scene.changeToGameover();
-        });
-        this.scene.events.on("unlockAbility", (title, points) => {
-
         });
 
     }
@@ -149,18 +147,26 @@ export default class Player extends Character {
         console.log("status points:" + this.statusPoint);
         console.log("ability points:" + this.abilityPoint);
     }
-    getANewAbility(ability, aPoints) {
+    getANewAbility(ability) {
         switch (ability) {
-            case 'Juego de proyectiles I': {
+            case 'Juego de proyectiles I':
+            case 'Juego de proyectiles II':
+            case 'Juego de proyectiles III': {
                 console.log("disparar dos veces");
+                this.bulletNumbers++;
+
             }
                 break;
             case 'Utilidad I': {
                 console.log("invocar dron");
             }
                 break;
+            default: {
+                console.warn(`Habilidad desconocida: ${ability}`);
+                return; // Salir si la habilidad no es válida
+            }
         }
-        this.abilityPoint = aPoints;
+        this.abilityPoint--
         
     }
     //funcion para subir un status
@@ -273,7 +279,9 @@ export default class Player extends Character {
                    this.shootSpeed + this.shootSpeedStatus * this.shootSpeed * 0.2,
                    'Bala2',
                    4,
-                   this.pool);
+                   this.pool,
+                   this.bulletNumbers,
+                   this.prob + this.prob*this.probStatus);
                this.cooldownCont = this.shootSpeed;
             }
        }
