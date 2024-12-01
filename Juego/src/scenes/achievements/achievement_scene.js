@@ -23,7 +23,7 @@ export default class AchievementScene extends Phaser.Scene {
 
 
         // Fondo de la escena.
-        const wallpaper = this.add.image(0, 0, 'achievement').setOrigin(0, 0);
+        const wallpaper = this.add.image(0, 0, 'pauseBackground').setOrigin(0, 0);
         wallpaper.setDisplaySize(this.scale.width, this.scale.height);
 
         // Array para almacenar logros.

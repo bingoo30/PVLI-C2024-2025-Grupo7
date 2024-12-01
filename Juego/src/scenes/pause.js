@@ -27,6 +27,9 @@ export default class Pause extends Phaser.Scene {
 		// Obtener la instancia de la escena previa
 		this.previousScene = this.scene.get(previousSceneKey);
 
+		const background = this.add.image(0, 0, 'pauseBackground').setOrigin(0, 0);
+		background.setDisplaySize(this.scale.width, this.scale.height);
+
 		//console.log("me he creado", this.scene.key);
 		let resume = this.add.text(this.sys.game.canvas.width * 0.5, this.sys.game.canvas.height * 0.25, 'RESUME', {
 			fontFamily: 'PixelArt',

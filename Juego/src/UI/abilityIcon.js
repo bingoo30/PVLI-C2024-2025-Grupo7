@@ -1,4 +1,6 @@
 const VALUE_OF_ABILITY = 3;
+
+//Icono de los atributos (botones)
 export default class AbilityIcon extends Phaser.GameObjects.Sprite {
     /**
  * @extends Phaser.GameObjects.Sprite;
@@ -17,7 +19,7 @@ export default class AbilityIcon extends Phaser.GameObjects.Sprite {
         super(scene, x, y, key);
         // #region atributos
         this.scene = scene;
-        this.scale = 0.35;
+        this.scale = 0.5;
         this.unlockedSprite = unlockedSprite;
         this.locked = locked;
         this.info = info;
@@ -31,26 +33,22 @@ export default class AbilityIcon extends Phaser.GameObjects.Sprite {
         // #endregion
 
         // Texto del título.
-        this.titleText = this.scene.add.text(x, y - 50, title, {
+        this.titleText = this.scene.add.text(x, y - 75, title, {
             fontFamily: "PixelArt",
-            fontSize: 20,
-            color: "#ffffff",
+            fontSize: 28,
+            color: "#000000",
             align: "center",
-            wordWrap: {
-                width: 125, // Ancho máximo antes de dividir en una nueva línea.
-                useAdvancedWrap: true, // Habilita el ajuste avanzado para cortar palabras.
-            },
         }).setOrigin(0.5);
-        this.titleText.visible = false;
+        this.titleText.visible = true;
 
         // Tooltip
-        this.tooltip = this.scene.add.text(x, y + 40, "", {
+        this.tooltip = this.scene.add.text(x, y + 50, "", {
             fontFamily: "PixelArt",
             fontSize: 20,
-            color: "#ffffff",
+            color: "#123456",
             align: "center",
             wordWrap: {
-                width: 125, // Ancho máximo antes de dividir en una nueva línea.
+                width: 450, // Ancho máximo antes de dividir en una nueva línea.
                 useAdvancedWrap: true, // Habilita el ajuste avanzado para cortar palabras.
             },
         }).setOrigin(0.5);

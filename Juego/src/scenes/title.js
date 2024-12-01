@@ -15,18 +15,11 @@ export default class Title extends Phaser.Scene {
 	 * Cargamos todos los assets que vamos a necesitar
 	 */
 	preload() {
-		
-		// Cargar el archivo JSON de logros.
-		this.load.json('achievementData', 'src/scenes/achievements/achievements_datas.json');
+		const achievementDatas = this.cache.json.get('achievementData');
 
-		// Primero, registramos las imágenes de los logros
-		this.load.on('filecomplete', (file) => {
-				const achievementDatas = this.cache.json.get('achievementData');
-
-				// Precargar dinámicamente los sprites de logros
-				achievementDatas.forEach(data => {
-					this.load.image(data.unlockedSprite, `assets/achievs/${data.unlockedSprite}.png`);
-				});
+		// Precargar dinámicamente los sprites de logros
+		achievementDatas.forEach(data => {
+			this.load.image(data.unlockedSprite, `assets/achievs/${data.unlockedSprite}.png`);
 		});
 
 

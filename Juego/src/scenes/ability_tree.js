@@ -14,35 +14,37 @@ export default class AbilityTree extends Phaser.Scene {
 
 	}
 	preload() {
-		this.load.image('abilityBackground', 'assets/tree/background.png');
 		this.load.image('titleHeader', 'assets/tree/titleHeader.png');
-		this.load.image('LockedAbility', 'assets/tree/unlockedAbility.png');
-		this.load.json('treeData', './tree_data.json');
+		this.load.image('LockedAbility', 'assets/tree/locked.png');
+		const treeDatas = this.cache.json.get('treeData');
+		// Precargar dinámicamente los sprites de logros
+		treeDatas.forEach(data => {
+			this.load.image(data.unlockedSprite, `assets/tree/${data.unlockedSprite}.png`);
+		});
+
+		this.load.on('complete', function (f) {
+			this.scene.time.addEvent({
+				delay: 200,
+				callback: () => { console.log("cargado"); }
+			})
+		});
 	}
 	create() {
 		//fondo
-		const background = this.add.image(0,0,'abilityBackground').setOrigin(0.5);
+		const background = this.add.image(0, 0, 'pauseBackground').setOrigin(0,0);
+		background.setDisplaySize(this.scale.width, this.scale.height);
 
 		let header1 = this.add.image(this.sys.game.canvas.width * 0.25, this.sys.game.canvas.height * 0.2, 'titleHeader').setOrigin(0.5);
-		header1.setScale(0.5);
+		//header1.setScale(1);
 		//Titulos 
-		const juegoDeProyectiles = this.add.text(this.sys.game.canvas.width * 0.25, this.sys.game.canvas.height * 0.2, 'Juego de proyectiles', {
+		const juegoDeProyectiles = this.add.text(this.sys.game.canvas.width * 0.25, this.sys.game.canvas.height * 0.2-10, 'Juego de proyectiles', {
 			fontFamily: 'PixelArt',
 			fontSize: 36
 
 		}).setOrigin(0.5, 0.5);
 
-		let header2 = this.add.image(this.sys.game.canvas.width * 0.5, this.sys.game.canvas.height * 0.2, 'titleHeader').setOrigin(0.5);
-		header2.setScale(0.5);
-		const francotirador = this.add.text(this.sys.game.canvas.width * 0.5, this.sys.game.canvas.height * 0.2, 'Francotirador explosivo', {
-			fontFamily: 'PixelArt',
-			fontSize: 36
-
-		}).setOrigin(0.5, 0.5);
-
-		let header3 = this.add.image(this.sys.game.canvas.width * 0.75, this.sys.game.canvas.height * 0.2, 'titleHeader').setOrigin(0.5);
-		header3.setScale(0.5);
-		const utilidad = this.add.text(this.sys.game.canvas.width * 0.75, this.sys.game.canvas.height * 0.2, 'Utilidad', {
+		let header2 = this.add.image(this.sys.game.canvas.width * 0.75, this.sys.game.canvas.height * 0.2, 'titleHeader').setOrigin(0.5);
+		const utilidad = this.add.text(this.sys.game.canvas.width * 0.75, this.sys.game.canvas.height * 0.2-15, 'Utilidad', {
 			fontFamily: 'PixelArt',
 			fontSize: 36
 

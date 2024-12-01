@@ -1,15 +1,15 @@
 [
   {
-    "x": 200,
-    "y":  400,
+    "x": 225,
+    "y": 250,
     "title": "Juego de proyectiles I",
     "unlockedSprite": "juegoDeProyectiles1",
     "info": "lanzar un proyectil extra",
     "locked": true
   },
   {
-    "x": 400,
-    "y": 400,
+    "x": 750,
+    "y": 250,
     "title": "Utilidad I",
     "unlockedSprite": "utilidad1",
     "info": "invocar una torreta que ataca de forma automatica",
