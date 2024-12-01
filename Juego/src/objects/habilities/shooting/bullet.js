@@ -3,7 +3,6 @@ export default class Bullet extends Phaser.GameObjects.Sprite {
      * Constructor de Bullet,las balas
      * @param {Scene} scene - escena en la que aparece
      * @param {number} damage - daño que hace la bala
-     * @param {number} range - alcance max
      * @param {number} startX - ejeX inicial
      * @param {number} startY - ejeY inical
      */
@@ -14,7 +13,7 @@ export default class Bullet extends Phaser.GameObjects.Sprite {
         this.scene.add.existing(this);
         this.damage = damage;
         this.speed = speed;
-        this.range = 1500;
+
         this.startX = 0; //posicion de la bala al ser disparada
         this.startY = 0;
         this.active = false;
@@ -29,7 +28,7 @@ export default class Bullet extends Phaser.GameObjects.Sprite {
 
         this.body.setVelocity(this.speed * pointSpeed.x, this.speed * pointSpeed.y);
 
-        this.scene.add.particles(0, 0, 'Particle', {
+        this.particles=this.scene.add.particles(0, 0, 'Particle', {
             x: () => {
                 return this.x;
             },
@@ -52,6 +51,7 @@ export default class Bullet extends Phaser.GameObjects.Sprite {
     }
     destroyBullet(pool) {
         pool.release(this);
+        this.particles.destroy();
         //quitar el efecto de particulas
     }
 }
