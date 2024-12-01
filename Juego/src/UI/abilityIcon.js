@@ -1,4 +1,6 @@
-const VALUE_OF_ABILITY = 3;
+import { showPopup } from "./showPopUp.js";
+
+
 
 //Icono de los atributos (botones)
 export default class AbilityIcon extends Phaser.GameObjects.Sprite {
@@ -12,8 +14,9 @@ export default class AbilityIcon extends Phaser.GameObjects.Sprite {
      * @param {string} title - titulo
      * @param {string} info - descripcion de la habilidad
      * @param {boolean} locked -booleano que indica que esta desbloquedo una habilidad
+     * @param {object} player -referencia del player
  */
-    constructor(scene, x, y, title, unlockedSprite, info, locked) {
+    constructor(scene, x, y, title, unlockedSprite, info, locked, player) {
         let key = "LockedAbility";
         if (!locked) key = unlockedSprite;
         super(scene, x, y, key);
@@ -24,7 +27,7 @@ export default class AbilityIcon extends Phaser.GameObjects.Sprite {
         this.locked = locked;
         this.info = info;
         this.title = title;
-
+        this.player = player;
 
         // Añadir a la escena y hacerle interactivo
         this.scene.add.existing(this);
@@ -45,7 +48,6 @@ export default class AbilityIcon extends Phaser.GameObjects.Sprite {
         this.tooltip = this.scene.add.text(x, y + 50, "", {
             fontFamily: "PixelArt",
             fontSize: 20,
-            color: "#123456",
             align: "center",
             wordWrap: {
                 width: 450, // Ancho máximo antes de dividir en una nueva línea.
@@ -58,8 +60,9 @@ export default class AbilityIcon extends Phaser.GameObjects.Sprite {
         this.on('pointerover', () => this.showTooltip());
         this.on('pointerout', () => this.hideTooltip());
 
-        this.on('pointerdown', (points) => {
-            this.unlockAbility(points);
+        this.on('pointerdown', () => {
+            let avaliablePoints = this.player.getAbilityPoints(); 
+            this.unlockAbility(avaliablePoints);
         });
     }
     /**
@@ -88,12 +91,12 @@ export default class AbilityIcon extends Phaser.GameObjects.Sprite {
         this.tooltip.setVisible(false);
     }
     unlockAbility(p) {
-        if (p < VALUE_OF_ABILITY) {
-            console.log("No se puede activar esta habilidad porque no tienes puntos suficientes");
+        if (p <=0) {
+            showPopup(this.scene,"No se puede activar esta habilidad porque no tienes puntos suficientes");
         }
         else {
             //lanzo el evento con la habilidad a desloquear y los puntos restantes
-            this.scene.game.events.emit('unlockAbility', this.title, p-VALUE_OF_ABILITY);
+            this.scene.game.events.emit('getANewAbility', this.title, p--);
         }
     }
 }

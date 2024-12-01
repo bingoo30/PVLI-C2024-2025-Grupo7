@@ -72,7 +72,8 @@ export default class AchievementScene extends Phaser.Scene {
             this.nextPage();
         });
 
-        var exitButton = this.add.image(50, 50, 'NextButton').setScale(0.35);
+        var exitButton = this.add.image(50, 50, 'ExitButton').setScale(0.25);
+        exitButton.setRotation(0.75);
         exitButton.setInteractive(); // Hacemos el sprite interactivo para que lance eventos
 
 

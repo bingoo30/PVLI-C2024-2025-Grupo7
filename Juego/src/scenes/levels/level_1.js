@@ -98,6 +98,8 @@ export default class Animation extends Phaser.Scene {
 
 		this.player = new Player(this, playerX, playerY);
 		this.player.setScale(SCALE);
+		// Guarda la referencia en el registry
+		this.registry.set('player', this.player);
 
 		// #endregion
 

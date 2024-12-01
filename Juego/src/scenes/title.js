@@ -68,7 +68,7 @@ export default class Title extends Phaser.Scene {
 		});
 
 		acvButton.on('pointerup', pointer => {
-			this.scene.launch('AchievementScene');
+			this.scene.start('AchievementScene', { previousScene: this.scene.key });
 
 		});
 

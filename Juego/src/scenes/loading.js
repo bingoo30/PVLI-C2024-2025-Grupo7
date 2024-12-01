@@ -40,8 +40,10 @@ export default class Loading extends Phaser.Scene {
 
 		this.load.image('achievement', 'assets/achievs/achievement.png');
 		this.load.image('LockedAchievement', 'assets/achievs/locked.png');
+		this.load.image('pauseBackground', 'assets/GUI/pause.png');
 		this.load.image('PrevButton', 'assets/achievs/previous.png');
 		this.load.image('NextButton', 'assets/achievs/next.png');
+		this.load.image('ExitButton', 'assets/GUI/exit.png');
 
 		// #endregion
 

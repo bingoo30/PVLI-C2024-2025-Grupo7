@@ -39,6 +39,7 @@ export default class Player extends Character {
         this.Inventory = new Inventory(this);
         // #region puntos de control status
         this.statusPoint = 0; //status points restantes
+        this.abilityPoint = 0;
         this.speedFactorStatus = 0;
         this.shootSpeedStatus = 0;
         this.maxLifeStatus = 0;
@@ -84,8 +85,11 @@ export default class Player extends Character {
     getLvel() {
         return this.level;
     }
-    getStatusPoint() {
+    getStatusPoints() {
         return this.statusPoint;
+    }
+    getAbilityPoints() {
+        return this.abilityPoint;
     }
     setKilledEnemy() {
         this.Inventory.addKilledEnemies();
@@ -138,11 +142,14 @@ export default class Player extends Character {
         this.xpAcumulator = this.xpAcumulator-this.xpToLevelUp;
         this.xpToLevelUp += 1;
         this.maxLife++;
-        //console.log(this.xpAcumulator);
-        //console.log(this.xpToLevelUp);
-        //console.log("me he subido de nivel");
+        this.statusPoint++;
+
+        if (this.level != 0 && (this.level % 3)-1 == 0) this.abilityPoint++;
+
+        console.log("status points:" + this.statusPoint);
+        console.log("ability points:" + this.abilityPoint);
     }
-    getANewAbility(ability) {
+    getANewAbility(ability, aPoints) {
         switch (ability) {
             case 'Juego de proyectiles I': {
                 console.log("disparar dos veces");
@@ -153,6 +160,8 @@ export default class Player extends Character {
             }
                 break;
         }
+        this.abilityPoint = aPoints;
+        
     }
     //funcion para subir un status
     upgrateStatus(status) {

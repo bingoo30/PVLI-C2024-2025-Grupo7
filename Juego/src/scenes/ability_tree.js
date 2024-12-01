@@ -8,11 +8,6 @@ export default class AbilityTree extends Phaser.Scene {
 	constructor() {
 		super({ key: 'AbilityTree' });
 	}
-	init(abilityPoints, statusPoints) {
-		this.abilityPoints = abilityPoints;
-		this.statusPoints = statusPoints;
-
-	}
 	preload() {
 		this.load.image('titleHeader', 'assets/tree/titleHeader.png');
 		this.load.image('LockedAbility', 'assets/tree/locked.png');
@@ -29,7 +24,13 @@ export default class AbilityTree extends Phaser.Scene {
 			})
 		});
 	}
-	create() {
+	create(data) {
+
+		// Recuperar la clave de la escena previa
+		const previousSceneKey = data.previousScene;
+
+		this.player = this.registry.get('player'); // Recuperamos al jugador
+
 		//fondo
 		const background = this.add.image(0, 0, 'pauseBackground').setOrigin(0,0);
 		background.setDisplaySize(this.scale.width, this.scale.height);
@@ -39,6 +40,7 @@ export default class AbilityTree extends Phaser.Scene {
 		//Titulos 
 		const juegoDeProyectiles = this.add.text(this.sys.game.canvas.width * 0.25, this.sys.game.canvas.height * 0.2-10, 'Juego de proyectiles', {
 			fontFamily: 'PixelArt',
+			color: '#4A9969',
 			fontSize: 36
 
 		}).setOrigin(0.5, 0.5);
@@ -46,6 +48,7 @@ export default class AbilityTree extends Phaser.Scene {
 		let header2 = this.add.image(this.sys.game.canvas.width * 0.75, this.sys.game.canvas.height * 0.2, 'titleHeader').setOrigin(0.5);
 		const utilidad = this.add.text(this.sys.game.canvas.width * 0.75, this.sys.game.canvas.height * 0.2-15, 'Utilidad', {
 			fontFamily: 'PixelArt',
+			color: '#4A9969',
 			fontSize: 36
 
 		}).setOrigin(0.5, 0.5);
@@ -62,11 +65,23 @@ export default class AbilityTree extends Phaser.Scene {
 				data.title,
 				data.unlockedSprite,
 				data.info,
-				data.locked
+				data.locked,
+				this.player
 			);
 			this.abilities.push(ability);
 		}
 		// #endregion
+
+		var exitButton = this.add.image(50, 50, 'ExitButton').setScale(0.25);
+		exitButton.setRotation(0.75);
+		exitButton.setInteractive(); // Hacemos el sprite interactivo para que lance eventos
+
+
+		//para salir //problema, cuando solo cuando quito la escena en title, no queda ninguna 
+		exitButton.on('pointerdown', pointer => {
+			this.scene.stop(); // Detiene la escena actual.
+			this.scene.start(previousSceneKey);
+		});
 	}
 	update(time, dt) {
 		super.update(time, dt);

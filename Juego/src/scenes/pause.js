@@ -14,7 +14,6 @@ export default class Pause extends Phaser.Scene {
 	 * Cargamos todos los assets que vamos a necesitar
 	 */
 	preload() {
-		this.load.image('pauseBackground', 'assets/GUI/pause.png');
 
 	}
 	/**
@@ -27,7 +26,7 @@ export default class Pause extends Phaser.Scene {
 		// Obtener la instancia de la escena previa
 		this.previousScene = this.scene.get(previousSceneKey);
 
-		const background = this.add.image(0, 0, 'pauseBackground').setOrigin(0, 0);
+		const background = this.add.image(this.sys.game.canvas.width * 0.5, this.sys.game.canvas.height * 0.5, 'pauseBackground').setOrigin(0.5,0.5);
 		background.setDisplaySize(this.scale.width, this.scale.height);
 
 		//console.log("me he creado", this.scene.key);
@@ -68,7 +67,7 @@ export default class Pause extends Phaser.Scene {
 
 		});
 		tree.on('pointerdown', () => {
-			this.scene.start('AbilityTree');
+			this.scene.start('AbilityTree', { previousScene: this.scene.key });
 		});
 	}
 }
