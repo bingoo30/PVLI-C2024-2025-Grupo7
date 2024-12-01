@@ -67,6 +67,9 @@ export default class Player extends Character {
         this.scene.events.on("playerIsDead", () => {
             this.scene.changeToGameover();
         });
+        this.scene.events.on("unlockAbility", (title, points) => {
+
+        });
 
     }
     init(speedFactor, shootSpeed, life, damage, prob) {
@@ -139,6 +142,18 @@ export default class Player extends Character {
         //console.log(this.xpToLevelUp);
         //console.log("me he subido de nivel");
     }
+    getANewAbility(ability) {
+        switch (ability) {
+            case 'Juego de proyectiles I': {
+                console.log("disparar dos veces");
+            }
+                break;
+            case 'Utilidad I': {
+                console.log("invocar dron");
+            }
+                break;
+        }
+    }
     //funcion para subir un status
     upgrateStatus(status) {
         switch(status){
@@ -163,7 +178,7 @@ export default class Player extends Character {
             }
                 break;
         }
-
+        this.statusPoint--;
     }
     /**
      * Bucle principal del personaje, actualizamos su posici�n y ejecutamos acciones seg�n el Input
@@ -233,7 +248,7 @@ export default class Player extends Character {
         }
 
         if (this.pKey.isDown) {
-            this.scene.game.scene.start("AchievementScene");
+            this.scene.pauseGame();
         }
 
        //Input de mouse
@@ -243,7 +258,13 @@ export default class Player extends Character {
                let target = new Phaser.Math.Vector2(this.mouse.x + this.scene.cameras.main.scrollX, this.mouse.y + this.scene.cameras.main.scrollY);
                // Calcula la dirección desde el personaje hacia el cursor
                //let direction = new Phaser.Math.Vector2(target.x - this.x, target.y - this.y).normalize();
-               fire(this, target, this.damage, this.shootSpeed, 'Bala2', 4, this.pool);
+               fire(this,
+                   target,
+                   this.damage + this.damageStatus * this.damage * 0.2,
+                   this.shootSpeed + this.shootSpeedStatus * this.shootSpeed * 0.2,
+                   'Bala2',
+                   4,
+                   this.pool);
                this.cooldownCont = this.shootSpeed;
             }
        }

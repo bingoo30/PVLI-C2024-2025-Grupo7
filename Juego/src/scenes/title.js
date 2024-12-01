@@ -29,28 +29,6 @@ export default class Title extends Phaser.Scene {
 				});
 		});
 
-		// Escuchar el evento de finalización de carga
-		this.load.on('complete', () => {
-			// Obtener los datos del JSON una vez cargados
-			const achievementDatas = this.cache.json.get('achievementData');
-
-			// Después de la carga, puedes acceder a las texturas
-			achievementDatas.forEach(data => {
-				const textureKey = data.unlockedSprite; // Clave de la imagen cargada.
-
-				// Verifica si la textura está disponible
-				const texture = this.textures.get(textureKey);
-				if (texture) {
-					const image = texture.getSourceImage();
-					console.log(
-						"%c ",
-						`font-size: 100px; background: url(${image.src}) no-repeat center; background-size: contain;`
-					);
-				} else {
-					console.error(`No se encontró la textura: ${textureKey}`);
-				}
-			});
-		});
 
 	}
 	/**
@@ -97,7 +75,7 @@ export default class Title extends Phaser.Scene {
 		});
 
 		acvButton.on('pointerup', pointer => {
-			this.scene.start('AchievementScene');
+			this.scene.launch('AchievementScene');
 
 		});
 

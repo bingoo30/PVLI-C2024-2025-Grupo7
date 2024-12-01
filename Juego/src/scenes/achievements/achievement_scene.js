@@ -16,7 +16,11 @@ export default class AchievementScene extends Phaser.Scene {
     /**
      * Creaci�n de los elementos de la escena.
      */
-    create() {
+    create(data) {
+
+        // Recuperar la clave de la escena previa
+        const previousSceneKey = data.previousScene;
+
 
         // Fondo de la escena.
         const wallpaper = this.add.image(0, 0, 'achievement').setOrigin(0, 0);
@@ -75,6 +79,7 @@ export default class AchievementScene extends Phaser.Scene {
         //para salir //problema, cuando solo cuando quito la escena en title, no queda ninguna 
         exitButton.on('pointerdown', pointer => {
             this.scene.stop(); // Detiene la escena actual.
+            this.scene.start(previousSceneKey);
         });
     }
 

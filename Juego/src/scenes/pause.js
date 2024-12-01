@@ -2,16 +2,13 @@
  * Escena de Título.
  * @extends Phaser.Scene
  */
-export default class Stop extends Phaser.Scene {
+export default class Pause extends Phaser.Scene {
 	/**
 	 * Escena principal.
 	 * @extends Phaser.Scene
 	 */
 	constructor() {
-		super({ key: 'pause' });
-	}
-	init(previousScene) {
-		this.previousScene = previousScene;
+		super({ key: 'Pause' });
 	}
 	/**
 	 * Cargamos todos los assets que vamos a necesitar
@@ -23,7 +20,13 @@ export default class Stop extends Phaser.Scene {
 	/**
 	* Creación de los elementos de la escena principal de juego
 	*/
-	create() {
+	create(data) {
+		// Recuperar la clave de la escena previa
+		const previousSceneKey = data.previousScene;
+
+		// Obtener la instancia de la escena previa
+		this.previousScene = this.scene.get(previousSceneKey);
+
 		//console.log("me he creado", this.scene.key);
 		let resume = this.add.text(this.sys.game.canvas.width * 0.5, this.sys.game.canvas.height * 0.25, 'RESUME', {
 			fontFamily: 'PixelArt',
@@ -31,7 +34,7 @@ export default class Stop extends Phaser.Scene {
 
 		}).setOrigin(0.5, 0.5);
 		resume.setInteractive();
-		let tree = this.add.text(this.sys.game.canvas.width * 0.5, this.sys.game.canvas.height * 0.5, 'HABILITIES',{
+		let tree = this.add.text(this.sys.game.canvas.width * 0.5, this.sys.game.canvas.height * 0.5, 'ABILITIES',{
 			fontFamily: 'PixelArt',
 			fontSize: 48
 
@@ -42,15 +45,27 @@ export default class Stop extends Phaser.Scene {
 			fontSize: 48
 
 		}).setOrigin(0.5, 0.5);
+		acvs.setInteractive();
 
 		resume.on('pointerdown', () => {
-			this.scene.start(this.previousScene);
+			
+			if (this.previousScene && typeof this.previousScene.resumeGame === 'function') {
+				this.previousScene.resumeGame(); // Llama al método solo si está definido
+			} else if (!this.previousScene) {
+				console.error("previousScene no es válido");
+			}
+			else {
+				console.error("resumeGame no está definido");
+			}
+			
+			
 		});
 		acvs.on('pointerdown', () => {
-			this.scene.launch('AchievementScene');
+			this.scene.start('AchievementScene', { previousScene: this.scene.key });
+
 		});
 		tree.on('pointerdown', () => {
-			this.scene.launch('AbilityTree');
+			this.scene.start('AbilityTree');
 		});
 	}
 }

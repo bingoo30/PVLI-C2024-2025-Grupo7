@@ -325,7 +325,16 @@ export default class Animation extends Phaser.Scene {
 		this.MainSample.stop();
 		this.scene.start("level2")
 	}
-
+	pauseGame() {
+		this.isGamePaused = true; // Cambiar el estado del juego a pausado
+		this.scene.launch("Pause", { previousScene: this.scene.key }); // Lanzar la escena de pausa
+		this.scene.pause(); // Pausar la escena actual
+	}
+	resumeGame() {
+		this.isGamePaused = false; // Cambiar el estado del juego a activo
+		this.scene.resume(); // Reanudar la escena actual
+		this.scene.stop("Pause"); // Detener la escena de pausa
+	}
 
 	update(t, dt) {
 
