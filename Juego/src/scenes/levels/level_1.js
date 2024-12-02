@@ -271,7 +271,7 @@ export default class Animation extends Phaser.Scene {
 		this.estaka.setScale(SCALE);
 		this.enemies.add(this.estaka);
 
-		this.turret = new Turret(this, this.player.x + 500, this.player.y, this.enemies);
+		this.turret = new Turret(this, this.player.x + 500, this.player.y, this.enemies.getChildren());
 		this.turret.setScale(SCALE);
 		this.turret.setPool(this.playerBullets);
 
