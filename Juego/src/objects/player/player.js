@@ -1,5 +1,5 @@
 import Character from "./character.js";
-import { fire } from "../habilities/shooting/fire.js";
+import { fire } from "../abilities/shooting/fire.js";
 import Inventory from "./inventory.js";
 
 /**
@@ -21,7 +21,7 @@ export default class Player extends Character {
         this.bulletNumbers = 1;
 
         //configurar los atributos correspondientes despues de llamar al constructor del character
-        this.init(400, 1250, 25, 2, 0.05);
+        this.init(400, 1250, 30, 2, 0.05);
 
         // Agregamos fisicas
         scene.physics.add.existing(this);
@@ -141,6 +141,9 @@ export default class Player extends Character {
         this.xpToLevelUp += 1;
         this.maxLife++;
         this.statusPoint++;
+        this.life = this.maxLife;
+
+        console.log(this.life);
 
         if (this.level != 0 && (this.level % 3)-1 == 0) this.abilityPoint++;
 

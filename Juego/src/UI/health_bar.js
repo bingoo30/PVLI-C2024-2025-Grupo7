@@ -15,14 +15,25 @@ export default class HealthBar {
 
         this.bar = scene.add.sprite(this.x, this.y, 'healthBar').setOrigin(0, 0);
         this.bar.setDisplaySize(this.maxWidth, this.height); 
-        this.container.add([this.bar, this.background]);
+
+        this.lifeText = this.scene.add.text(this.x -30, this.y, '100%', {
+            font: '20px TimeNewsRoman',
+            fill: '#FFFFFF' 
+        });
+
+        this.lifeText.setOrigin(0, 0);
+
+        this.container.add([this.bar, this.background, this.lifeText]);
         this.container.setScrollFactor(0);
         this.container.setDepth(depth);
     }
+    
     updateHealth(currentHealth, maxHealth) {
 
         const healthPer = Phaser.Math.Clamp(currentHealth / maxHealth, 0, 1);
 
+        
+        this.lifeText.setText(`${Phaser.Math.RoundTo(healthPer * 100, 0) }%`);
         this.bar.setDisplaySize(this.maxWidth * healthPer, this.height); 
 
         if (healthPer< 0.2){

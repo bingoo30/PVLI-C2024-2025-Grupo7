@@ -1,22 +1,21 @@
-export function fire(shooter, target, damage, speed, sprite, scale, pool, num, critChance = 0, critMultiplier = 2)
-{  
-    // Calcular el ángulo base hacia el objetivo
+export function fire(shooter, target, damage, speed, sprite, scale, pool, num, critChance = 0, critMultiplier = 2) {
+    // Calcular el é†¤gulo base hacia el objetivo
     const angleToTarget = Phaser.Math.Angle.Between(shooter.x, shooter.y, target.x, target.y);
 
-    // Configurar el rango de dispersión (en radianes)
+    // Configurar el rango de dispersié«‡ (en radianes)
     const spread = Phaser.Math.DegToRad(8); // Rango total del spread
-    const angleStep = num > 1 ? spread / (num - 1) : 0; // Evitar división por cero
+    const angleStep = num > 1 ? spread / (num - 1) : 0; // Evitar divisié«‡ por cero
     const startAngle = angleToTarget - spread / 2;
 
     for (let i = 0; i < num; i++) {
-        // Calcular el ángulo para esta bala
+        // Calcular el é†¤gulo para esta bala
         const angle = startAngle + i * angleStep;
 
-        // Determinar si esta bala es un crítico y calcular el daño final
-        const isCritical = Math.random() < critChance; // Probabilidad de crítico
+        // Determinar si esta bala es un créŸ™ico y calcular el daé§‰ final
+        const isCritical = Math.random() < critChance; // Probabilidad de créŸ™ico
         const finalDamage = isCritical ? damage * critMultiplier : damage;
 
-        // Calcular la dirección de la bala a partir del ángulo ajustado
+        // Calcular la direccié«‡ de la bala a partir del é†¤gulo ajustado
         const dx = Math.cos(angle);
         const dy = Math.sin(angle);
 
@@ -28,13 +27,13 @@ export function fire(shooter, target, damage, speed, sprite, scale, pool, num, c
         bullet.setSpeed(speed);
         bullet.setDamage(finalDamage);
 
-        // Mover la bala hacia la posición calculada
+        // Mover la bala hacia la posicié«‡ calculada
         //uso dx y dy por el disparo en abanico si lo hay
         bullet.move(shooter.x, shooter.y, shooter.x + dx * 1000, shooter.y + dy * 1000);
 
-        // Mensaje de ataque crítico (opcional)
+        // Mensaje de ataque créŸ™ico (opcional)
         if (isCritical) {
-            console.log(`¡Ataque crítico! Daño: ${finalDamage}`);
+            console.log(`Ataque criico! DaÃ±o: ${finalDamage}`);
         }
     }
 }

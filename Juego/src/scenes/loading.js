@@ -69,6 +69,9 @@ export default class Loading extends Phaser.Scene {
 		this.load.image('Crac', 'assets/enemies/crac.png');
 		this.load.image('Letus', 'assets/enemies/letus.png');
 		this.load.image('Zaro', 'assets/enemies/zaro_placeholder.png');
+		this.load.image('Mutum', 'assets/enemies/mutum.png')
+
+		this.load.image('DamageArea', 'assets/bullet/damage_area.png');
 
 		// #endregion
 
@@ -98,7 +101,6 @@ export default class Loading extends Phaser.Scene {
 				callback: () => { this.scene.scene.start("title") }
 			})
 		});
-
 
 	}
 

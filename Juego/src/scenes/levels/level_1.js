@@ -5,13 +5,17 @@ import Bob from '../../objects/enemies/bob.js';
 import HealthBar from '../../UI/health_bar.js';
 import ExpBar from '../../UI/exp_bar.js';
 import Coin from '../../objects/enemies/coin.js';
-import Bullet from '../../objects/habilities/shooting/bullet.js';
+import Bullet from '../../objects/abilities/shooting/bullet.js';
 import Letus from '../../objects/enemies/letus.js';
+
+import Mutum from '../../objects/enemies/mutum.js'
 
 import DialogueManager from '../../UI/dialog_manager.js';
 import DialogText from '../../UI/dialog_plugin.js';
 import NPC from '../../objects/interactable_objects/npc.js';
 import Door from '../../objects/interactable_objects/door.js';
+import DamageArea from '../../objects/abilities/area_damage/damage_area.js';
+
 //import Coin from '../../objetos/Enemies/coin.js'
 //constante
 const SCALE = 4;
@@ -64,7 +68,6 @@ export default class Animation extends Phaser.Scene {
 		// la escala de la puerta lo hace en la constructora de la clase door
 		this.doorGroup = this.add.group();
 		this.doorLayer = this.map.getObjectLayer('Door');
-		console.log(this.doorLayer);
 		this.doorLayer.objects.forEach((objD) => {
 			const door = new Door(this, objD.x, objD.y,
 				objD.name,  // El tipo de puerta ('verticalDoor' o 'horizontalDoor')
@@ -146,6 +149,18 @@ export default class Animation extends Phaser.Scene {
 
 		// #endregion
 
+		//#region Enemy Area
+		///scene, x, y, radius, damage, duration, scale=4
+		toAdds = [];
+		this.area = new Pool(this, MAX, 'Coin');
+		for (let i = 0; i < MAX; i++) {
+			let toAdd = new DamageArea(this, 0, 0, 100, 0);
+			toAdds.push(toAdd);
+		}
+		this.area.addMultipleEntity(toAdds);
+
+		//#endregion
+
 		// #endregion
 
 		// #region Enemy
@@ -193,7 +208,7 @@ export default class Animation extends Phaser.Scene {
 		});
 
 		this.enemies.addMultiple(this.arrayLetus);
-		
+		//#endregion
 
 		//#region UI
 
@@ -234,6 +249,22 @@ export default class Animation extends Phaser.Scene {
 		this.Flush = new NPC(this, NPCX, NPCY, 'Flush', 'dialogues_Flush', "Caballero generoso");
 		this.Flush.setScale(SCALE);
 
+
+		const x = NPCpos.x * SCALE - 100;
+		const y = NPCpos.y * SCALE;
+
+		this.mutum = new Mutum(this, x, y, this.player, 1, this.area);
+		this.mutum.setScale(SCALE);
+		this.enemies.add(this.mutum);
+
+		this.physics.add.overlap(this.player, this.area.getPhaserGroup(), (player, area) => {
+			player.onGotHit(area.getDamage());
+			this.healthBar.updateHealth(this.player.life, this.player.maxLife);
+
+		});
+
+
+
 		// #endregion
 
 		// #region Collision
@@ -260,6 +291,7 @@ export default class Animation extends Phaser.Scene {
 				player.knockback(500, enemy);
 				player.onGotHit(enemy.getDamage());
 				this.healthBar.updateHealth(this.player.life, this.player.maxLife);
+				if (enemy.isMutum) enemy.createDamageArea();
 			}
 
 		});

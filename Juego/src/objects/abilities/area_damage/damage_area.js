@@ -1,0 +1,61 @@
+/**
+ * Constructor de Area de daño
+ * @param {Scene} scene - escena en la que aparece
+ * @param {number} damage - daño que hace
+ * @param {number} x - ejeX inicial
+ * @param {number} y- ejeY inical
+ * @param {number} radius - radio del area
+ */
+export default class DamageArea extends Phaser.GameObjects.Sprite {
+    constructor(scene, x, y, radius, damage) {
+        super(scene, x, y, 'DamageArea');
+        this.scene = scene;
+
+        this.damage = damage; 
+        this.radius = radius;
+        this.getRealDamage = false;
+
+        scene.add.existing(this);
+        scene.physics.add.existing(this);
+        this.body.setImmovable(true);
+        this.setOrigin(0.5, 0.5);
+
+        let timer = this.scene.time.addEvent({
+            delay: 300,
+            callback: this.changeDamage,
+            callbackScope: this,
+            loop: true
+        });
+
+
+    }
+    changeDamage() {
+        this.getRealDamage = true
+    }
+
+    reset(radius, damage, duration) {
+        this.radius = radius;
+        this.damage = damage;
+        this.duration = duration;
+        this.setDisplaySize(radius * 2, radius * 2);
+        this.body.setCircle(radius);
+
+        this.scene.time.delayedCall(this.duration * 1000, this.destroyArea, [], this);
+    }
+    getDamage() {
+
+        if (this.getRealDamage) {
+            this.getRealDamage = false;
+            return this.damage;    
+        }
+        else return 0;
+    }
+    destroyArea(pool = null) {
+        if (pool != null) {
+            pool.release(this);
+        } else {
+            this.destroy();
+        }
+    }
+   
+}

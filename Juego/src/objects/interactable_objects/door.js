@@ -2,12 +2,12 @@
      * @extends InteractableObjects
      Lo que recibe
      * @param {Scene} scene - la escena que esta
-     * @param {int} x - posicion x
-     * @param {int} y - posicion y
+     * @param {number} x - posicion x
+     * @param {number} y - posicion y
      * @param {String} texture - key del sprite del objeto
-     * @param {int} sizeW - ancho del collider de la puerta
-     * @param {int} sizeH - altura del collider de la puerta
-     * @param {int} scale - escala de la mapa
+     * @param {number} sizeW - ancho del collider de la puerta
+     * @param {number} sizeH - altura del collider de la puerta
+     * @param {number} scale - escala de la mapa
      Atributos
      * @param {boolean} isOpen  - booleano para saber si la puerta esta abierto o no
      */
@@ -23,7 +23,6 @@ export default class Door extends InteractableObjects {
 
         this.scene.physics.add.existing(this);
         this.body.setImmovable(true);
-        //this.body.setSize(sizeW, sizeH);
         this.body.setOffset(0, 0);
         this.setOrigin(0, 0);
 
