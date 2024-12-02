@@ -72,7 +72,7 @@ export default class Loading extends Phaser.Scene {
 		this.load.image('Mutum', 'assets/enemies/mutum.png')
 
 		this.load.image('DamageArea', 'assets/bullet/damage_area.png');
-
+		this.load.image('EstakaDamageArea', 'assets/bullet/estaka_damage_area.png');
 		// #endregion
 
 		// #region Tilemaps

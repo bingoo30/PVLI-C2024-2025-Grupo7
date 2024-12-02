@@ -786,7 +786,7 @@
  <objectgroup id="12" name="Door">
   <object id="209" name="verticalDoor" x="1000" y="1192" width="8" height="56"/>
   <object id="216" name="horizontalDoor" x="1088" y="1280" width="64" height="32"/>
-  <object id="221" name="verticalDoor" x="1416" y="1224" width="16" height="56"/>
+  <object id="221" name="verticalDoor" x="1424" y="1224" width="8" height="56"/>
   <object id="223" name="verticalDoor" x="936" y="840" width="8" height="56"/>
   <object id="224" name="verticalDoor" x="1480" y="776" width="8" height="56"/>
   <object id="225" name="verticalDoor" x="1264" y="360" width="8" height="56"/>

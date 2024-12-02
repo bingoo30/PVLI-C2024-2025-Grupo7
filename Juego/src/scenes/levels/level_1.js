@@ -9,6 +9,8 @@ import Bullet from '../../objects/abilities/shooting/bullet.js';
 import Letus from '../../objects/enemies/letus.js';
 
 import Mutum from '../../objects/enemies/mutum.js'
+import Estaka from '../../objects/enemies/estaka.js';
+
 
 import DialogueManager from '../../UI/dialog_manager.js';
 import DialogText from '../../UI/dialog_plugin.js';
@@ -152,12 +154,20 @@ export default class Animation extends Phaser.Scene {
 		//#region Enemy Area
 		///scene, x, y, radius, damage, duration, scale=4
 		toAdds = [];
-		this.area = new Pool(this, MAX, 'Coin');
+		this.area = new Pool(this, MAX, 'DamageArea');
 		for (let i = 0; i < MAX; i++) {
 			let toAdd = new DamageArea(this, 0, 0, 100, 0);
 			toAdds.push(toAdd);
 		}
 		this.area.addMultipleEntity(toAdds);
+
+		toAdds = [];
+		this.areaEs = new Pool(this, MAX, 'EstakaDamageArea');
+		for (let i = 0; i < MAX; i++) {
+			let toAdd = new DamageArea(this, 0, 0, 100, 0, 'EstakaDamageArea');
+			toAdds.push(toAdd);
+		}
+		this.areaEs.addMultipleEntity(toAdds);
 
 		//#endregion
 
@@ -256,6 +266,11 @@ export default class Animation extends Phaser.Scene {
 		this.mutum = new Mutum(this, x, y, this.player, 1, this.area);
 		this.mutum.setScale(SCALE);
 		this.enemies.add(this.mutum);
+
+		this.estaka = new Estaka(this, x - 100, y, this.player, 1, this.areaEs);
+		this.estaka.setScale(SCALE);
+		this.enemies.add(this.estaka);
+
 
 		this.physics.add.overlap(this.player, this.area.getPhaserGroup(), (player, area) => {
 			player.onGotHit(area.getDamage());

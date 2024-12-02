@@ -10,33 +10,36 @@ import DamageArea from '../abilities/area_damage/damage_area.js'
  * @param {number} damageRange - radio del area
  * @param {number} duration - duracion del area
  */
-export default class Mutum extends Enemy {
+export default class Estaka extends Enemy {
     constructor(scene, x, y, player, exp, pool) {
         super(scene, x, y, player, 'Mutum', exp);
         this.player = player;
         this.damageRange = 100;
-        this.damage = 0.3;  
-        this.duration = 3;      
+        this.damage = 0.1;
+        this.duration = 1;
         this.scene.add.existing(this);
         this.damageArea = null;
         this.pool = pool;
-        this.isMutum = true;
 
-        this.init(50, 0, 2, 2, 0);
+        this.init(30, 0, 2, 2, 0);
+        this.timer = this.scene.time.addEvent({
+            delay: 3000,
+            callback: this.createDamageArea,
+            callbackScope: this,
+            loop: true
+        });
     }
     init(speedFactor, shootSpeed, life, damage, prob) {
         super.init(speedFactor, shootSpeed, life, damage, prob);
     }
     onDeath() {
-        this.createDamageArea();
+        this.timer.remove(); 
+        this.timer = null;
+        super.onDeath();
     }
     createDamageArea() {
-        if (!this.damageArea) {
-            this.damageArea = this.pool.spawn(this.x, this.y);
-            this.damageArea.reset(this.damageRange, this.damage, this.duration);
-        }
-
-        super.onDeath();
+        this.damageArea = this.pool.spawn(this.x, this.y);
+        this.damageArea.reset(this.damageRange, this.damage, this.duration);
     }
 
 }
