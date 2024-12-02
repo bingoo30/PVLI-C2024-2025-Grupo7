@@ -38,8 +38,10 @@ export default class Estaka extends Enemy {
         super.onDeath();
     }
     createDamageArea() {
-        this.damageArea = this.pool.spawn(this.x, this.y);
-        this.damageArea.reset(this.damageRange, this.damage, this.duration);
+        if (this.follow) {
+            this.damageArea = this.pool.spawn(this.x, this.y);
+            this.damageArea.reset(this.damageRange, this.damage, this.duration);
+        }
     }
 
 }

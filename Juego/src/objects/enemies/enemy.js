@@ -30,6 +30,8 @@ export default class Enemy extends Character {
         this.dead = false;
         this.followRange = DEFAULT_FOLLOW_RANGE;
 
+        this.follow = false;
+
     }
 
 
@@ -68,8 +70,10 @@ export default class Enemy extends Character {
         const distanceToPlayer = Phaser.Math.Distance.Between(this.x, this.y, this.player.x, this.player.y);
         if (distanceToPlayer <= this.followRange) {
             this.moveTowards(this.player.x, this.player.y);
+            this.follow = true;
         } else {
             this.stopMovement();
+            this.follow = false;
         }
     }
 
