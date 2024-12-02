@@ -1,16 +1,16 @@
 import Player from '../../objects/player/player.js';
 import Crac from '../../objects/enemies/crac.js'
-import Pool from '../../objects/our_pool.js'
-import Bob from '../../objects/enemies/bob.js';
 import HealthBar from '../../UI/health_bar.js';
 import ExpBar from '../../UI/exp_bar.js';
 import Coin from '../../objects/enemies/coin.js';
 import Bullet from '../../objects/abilities/shooting/bullet.js';
-import Letus from '../../objects/enemies/letus.js';
 
+import Pool from '../../objects/our_pool.js'
+import Bob from '../../objects/enemies/bob.js';
+import Letus from '../../objects/enemies/letus.js';
 import Mutum from '../../objects/enemies/mutum.js'
 import Estaka from '../../objects/enemies/estaka.js';
-
+import Turret from '../../objects/habilities/turret.js';
 
 import DialogueManager from '../../UI/dialog_manager.js';
 import DialogText from '../../UI/dialog_plugin.js';
@@ -270,6 +270,10 @@ export default class Animation extends Phaser.Scene {
 		this.estaka = new Estaka(this, x - 100, y, this.player, 1, this.areaEs);
 		this.estaka.setScale(SCALE);
 		this.enemies.add(this.estaka);
+
+		this.turret = new Turret(this, this.player.x + 500, this.player.y, this.enemies);
+		this.turret.setScale(SCALE);
+		this.turret.setPool(this.playerBullets);
 
 
 		this.physics.add.overlap(this.player, this.area.getPhaserGroup(), (player, area) => {

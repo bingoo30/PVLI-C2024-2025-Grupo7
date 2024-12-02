@@ -63,7 +63,7 @@ export default class Player extends Character {
 
         //eventos
         this.scene.events.on("IKilledAnEnemy", () => {
-            console.log("i killed it");
+            //console.log("i killed it");
             this.Inventory.addKilledEnemies();
         });
         this.scene.events.on("playerIsDead", () => {

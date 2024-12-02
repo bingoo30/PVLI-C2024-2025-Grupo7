@@ -54,6 +54,7 @@ export default class Loading extends Phaser.Scene {
 		this.load.image('Bala2', 'assets/bullet/bullet_2.png');
 		this.load.image('Particle', 'assets/effects/particles_1.png');
 		this.load.image('Coin', 'assets/coin/coin.png');
+		this.load.image('Turret', 'assets/abilities/turret_placeholder.png');
 
 		this.load.spritesheet('playerSheet', 'assets/character/player_sheet.png',{
 			frameWidth: 32,  // Ancho de cada cuadro
