@@ -1,19 +1,96 @@
 import Player from '../../objects/player/player.js';
 import Joker from '../../objects/enemies/joker.js'
 
+import Crac from '../../objects/enemies/crac.js'
+import HealthBar from '../../UI/health_bar.js';
+import ExpBar from '../../UI/exp_bar.js';
+import Coin from '../../objects/enemies/coin.js';
+import Bullet from '../../objects/abilities/shooting/bullet.js';
 
-class BossScene extends Phaser.Scene {
+import Pool from '../../objects/our_pool.js'
+import Bob from '../../objects/enemies/bob.js';
+import Letus from '../../objects/enemies/letus.js';
+import Mutum from '../../objects/enemies/mutum.js'
+import Estaka from '../../objects/enemies/estaka.js';
+import Turret from '../../objects/habilities/turret.js';
+
+import DialogueManager from '../../UI/dialog_manager.js';
+import DialogText from '../../UI/dialog_plugin.js';
+import NPC from '../../objects/interactable_objects/npc.js';
+import Door from '../../objects/interactable_objects/door.js';
+import DamageArea from '../../objects/abilities/area_damage/damage_area.js';
+import PickableObjects from '../../objects/interactable_objects/pickable_objects.js';
+
+const SCALE = 4;
+export default class BossScene extends Phaser.Scene {
     constructor() {
         super({ key: 'BossScene' });
     }
 
     preload() {
         // Load assets (e.g., boss sprite, animations, and sounds)
-        this.load.spritesheet('boss', 'assets/boss.png', { frameWidth: 64, frameHeight: 64 });
-        this.load.image('projectile', 'assets/projectile.png');
+        this.load.image('boss', 'assets/enemies/joker.png');
+        this.load.image('projectile', 'assets/bullet/bullet_1.png');
     }
 
     create() {
+        // #region Map
+
+        this.map = this.make.tilemap({ key: 'mapa4', tileWidth: 16, tileHeight: 16 });
+        this.tileset = this.map.addTilesetImage('mapTiles', 'tileset4');
+        this.sueloLayer = this.map.createLayer('suelo', this.tileset);
+
+
+        if (!this.sueloLayer) {
+            console.error("La capa 'suelo' no se ha creado correctamente.");
+        }
+       
+        this.sueloLayer.setScale(SCALE);
+
+        //#region puerta
+
+        // la escala de la puerta lo hace en la constructora de la clase door
+        this.doorGroup = this.add.group();
+        this.doorLayer = this.map.getObjectLayer('Door');
+        this.doorLayer.objects.forEach((objD) => {
+            const door = new Door(this, objD.x, objD.y,
+                objD.name,  // El tipo de puerta ('verticalDoor' o 'horizontalDoor')
+                objD.width,  // El tamaño de la puerta en Tiled
+                objD.height, // El tamaño de la puerta en Tiled
+            );
+            // Añadir la puerta al grupo de puertas
+            this.doorGroup.add(door);
+        });
+
+        //#endregion
+
+
+        // #region Player
+        // #region Player Position
+
+        const objectLayer = this.map.getObjectLayer('position');
+
+        const playerPos = objectLayer.objects.find(obj => obj.name == 'playerPosition');
+
+        // Verificar si el objeto fue encontrado
+        if (!playerPos) console.log('Position player no encontrado.');
+        const playerX = playerPos.x * SCALE;
+        const playerY = playerPos.y * SCALE;
+
+        // #endregion
+
+
+        // #region Player
+
+        this.player = new Player(this, playerX, playerY);
+        this.player.setScale(SCALE);
+        // Guarda la referencia en el registry
+        this.registry.set('player', this.player);
+
+        // #endregion
+
+        // #endregion
+
 
         // #region Pools
 
@@ -48,29 +125,6 @@ class BossScene extends Phaser.Scene {
         // #endregion
 
 
-        // #region Player
-        // #region Player Position
-
-        const objectLayer = this.map.getObjectLayer('position');
-
-        const playerPos = objectLayer.objects.find(obj => obj.name == 'playerPosition');
-
-        // Verificar si el objeto fue encontrado
-        if (!playerPos) console.log('Position player no encontrado.');
-        const playerX = playerPos.x * SCALE;
-        const playerY = playerPos.y * SCALE;
-
-        // #endregion
-
-
-        // #region Player
-
-        this.player = new Player(this, playerX, playerY);
-        this.player.setScale(SCALE);
-    
-        // #endregion
-
-        // #endregion
 
         // #region Joker
 
