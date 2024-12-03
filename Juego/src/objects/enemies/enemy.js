@@ -31,8 +31,6 @@ export default class Enemy extends Character {
         this.followRange = DEFAULT_FOLLOW_RANGE;
 
         this.follow = false;
-        this.directionX = 0;
-        this.directionY = 0;
     }
 
 
