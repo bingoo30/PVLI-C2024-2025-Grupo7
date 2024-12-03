@@ -17,7 +17,8 @@ export default class Inventory {
         this.enemiesKilled++;
     }
     collectKey() {
-        key = true;
+       // console.log('llave conseguida');
+        this.key = true;
     }
     //metodo auxiliar para crear los eventos
     createEvents() {

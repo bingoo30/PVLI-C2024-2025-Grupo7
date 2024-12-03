@@ -17,15 +17,12 @@ export default class PickableObjects extends InteractableObjects {
         this.scene.add.existing(this);
     }
 
-    preUpdate(t, dt) {
-        super.preUpdate(t, dt);
-    }
-
     onInteract() {
         if (this.canInteract && !this.isPick) {
             this.isPick = true;
             if (this.name == 'key') this.scene.player.Inventory.collectKey();
             else this.scene.player.Inventory.addObject(this);
+
             this.textActive = false;
             this.setVisible(false).setActive(false);
             this.text.setVisible(false);

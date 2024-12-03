@@ -88,6 +88,10 @@ export default class Loading extends Phaser.Scene {
 
 		// #endregion
 
+		//#region Objects
+		this.load.image('key', 'assets/map/key.png');
+		//#endregion
+
 		// #region Audio
 
 		this.load.audio('MainSample', 'assets/audio/batallaPrincipal.wav');

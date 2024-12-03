@@ -17,6 +17,7 @@ import DialogText from '../../UI/dialog_plugin.js';
 import NPC from '../../objects/interactable_objects/npc.js';
 import Door from '../../objects/interactable_objects/door.js';
 import DamageArea from '../../objects/abilities/area_damage/damage_area.js';
+import PickableObjects from '../../objects/interactable_objects/pickable_objects.js';
 
 //import Coin from '../../objetos/Enemies/coin.js'
 //constante
@@ -78,6 +79,19 @@ export default class Animation extends Phaser.Scene {
 			);
 			// Añadir la puerta al grupo de puertas
 			this.doorGroup.add(door);
+		});
+
+		//#endregion
+
+		//#region Objetos
+
+		// la escala de la puerta lo hace en la constructora de la clase door
+		this.PickableObjects = this.add.group();
+		this.objectsLayer = this.map.getObjectLayer('Objects');
+		this.objectsLayer.objects.forEach((obj) => {
+			const pickable = new PickableObjects(this, obj.x * SCALE, obj.y * SCALE, obj.name, obj.name);
+			pickable.setScale(SCALE);
+			this.PickableObjects.add(pickable);
 		});
 
 		//#endregion

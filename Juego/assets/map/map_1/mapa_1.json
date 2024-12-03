@@ -201,6 +201,29 @@
         }, 
         {
          "draworder":"topdown",
+         "id":13,
+         "name":"Objects",
+         "objects":[
+                {
+                 "height":0,
+                 "id":241,
+                 "name":"key",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":888,
+                 "y":1192
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
          "id":12,
          "name":"Door",
          "objects":[
@@ -1945,8 +1968,8 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":13,
- "nextobjectid":241,
+ "nextlayerid":14,
+ "nextobjectid":245,
  "orientation":"orthogonal",
  "renderorder":"left-up",
  "tiledversion":"1.11.0",
