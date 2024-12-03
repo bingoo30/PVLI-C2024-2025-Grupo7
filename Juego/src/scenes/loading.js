@@ -54,7 +54,11 @@ export default class Loading extends Phaser.Scene {
 		this.load.image('Bala2', 'assets/bullet/bullet_2.png');
 		this.load.image('Particle', 'assets/effects/particles_1.png');
 		this.load.image('Coin', 'assets/coin/coin.png');
-		this.load.image('Turret', 'assets/abilities/turret_placeholder.png');
+		this.load.spritesheet('Turret', 'assets/abilities/turret.png', {
+			frameWidth: 32,  // Ancho de cada cuadro
+			frameHeight: 30, // Altura de cada cuadro
+			endFrame: 3      // Número de cuadros en el sprite sheet
+		});
 
 		this.load.spritesheet('playerSheet', 'assets/character/player_sheet.png',{
 			frameWidth: 32,  // Ancho de cada cuadro
@@ -72,8 +76,8 @@ export default class Loading extends Phaser.Scene {
 		this.load.image('Zaro', 'assets/enemies/zaro_placeholder.png');
 		this.load.image('Mutum', 'assets/enemies/mutum.png')
 
-		this.load.image('DamageArea', 'assets/bullet/damage_area.png');
-		this.load.image('EstakaDamageArea', 'assets/bullet/estaka_damage_area.png');
+		//this.load.image('DamageArea', 'assets/bullet/damage_area.png');
+		//this.load.image('EstakaDamageArea', 'assets/bullet/estaka_damage_area.png');
 		// #endregion
 
 		// #region Tilemaps
@@ -90,18 +94,50 @@ export default class Loading extends Phaser.Scene {
 
 		// #endregion
 
+		// #region Explosion
+
+		this.explosionData = [
+			{ key: '01', frameWidth: 32, frameHeight: 32, frameCount: 8 },
+			{ key: '02', frameWidth: 32, frameHeight: 32, frameCount: 10 },
+			{ key: '03', frameWidth: 32, frameHeight: 32, frameCount: 9 },
+			{ key: '04', frameWidth: 32, frameHeight: 32, frameCount: 12 },
+			{ key: '05', frameWidth: 32, frameHeight: 32, frameCount: 11 },
+			{ key: '06', frameWidth: 32, frameHeight: 32, frameCount: 10 },
+			{ key: '07', frameWidth: 32, frameHeight: 32, frameCount: 11 },
+			{ key: '08', frameWidth: 32, frameHeight: 32, frameCount: 12 },
+			{ key: '09', frameWidth: 32, frameHeight: 32, frameCount: 9 },
+			// ... Agrega el resto de las explosiones
+		];
+
+
+		// SpriteSheets
+		this.explosionData.forEach(({ key, frameWidth, frameHeight, frameCount }) => {
+			this.load.spritesheet(key, `assets/effects/free_assets/${key}.png`, {
+				frameWidth,
+				frameHeight,
+				endFrame: frameCount - 1,
+				repeat: 1
+			});
+		});
+
+		// #endregion
+
+
+
 		// #region JSONS
 		// Cargar el archivo JSON de logros.
 		this.load.json('achievementData', 'src/scenes/achievements/achievements_datas.json');
 		this.load.json('treeData', 'src/objects/player/tree_data.json');
 		// #endregion
 
-		this.load.on('complete', function (f) {
-			this.scene.time.addEvent({
+
+		this.load.on('complete', () => {
+			this.time.addEvent({
 				delay: 2000,
-				callback: () => { this.scene.scene.start("title") }
-			})
+				callback: () => { this.scene.start("title"); }
+			});
 		});
+
 
 	}
 
@@ -133,7 +169,15 @@ export default class Loading extends Phaser.Scene {
 		});
 
 
-
+		this.explosionData.forEach(({ key, frameCount }) => {
+			this.anims.create({
+				key: `${key}_expl_anim`, // Nombre único para la animación
+				frames: this.anims.generateFrameNumbers(key, { start: 0, end: frameCount - 1 }),
+				frameRate: 10, // Ajusta según la velocidad deseada
+				repeat: 0 // Reproducir una sola vez
+			});
+		});
+		
 
 		//#endregion
 

@@ -7,7 +7,7 @@
  * @param {number} radius - radio del area
  */
 export default class DamageArea extends Phaser.GameObjects.Sprite {
-    constructor(scene, x, y, radius, damage, texture = 'DamageArea') {
+    constructor(scene, x, y, radius, damage, texture) {
         super(scene, x, y, texture);
         this.scene = scene;
 
@@ -29,6 +29,7 @@ export default class DamageArea extends Phaser.GameObjects.Sprite {
             loop: true
         });
 
+        this.play(texture);
 
     }
     changeDamage() {
