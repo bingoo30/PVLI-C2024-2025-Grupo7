@@ -16,10 +16,11 @@ export default class DamageArea extends Phaser.GameObjects.Sprite {
         this.getRealDamage = false;
 
         scene.add.existing(this);
-        scene.physics.add.existing(this);
-        this.body.setImmovable(true);
-        this.setOrigin(0.5, 0.5);
 
+        scene.physics.add.existing(this);
+
+        this.body.setImmovable(true);
+       
         this.setDepth(0);
 
         let timer = this.scene.time.addEvent({
@@ -41,7 +42,6 @@ export default class DamageArea extends Phaser.GameObjects.Sprite {
         this.damage = damage;
         this.duration = duration;
         this.setDisplaySize(radius * 2, radius * 2);
-        this.body.setCircle(radius);
 
         this.scene.time.delayedCall(this.duration * 1000, this.destroyArea, [], this);
     }
