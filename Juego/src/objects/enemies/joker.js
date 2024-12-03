@@ -13,27 +13,26 @@ export default class Joker extends Enemy{
         this.attackInterval = 2000; 
         this.phase = 1;
 
-        this.createAnithis.phase = 1;mations(this.scene);
-
+        //this.createAnimations();
     }
 
     createAnimations() {
         this.scene.anims.create({
             key: 'joker_idle',
-            frames: scene.anims.generateFrameNumbers('boss', { start: 0, end: 3 }),
+            frames: this.scene.anims.generateFrameNumbers('boss', { start: 0, end: 3 }),
             frameRate: 8,
             repeat: -1,
         });
 
         this.scene.anims.create({
             key: 'joker_attack',
-            frames: scene.anims.generateFrameNumbers('boss', { start: 4, end: 7 }),
+            frames: this.scene.anims.generateFrameNumbers('boss', { start: 4, end: 7 }),
             frameRate: 8,
             repeat: 0,
         });
         this.scene.anims.create({
             key: 'joker_teleport',
-            frames: scene.anims.generateFrameNumbers('boss', { start: 4, end: 7 }),
+            frames: this.scene.anims.generateFrameNumbers('boss', { start: 4, end: 7 }),
             frameRate: 8,
             repeat: 0,
         });
@@ -72,14 +71,14 @@ export default class Joker extends Enemy{
         super.preUpdate(t, dt);
 
 
-        if (time > this.lastAttackTime + this.attackInterval) {
+        if (t > this.lastAttackTime + this.attackInterval) {
             if (this.phase === 1) {
-                this.shootCards(scene);
-                this.spawnOrbs(scene);
+                this.shootCards();
+                //this.spawnOrbs();
             } else {
-                this.teleport(scene, scene.player);
+                this.teleport();
             }
-            this.lastAttackTime = time;
+            this.lastAttackTime = t;
         }
     }
 }

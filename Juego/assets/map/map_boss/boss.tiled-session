@@ -7,6 +7,28 @@
     "expandedProjectPaths": [
     ],
     "fileStates": {
+        "C:/Todo/Universidad/Maria/2 Curso/PVLI/PVLI-C2024-2025-Grupo7/Juego/assets/map/map_1/mapa_1.tmx": {
+            "scale": 0.2501171875,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 1279.4002811182258,
+                "y": 961.5492737779166
+            }
+        },
+        "C:/Todo/Universidad/Maria/2 Curso/PVLI/PVLI-C2024-2025-Grupo7/Juego/assets/map/map_1/mapa_1.tmx#mapTiles": {
+            "scaleInDock": 1
+        },
+        "boss.tmx": {
+            "expandedObjectLayers": [
+                2
+            ],
+            "scale": 1,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 284,
+                "y": 191.5
+            }
+        }
     },
     "last.exportedFilePath": "C:/Todo/Universidad/Maria/2 Curso/PVLI/PVLI-C2024-2025-Grupo7/Juego/assets/map/map_boss",
     "last.imagePath": "C:/Todo/Universidad/Maria/2 Curso/PVLI/PVLI-C2024-2025-Grupo7/Juego/assets/map/tileset",

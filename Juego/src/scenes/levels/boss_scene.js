@@ -31,13 +31,18 @@ export default class BossScene extends Phaser.Scene {
         // Load assets (e.g., boss sprite, animations, and sounds)
         this.load.image('boss', 'assets/enemies/joker.png');
         this.load.image('projectile', 'assets/bullet/bullet_1.png');
+
+
+        this.load.tilemapTiledJSON('mapa4', 'assets/map/map_boss/boss.json');
+        this.load.image('tileset4', 'assets/map/tileset/grass.png');
+
     }
 
     create() {
         // #region Map
 
-        this.map = this.make.tilemap({ key: 'mapa4', tileWidth: 16, tileHeight: 16 });
-        this.tileset = this.map.addTilesetImage('mapTiles', 'tileset4');
+        this.map = this.make.tilemap({ key: 'mapa1'});
+        this.tileset = this.map.addTilesetImage('mapTiles', 'tileset1');
         this.sueloLayer = this.map.createLayer('suelo', this.tileset);
 
 
@@ -47,23 +52,7 @@ export default class BossScene extends Phaser.Scene {
        
         this.sueloLayer.setScale(SCALE);
 
-        //#region puerta
-
-        // la escala de la puerta lo hace en la constructora de la clase door
-        this.doorGroup = this.add.group();
-        this.doorLayer = this.map.getObjectLayer('Door');
-        this.doorLayer.objects.forEach((objD) => {
-            const door = new Door(this, objD.x, objD.y,
-                objD.name,  // El tipo de puerta ('verticalDoor' o 'horizontalDoor')
-                objD.width,  // El tamaño de la puerta en Tiled
-                objD.height, // El tamaño de la puerta en Tiled
-            );
-            // Añadir la puerta al grupo de puertas
-            this.doorGroup.add(door);
-        });
-
-        //#endregion
-
+        // #endregion
 
         // #region Player
         // #region Player Position
@@ -71,9 +60,14 @@ export default class BossScene extends Phaser.Scene {
         const objectLayer = this.map.getObjectLayer('position');
 
         const playerPos = objectLayer.objects.find(obj => obj.name == 'playerPosition');
-
+        const jokerPos = objectLayer.objects.find(obj => obj.name == 'playerPosition');
         // Verificar si el objeto fue encontrado
+        if (!jokerPos) console.log('Position joker no encontrado.');
         if (!playerPos) console.log('Position player no encontrado.');
+
+        const jokerX = playerPos.x * SCALE;
+        const jokerY = playerPos.y * SCALE;
+
         const playerX = playerPos.x * SCALE;
         const playerY = playerPos.y * SCALE;
 
@@ -128,9 +122,9 @@ export default class BossScene extends Phaser.Scene {
 
         // #region Joker
 
-        const jokerPos = objectLayer.objects.find(obj => obj.name == 'jokerPosition');
+       
 
-        this.joker = new Joker(this, jokerPos.x * SCALE, jokerPos.y * SCALE, this.player, this.exp);
+        this.joker = new Joker(this, jokerX, jokerY, this.player, this.exp);
         this.joker.setPool(this.enemyBullets);
 
         this.physics.add.collider(this.player, this.boss, this.onPlayerHit, null, this);
@@ -143,29 +137,6 @@ export default class BossScene extends Phaser.Scene {
 
         this.healthBar = new HealthBar(this, 20, 10);
 
-        const dialogos = this.cache.json.get('dialogues');
-
-        //#region Dialog
-
-        this.dialog = new DialogText(this, {
-            borderThickness: 2,
-            borderColor: 0xcb3234,
-            borderAlpha: 1,
-            windowAlpha: 0.8,
-            windowColor: 0x000000,
-            windowHeight: 180,
-            padding: 32,
-            closeBtnColor: 'white',
-            dialogSpeed: 4,
-            fontSize: 25,
-            fontFamily: "PixelArt"
-        });
-        this.dialogManager = new DialogueManager(this);
-        this.dialogManager.initialize(this.dialog, dialogos);
-        this.dialogManager.showDialogue();
-
-        // #endregion
-
         // #endregion
 
 
@@ -177,6 +148,10 @@ export default class BossScene extends Phaser.Scene {
         this.physics.add.collider(this.enemyBullets.getPhaserGroup(), this.paredLayer, (bullet, wall) => {
             bullet.destroyBullet(this.enemyBullets);
         });
+
+
+        this.cameras.main.startFollow(this.player);
+
     }
 
     update(time, delta) {

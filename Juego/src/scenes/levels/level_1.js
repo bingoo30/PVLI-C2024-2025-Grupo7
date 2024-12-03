@@ -54,7 +54,7 @@ export default class Animation extends Phaser.Scene {
 		// #region Map
 
 		this.map = this.make.tilemap({ key: 'mapa1', tileWidth: 32, tileHeight: 32 });
-		this.tileset = this.map.addTilesetImage('mapTiles', 'tileset');
+		this.tileset = this.map.addTilesetImage('mapTiles', 'tileset1');
 		this.sueloLayer = this.map.createLayer('suelo', this.tileset);
 		if (!this.sueloLayer) {
 			console.error("La capa 'suelo' no se ha creado correctamente.");
