@@ -28,6 +28,8 @@ export default class Animation extends Phaser.Scene {
 	}
 	preload() {
 		// dialogos level2
+		this.load.tilemapTiledJSON('mapa2', 'assets/map/map_2/mapa_2.json');
+		this.load.image('tileset2', 'assets/map/map_2/map_tiles2.png');
 	}
 
 	/**  
@@ -40,8 +42,8 @@ export default class Animation extends Phaser.Scene {
 		// #region Entities
 		// #region Map
 
-		this.map = this.make.tilemap({ key: 'mapa1', tileWidth: 32, tileHeight: 32 });
-		this.tileset = this.map.addTilesetImage('mapTiles', 'tileset');
+		this.map = this.make.tilemap({ key: 'mapa2', tileWidth: 32, tileHeight: 32 });
+		this.tileset = this.map.addTilesetImage('mapTiles', 'tileset2');
 		this.sueloLayer = this.map.createLayer('suelo', this.tileset);
 		if (!this.sueloLayer) {
 			console.error("La capa 'suelo' no se ha creado correctamente.");
@@ -55,7 +57,6 @@ export default class Animation extends Phaser.Scene {
 
 		//#region puerta
 
-		// la escala de la puerta lo hace en la constructora de la clase door
 		this.doorGroup = this.add.group();
 		this.doorLayer = this.map.getObjectLayer('Door');
 		console.log(this.doorLayer);
@@ -68,7 +69,7 @@ export default class Animation extends Phaser.Scene {
 			// Añadir la puerta al grupo de puertas
 			this.doorGroup.add(door);
 		});
-
+		
 		//#endregion
 
 		// #endregion
@@ -217,6 +218,7 @@ export default class Animation extends Phaser.Scene {
 
 		this.healthBar = new HealthBar(this, 20, 10);
 
+		/*
 		const dialogos = this.cache.json.get('dialogues');
 
 		//#region Dialog
@@ -237,6 +239,7 @@ export default class Animation extends Phaser.Scene {
 		this.dialogManager = new DialogueManager(this);
 		//this.dialogManager.initialize(this.dialog, dialogos);
 		//this.dialogManager.showDialogue();
+		*/
 
 		// #endregion
 
