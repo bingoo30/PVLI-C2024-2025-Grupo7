@@ -164,6 +164,7 @@ export default class Loading extends Phaser.Scene {
 		// Cargar el archivo JSON de logros.
 		this.load.json('achievementData', 'src/scenes/achievements/achievements_datas.json');
 		this.load.json('treeData', 'src/objects/player/tree_data.json');
+		this.load.json('statusData', 'src/objects/player/status_data.json');
 		// #endregion
 
 

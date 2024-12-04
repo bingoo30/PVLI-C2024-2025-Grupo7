@@ -33,14 +33,14 @@ export default class Player extends Character {
         // #region Sistema de experiencia
         this.level = 1; 
         this.xpAcumulator = 0;
-        this.xpToLevelUp = 2;
+        this.xpToLevelUp = 5;
         // #endregion
 
         // inventorios
         this.Inventory = new Inventory(this);
         // #region puntos de control status
         this.statusPoint = 0; //status points restantes
-        this.abilityPoint = 1;
+        this.abilityPoint = 0; //ability points restantes
         this.speedFactorStatus = 0;
         this.shootSpeedStatus = 0;
         this.maxLifeStatus = 0;
@@ -57,7 +57,7 @@ export default class Player extends Character {
         this.sKey = this.scene.input.keyboard.addKey('S'); //parar animaci�n
         this.dKey = this.scene.input.keyboard.addKey('D'); //derecha
         this.eKey = this.scene.input.keyboard.addKey('E'); //interactuar
-        this.pKey = this.scene.input.keyboard.addKey('P'); //activar la escena de logros
+        this.pKey = this.scene.input.keyboard.addKey('P'); //pausar el juego
         // Seteamos mouse
         this.mouse = this.scene.input.activePointer;
 

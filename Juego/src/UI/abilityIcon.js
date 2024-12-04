@@ -2,7 +2,7 @@ import { showPopup } from "./showPopUp.js";
 
 
 
-//Icono de los atributos (botones)
+//Icono de las habilidades (botones)
 export default class AbilityIcon extends Phaser.GameObjects.Sprite {
     /**
  * @extends Phaser.GameObjects.Sprite;
@@ -102,7 +102,7 @@ export default class AbilityIcon extends Phaser.GameObjects.Sprite {
 
             const treeData = this.scene.cache.json.get('treeData');
 
-            // Buscar el árbol o nodo correspondiente usando el título (ajusta el criterio de búsqueda si es necesario)
+            // Buscar el árbol o nodo correspondiente usando el título
             const treeObj = treeData.find(item => item.title === this.title);
 
             // Cambiar el estado de "locked"

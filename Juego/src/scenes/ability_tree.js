@@ -11,11 +11,14 @@ export default class AbilityTree extends Phaser.Scene {
 	preload() {
 		this.load.image('titleHeader', 'assets/tree/titleHeader.png');
 		this.load.image('LockedAbility', 'assets/tree/locked.png');
+		this.load.image('statusBall', 'assets/tree/statusBall.png');
+		this.load.image('statusBackground', 'assets/tree/statusBackground.png');
 		const treeDatas = this.cache.json.get('treeData');
-		// Precargar dinámicamente los sprites de logros
+		// Precargar los sprites de las habilidades
 		treeDatas.forEach(data => {
 			this.load.image(data.unlockedSprite, `assets/tree/${data.unlockedSprite}.png`);
 		});
+		
 
 		this.load.on('complete', function (f) {
 			this.scene.time.addEvent({
