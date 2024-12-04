@@ -40,6 +40,7 @@ export default class Player extends Character {
         this.Inventory = new Inventory(this);
         // #region puntos de control status
         this.statusPoint = 5; //status points restantes
+        this.usedStatusPoint = 0; //puntos status usados (para logros)
         this.abilityPoint = 0; //ability points restantes
         this.speedFactorStatus = 0; //+15%
         this.shootSpeedStatus = 0; //+15%
@@ -203,6 +204,7 @@ export default class Player extends Character {
                 break;
         }
         this.statusPoint--;
+        this.usedStatusPoint++;
     }
     /**
      * Bucle principal del personaje, actualizamos su posici�n y ejecutamos acciones seg�n el Input

@@ -1,9 +1,14 @@
+/**
+ * Clase inventorio
+ */
+const MAX_STATUS = 25;
+const MAX_ABILITY =;
 export default class Inventory { 
 
     constructor(player) {
         this.scene = player.scene;
         this.level = player.level;
-        this.statusPoints = 0;
+        this.usedStatus = player.usedStatusPoint;
         this.enemiesKilled = 0;
         this.key = false;
         //completar cuantos objetos hay
@@ -22,27 +27,27 @@ export default class Inventory {
     }
     //metodo auxiliar para crear los eventos
     createEvents() {
-        //cambiar todos los emits por on
-        //basicos
-        this.scene.events.emit("levelUp");
-        this.scene.events.emit("hasCollectedStatusPoint");
+        //logros relacionados con enemigos matados
+        this.scene.events.on(this.enemiesKilled == 50, () => {
+            this.scene.game.events.emit(`unlock_La Batalla Comienza`);
+        });
+        this.scene.events.on(this.enemiesKilled == 100, () => {
+            this.scene.game.events.emit(`unlock_Asaltante Feroz`);
+        });
+        this.scene.events.on(this.enemiesKilled == 150, () => {
+            this.scene.game.events.emit(`unlock_Dominante de la guerra`);
+        });
+        this.scene.events.on(this.enemiesKilled == 200, () => {
+            this.scene.game.events.emit(`unlock_Destructor del mundo`);
+        });
 
-        //npcs
-        this.scene.events.emit("interactedWithFlush");
-        this.scene.events.emit("interactedWithWeiyoung");
-        this.scene.events.emit("interactedWithRomeo");
-        this.scene.events.emit("interactedWithPiu");
-
-        //boss
-        this.scene.events.emit("hasMetJoker");
-
-        //easter eggs
-        this.scene.events.emit("MARIA");
-        this.scene.events.emit("BING");
-        this.scene.events.emit("HAOSHUANG");
-
-        //matar unos cuantos enemigos
-        this.scene.events.emit("hasKilledEnemies");
+        //logros relacionados con status points y abilities
+        this.scene.events.on(this.usedStatus == MAX_STATUS, () => {
+            this.scene.game.events.emit(`unlock_Julie Pro`);
+        });
+        this.scene.events.on(this.usedStatus == MAX_ABILITY, () => {
+            this.scene.game.events.emit(`unlock_Julie Pro`);
+        });
     }
 
 }

@@ -8,6 +8,22 @@
     "locked": true
   },
   {
+    "x": 225,
+    "y": 375,
+    "title": "Juego de proyectiles II",
+    "unlockedSprite": "juegoDeProyectiles2",
+    "info": "lanzar dos proyectiles extras",
+    "locked": true
+  },
+  {
+    "x": 225,
+    "y": 500,
+    "title": "Juego de proyectiles III",
+    "unlockedSprite": "juegoDeProyectiles3",
+    "info": "lanzar tres proyectiles extras",
+    "locked": true
+  },
+  {
     "x": 750,
     "y": 250,
     "title": "Utilidad I",
