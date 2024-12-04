@@ -38,6 +38,11 @@ export default class Enemy extends Character {
         this.prob = prob;
     }
 
+
+    stopMovement() {
+        this.body.setVelocity(0, 0); // Detiene al enemigo
+    }
+
     onGotHit(damage, pool) {
         super.onGotHit(damage);
         if (this.life == 0) {

@@ -20,7 +20,7 @@ export default class Joker extends Character {
     
         this.isTeleporting = false;
         this.lastAttackTime = 0;
-        this.attackInterval = 1000; 
+        this.attackInterval = 2000; 
         this.phase = 1;
 
 
@@ -82,6 +82,8 @@ export default class Joker extends Character {
               //  this.play('joker_idle');
             //});
         }
+        this.phase = 1;
+
     }
 
     shootCards() {
@@ -98,6 +100,8 @@ export default class Joker extends Character {
                 this.bulletCardNumbers,
                 this.prob + this.prob * this.probStatus);
         }
+
+        this.phase = 2;
     }
 
     

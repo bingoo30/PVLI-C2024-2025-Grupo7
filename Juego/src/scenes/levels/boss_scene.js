@@ -101,12 +101,12 @@ export default class BossScene extends Phaser.Scene {
         // #region Enemy Bullets
 
         toAdds = [];
-        this.enemyBullets = new Pool(this, MAX, 'Bullet');
+        this.jokerBullets = new Pool(this, MAX, 'Bullet');
         for (let i = 0; i < MAX; i++) {
             let toAdd = new Bullet(this, 0, 0, 'Bala');
             toAdds.push(toAdd);
         }
-        this.enemyBullets.addMultipleEntity(toAdds);
+        this.jokerBullets.addMultipleEntity(toAdds);
 
         // #endregion
 
@@ -119,7 +119,7 @@ export default class BossScene extends Phaser.Scene {
        
 
         this.joker = new Joker(this, 140, 140, this.player);
-        this.joker.setPool(this.enemyBullets);
+        this.joker.setPool(this.jokerBullets);
 
         this.physics.add.collider(this.player, this.boss, this.onPlayerHit, null, this);
 
@@ -139,12 +139,13 @@ export default class BossScene extends Phaser.Scene {
         this.physics.add.collider(this.playerBullets.getPhaserGroup(), this.paredLayer, (bullet, wall) => {
             bullet.destroyBullet(this.playerBullets);
         });
-        this.physics.add.collider(this.enemyBullets.getPhaserGroup(), this.paredLayer, (bullet, wall) => {
-            bullet.destroyBullet(this.enemyBullets);
+        this.physics.add.collider(this.jokerBullets.getPhaserGroup(), this.paredLayer, (bullet, wall) => {
+            bullet.destroyBullet(this.jokerBullets);
         });
 
 
         this.cameras.main.startFollow(this.player);
+        this.cameras.main.setBounds(this.sueloLayer);
 
     }
 
