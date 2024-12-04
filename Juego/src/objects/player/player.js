@@ -44,8 +44,8 @@ export default class Player extends Character {
         this.speedFactorStatus = 0; //+15%
         this.shootSpeedStatus = 0; //+15%
         this.maxLifeStatus = 0; //+n (siendo n maxLifeStatus)
-        this.probStatus = 0;
-        this.damageStatus = 0;
+        this.probStatus = 0; //+5%
+        this.damageStatus = 0; //+100%
         // #endregion
 
         this.setDepth(2);
@@ -284,14 +284,15 @@ export default class Player extends Character {
                //let direction = new Phaser.Math.Vector2(target.x - this.x, target.y - this.y).normalize();
                fire(this,
                    target,
-                   this.damage + this.damageStatus * this.damage * 0.2,
-                   this.shootSpeed + this.shootSpeedStatus * this.shootSpeed * 0.2,
+                   this.damage + this.damageStatus * this.damage,
+                   this.shootSpeed + this.shootSpeedStatus * this.shootSpeed * 0.15,
                    'Bala2',
                    4,
                    this.pool,
                    this.bulletNumbers,
                    this.prob + this.prob*this.probStatus);
-               this.cooldownCont = this.shootSpeed;
+               this.cooldownCont = this.shootSpeed - this.shootSpeedStatus * this.shootSpeed * 0.15;
+               console.log(this.damage + this.damageStatus * this.damage);
             }
        }
 
