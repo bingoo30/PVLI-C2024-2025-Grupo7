@@ -6,7 +6,7 @@
      * @param {number} y Posicion Y
      atributos
      * @param {string} type tipo de obstaculo
-     * @param {number} damage daño que produce este obstaculo
+     * @param {number} damage daï¿½o que produce este obstaculo
      */
 
 const DEFAULT_DAMAGE = 1;
@@ -17,11 +17,10 @@ export default class Obstacle extends Phaser.GameObjects.Sprite {
         this.scene.add.existing(this);
         // Inicializar las propiedades por defecto
         this.type = type;
-        this.damage = DEFAULT_DAMAGE;
-        
+        this.damage = DEFAULT_DAMAGE;    
     }
+
     init(damage) {
         this.damage = damage;
     }
-
 }
