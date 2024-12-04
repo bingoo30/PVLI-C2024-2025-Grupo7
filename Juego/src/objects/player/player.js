@@ -41,9 +41,9 @@ export default class Player extends Character {
         // #region puntos de control status
         this.statusPoint = 5; //status points restantes
         this.abilityPoint = 0; //ability points restantes
-        this.speedFactorStatus = 0;
-        this.shootSpeedStatus = 0;
-        this.maxLifeStatus = 0;
+        this.speedFactorStatus = 0; //+15%
+        this.shootSpeedStatus = 0; //+15%
+        this.maxLifeStatus = 0; //+n (siendo n maxLifeStatus)
         this.probStatus = 0;
         this.damageStatus = 0;
         // #endregion
@@ -80,7 +80,7 @@ export default class Player extends Character {
         this.maxLife = life;
     }
     // #region getters para el inventario
-    getLvel() {
+    getLevel() {
         return this.level;
     }
     getStatusPoints() {
