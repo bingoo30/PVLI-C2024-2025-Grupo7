@@ -173,7 +173,7 @@ export default class Animation extends Phaser.Scene {
 		//#region Enemy Area
 		///scene, x, y, radius, damage, duration, scale=4
 		toAdds = [];
-		this.area = new Pool(this, MAX, '06_expl_anim');
+		this.area = new Pool(this, MAX, '03_expl_anim');
 		for (let i = 0; i < MAX; i++) {
 			let toAdd = new DamageArea(this, 0, 0, 100, 0, '06_expl_anim');
 			toAdds.push(toAdd);
@@ -328,7 +328,6 @@ export default class Animation extends Phaser.Scene {
 			if (enemy.visible) {
 				player.knockback(500, enemy);
 				player.onGotHit(enemy.getDamage());
-				this.healthBar.updateHealth(this.player.life, this.player.maxLife);
 				if (enemy.isMutum) enemy.createDamageArea();
 			}
 
@@ -336,7 +335,7 @@ export default class Animation extends Phaser.Scene {
 
 		//colision bala player-enemigos
 		this.physics.add.collider(this.playerBullets.getPhaserGroup(), this.enemies, (playerBullet, enemy) => {
-			enemy.onGotHit(this.player.getDamage(), this.coins);
+			enemy.onGotHit(playerBullet.getDamage(), this.coins);
 			// mandaria a la pool de las balas de player otra vez
 			playerBullet.destroyBullet(this.playerBullets);
 		});
@@ -345,7 +344,6 @@ export default class Animation extends Phaser.Scene {
 		this.physics.add.collider(this.enemyBullets.getPhaserGroup(), this.player, (enemyBullet, player) => {
 			player.knockback(200, enemyBullet);
 			player.onGotHit(enemyBullet.getDamage());
-			this.healthBar.updateHealth(this.player.life, this.player.maxLife);
 			// mandaria a la pool de las balas de los enemigos otra vez
 			enemyBullet.destroyBullet(this.enemyBullets);
 		});
@@ -356,7 +354,6 @@ export default class Animation extends Phaser.Scene {
 			if (player.getXpAcu() >= player.getXpToLevelUp()) {
 				player.levelUp();
 			}
-			this.expBar.updateExp(player.getXpAcu(), player.getXpToLevelUp());
 			coin.destroyCoin(this.coins);
 			//console.log(this.expBar);
 		});

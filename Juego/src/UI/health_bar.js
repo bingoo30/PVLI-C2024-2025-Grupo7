@@ -1,44 +1,50 @@
 
-export default class HealthBar {
-    constructor(scene, x, y, depth=3) {
+/**
+ * @extends Phaser.GameObjects.Sprite
+ * Constructor de Player, nuestro caballero medieval con espada y escudo
+     * @param {Scene} scene - escena en la que aparece
+     * @param {number} x - coordenada x
+     * @param {number} y - coordenada y
+     * @param {number} depth - la capa que va a estar
+     * atributos
+     * @param {container} container - un contenedor que tiene el bar y text
+     * 
+ */
+export default class HealthBar extends Phaser.GameObjects.Sprite {
+    constructor(scene, x, y, depth = 3) {
+        super(scene, x, y,'healthBarBackground');
         this.scene = scene;
         this.maxWidth = 300;
         this.height = 30; 
-
-        this.x = x;
-        this.y = y;
-
         this.container = scene.add.container(this.x, this.y);
 
-        this.background = scene.add.sprite(this.x, this.y, 'healthBarBackground').setOrigin(0, 0);
-        this.background.setDisplaySize(this.maxWidth, this.height);
+        this.setOrigin(0, 0);
+        this.setDisplaySize(this.maxWidth, this.height);
 
         this.bar = scene.add.sprite(this.x, this.y, 'healthBar').setOrigin(0, 0);
         this.bar.setDisplaySize(this.maxWidth, this.height); 
 
-        this.lifeText = this.scene.add.text(this.x -30, this.y, '100%', {
-            font: '20px TimeNewsRoman',
-            fill: '#FFFFFF' 
-        });
+        this.lifeText = this.scene.add.text(this.x + 10, this.y+5, '100%', {
+            fontSize: 20,
+            fontFamily: "PixelArt",
+            fill: '#FFFFFF',
+            align: 'left'
+        }).setOrigin(0, 0);
 
-        this.lifeText.setOrigin(0, 0);
-
-        this.container.add([this.bar, this.background, this.lifeText]);
+        this.container.add([this.bar, this, this.lifeText]);
         this.container.setScrollFactor(0);
         this.container.setDepth(depth);
     }
-    
-    updateHealth(currentHealth, maxHealth) {
+    preUpdate(t,dt) {
+        super.preUpdate(t, dt);
 
-        const healthPer = Phaser.Math.Clamp(currentHealth / maxHealth, 0, 1);
+        const healthPer = Phaser.Math.Clamp(this.scene.player.getLife() / this.scene.player.getMaxLife(), 0, 1);
+        this.lifeText.setText(`${Phaser.Math.RoundTo(healthPer * 100, 0)}%`);
+        this.bar.setDisplaySize(this.maxWidth * healthPer, this.height);
 
-        
-        this.lifeText.setText(`${Phaser.Math.RoundTo(healthPer * 100, 0) }%`);
-        this.bar.setDisplaySize(this.maxWidth * healthPer, this.height); 
-
-        if (healthPer< 0.2){
+        if (healthPer < 0.2) {
             this.bar.setTint(0xff0000);  // Rojo
         }
-    }
 
+    }
 }
