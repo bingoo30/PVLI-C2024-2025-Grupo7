@@ -47,12 +47,30 @@ export default class Animation extends Phaser.Scene {
 	/**  
 	* Creación de los elementos de la escena principal de juego
 	*/
-	create() {
-		//console.log("me he creado", this.scene.key);
-		//this.input.on('pointerup', this.handleClick, this);
-
+	create(data) {
 		// #region Entities
 		// #region Map
+
+		const tries = data.tries;
+
+		// #region logros muertes-intentos
+		//logro morirse 1 vez
+		if (tries-1 == 1) {
+			this.game.events.emit(`unlock_La primera no cuenta`);
+		}
+		//logro morirse 5 vez
+		else if (tries-1 == 5) {
+			this.game.events.emit(`unlock_Este no es mi momento`);
+		}
+		//logro morirse 10 veces
+		else if (tries - 1 == 10) {
+			this.game.events.emit(`unlock_Demasiado hardcore`);
+		}
+		//logro morirse 20 veces
+		else if (tries - 1 == 20) {
+			this.game.events.emit(`unlock_Insignia para novatos (no llores, te queremos)`);
+		}
+		// #endregion
 
 		this.map = this.make.tilemap({ key: 'mapa1', tileWidth: 32, tileHeight: 32 });
 		this.tileset = this.map.addTilesetImage('mapTiles', 'tileset1');
@@ -297,8 +315,6 @@ export default class Animation extends Phaser.Scene {
 
 		this.physics.add.overlap(this.player, this.area.getPhaserGroup(), (player, area) => {
 			player.onGotHit(area.getDamage());
-			this.healthBar.updateHealth(this.player.life, this.player.maxLife);
-
 		});
 
 
