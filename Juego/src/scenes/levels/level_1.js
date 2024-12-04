@@ -173,7 +173,7 @@ export default class Animation extends Phaser.Scene {
 		//#region Enemy Area
 		///scene, x, y, radius, damage, duration, scale=4
 		toAdds = [];
-		this.area = new Pool(this, MAX, '06_expl_anim');
+		this.area = new Pool(this, MAX, '03_expl_anim');
 		for (let i = 0; i < MAX; i++) {
 			let toAdd = new DamageArea(this, 0, 0, 100, 0, '06_expl_anim');
 			toAdds.push(toAdd);
