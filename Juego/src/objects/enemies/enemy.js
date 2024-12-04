@@ -17,16 +17,12 @@ export default class Enemy extends Character {
         super(scene, x, y, [typeEnemy]);
         this.scene = scene;
         this.player = player;
-        this.exp =exp;
-        this.navMesh = scene.navMesh;
+        this.exp = exp;
         scene.physics.add.existing(this);
-        this.currentPath = [];
-        this.targetPoint = null;  // Próximo punto objetivo
-        //configurar los atributos correspondientes despues de llamar al constructor del character
-        this.currentNode = { x: x, y: y };
+  
         //this.body.setSize(16,8);
         //this.body.setOffset(8, 24);
-        this.path = [];
+    
         this.dead = false;
         this.followRange = DEFAULT_FOLLOW_RANGE;
 
@@ -76,72 +72,4 @@ export default class Enemy extends Character {
         }
     }
 
-
-    // Método para moverse hacia una posición específica
-    moveTowards(targetX, targetY) {
-        const angle = Phaser.Math.Angle.Between(this.x, this.y, targetX, targetY);
-        const velocity = this.speedFactor * this.scene.physics.world.timeScale;
-
-        this.body.setVelocity(Math.cos(angle) * velocity, Math.sin(angle) * velocity);
-    }
-
-    // Método para detener el movimiento del enemigo
-    stopMovement() {
-        this.body.setVelocity(0, 0); // Detiene al enemigo
-    }
-
-    setPath(path) {
-        // Establece el camino calculado con EasyStar
-        this.currentPath = path;
-        this.moveToNextPoint();  // Inicia el movimiento hacia el primer punto
-    }
-
-    moveToNextPoint() {
-        if (this.currentPath.length === 0) {
-            // Si no hay más puntos, detén el movimiento
-            this.body.setVelocity(0, 0);
-            return;
-        }
-
-
-        // Siguiente paso en la ruta
-        const nextStep = this.currentPath.shift();
-        if (!nextStep) return;
-        if (this.dead) return;
-        if (!this.targetPoint) return;
-
-        // Comprobar si ha alcanzado el próximo punto
-        const distanceToTarget = Phaser.Math.Distance.Between(this.x, this.y, this.targetPoint.x, this.targetPoint.y);
-        if (distanceToTarget < 4) {  // Precisión al llegar al punto
-            this.moveToNextPoint();  // Mover al siguiente punto
-        }
-
-    }
-
-    moveToNextPoint() {
-        if (this.currentPath.length === 0) {
-            // Si no hay más puntos, detén el movimiento
-            this.body.setVelocity(0, 0);
-            return;
-        }
-
-        // Siguiente paso en la ruta
-        const nextStep = this.currentPath.shift();
-        if (!nextStep) return;
-
-        // Convertir coordenadas de tiles a coordenadas del mundo
-        const targetX = this.scene.map.tileToWorldX(nextStep.x) + this.scene.map.tileWidth * 0.5;
-        const targetY = this.scene.map.tileToWorldY(nextStep.y) + this.scene.map.tileHeight * 0.5;
-
-        // Calcular la dirección hacia el próximo punto
-        const directionX = targetX - this.x;
-        const directionY = targetY - this.y;
-        const distance = Math.sqrt(directionX * directionX + directionY * directionY);
-
-        // Normalizar la dirección y establecer la velocidad
-        this.body.setVelocity((directionX / distance) * this.speed, (directionY / distance) * this.speed);
-
-        // Guardar el punto de destino actual
-        this.targetPoint = { x: targetX, y: targetY };
-    }
 }

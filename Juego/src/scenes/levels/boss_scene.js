@@ -1,19 +1,12 @@
 import Player from '../../objects/player/player.js';
 import Joker from '../../objects/enemies/joker.js'
 
-import Crac from '../../objects/enemies/crac.js'
 import HealthBar from '../../UI/health_bar.js';
 import ExpBar from '../../UI/exp_bar.js';
 import Coin from '../../objects/enemies/coin.js';
 import Bullet from '../../objects/abilities/shooting/bullet.js';
 
-import Pool from '../../objects/our_pool.js'
-import Bob from '../../objects/enemies/bob.js';
-import Letus from '../../objects/enemies/letus.js';
-import Mutum from '../../objects/enemies/mutum.js'
-import Estaka from '../../objects/enemies/estaka.js';
-import Turret from '../../objects/abilities/turret.js';
-
+import Pool from '../../objects/our_pool.js';
 import DialogueManager from '../../UI/dialog_manager.js';
 import DialogText from '../../UI/dialog_plugin.js';
 import NPC from '../../objects/interactable_objects/npc.js';
@@ -29,11 +22,11 @@ export default class BossScene extends Phaser.Scene {
 
     preload() {
         // Load assets (e.g., boss sprite, animations, and sounds)
-        this.load.image('boss', 'assets/enemies/joker.png');
+        this.load.image('boss', 'assets/enemies/bob.png');
         this.load.image('projectile', 'assets/bullet/bullet_1.png');
 
 
-        this.load.tilemapTiledJSON('mapa4', 'assets/map/map_boss/boss.json');
+        this.load.tilemapTiledJSON('mapaBoss', 'assets/map/map_boss/map_boss.json');
         this.load.image('tileset4', 'assets/map/tileset/grass.png');
 
     }
@@ -41,9 +34,9 @@ export default class BossScene extends Phaser.Scene {
     create() {
         // #region Map
 
-        this.map = this.make.tilemap({ key: 'mapa1'});
-        this.tileset = this.map.addTilesetImage('mapTiles', 'tileset1');
-        this.sueloLayer = this.map.createLayer('suelo', this.tileset);
+        this.mapBoss = this.make.tilemap({ key: 'mapaBoss'});
+        this.tileset = this.mapBoss.addTilesetImage('Grass', 'tileset4');
+        this.sueloLayer = this.mapBoss.createLayer('suelo', this.tileset);
 
 
         if (!this.sueloLayer) {
@@ -57,26 +50,27 @@ export default class BossScene extends Phaser.Scene {
         // #region Player
         // #region Player Position
 
-        const objectLayer = this.map.getObjectLayer('position');
+        const objectLayer = this.mapBoss.getObjectLayer('position');
+        if (!objectLayer) console.log('object no encontrado.');
 
-        const playerPos = objectLayer.objects.find(obj => obj.name == 'playerPosition');
-        const jokerPos = objectLayer.objects.find(obj => obj.name == 'playerPosition');
+        //const playerPos = objectLayer.objects.find(obj => obj.name == 'playerPosition');
+        //const jokerPos = objectLayer.objects.find(obj => obj.name == 'jokerPosition');
         // Verificar si el objeto fue encontrado
-        if (!jokerPos) console.log('Position joker no encontrado.');
-        if (!playerPos) console.log('Position player no encontrado.');
+      //  if (!jokerPos) console.log('Position joker no encontrado.');
+        //if (!playerPos) console.log('Position player no encontrado.');
 
-        const jokerX = playerPos.x * SCALE;
-        const jokerY = playerPos.y * SCALE;
+        //const jokerX = playerPos.x * SCALE;
+//        const jokerY = playerPos.y * SCALE;
 
-        const playerX = playerPos.x * SCALE;
-        const playerY = playerPos.y * SCALE;
+  //      const playerX = playerPos.x * SCALE;
+    //    const playerY = playerPos.y * SCALE;
 
         // #endregion
 
 
         // #region Player
 
-        this.player = new Player(this, playerX, playerY);
+        this.player = new Player(this, 134 , 139);
         this.player.setScale(SCALE);
         // Guarda la referencia en el registry
         this.registry.set('player', this.player);
@@ -124,7 +118,7 @@ export default class BossScene extends Phaser.Scene {
 
        
 
-        this.joker = new Joker(this, jokerX, jokerY, this.player, this.exp);
+        this.joker = new Joker(this, 140, 140, this.player);
         this.joker.setPool(this.enemyBullets);
 
         this.physics.add.collider(this.player, this.boss, this.onPlayerHit, null, this);
