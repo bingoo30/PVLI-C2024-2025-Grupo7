@@ -31,7 +31,7 @@ export default class Door extends InteractableObjects {
     preUpdate(t, dt) {
         super.preUpdate(t, dt);
         if (!this.playerInRange) {
-            this.isOpen = false
+            this.isOpen = false;
             this.setVisible(true);
             this.body.checkCollision.none = false;
         }

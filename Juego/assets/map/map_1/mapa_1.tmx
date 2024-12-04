@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="left-up" width="80" height="60" tilewidth="32" tileheight="32" infinite="0" nextlayerid="14" nextobjectid="245">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="left-up" width="80" height="60" tilewidth="32" tileheight="32" infinite="0" nextlayerid="14" nextobjectid="250">
  <editorsettings>
   <export target="mapa_1.json" format="json"/>
  </editorsettings>
@@ -772,17 +772,6 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,47,1,2,3,4,4,4,4,4,4,4,4,4,4,5,110,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup id="6" name="position" offsetx="-64" offsety="16">
-  <object id="19" name="playerPosition" x="864" y="1246">
-   <point/>
-  </object>
-  <object id="145" name="Llave" x="2384" y="1658">
-   <point/>
-  </object>
-  <object id="240" name="FlushPosition" x="1000" y="1152">
-   <point/>
-  </object>
- </objectgroup>
  <objectgroup id="13" name="Objects">
   <object id="241" name="key" x="888" y="1192">
    <point/>
@@ -1233,5 +1222,17 @@
   <object id="186" name="Crac" x="1436.36" y="1772.73">
    <point/>
   </object>
+ </objectgroup>
+ <objectgroup id="6" name="position">
+  <object id="19" name="playerPosition" x="800" y="1248">
+   <point/>
+  </object>
+  <object id="145" name="Llave" x="2384" y="1658">
+   <point/>
+  </object>
+  <object id="240" name="FlushPosition" x="960" y="1160">
+   <point/>
+  </object>
+  <object id="249" name="changeLevel" x="760" y="1160" width="8" height="48"/>
  </objectgroup>
 </map>

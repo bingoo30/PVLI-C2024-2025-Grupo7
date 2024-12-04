@@ -152,55 +152,6 @@
         }, 
         {
          "draworder":"topdown",
-         "id":6,
-         "name":"position",
-         "objects":[
-                {
-                 "height":0,
-                 "id":19,
-                 "name":"playerPosition",
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":864,
-                 "y":1246
-                }, 
-                {
-                 "height":0,
-                 "id":145,
-                 "name":"Llave",
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":2384,
-                 "y":1658
-                }, 
-                {
-                 "height":0,
-                 "id":240,
-                 "name":"FlushPosition",
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":1000,
-                 "y":1152
-                }],
-         "offsetx":-64,
-         "offsety":16,
-         "opacity":1,
-         "type":"objectgroup",
-         "visible":true,
-         "x":0,
-         "y":0
-        }, 
-        {
-         "draworder":"topdown",
          "id":13,
          "name":"Objects",
          "objects":[
@@ -1967,9 +1918,67 @@
          "visible":true,
          "x":0,
          "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":6,
+         "name":"position",
+         "objects":[
+                {
+                 "height":0,
+                 "id":19,
+                 "name":"playerPosition",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":800,
+                 "y":1248
+                }, 
+                {
+                 "height":0,
+                 "id":145,
+                 "name":"Llave",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":2384,
+                 "y":1658
+                }, 
+                {
+                 "height":0,
+                 "id":240,
+                 "name":"FlushPosition",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":960,
+                 "y":1160
+                }, 
+                {
+                 "height":48,
+                 "id":249,
+                 "name":"changeLevel",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":8,
+                 "x":760,
+                 "y":1160
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
         }],
  "nextlayerid":14,
- "nextobjectid":245,
+ "nextobjectid":250,
  "orientation":"orthogonal",
  "renderorder":"left-up",
  "tiledversion":"1.11.0",

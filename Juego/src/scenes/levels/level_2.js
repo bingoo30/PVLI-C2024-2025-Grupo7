@@ -6,7 +6,7 @@ import Bob from '../../objects/enemies/bob.js';
 import HealthBar from '../../UI/health_bar.js';
 import ExpBar from '../../UI/exp_bar.js';
 import Coin from '../../objects/enemies/coin.js';
-import Bullet from '../../objects/shooting/bullet.js';
+import Bullet from '../../objects/abilities/shooting/bullet.js';
 import Letus from '../../objects/enemies/letus.js';
 
 import DialogueManager from '../../UI/dialog_manager.js';
@@ -35,7 +35,9 @@ export default class Animation extends Phaser.Scene {
 	/**  
 	* Creación de los elementos de la escena principal de juego
 	*/
-	create() {
+	create(data) {
+		this.player = data;
+
 		//console.log("me he creado", this.scene.key);
 		//this.input.on('pointerup', this.handleClick, this);
 
@@ -56,7 +58,7 @@ export default class Animation extends Phaser.Scene {
 		this.paredLayer.setScale(SCALE);
 
 		//#region puerta
-
+		/*
 		this.doorGroup = this.add.group();
 		this.doorLayer = this.map.getObjectLayer('Door');
 		console.log(this.doorLayer);
@@ -69,7 +71,7 @@ export default class Animation extends Phaser.Scene {
 			// Añadir la puerta al grupo de puertas
 			this.doorGroup.add(door);
 		});
-		
+		*/
 		//#endregion
 
 		// #endregion

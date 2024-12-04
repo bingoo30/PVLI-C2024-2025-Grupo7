@@ -10,7 +10,7 @@ import Bob from '../../objects/enemies/bob.js';
 import Letus from '../../objects/enemies/letus.js';
 import Mutum from '../../objects/enemies/mutum.js'
 import Estaka from '../../objects/enemies/estaka.js';
-import Turret from '../../objects/habilities/turret.js';
+import Turret from '../../objects/abilities/turret.js';
 
 import DialogueManager from '../../UI/dialog_manager.js';
 import DialogText from '../../UI/dialog_plugin.js';
@@ -18,6 +18,7 @@ import NPC from '../../objects/interactable_objects/npc.js';
 import Door from '../../objects/interactable_objects/door.js';
 import DamageArea from '../../objects/abilities/area_damage/damage_area.js';
 import PickableObjects from '../../objects/interactable_objects/pickable_objects.js';
+import ChangeLevelDoor from '../../objects/interactable_objects/change_level_door.js';
 
 //import Coin from '../../objetos/Enemies/coin.js'
 //constante
@@ -109,6 +110,10 @@ export default class Animation extends Phaser.Scene {
 		if (!playerPos) console.log('Position player no encontrado.');
 		const playerX = playerPos.x * SCALE;
 		const playerY = playerPos.y * SCALE;
+
+		const change = objectLayer.objects.find(obj => obj.name == 'changeLevel');
+		this.DoorLevel2 = new ChangeLevelDoor(this, change.x, change.y, change.width, change.height);
+
 
 		// #endregion
 
@@ -390,7 +395,7 @@ export default class Animation extends Phaser.Scene {
 
 	changeToNextLevel() {
 		this.MainSample.stop();
-		this.scene.start("level2")
+		this.scene.start('level2', this.player);
 	}
 	pauseGame() {
 		this.isGamePaused = true; // Cambiar el estado del juego a pausado

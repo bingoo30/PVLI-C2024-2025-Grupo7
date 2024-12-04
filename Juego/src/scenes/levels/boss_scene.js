@@ -12,7 +12,7 @@ import Bob from '../../objects/enemies/bob.js';
 import Letus from '../../objects/enemies/letus.js';
 import Mutum from '../../objects/enemies/mutum.js'
 import Estaka from '../../objects/enemies/estaka.js';
-import Turret from '../../objects/habilities/turret.js';
+import Turret from '../../objects/abilities/turret.js';
 
 import DialogueManager from '../../UI/dialog_manager.js';
 import DialogText from '../../UI/dialog_plugin.js';
