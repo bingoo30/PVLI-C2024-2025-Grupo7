@@ -38,7 +38,12 @@ export default class Enemy extends Character {
         this.prob = prob;
     }
 
+    moveTowards(targetX, targetY) {
+        const angle = Phaser.Math.Angle.Between(this.x, this.y, targetX, targetY);
+        const velocity = this.speedFactor * this.scene.physics.world.timeScale;
 
+        this.body.setVelocity(Math.cos(angle) * velocity, Math.sin(angle) * velocity);
+    }
     stopMovement() {
         this.body.setVelocity(0, 0); // Detiene al enemigo
     }
