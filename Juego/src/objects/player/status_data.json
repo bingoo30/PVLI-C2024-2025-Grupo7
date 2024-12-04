@@ -1,6 +1,6 @@
 [
   {
-    "x": 225,
+    "x": 100,
     "y": 500,
     "title": "maxLife",
     "count": 0
@@ -12,25 +12,19 @@
     "count": 0
   },
   {
-    "x": 425,
+    "x": 450,
     "y": 500,
     "title": "damage",
     "count": 0
   },
   {
-    "x": 525,
+    "x": 575,
     "y": 500,
     "title": "speedFactor",
     "count": 0
   },
   {
-    "x": 525,
-    "y": 500,
-    "title": "speedFactor",
-    "count": 0
-  },
-  {
-    "x": 625,
+    "x": 700,
     "y": 500,
     "title": "prob",
     "count": 0

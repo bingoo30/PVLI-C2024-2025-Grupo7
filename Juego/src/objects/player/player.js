@@ -39,7 +39,7 @@ export default class Player extends Character {
         // inventorios
         this.Inventory = new Inventory(this);
         // #region puntos de control status
-        this.statusPoint = 0; //status points restantes
+        this.statusPoint = 5; //status points restantes
         this.abilityPoint = 0; //ability points restantes
         this.speedFactorStatus = 0;
         this.shootSpeedStatus = 0;
@@ -97,6 +97,12 @@ export default class Player extends Character {
     getDamage() {
         return this.damage;
     }
+    getLife() {
+        return this.life;
+    }
+    getMaxLife() {
+        return this.maxLife;
+    }
     getXpAcu() {
         return this.xpAcumulator;
     }
@@ -143,8 +149,6 @@ export default class Player extends Character {
         this.statusPoint++;
         this.life = this.maxLife;
 
-        console.log(this.life);
-
         if (this.level != 0 && (this.level % 3)-1 == 0) this.abilityPoint++;
 
         console.log("status points:" + this.statusPoint);
@@ -155,13 +159,13 @@ export default class Player extends Character {
             case 'Juego de proyectiles I':
             case 'Juego de proyectiles II':
             case 'Juego de proyectiles III': {
-                console.log("disparar dos veces");
                 this.bulletNumbers++;
 
             }
                 break;
             case 'Utilidad I': {
-                console.log("invocar dron");
+                //invocar torreta
+                console.log("invocar torreta");
             }
                 break;
             default: {
@@ -189,6 +193,8 @@ export default class Player extends Character {
                 break;
             case 'maxLife': {
                 this.maxLifeStatus++;
+                this.maxLife += this.maxLifeStatus;
+                console.log('max life: '+ this.maxLife);
             }
                 break;
             case 'prob': {
@@ -289,10 +295,14 @@ export default class Player extends Character {
             }
        }
 
-       this.cooldownCont = this.cooldownCont - dt;
+        this.cooldownCont = this.cooldownCont - dt;
 
-       this.speed.normalize();
+        this.speed.normalize();
 
-        this.body.setVelocity(this.speed.x * this.speedFactor, this.speed.y * this.speedFactor);
+        //calculo la velocidad teniendome en cuenta los status point de speed factor
+        //cada punto de speed factor aumenta el 15% de velocidad
+        let finalX = this.speed.x * this.speedFactor * (1 + this.speedFactorStatus*0.15);
+        let finalY = this.speed.y * this.speedFactor * (1 + this.speedFactorStatus*0.15);
+        this.body.setVelocity(finalX, finalY);
     }
 }

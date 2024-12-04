@@ -1,4 +1,6 @@
 import AbilityIcon from "../UI/abilityIcon.js";
+import StatusIcon from "../UI/statusIcon.js";
+
 
 /**
  * Escena de loading.
@@ -72,6 +74,21 @@ export default class AbilityTree extends Phaser.Scene {
 				this.player
 			);
 			this.abilities.push(ability);
+		}
+
+		this.status = [];
+		const statusData = this.cache.json.get('statusData');
+		for (let i = 0; i < statusData.length; i++) {
+			const data = statusData[i]; // Obtener los datos de la habilidad actual.
+			const s = new StatusIcon( //creo el objeto
+				this,
+				data.x,
+				data.y,
+				data.title,
+				data.count,
+				this.player
+			);
+			this.status.push(s);
 		}
 		// #endregion
 

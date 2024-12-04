@@ -2,7 +2,7 @@ import { showPopup } from "./showPopUp.js";
 
 
 const MAX_STATUS = 5; // maximo que puedes mejorar un status
-const radius = 100; // Distancia del this a cada bola
+const radius = 15; // Distancia del this a cada bola
 //Icono de los stautus (botones)
 export default class StatusIcon extends Phaser.GameObjects.Sprite {
     /**
@@ -19,8 +19,7 @@ export default class StatusIcon extends Phaser.GameObjects.Sprite {
         super(scene, x, y, 'statusBackground');
         // #region atributos
         this.scene = scene;
-        this.scale = 0.25;
-        this.sprite = sprite;
+        this.scale = 0.15;
         this.title = title;
         this.player = player;
         this.count = count;
@@ -33,24 +32,26 @@ export default class StatusIcon extends Phaser.GameObjects.Sprite {
         // Texto del título.
         this.tooltip = this.scene.add.text(x, y, title, {
             fontFamily: "PixelArt",
-            fontSize: 28,
-            color: "#000000",
+            fontSize: 18,
+            color: "#2B5F3F",
             align: "center",
         }).setOrigin(0.5);
         this.tooltip.visible = true;
 
         //array que te muestras cuantas veces has mejorado este status
         this.counts = [];
-
+        let posX = this.x - 2*radius;
         for (let i = 0; i < MAX_STATUS; i++) {
             //calcular la posicion de cada bola
-            const angle = (i / MAX_STATUS) * Math.PI * 2; // Ángulo en radianes
-            const ballX = this.x + Math.cos(angle) * radius;
-            const ballY = this.y + Math.sin(angle) * radius;
+            const ballX = posX;
+            const ballY = this.y + 35;
             const iconBall = this.scene.add.image(ballX, ballY, 'statusBall').setScale(0.05);
+            if (this.count >= i) iconBall.setVisible(true);
             iconBall.setVisible(false);
             this.counts.push(iconBall);
+            posX += radius;
         }
+
 
         this.on('pointerdown', () => {
             if (this.count < MAX_STATUS) {
