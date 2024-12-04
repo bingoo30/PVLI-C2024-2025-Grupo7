@@ -2,7 +2,7 @@
  * Clase inventorio
  */
 const MAX_STATUS = 25;
-const MAX_ABILITY =;
+const MAX_ABILITY = 25;
 export default class Inventory { 
 
     constructor(player) {
