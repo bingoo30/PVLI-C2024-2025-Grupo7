@@ -66,7 +66,7 @@ export default class StatusIcon extends Phaser.GameObjects.Sprite {
      */
     upgrateStatus(p) {
         if (p <= 0) {
-            showPopup(this.scene, "No se puede mejorar el status porque no tienes puntos suficientes");
+            showPopup(this.scene, "No se puede mejorar el status porque no tienes puntos suficientes", 350, 200);
         }
         else {
             //lanzo el evento con la habilidad a desloquear y los puntos restantes

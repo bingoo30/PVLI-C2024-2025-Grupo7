@@ -73,7 +73,7 @@
     "locked": true
   },
   {
-    "title": "Cogiendo el ritmillo",
+    "title": "Cogiendo ritmillo",
     "unlockedSprite": "5niveles_icon",
     "info": "Llegar al nivel 5",
     "locked": true
@@ -121,21 +121,28 @@
     "locked": true
   },
   {
+    "title": "Un poco de mejora",
+    "unlockedSprite": "1habilidad_icon",
+    "info": "Desbloquear 1 habilidad",
+    "locked": true
+  },
+  {
     "title": "Maxima punteria",
-    "unlockedSprite": "rama_icon",
-    "info": "Desbloquear una rama entera del arbol",
+    "unlockedSprite": "4habilidad_icon",
+    "info": "Desbloquear 4 habilidades",
+    "locked": true
+  },
+
+  {
+    "title": "Julie Pro Max",
+    "unlockedSprite": "julieProMax_icon",
+    "info": "Desbloquear todas las habilidades",
     "locked": true
   },
   {
     "title": "Julie Pro",
     "unlockedSprite": "juliePro_icon",
     "info": "Tener todos los estatus mejorados al maximo",
-    "locked": true
-  },
-  {
-    "title": "Julie Pro Max",
-    "unlockedSprite": "julieProMax_icon",
-    "info": "Desbloquear las tres ramas de habilidades",
     "locked": true
   },
   {

@@ -8,6 +8,7 @@
      * @param {boolean} isDialogActive  - booleano para saber si esta en dialogo
      * 
      */
+import { showPopup } from '../../UI/showPopUp.js';
 import { unlock } from '../../scenes/achievements/unlock.js';
 import InteractableObjects from './interactable_objects.js';
 export default class NPC extends InteractableObjects {
@@ -36,7 +37,7 @@ export default class NPC extends InteractableObjects {
             this.isDialogActive = true;
 
             //llamar al DialogManager de la escena
-            const dialogos = this.scene.cache.json.get(this.dialogues); 
+            const dialogos = this.scene.cache.json.get(this.dialogues);
             const dialogManager = this.scene.dialogManager;
             const dialogPlugin = this.scene.dialog;
 
@@ -49,7 +50,8 @@ export default class NPC extends InteractableObjects {
             else {
                 console.error("El DialogManager no est¨¢ disponible en la escena.");
             }
-            unlock(this.scene,this.achievement);
+            unlock(this.scene, this.achievement);
+            showPopup(this.scene, `Logro <<${this.achievement}>> desloqueado!`, this.scale.width - 100, this.scale.height - 50);
         }
     }
 }

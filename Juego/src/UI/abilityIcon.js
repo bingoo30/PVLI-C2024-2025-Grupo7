@@ -94,7 +94,7 @@ export default class AbilityIcon extends Phaser.GameObjects.Sprite {
     }
     unlockAbility(p) {
         if (p <=0) {
-            showPopup(this.scene,"No se puede activar esta habilidad porque no tienes puntos suficientes");
+            showPopup(this.scene,"No se puede activar esta habilidad porque no tienes puntos suficientes", );
         }
         else {
             //lanzo el evento con la habilidad a desloquear y los puntos restantes

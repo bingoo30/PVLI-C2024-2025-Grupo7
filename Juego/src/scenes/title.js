@@ -27,7 +27,8 @@ export default class Title extends Phaser.Scene {
 	/**
 	* Creación de los elementos de la escena principal de juego
 	*/
-	create() {
+	create(data) {
+		const _tries = data.tries || 1;
 		//console.log("me he creado", this.scene.key);
 
 		var TitleSample = this.sound.add('TitleSample');
@@ -52,7 +53,7 @@ export default class Title extends Phaser.Scene {
 
 		startButton.on('pointerup', pointer => {
 			TitleSample.stop();
-			this.scene.start('level1'); //Cambiamos a la escena de juego
+			this.scene.start('level1', { tries: _tries }); //Cambiamos a la escena de juego
 
 		});
 

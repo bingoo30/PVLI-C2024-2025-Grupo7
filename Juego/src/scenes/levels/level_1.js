@@ -19,6 +19,7 @@ import Door from '../../objects/interactable_objects/door.js';
 import DamageArea from '../../objects/abilities/area_damage/damage_area.js';
 import PickableObjects from '../../objects/interactable_objects/pickable_objects.js';
 import ChangeLevelDoor from '../../objects/interactable_objects/change_level_door.js';
+import { showPopup } from '../../UI/showPopUp.js';
 
 //import Coin from '../../objetos/Enemies/coin.js'
 //constante
@@ -51,24 +52,28 @@ export default class Animation extends Phaser.Scene {
 		// #region Entities
 		// #region Map
 
-		const tries = data.tries;
+		const _tries = data.tries;
 
 		// #region logros muertes-intentos
 		//logro morirse 1 vez
-		if (tries-1 == 1) {
+		if (_tries -1 == 1) {
 			this.game.events.emit(`unlock_La primera no cuenta`);
+			showPopup(this, 'Logro <<La primera no cuenta>> desloqueado!', this.scale.width-100, this.scale.height-50);
 		}
 		//logro morirse 5 vez
-		else if (tries-1 == 5) {
+		else if (_tries -1 == 5) {
 			this.game.events.emit(`unlock_Este no es mi momento`);
+			showPopup(this, 'Logro <<Este no es mi momento>> desloqueado!', this.scale.width - 100, this.scale.height - 50);
 		}
 		//logro morirse 10 veces
-		else if (tries - 1 == 10) {
+		else if (_tries - 1 == 10) {
 			this.game.events.emit(`unlock_Demasiado hardcore`);
+			showPopup(this, 'Logro <<Demasiado hardcore>> desloqueado!', this.scale.width - 100, this.scale.height - 50);
 		}
 		//logro morirse 20 veces
-		else if (tries - 1 == 20) {
+		else if (_tries - 1 == 20) {
 			this.game.events.emit(`unlock_Insignia para novatos (no llores, te queremos)`);
+			showPopup(this, 'Logro <<Insignia para novatos (no llores, te queremos)>> desloqueado!', this.scale.width - 100, this.scale.height - 50);
 		}
 		// #endregion
 
@@ -336,7 +341,7 @@ export default class Animation extends Phaser.Scene {
 
 		this.physics.add.collider(this.player, this.Flush, () => {
 			//desbloquear el logro de hablar con flush
-			this.game.events.emit(`unlock_Caballero generoso`);
+			//this.game.events.emit(`unlock_Caballero generoso`);
 		});
 
 		//colision player-enemigos
@@ -403,12 +408,12 @@ export default class Animation extends Phaser.Scene {
 
 	changeToGameover() {
 		this.MainSample.stop();
-		this.scene.start("gameover") 
+		this.scene.start("gameover", { tries: _tries });
 	}
 
 	changeToNextLevel() {
 		this.MainSample.stop();
-		this.scene.start('level2', this.player);
+		this.scene.start('level2', { player: this.player, tries: _tries });
 	}
 	pauseGame() {
 		this.isGamePaused = true; // Cambiar el estado del juego a pausado
