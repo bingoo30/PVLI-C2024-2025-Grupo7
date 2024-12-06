@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="left-up" width="80" height="60" tilewidth="32" tileheight="32" infinite="0" nextlayerid="14" nextobjectid="250">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="left-up" width="80" height="60" tilewidth="32" tileheight="32" infinite="0" nextlayerid="15" nextobjectid="262">
  <editorsettings>
   <export target="mapa_1.json" format="json"/>
  </editorsettings>
@@ -773,7 +773,7 @@
 </data>
  </layer>
  <objectgroup id="13" name="Objects">
-  <object id="241" name="key" x="888" y="1192">
+  <object id="241" name="key" x="2440" y="1608">
    <point/>
   </object>
  </objectgroup>
@@ -892,311 +892,6 @@
    <point/>
   </object>
  </objectgroup>
- <objectgroup id="5" name="navmesh" visible="0">
-  <properties>
-   <property name="walkable_tiles" type="bool" value="true"/>
-  </properties>
-  <object id="5" x="1032" y="1096" width="368" height="176">
-   <properties>
-    <property name="walkable_tiles" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="7" x="1448" y="1160" width="336" height="176">
-   <properties>
-    <property name="walkable_tiles" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="9" x="1400" y="1256" width="48" height="16">
-   <properties>
-    <property name="walkable_tiles" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="10" x="1288" y="856" width="48" height="240">
-   <properties>
-    <property name="walkable_tiles" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="15" x="968" y="856" width="240" height="128">
-   <properties>
-    <property name="walkable_tiles" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="17" x="968" y="680" width="432" height="176">
-   <properties>
-    <property name="walkable_tiles" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="18" x="1400" y="744" width="64" height="112">
-   <properties>
-    <property name="walkable_tiles" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="24" x="1464" y="808" width="48" height="16">
-   <properties>
-    <property name="walkable_tiles" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="28" x="1512" y="776" width="272" height="272">
-   <properties>
-    <property name="walkable_tiles" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="29" x="1704" y="1048" width="48" height="112">
-   <properties>
-    <property name="walkable_tiles" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="31" x="1784" y="904" width="144" height="48">
-   <properties>
-    <property name="walkable_tiles" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="32" x="1928" y="776" width="48" height="336">
-   <properties>
-    <property name="walkable_tiles" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="34" x="1976" y="1032" width="416" height="80">
-   <properties>
-    <property name="walkable_tiles" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="38" x="2248" y="776" width="144" height="256">
-   <properties>
-    <property name="walkable_tiles" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="39" x="1976" y="776" width="272" height="48">
-   <properties>
-    <property name="walkable_tiles" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="41" x="2088" y="664" width="48" height="112">
-   <properties>
-    <property name="walkable_tiles" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="42" x="1928" y="392" width="304" height="240">
-   <properties>
-    <property name="walkable_tiles" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="43" x="1960" y="632" width="272" height="32">
-   <properties>
-    <property name="walkable_tiles" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="52" x="1544" y="424" width="144" height="240">
-   <properties>
-    <property name="walkable_tiles" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="54" x="1688" y="584" width="240" height="48">
-   <properties>
-    <property name="walkable_tiles" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="56" x="1672" y="328" width="112" height="96">
-   <properties>
-    <property name="walkable_tiles" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="57" x="1688" y="424" width="96" height="48">
-   <properties>
-    <property name="walkable_tiles" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="58" x="1704" y="168" width="48" height="160">
-   <properties>
-    <property name="walkable_tiles" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="59" x="1752" y="168" width="448" height="48">
-   <properties>
-    <property name="walkable_tiles" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="61" x="2024" y="216" width="112" height="176">
-   <properties>
-    <property name="walkable_tiles" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="62" x="1800" y="72" width="400" height="96">
-   <properties>
-    <property name="walkable_tiles" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="64" x="1352" y="456" width="192" height="176">
-   <properties>
-    <property name="walkable_tiles" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="65" x="1352" y="632" width="48" height="48">
-   <properties>
-    <property name="walkable_tiles" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="66" x="1288" y="328" width="208" height="128">
-   <properties>
-    <property name="walkable_tiles" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="68" x="1288" y="456" width="64" height="16">
-   <properties>
-    <property name="walkable_tiles" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="69" x="1240" y="392" width="48" height="16">
-   <properties>
-    <property name="walkable_tiles" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="70" x="840" y="328" width="400" height="240">
-   <properties>
-    <property name="walkable_tiles" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="72" x="2024" y="1112" width="48" height="208">
-   <properties>
-    <property name="walkable_tiles" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="73" x="1864" y="1320" width="240" height="240">
-   <properties>
-    <property name="walkable_tiles" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="77" x="1896" y="1560" width="48" height="192">
-   <properties>
-    <property name="walkable_tiles" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="78" x="1944" y="1704" width="304" height="48">
-   <properties>
-    <property name="walkable_tiles" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="79" x="1496" y="1672" width="400" height="48">
-   <properties>
-    <property name="walkable_tiles" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="80" x="1192" y="1544" width="304" height="240">
-   <properties>
-    <property name="walkable_tiles" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="81" x="1080" y="1704" width="112" height="48">
-   <properties>
-    <property name="walkable_tiles" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="82" x="648" y="1640" width="432" height="240">
-   <properties>
-    <property name="walkable_tiles" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="83" x="568" y="1672" width="80" height="48">
-   <properties>
-    <property name="walkable_tiles" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="84" x="360" y="1544" width="208" height="240">
-   <properties>
-    <property name="walkable_tiles" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="85" x="232" y="1576" width="128" height="48">
-   <properties>
-    <property name="walkable_tiles" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="87" x="232" y="1256" width="48" height="320">
-   <properties>
-    <property name="walkable_tiles" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="88" x="280" y="1256" width="112" height="48">
-   <properties>
-    <property name="walkable_tiles" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="89" x="392" y="1160" width="240" height="272">
-   <properties>
-    <property name="walkable_tiles" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="90" x="392" y="1432" width="48" height="112">
-   <properties>
-    <property name="walkable_tiles" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="91" x="632" y="1352" width="32" height="80">
-   <properties>
-    <property name="walkable_tiles" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="92" x="664" y="1384" width="32" height="48">
-   <properties>
-    <property name="walkable_tiles" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="97" x="616" y="1432" width="80" height="48">
-   <properties>
-    <property name="walkable_tiles" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="98" x="616" y="1480" width="528" height="48">
-   <properties>
-    <property name="walkable_tiles" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="99" x="1064" y="1448" width="80" height="32">
-   <properties>
-    <property name="walkable_tiles" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="101" x="1096" y="1272" width="48" height="176">
-   <properties>
-    <property name="walkable_tiles" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="102" x="424" y="1016" width="48" height="144">
-   <properties>
-    <property name="walkable_tiles" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="103" x="328" y="840" width="208" height="176">
-   <properties>
-    <property name="walkable_tiles" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="104" x="72" y="872" width="256" height="48">
-   <properties>
-    <property name="walkable_tiles" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="106" x="72" y="728" width="48" height="144">
-   <properties>
-    <property name="walkable_tiles" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="107" x="72" y="360" width="112" height="368">
-   <properties>
-    <property name="walkable_tiles" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="108" x="184" y="360" width="352" height="144">
-   <properties>
-    <property name="walkable_tiles" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="109" x="360" y="504" width="176" height="224">
-   <properties>
-    <property name="walkable_tiles" type="bool" value="true"/>
-   </properties>
-  </object>
- </objectgroup>
  <objectgroup id="10" name="Crac">
   <object id="178" name="Crac" x="1053.67" y="790.5">
    <point/>
@@ -1227,12 +922,22 @@
   <object id="19" name="playerPosition" x="800" y="1248">
    <point/>
   </object>
-  <object id="145" name="Llave" x="2384" y="1658">
-   <point/>
-  </object>
   <object id="240" name="FlushPosition" x="960" y="1160">
    <point/>
   </object>
-  <object id="249" name="changeLevel" x="760" y="1160" width="8" height="48"/>
+  <object id="249" name="changeLevel" x="824" y="400" width="8" height="104"/>
+ </objectgroup>
+ <objectgroup id="14" name="rectangle">
+  <object id="250" x="2224" y="1464" width="320" height="368"/>
+  <object id="252" x="360" y="1056" width="352" height="448"/>
+  <object id="253" x="816" y="728" width="136" height="240"/>
+  <object id="254" x="1168" y="1496" width="352" height="336"/>
+  <object id="255" x="1840" y="1272" width="296" height="360"/>
+  <object id="256" x="1664" y="16" width="576" height="272"/>
+  <object id="257" x="816" y="272" width="448" height="344"/>
+  <object id="258" x="1424" y="1088" width="384" height="296"/>
+  <object id="259" x="48" y="312" width="520" height="744"/>
+  <object id="260" x="336" y="1504" width="264" height="328"/>
+  <object id="261" x="608" y="1592" width="552" height="328"/>
  </objectgroup>
 </map>

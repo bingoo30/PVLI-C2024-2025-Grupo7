@@ -20,9 +20,9 @@ export default class Turret extends Character {
         super(scene, x, y, 'Turret');
         this.scene = scene;
         this.target = null;
-        this.navMesh = scene.navMesh;
+        //this.navMesh = scene.navMesh;
         scene.physics.add.existing(this);
-        this.currentPath = [];
+        //this.currentPath = [];
         this.targetPoint = null;  // Próximo punto objetivo
         //configurar los atributos correspondientes despues de llamar al constructor del character
         this.currentNode = { x: x, y: y };

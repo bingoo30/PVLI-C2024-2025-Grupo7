@@ -20,6 +20,7 @@ import DamageArea from '../../objects/abilities/area_damage/damage_area.js';
 import PickableObjects from '../../objects/interactable_objects/pickable_objects.js';
 import ChangeLevelDoor from '../../objects/interactable_objects/change_level_door.js';
 import { showPopup } from '../../UI/showPopUp.js';
+import Rectangle from '../../objects/interactable_objects/rectangle.js';
 
 //import Coin from '../../objetos/Enemies/coin.js'
 //constante
@@ -105,6 +106,7 @@ export default class Animation extends Phaser.Scene {
 			this.doorGroup.add(door);
 		});
 
+
 		//#endregion
 
 		//#region Objetos
@@ -147,6 +149,13 @@ export default class Animation extends Phaser.Scene {
 		this.player.setScale(SCALE);
 		// Guarda la referencia en el registry
 		this.registry.set('player', this.player);
+
+		this.rectGroup = this.add.group();
+		this.rectangleLayer = this.map.getObjectLayer('rectangle');
+		this.rectangleLayer.objects.forEach((obj) => {
+			const rect = new Rectangle(this, obj.x, obj.y, obj.width, obj.height, this.player);
+			this.rectGroup.add(rect);
+		});
 
 		// #endregion
 
