@@ -1,16 +1,23 @@
-export function showPopup(scene, message, x,y) {
+export function showPopup(scene, message, x = undefined, y = undefined) {
     if (!scene.time || typeof scene.time.addEvent !== 'function') {
         console.error("La escena no tiene un sistema de tiempo válido.");
         return;
     }
 
+    // Usar coordenadas predeterminadas si no se proporcionan
+    if (x === undefined || y === undefined) {
+        const camera = scene.cameras.main;
+        x = camera.width / 2;
+        y = camera.height / 2;
+    }
+
     // Crear un fondo semi-transparente para el popup
     const popupBackground = scene.add.graphics();
-    popupBackground.fillStyle(0x000000, 0.7); // Negro con transparencia
-    popupBackground.fillRoundedRect(x, y, 300, 150, 15); // Posición, tamaño y esquinas redondeadas
+    popupBackground.fillStyle(0x124243, 0.7); // Color con transparencia
+    popupBackground.fillRoundedRect(-150, -50, 300, 100, 15); // Tamaño relativo al contenedor
 
     // Crear un texto para el mensaje
-    const popupText = scene.add.text(x+150, y+50, message, {
+    const popupText = scene.add.text(0, 0, message, {
         fontFamily: 'PixelArt',
         fontSize: '18px',
         color: '#ffffff',
@@ -19,21 +26,19 @@ export function showPopup(scene, message, x,y) {
     }).setOrigin(0.5);
 
     // Crear un contenedor para agrupar los elementos
-    const popupContainer = scene.add.container(0, 0, [popupBackground, popupText]);
+    const popupContainer = scene.add.container(x, y, [popupBackground, popupText]).setScrollFactor(0);
 
-    // Añadir una animación de aparición
-    popupContainer.setAlpha(0); // Inicialmente invisible
+    // Animación de aparición
+    popupContainer.setAlpha(0); // Invisible al inicio
     scene.tweens.add({
         targets: popupContainer,
-        alpha: 1, // Aparecer gradualmente
-        duration: 500, // Duración de la animación en milisegundos
-        ease: 'Power2'
+        alpha: 1,
+        duration: 1000, // Duración de la animación de aparición
+        ease: 'Power2',
+        onComplete: () => {
+            popupContainer.destroy();
+        }
     });
 
-    scene.time.addEvent({
-        delay: 1000,
-        callback: () => { popupContainer.destroy(); }
-    });
 
-    return popupContainer;
 }

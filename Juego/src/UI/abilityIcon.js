@@ -22,7 +22,7 @@ export default class AbilityIcon extends Phaser.GameObjects.Sprite {
         super(scene, x, y, key);
         // #region atributos
         this.scene = scene;
-        this.scale = 0.5;
+        this.scale = 0.3;
         this.unlockedSprite = unlockedSprite;
         this.locked = locked;
         this.info = info;
@@ -36,18 +36,18 @@ export default class AbilityIcon extends Phaser.GameObjects.Sprite {
         // #endregion
 
         // Texto del título.
-        this.titleText = this.scene.add.text(x, y - 75, title, {
+        this.titleText = this.scene.add.text(x, y - 40, title, {
             fontFamily: "PixelArt",
-            fontSize: 28,
+            fontSize: 24,
             color: "#000000",
             align: "center",
         }).setOrigin(0.5);
         this.titleText.visible = true;
 
         // Tooltip
-        this.tooltip = this.scene.add.text(x, y + 50, "", {
+        this.tooltip = this.scene.add.text(x, y + 25, "", {
             fontFamily: "PixelArt",
-            fontSize: 20,
+            fontSize: 16,
             align: "center",
             wordWrap: {
                 width: 450, // Ancho máximo antes de dividir en una nueva línea.

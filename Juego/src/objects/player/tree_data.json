@@ -1,7 +1,7 @@
 [
   {
     "x": 225,
-    "y": 250,
+    "y": 225,
     "title": "Juego de proyectiles I",
     "unlockedSprite": "juegoDeProyectiles1",
     "info": "lanzar un proyectil extra",
@@ -9,7 +9,7 @@
   },
   {
     "x": 225,
-    "y": 375,
+    "y": 325,
     "title": "Juego de proyectiles II",
     "unlockedSprite": "juegoDeProyectiles2",
     "info": "lanzar dos proyectiles extras",
@@ -17,7 +17,7 @@
   },
   {
     "x": 225,
-    "y": 500,
+    "y": 425,
     "title": "Juego de proyectiles III",
     "unlockedSprite": "juegoDeProyectiles3",
     "info": "lanzar tres proyectiles extras",
@@ -25,7 +25,7 @@
   },
   {
     "x": 750,
-    "y": 250,
+    "y": 225,
     "title": "Utilidad I",
     "unlockedSprite": "utilidad1",
     "info": "invocar una torreta que ataca de forma automatica",

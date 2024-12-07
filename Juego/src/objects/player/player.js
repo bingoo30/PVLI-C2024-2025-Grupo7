@@ -21,7 +21,7 @@ export default class Player extends Character {
         this.bulletNumbers = 1;
 
         //configurar los atributos correspondientes despues de llamar al constructor del character
-        this.init(400, 1250, 30, 2, 0.05);
+        this.init(400, 1250, 20, 2, 0.05);
 
         // Agregamos fisicas
         scene.physics.add.existing(this);
@@ -39,7 +39,7 @@ export default class Player extends Character {
         // inventorios
         this.Inventory = new Inventory(this);
         // #region puntos de control status
-        this.statusPoint = 5; //status points restantes
+        this.statusPoint = 0; //status points restantes
         this.abilityPoint = 0; //ability points restantes
         this.speedFactorStatus = 0; //+15%
         this.shootSpeedStatus = 0; //+15%

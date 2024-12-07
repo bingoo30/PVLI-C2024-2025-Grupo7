@@ -22,22 +22,22 @@ export default class Gameover extends Phaser.Scene {
 		//logro morirse 1 vez
 		if (this._tries - 1 == 1) {
 			unlock(this, `La primera no cuenta`);
-			showPopup(this, 'Logro <<La primera no cuenta>> desloqueado!', this.scale.width - 400, this.scale.height - 100);
+			showPopup(this, 'Logro <<La primera no cuenta>> desloqueado!', this.scale.width - 175, this.scale.height - 100);
 		}
 		//logro morirse 5 vez
 		else if (this._tries - 1 == 5) {
 			unlock(this, `Este no es mi momento`);
-			showPopup(this, 'Logro <<Este no es mi momento>> desloqueado!', this.scale.width - 400, this.scale.height - 100);
+			showPopup(this, 'Logro <<Este no es mi momento>> desloqueado!', this.scale.width - 175, this.scale.height - 100);
 		}
 		//logro morirse 10 veces
 		else if (this._tries - 1 == 10) {
 			unlock(this, `Demasiado hardcore`);
-			showPopup(this, 'Logro <<Demasiado hardcore>> desloqueado!', this.scale.width - 400, this.scale.height - 100);
+			showPopup(this, 'Logro <<Demasiado hardcore>> desloqueado!', this.scale.width - 175, this.scale.height - 100);
 		}
 		//logro morirse 20 veces
 		else if (this._tries - 1 == 20) {
 			unlock(this, `Insignia para novatos (no llores, te queremos)`);
-			showPopup(this, 'Logro <<Insignia para novatos (no llores, te queremos)>> desloqueado!', this.scale.width - 400, this.scale.height - 100);
+			showPopup(this, 'Logro <<Insignia para novatos (no llores, te queremos)>> desloqueado!', this.scale.width - 175, this.scale.height - 100);
 		}
 		// #endregion
 

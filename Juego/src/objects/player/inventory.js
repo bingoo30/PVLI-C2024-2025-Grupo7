@@ -1,4 +1,5 @@
 import { showPopup } from "../../UI/showPopUp.js";
+import { unlock } from "../../scenes/achievements/unlock.js";
 
 /**
  * Clase inventorio
@@ -23,15 +24,19 @@ export default class Inventory {
     }
     addKilledEnemies() {
         this.enemiesKilled++;
+        this.scene.events.emit('enemyKilled', this.enemiesKilled); // Emitir evento
     }
     addUsedAbility() {
         this.usedAbility++;
+        this.scene.events.emit('abilityUsed', this.usedAbility); // Emitir evento
     }
     addUsedStatus() {
         this.usedStatus++;
+        this.scene.events.emit('statusUsed', this.usedStatus); // Emitir evento
     }
     addLevel() {
         this.level++;
+        this.scene.events.emit('levelUp', this.level); // Emitir evento
     }
     collectKey() {
        // console.log('llave conseguida');
@@ -39,50 +44,59 @@ export default class Inventory {
     }
     //metodo auxiliar para crear los eventos
     createEvents() {
-        //logros relacionados con enemigos matados
-        this.scene.events.on(this.enemiesKilled == 50, () => {
-            this.scene.game.events.emit(`unlock_La Batalla Comienza`);
-            showPopup(this.scene, `Logro <<La Batalla Comienza>> desloqueado!`, this.scale.width - 100, this.scale.height - 50);
-        });
-        this.scene.events.on(this.enemiesKilled == 100, () => {
-            this.scene.game.events.emit(`unlock_Asaltante Feroz`);
-            showPopup(this.scene, `Logro <<Asaltante Feroz>> desloqueado!`, this.scale.width - 100, this.scale.height - 50);
-        });
-        this.scene.events.on(this.enemiesKilled == 150, () => {
-            this.scene.game.events.emit(`unlock_Dominante de la guerra`);
-            showPopup(this.scene, `Logro <<Dominante de la guerra>> desloqueado!`, this.scale.width - 100, this.scale.height - 50);
-        });
-        this.scene.events.on(this.enemiesKilled == 200, () => {
-            this.scene.game.events.emit(`unlock_Destructor del mundo`);
-            showPopup(this.scene, `Logro <<Destructor del mundo>> desloqueado!`, this.scale.width - 100, this.scale.height - 50);
-        });
-
-        //logros relacionados con status points y abilities
-        this.scene.events.on(this.usedStatus == MAX_STATUS, () => {
-            this.scene.game.events.emit(`unlock_Julie Pro`);
-            showPopup(this.scene, `Logro <<Julie Pro>> desloqueado!`, this.scale.width - 100, this.scale.height - 50);
-        });
-        this.scene.events.on(this.usedAbility == MAX_ABILITY, () => {
-            this.scene.game.events.emit(`unlock_Julie Pro Max`);
-            showPopup(this.scene, `Logro <<Julie Pro Max>> desloqueado!`, this.scale.width - 100, this.scale.height - 50);
+        // Logros relacionados con enemigos matados
+        this.scene.events.on('enemyKilled', (enemiesKilled) => {
+            if (enemiesKilled === 50) {
+                unlock(this.scene, `La Batalla Comienza`);
+                showPopup(this.scene, `Logro <<La Batalla Comienza>> desbloqueado!`, this.scene.scale.width - 175, this.scene.scale.height - 100);
+            }
+            if (enemiesKilled === 100) {
+                unlock(this.scene, `Asaltante Feroz`);
+                showPopup(this.scene, `Logro <<Asaltante Feroz>> desbloqueado!`, this.scene.scale.width - 175, this.scene.scale.height - 100);
+            }
+            if (enemiesKilled === 150) {
+                unlock(this.scene, `Dominante de la guerra`);
+                showPopup(this.scene, `Logro <<Dominante de la guerra>> desbloqueado!`, this.scene.scale.width - 175, this.scene.scale.height - 100);
+            }
+            if (enemiesKilled === 200) {
+                unlock(this.scene, `Destructor del mundo`);
+                showPopup(this.scene, `Logro <<Destructor del mundo>> desbloqueado!`, this.scene.scale.width - 175, this.scene.scale.height - 100);
+            }
         });
 
-        //logros nivel
-        this.scene.events.on(this.level == 5, () => {
-            this.scene.game.events.emit(`unlock_Cogiendo ritmillo`);
-            showPopup(this.scene, `Logro <<Cogiendo ritmillo>> desloqueado!`, this.scale.width - 100, this.scale.height - 50);
+        // Logros relacionados con status y habilidades
+        this.scene.events.on('statusUsed', (usedStatus) => {
+            if (usedStatus === MAX_STATUS) {
+                unlock(this.scene, `Julie Pro`);
+                showPopup(this.scene, `Logro <<Julie Pro>> desbloqueado!`, this.scene.scale.width - 175, this.scene.scale.height - 100);
+            }
         });
-        this.scene.events.on(this.level == 10, () => {
-            this.scene.game.events.emit(`unlock_Buena racha`);
-            showPopup(this.scene, `Logro <<Buena racha>> desloqueado!`, this.scale.width - 100, this.scale.height - 50);
+
+        this.scene.events.on('abilityUsed', (usedAbility) => {
+            if (usedAbility === MAX_ABILITY) {
+                unlock(this.scene, `Julie Pro Max`);
+                showPopup(this.scene, `Logro <<Julie Pro Max>> desbloqueado!`, this.scene.scale.width - 175, this.scene.scale.height - 100);
+            }
         });
-        this.scene.events.on(this.level == 20, () => {
-            this.scene.game.events.emit(`unlock_Mucha fuerza`);
-            showPopup(this.scene, `Logro <<Mucha fuerza>> desloqueado!`, this.scale.width - 100, this.scale.height - 50);
-        });
-        this.scene.events.on(this.level == 30, () => {
-            this.scene.game.events.emit(`unlock_En la Cima`);
-            showPopup(this.scene, `Logro <<En la Cima>> desloqueado!`, this.scale.width - 100, this.scale.height - 50);
+
+        // Logros relacionados con niveles
+        this.scene.events.on('levelUp', (level) => {
+            if (level === 5) {
+                unlock(this.scene, `Cogiendo ritmillo`);
+                showPopup(this.scene, `Logro <<Cogiendo ritmillo>> desbloqueado!`, this.scene.scale.width - 175, this.scene.scale.height - 100);
+            }
+            if (level === 10) {
+                unlock(this.scene, `Buena racha`);
+                showPopup(this.scene, `Logro <<Buena racha>> desbloqueado!`, this.scene.scale.width - 175, this.scene.scale.height - 100);
+            }
+            if (level === 20) {
+                unlock(this.scene, `Mucha fuerza`);
+                showPopup(this.scene, `Logro <<Mucha fuerza>> desbloqueado!`, this.scene.scale.width - 175, this.scene.scale.height - 100);
+            }
+            if (level === 30) {
+                unlock(this.scene, `En la Cima`);
+                showPopup(this.scene, `Logro <<En la Cima>> desbloqueado!`, this.scene.scale.width - 175, this.scene.scale.height - 100);
+            }
         });
     }
 
