@@ -370,17 +370,18 @@ export default class Animation extends Phaser.Scene {
 
 		this.cameras.main.startFollow(this.player);
 
+
+		if (this._tries == 1) {
+			const dialogos = this.cache.json.get('dialogues');
+			this.changeToDialogScene({ sceneKey: this.scene.key, backgroundType: 'dark', dialogos: dialogos });
+		}
+
 		// #region sonido
 		this.MainSample = this.sound.add('MainSample');
 		this.MainSample.play();
 		this.MainSample.setLoop(true);
 		// #endregion
-
-		//#region Dialog
-		const dialogos = this.cache.json.get('dialogues');
-		//data= scene, background, dialogos
-		this.changeToDialogScene({ sceneKey: this.scene.key, backgroundType: 'dark', dialogos: dialogos });
-		// #endregion
+		
 
 	}
 	changeToDialogScene(data) {
@@ -406,5 +407,6 @@ export default class Animation extends Phaser.Scene {
 		this.scene.resume(); // Reanudar la escena actual
 		this.scene.stop("Pause"); // Detener la escena de pausa
 	}
-	
+	update(t, dt) {
+	}
 }
