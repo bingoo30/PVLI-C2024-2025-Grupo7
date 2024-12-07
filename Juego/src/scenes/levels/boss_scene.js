@@ -32,8 +32,11 @@ export default class BossScene extends Phaser.Scene {
 
     }
 
-    create() {
+    create(data) {
         // #region Map
+
+        this._tries = data.tries;
+        console.log("tries: " + this._tries);
 
         this.mapBoss = this.make.tilemap({ key: 'mapaBoss'});
         this.tileset = this.mapBoss.addTilesetImage('Grass', 'tileset4');
@@ -167,12 +170,29 @@ export default class BossScene extends Phaser.Scene {
         });
 
 
+        this.physics.add.overlap(this.player, this.joker, (player, enemy) => {
+            if (enemy.visible) {
+                player.knockback(500, enemy);
+                player.onGotHit(enemy.getDamage());
+                if (enemy.isMutum) enemy.createDamageArea();
+            }
+
+        });
+
         //Orbs Joker - Paredes
         this.physics.add.collider(this.jokerOrbs.getPhaserGroup(), this.paredLayer, (bullet, wall) => {
             bullet.destroyBullet(this.jokerOrbs);
         });
 
-        
+
+        // player - Balas
+
+        this.physics.add.collider(this.jokerBullets.getPhaserGroup(), this.player, (bullet, player) => {
+            player.knockback(200, bullet);
+            player.onGotHit(bullet.getDamage());
+            // mandaria a la pool de las balas de los enemigos otra vez
+            bullet.destroyBullet(this.jokerBullets);
+        });
 
         // player - Orb
         this.physics.add.collider(this.player, this.jokerOrbs.getPhaserGroup(), (player, orb) => {
@@ -186,6 +206,10 @@ export default class BossScene extends Phaser.Scene {
         this.cameras.main.startFollow(this.player);
         this.cameras.main.setBounds(this.sueloLayer);
 
+    }
+
+    changeToGameover() {
+        this.scene.start("gameover", { tries: this._tries });
     }
 
     update(time, delta) {

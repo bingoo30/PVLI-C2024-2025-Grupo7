@@ -10,18 +10,19 @@ export default class Joker extends Character {
         this.minY = 10;
         this.maxX = this.scene.scale.width;
         this.maxY = this.scene.scale.width;
+        scene.physics.add.existing(this);
 
         this.shootSpeedStatus = 0;
         this.damageStatus = 0;
         this.bulletCardNumbers = 2;
 
         //speedFactor,shootCardSpeed, shootSpeed, life, damage, prob
-        this.init(100, 80, 500, 300, 3, 0);
+        this.init(100, 300, 500, 300, 3, 0);
     
         this.isTeleporting = false;
         this.lastAttackTime = 0;
         this.attackInterval = 3000; 
-        this.phase = 3;
+        this.phase = 1;
 
         this.createAnimations();
     }
@@ -79,7 +80,7 @@ export default class Joker extends Character {
                 
             this.x = newDistX;
             this.y = newDistY;
-                this.isTeleporting = false;
+            this.isTeleporting = false;
               //  this.play('joker_idle');
             //});
         }
@@ -105,7 +106,7 @@ export default class Joker extends Character {
         this.phase = 2;
     }
 
-    spawnOrbs() {
+    spawnOrbs() {// fase 3
         // shooter, target, damage, speed, sprite, scale, pool, num, critChance = 0, critMultiplier = 2
         fire(this,
             this.target,
@@ -116,6 +117,9 @@ export default class Joker extends Character {
             this.pool2,
             1,
             this.prob + this.prob * this.probStatus);
+
+        this.phase = 1;
+
     }
 
     preUpdate(t,dt){
@@ -123,6 +127,7 @@ export default class Joker extends Character {
 
         if (t > this.lastAttackTime + this.attackInterval) { // A cada dos segundos
             //this.phase = 2;
+            console.log(this.phase)
             if (this.phase === 1) {
                 //console.log('disparando cartas');
 

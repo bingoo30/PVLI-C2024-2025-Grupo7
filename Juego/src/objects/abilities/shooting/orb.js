@@ -20,7 +20,7 @@ export default class Orb extends Phaser.GameObjects.Sprite {
             this.scene.anims.create({
                 key: animKey,
                 frames: this.scene.anims.generateFrameNumbers('Orbs', { start: color * 4, end: color * 4 + 3 }),
-                frameRate: 4,
+                frameRate: 1,
                 repeat: 0,
             });
         }
@@ -98,7 +98,7 @@ export default class Orb extends Phaser.GameObjects.Sprite {
         if (this.start) {
             if (!this.actTime) {
                 console.log('actTime')
-                this.timeToStop = time + 2000; // va a seguir el player por 2 segundos
+                this.timeToStop = time + 5000; // va a seguir el player por 2 segundos
                 this.actTime = true;
             }
             this.rotate();
