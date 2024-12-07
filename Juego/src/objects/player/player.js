@@ -39,8 +39,12 @@ export default class Player extends Character {
         // inventorios
         this.Inventory = new Inventory(this);
         // #region puntos de control status
-        this.statusPoint = 0; //status points restantes
+        this.statusPoint = 1; //status points restantes
         this.abilityPoint = 0; //ability points restantes
+
+        this.turretAvaliable = false;
+        this.turrentsPool = null;
+
         this.speedFactorStatus = 0; //+15%
         this.shootSpeedStatus = 0; //+15%
         this.maxLifeStatus = 0; //+n (siendo n maxLifeStatus)
@@ -65,6 +69,12 @@ export default class Player extends Character {
         this.scene.events.on("IKilledAnEnemy", () => {
             //console.log("i killed it");
             this.Inventory.addKilledEnemies();
+        });
+
+        //eventos
+        this.scene.events.on("TurrentTimeOVer", (turrent) => {
+            this.turrentsPool.release(turrent);
+            this.setTurretAvaliable(true);
         });
 
     }
@@ -105,6 +115,10 @@ export default class Player extends Character {
     }
     getXpToLevelUp() {
         return this.xpToLevelUp;
+    }
+
+    setTurretAvaliable(a) {
+        this.turretAvaliable = a;
     }
     onGotHit(damage) {
         super.onGotHit(damage); // Aplica daño al jugador
@@ -163,6 +177,7 @@ export default class Player extends Character {
             case 'Utilidad I': {
                 //invocar torreta
                 console.log("invocar torreta");
+                this.setTurretAvaliable(true);
             }
                 break;
             default: {
@@ -201,6 +216,10 @@ export default class Player extends Character {
         }
         this.statusPoint--;
         this.Inventory.addUsedStatus();
+    }
+
+    registerTurrents(turrents) {
+        this.turrentsPool = turrents;
     }
     /**
      * Bucle principal del personaje, actualizamos su posici�n y ejecutamos acciones seg�n el Input
@@ -274,25 +293,35 @@ export default class Player extends Character {
         }
 
        //Input de mouse
-       if(this.mouse.leftButtonDown()){
+        if (this.mouse.leftButtonDown()) {
             // Todo esto se debería mover al Shooter
-           if (this.cooldownCont < 0) {
-               let target = new Phaser.Math.Vector2(this.mouse.x + this.scene.cameras.main.scrollX, this.mouse.y + this.scene.cameras.main.scrollY);
-               // Calcula la dirección desde el personaje hacia el cursor
-               //let direction = new Phaser.Math.Vector2(target.x - this.x, target.y - this.y).normalize();
-               fire(this,
-                   target,
-                   this.damage + this.damageStatus * this.damage,
-                   this.shootSpeed + this.shootSpeedStatus * this.shootSpeed * 0.15,
-                   'Bala2',
-                   4,
-                   this.pool,
-                   this.bulletNumbers,
-                   this.prob + this.prob*this.probStatus);
-               this.cooldownCont = this.shootSpeed - this.shootSpeedStatus * this.shootSpeed * 0.15;
-               console.log(this.damage + this.damageStatus * this.damage);
+            if (this.cooldownCont < 0) {
+                let target = new Phaser.Math.Vector2(this.mouse.x + this.scene.cameras.main.scrollX, this.mouse.y + this.scene.cameras.main.scrollY);
+                // Calcula la dirección desde el personaje hacia el cursor
+                //let direction = new Phaser.Math.Vector2(target.x - this.x, target.y - this.y).normalize();
+                fire(this,
+                    target,
+                    this.damage + this.damageStatus * this.damage,
+                    this.shootSpeed + this.shootSpeedStatus * this.shootSpeed * 0.15,
+                    'Bala2',
+                    4,
+                    this.pool,
+                    this.bulletNumbers,
+                    this.prob + this.prob * this.probStatus);
+                this.cooldownCont = this.shootSpeed - this.shootSpeedStatus * this.shootSpeed * 0.15;
+                console.log(this.damage + this.damageStatus * this.damage);
             }
-       }
+        }
+        else if (this.mouse.rightButtonDown()) {
+            if (this.turretAvaliable) {
+                //invocar torreta
+                let turrent = this.turrentsPool.spawn(this.x, this.y, 'Turret');
+                turrent.setDamage(this.damage);
+                turrent.setBulletSpeed(this.shootSpeed);
+                //marcarla como deshabilitada
+                this.setTurretAvaliable(false);
+            }
+        }
 
         this.cooldownCont = this.cooldownCont - dt;
 

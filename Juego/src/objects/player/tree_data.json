@@ -28,7 +28,7 @@
     "y": 225,
     "title": "Utilidad I",
     "unlockedSprite": "utilidad1",
-    "info": "invocar una torreta que ataca de forma automatica",
+    "info": "invocar una torreta que ataca de forma automatica (boton derecho del raton)",
     "locked": true
   }
 ]

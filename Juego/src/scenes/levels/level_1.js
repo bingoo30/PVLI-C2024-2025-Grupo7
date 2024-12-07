@@ -176,7 +176,6 @@ export default class Animation extends Phaser.Scene {
 		}
 		this.enemyBullets.addMultipleEntity(toAdds);
 
-
 		// #endregion
 
 		//#region Enemy Area
@@ -303,6 +302,18 @@ export default class Animation extends Phaser.Scene {
 		// this.turret.setScale(SCALE);
 		// this.turret.setPool(this.playerBullets);
 
+		// #region torretas
+		toAdds = [];
+		this.playerTurrent = new Pool(this, 10, 'Turret');
+		for (let i = 0; i < MAX; i++) {
+			let toAdd = new Turret(this, 0, 0, this.enemies);
+			toAdd.setPool(this.playerBullets);
+			toAdds.push(toAdd);
+		}
+		this.playerTurrent.addMultipleEntity(toAdds);
+		this.player.registerTurrents(this.playerTurrent);
+
+		// #endregion
 
 		this.physics.add.overlap(this.player, this.area.getPhaserGroup(), (player, area) => {
 			player.onGotHit(area.getDamage());

@@ -2,9 +2,11 @@ import Character from "../player/character.js";
 import { fire } from "../abilities/shooting/fire.js";
 
 const DEFAULT_TURRET_SHOOTING_SPEED = 2000;
-const DEFAULT_TURRET_SHOOTING_RANGE = 700;
-const DEFAULT_TURRET_DAMAGE = 1;
+const DEFAULT_TURRET_SHOOTING_RANGE = 500;
 const DEFAULT_TURRET_BULLET_SPEED = 300;
+const DEFAULT_DAMAGE = 1;
+const DEFAULT_TURRET_LIFETIME = 10000; // Duración de vida en milisegundos
+
 
 export default class Turret extends Character {
     /**
@@ -12,13 +14,14 @@ export default class Turret extends Character {
      * @param {Scene} scene - escena en la que aparece
      * @param {number} x - coordenada x
      * @param {number} y - coordenada y
+     * @param {object} Enemies - grupo de enemigos
      * 
     */
 
     constructor(scene, x, y, Enemies) {
         //heredo de la clase character
         super(scene, x, y, 'Turret');
-        this.scene = scene;
+        this.scale = 4; 
         this.target = null;
         //this.navMesh = scene.navMesh;
         scene.physics.add.existing(this);
@@ -29,10 +32,14 @@ export default class Turret extends Character {
         this.dead = false;
         this.shootCooldown = DEFAULT_TURRET_SHOOTING_SPEED;
         this.shootingRange = DEFAULT_TURRET_SHOOTING_RANGE;
-        this.damage = DEFAULT_TURRET_DAMAGE;
+        this.damage = DEFAULT_DAMAGE;
         this.enemies = Enemies
         this.cooldownCont = 0;
         this.bulletSpeed = DEFAULT_TURRET_BULLET_SPEED;
+
+        this.lifetime = DEFAULT_TURRET_LIFETIME; // Tiempo de vida de la torreta
+
+        this.setDepth(2);
     }
 
     preUpdate(t, dt) {
@@ -40,11 +47,17 @@ export default class Turret extends Character {
 
         if(this.cooldownCont <= 0 && this.getClosestEnemy()){
             this.cooldownCont = this.shootCooldown;
-            fire(this, this.target, this.damage, this.shootCooldown, 'Bala', 4, this.pool, 1, 0, 0);
+            fire(this, this.target, this.damage, this.bulletSpeed, 'Bala', 4, this.pool, 1, 0.05, 1.5);
             console.log('pium');
         }
         this.cooldownCont = this.cooldownCont - dt;
-        //if(!this.getClosestEnemy()) console.log("heya heya");
+
+        // Reducir tiempo de vida
+        this.lifetime -= dt;
+        if (this.lifetime <= 0) {
+            this.lifetime = DEFAULT_TURRET_LIFETIME;
+            this.scene.events.emit('TurrentTimeOVer', this);
+        }
 	}
 
     getDistance(targetToCheck) {
@@ -58,7 +71,10 @@ export default class Turret extends Character {
         this.currentBest = this.shootingRange;
         this.res = false;
 
-        this.enemies.forEach((enemyCandidate) => {
+        // Acceder al array de enemigos en el grupo
+        const enemiesArray = this.enemies.getChildren();
+
+        enemiesArray.forEach((enemyCandidate) => {
             if(this.getDistance(enemyCandidate) <= this.currentBest) {
                 this.res = true;
                 this.target = enemyCandidate;
@@ -66,5 +82,11 @@ export default class Turret extends Character {
         });
 
         return this.res;
+    }
+    setDamage(damage) {
+        this.damage = damage;
+    }
+    setBulletSpeed(speed) {
+        this.bulletSpeed = speed -DEFAULT_TURRET_BULLET_SPEED;
     }
 }
