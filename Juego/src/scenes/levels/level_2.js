@@ -328,6 +328,11 @@ export default class Animation extends Phaser.Scene {
 		this.MainSample.setLoop(true);
 		// #endregion
 	}
+	changeToDialogScene(data) {
+		this.scene.launch('Dialog', data);
+		this.scene.bringToTop('Dialog');
+		this.scene.pause();
+	}
 
 	changeToGameover() {
 		this.MainSample.stop();
@@ -336,7 +341,15 @@ export default class Animation extends Phaser.Scene {
 
 	changeToNextLevel() {
 		this.MainSample.stop();
-		this.scene.start('level3', { player: this.player, tries: this._tries });
+		this.scene.start('level2', { player: this.player, tries: this._tries });
+	}
+	pauseGame() {
+		this.scene.launch("Pause", { previousScene: this.scene.key }); // Lanzar la escena de pausa
+		this.scene.pause(); // Pausar la escena actual
+	}
+	resumeGame() {
+		this.scene.resume(); // Reanudar la escena actual
+		this.scene.stop("Pause"); // Detener la escena de pausa
 	}
 
 	update(t, dt) {
