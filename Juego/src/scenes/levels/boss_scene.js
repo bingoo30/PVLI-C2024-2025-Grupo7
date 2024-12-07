@@ -107,6 +107,13 @@ export default class BossScene extends Phaser.Scene {
 
         // #endregion
 
+
+        // #region Joker
+
+        this.joker = new Joker(this, jokerX, jokerY, this.player);
+
+        // #endregion
+
         // #region Enemy Bullets
 
         toAdds = [];
@@ -122,21 +129,19 @@ export default class BossScene extends Phaser.Scene {
 
         this.jokerOrbs = new Pool(this, MAXOrbs, 'Orbs');
         for (let i = 0; i < MAXOrbs; i++) {
-            // scene, index, color, damage, scale, target
-            const orb = new Orb(this, i, i % 3, 0, SCALE, this.player); // Usa un color basado en el índice
+            // scene, joker, index, color, damage, scale, target
+            const orb = new Orb(this, this.joker,i, i % 3, 0, SCALE, this.player); // Usa un color basado en el índice
             toAdds.push(orb);
         }
         this.jokerOrbs.addMultipleEntity(toAdds);
 
+        this.actOrbs = [];
+        this.activeOrbsCount = 0;
         // #endregion
 
         // #endregion
 
-
-
-        // #region Joker
-
-        this.joker = new Joker(this, jokerX, jokerY, this.player);
+       
         this.joker.setPool(this.jokerBullets);
         this.joker.setPool2(this.jokerOrbs);
         this.joker.setScale(SCALE);
@@ -206,6 +211,32 @@ export default class BossScene extends Phaser.Scene {
         this.cameras.main.startFollow(this.player);
         this.cameras.main.setBounds(this.sueloLayer);
 
+    }
+
+    checkActiveOrbs(orb) {
+        // Incrementa el contador de orbes activas cada vez que una orbe esté lista
+        this.activeOrbsCount++;
+
+        this.actOrbs.push(orb);
+
+        console.log('activeOrbsCount', this.activeOrbsCount)
+        if (this.activeOrbsCount >= 3) {
+            this.activeOrbsCount = 0;
+            // Cuando haya 3 orbes empieza a moverlas
+            this.startOrbsMovement();
+        }
+    }
+
+    startOrbsMovement() {
+        // Hace que todas las orbes activas se muevan hacia el jugador
+        this.actOrbs.forEach(orb => {
+            if (orb.isActive) {
+                orb.follow = true;  // Indica que las orbes deben empezar a seguir al jugador
+                orb.start = false;
+            }
+        });
+
+        this.actOrbs = [];
     }
 
     changeToGameover() {
