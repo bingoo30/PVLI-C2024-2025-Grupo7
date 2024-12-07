@@ -40,6 +40,7 @@ export default class Bullet extends Phaser.GameObjects.Sprite {
             scale: 2
         }); 
     }
+
     setSpeed(s) {
         this.speed = s;
     }
@@ -49,6 +50,7 @@ export default class Bullet extends Phaser.GameObjects.Sprite {
     getDamage() {
         return this.damage;
     }
+
     destroyBullet(pool) {
         pool.release(this);
         this.particles.destroy();

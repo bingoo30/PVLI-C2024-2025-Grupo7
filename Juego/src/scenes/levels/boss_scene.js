@@ -5,6 +5,7 @@ import HealthBar from '../../UI/health_bar.js';
 import ExpBar from '../../UI/exp_bar.js';
 import Coin from '../../objects/enemies/coin.js';
 import Bullet from '../../objects/abilities/shooting/bullet.js';
+import Orb from '../../objects/abilities/shooting/orb.js';
 
 import Pool from '../../objects/our_pool.js';
 import DialogueManager from '../../UI/dialog_manager.js';
@@ -108,6 +109,17 @@ export default class BossScene extends Phaser.Scene {
         }
         this.jokerBullets.addMultipleEntity(toAdds);
 
+        const MAXOrbs = 6;
+        toAdds = [];
+
+        this.jokerOrbs = new Pool(this, MAXOrbs, 'Orbs');
+        for (let i = 0; i < MAXOrbs; i++) {
+            // scene, index, color, damage, scale, target
+            const orb = new Orb(this, i, i % 3, 0, SCALE, this.player); // Usa un color basado en el índice
+            toAdds.push(orb);
+        }
+        this.jokerOrbs.addMultipleEntity(toAdds);
+
         // #endregion
 
         // #endregion
@@ -116,10 +128,10 @@ export default class BossScene extends Phaser.Scene {
 
         // #region Joker
 
-       
-
         this.joker = new Joker(this, 140, 140, this.player);
         this.joker.setPool(this.jokerBullets);
+        this.joker.setPool2(this.jokerOrbs);
+        this.joker.setScale(SCALE);
 
         this.physics.add.collider(this.player, this.boss, this.onPlayerHit, null, this);
 
@@ -143,6 +155,14 @@ export default class BossScene extends Phaser.Scene {
             bullet.destroyBullet(this.jokerBullets);
         });
 
+        // player - Orb
+        this.physics.add.collider(this.player, this.jokerOrbs.getPhaserGroup(), (player, orb) => {
+            player.knockback(200, orb);
+            player.onGotHit(orb.getDamage());
+
+            // mandaria a la pool de las orbs del joker otra vez
+            orb.destroyBullet(this.jokerOrbs);
+        })
 
         this.cameras.main.startFollow(this.player);
         this.cameras.main.setBounds(this.sueloLayer);

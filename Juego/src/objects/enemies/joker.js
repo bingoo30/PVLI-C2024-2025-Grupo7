@@ -16,20 +16,20 @@ export default class Joker extends Character {
         this.bulletCardNumbers = 2;
 
         //speedFactor, shootSpeed, life, damage, prob
-        this.init(100, 80, 300, 3, 0);
+        this.init(100, 80, 300, 300, 3, 0);
     
         this.isTeleporting = false;
         this.lastAttackTime = 0;
-        this.attackInterval = 2000; 
-        this.phase = 1;
+        this.attackInterval = 3000; 
+        this.phase = 3;
 
-
-        //this.createAnimations();
+        this.createAnimations();
     }
 
-    init(speedFactor, shootSpeed, life, damage, prob) {
+    init(speedFactor, shootCardSpeed, shootSpeed, life, damage, prob) {
         this.speedFactor = speedFactor;
         this.shootSpeed = shootSpeed;
+        this.shootCardSpeed = shootCardSpeed;
         this.life = life;
         this.damage = damage;
         this.prob = prob;
@@ -38,26 +38,27 @@ export default class Joker extends Character {
 
 
     createAnimations() {
-        this.scene.anims.create({
-            key: 'joker_idle',
-            frames: this.scene.anims.generateFrameNumbers('boss', { start: 0, end: 3 }),
-            frameRate: 8,
-            repeat: -1,
-        });
 
-        this.scene.anims.create({
-            key: 'joker_attack',
-            frames: this.scene.anims.generateFrameNumbers('boss', { start: 4, end: 7 }),
-            frameRate: 8,
-            repeat: 0,
-        });
-        this.scene.anims.create({
-            key: 'joker_teleport',
-            frames: this.scene.anims.generateFrameNumbers('boss', { start: 4, end: 7 }),
-            frameRate: 8,
-            repeat: 0,
-        });
-        this.play('joker_idle');
+        //this.scene.anims.create({
+        //    key: 'joker_idle',
+        //    frames: this.scene.anims.generateFrameNumbers('boss', { start: 0, end: 3 }),
+        //    frameRate: 8,
+        //    repeat: -1,
+        //});
+
+        //this.scene.anims.create({
+        //    key: 'joker_attack',
+        //    frames: this.scene.anims.generateFrameNumbers('boss', { start: 4, end: 7 }),
+        //    frameRate: 8,
+        //    repeat: 0,
+        //});
+        //this.scene.anims.create({
+        //    key: 'joker_teleport',
+        //    frames: this.scene.anims.generateFrameNumbers('boss', { start: 4, end: 7 }),
+        //    frameRate: 8,
+        //    repeat: 0,
+        //});
+        //this.play('joker_idle');
     }
 
   
@@ -82,7 +83,7 @@ export default class Joker extends Character {
               //  this.play('joker_idle');
             //});
         }
-        this.phase = 1;
+        this.phase = 3;
 
     }
 
@@ -93,7 +94,7 @@ export default class Joker extends Character {
             fire(this,
                 this.target,
                 this.damage + this.damageStatus * this.damage * 0.2,
-                this.shootSpeed + this.shootSpeedStatus * this.shootSpeed * 0.2,
+                this.shootCardSpeed + this.shootSpeedStatus * this.shootSpeed * 0.2,
                 'Bala2',
                 4,
                 this.pool,
@@ -104,20 +105,36 @@ export default class Joker extends Character {
         this.phase = 2;
     }
 
-    
+    spawnOrbs() {
+        // shooter, target, damage, speed, sprite, scale, pool, num, critChance = 0, critMultiplier = 2
+        fire(this,
+            this.target,
+            this.damage + this.damageStatus * this.damage * 0.2,
+            this.shootSpeed + this.shootSpeedStatus * this.shootSpeed * 0.2,
+            'Orbs',
+            4,
+            this.pool2,
+            1,
+            this.prob + this.prob * this.probStatus);
+    }
+
     preUpdate(t,dt){
         super.preUpdate(t, dt);
 
-
-
-        if (t > this.lastAttackTime + this.attackInterval) {
-            console.log('x: ', this.x, ' y: ', this.y);
+        if (t > this.lastAttackTime + this.attackInterval) { // A cada dos segundos
             //this.phase = 2;
             if (this.phase === 1) {
+                console.log('disparando cartas');
+
                 this.shootCards();
-                //this.spawnOrbs();
-            } else {
+            } else if (this.phase === 2) {
+                console.log('x: ', this.x, ' y: ', this.y);
+
                 this.teleport();
+            } else if (this.phase === 3) {
+                console.log('preparando orb');
+
+                this.spawnOrbs(); // Incio del las orbs
             }
             this.lastAttackTime = t;
         }

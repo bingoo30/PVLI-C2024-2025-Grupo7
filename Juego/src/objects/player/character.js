@@ -50,14 +50,24 @@ export default class Character extends Phaser.GameObjects.Sprite {
      * @param {number} damageTaken Daño que va a recibir
      */
     onGotHit(damageTaken) {
+        this.setTint(0xff0000); 
         this.life = Math.max(0, this.life - damageTaken);
+
+        this.scene.time.delayedCall(1000, () => {
+            this.clearTint();
+        });
     }
     onDeath() {
         //console.log(`${this.texture.key} ha muerto`);
         this.destroy(); // Elimina el objeto de la escena
     }
+
     setPool(pool) {
         this.pool = pool;
+    }
+
+    setPool2(pool) {
+        this.pool2 = pool;
     }
     // #endregion
 }
