@@ -1,12 +1,10 @@
+import { showPopup } from "../UI/showPopUp.js";
+import { unlock } from "./achievements/unlock.js";
+
 export default class Gameover extends Phaser.Scene {
 	
 	constructor() {
 		super({ key: 'gameover' });
-	}
-	
-	init(data){
-		this.score = data.score;
-		this.time = (data.time/1000).toFixed(2); // Cambiamos el tiempo de milisegundos a segundos con dos decimales
 	}
 
 	/**
@@ -16,14 +14,39 @@ export default class Gameover extends Phaser.Scene {
 		//console.log("me he creado", this.scene.key);
 
 		//aumentar el numero de veces que me he muerto
-		const _tries = data.tries++;
+		this._tries = data.tries;
+		this._tries++;
+		console.log("tries: " + this._tries);
+
+		// #region logros muertes-intentos
+		//logro morirse 1 vez
+		if (this._tries - 1 == 1) {
+			unlock(this, `La primera no cuenta`);
+			showPopup(this, 'Logro <<La primera no cuenta>> desloqueado!', this.scale.width - 400, this.scale.height - 100);
+		}
+		//logro morirse 5 vez
+		else if (this._tries - 1 == 5) {
+			unlock(this, `Este no es mi momento`);
+			showPopup(this, 'Logro <<Este no es mi momento>> desloqueado!', this.scale.width - 400, this.scale.height - 100);
+		}
+		//logro morirse 10 veces
+		else if (this._tries - 1 == 10) {
+			unlock(this, `Demasiado hardcore`);
+			showPopup(this, 'Logro <<Demasiado hardcore>> desloqueado!', this.scale.width - 400, this.scale.height - 100);
+		}
+		//logro morirse 20 veces
+		else if (this._tries - 1 == 20) {
+			unlock(this, `Insignia para novatos (no llores, te queremos)`);
+			showPopup(this, 'Logro <<Insignia para novatos (no llores, te queremos)>> desloqueado!', this.scale.width - 400, this.scale.height - 100);
+		}
+		// #endregion
 
 		var sprite = this.add.image(this.sys.game.canvas.width/2, 20, 'end').setOrigin(0.5,0)
 		sprite.setInteractive(); // Hacemos el sprite interactivo para que lance eventos
 
 		// Escuchamos los eventos del ratón cuando interactual con nuestro sprite de "Start"
 	    sprite.on('pointerup', pointer => {
-			this.scene.start('title', { tries: _tries }); //Cambiamos a la escena de juego
+			this.scene.start('title', { tries: this._tries }); //Cambiamos a la escena de juego
 	    });
 
 	}

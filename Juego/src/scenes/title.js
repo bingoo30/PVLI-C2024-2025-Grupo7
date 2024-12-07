@@ -28,7 +28,9 @@ export default class Title extends Phaser.Scene {
 	* Creación de los elementos de la escena principal de juego
 	*/
 	create(data) {
+
 		const _tries = data.tries || 1;
+		console.log("tries: " + _tries);
 		//console.log("me he creado", this.scene.key);
 
 		var TitleSample = this.sound.add('TitleSample');

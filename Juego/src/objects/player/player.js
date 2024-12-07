@@ -66,9 +66,6 @@ export default class Player extends Character {
             //console.log("i killed it");
             this.Inventory.addKilledEnemies();
         });
-        this.scene.events.on("playerIsDead", () => {
-            this.scene.changeToGameover();
-        });
 
     }
     init(speedFactor, shootSpeed, life, damage, prob) {
@@ -112,8 +109,8 @@ export default class Player extends Character {
     onGotHit(damage) {
         super.onGotHit(damage); // Aplica daño al jugador
         if (this.life == 0) {
-            this.scene.events.emit('playerIsDead');
-            this.onDeath();
+            this.scene.changeToGameover();
+            //this.onDeath();
         }
 
     }

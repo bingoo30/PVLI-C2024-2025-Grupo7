@@ -51,7 +51,7 @@ export default class NPC extends InteractableObjects {
                 console.error("El DialogManager no est¨¢ disponible en la escena.");
             }
             unlock(this.scene, this.achievement);
-            showPopup(this.scene, `Logro <<${this.achievement}>> desloqueado!`, this.scale.width - 100, this.scale.height - 50);
+            showPopup(this.scene, `Logro <<${this.achievement}>> desloqueado!`, this.scale.width - 400, this.scale.height - 100);
         }
     }
 }
