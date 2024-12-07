@@ -63,7 +63,7 @@ export default class Animation extends Phaser.Scene {
 		}
 		this.paredLayer = this.map.createLayer('pared', this.tileset);
 		if (!this.paredLayer) {
-			console.error("La capa 'suelo' no se ha creado correctamente.");
+			console.error("La capa 'pared' no se ha creado correctamente.");
 		}
 		this.sueloLayer.setScale(SCALE);
 		this.paredLayer.setScale(SCALE);

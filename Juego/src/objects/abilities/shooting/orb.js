@@ -7,8 +7,9 @@ export default class Orb extends Phaser.GameObjects.Sprite {
         this.target = target;
         this.color = color;
         this.start = false;
+        this.actTime = false;
         this.follow = false;
-
+        this.timeToStop = 0;
         this.damage = damage;
         this.angle = 0; 
         this.scene.add.existing(this);
@@ -42,10 +43,8 @@ export default class Orb extends Phaser.GameObjects.Sprite {
 
         this.xStart = xStart;
         this.yStart = yStart;
-        this.xObj = this.target.x;
-        this.yObj = this.target.y;
 
-        console.log('Posición inicial xStart:', this.xStart, 'yStart:', this.yStart);
+        //console.log('Posición inicial xStart:', this.xStart, 'yStart:', this.yStart);
 
         const animKey = `orb_charge_color_${this.color}`;
         this.play(animKey);
@@ -53,7 +52,6 @@ export default class Orb extends Phaser.GameObjects.Sprite {
         this.once('animationcomplete', () => {
             this.start = false;
             this.follow = true;
-            this.scene.time.delayedCall(1000, this.destroyBullet, [pool], this);
         });
     }
 
@@ -70,10 +68,10 @@ export default class Orb extends Phaser.GameObjects.Sprite {
     }
 
     startMovingToTarget() {
-        console.log('Yendo al player: ', this.x);
+        //console.log('Yendo al player: ', this.x);
 
         // direccion de disparo 
-        var pointSpeed = new Phaser.Math.Vector2(this.target.x - this.xStart, this.target.y - this.yStart);   // Usa como referencia el centro de la pantalla
+        var pointSpeed = new Phaser.Math.Vector2(this.target.x - this.x, this.target.y - this.y);   // Usa como referencia el centro de la pantalla
         pointSpeed.normalize();
 
         this.body.setVelocity(this.speed * pointSpeed.x, this.speed * pointSpeed.y);
@@ -85,6 +83,10 @@ export default class Orb extends Phaser.GameObjects.Sprite {
     }
 
     destroyBullet(pool) {
+        this.actTime = false;
+        this.start = false;
+        this.follow = false;
+
         pool.release(this);
         this.body.setVelocity(0, 0);
     }
@@ -94,9 +96,16 @@ export default class Orb extends Phaser.GameObjects.Sprite {
         super.preUpdate(time, delta);
 
         if (this.start) {
+            if (!this.actTime) {
+                console.log('actTime')
+                this.timeToStop = time + 2000; // va a seguir el player por 2 segundos
+                this.actTime = true;
+            }
             this.rotate();
         } else if (this.follow) {
-            this.startMovingToTarget();
+            if (this.timeToStop > time) {
+                this.startMovingToTarget();
+            }
         }
     }
 }

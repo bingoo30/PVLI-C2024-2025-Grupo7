@@ -15,8 +15,8 @@ export default class Joker extends Character {
         this.damageStatus = 0;
         this.bulletCardNumbers = 2;
 
-        //speedFactor, shootSpeed, life, damage, prob
-        this.init(100, 80, 300, 300, 3, 0);
+        //speedFactor,shootCardSpeed, shootSpeed, life, damage, prob
+        this.init(100, 80, 500, 300, 3, 0);
     
         this.isTeleporting = false;
         this.lastAttackTime = 0;
@@ -89,7 +89,7 @@ export default class Joker extends Character {
 
     shootCards() {
         // Dispara 2 cartas hacia el jugador
-        console.log('disparo joker');
+        //console.log('disparo joker');
         for (let i = 0; i < 2; i++) {
             fire(this,
                 this.target,
@@ -124,7 +124,7 @@ export default class Joker extends Character {
         if (t > this.lastAttackTime + this.attackInterval) { // A cada dos segundos
             //this.phase = 2;
             if (this.phase === 1) {
-                console.log('disparando cartas');
+                //console.log('disparando cartas');
 
                 this.shootCards();
             } else if (this.phase === 2) {
@@ -132,7 +132,7 @@ export default class Joker extends Character {
 
                 this.teleport();
             } else if (this.phase === 3) {
-                console.log('preparando orb');
+                //console.log('preparando orb');
 
                 this.spawnOrbs(); // Incio del las orbs
             }

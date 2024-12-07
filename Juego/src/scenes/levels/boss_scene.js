@@ -27,7 +27,7 @@ export default class BossScene extends Phaser.Scene {
         this.load.image('projectile', 'assets/bullet/bullet_1.png');
 
 
-        this.load.tilemapTiledJSON('mapaBoss', 'assets/map/map_boss/map_boss.json');
+        this.load.tilemapTiledJSON('mapaBoss', 'assets/map/map_boss/map_boss2.json');
         this.load.image('tileset4', 'assets/map/tileset/grass.png');
 
     }
@@ -38,13 +38,17 @@ export default class BossScene extends Phaser.Scene {
         this.mapBoss = this.make.tilemap({ key: 'mapaBoss'});
         this.tileset = this.mapBoss.addTilesetImage('Grass', 'tileset4');
         this.sueloLayer = this.mapBoss.createLayer('suelo', this.tileset);
-
-
         if (!this.sueloLayer) {
             console.error("La capa 'suelo' no se ha creado correctamente.");
         }
-       
+
+        this.paredLayer = this.mapBoss.createLayer('pared', this.tileset);
+		if (!this.paredLayer) {
+			console.error("La capa 'pared' no se ha creado correctamente.");
+		}
+
         this.sueloLayer.setScale(SCALE);
+        this.paredLayer.setScale(SCALE);
 
         // #endregion
 
@@ -54,24 +58,25 @@ export default class BossScene extends Phaser.Scene {
         const objectLayer = this.mapBoss.getObjectLayer('position');
         if (!objectLayer) console.log('object no encontrado.');
 
-        //const playerPos = objectLayer.objects.find(obj => obj.name == 'playerPosition');
-        //const jokerPos = objectLayer.objects.find(obj => obj.name == 'jokerPosition');
-        // Verificar si el objeto fue encontrado
-      //  if (!jokerPos) console.log('Position joker no encontrado.');
-        //if (!playerPos) console.log('Position player no encontrado.');
+        const playerPos = objectLayer.objects.find(obj => obj.name == 'playerPosition');
+        const jokerPos = objectLayer.objects.find(obj => obj.name == 'jokerPosition');
 
-        //const jokerX = playerPos.x * SCALE;
-//        const jokerY = playerPos.y * SCALE;
+        //Verificar si el objeto fue encontrado
+        if (!jokerPos) console.log('Position joker no encontrado.');
+        if (!playerPos) console.log('Position player no encontrado.');
 
-  //      const playerX = playerPos.x * SCALE;
-    //    const playerY = playerPos.y * SCALE;
+        const jokerX = jokerPos.x * SCALE;
+        const jokerY = jokerPos.y * SCALE;
+
+        const playerX = playerPos.x * SCALE;
+        const playerY = playerPos.y * SCALE;
 
         // #endregion
 
 
         // #region Player
 
-        this.player = new Player(this, 134 , 139);
+        this.player = new Player(this, playerX, playerY);
         this.player.setScale(SCALE);
         // Guarda la referencia en el registry
         this.registry.set('player', this.player);
@@ -109,7 +114,7 @@ export default class BossScene extends Phaser.Scene {
         }
         this.jokerBullets.addMultipleEntity(toAdds);
 
-        const MAXOrbs = 6;
+        const MAXOrbs = 60;
         toAdds = [];
 
         this.jokerOrbs = new Pool(this, MAXOrbs, 'Orbs');
@@ -128,7 +133,7 @@ export default class BossScene extends Phaser.Scene {
 
         // #region Joker
 
-        this.joker = new Joker(this, 140, 140, this.player);
+        this.joker = new Joker(this, jokerX, jokerY, this.player);
         this.joker.setPool(this.jokerBullets);
         this.joker.setPool2(this.jokerOrbs);
         this.joker.setScale(SCALE);
@@ -145,15 +150,29 @@ export default class BossScene extends Phaser.Scene {
 
         // #endregion
 
+        this.paredLayer.setCollisionByProperty({ collides: true });
 
+        this.physics.add.collider(this.joker, this.paredLayer);
 
-        //colision balas-paredes
+        this.physics.add.collider(this.player, this.paredLayer);
+
+        ////colision balas-paredes
         this.physics.add.collider(this.playerBullets.getPhaserGroup(), this.paredLayer, (bullet, wall) => {
             bullet.destroyBullet(this.playerBullets);
         });
+
+        //Balas Joker - Paredes
         this.physics.add.collider(this.jokerBullets.getPhaserGroup(), this.paredLayer, (bullet, wall) => {
             bullet.destroyBullet(this.jokerBullets);
         });
+
+
+        //Orbs Joker - Paredes
+        this.physics.add.collider(this.jokerOrbs.getPhaserGroup(), this.paredLayer, (bullet, wall) => {
+            bullet.destroyBullet(this.jokerOrbs);
+        });
+
+        
 
         // player - Orb
         this.physics.add.collider(this.player, this.jokerOrbs.getPhaserGroup(), (player, orb) => {
