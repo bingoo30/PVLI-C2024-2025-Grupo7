@@ -35,23 +35,12 @@ export default class NPC extends InteractableObjects {
     onInteract() {
         if (this.canInteract && !this.isDialogActive) {
             this.isDialogActive = true;
-
-            //llamar al DialogManager de la escena
             const dialogos = this.scene.cache.json.get(this.dialogues);
-            const dialogManager = this.scene.dialogManager;
-            const dialogPlugin = this.scene.dialog;
 
-            if (dialogManager) {
-
-                dialogManager.initialize(dialogPlugin, dialogos);
-                dialogManager.showDialogue();
-                if (!dialogManager.isDialogActive) this.isDialogActive = false;
-            }
-            else {
-                console.error("El DialogManager no est¨¢ disponible en la escena.");
-            }
             unlock(this.scene, this.achievement);
             showPopup(this.scene, `Logro <<${this.achievement}>> desloqueado!`, this.scene.scale.width - 175, this.scene.scale.height - 100);
+
+            this.scene.changeToDialogScene({ sceneKey: this.scene.scene.key, dialogos: dialogos });
         }
     }
 }

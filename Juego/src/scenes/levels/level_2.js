@@ -24,7 +24,6 @@ export default class Animation extends Phaser.Scene {
 
 	constructor() {
 		super({ key: 'level2' });
-		this.isGamePaused = false;
 	}
 	preload() {
 		// dialogos level2
@@ -341,11 +340,5 @@ export default class Animation extends Phaser.Scene {
 	}
 
 	update(t, dt) {
-		if (this.isGamePaused) {
-			this.physics.world.pause();
-			return;
-		} else {
-			this.physics.world.resume();
-		}
 	}
 }

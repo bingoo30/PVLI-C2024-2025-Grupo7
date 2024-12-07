@@ -227,7 +227,6 @@ export default class Player extends Character {
      * @param {number} dt - Tiempo entre frames
      */
     preUpdate(t, dt) {
-        if (this.scene.isGamePaused) { return; }
         if (this.isKnockedBack) {
             return;
         }

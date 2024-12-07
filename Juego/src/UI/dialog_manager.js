@@ -13,7 +13,7 @@ export default class DialogueManager {
     }
     initialize(dialogPlugin, dialogues) {
 
-        this.currentDialogueIndex = 0;
+        this.currentDialogueIndex = 0; 
         this.dialogPlugin = dialogPlugin;
         this.dialogues = dialogues;
 
@@ -28,6 +28,8 @@ export default class DialogueManager {
         this.dialogPlugin.closeBtn.on('pointerdown', () => {
             this.skipDialogue();
         });
+
+        this.isWaitingForInput = false; 
     }
 
     showDialogue() {
@@ -37,7 +39,6 @@ export default class DialogueManager {
         }
         this.isDialogueActive = true;
         this.isWaitingForInput = false;
-        this.scene.isGamePaused = true;
         const currentDialogue = this.dialogues[this.currentDialogueIndex];
         if (currentDialogue) {
             this.dialogPlugin.setText(
@@ -61,7 +62,6 @@ export default class DialogueManager {
         else {
             this.dialogPlugin.toggleWindow();
             this.isDialogueActive = false;
-            this.scene.isGamePaused = false;
         }
 
     }
@@ -69,6 +69,5 @@ export default class DialogueManager {
         this.currentDialogueIndex = this.dialogues.length; // Salta al final
         this.dialogPlugin.toggleWindow();
         this.isDialogueActive = false;
-        this.scene.isGamePaused = false;
     }
 }

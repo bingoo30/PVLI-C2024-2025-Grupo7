@@ -15,9 +15,8 @@
  */
 export default class DialogText{
 
-	constructor(scene, opts, depth =3){
+	constructor(scene, opts){
 		this.scene = scene;
-		this.depth = depth;
 		this.init(opts);
 	}
 
@@ -198,7 +197,6 @@ export default class DialogText{
 				align: 'center'
 			}
 		});
-		this.closeBtn.setDepth(this.depth);
 		this.closeBtn.setInteractive(); //hace interactuable el boton de cierre
 
 		this.closeBtn.on('pointerover', function () {
@@ -291,11 +289,9 @@ export default class DialogText{
 
 		if (this.text) {
 			this.text.setScrollFactor(0);
-			this.text.setDepth(this.depth);
 		}
 		if (this.speakerText) {
 			this.speakerText.setScrollFactor(0);
-			this.speakerText.setDepth(this.depth);
 		}
 	}
 
@@ -310,6 +306,5 @@ export default class DialogText{
 			this.speakerText.height + (borderPadding));
 
 		this.speakerBorderGraphics.setScrollFactor(0);
-		this.speakerBorderGraphics.setDepth(this.depth);
 	}
 };

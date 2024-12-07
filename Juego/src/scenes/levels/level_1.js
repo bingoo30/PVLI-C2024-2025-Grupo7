@@ -12,8 +12,6 @@ import Mutum from '../../objects/enemies/mutum.js'
 import Estaka from '../../objects/enemies/estaka.js';
 import Turret from '../../objects/abilities/turret.js';
 
-import DialogueManager from '../../UI/dialog_manager.js';
-import DialogText from '../../UI/dialog_plugin.js';
 import NPC from '../../objects/interactable_objects/npc.js';
 import Door from '../../objects/interactable_objects/door.js';
 import DamageArea from '../../objects/abilities/area_damage/damage_area.js';
@@ -32,7 +30,6 @@ export default class Animation extends Phaser.Scene {
 
 	constructor() {
 		super({ key: 'level1' });
-		this.isGamePaused = false;
 	}
 	preload() {
 
@@ -253,29 +250,6 @@ export default class Animation extends Phaser.Scene {
 
 		this.healthBar = new HealthBar(this, 20, 10);
 
-		const dialogos = this.cache.json.get('dialogues');
-
-		//#region Dialog
-
-		this.dialog = new DialogText(this, {
-			borderThickness: 2,
-			borderColor: 0xcb3234,
-			borderAlpha: 1,
-			windowAlpha: 0.8,
-			windowColor: 0x000000,
-			windowHeight: 180,
-			padding: 32,
-			closeBtnColor: 'white',
-			dialogSpeed: 4,
-			fontSize: 25,
-			fontFamily: "PixelArt"
-		});
-		this.dialogManager = new DialogueManager(this);
-		this.dialogManager.initialize(this.dialog, dialogos);
-		this.dialogManager.showDialogue();
-
-		// #endregion
-
 		//#endregion
 
 		// #region NPC
@@ -401,6 +375,18 @@ export default class Animation extends Phaser.Scene {
 		this.MainSample.play();
 		this.MainSample.setLoop(true);
 		// #endregion
+
+		//#region Dialog
+		const dialogos = this.cache.json.get('dialogues');
+		//data= scene, background, dialogos
+		this.changeToDialogScene({ sceneKey: this.scene.key, backgroundType: 'dark', dialogos: dialogos });
+		// #endregion
+
+	}
+	changeToDialogScene(data) {
+		this.scene.launch('Dialog', data);
+		this.scene.bringToTop('Dialog');
+		this.scene.pause();
 	}
 
 	changeToGameover() {
@@ -413,25 +399,12 @@ export default class Animation extends Phaser.Scene {
 		this.scene.start('level2', { player: this.player, tries: this._tries });
 	}
 	pauseGame() {
-		this.isGamePaused = true; // Cambiar el estado del juego a pausado
 		this.scene.launch("Pause", { previousScene: this.scene.key }); // Lanzar la escena de pausa
 		this.scene.pause(); // Pausar la escena actual
 	}
 	resumeGame() {
-		this.isGamePaused = false; // Cambiar el estado del juego a activo
 		this.scene.resume(); // Reanudar la escena actual
 		this.scene.stop("Pause"); // Detener la escena de pausa
-	}
-
-	update(t, dt) {
-
-		if (this.isGamePaused) {
-			this.physics.world.pause();
-			return;
-		} else {
-			this.physics.world.resume();
-		}
-
 	}
 	
 }

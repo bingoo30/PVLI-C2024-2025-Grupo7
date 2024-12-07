@@ -52,12 +52,12 @@ export default class Pause extends Phaser.Scene {
 		resume.on('pointerdown', () => {
 			
 			if (this.previousScene && typeof this.previousScene.resumeGame === 'function') {
-				this.previousScene.resumeGame(); // Llama al método solo si está definido
+				this.previousScene.resumeGame(); // Llama al método solo si est?definido
 			} else if (!this.previousScene) {
 				console.error("previousScene no es válido");
 			}
 			else {
-				console.error("resumeGame no está definido");
+				console.error("resumeGame no est?definido");
 			}
 			
 			
