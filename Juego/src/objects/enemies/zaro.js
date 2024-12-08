@@ -40,6 +40,8 @@ export default class Zaro extends Enemy {
             if (this.shootCont <= 0 && this.getDistance() < SHOOTING_RANGE) {
                 this.shootCont = SHOOTING_COOLDOWN;
                 fire(this, this.player, this.damage, this.shootSpeed, 'Bala', 4, this.pool, 1);
+                const sfx = this.scene.sound.add('enemyShootAudio');
+                sfx.play();
             }
             this.shootCont = this.shootCont - dt;
             this.randomX = Phaser.Math.Between(-1, 1);

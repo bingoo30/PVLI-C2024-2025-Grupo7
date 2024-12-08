@@ -28,14 +28,20 @@ export default class Title extends Phaser.Scene {
 	* Creación de los elementos de la escena principal de juego
 	*/
 	create(data) {
+		this.sound.pauseAll(); // Reanuda todos los sonidos pausados
 
 		const _tries = data.tries || 1;
 		console.log("tries: " + _tries);
 		//console.log("me he creado", this.scene.key);
 
-		var TitleSample = this.sound.add('TitleSample');
-		TitleSample.setLoop(true);
-		TitleSample.play();
+		var TitleSample = this.sound.add('menuAudio');
+		if (!TitleSample.isPlaying) {
+			TitleSample.setLoop(true);
+			TitleSample.play();
+		}
+		// efecto de sonido del botón
+		var buttonSFX = this.sound.add('buttonPressedAudio');
+		buttonSFX.setVolume(0.5);
 		
 		//Pintamos un fondo
 		var back = this.add.image(0, 0, 'background').setOrigin(0, 0);
@@ -48,14 +54,25 @@ export default class Title extends Phaser.Scene {
 		startButton.setInteractive(); // Hacemos el sprite interactivo para que lance eventos
 
 
+		
+
 		// Escuchamos los eventos del ratón cuando interactual con nuestro sprite de "Start"
 		startButton.on('pointerdown', pointer => {
 	    	 //console.log("pulsando");
 	    });
 
 		startButton.on('pointerup', pointer => {
-			TitleSample.stop();
-			this.scene.start('level1', { tries: _tries }); //Cambiamos a la escena de juego
+			TitleSample.stop(); // Detiene el audio de fondo
+
+			buttonSFX.play();
+
+			// Agregar un retraso de 250ms antes de cambiar de escena
+			this.time.addEvent({
+				delay: 250, // 250 ms
+				callback: () => {
+					this.scene.start('level1', { tries: _tries }); // Cambiar a la escena de juego
+				}
+			});
 
 		});
 
@@ -71,7 +88,15 @@ export default class Title extends Phaser.Scene {
 		});
 
 		acvButton.on('pointerup', pointer => {
-			this.scene.start('AchievementScene', { previousScene: this.scene.key });
+			buttonSFX.play();
+
+			// Agregar un retraso de 250ms antes de cambiar de escena
+			this.time.addEvent({
+				delay: 250, // 250 ms
+				callback: () => {
+					this.scene.start('AchievementScene', { previousScene: this.scene.key });
+				}
+			});
 
 		});
 

@@ -77,6 +77,8 @@ export default class Player extends Character {
             this.setTurretAvaliable(true);
         });
 
+        this.hitSoundCooldown = false;
+
     }
     init(speedFactor, shootSpeed, life, damage, prob) {
         this.speedFactor = speedFactor;
@@ -122,6 +124,19 @@ export default class Player extends Character {
     }
     onGotHit(damage) {
         super.onGotHit(damage); // Aplica daño al jugador
+        // Comprobar si el sonido está en cooldown
+        if (!this.hitSoundCooldown) {
+            const sfx = this.scene.sound.add('playerHitAudio');
+            sfx.play();
+
+            // Activar el cooldown
+            this.hitSoundCooldown = true;
+
+            // Desactivar el cooldown después de 500ms (0.5 segundos)
+            this.scene.time.delayedCall(500, () => {
+                this.hitSoundCooldown = false;
+            });
+        }
         if (this.life == 0) {
             this.scene.changeToGameover();
             //this.onDeath();
@@ -160,7 +175,10 @@ export default class Player extends Character {
         this.statusPoint++;
         this.life = this.maxLife;
         this.Inventory.addLevel();
-        if (this.level != 0 && (this.level % 3)-1 == 0) this.abilityPoint++;
+        if (this.level != 0 && (this.level % 3) - 1 == 0) this.abilityPoint++;
+
+        const sfx = this.scene.sound.add('levelUpAudio');
+        sfx.play();
 
         console.log("status points:" + this.statusPoint);
         console.log("ability points:" + this.abilityPoint);
@@ -307,6 +325,9 @@ export default class Player extends Character {
                     this.pool,
                     this.bulletNumbers,
                     this.prob + this.prob * this.probStatus);
+                const sfx = this.scene.sound.add('playerAttackAudio');
+                sfx.setVolume(0.5); // Cambiar el volumen dinámicamente
+                sfx.play();
                 this.cooldownCont = this.shootSpeed - this.shootSpeedStatus * this.shootSpeed * 0.15;
                 console.log(this.damage + this.damageStatus * this.damage);
             }

@@ -35,10 +35,12 @@ export default class Animation extends Phaser.Scene {
 	* Creación de los elementos de la escena principal de juego
 	*/
 	create(data) {
-		this.player = data;
+		this.sound.stopAll();
+		this.player = data.player;
 
 		this._tries = data.tries;
 
+		this.sound.stopAll(); // Detiene todos los sonidos en reproducción
 		//console.log("me he creado", this.scene.key);
 		//this.input.on('pointerup', this.handleClick, this);
 

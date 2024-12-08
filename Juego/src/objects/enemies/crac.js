@@ -23,7 +23,10 @@ export default class Crac extends Enemy {
 
         if(this.cooldownCont <= 0 && this.getDistance() < SHOOTING_RANGE){
             this.cooldownCont = SHOOTING_COOLDOWN;
-            fire(this, this.player, this.damage, this.shootSpeed, 'Bala', 4, this.pool,1);
+			fire(this, this.player, this.damage, this.shootSpeed, 'Bala', 4, this.pool, 1);
+			const sfx = this.scene.sound.add('enemyShootAudio');
+			sfx.setVolume(0.5); // Cambiar el volumen dinámicamente
+			sfx.play();
         }
         this.cooldownCont = this.cooldownCont - dt;
 	}

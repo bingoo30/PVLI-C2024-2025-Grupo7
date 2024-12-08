@@ -80,6 +80,7 @@ export default class AchievementScene extends Phaser.Scene {
         //para salir //problema, cuando solo cuando quito la escena en title, no queda ninguna 
         exitButton.on('pointerdown', pointer => {
             this.scene.stop(); // Detiene la escena actual.
+            this.sound.resumeAll(); // Reanuda todos los sonidos pausados
             this.scene.start(previousSceneKey);
         });
     }

@@ -20,8 +20,13 @@ export default class Pause extends Phaser.Scene {
 	* Creación de los elementos de la escena principal de juego
 	*/
 	create(data) {
+		this.sound.pauseAll();
 		// Recuperar la clave de la escena previa
 		const previousSceneKey = data.previousScene;
+
+		// efecto de sonido del botón
+		var buttonSFX = this.sound.add('buttonPressedAudio');
+		buttonSFX.setVolume(0.5);
 
 		// Obtener la instancia de la escena previa
 		this.previousScene = this.scene.get(previousSceneKey);
@@ -52,6 +57,7 @@ export default class Pause extends Phaser.Scene {
 		resume.on('pointerdown', () => {
 			
 			if (this.previousScene && typeof this.previousScene.resumeGame === 'function') {
+				this.sound.resumeAll(); // Reanuda todos los sonidos pausados
 				this.previousScene.resumeGame(); // Llama al método solo si est?definido
 			} else if (!this.previousScene) {
 				console.error("previousScene no es válido");
@@ -63,10 +69,12 @@ export default class Pause extends Phaser.Scene {
 			
 		});
 		acvs.on('pointerdown', () => {
+			buttonSFX.play();
 			this.scene.start('AchievementScene', { previousScene: this.scene.key });
 
 		});
 		tree.on('pointerdown', () => {
+			buttonSFX.play();
 			this.scene.start('AbilityTree', { previousScene: this.scene.key });
 		});
 	}

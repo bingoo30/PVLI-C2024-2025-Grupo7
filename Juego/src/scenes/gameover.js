@@ -12,7 +12,7 @@ export default class Gameover extends Phaser.Scene {
 	*/
 	create(data) {
 		//console.log("me he creado", this.scene.key);
-
+		this.sound.stopAll(); // Detiene todos los sonidos en reproducción
 		//aumentar el numero de veces que me he muerto
 		this._tries = data.tries;
 		this._tries++;

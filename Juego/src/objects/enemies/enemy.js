@@ -52,8 +52,14 @@ export default class Enemy extends Character {
         super.onGotHit(damage);
         if (this.life == 0) {
             this.scene.events.emit("IKilledAnEnemy");
+            const sfx = this.scene.sound.add('enemyDeadAudio');
+            sfx.play();
             drop(this.x, this.y, this.exp, pool);
             this.onDeath();
+        }
+        else {
+            const sfx = this.scene.sound.add('enemyHitAudio');
+            sfx.play();
         }
             
     }

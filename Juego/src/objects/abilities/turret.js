@@ -48,6 +48,9 @@ export default class Turret extends Character {
         if(this.cooldownCont <= 0 && this.getClosestEnemy()){
             this.cooldownCont = this.shootCooldown;
             fire(this, this.target, this.damage, this.bulletSpeed, 'Bala', 4, this.pool, 1, 0.05, 1.5);
+            const sfx = this.scene.sound.add('playerAttackAudio');
+            sfx.setVolume(0.35); // Cambiar el volumen dinámicamente
+            sfx.play();
             console.log('pium');
         }
         this.cooldownCont = this.cooldownCont - dt;

@@ -34,7 +34,7 @@ export default class BossScene extends Phaser.Scene {
 
     create(data) {
         // #region Map
-
+        this.sound.stopAll(); // Detiene todos los sonidos en reproducción
         this._tries = data.tries;
         console.log("tries: " + this._tries);
 

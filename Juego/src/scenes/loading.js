@@ -141,10 +141,22 @@ export default class Loading extends Phaser.Scene {
 		this.load.image('key', 'assets/map/key.png');
 		//#endregion
 
-		// #region Audio
+		// #region soundtracks
+		this.load.audio('menuAudio', 'assets/audio/soundtracks/menu.mp3');
+		this.load.audio('level1Audio', 'assets/audio/soundtracks/nivel_1.mp3');
+		this.load.audio('level2Audio', 'assets/audio/soundtracks/nivel_2.mp3');
+		this.load.audio('jokerAudio', 'assets/audio/soundtracks/nivel_joker.mp3');
+		// #endregion
 
-		this.load.audio('MainSample', 'assets/audio/batallaPrincipal.wav');
-
+		// #region SFX
+		this.load.audio('buttonPressedAudio', 'assets/audio/SFX/button_pressed.wav');
+		this.load.audio('enemyAreaAudio', 'assets/audio/SFX/enemy_area.wav');
+		this.load.audio('enemyDeadAudio', 'assets/audio/SFX/enemy_dead.wav');
+		this.load.audio('enemyHitAudio', 'assets/audio/SFX/enemy_hit.wav');
+		this.load.audio('enemyShootAudio', 'assets/audio/SFX/enemy_shoot.wav');
+		this.load.audio('levelUpAudio', 'assets/audio/SFX/level_up.wav');
+		this.load.audio('playerAttackAudio', 'assets/audio/SFX/player_attack.wav');
+		this.load.audio('playerHitAudio', 'assets/audio/SFX/player_hit.wav');
 		// #endregion
 
 		// #region Explosion

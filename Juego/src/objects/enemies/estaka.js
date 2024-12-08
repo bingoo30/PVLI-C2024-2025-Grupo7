@@ -44,6 +44,9 @@ export default class Estaka extends Enemy {
             velocity.normalize();
             this.damageArea = this.pool.spawn(this.x + velocity.x * 150, this.y + velocity.y * 150);
             this.damageArea.reset(this.damageRange, this.damage, this.duration);
+
+            const sfx = this.scene.sound.add('enemyAreaAudio');
+            sfx.play();
         }
        
     }

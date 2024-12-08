@@ -50,6 +50,8 @@ export default class Animation extends Phaser.Scene {
 		// #region Entities
 		// #region Map
 
+		this.sound.stopAll(); // Detiene todos los sonidos en reproducción
+
 		this._tries = data.tries;
 		console.log("tries: "+ this._tries);
 
@@ -388,9 +390,9 @@ export default class Animation extends Phaser.Scene {
 		}
 
 		// #region sonido
-		this.MainSample = this.sound.add('MainSample');
-		this.MainSample.play();
+		this.MainSample = this.sound.add('level1Audio');
 		this.MainSample.setLoop(true);
+		this.MainSample.play();
 		// #endregion
 		
 
@@ -402,12 +404,10 @@ export default class Animation extends Phaser.Scene {
 	}
 
 	changeToGameover() {
-		this.MainSample.stop();
 		this.scene.start("gameover", { tries: this._tries });
 	}
 
 	changeToNextLevel() {
-		this.MainSample.stop();
 		this.scene.start('level2', { player: this.player, tries: this._tries });
 	}
 	pauseGame() {
