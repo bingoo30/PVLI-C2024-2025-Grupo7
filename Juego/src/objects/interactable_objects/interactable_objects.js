@@ -11,7 +11,7 @@
      * @param {Boolean} playerInRange - si player esta en una area
      */
 export default class InteractableObjects extends Phaser.GameObjects.Sprite {
-    constructor(scene, x, y, texture, range = 100, textDistance=100) {
+    constructor(scene, x, y, texture, range = 80, textDistance=100) {
         super(scene, x, y, [texture]);
 
         this.scene = scene;
@@ -19,23 +19,26 @@ export default class InteractableObjects extends Phaser.GameObjects.Sprite {
         this.playerInRange;
         // Texto de interacci¨®n inicialmente invisible
         this.text = this.scene.add.text(this.x - 10, this.y - textDistance, 'Presiona E', {
-            font: '15px PixelArt',
+            fontFamily: 'PixelArt',
+            fontSize: 15,
             fill: '#ffffff',
             backgroundColor: '#000000',
             padding: 4,
         });
         this.text.setVisible(false);
-        this.isWaitingInput=true;
+        this.isWaitingInput = true;
 
         this.interactionArea = new Phaser.Geom.Circle(this.x, this.y, range);
+        this.init();
+
+    }
+    init() {
         this.scene.events.on('Interact', () => {
-            if(this.isWaitingInput)this.onInteract()
+            if (this.isWaitingInput) this.onInteract()
         });
     }
-
     preUpdate(t, dt) {
         super.preUpdate(t, dt);
-
         this.playerInRange = Phaser.Geom.Circle.Contains(this.interactionArea, this.scene.player.x, this.scene.player.y);
 
         if (this.playerInRange) {

@@ -19,9 +19,10 @@ export default class Door extends InteractableObjects {
         this.scene = scene;
         this.isOpen = false;
         this.setDisplaySize(sizeW * scale, sizeH * scale);
-        this.scene.add.existing(this);
 
-        this.scene.physics.add.existing(this);
+        scene.physics.add.existing(this);
+        scene.add.existing(this);
+
         this.body.setImmovable(true);
         this.body.setOffset(0, 0);
         this.setOrigin(0, 0);
@@ -34,11 +35,14 @@ export default class Door extends InteractableObjects {
             this.isOpen = false;
             this.setVisible(true);
             this.body.checkCollision.none = false;
-        }
-
+        }   
     }
 
     onInteract() {
+        if (!this.body) {
+           // console.log("Error: 'this.body' no est¨¢ definido en 'onInteract'.");
+            return;
+        }
         if (this.canInteract && !this.isOpen) {
             this.isOpen = true;
         }
