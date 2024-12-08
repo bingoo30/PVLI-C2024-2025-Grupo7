@@ -108,7 +108,7 @@ export default class Loading extends Phaser.Scene {
 		this.load.spritesheet('LetusAnim', 'assets/enemies/letus-sheet.png', {
 			frameWidth: 29,
 			frameHeight: 20,
-			endFrame: 3
+			endFrame: 6
 		});
 
 		this.load.spritesheet('BobAnim', 'assets/enemies/bob-sheet.png', {
