@@ -20,6 +20,8 @@ export default class Mutum extends Enemy {
         this.scene.add.existing(this);
         this.damageArea = null;
         this.pool = pool;
+        console.log(this.pool);
+
         this.isMutum = true;
         this.init(50, 0, 2, 2, 0);
     }

@@ -14,7 +14,7 @@ export default class DamageArea extends Phaser.GameObjects.Sprite {
         this.damage = damage; 
         this.radius = radius;
         this.getRealDamage = false;
-
+        this.setDepth(1);
         scene.add.existing(this);
 
         scene.physics.add.existing(this);
@@ -44,15 +44,18 @@ export default class DamageArea extends Phaser.GameObjects.Sprite {
         this.setDisplaySize(radius * 2, radius * 2);
 
         this.scene.time.delayedCall(this.duration * 1000, this.destroyArea, [], this);
+        this.setVisible(true); 
+        this.setActive(true);
     }
-    getDamage() {
 
+    getDamage() {
         if (this.getRealDamage) {
             this.getRealDamage = false;
             return this.damage;    
         }
         else return 0;
     }
+
     destroyArea(pool = null) {
         if (pool != null) {
             pool.release(this);

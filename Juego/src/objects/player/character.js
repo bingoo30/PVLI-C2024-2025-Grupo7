@@ -64,6 +64,7 @@ export default class Character extends Phaser.GameObjects.Sprite {
 
     setPool(pool) {
         this.pool = pool;
+
     }
 
     setPool2(pool) {
