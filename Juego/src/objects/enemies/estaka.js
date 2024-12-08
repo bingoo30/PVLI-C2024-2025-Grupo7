@@ -12,7 +12,7 @@ import DamageArea from '../abilities/area_damage/damage_area.js'
  */
 export default class Estaka extends Enemy {
     constructor(scene, x, y, player, exp, pool) {
-        super(scene, x, y, player, 'Mutum', exp);
+        super(scene, x, y, player, 'Estaka', exp);
         this.player = player;
         this.damageRange = 100;
         this.damage = 0.1;
@@ -21,7 +21,7 @@ export default class Estaka extends Enemy {
         this.damageArea = null;
         this.pool = pool;
 
-        this.init(30, 0, 2, 2, 0);
+        this.init(25, 0, 2, 2, 0);
         this.timer = this.scene.time.addEvent({
             delay: 3000,
             callback: this.createDamageArea,
@@ -31,6 +31,7 @@ export default class Estaka extends Enemy {
     }
     init(speedFactor, shootSpeed, life, damage, prob) {
         super.init(speedFactor, shootSpeed, life, damage, prob);
+        this.play('EstakaAttack');
     }
     onDeath() {
         this.timer.remove(); 
@@ -41,10 +42,10 @@ export default class Estaka extends Enemy {
         if (this.follow) {
             const velocity = this.body.velocity;
             velocity.normalize();
-
-            this.damageArea = this.pool.spawn(this.x + velocity.x * 100, this.y + velocity.y * 100);
+            this.damageArea = this.pool.spawn(this.x + velocity.x * 150, this.y + velocity.y * 150);
             this.damageArea.reset(this.damageRange, this.damage, this.duration);
         }
+       
     }
 
 }

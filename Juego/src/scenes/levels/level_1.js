@@ -18,6 +18,7 @@ import DamageArea from '../../objects/abilities/area_damage/damage_area.js';
 import PickableObjects from '../../objects/interactable_objects/pickable_objects.js';
 import ChangeLevelDoor from '../../objects/interactable_objects/change_level_door.js';
 import Rectangle from '../../objects/interactable_objects/rectangle.js';
+import Zaro from '../../objects/enemies/zaro.js';
 
 //import Coin from '../../objetos/Enemies/coin.js'
 //constante
@@ -178,9 +179,9 @@ export default class Animation extends Phaser.Scene {
 		//#region Enemy Area
 		///scene, x, y, radius, damage, duration, scale=4
 		toAdds = [];
-		this.area = new Pool(this, MAX, '03_expl_anim');
+		this.area = new Pool(this, MAX);
 		for (let i = 0; i < MAX; i++) {
-			let toAdd = new DamageArea(this, 0, 0, 100, 0, '06_expl_anim');
+			let toAdd = new DamageArea(this, 0, 0, 100, 0, '08_expl_anim');
 			toAdds.push(toAdd);
 		}
 		this.area.addMultipleEntity(toAdds);
@@ -188,7 +189,7 @@ export default class Animation extends Phaser.Scene {
 		toAdds = [];
 		this.areaEs = new Pool(this, MAX);
 		for (let i = 0; i < MAX; i++) {
-			let toAdd = new DamageArea(this, 0, 0, 100, 0, '07_expl_anim');
+			let toAdd = new DamageArea(this, 0, 0, 100, 0, '03_expl_anim');
 			toAdds.push(toAdd);
 		}
 		this.areaEs.addMultipleEntity(toAdds);
@@ -271,6 +272,11 @@ export default class Animation extends Phaser.Scene {
 		this.estaka = new Estaka(this, x - 100, y, this.player, 1, this.areaEs);
 		this.estaka.setScale(SCALE);
 		this.enemies.add(this.estaka);
+
+		this.zaro = new Zaro(this, x - 200, y, this.player, 1);
+		this.zaro.setScale(SCALE);
+		this.zaro.setPool(this.enemyBullets);
+		this.enemies.add(this.zaro);
 
 		// this.turret = new Turret(this, this.player.x + 500, this.player.y, this.enemies.getChildren());
 		// this.turret.setScale(SCALE);

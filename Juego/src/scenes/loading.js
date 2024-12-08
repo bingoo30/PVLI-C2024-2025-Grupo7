@@ -80,8 +80,26 @@ export default class Loading extends Phaser.Scene {
 		this.load.image('Bob', 'assets/enemies/bob.png');
 		this.load.image('Crac', 'assets/enemies/crac.png');
 		this.load.image('Letus', 'assets/enemies/letus.png');
-		this.load.image('Zaro', 'assets/enemies/zaro_placeholder.png');
-		this.load.image('Mutum', 'assets/enemies/mutum.png')
+		this.load.image('Mutum', 'assets/enemies/mutum.png');
+		this.load.image('Zaro', 'assets/enemies/zaro.png');
+		this.load.image('Estaka', 'assets/enemies/estaka.png');
+
+
+		this.load.spritesheet('MutumAnim', 'assets/enemies/mutum-sheet.png', {
+			frameWidth: 18,
+			frameHeight: 20,
+			endFrame: 2
+		});
+		this.load.spritesheet('ZaroAnim', 'assets/enemies/zaro-sheet.png', {
+			frameWidth: 32,
+			frameHeight: 32, 
+			endFrame: 2
+		});
+		this.load.spritesheet('EstakaAnim', 'assets/enemies/estaka-sheet.png', {
+			frameWidth: 32,
+			frameHeight: 32, 
+			endFrame: 5
+		});
 
 		//this.load.image('DamageArea', 'assets/bullet/damage_area.png');
 		//this.load.image('EstakaDamageArea', 'assets/bullet/estaka_damage_area.png');
@@ -211,6 +229,27 @@ export default class Loading extends Phaser.Scene {
 				repeat
 			});
 		});
+
+		//animacion enemigos
+		this.anims.create({
+			key: 'MutumIdle',
+			frames: this.anims.generateFrameNumbers('MutumAnim', { start: 0, end: 2 }),
+			frameRate: 5,
+			repeat: -1
+		});
+		this.anims.create({
+			key: 'ZaroIdle',
+			frames: this.anims.generateFrameNumbers('ZaroAnim', { start: 0, end: 2 }),
+			frameRate: 6,
+			repeat: -1
+		});
+		this.anims.create({
+			key: 'EstakaAttack',
+			frames: this.anims.generateFrameNumbers('EstakaAnim', { start: 0, end: 5 }),
+			frameRate: 7,
+			repeat: -1
+		});
+
 
 
 		this.explosionData.forEach(({ key, frameCount }) => {

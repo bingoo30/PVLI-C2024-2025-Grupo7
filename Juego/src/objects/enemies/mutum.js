@@ -21,11 +21,11 @@ export default class Mutum extends Enemy {
         this.damageArea = null;
         this.pool = pool;
         this.isMutum = true;
-
         this.init(50, 0, 2, 2, 0);
     }
     init(speedFactor, shootSpeed, life, damage, prob) {
         super.init(speedFactor, shootSpeed, life, damage, prob);
+        this.play('MutumIdle');
     }
     onDeath() {
         this.createDamageArea();

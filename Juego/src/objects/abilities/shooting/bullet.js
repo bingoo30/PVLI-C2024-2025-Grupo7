@@ -18,6 +18,7 @@ export default class Bullet extends Phaser.GameObjects.Sprite {
         this.startY = 0;
         this.active = false;
         this.scene.physics.add.existing(this);
+        this.setDepth(1);
         this.particles = null;
     }
 

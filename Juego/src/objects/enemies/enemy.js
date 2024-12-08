@@ -12,7 +12,7 @@ export default class Enemy extends Character {
      * @param {phaser.player} player Jugador (target) a perseguir
      * 
     */
-    constructor(scene, x, y, player, typeEnemy, exp =1) {
+    constructor(scene, x, y, player, typeEnemy, exp = 1) {
         //heredo de la clase character
         super(scene, x, y, [typeEnemy]);
         this.scene = scene;
@@ -74,6 +74,9 @@ export default class Enemy extends Character {
         const distanceToPlayer = Phaser.Math.Distance.Between(this.x, this.y, this.player.x, this.player.y);
         if (distanceToPlayer <= this.followRange) {
             this.moveTowards(this.player.x, this.player.y);
+
+            if (this.x - this.player.x < 0) this.setFlipX(false);
+            else this.setFlipX(true);
             this.follow = true;
         } else {
             this.stopMovement();

@@ -14,14 +14,15 @@ export default class Zaro extends Enemy {
         super(scene, x, y, player, "Zaro",exp);
         this.scene = scene;
         this.player = player;
-        this.scene.add.existing(this);
-        this.init(150, 300, 2, 2, 0);
-        //this.teleportCont = 3000;		
+        this.randomX = 0;
+        this.randomY = 0;
         this.shootCont = 0;
-        //this.followRange = 0;
 
+        this.scene.add.existing(this);
+
+        this.init(150, 300, 2, 2, 0);
         let timer = this.scene.time.addEvent({
-            delay: 3000,
+            delay: 2000,
             callback: this.changeVisible,
             callbackScope: this,
             loop: true
@@ -30,16 +31,22 @@ export default class Zaro extends Enemy {
     }
     init(speedFactor, shootSpeed, life, damage, prob) {
         super.init(speedFactor, shootSpeed, life, damage, prob);
+        this.play('ZaroIdle');
     }
     preUpdate(t, dt) {
         super.preUpdate(t, dt);
-
+        
         if (this.visible) {
             if (this.shootCont <= 0 && this.getDistance() < SHOOTING_RANGE) {
                 this.shootCont = SHOOTING_COOLDOWN;
-                fire(this, this.player, this.damage, this.shootSpeed, 'Bala', 4, this.pool,1);
+                fire(this, this.player, this.damage, this.shootSpeed, 'Bala', 4, this.pool, 1);
             }
             this.shootCont = this.shootCont - dt;
+            this.randomX = Phaser.Math.Between(-1, 1);
+            this.randomY = Phaser.Math.Between(-1, 1);
+        }
+        else {
+            this.body.setVelocity(this.randomX * this.speedFactor, this.randomY * this.speedFactor);
         }
 
     }
