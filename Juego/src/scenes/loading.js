@@ -100,6 +100,22 @@ export default class Loading extends Phaser.Scene {
 			frameHeight: 32, 
 			endFrame: 5
 		});
+		this.load.spritesheet('CracAnim', 'assets/enemies/crac-sheet.png', {
+			frameWidth: 23,
+			frameHeight: 28,
+			endFrame: 3
+		});
+		this.load.spritesheet('LetusAnim', 'assets/enemies/letus-sheet.png', {
+			frameWidth: 29,
+			frameHeight: 20,
+			endFrame: 3
+		});
+
+		this.load.spritesheet('BobAnim', 'assets/enemies/bob-sheet.png', {
+			frameWidth: 26,
+			frameHeight: 29,
+			endFrame: 5
+		});
 
 		//this.load.image('DamageArea', 'assets/bullet/damage_area.png');
 		//this.load.image('EstakaDamageArea', 'assets/bullet/estaka_damage_area.png');
@@ -234,7 +250,7 @@ export default class Loading extends Phaser.Scene {
 		this.anims.create({
 			key: 'MutumIdle',
 			frames: this.anims.generateFrameNumbers('MutumAnim', { start: 0, end: 2 }),
-			frameRate: 5,
+			frameRate: 4,
 			repeat: -1
 		});
 		this.anims.create({
@@ -246,10 +262,29 @@ export default class Loading extends Phaser.Scene {
 		this.anims.create({
 			key: 'EstakaAttack',
 			frames: this.anims.generateFrameNumbers('EstakaAnim', { start: 0, end: 5 }),
-			frameRate: 7,
+			frameRate: 2,
+			repeat: -1
+		});
+		this.anims.create({
+			key: 'CracIdle',
+			frames: this.anims.generateFrameNumbers('CracAnim', { start: 0, end: 3 }),
+			frameRate: 2,
 			repeat: -1
 		});
 
+		this.anims.create({
+			key: 'BobIdle',
+			frames: this.anims.generateFrameNumbers('BobAnim', { start: 0, end: 5 }),
+			frameRate: 3,
+			repeat: -1
+
+		});
+		this.anims.create({
+			key: 'LetusIdle',
+			frames: this.anims.generateFrameNumbers('LetusAnim', { start: 0, end: 3 }),
+			frameRate: 3,
+			repeat: -1
+		});
 
 
 		this.explosionData.forEach(({ key, frameCount }) => {

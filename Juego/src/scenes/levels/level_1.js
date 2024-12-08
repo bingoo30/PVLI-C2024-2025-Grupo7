@@ -278,6 +278,11 @@ export default class Animation extends Phaser.Scene {
 		this.zaro.setPool(this.enemyBullets);
 		this.enemies.add(this.zaro);
 
+		this.crac = new Crac(this, x - 300, y, this.player, 1);
+		this.crac.setScale(SCALE);
+		this.crac.setPool(this.enemyBullets);
+		this.enemies.add(this.crac);
+
 		// this.turret = new Turret(this, this.player.x + 500, this.player.y, this.enemies.getChildren());
 		// this.turret.setScale(SCALE);
 		// this.turret.setPool(this.playerBullets);

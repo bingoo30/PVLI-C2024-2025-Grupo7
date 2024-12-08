@@ -9,8 +9,6 @@ export default class Letus extends Enemy {
     }
     init(speedFactor, shootSpeed, life, damage, prob) {
         super.init(speedFactor, shootSpeed, life, damage, prob);
-    }
-    preUpdate(t, dt) {
-        super.preUpdate(t, dt);
+        this.play('LetusIdle');
     }
 }

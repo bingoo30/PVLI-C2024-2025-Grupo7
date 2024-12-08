@@ -14,6 +14,7 @@ export default class Crac extends Enemy {
 	}
 	init(speedFactor, shootSpeed, life, damage, prob) {
 		super.init(speedFactor, shootSpeed, life, damage, prob);
+		this.play('CracIdle');
 	}
 	preUpdate(t, dt) {
 		super.preUpdate(t, dt);
