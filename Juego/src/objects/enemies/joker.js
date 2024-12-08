@@ -11,10 +11,11 @@ export default class Joker extends Character {
         this.maxX = this.scene.scale.width;
         this.maxY = this.scene.scale.width;
         scene.physics.add.existing(this);
-
+        this.damageArea = null;
         this.shootSpeedStatus = 0;
         this.damageStatus = 0;
         this.bulletCardNumbers = 2;
+        this.duration = 1;
 
         //speedFactor,shootCardSpeed, shootSpeed, life, damage, prob
         this.init(100, 300, 500, 300, 3, 0);
@@ -22,9 +23,15 @@ export default class Joker extends Character {
         this.isTeleporting = false;
         this.lastAttackTime = 0;
         this.attackInterval = 3000; 
-        this.phase = 1;
+        this.phase = 3;
 
         this.createAnimations();
+    }
+
+    setDamageArea(area) {
+        this.poolArea = area;
+        console.log(this.poolArea);
+
     }
 
     init(speedFactor, shootCardSpeed, shootSpeed, life, damage, prob) {
@@ -37,6 +44,15 @@ export default class Joker extends Character {
         this.maxLife = life;
     }
 
+    createDamageArea() {
+        
+        this.damageArea = this.poolArea.spawn(this.x, this.y);
+        this.damageArea.reset(this.damageRange, this.damage, this.duration);
+        console.log(this.damageArea);
+
+        const sfx = this.scene.sound.add('enemyAreaAudio');
+        sfx.play();
+    }
 
     createAnimations() {
 
@@ -130,11 +146,11 @@ export default class Joker extends Character {
             console.log(this.phase)
             if (this.phase === 1) {
                 //console.log('disparando cartas');
+                this.createDamageArea();
 
                 this.shootCards();
             } else if (this.phase === 2) {
-                console.log('x: ', this.x, ' y: ', this.y);
-
+                //console.log('x: ', this.x, ' y: ', this.y);
                 this.teleport();
             } else if (this.phase === 3) {
                 //console.log('preparando orb');

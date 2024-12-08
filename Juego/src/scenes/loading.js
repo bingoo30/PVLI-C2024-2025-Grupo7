@@ -1,24 +1,25 @@
 /**
- * Escena de loading.
+ * Escena de carga de recursos (Loading Scene).
  * @extends Phaser.Scene
  */
 export default class Loading extends Phaser.Scene {
 	/**
-	 * Escena principal.
-	 * @extends Phaser.Scene
+	 * Constructor: Define la clave de la escena como 'loading'.
 	 */
 	constructor() {
 		super({ key: 'loading' });
 	}
 
 	/**
-	 * Cargamos todos los assets que vamos a necesitar
-	 */
+	* Preload: Carga todos los recursos necesarios antes de iniciar el juego.
+	*/
 	preload() {
-		// #region Images
 
-		// #region UI
+		// Establecer color de fondo de la pantalla de carga.
 		this.cameras.main.setBackgroundColor('#d3d3d3');
+
+		// #region UI Assets
+		
 		this.load.image('start', 'assets/GUI/start_button.png');
 		//this.load.image('background', 'assets/GUI/fondoinicio1.png');
 		this.load.image('end', 'assets/GUI/gameover.png');
@@ -26,47 +27,37 @@ export default class Loading extends Phaser.Scene {
 		this.load.image('healthBar', 'assets/GUI/health_bar_2_b.png');
 		this.load.image('expBarBackground', 'assets/GUI/exp_bar_background.png');
 		this.load.image('expBar', 'assets/GUI/exp_bar.png');
-
 		this.load.spritesheet('PiuAnim', 'assets/piu/piu.png', {
 			frameWidth: 25,  // Ancho de cada cuadro
 			frameHeight: 10, // Altura de cada cuadro
 			endFrame: 16      // Número de cuadros en el sprite sheet
 		});
-
 		this.load.image('start', 'assets/GUI/start_button.png');
 		this.load.image('logros', 'assets/GUI/achievements.png');
 		this.load.image('background', 'assets/GUI/beckground_start_1.png');
-		this.load.audio('TitleSample', 'assets/audio/MenuPrincipal.mp3');
-
 		this.load.image('achievement', 'assets/achievs/achievement.png');
 		this.load.image('LockedAchievement', 'assets/achievs/locked.png');
 		this.load.image('pauseBackground', 'assets/GUI/pause.png');
 		this.load.image('PrevButton', 'assets/achievs/previous.png');
 		this.load.image('NextButton', 'assets/achievs/next.png');
 		this.load.image('ExitButton', 'assets/GUI/exit.png');
+		// Cargar audio para el menú principal.
+		this.load.audio('TitleSample', 'assets/audio/MenuPrincipal.mp3');
 
 		// #endregion
 
-		// #region Player
-
+		// #region Player Assets
 		this.load.image('Player', 'assets/character/player.png');
-		this.load.image('Bala', 'assets/bullet/bullet_1.png');
-		this.load.image('Bala2', 'assets/bullet/bullet_2.png');
-
-		this.load.image('Particle', 'assets/effects/particles_1.png');
 		this.load.spritesheet('Orbs', 'assets/effects/particles_2_G.png', {
 			frameWidth: 55,
 			frameHeight: 55,
 		});
-
 		this.load.image('Coin', 'assets/coin/coin.png');
-
 		this.load.spritesheet('Turret', 'assets/abilities/turret.png', {
 			frameWidth: 32,  // Ancho de cada cuadro
 			frameHeight: 30, // Altura de cada cuadro
 			endFrame: 3      // Número de cuadros en el sprite sheet
 		});
-
 		this.load.spritesheet('playerSheet', 'assets/character/player_sheet.png',{
 			frameWidth: 32,  // Ancho de cada cuadro
 			frameHeight: 32, // Altura de cada cuadro
@@ -75,7 +66,8 @@ export default class Loading extends Phaser.Scene {
 
 		// #endregion
 
-		// #region Enemies
+
+		// #region Enemies Assets
 
 		this.load.image('Bob', 'assets/enemies/bob.png');
 		this.load.image('Crac', 'assets/enemies/crac.png');
@@ -83,7 +75,6 @@ export default class Loading extends Phaser.Scene {
 		this.load.image('Mutum', 'assets/enemies/mutum.png');
 		this.load.image('Zaro', 'assets/enemies/zaro.png');
 		this.load.image('Estaka', 'assets/enemies/estaka.png');
-
 
 		this.load.spritesheet('MutumAnim', 'assets/enemies/mutum-sheet.png', {
 			frameWidth: 18,
@@ -161,7 +152,7 @@ export default class Loading extends Phaser.Scene {
 
 		// #region Explosion
 
-		this.explosionData = [
+		this.explosionData_1 = [
 			{ key: '01', frameCount: 8 },
 			{ key: '02', frameCount: 10 },
 			{ key: '03', frameCount: 9 },
@@ -199,8 +190,12 @@ export default class Loading extends Phaser.Scene {
 		];
 
 
+		this.load.image('Bala', 'assets/bullet/bullet_1.png');
+		this.load.image('Bala2', 'assets/bullet/bullet_2.png');
+		this.load.image('Particle', 'assets/effects/particles_1.png');
+
 		// SpriteSheets
-		this.explosionData.forEach(({ key, frameWidth, frameHeight, frameCount }) => {
+		this.explosionData_1.forEach(({ key, frameWidth, frameHeight, frameCount }) => {
 			this.load.spritesheet(key, `assets/effects/explosions/${key}.png`, {
 				frameWidth: 32,
 				frameHeight: 32,
@@ -227,8 +222,6 @@ export default class Loading extends Phaser.Scene {
 				callback: () => { this.scene.start("title"); }
 			});
 		});
-
-
 	}
 
 	/**
@@ -236,7 +229,7 @@ export default class Loading extends Phaser.Scene {
 	*/
 	create() {
 
-		//#region animaciones
+		// #region Animaciones
 		// Definimos las animaciones en un array
 		const animations = [
 			{ key: 'playerIdleDown', start: 1, end: 1, frameRate: 5, repeat:0 },
@@ -258,7 +251,7 @@ export default class Loading extends Phaser.Scene {
 			});
 		});
 
-		//animacion enemigos
+		// Crear animaciones de enemigos
 		this.anims.create({
 			key: 'MutumIdle',
 			frames: this.anims.generateFrameNumbers('MutumAnim', { start: 0, end: 2 }),
@@ -299,7 +292,7 @@ export default class Loading extends Phaser.Scene {
 		});
 
 
-		this.explosionData.forEach(({ key, frameCount }) => {
+		this.explosionData_1.forEach(({ key, frameCount }) => {
 			this.anims.create({
 				key: `${key}_expl_anim`, // Nombre único para la animación
 				frames: this.anims.generateFrameNumbers(key, { start: 0, end: frameCount - 1 }),
@@ -307,13 +300,7 @@ export default class Loading extends Phaser.Scene {
 				repeat: 0 // Reproducir una sola vez
 			});
 		});
-		
-
 		//#endregion
-
-
-
-		//console.log("me he creado", this.scene.key);
 
 		this.anims.create({
 			key: 'PiuLoad',
@@ -346,6 +333,9 @@ export default class Loading extends Phaser.Scene {
 		});
 	}
 
+	/**
+	 * Actualiza el texto de carga con puntos animados.
+	 */
 	updateDots() {
 		// Añadir puntos hasta tres y reiniciar
 		this.dots = this.dots.length < 3 ? this.dots + '.' : '.';

@@ -71,10 +71,10 @@ export default class Orb extends Phaser.GameObjects.Sprite {
     }
 
     startMovingToTarget() {
-        console.log('Yendo al player: ', this.x);
+        //console.log('Yendo al player: ', this.x);
 
         // direccion de disparo 
-        var pointSpeed = new Phaser.Math.Vector2(this.target.x - this.x, this.target.y - this.y);   // Usa como referencia el centro de la pantalla
+        var pointSpeed = new Phaser.Math.Vector2(this.target.x - this.x, this.target.y - this.y);
         pointSpeed.normalize();
 
         this.body.setVelocity(this.speed * pointSpeed.x, this.speed * pointSpeed.y);

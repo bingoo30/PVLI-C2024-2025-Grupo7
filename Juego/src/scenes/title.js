@@ -21,9 +21,8 @@ export default class Title extends Phaser.Scene {
 		achievementDatas.forEach(data => {
 			this.load.image(data.unlockedSprite, `assets/achievs/${data.unlockedSprite}.png`);
 		});
-
-
 	}
+
 	/**
 	* Creación de los elementos de la escena principal de juego
 	*/
@@ -70,7 +69,7 @@ export default class Title extends Phaser.Scene {
 			this.time.addEvent({
 				delay: 250, // 250 ms
 				callback: () => {
-					this.scene.start('level1', { tries: _tries }); // Cambiar a la escena de juego
+					this.scene.start('BossScene', { tries: _tries }); // Cambiar a la escena de juego
 				}
 			});
 
