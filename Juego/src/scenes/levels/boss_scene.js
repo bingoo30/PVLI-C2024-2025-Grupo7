@@ -200,7 +200,7 @@ export default class BossScene extends Phaser.Scene {
         });
 
         // player - Orb
-        this.physics.add.collider(this.player, this.jokerOrbs.getPhaserGroup(), (player, orb) => {
+        this.physics.add.overlap(this.player, this.jokerOrbs.getPhaserGroup(), (player, orb) => {
             player.knockback(200, orb);
             player.onGotHit(orb.getDamage());
 
