@@ -5,7 +5,7 @@ const DEFAULT_SWAPPING_COOLDOWN = 5000;
 /**
 * @extends Obstacle
 */
-//pinchos estaticos
+//pinchos dinamicos
 export default class Retractable_Spike extends Obstacle {
     constructor(scene, x, y) {
         super(scene, x, y, "Retractable_Spikes");

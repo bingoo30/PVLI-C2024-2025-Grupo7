@@ -130,8 +130,12 @@ export default class Loading extends Phaser.Scene {
 
 		//#region Objects
 		this.load.image('key', 'assets/map/key.png');
+		//#endregion
+
+		//#region Traps
 		this.load.image('Retractable_Spikes', 'assets/traps/retractable_spilkes_placeholder.png');
-		this.load.image('Spike', 'assets/traps/retractable_spilkes_placeholder.png')
+		this.load.image('Spike', 'assets/traps/retractable_spilkes_placeholder.png');
+		this.load.image('Statue', 'assets/traps/retractable_spilkes_placeholder.png');
 		//#endregion
 
 		// #region soundtracks

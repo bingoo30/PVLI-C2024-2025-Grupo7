@@ -256,6 +256,12 @@ export default class Animation extends Phaser.Scene {
 		this.spikeTrap.setScale(SCALE);
 		this.traps.add(this.spikeTrap);
 
+		// this.traps = this.add.group();
+		// this.statue = new Statue(this, this.player.x + 300, this.player.y, 0);
+		// this.statue.setScale(SCALE);
+		// this.statue.setPool(this.enemyBullets);
+		// this.traps.add(this.statue);
+
 		//#endregion
 
 		//#region UI
@@ -388,7 +394,7 @@ export default class Animation extends Phaser.Scene {
 			bullet.body.setBounce(0);
 		});
 
-		//colision trampas
+		//colision trampas-player
 		this.physics.add.collider(this.traps, this.player, (trap, player,) => {
 			player.knockback(200, trap);
 			player.onGotHit(trap.getDamage());
