@@ -13,9 +13,8 @@ import DamageArea from '../abilities/area_damage/damage_area.js'
 export default class Mutum extends Enemy {
     constructor(scene, x, y, player, exp, pool) {
         super(scene, x, y, player, 'Mutum', exp);
-        this.player = player;
-        this.damageRange = 100;
-        this.damage = 0.3;  
+        this.AreaDamageRange = 100;
+        this.AreaDamage = 0.3;  
         this.duration = 3;      
         this.scene.add.existing(this);
         this.damageArea = null;
