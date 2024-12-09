@@ -196,6 +196,12 @@ export default class BossScene extends Phaser.Scene {
         this.cameras.main.setBounds(this.sueloLayer);
         // #endregion
 
+        // #region sonido
+        this.MainSample = this.sound.add('jokerAudio');
+        this.MainSample.setLoop(true);
+        this.MainSample.play();
+		// #endregion
+
     }
 
     checkActiveOrbs(orb) {
@@ -227,7 +233,14 @@ export default class BossScene extends Phaser.Scene {
     changeToGameover() {
         this.scene.start("gameover", { tries: this._tries });
     }
-
+    pauseGame() {
+        this.scene.launch("Pause", { previousScene: this.scene.key }); // Lanzar la escena de pausa
+        this.scene.pause(); // Pausar la escena actual
+    }
+    resumeGame() {
+        this.scene.resume(); // Reanudar la escena actual
+        this.scene.stop("Pause"); // Detener la escena de pausa
+    }
     update(time, delta) {
 
     }

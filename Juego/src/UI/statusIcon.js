@@ -46,8 +46,9 @@ export default class StatusIcon extends Phaser.GameObjects.Sprite {
             const ballX = posX;
             const ballY = this.y + 35;
             const iconBall = this.scene.add.image(ballX, ballY, 'statusBall').setScale(0.05);
-            if (this.count >= i) iconBall.setVisible(true);
-            iconBall.setVisible(false);
+            this.scene.add.existing(iconBall);
+            if (this.count > i) iconBall.setVisible(true);
+            else iconBall.setVisible(false);
             this.counts.push(iconBall);
             posX += radius;
         }
