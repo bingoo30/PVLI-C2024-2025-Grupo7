@@ -151,6 +151,7 @@ export default class Animation extends Phaser.Scene {
 
 		// #region Enemy
 
+		/*
 		this.arrayCracs = [];
 		const cracLayer = this.map.getObjectLayer('Crac');
 		cracLayer.objects.forEach(obj => {
@@ -207,7 +208,7 @@ export default class Animation extends Phaser.Scene {
 		});
 
 		this.enemies.addMultiple(this.arrayZaros);
-
+		*/
 		// #endregion
 
 		// #region Navmesh
@@ -223,30 +224,8 @@ export default class Animation extends Phaser.Scene {
 
 		this.healthBar = new HealthBar(this, 20, 10);
 
-		/*
-		const dialogos = this.cache.json.get('dialogues');
+		*
 
-		//#region Dialog
-
-		this.dialog = new DialogText(this, {
-			borderThickness: 2,
-			borderColor: 0xcb3234,
-			borderAlpha: 1,
-			windowAlpha: 0.8,
-			windowColor: 0x000000,
-			windowHeight: 180,
-			padding: 32,
-			closeBtnColor: 'white',
-			dialogSpeed: 4,
-			fontSize: 25,
-			fontFamily: "PixelArt"
-		});
-		this.dialogManager = new DialogueManager(this);
-		//this.dialogManager.initialize(this.dialog, dialogos);
-		//this.dialogManager.showDialogue();
-		*/
-
-		// #endregion
 
 		//#endregion
 
