@@ -19,13 +19,27 @@ export default class Joker extends Character {
 
         //speedFactor,shootCardSpeed, shootSpeed, life, damage, prob
         this.init(100, 300, 500, 300, 3, 0);
-    
+        this.chaseSpeed = 100;
         this.isTeleporting = false;
+        this.isChasing = false;
         this.lastAttackTime = 0;
         this.attackInterval = 2000; 
         this.phase = 3;
+        this.attackRange = 50; 
+
+        this.timer = this.scene.time.addEvent({
+            delay: 3000,
+            callback: this.chasing,
+            callbackScope: this,
+            loop: true
+        });
+
 
         this.createAnimations();
+    }
+
+    chasing() {
+        this.isChasing = true;
     }
 
     setDamageArea(area) {
@@ -78,33 +92,65 @@ export default class Joker extends Character {
         //this.play('joker_idle');
     }
 
-  
+    chasePlayer() {
+
+        const dx = this.target.x - this.x;
+        const dy = this.target.y - this.y;
+
+        const distance = Math.sqrt(dx * dx + dy * dy);
+
+        if (distance > this.attackRange) {
+
+            const velocityX = (dx / distance) * this.chaseSpeed;
+            const velocityY = (dy / distance) * this.chaseSpeed;
+
+            this.body.setVelocity(velocityX, velocityY);
+
+        } else {
+            // Si está lo suficientemente cerca, detén el movimiento
+            this.body.setVelocity(0, 0);
+
+            // Realiza el ataque en área
+            this.createDamageArea();
+        }
+    }
 
     teleport() {
+        this.isChasing = false;
+
         if (!this.isTeleporting) {
-            this.isTeleporting = true;
-
-            // Animación de teleportación
-            //this.play('joker_teleport');
-
-            // Después de la animación, teletransporta al Joker
-            //this.once('animationcomplete', () => {
-
 
             let newDistX = Phaser.Math.Between(this.minX, this.maxX);
-            let newDistY = Phaser.Math.Between( this.minY, this.maxY);
-                
-            this.x = newDistX;
-            this.y = newDistY;
-            this.isTeleporting = false;
-              //  this.play('joker_idle');
-            //});
+            let newDistY = Phaser.Math.Between(this.minY, this.maxY);
+
+            const dx = this.target.x - newDistX;
+            const dy = this.target.y - newDistY;
+
+            let distanceToPlayer = Math.sqrt(dx * dx + dy * dy);
+            if (distanceToPlayer>100) {
+                this.isTeleporting = true;
+                // Animación de teleportación
+                //this.play('joker_teleport');
+
+                // Después de la animación, teletransporta al Joker
+                //this.once('animationcomplete', () => {
+                this.x = newDistX;
+                this.y = newDistY;
+                this.isTeleporting = false;
+
+                //  this.play('joker_idle');
+                //});
+
+            }
+           
         }
         this.phase = 3;
 
     }
 
     shootCards() {
+        this.isChasing = false;
+
         // Dispara 2 cartas hacia el jugador
         //console.log('disparo joker');
         for (let i = 0; i < 2; i++) {
@@ -124,6 +170,8 @@ export default class Joker extends Character {
     }
 
     spawnOrbs() {// fase 3
+        this.isChasing = false;
+        
         // shooter, target, damage, speed, sprite, scale, pool, num, critChance = 0, critMultiplier = 2
         fire(this,
             this.target,
@@ -160,5 +208,9 @@ export default class Joker extends Character {
             }
             this.lastAttackTime = t;
         }
+        if (this.isChasing) {
+            this.chasePlayer();
+        }
+        
     }
 }
