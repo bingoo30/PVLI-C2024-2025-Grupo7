@@ -391,8 +391,7 @@ export default class Animation extends Phaser.Scene {
 		//colision trampas
 		this.physics.add.collider(this.traps, this.player, (trap, player,) => {
 			player.knockback(200, trap);
-			//player.onGotHit(this.trap.getDamage());
-
+			player.onGotHit(trap.getDamage());
 		});
 
 

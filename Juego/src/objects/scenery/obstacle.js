@@ -27,4 +27,8 @@ export default class Obstacle extends Phaser.GameObjects.Sprite {
     getDamage(){
         return this.damage;
     }
+
+    preUpdate(t, dt) {
+        //this.body.setVelocity(0,0);
+    }
 }

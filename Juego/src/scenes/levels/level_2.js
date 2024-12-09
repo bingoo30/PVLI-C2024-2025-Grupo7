@@ -32,7 +32,7 @@ export default class Animation extends Phaser.Scene {
 	}
 
 	/**  
-	* Creación de los elementos de la escena principal de juego
+	* Creaciï¿½n de los elementos de la escena principal de juego
 	*/
 	create(data) {
 		this.sound.stopAll();
@@ -40,7 +40,7 @@ export default class Animation extends Phaser.Scene {
 
 		this._tries = data.tries;
 
-		this.sound.stopAll(); // Detiene todos los sonidos en reproducción
+		this.sound.stopAll(); // Detiene todos los sonidos en reproducciï¿½n
 		//console.log("me he creado", this.scene.key);
 		//this.input.on('pointerup', this.handleClick, this);
 
@@ -68,10 +68,10 @@ export default class Animation extends Phaser.Scene {
 		this.doorLayer.objects.forEach((objD) => {
 			const door = new Door(this, objD.x, objD.y,
 				objD.name,  // El tipo de puerta ('verticalDoor' o 'horizontalDoor')
-				objD.width,  // El tamaño de la puerta en Tiled
-				objD.height, // El tamaño de la puerta en Tiled
+				objD.width,  // El tamaï¿½o de la puerta en Tiled
+				objD.height, // El tamaï¿½o de la puerta en Tiled
 			);
-			// Añadir la puerta al grupo de puertas
+			// Aï¿½adir la puerta al grupo de puertas
 			this.doorGroup.add(door);
 		});
 		*/
@@ -165,7 +165,7 @@ export default class Animation extends Phaser.Scene {
 			}
 		});
 
-		//console.log(this.arrayCracs); // Depuración: verificar el contenido del array
+		//console.log(this.arrayCracs); // Depuraciï¿½n: verificar el contenido del array
 
 		this.enemies = this.add.group();
 		this.enemies.addMultiple(this.arrayCracs);
@@ -223,8 +223,6 @@ export default class Animation extends Phaser.Scene {
 		this.expBar = new ExpBar(this, 20, 30);
 
 		this.healthBar = new HealthBar(this, 20, 10);
-
-		*
 
 
 		//#endregion

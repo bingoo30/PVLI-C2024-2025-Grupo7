@@ -1,7 +1,7 @@
 import Obstacle from "./obstacle.js";
 
 const RETRACTABLE_SPIKE_DAMAGE = 5;
-const DEFAULT_SWAPPING_COOLDOWN = 1000;
+const DEFAULT_SWAPPING_COOLDOWN = 5000;
 /**
 * @extends Obstacle
 */
@@ -22,15 +22,11 @@ export default class Retractable_Spike extends Obstacle {
     
     preUpdate(t, dt) {
         if(this.timer < 0) {
-            this.spikesRised = !this.spikesRised;
+            this.body.enable = false;
             this.timer = DEFAULT_SWAPPING_COOLDOWN;
         }
         this.timer = this.timer - dt;
 
         this.body.setVelocity(0,0);
-    }
-
-    getDamage(){
-        return this.damage;
     }
 }

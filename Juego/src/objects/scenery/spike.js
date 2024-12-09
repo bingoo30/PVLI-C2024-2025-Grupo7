@@ -13,7 +13,12 @@ export default class Spike extends Obstacle {
         //this.body.setOffset(8, 24);
         this.init(SPIKE_DAMAGE);
     }
+
     init(damage) {
         super.init(damage);
+    }
+
+    preUpdate(t, dt) {
+        this.body.setVelocity(0,0);
     }
 }
