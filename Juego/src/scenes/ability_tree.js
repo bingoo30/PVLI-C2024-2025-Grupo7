@@ -40,21 +40,28 @@ export default class AbilityTree extends Phaser.Scene {
 		const background = this.add.image(0, 0, 'pauseBackground').setOrigin(0,0);
 		background.setDisplaySize(this.scale.width, this.scale.height);
 
-		let header1 = this.add.image(this.sys.game.canvas.width * 0.25, this.sys.game.canvas.height * 0.2, 'titleHeader').setOrigin(0.5);
-		//header1.setScale(1);
+		let header1 = this.add.image(this.sys.game.canvas.width * 0.17, this.sys.game.canvas.height * 0.2, 'titleHeader').setOrigin(0.5).setScale(0.7);
 		//Titulos 
-		const juegoDeProyectiles = this.add.text(this.sys.game.canvas.width * 0.25, this.sys.game.canvas.height * 0.2-10, 'Juego de proyectiles', {
+		const juegoDeProyectiles = this.add.text(this.sys.game.canvas.width * 0.17, this.sys.game.canvas.height * 0.2-10, 'Juego de proyectiles', {
 			fontFamily: 'PixelArt',
 			color: '#4A9969',
-			fontSize: 36
+			fontSize: 24
 
 		}).setOrigin(0.5, 0.5);
 
-		let header2 = this.add.image(this.sys.game.canvas.width * 0.75, this.sys.game.canvas.height * 0.2, 'titleHeader').setOrigin(0.5);
-		const utilidad = this.add.text(this.sys.game.canvas.width * 0.75, this.sys.game.canvas.height * 0.2-15, 'Utilidad', {
+		let header2 = this.add.image(this.sys.game.canvas.width * 0.5, this.sys.game.canvas.height * 0.2, 'titleHeader').setOrigin(0.5).setScale(0.7);
+		const francotirador = this.add.text(this.sys.game.canvas.width * 0.5, this.sys.game.canvas.height * 0.2 - 10, 'Francotirador explosivo', {
 			fontFamily: 'PixelArt',
 			color: '#4A9969',
-			fontSize: 36
+			fontSize: 24
+
+		}).setOrigin(0.5, 0.5);
+
+		let header3 = this.add.image(this.sys.game.canvas.width * 0.83, this.sys.game.canvas.height * 0.2, 'titleHeader').setOrigin(0.5).setScale(0.7);
+		const utilidad = this.add.text(this.sys.game.canvas.width * 0.83, this.sys.game.canvas.height * 0.2-13, 'Utilidad', {
+			fontFamily: 'PixelArt',
+			color: '#4A9969',
+			fontSize: 24
 
 		}).setOrigin(0.5, 0.5);
 
@@ -71,6 +78,7 @@ export default class AbilityTree extends Phaser.Scene {
 				data.unlockedSprite,
 				data.info,
 				data.locked,
+				data.previousIsLocked,
 				this.player
 			);
 			this.abilities.push(ability);

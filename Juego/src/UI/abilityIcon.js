@@ -14,9 +14,10 @@ export default class AbilityIcon extends Phaser.GameObjects.Sprite {
      * @param {string} title - titulo
      * @param {string} info - descripcion de la habilidad
      * @param {boolean} locked -booleano que indica que esta desbloquedo una habilidad
+     * @param {boolean} previousIsLocked -booleano que indica si la habilidad anterior esta desbloqueada o no
      * @param {object} player -referencia del player
  */
-    constructor(scene, x, y, title, unlockedSprite, info, locked, player) {
+    constructor(scene, x, y, title, unlockedSprite, info, locked, previousIsLocked,player) {
         let key = "LockedAbility";
         if (!locked) key = unlockedSprite;
         super(scene, x, y, key);
@@ -25,6 +26,7 @@ export default class AbilityIcon extends Phaser.GameObjects.Sprite {
         this.scale = 0.3;
         this.unlockedSprite = unlockedSprite;
         this.locked = locked;
+        this.previousIsLocked = previousIsLocked;
         this.info = info;
         this.title = title;
         this.player = player;
@@ -50,7 +52,7 @@ export default class AbilityIcon extends Phaser.GameObjects.Sprite {
             fontSize: 16,
             align: "center",
             wordWrap: {
-                width: 450, // Ancho máximo antes de dividir en una nueva línea.
+                width: 250, // Ancho máximo antes de dividir en una nueva línea.
                 useAdvancedWrap: true, // Habilita el ajuste avanzado para cortar palabras.
             },
         }).setOrigin(0.5);
@@ -94,7 +96,10 @@ export default class AbilityIcon extends Phaser.GameObjects.Sprite {
     }
     unlockAbility(p) {
         if (p <=0) {
-            showPopup(this.scene,"No se puede activar esta habilidad porque no tienes puntos suficientes", );
+            showPopup(this.scene, "No se puede activar esta habilidad porque no tienes puntos suficientes");
+        }
+        else if (this.previousIsLocked) {
+            showPopup(this.scene, "Tienes que desbloquear primero la habilidad previa");
         }
         else {
             //lanzo el evento con la habilidad a desloquear y los puntos restantes
@@ -108,6 +113,8 @@ export default class AbilityIcon extends Phaser.GameObjects.Sprite {
             // Cambiar el estado de "locked"
             treeObj.locked = false;
 
+            const nextTreeObj = treeData.find(item => item.id === treeObj.nextId);
+            if (nextTreeObj !== null) nextTreeObj.previousIsLocked = false;
             // Guardar los datos actualizados en localStorage
             localStorage.setItem('treeData', JSON.stringify(treeData));
 

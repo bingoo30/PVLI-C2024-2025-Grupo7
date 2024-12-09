@@ -19,6 +19,7 @@ export default class Player extends Character {
         this.cooldownCont = 0;
         this.canShoot = true;
         this.bulletNumbers = 1;
+        this.bulletScale = 4;
 
         //configurar los atributos correspondientes despues de llamar al constructor del character
         this.init(400, 1250, 20, 2, 0.05);
@@ -189,7 +190,10 @@ export default class Player extends Character {
             case 'Juego de proyectiles II':
             case 'Juego de proyectiles III': {
                 this.bulletNumbers++;
-
+            }
+                break;
+            case 'Francotirador explosivo I': {
+                this.bulletScale += this.bulletScale/4; //aumentar el 25% del tamaño de la bala
             }
                 break;
             case 'Utilidad I': {
@@ -321,7 +325,7 @@ export default class Player extends Character {
                     this.damage + this.damageStatus * this.damage,
                     this.shootSpeed + this.shootSpeedStatus * this.shootSpeed * 0.15,
                     'Bala2',
-                    4,
+                    this.bulletScale,
                     this.pool,
                     this.bulletNumbers,
                     this.prob + this.prob * this.probStatus);

@@ -46,7 +46,6 @@ export default class StatusIcon extends Phaser.GameObjects.Sprite {
             const ballX = posX;
             const ballY = this.y + 35;
             const iconBall = this.scene.add.image(ballX, ballY, 'statusBall').setScale(0.05);
-            this.scene.add.existing(iconBall);
             if (this.count > i) iconBall.setVisible(true);
             else iconBall.setVisible(false);
             this.counts.push(iconBall);
@@ -67,7 +66,7 @@ export default class StatusIcon extends Phaser.GameObjects.Sprite {
      */
     upgrateStatus(p) {
         if (p <= 0) {
-            showPopup(this.scene, "No se puede mejorar el status porque no tienes puntos suficientes", 350, 200);
+            showPopup(this.scene, "No se puede mejorar el status porque no tienes puntos suficientes");
         }
         else {
             //lanzo el evento con la habilidad a desloquear y los puntos restantes
