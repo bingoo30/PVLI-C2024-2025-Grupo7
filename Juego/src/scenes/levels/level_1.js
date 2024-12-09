@@ -21,7 +21,6 @@ import Rectangle from '../../objects/interactable_objects/rectangle.js';
 import Zaro from '../../objects/enemies/zaro.js';
 import Spike from '../../objects/scenery/spike.js';
 import Retractable_Spike from '../../objects/scenery/retractable_spike.js';
-import Statue from '../../objects/scenery/statue.js';
 
 //import Coin from '../../objetos/Enemies/coin.js'
 //constante
@@ -252,15 +251,10 @@ export default class Animation extends Phaser.Scene {
 
 		//#region Traps
 
-		// this.traps = this.add.group();
-		// this.spike = new Spike(this, this.player.x + 300, this.player.y);
-		// this.spike.setScale(SCALE);
-		// this.traps.add(this.spike);
-
-		// this.traps = this.add.group();
-		// this.spike = new Retractable_Spike(this, this.player.x + 300, this.player.y);
-		// this.spike.setScale(SCALE);
-		// this.traps.add(this.spike);
+		this.traps = this.add.group();
+		this.spikeTrap = new Retractable_Spike(this, this.player.x + 300, this.player.y);
+		this.spikeTrap.setScale(SCALE);
+		this.traps.add(this.spikeTrap);
 
 		//#endregion
 
@@ -268,7 +262,7 @@ export default class Animation extends Phaser.Scene {
 
 		this.expBar = new ExpBar(this, 20, 30);
 
-		this.healthBar = new HealthBar(this, 20, 10);
+		this.healthBar = new HealthBar(this, 20, 10, this.player);
 
 		//#endregion
 

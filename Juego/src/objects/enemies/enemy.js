@@ -19,9 +19,6 @@ export default class Enemy extends Character {
         this.player = player;
         this.exp = exp;
         scene.physics.add.existing(this);
-  
-        //this.body.setSize(16,8);
-        //this.body.setOffset(8, 24);
     
         this.dead = false;
         this.followRange = DEFAULT_FOLLOW_RANGE;

@@ -222,7 +222,7 @@ export default class Animation extends Phaser.Scene {
 
 		this.expBar = new ExpBar(this, 20, 30);
 
-		this.healthBar = new HealthBar(this, 20, 10);
+		this.healthBar = new HealthBar(this, 20, 10, this.player);
 
 
 		//#endregion

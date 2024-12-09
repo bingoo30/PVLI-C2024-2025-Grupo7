@@ -21,7 +21,7 @@ export default class DamageArea extends Phaser.GameObjects.Sprite {
 
         this.body.setImmovable(true);
        
-        this.setDepth(0);
+        this.setDepth(2);
 
         let timer = this.scene.time.addEvent({
             delay: 300,

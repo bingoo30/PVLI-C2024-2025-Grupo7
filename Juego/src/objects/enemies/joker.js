@@ -10,15 +10,20 @@ export default class Joker extends Character {
         this.minY = 10;
         this.maxX = this.scene.scale.width;
         this.maxY = this.scene.scale.width;
+
         scene.physics.add.existing(this);
         this.damageArea = null;
         this.shootSpeedStatus = 0;
         this.damageStatus = 0;
         this.bulletCardNumbers = 2;
+
+        this.AreaDamageRange = 100;
+        this.AreaDamage = 0.1;
         this.duration = 1;
 
+        this.maxLife = 300;
         //speedFactor,shootCardSpeed, shootSpeed, life, damage, prob
-        this.init(100, 300, 500, 300, 3, 0);
+        this.init(100, 300, 500, this.maxLife, 3, 0);
         this.chaseSpeed = 100;
         this.isTeleporting = false;
         this.isChasing = false;
@@ -37,15 +42,18 @@ export default class Joker extends Character {
 
         this.createAnimations();
     }
-
+    getLife() {
+        return this.life;
+    }
+    getMaxLife() {
+        return this.maxLife;
+    }
     chasing() {
         this.isChasing = true;
     }
 
     setDamageArea(area) {
         this.poolArea = area;
-        console.log(this.poolArea);
-
     }
 
     init(speedFactor, shootCardSpeed, shootSpeed, life, damage, prob) {
@@ -57,13 +65,10 @@ export default class Joker extends Character {
         this.prob = prob;
         this.maxLife = life;
     }
-
     createDamageArea() {
         
         this.damageArea = this.poolArea.spawn(this.x, this.y);
-        this.damageArea.reset(this.damageRange, this.damage, this.duration);
-        console.log(this.damageArea);
-
+        this.damageArea.reset(this.AreaDamageRange, this.AreaDamage, this.duration);
         const sfx = this.scene.sound.add('enemyAreaAudio');
         sfx.play();
     }
@@ -107,7 +112,7 @@ export default class Joker extends Character {
             this.body.setVelocity(velocityX, velocityY);
 
         } else {
-            // Si está lo suficientemente cerca, detén el movimiento
+            // Si est?lo suficientemente cerca, detén el movimiento
             this.body.setVelocity(0, 0);
 
             // Realiza el ataque en área

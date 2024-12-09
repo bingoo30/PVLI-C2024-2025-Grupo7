@@ -9,6 +9,8 @@ import Orb from '../../objects/abilities/shooting/orb.js';
 import Pool from '../../objects/our_pool.js';
 import DamageArea from '../../objects/abilities/area_damage/damage_area.js';
 import PickableObjects from '../../objects/interactable_objects/pickable_objects.js';
+import Estaka from '../../objects/enemies/estaka.js';
+
 
 const SCALE = 4;
 export default class BossScene extends Phaser.Scene {
@@ -95,6 +97,8 @@ export default class BossScene extends Phaser.Scene {
 
 
         this.joker = new Joker(this, jokerX, jokerY, this.player);
+        console.log('joker:', this.joker.x, this.joker.y);
+
 
         // #region Enemy Bullets
         toAdds = [];
@@ -115,14 +119,15 @@ export default class BossScene extends Phaser.Scene {
         }
         this.jokerOrbs.addMultipleEntity(toAdds);
 
+
         toAdds = [];
-        this.area = new Pool(this, MAX);
+        this.area = new Pool(this, MAX, '03_expl_anim');
         for (let i = 0; i < MAX; i++) {
             let toAdd = new DamageArea(this, 0, 0, 100, 0, '03_expl_anim');
             toAdds.push(toAdd);
         }
         this.area.addMultipleEntity(toAdds);
-
+        console.log(this.area);
 
         this.actOrbs = [];
         this.activeOrbsCount = 0;
@@ -188,7 +193,10 @@ export default class BossScene extends Phaser.Scene {
 
         // #region UI
         this.expBar = new ExpBar(this, 20, 30);
-        this.healthBar = new HealthBar(this, 20, 10);
+        this.healthBar = new HealthBar(this, 20, 10, this.player);
+
+        this.bossHealthBar = new HealthBar(this, 200, 10, this.joker);
+
         // #endregion
 
         // #region Camera Setup
@@ -205,7 +213,7 @@ export default class BossScene extends Phaser.Scene {
     }
 
     checkActiveOrbs(orb) {
-        // Incrementa el contador de orbes activas cada vez que una orbe esté lista
+        // Incrementa el contador de orbes activas cada vez que una orbe est?lista
         this.activeOrbsCount++;
 
         this.actOrbs.push(orb);

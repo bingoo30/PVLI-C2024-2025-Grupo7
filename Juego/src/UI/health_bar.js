@@ -11,17 +11,18 @@
      * 
  */
 export default class HealthBar extends Phaser.GameObjects.Sprite {
-    constructor(scene, x, y, depth = 3) {
-        super(scene, x, y,'healthBarBackground');
+    constructor(scene, x, y, character, texture = 'healthBarBackground', barTexture ='healthBar',depth = 3) {
+        super(scene, x, y, texture);
         this.scene = scene;
         this.maxWidth = 300;
         this.height = 30; 
+        this.character = character;
         this.container = scene.add.container(this.x, this.y);
 
         this.setOrigin(0, 0);
         this.setDisplaySize(this.maxWidth, this.height);
 
-        this.bar = scene.add.sprite(this.x, this.y, 'healthBar').setOrigin(0, 0);
+        this.bar = scene.add.sprite(this.x, this.y, barTexture).setOrigin(0, 0);
         this.bar.setDisplaySize(this.maxWidth, this.height); 
 
         this.lifeText = this.scene.add.text(this.x + 10, this.y+5, '100%', {
@@ -38,13 +39,10 @@ export default class HealthBar extends Phaser.GameObjects.Sprite {
     preUpdate(t,dt) {
         super.preUpdate(t, dt);
 
-        const healthPer = Phaser.Math.Clamp(this.scene.player.getLife() / this.scene.player.getMaxLife(), 0, 1);
+        const healthPer = Phaser.Math.Clamp(this.character.getLife() / this.character.getMaxLife(), 0, 1);
+
         this.lifeText.setText(`${Phaser.Math.RoundTo(healthPer * 100, 0)}%`);
         this.bar.setDisplaySize(this.maxWidth * healthPer, this.height);
-
-        if (healthPer < 0.2) {
-            this.bar.setTint(0xff0000);  // Rojo
-        }
 
     }
 }
