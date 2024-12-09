@@ -17,10 +17,14 @@ export default class Obstacle extends Phaser.GameObjects.Sprite {
         this.scene.add.existing(this);
         // Inicializar las propiedades por defecto
         this.type = type;
-        this.damage = DEFAULT_DAMAGE;    
+        this.damage = DEFAULT_DAMAGE;
     }
 
     init(damage) {
         this.damage = damage;
+    }
+
+    getDamage(){
+        return this.damage;
     }
 }

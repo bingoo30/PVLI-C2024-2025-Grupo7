@@ -19,6 +19,8 @@ import PickableObjects from '../../objects/interactable_objects/pickable_objects
 import ChangeLevelDoor from '../../objects/interactable_objects/change_level_door.js';
 import Rectangle from '../../objects/interactable_objects/rectangle.js';
 import Zaro from '../../objects/enemies/zaro.js';
+import Spike from '../../objects/scenery/spike.js';
+import Retractable_Spike from '../../objects/scenery/retractable_spike.js';
 
 //import Coin from '../../objetos/Enemies/coin.js'
 //constante
@@ -247,6 +249,15 @@ export default class Animation extends Phaser.Scene {
 		this.enemies.addMultiple(this.arrayLetus);
 		//#endregion
 
+		//#region Traps
+
+		this.traps = this.add.group();
+		this.spikeTrap = new Retractable_Spike(this, this.player.x + 300, this.player.y);
+		this.spikeTrap.setScale(SCALE);
+		this.traps.add(this.spikeTrap);
+
+		//#endregion
+
 		//#region UI
 
 		this.expBar = new ExpBar(this, 20, 30);
@@ -290,15 +301,15 @@ export default class Animation extends Phaser.Scene {
 		// this.turret.setPool(this.playerBullets);
 
 		// #region torretas
-		toAdds = [];
-		this.playerTurrent = new Pool(this, 10, 'Turret');
-		for (let i = 0; i < MAX; i++) {
-			let toAdd = new Turret(this, 0, 0, this.enemies);
-			toAdd.setPool(this.playerBullets);
-			toAdds.push(toAdd);
-		}
-		this.playerTurrent.addMultipleEntity(toAdds);
-		this.player.registerTurrents(this.playerTurrent);
+		// toAdds = [];
+		// this.playerTurrent = new Pool(this, 10, 'Turret');
+		// for (let i = 0; i < MAX; i++) {
+		// 	let toAdd = new Turret(this, 0, 0, this.enemies);
+		// 	toAdd.setPool(this.playerBullets);
+		// 	toAdds.push(toAdd);
+		// }
+		// this.playerTurrent.addMultipleEntity(toAdds);
+		// this.player.registerTurrents(this.playerTurrent);
 
 		// #endregion
 
@@ -375,6 +386,13 @@ export default class Animation extends Phaser.Scene {
 		this.physics.add.collider(this.coins, this.playerBullets.getPhaserGroup(), (coin, bullet) => {
 			coin.body.setBounce(0);
 			bullet.body.setBounce(0);
+		});
+
+		//colision trampas
+		this.physics.add.collider(this.traps, this.player, (trap, player,) => {
+			player.knockback(200, trap);
+			//player.onGotHit(this.trap.getDamage());
+
 		});
 
 

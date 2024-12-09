@@ -2,8 +2,8 @@
      * @extends Phaser.GameObjects.Sprite
      Lo que recibe
      * @param {Phaser.Scene} scene La escena del juego
-     * @param {number} x - Posici¨®n X
-     * @param {number} y - Posici¨®n Y
+     * @param {number} x - Posiciï¿½ï¿½n X
+     * @param {number} y - Posiciï¿½ï¿½n Y
      * @param {String} texture - sprite que va tener
      Atributos
      * @param {Boolean} canInteract  - booleano para saber si se puede interactar
@@ -17,8 +17,8 @@ export default class InteractableObjects extends Phaser.GameObjects.Sprite {
         this.scene = scene;
         this.canInteract = false;
         this.playerInRange = false;
-        // Texto de interacci¨®n inicialmente invisible
-        this.text = this.scene.add.(this.x - 10, this.y - textDistance, 'Presiona E', {
+        // Texto de interacciï¿½ï¿½n inicialmente invisible
+        this.text = this.scene.add.text(this.x - 10, this.y - textDistance, 'Presiona E', {
             fontFamily: 'PixelArt',
             fontSize: 15,
             fill: '#ffffff',

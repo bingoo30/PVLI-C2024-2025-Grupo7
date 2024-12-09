@@ -25,7 +25,12 @@ export default class Retractable_Spike extends Obstacle {
             this.spikesRised = !this.spikesRised;
             this.timer = DEFAULT_SWAPPING_COOLDOWN;
         }
-
         this.timer = this.timer - dt;
+
+        this.body.setVelocity(0,0);
+    }
+
+    getDamage(){
+        return this.damage;
     }
 }
