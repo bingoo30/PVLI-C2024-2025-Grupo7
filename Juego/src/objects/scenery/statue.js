@@ -5,7 +5,7 @@ const SPIKE_DAMAGE = 5;
 * @extends Obstacle
 */
 //pinchos estaticos
-export default class Spike extends Obstacle {
+export default class Statue extends Obstacle {
     constructor(scene, x, y) {
         super(scene, x, y, "Spike");
         this.scene.physics.add.existing(this);

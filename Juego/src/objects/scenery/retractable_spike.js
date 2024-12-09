@@ -11,9 +11,6 @@ export default class Retractable_Spike extends Obstacle {
         super(scene, x, y, "Retractable_Spikes");
         this.scene.physics.add.existing(this);
         this.timer = DEFAULT_SWAPPING_COOLDOWN;
-        this.spikesRised = false;
-        //this.body.setSize(16, 8);
-        //this.body.setOffset(8, 24);
         this.init(RETRACTABLE_SPIKE_DAMAGE);
     }
     init(damage) {
