@@ -14,8 +14,8 @@ export default class Estaka extends Enemy {
     constructor(scene, x, y, player, exp, pool) {
         super(scene, x, y, player, 'Estaka', exp);
         this.player = player;
-        this.damageRange = 100;
-        this.damage = 0.1;
+        this.AreaDamageRange = 100;
+        this.AreaDamage = 0.1;
         this.duration = 1;
         this.scene.add.existing(this);
         this.damageArea = null;
@@ -47,7 +47,7 @@ export default class Estaka extends Enemy {
             velocity.normalize();
 
             this.damageArea = this.pool.spawn(this.x + velocity.x * 150, this.y + velocity.y * 150);
-            this.damageArea.reset(this.damageRange, this.damage, this.duration);
+            this.damageArea.reset(this.AreaDamageRange, this.AreaDamage, this.duration);
 
             const sfx = this.scene.sound.add('enemyAreaAudio');
             sfx.play();

@@ -34,7 +34,7 @@ export default class Mutum extends Enemy {
     createDamageArea() {
         if (!this.damageArea) {
             this.damageArea = this.pool.spawn(this.x, this.y);
-            this.damageArea.reset(this.damageRange, this.damage, this.duration);
+            this.damageArea.reset(this.AreaDamageRange, this.AreaDamage, this.duration);
             const sfx = this.scene.sound.add('enemyAreaAudio');
             sfx.play();
         }
