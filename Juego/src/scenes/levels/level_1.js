@@ -209,14 +209,12 @@ export default class Animation extends Phaser.Scene {
 		this.areaFE.addMultipleEntity(toAdds);
 
 		toAdds = [];
-		this.playerExplosiveBullets = new Pool(this, MAX, 'Bullet', this.areaEs);
+		this.playerExplosiveBullets = new Pool(this, MAX, 'Bullet');
 		for (let i = 0; i < MAX; i++) {
-			let toAdd = new ExplosiveBullet(this, 0, 0, 'Bala2', 75,);
+			let toAdd = new ExplosiveBullet(this, 0, 0, 'Bala2', 75, this.areaFE);
 			toAdds.push(toAdd);
 		}
 		this.playerExplosiveBullets.addMultipleEntity(toAdds);
-
-		//#endregion
 
 		// #endregion
 

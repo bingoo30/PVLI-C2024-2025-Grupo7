@@ -142,6 +142,24 @@ export default class Animation extends Phaser.Scene {
 		this.enemyBullets.addMultipleEntity(toAdds);
 
 
+
+		//pool balas explosivas (francotirador explosivo)
+		this.areaFE = new Pool(this, MAX, 'Area');
+		for (let i = 0; i < MAX; i++) {
+			let toAdd = new DamageArea(this, 0, 0, 100, 0, '30_expl_anim');
+			toAdds.push(toAdd);
+		}
+		this.areaFE.addMultipleEntity(toAdds);
+
+		toAdds = [];
+		this.playerExplosiveBullets = new Pool(this, MAX, 'Bullet');
+		for (let i = 0; i < MAX; i++) {
+			let toAdd = new ExplosiveBullet(this, 0, 0, 'Bala2', 75, this.areaFE);
+			toAdds.push(toAdd);
+		}
+		this.playerExplosiveBullets.addMultipleEntity(toAdds);
+
+
 		//this.Crac.setPool(this.enemyBullets);
 		//this.Zaro.setPool(this.enemyBullets);
 
