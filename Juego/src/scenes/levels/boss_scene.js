@@ -93,18 +93,15 @@ export default class BossScene extends Phaser.Scene {
         this.player.setPool(this.playerBullets);
         // #endregion
 
-        // #region Joker Setup
+
         this.joker = new Joker(this, jokerX, jokerY, this.player);
-        this.joker.setScale(0.4);
-        this.joker.setPool(this.jokerBullets);
-        this.joker.setPool2(this.jokerOrbs);
-        // #endregion
 
         // #region Enemy Bullets
         toAdds = [];
-        this.jokerBullets = new Pool(this, MAX, 'Bullet');
+        this.jokerBullets = new Pool(this, MAX, 'Card');
         for (let i = 0; i < MAX; i++) {
-            let toAdd = new Bullet(this, 0, 0, 'Bala');
+            // scene, damage, speed, bala, scale
+            let toAdd = new Bullet(this, 0, 0, 'Card', 0.25);
             toAdds.push(toAdd);
         }
         this.jokerBullets.addMultipleEntity(toAdds);
@@ -130,10 +127,14 @@ export default class BossScene extends Phaser.Scene {
         this.actOrbs = [];
         this.activeOrbsCount = 0;
 
+
+        // #region Joker Setup
+        this.joker.setScale(0.4);
         this.joker.setPool(this.jokerBullets);
         this.joker.setPool2(this.jokerOrbs);
         this.joker.setDamageArea(this.area);
-        this.joker.setScale(0.4);
+        // #endregion
+
         // #endregion
 
         // #endregion

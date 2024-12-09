@@ -192,6 +192,7 @@ export default class Loading extends Phaser.Scene {
 
 		this.load.image('Bala', 'assets/bullet/bullet_1.png');
 		this.load.image('Bala2', 'assets/bullet/bullet_2.png');
+		this.load.image('Card', 'assets/bullet/card.png');
 		this.load.image('Particle', 'assets/effects/particles_1.png');
 
 		// SpriteSheets

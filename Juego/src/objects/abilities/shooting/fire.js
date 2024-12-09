@@ -10,7 +10,6 @@ export function fire(shooter, target, damage, speed, sprite, scale, pool, num, c
     for (let i = 0; i < num; i++) {
         // Calcular el 醤gulo para esta bala
         const angle = startAngle + i * angleStep;
-
         // Determinar si esta bala es un cr韙ico y calcular el da駉 final
         const isCritical = Math.random() < critChance; // Probabilidad de cr韙ico
         const finalDamage = isCritical ? damage * critMultiplier : damage;
@@ -21,6 +20,7 @@ export function fire(shooter, target, damage, speed, sprite, scale, pool, num, c
 
         // Extrae la bala de la pool
         let bullet = pool.spawn(shooter.x, shooter.y, sprite);
+        bullet.rotation = angle+90;
 
         // Configurar la bala
         bullet.setScale(scale);

@@ -22,7 +22,7 @@ export default class Joker extends Character {
     
         this.isTeleporting = false;
         this.lastAttackTime = 0;
-        this.attackInterval = 3000; 
+        this.attackInterval = 2000; 
         this.phase = 3;
 
         this.createAnimations();
@@ -108,12 +108,13 @@ export default class Joker extends Character {
         // Dispara 2 cartas hacia el jugador
         //console.log('disparo joker');
         for (let i = 0; i < 2; i++) {
+            //shooter, target, damage, speed, sprite, scale, pool, num, critChance = 0, critMultiplier = 2
             fire(this,
                 this.target,
                 this.damage + this.damageStatus * this.damage * 0.2,
                 this.shootCardSpeed + this.shootSpeedStatus * this.shootSpeed * 0.2,
-                'Bala2',
-                4,
+                'Card',
+                0.5,
                 this.pool,
                 this.bulletCardNumbers,
                 this.prob + this.prob * this.probStatus);
