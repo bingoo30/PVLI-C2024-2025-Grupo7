@@ -278,6 +278,11 @@ export default class Animation extends Phaser.Scene {
 			// mandaria a la pool de las balas de player otra vez
 			playerBullet.destroyBullet(this.playerBullets);
 		});
+		this.physics.add.collider(this.playerExplosiveBullets.getPhaserGroup(), this.enemies, (playerBullet, enemy) => {
+			enemy.onGotHit(playerBullet.getDamage(), this.coins);
+			// mandaria a la pool de las balas de player otra vez
+			playerBullet.destroyBullet(this.playerBullets);
+		});
 
 		//colision bala enemigos-player
 		this.physics.add.collider(this.enemyBullets.getPhaserGroup(), this.player, (enemyBullet, player) => {
@@ -306,6 +311,21 @@ export default class Animation extends Phaser.Scene {
 		this.physics.add.collider(this.enemyBullets.getPhaserGroup(), this.paredLayer, (bullet, wall) => {
 			bullet.destroyBullet(this.enemyBullets);
 		});
+		this.physics.add.collider(this.playerExplosiveBullets.getPhaserGroup(), this.paredLayer, (bullet, wall) => {
+			bullet.destroyBullet(this.playerExplosiveBullets);
+		});
+
+		//colision balas-puertas
+		this.physics.add.collider(this.playerBullets.getPhaserGroup(), this.doorGroup, (bullet, door) => {
+			bullet.destroyBullet(this.playerBullets);
+		});
+		this.physics.add.collider(this.enemyBullets.getPhaserGroup(), this.doorGroup, (bullet, door) => {
+			bullet.destroyBullet(this.enemyBullets);
+		});
+		this.physics.add.collider(this.playerExplosiveBullets.getPhaserGroup(), this.doorGroup, (bullet, door) => {
+			bullet.destroyBullet(this.playerExplosiveBullets);
+		});
+
 
 		//colision balas-fichas
 		this.physics.add.collider(this.coins, this.playerBullets.getPhaserGroup(), (coin, bullet) => {

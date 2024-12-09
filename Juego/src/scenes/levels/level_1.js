@@ -323,22 +323,25 @@ export default class Animation extends Phaser.Scene {
 		// this.turret.setPool(this.playerBullets);
 
 		// #region torretas
-		// toAdds = [];
-		// this.playerTurrent = new Pool(this, 10, 'Turret');
-		// for (let i = 0; i < MAX; i++) {
-		// 	let toAdd = new Turret(this, 0, 0, this.enemies);
-		// 	toAdd.setPool(this.playerBullets);
-		// 	toAdds.push(toAdd);
-		// }
-		// this.playerTurrent.addMultipleEntity(toAdds);
-		// this.player.registerTurrents(this.playerTurrent);
-
+		toAdds = [];
+		this.playerTurrent = new Pool(this, 10, 'Turret');
+		for (let i = 0; i < MAX; i++) {
+		 	let toAdd = new Turret(this, 0, 0, this.enemies);
+		 	toAdd.setPool(this.playerBullets);
+		 	toAdds.push(toAdd);
+		 }
+		 this.playerTurrent.addMultipleEntity(toAdds);
+		 this.player.registerTurrents(this.playerTurrent);
 		// #endregion
 
 		this.physics.add.overlap(this.player, this.area.getPhaserGroup(), (player, area) => {
 			player.onGotHit(area.getDamage());
 		});
 
+
+		this.physics.add.overlap(this.enemies, this.areaFE.getPhaserGroup(), (enemy, area) => {
+			enemy.onGotHit(area.getDamage());
+		});
 
 
 		// #endregion
@@ -356,10 +359,7 @@ export default class Animation extends Phaser.Scene {
 
 		this.physics.add.collider(this.enemies, this.doorGroup);
 
-		this.physics.add.collider(this.player, this.Flush, () => {
-			//desbloquear el logro de hablar con flush
-			//this.game.events.emit(`unlock_Caballero generoso`);
-		});
+		this.physics.add.collider(this.player, this.Flush);
 
 		//colision player-enemigos
 		this.physics.add.overlap(this.player, this.enemies, (player, enemy) => {
@@ -373,6 +373,11 @@ export default class Animation extends Phaser.Scene {
 
 		//colision bala player-enemigos
 		this.physics.add.collider(this.playerBullets.getPhaserGroup(), this.enemies, (playerBullet, enemy) => {
+			enemy.onGotHit(playerBullet.getDamage(), this.coins);
+			// mandaria a la pool de las balas de player otra vez
+			playerBullet.destroyBullet(this.playerBullets);
+		});
+		this.physics.add.collider(this.playerExplosiveBullets.getPhaserGroup(), this.enemies, (playerBullet, enemy) => {
 			enemy.onGotHit(playerBullet.getDamage(), this.coins);
 			// mandaria a la pool de las balas de player otra vez
 			playerBullet.destroyBullet(this.playerBullets);
@@ -400,6 +405,9 @@ export default class Animation extends Phaser.Scene {
 		this.physics.add.collider(this.playerBullets.getPhaserGroup(), this.paredLayer, (bullet, wall) => {
 			bullet.destroyBullet(this.playerBullets);
 		});
+		this.physics.add.collider(this.playerExplosiveBullets.getPhaserGroup(), this.paredLayer, (bullet, wall) => {
+			bullet.destroyBullet(this.playerExplosiveBullets);
+		});
 		this.physics.add.collider(this.enemyBullets.getPhaserGroup(), this.paredLayer, (bullet, wall) => {
 			bullet.destroyBullet(this.enemyBullets);
 		});
@@ -410,6 +418,9 @@ export default class Animation extends Phaser.Scene {
 		});
 		this.physics.add.collider(this.enemyBullets.getPhaserGroup(), this.doorGroup, (bullet, door) => {
 			bullet.destroyBullet(this.enemyBullets);
+		});
+		this.physics.add.collider(this.playerExplosiveBullets.getPhaserGroup(), this.doorGroup, (bullet, door) => {
+			bullet.destroyBullet(this.playerExplosiveBullets);
 		});
 
 		//colision balas-fichas
