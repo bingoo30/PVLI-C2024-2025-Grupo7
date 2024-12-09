@@ -113,8 +113,17 @@ export default class AbilityIcon extends Phaser.GameObjects.Sprite {
             // Cambiar el estado de "locked"
             treeObj.locked = false;
 
+            // Obtener el nodo siguiente
             const nextTreeObj = treeData.find(item => item.id === treeObj.nextId);
-            if (nextTreeObj !== null) nextTreeObj.previousIsLocked = false;
+            if (nextTreeObj) {
+                nextTreeObj.previousIsLocked = false;
+
+                // Actualizar el objeto visual del siguiente nodo
+                const nextIcon = this.scene.abilities[nextTreeObj.id - 1]; // Buscar el ícono del siguiente nodo
+                if (nextIcon) {
+                    nextIcon.previousIsLocked = false;
+                }
+            }
             // Guardar los datos actualizados en localStorage
             localStorage.setItem('treeData', JSON.stringify(treeData));
 

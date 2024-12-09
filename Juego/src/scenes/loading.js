@@ -41,9 +41,6 @@ export default class Loading extends Phaser.Scene {
 		this.load.image('PrevButton', 'assets/achievs/previous.png');
 		this.load.image('NextButton', 'assets/achievs/next.png');
 		this.load.image('ExitButton', 'assets/GUI/exit.png');
-		// Cargar audio para el menú principal.
-		this.load.audio('TitleSample', 'assets/audio/MenuPrincipal.mp3');
-
 		// #endregion
 
 		// #region Player Assets

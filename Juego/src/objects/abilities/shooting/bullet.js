@@ -6,9 +6,8 @@ export default class Bullet extends Phaser.GameObjects.Sprite {
      * @param {number} startX - ejeX inicial
      * @param {number} startY - ejeY inical
      */
-    constructor(scene, damage, speed, bala, scale) {
+    constructor(scene, damage, speed, bala) {
         super(scene, 0, 0, bala);
-        this.setScale(scale);
         this.scene = scene;
         this.scene.add.existing(this);
         this.damage = damage;
@@ -18,7 +17,6 @@ export default class Bullet extends Phaser.GameObjects.Sprite {
         this.setDepth(1);
         this.particles = null;
     }
-
     move(xStart, yStart, xObj, yObj) {
         // direccion de disparo 
         var pointSpeed = new Phaser.Math.Vector2(xObj - xStart, yObj - yStart);   // Usa como referencia el centro de la pantalla

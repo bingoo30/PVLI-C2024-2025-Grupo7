@@ -35,5 +35,6 @@ export function fire(shooter, target, damage, speed, sprite, scale, pool, num, c
         if (isCritical) {
             console.log(`Ataque criico! Daño: ${finalDamage}`);
         }
+        else console.log(`Daño: ${finalDamage}`);
     }
 }

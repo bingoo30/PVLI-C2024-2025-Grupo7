@@ -53,7 +53,7 @@ export default class Character extends Phaser.GameObjects.Sprite {
         this.setTint(0xff0000); 
         this.life = Math.max(0, this.life - damageTaken);
 
-        this.scene.time.delayedCall(1000, () => {
+        this.scene.time.delayedCall(300, () => {
             this.clearTint();
         });
     }

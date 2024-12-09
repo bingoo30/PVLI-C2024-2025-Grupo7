@@ -41,7 +41,7 @@ export default class Player extends Character {
         this.Inventory = new Inventory(this);
         // #region puntos de control status
         this.statusPoint = 1; //status points restantes
-        this.abilityPoint = 1; //ability points restantes
+        this.abilityPoint = 2; //ability points restantes
 
         this.turretAvaliable = false;
         this.turrentsPool = null;
@@ -193,7 +193,11 @@ export default class Player extends Character {
             }
                 break;
             case 'Francotirador explosivo I': {
-                this.bulletScale += this.bulletScale/4; //aumentar el 25% del tamaño de la bala
+                this.bulletScale += this.bulletScale/2; //aumentar el 50s% del tamaño de la bala
+            }
+                break;
+            case 'Francotirador explosivo II': {
+                this.setPool(this.scene.playerExplosiveBullets);
             }
                 break;
             case 'Utilidad I': {
@@ -333,7 +337,6 @@ export default class Player extends Character {
                 sfx.setVolume(0.5); // Cambiar el volumen dinámicamente
                 sfx.play();
                 this.cooldownCont = this.shootSpeed - this.shootSpeedStatus * this.shootSpeed * 0.15;
-                console.log(this.damage + this.damageStatus * this.damage);
             }
         }
         else if (this.mouse.rightButtonDown()) {

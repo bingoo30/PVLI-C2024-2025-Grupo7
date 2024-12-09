@@ -21,6 +21,7 @@ import Rectangle from '../../objects/interactable_objects/rectangle.js';
 import Zaro from '../../objects/enemies/zaro.js';
 import Spike from '../../objects/scenery/spike.js';
 import Retractable_Spike from '../../objects/scenery/retractable_spike.js';
+import ExplosiveBullet from '../../objects/abilities/shooting/explosive_bullet.js';
 
 //import Coin from '../../objetos/Enemies/coin.js'
 //constante
@@ -165,7 +166,6 @@ export default class Animation extends Phaser.Scene {
 		}
 		this.playerBullets.addMultipleEntity(toAdds);
 		this.player.setPool(this.playerBullets);
-
 		// #endregion
 
 		// #region Enemy Bullets
@@ -183,7 +183,7 @@ export default class Animation extends Phaser.Scene {
 		//#region Enemy Area
 		///scene, x, y, radius, damage, duration, scale=4
 		toAdds = [];
-		this.area = new Pool(this, MAX);
+		this.area = new Pool(this, MAX, 'Area');
 		for (let i = 0; i < MAX; i++) {
 			let toAdd = new DamageArea(this, 0, 0, 100, 0, '08_expl_anim');
 			toAdds.push(toAdd);
@@ -191,12 +191,30 @@ export default class Animation extends Phaser.Scene {
 		this.area.addMultipleEntity(toAdds);
 
 		toAdds = [];
-		this.areaEs = new Pool(this, MAX);
+		this.areaEs = new Pool(this, MAX,'Area');
 		for (let i = 0; i < MAX; i++) {
 			let toAdd = new DamageArea(this, 0, 0, 100, 0, '03_expl_anim');
 			toAdds.push(toAdd);
 		}
 		this.areaEs.addMultipleEntity(toAdds);
+
+		toAdds = [];
+
+		//pool balas explosivas (francotirador explosivo)
+		this.areaFE = new Pool(this, MAX, 'Area');
+		for (let i = 0; i < MAX; i++) {
+			let toAdd = new DamageArea(this, 0, 0, 100, 0, '30_expl_anim');
+			toAdds.push(toAdd);
+		}
+		this.areaFE.addMultipleEntity(toAdds);
+
+		toAdds = [];
+		this.playerExplosiveBullets = new Pool(this, MAX, 'Bullet', this.areaEs);
+		for (let i = 0; i < MAX; i++) {
+			let toAdd = new ExplosiveBullet(this, 0, 0, 'Bala2', 75,);
+			toAdds.push(toAdd);
+		}
+		this.playerExplosiveBullets.addMultipleEntity(toAdds);
 
 		//#endregion
 
@@ -385,6 +403,14 @@ export default class Animation extends Phaser.Scene {
 			bullet.destroyBullet(this.playerBullets);
 		});
 		this.physics.add.collider(this.enemyBullets.getPhaserGroup(), this.paredLayer, (bullet, wall) => {
+			bullet.destroyBullet(this.enemyBullets);
+		});
+
+		//colision balas-puertas
+		this.physics.add.collider(this.playerBullets.getPhaserGroup(), this.doorGroup, (bullet, door) => {
+			bullet.destroyBullet(this.playerBullets);
+		});
+		this.physics.add.collider(this.enemyBullets.getPhaserGroup(), this.doorGroup, (bullet, door) => {
 			bullet.destroyBullet(this.enemyBullets);
 		});
 
