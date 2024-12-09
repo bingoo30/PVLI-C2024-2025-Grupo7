@@ -16,9 +16,9 @@ export default class InteractableObjects extends Phaser.GameObjects.Sprite {
 
         this.scene = scene;
         this.canInteract = false;
-        this.playerInRange;
+        this.playerInRange = false;
         // Texto de interacci¨®n inicialmente invisible
-        this.text = this.scene.add.text(this.x - 10, this.y - textDistance, 'Presiona E', {
+        this.text = this.scene.add.(this.x - 10, this.y - textDistance, 'Presiona E', {
             fontFamily: 'PixelArt',
             fontSize: 15,
             fill: '#ffffff',

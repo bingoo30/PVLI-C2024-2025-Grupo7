@@ -13,8 +13,7 @@ import InteractableObjects from './interactable_objects.js';
 export default class ChangeLevelDoor extends InteractableObjects {
     constructor(scene, x, y, sizeW = 32, sizeH = 32, scale = 4) {
         super(scene, x * scale, y * scale,'verticalDoor', 200, 50);
-
-        this.scene = scene;
+        
         this.isWaitingInput = true;
         this.setDisplaySize(sizeW * scale, sizeH * scale);
         this.scene.add.existing(this);

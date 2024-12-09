@@ -14,8 +14,7 @@ import InteractableObjects from './interactable_objects.js';
 export default class NPC extends InteractableObjects {
     constructor(scene, x, y, texture, dialogues, acv) {
         super(scene, x, y, [texture]);
-
-        this.scene = scene;
+    
         this.dialogues = dialogues;
         this.isDialogActive = false;
         this.achievement = acv;

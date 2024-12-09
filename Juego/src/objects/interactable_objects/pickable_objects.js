@@ -10,16 +10,15 @@ import InteractableObjects from './interactable_objects.js';
 export default class PickableObjects extends InteractableObjects {
     constructor(scene, x, y, texture, name) {
         super(scene, x, y, [texture]);
-        this.scene = scene;
-        this.isPick = false;
+        this.isPickable = false;
         this.name= name;
 
         this.scene.add.existing(this);
     }
 
     onInteract() {
-        if (this.canInteract && !this.isPick) {
-            this.isPick = true;
+        if (this.canInteract && !this.isPickable) {
+            this.isPickable = true;
             if (this.name == 'key') this.scene.player.Inventory.collectKey();
             else this.scene.player.Inventory.addObject(this);
 

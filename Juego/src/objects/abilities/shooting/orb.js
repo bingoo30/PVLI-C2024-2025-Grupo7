@@ -44,8 +44,8 @@ export default class Orb extends Phaser.GameObjects.Sprite {
 
         this.start = true; // empieza
 
-        this.xStart = xStart;
-        this.yStart = yStart;
+        //this.xStart = xStart;
+        //this.yStart = yStart;
 
         //console.log('Posición inicial xStart:', this.xStart, 'yStart:', this.yStart);
 

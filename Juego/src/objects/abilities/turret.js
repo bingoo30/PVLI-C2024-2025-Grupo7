@@ -1,4 +1,3 @@
-import Character from "../player/character.js";
 import { fire } from "../abilities/shooting/fire.js";
 
 const DEFAULT_TURRET_SHOOTING_SPEED = 2000;
@@ -8,7 +7,7 @@ const DEFAULT_DAMAGE = 1;
 const DEFAULT_TURRET_LIFETIME = 10000; // Duración de vida en milisegundos
 
 
-export default class Turret extends Character {
+export default class Turret extends Phaser.GameObjects.Sprite{
     /**
      * Constructor de la torreta
      * @param {Scene} scene - escena en la que aparece
@@ -21,15 +20,18 @@ export default class Turret extends Character {
     constructor(scene, x, y, Enemies) {
         //heredo de la clase character
         super(scene, x, y, 'Turret');
+        this.scene = scene;
         this.scale = 4; 
         this.target = null;
         //this.navMesh = scene.navMesh;
-        scene.physics.add.existing(this);
+        this.scene.physics.add.existing(this);
+
+        // ???????????????????????????
         //this.currentPath = [];
-        this.targetPoint = null;  // Próximo punto objetivo
+        //this.targetPoint = null;  // Próximo punto objetivo
         //configurar los atributos correspondientes despues de llamar al constructor del character
-        this.currentNode = { x: x, y: y };
-        this.dead = false;
+        //this.dead = false;
+
         this.shootCooldown = DEFAULT_TURRET_SHOOTING_SPEED;
         this.shootingRange = DEFAULT_TURRET_SHOOTING_RANGE;
         this.damage = DEFAULT_DAMAGE;
@@ -86,6 +88,7 @@ export default class Turret extends Character {
 
         return this.res;
     }
+
     setDamage(damage) {
         this.damage = damage;
     }

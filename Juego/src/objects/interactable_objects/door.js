@@ -16,7 +16,6 @@ export default class Door extends InteractableObjects {
     constructor(scene, x, y, doorClass, sizeW = 32, sizeH = 32, scale = 4) {
         super(scene, x * scale, y * scale, [doorClass === 'verticalDoor' ? 'verticalDoor' : 'horizontalDoor'], 200, 50);
 
-        this.scene = scene;
         this.isOpen = false;
         this.setDisplaySize(sizeW * scale, sizeH * scale);
 

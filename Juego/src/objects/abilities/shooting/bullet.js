@@ -13,10 +13,7 @@ export default class Bullet extends Phaser.GameObjects.Sprite {
         this.scene.add.existing(this);
         this.damage = damage;
         this.speed = speed;
-
-        this.startX = 0; //posicion de la bala al ser disparada
-        this.startY = 0;
-        this.active = false;
+        
         this.scene.physics.add.existing(this);
         this.setDepth(1);
         this.particles = null;
