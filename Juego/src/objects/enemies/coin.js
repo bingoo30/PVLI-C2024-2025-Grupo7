@@ -17,18 +17,8 @@ export default class Coin extends Phaser.GameObjects.Sprite {
         this.body.setImmovable(true);
         this.active = false;
         this.setDepth(1);
-        //console.log("aa");
-        //this.scene.tweens.add({
-        //    targets: this,
-        //    x: this.x + 200,
-        //    y: this.y - 100,
-        //    angle: 360,
-        //    duration: 10000000,
-        //    ease: 'Sine.easeInOut',
-        //    repeat: -1,
-        //    yoyo: true,
-        //});
-
+        
+        this.createRotationTween(); // Crear la animación de giro
     }
     preUpdate(t, dt) {
         super.preUpdate(t, dt);
@@ -51,5 +41,23 @@ export default class Coin extends Phaser.GameObjects.Sprite {
 
     destroyCoin(pool) {
         pool.release(this);
+    }
+    /**
+    * Crear una animación de giro para la moneda
+    */
+    createRotationTween() {
+        // Fijar el tamaño del cuerpo antes de iniciar la animación
+        this.body.setSize(this.width, this.height); // Tamaño original del sprite
+        this.scene.tweens.add({
+            targets: this,
+            scaleX: 0,           // Escala X a 0 para simular la delgadez en el giro
+            duration: 700,       // Duración de la primera mitad del giro
+            ease: 'Linear',
+            yoyo: true,          // Revertir el giro
+            repeat: -1,          // Repetir indefinidamente
+            onYoyo: () => {
+                this.flipX = !this.flipX; // Cambiar la cara visible de la moneda
+            }
+        });
     }
 }

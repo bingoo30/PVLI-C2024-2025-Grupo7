@@ -53,7 +53,9 @@ export default class Zaro extends Enemy {
 
     }
     changeVisible() {
-        if (this.visible) this.setVisible(false);
+        if (this.visible) {
+            this.setVisible(false);
+        }
         else this.setVisible(true);
     }
     
