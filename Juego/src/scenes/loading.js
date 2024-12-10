@@ -56,6 +56,7 @@ export default class Loading extends Phaser.Scene {
 			frameHeight: 30, // Altura de cada cuadro
 			endFrame: 3      // Número de cuadros en el sprite sheet
 		});
+		this.load.image('Drone', 'assets/abilities/drone.png');
 		this.load.spritesheet('playerSheet', 'assets/character/player_sheet.png',{
 			frameWidth: 32,  // Ancho de cada cuadro
 			frameHeight: 32, // Altura de cada cuadro

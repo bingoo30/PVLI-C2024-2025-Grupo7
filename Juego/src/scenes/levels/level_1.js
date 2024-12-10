@@ -22,6 +22,7 @@ import Zaro from '../../objects/enemies/zaro.js';
 import Spike from '../../objects/scenery/spike.js';
 import Retractable_Spike from '../../objects/scenery/retractable_spike.js';
 import ExplosiveBullet from '../../objects/abilities/shooting/explosive_bullet.js';
+import Drone from '../../objects/abilities/drone.js';
 
 //import Coin from '../../objetos/Enemies/coin.js'
 //constante
@@ -203,7 +204,7 @@ export default class Animation extends Phaser.Scene {
 		toAdds = [];
 		this.playerExplosiveBullets = new Pool(this, MAX, 'Bullet');
 		for (let i = 0; i < MAX; i++) {
-			let toAdd = new ExplosiveBullet(this, 0, 0, 'Bala2', 75, this.areaFE);
+			let toAdd = new ExplosiveBullet(this, 0, 0, 'Bala2', 125, this.areaFE);
 			toAdds.push(toAdd);
 		}
 		this.playerExplosiveBullets.addMultipleEntity(toAdds);
@@ -289,7 +290,7 @@ export default class Animation extends Phaser.Scene {
 		this.Flush.setScale(SCALE);
 		// #endregion
 
-		// #region torretas
+		// #region utilidades
 		toAdds = [];
 		this.playerTurret = new Pool(this, 10, 'Turret');
 		for (let i = 0; i < 10; i++) {
@@ -299,6 +300,9 @@ export default class Animation extends Phaser.Scene {
 		}
 		this.playerTurret.addMultipleEntity(toAdds);
 		this.player.registerTurrets(this.playerTurret);
+
+		let drone = new Drone(this, this.player.x, this.player.y, this.player, this.enemies, this.playerBullets);
+		this.player.registerDrone(drone);
 		// #endregion
 
 		// #region Collision
@@ -308,6 +312,8 @@ export default class Animation extends Phaser.Scene {
 		this.physics.add.collider(this.enemies, this.paredLayer);
 
 		this.physics.add.collider(this.player, this.paredLayer);
+
+		this.physics.add.collider(drone, this.paredLayer);
 
 		//collisiones con la puerta
 		this.physics.add.collider(this.player, this.doorGroup);
@@ -335,7 +341,7 @@ export default class Animation extends Phaser.Scene {
 		this.physics.add.collider(this.playerExplosiveBullets.getPhaserGroup(), this.enemies, (playerBullet, enemy) => {
 			enemy.onGotHit(playerBullet.getDamage(), this.coins);
 			// mandaria a la pool de las balas de player otra vez
-			playerBullet.destroyBullet(this.playerBullets);
+			playerBullet.destroyBullet(this.playerExplosiveBullets);
 		});
 
 		//colision bala enemigos-player
@@ -352,7 +358,7 @@ export default class Animation extends Phaser.Scene {
 
 
 		this.physics.add.overlap(this.enemies, this.areaFE.getPhaserGroup(), (enemy, area) => {
-			enemy.onGotHit(area.getDamage());
+			enemy.onGotHit(area.getDamage(), this.coins);
 		});
 		//colision fichas-player
 		this.physics.add.collider(this.player.collisionZone, this.coins.getPhaserGroup(), (zone, coin) => {

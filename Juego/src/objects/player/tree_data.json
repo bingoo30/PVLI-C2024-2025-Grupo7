@@ -63,6 +63,17 @@
     "info": "invocar una torreta que ataca de forma automatica (boton derecho del raton)",
     "locked": true,
     "previousIsLocked": false,
+    "nextId": 7
+  },
+  {
+    "id": 7,
+    "x": 835,
+    "y": 325,
+    "title": "Utilidad II",
+    "unlockedSprite": "utilidad2",
+    "info": "invocar un dron que se mueve con el personaje y ataca de forma automatica",
+    "locked": true,
+    "previousIsLocked": true,
     "nextId": -1
   }
 ]

@@ -23,6 +23,7 @@ export default class Turret extends Phaser.GameObjects.Sprite{
         this.scale = 4; 
         this.target = null;
         //this.navMesh = scene.navMesh;
+        this.scene.add.existing(this);
         this.scene.physics.add.existing(this);
         this.pool = null;
 

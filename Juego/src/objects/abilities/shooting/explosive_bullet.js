@@ -13,13 +13,16 @@ export default class ExplosiveBullet extends Bullet {
         super(scene, damage, speed, bala);
         this.areaRadius = areaRadius;
         this.pool = pool;
-        this.areaDamage = 0.3;
+        this.areaDamage = 0;
         this.duration = 1;  
+    }
+    setDamage(d) {
+        super.setDamage(d);
+        this.areaDamage = d/2;
     }
     destroyBullet(pool) {
         //crear el area de daño
         let damageArea = this.pool.spawn(this.x, this.y);
-        
         damageArea.reset(this.areaRadius, this.areaDamage, this.duration);
         const sfx = this.scene.sound.add('enemyAreaAudio');
         sfx.play();

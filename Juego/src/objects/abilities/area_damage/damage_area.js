@@ -42,7 +42,6 @@ export default class DamageArea extends Phaser.GameObjects.Sprite {
         this.damage = damage;
         this.duration = duration;
         this.setDisplaySize(radius * 2, radius * 2);
-
         this.scene.time.delayedCall(this.duration * 1000, this.destroyArea, [], this);
         this.setVisible(true); 
         this.setActive(true);

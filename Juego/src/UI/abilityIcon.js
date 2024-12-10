@@ -47,7 +47,7 @@ export default class AbilityIcon extends Phaser.GameObjects.Sprite {
         this.titleText.visible = true;
 
         // Tooltip
-        this.tooltip = this.scene.add.text(x, y + 25, "", {
+        this.tooltip = this.scene.add.text(x, y + 40, "", {
             fontFamily: "PixelArt",
             fontSize: 16,
             align: "center",

@@ -1,6 +1,7 @@
 import Character from "./character.js";
 import { fire } from "../abilities/shooting/fire.js";
 import Inventory from "./inventory.js";
+import Drone from "../abilities/drone.js";
 
 /**
  * @extends Character
@@ -51,6 +52,8 @@ export default class Player extends Character {
 
         this.turretAvaliable = false;
         this.turretsPool = null;
+
+        this.drone = null;
 
         this.speedFactorStatus = 0; //+15%
         this.shootSpeedStatus = 0; //+15%
@@ -249,6 +252,12 @@ export default class Player extends Character {
                 this.setTurretAvaliable(true);
             }
                 break;
+            case 'Utilidad II': {
+                //invocar torreta
+                console.log("invocar dron");
+                this.drone.setVisible(true);
+            }
+                break;
             default: {
                 console.warn(`Habilidad desconocida: ${ability}`);
                 return; // Salir si la habilidad no es válida
@@ -289,6 +298,10 @@ export default class Player extends Character {
 
     registerTurrets(turrets) {
         this.turretsPool = turrets;
+    }
+    registerDrone(drone) {
+        this.drone = drone;
+        this.drone.setVisible(false);
     }
     /**
      * Bucle principal del personaje, actualizamos su posici�n y ejecutamos acciones seg�n el Input
