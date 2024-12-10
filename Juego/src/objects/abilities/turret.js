@@ -57,7 +57,7 @@ export default class Turret extends Phaser.GameObjects.Sprite{
         this.lifetime -= dt;
         if (this.lifetime <= 0) {
             this.lifetime = DEFAULT_TURRET_LIFETIME;
-            this.scene.events.emit('TurrentTimeOVer', this);
+            this.scene.events.emit('TurretTimeOVer', this);
         }
 	}
 

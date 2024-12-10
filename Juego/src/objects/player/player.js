@@ -50,7 +50,7 @@ export default class Player extends Character {
         this.abilityPoint = 2; //ability points restantes
 
         this.turretAvaliable = false;
-        this.turrentsPool = null;
+        this.turretsPool = null;
 
         this.speedFactorStatus = 0; //+15%
         this.shootSpeedStatus = 0; //+15%
@@ -69,6 +69,7 @@ export default class Player extends Character {
         this.dKey = this.scene.input.keyboard.addKey('D'); //derecha
         this.eKey = this.scene.input.keyboard.addKey('E'); //interactuar
         this.pKey = this.scene.input.keyboard.addKey('P'); //pausar el juego
+        this.xKey = this.scene.input.keyboard.addKey('X'); //pausar el juego
         // Seteamos mouse
         this.mouse = this.scene.input.activePointer;
 
@@ -79,8 +80,8 @@ export default class Player extends Character {
         });
 
         //eventos
-        this.scene.events.on("TurrentTimeOVer", (turrent) => {
-            this.turrentsPool.release(turrent);
+        this.scene.events.on("TurretTimeOVer", (turret) => {
+            this.turretsPool.release(turret);
             this.setTurretAvaliable(true);
         });
 
@@ -286,8 +287,8 @@ export default class Player extends Character {
         this.Inventory.addUsedStatus();
     }
 
-    registerTurrents(turrents) {
-        this.turrentsPool = turrents;
+    registerTurrets(turrets) {
+        this.turretsPool = turrets;
     }
     /**
      * Bucle principal del personaje, actualizamos su posici�n y ejecutamos acciones seg�n el Input
@@ -359,6 +360,10 @@ export default class Player extends Character {
             this.scene.pauseGame();
         }
 
+        if (this.xKey.isDown) {
+            this.scene.changeToNextLevel();
+        }
+
        //Input de mouse
         if (this.mouse.leftButtonDown()) {
             // Todo esto se debería mover al Shooter
@@ -384,9 +389,9 @@ export default class Player extends Character {
         else if (this.mouse.rightButtonDown()) {
             if (this.turretAvaliable) {
                 //invocar torreta
-                let turrent = this.turrentsPool.spawn(this.x, this.y, 'Turret');
-                turrent.setDamage(this.damage);
-                turrent.setBulletSpeed(this.shootSpeed);
+                let turret = this.turretsPool.spawn(this.x, this.y, 'Turret');
+                turret.setDamage(this.damage);
+                turret.setBulletSpeed(this.shootSpeed);
                 //marcarla como deshabilitada
                 this.setTurretAvaliable(false);
             }

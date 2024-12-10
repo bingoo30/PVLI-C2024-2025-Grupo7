@@ -1,20 +1,25 @@
-import Zaro from '../../objects/enemies/zaro.js';
 import Player from '../../objects/player/player.js';
 import Crac from '../../objects/enemies/crac.js'
-import Pool from '../../objects/our_pool.js';
-import Bob from '../../objects/enemies/bob.js';
 import HealthBar from '../../UI/health_bar.js';
 import ExpBar from '../../UI/exp_bar.js';
 import Coin from '../../objects/enemies/coin.js';
 import Bullet from '../../objects/abilities/shooting/bullet.js';
-import Letus from '../../objects/enemies/letus.js';
 
-import DialogueManager from '../../UI/dialog_manager.js';
-import DialogText from '../../UI/dialog_plugin.js';
+import Pool from '../../objects/our_pool.js'
+import Bob from '../../objects/enemies/bob.js';
+import Letus from '../../objects/enemies/letus.js';
+import Turret from '../../objects/abilities/turret.js';
+
 import NPC from '../../objects/interactable_objects/npc.js';
 import Door from '../../objects/interactable_objects/door.js';
+import DamageArea from '../../objects/abilities/area_damage/damage_area.js';
+import PickableObjects from '../../objects/interactable_objects/pickable_objects.js';
+import ChangeLevelDoor from '../../objects/interactable_objects/change_level_door.js';
+import Rectangle from '../../objects/interactable_objects/rectangle.js';
+import Zaro from '../../objects/enemies/zaro.js';
 import Spike from '../../objects/scenery/spike.js';
 import RetractableSpike from '../../objects/scenery/retractable_spike.js';
+import ExplosiveBullet from '../../objects/abilities/shooting/explosive_bullet.js';
 
 //constante
 const SCALE = 4;
@@ -31,6 +36,8 @@ export default class Animation extends Phaser.Scene {
 		// dialogos level2
 		this.load.tilemapTiledJSON('mapa2', 'assets/map/map_2/mapa_2.json');
 		this.load.image('tileset2', 'assets/map/map_2/map_tiles2.png');
+		this.load.json('dialogues_Weiyoung', 'assets/dialogues/dialogues_Flush.json');
+		this.load.image('Flush', 'assets/character/weiyoung.png');
 	}
 
 	/**  
@@ -44,7 +51,7 @@ export default class Animation extends Phaser.Scene {
 		// #region Map
 
 		this.map = this.make.tilemap({ key: 'mapa2', tileWidth: 32, tileHeight: 32 });
-		this.tileset = this.map.addTilesetImage('mapTiles', 'tileset2');
+		this.tileset = this.map.addTilesetImage('map_tiles2', 'tileset2');
 		this.sueloLayer = this.map.createLayer('suelo', this.tileset);
 		if (!this.sueloLayer) {
 			console.error("La capa 'suelo' no se ha creado correctamente.");
@@ -57,7 +64,11 @@ export default class Animation extends Phaser.Scene {
 		this.paredLayer.setScale(SCALE);
 
 		//#region puerta
-		
+		const objectLayer = this.map.getObjectLayer('position');
+
+		const change = objectLayer.objects.find(obj => obj.name == 'changeLevel');
+		this.DoorLevel2 = new ChangeLevelDoor(this, change.x, change.y, change.width, change.height);
+
 		this.doorGroup = this.add.group();
 		this.doorLayer = this.map.getObjectLayer('Door');
 		console.log(this.doorLayer);
@@ -70,15 +81,21 @@ export default class Animation extends Phaser.Scene {
 			// A�adir la puerta al grupo de puertas
 			this.doorGroup.add(door);
 		});
-		
 		//#endregion
 
+		// #region pickables
+		this.PickableObjects = this.add.group();
+		this.objectsLayer = this.map.getObjectLayer('Objects');
+		this.objectsLayer.objects.forEach((obj) => {
+			const pickable = new PickableObjects(this, obj.x * SCALE, obj.y * SCALE, obj.name, obj.name);
+			pickable.setScale(SCALE);
+			this.PickableObjects.add(pickable);
+		});
+		// #endregion
 		// #endregion
 
 		// #region Player
 		// #region Player Position
-		const objectLayer = this.map.getObjectLayer('position');
-
 		const playerPos = objectLayer.objects.find(obj => obj.name == 'playerPosition');
 
 		// Verificar si el objeto fue encontrado
@@ -92,15 +109,6 @@ export default class Animation extends Phaser.Scene {
 		this.player.newLevelClone(data.player);
 		// Sobreescribir la referencia en el registro
 		this.registry.set('player', this.player);
-		// #endregion
-
-		// #region rectangulos negros
-		this.rectGroup = this.add.group();
-		this.rectangleLayer = this.map.getObjectLayer('rectangle');
-		this.rectangleLayer.objects.forEach((obj) => {
-			const rect = new Rectangle(this, obj.x, obj.y, obj.width, obj.height, this.player);
-			this.rectGroup.add(rect);
-		});
 		// #endregion
 
 		// #region Pools
@@ -182,14 +190,14 @@ export default class Animation extends Phaser.Scene {
 
 		// #region torretas
 		toAdds = [];
-		this.playerTurrent = new Pool(this, 10, 'Turret');
+		this.playerTurret = new Pool(this, 10, 'Turret');
 		for (let i = 0; i < 10; i++) {
 			let toAdd = new Turret(this, 0, 0, this.enemies);
 			toAdd.setPool(this.playerBullets);
 			toAdds.push(toAdd);
 		}
-		this.playerTurrent.addMultipleEntity(toAdds);
-		this.player.registerTurrents(this.playerTurrent);
+		this.playerTurret.addMultipleEntity(toAdds);
+		this.player.registerTurrets(this.playerTurret);
 		// #endregion
 
 		// #endregion
@@ -264,7 +272,7 @@ export default class Animation extends Phaser.Scene {
 		// #endregion
 
 		// #region NPC
-		const NPCpos = objectLayer.objects.find(obj => obj.name == 'WeiyoungPosition');
+		const NPCpos = objectLayer.objects.find(obj => obj.name == 'weiyoungPosition');
 		const NPCX = NPCpos.x * SCALE;
 		const NPCY = NPCpos.y * SCALE;
 
@@ -276,9 +284,9 @@ export default class Animation extends Phaser.Scene {
 		this.traps = this.add.group();
 		// #region Spikes
 		this.arraySpikes = [];
-		const spikeLayer = this.map.getObjectLayer('Spike');
+		const spikeLayer = this.map.getObjectLayer('Spikes');
 		cracLayer.objects.forEach(obj => {
-			if (obj.name === '	Spike') { // Filtra por nombre
+			if (obj.name === 'Spike') { // Filtra por nombre
 				const spike = new Spike(this, obj.x * SCALE, obj.y * SCALE);
 				spike.setScale(SCALE);
 				this.arraySpikes.push(spike);
@@ -287,9 +295,9 @@ export default class Animation extends Phaser.Scene {
 		this.traps.addMultiple(this.arraySpikes);
 		// #endregion
 
-		// #region Spikes
+		// #region Retractables spikes
 		this.arrayRetractableSpikes = [];
-		const retractableSpikeLayer = this.map.getObjectLayer('RetractableSpike');
+		const retractableSpikeLayer = this.map.getObjectLayer('RetractablesSpikes');
 		retractableSpikeLayer.objects.forEach(obj => {
 			if (obj.name === 'retractableSpike') { // Filtra por nombre
 				const retractableSpike = new RetractableSpike(this, obj.x * SCALE, obj.y * SCALE);
@@ -299,6 +307,14 @@ export default class Animation extends Phaser.Scene {
 		});
 		this.traps.addMultiple(this.arrayRetractableSpikes);
 		// #endregion
+
+		// #region rectangulos negros
+		this.rectGroup = this.add.group();
+		this.rectangleLayer = this.map.getObjectLayer('rectangle');
+		this.rectangleLayer.objects.forEach((obj) => {
+			const rect = new Rectangle(this, obj.x, obj.y, obj.width, obj.height, this.player);
+			this.rectGroup.add(rect);
+		});
 		// #endregion
 
 		// #region Collision
@@ -357,7 +373,7 @@ export default class Animation extends Phaser.Scene {
 		//colision fichas-player
 		this.physics.add.collider(this.player.collisionZone, this.coins.getPhaserGroup(), (collisionZone, coin) => {
 			this.player.onPlayerCollectedXP(coin.getExp());
-			if (this.player.getXpAcu() >= player.getXpToLevelUp()) {
+			if (this.player.getXpAcu() >= this.player.getXpToLevelUp()) {
 				this.player.levelUp();
 			}
 			coin.destroyCoin(this.coins);
