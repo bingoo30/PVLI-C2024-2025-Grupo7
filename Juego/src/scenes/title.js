@@ -30,7 +30,7 @@ export default class Title extends Phaser.Scene {
 		this.sound.pauseAll(); // Reanuda todos los sonidos pausados
 
 		const _tries = data.tries || 1;
-		console.log("tries: " + _tries);
+		//console.log("tries: " + _tries);
 		//console.log("me he creado", this.scene.key);
 
 		var TitleSample = this.sound.add('menuAudio');
@@ -49,9 +49,8 @@ export default class Title extends Phaser.Scene {
 
 
 		//Pintamos un botón de Empezar
-		var startButton = this.add.image(this.sys.game.canvas.width/2, this.sys.game.canvas.height/2 + 100, 'start')
+		var startButton = this.add.image(this.sys.game.canvas.width/2, this.sys.game.canvas.height/2+50, 'start')
 		startButton.setInteractive(); // Hacemos el sprite interactivo para que lance eventos
-
 
 		
 
@@ -76,8 +75,7 @@ export default class Title extends Phaser.Scene {
 		});
 
 		//Pintamos un botón de Empezar
-		var acvButton = this.add.image(this.sys.game.canvas.width / 2, this.sys.game.canvas.height / 2 + 220, 'logros');
-		acvButton.setScale(0.8);
+		var acvButton = this.add.image(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height / 2 + 140, 'logros');
 		acvButton.setInteractive(); // Hacemos el sprite interactivo para que lance eventos
 
 
@@ -98,6 +96,23 @@ export default class Title extends Phaser.Scene {
 			});
 
 		});
+
+		var tutorialButton = this.add.image(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height / 2 + 210, 'tutorial');
+		tutorialButton.setInteractive(); // Hacemos el sprite interactivo para que lance eventos
+
+		tutorialButton.on('pointerup', pointer => {
+			TitleSample.stop(); // Detiene el audio de fondo
+
+			buttonSFX.play();
+			this.time.addEvent({
+				delay: 250,
+				callback: () => {
+					this.scene.start('Tutorial', { tries: _tries });
+				}
+			});
+
+		});
+
 
 	}
 }

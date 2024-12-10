@@ -34,7 +34,8 @@ export default class Loading extends Phaser.Scene {
 		});
 		this.load.image('start', 'assets/GUI/start_button.png');
 		this.load.image('logros', 'assets/GUI/achievements.png');
-		this.load.image('background', 'assets/GUI/beckground_start_1.png');
+		this.load.image('tutorial', 'assets/GUI/tutorial.png');
+		this.load.image('background', 'assets/GUI/background_start_1.jpg');
 		this.load.image('achievement', 'assets/achievs/achievement.png');
 		this.load.image('LockedAchievement', 'assets/achievs/locked.png');
 		this.load.image('pauseBackground', 'assets/GUI/pause.png');

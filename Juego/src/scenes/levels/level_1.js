@@ -327,7 +327,7 @@ export default class Animation extends Phaser.Scene {
 		this.playerTurrent = new Pool(this, 10, 'Turret');
 		for (let i = 0; i < MAX; i++) {
 		 	let toAdd = new Turret(this, 0, 0, this.enemies);
-		 	toAdd.setPool(this.playerBullets);
+			toAdd.setPool(this.playerBullets);
 		 	toAdds.push(toAdd);
 		 }
 		 this.playerTurrent.addMultipleEntity(toAdds);
