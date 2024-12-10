@@ -121,6 +121,9 @@ export default class Animation extends Phaser.Scene {
 
 		this.player = new Player(this, playerX, playerY);
 		this.player.setScale(SCALE);
+		if (data.player !== undefined) {
+			this.player.newLevelClone(data.player);
+		}
 		// Guarda la referencia en el registry
 		this.registry.set('player', this.player);
 
@@ -313,7 +316,6 @@ export default class Animation extends Phaser.Scene {
 
 		this.physics.add.collider(this.player, this.paredLayer);
 
-		this.physics.add.collider(drone, this.paredLayer);
 
 		//collisiones con la puerta
 		this.physics.add.collider(this.player, this.doorGroup);

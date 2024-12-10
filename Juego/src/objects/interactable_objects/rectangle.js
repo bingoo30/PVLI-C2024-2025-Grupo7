@@ -31,6 +31,8 @@ export default class Rectangle extends Phaser.GameObjects.Sprite {
         this.scene.physics.add.overlap(this, this.player, this.onOverlap, null, this);
 
         this.isPlayerInside = false;
+
+        this.setDepth(4);
     }
 
     onOverlap() {

@@ -35,6 +35,8 @@ export default class Character extends Phaser.GameObjects.Sprite {
         this.damage = DEFAULT_DAMAGE;
         this.prob = DEFAULT_CRIT;
         this.pool = null;
+
+        this.setDepth(2);
     }
     getSpeed() {
         return this.speed;

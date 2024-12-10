@@ -1,7 +1,6 @@
 import Character from "./character.js";
 import { fire } from "../abilities/shooting/fire.js";
 import Inventory from "./inventory.js";
-import Drone from "../abilities/drone.js";
 
 /**
  * @extends Character
@@ -54,6 +53,7 @@ export default class Player extends Character {
         this.turretsPool = null;
 
         this.drone = null;
+        this.droneActivated = false;
 
         this.speedFactorStatus = 0; //+15%
         this.shootSpeedStatus = 0; //+15%
@@ -136,7 +136,7 @@ export default class Player extends Character {
     /*metodo para actualizar los atributos entre niveles*/
     newLevelClone(player) {
         this.init(player.speedFactor, player.shootSpeed, player.life, player.damage, player.prob);
-
+        this.maxLife = player.maxLife;
         // #region Medidor de tiempo para los disparos
         this.cooldownCont = player.cooldownCont;
         this.canShoot = player.canShoot;
@@ -159,6 +159,7 @@ export default class Player extends Character {
         this.abilityPoint = player.abilityPoint; //ability points restantes
 
         this.turretAvaliable = player.turrentAvaliable;
+        this.droneActivated = player.droneActivated;
 
         this.speedFactorStatus = player.speedFactorStatus; //+15%
         this.shootSpeedStatus = player.shootSpeedStatus; //+15%
@@ -255,6 +256,7 @@ export default class Player extends Character {
             case 'Utilidad II': {
                 //invocar torreta
                 console.log("invocar dron");
+                this.setDroneActivated(true);
                 this.drone.setVisible(true);
             }
                 break;
@@ -301,7 +303,10 @@ export default class Player extends Character {
     }
     registerDrone(drone) {
         this.drone = drone;
-        this.drone.setVisible(false);
+        this.drone.setVisible(this.droneActivated);
+    }
+    setDroneActivated(s) {
+        this.droneActivated = s;
     }
     /**
      * Bucle principal del personaje, actualizamos su posici�n y ejecutamos acciones seg�n el Input
