@@ -1,5 +1,4 @@
 import Obstacle from "./obstacle.js";
-import { fire } from "../abilities/shooting/fire.js";
 
 const STATUE_SHOOT_DAMAGE = 3;
 const STATUE_SHOOT_COOLDOWN = 1000;
@@ -12,23 +11,7 @@ export default class Statue extends Obstacle {
     constructor(scene, x, y, dir) {
         super(scene, x, y, "Statue");
         this.scene.physics.add.existing(this);
-        switch(dir) {
-            case 0: // Sur
-                //this.target = new Vector(x, y + 100);
-                this.target = new Phaser.Math.Vector2(this.x, this.y + 100);
-                break;
-            case 1: // Este
-                this.target = new Phaser.Math.Vector2(this.x + 100, this.y);
-                break;
-            case 2: // Norte
-                //this.target = new Vector(x, y - 100);
-                this.target = new Phaser.Math.Vector2(this.x, this.y - 100);
-                break;
-            case 3: // Oeste
-                //this.target = new Vector(x - 100, y);
-                this.target = new Phaser.Math.Vector2(this.x - 100, this.y);
-                break;
-        }
+        this.direction = dir;
         this.damage = STATUE_SHOOT_DAMAGE;
         this.timer = STATUE_SHOOT_COOLDOWN;
         this.shootSpeed = STATUE_BULLET_SPEED;
@@ -39,9 +22,54 @@ export default class Statue extends Obstacle {
         super.init(damage);
     }
 
+    fire(shooter, damage, speed, sprite, scale, pool, num, critChance = 0, critMultiplier = 2) {
+        for (let i = 0; i < num; i++) {
+            // Calcular la direcci髇 de la bala a partir del 醤gulo ajustado
+            let dx;
+            let dy;
+            let angle;
+
+            switch(this.direction) {
+                case 0: // Sur
+                    dx = 0;
+                    dy = 1;
+                    angle = 1.5;
+                    break;
+                case 1: // Este
+                    dx = 1;
+                    dy = 0;
+                    angle = 0;
+                    break;
+                case 2: // Norte
+                    dx = 0;
+                    dy = -1;
+                    angle = -1.5;
+                    break;
+                case 3: // Oeste
+                    dx = -1;
+                    dy = 0;
+                    angle = 3;
+                    break;
+            }
+
+            // Extrae la bala de la pool
+            let bullet = pool.spawn(shooter.x, shooter.y, sprite);
+            bullet.rotation = angle+90;
+
+            // Configurar la bala
+            bullet.setScale(scale);
+            bullet.setSpeed(speed);
+            bullet.setDamage(damage);
+    
+            // Mover la bala hacia la posici髇 calculada
+            //uso dx y dy por el disparo en abanico si lo hay
+            bullet.move(shooter.x, shooter.y, shooter.x + dx * 1000, shooter.y + dy * 1000);
+        }
+    }
+
     preUpdate(t, dt) {
         if(this.timer < 0) {
-            fire(this, this.target, this.damage, this.shootSpeed, 'Bala', 4, this.pool, 1)
+            this.fire(this, this.damage, this.shootSpeed, 'Bala', 4, this.pool, 1)
             this.timer = STATUE_SHOOT_COOLDOWN;
         }
         this.timer = this.timer - dt;

@@ -11,7 +11,7 @@ import Letus from '../../objects/enemies/letus.js';
 import Mutum from '../../objects/enemies/mutum.js'
 import Estaka from '../../objects/enemies/estaka.js';
 import Turret from '../../objects/abilities/turret.js';
-
+import Statue from '../../objects/scenery/statue.js';
 import NPC from '../../objects/interactable_objects/npc.js';
 import Door from '../../objects/interactable_objects/door.js';
 import DamageArea from '../../objects/abilities/area_damage/damage_area.js';
