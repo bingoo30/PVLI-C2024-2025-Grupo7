@@ -11,7 +11,7 @@ import Inventory from "./inventory.js";
  */
 
 export default class Player extends Character {
-    constructor(scene, x, y) {
+    constructor(scene, x, y, scale=4) {
         //heredo de la clase character
         super(scene, x, y, 'Player');
 
@@ -26,8 +26,15 @@ export default class Player extends Character {
 
         // Agregamos fisicas
         scene.physics.add.existing(this);
-        this.body.setSize(16,8);
+        this.body.setSize(16, 8);
         this.body.setOffset(8, 24);
+
+        this.collisionZone = scene.add.zone(this.x, this.y, 16 * scale, 32 * scale);
+        scene.physics.add.existing(this.collisionZone);
+        this.collisionZone.body.setAllowGravity(false);
+        this.collisionZone.body.setImmovable(true);
+
+
         // Establecer el estado de knockback
         this.isKnockedBack = false;
 
@@ -154,7 +161,7 @@ export default class Player extends Character {
         this.isKnockedBack = true;
         // Calcula el vector de dirección
         const directionX = this.x - attacker.x;
-        const directionY = this.y - attacker.y;
+        const directionY = this.y - attacker.y
 
         // Normaliza la dirección
         let normalized = new Phaser.Math.Vector2(directionX, directionY).normalize();
@@ -353,6 +360,8 @@ export default class Player extends Character {
         this.cooldownCont = this.cooldownCont - dt;
 
         this.speed.normalize();
+
+        this.collisionZone.setPosition(this.x, this.y);
 
         //calculo la velocidad teniendome en cuenta los status point de speed factor
         //cada punto de speed factor aumenta el 15% de velocidad

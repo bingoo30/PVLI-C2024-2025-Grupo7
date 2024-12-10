@@ -10,6 +10,7 @@ import Pool from '../../objects/our_pool.js';
 import DamageArea from '../../objects/abilities/area_damage/damage_area.js';
 import PickableObjects from '../../objects/interactable_objects/pickable_objects.js';
 import Estaka from '../../objects/enemies/estaka.js';
+import ExplosiveBullet from '../../objects/abilities/shooting/explosive_bullet.js';
 
 
 const SCALE = 4;
@@ -163,7 +164,7 @@ export default class BossScene extends Phaser.Scene {
         
 
         // #region Collisions and Interactions
-        this.physics.add.collider(this.player, this.joker, this.onPlayerHit, null, this);
+        this.physics.add.collider(this.player.collisionZone, this.joker, this.onPlayerHit, null, this);
 
         this.paredLayer.setCollisionByProperty({ collides: true });
 
@@ -178,10 +179,10 @@ export default class BossScene extends Phaser.Scene {
             bullet.destroyBullet(this.jokerBullets);
         });
 
-        this.physics.add.overlap(this.player, this.joker, (player, enemy) => {
+        this.physics.add.overlap(this.player.collisionZone, this.joker, (collisionZone, enemy) => {
             if (enemy.visible) {
-                player.knockback(500, enemy);
-                player.onGotHit(enemy.getDamage());
+                this.player.knockback(500, enemy);
+                this.player.onGotHit(enemy.getDamage());
             }
         });
 
@@ -189,9 +190,9 @@ export default class BossScene extends Phaser.Scene {
             bullet.destroyBullet(this.jokerOrbs);
         });
 
-        this.physics.add.collider(this.jokerBullets.getPhaserGroup(), this.player, (bullet, player) => {
-            player.knockback(200, bullet);
-            player.onGotHit(bullet.getDamage());
+        this.physics.add.collider(this.jokerBullets.getPhaserGroup(), this.player.collisionZone, (bullet, collisionZone) => {
+            this.player.knockback(200, bullet);
+            this.player.onGotHit(bullet.getDamage());
             bullet.destroyBullet(this.jokerBullets);
         });
 
@@ -200,9 +201,9 @@ export default class BossScene extends Phaser.Scene {
             playerBullet.destroyBullet(this.playerBullets);
         });
 
-        this.physics.add.overlap(this.player, this.jokerOrbs.getPhaserGroup(), (player, orb) => {
-            player.knockback(200, orb);
-            player.onGotHit(orb.getDamage());
+        this.physics.add.overlap(this.player.collisionZone, this.jokerOrbs.getPhaserGroup(), (collisionZone, orb) => {
+            this.player.knockback(200, orb);
+            this.player.onGotHit(orb.getDamage());
             orb.destroyBullet(this.jokerOrbs);
         });
         // #endregion

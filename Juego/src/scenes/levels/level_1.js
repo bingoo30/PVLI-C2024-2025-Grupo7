@@ -56,7 +56,7 @@ export default class Animation extends Phaser.Scene {
 		this.sound.stopAll(); // Detiene todos los sonidos en reproducción
 
 		this._tries = data.tries;
-		console.log("tries: "+ this._tries);
+		console.log("tries: " + this._tries);
 
 		this.map = this.make.tilemap({ key: 'mapa1', tileWidth: 32, tileHeight: 32 });
 		this.tileset = this.map.addTilesetImage('mapTiles', 'tileset1');
@@ -191,7 +191,7 @@ export default class Animation extends Phaser.Scene {
 		this.area.addMultipleEntity(toAdds);
 
 		toAdds = [];
-		this.areaEs = new Pool(this, MAX,'Area');
+		this.areaEs = new Pool(this, MAX, 'Area');
 		for (let i = 0; i < MAX; i++) {
 			let toAdd = new DamageArea(this, 0, 0, 100, 0, '03_expl_anim');
 			toAdds.push(toAdd);
@@ -224,7 +224,7 @@ export default class Animation extends Phaser.Scene {
 		const cracLayer = this.map.getObjectLayer('Crac');
 		cracLayer.objects.forEach(obj => {
 			if (obj.name === 'Crac') { // Filtra por nombre
-				const crac = new Crac(this, obj.x * SCALE, obj.y *SCALE, this.player, this.exp);
+				const crac = new Crac(this, obj.x * SCALE, obj.y * SCALE, this.player, this.exp);
 				crac.setScale(SCALE);
 				crac.setPool(this.enemyBullets);
 				// Agregar el Crac a la escena y al array
@@ -326,12 +326,12 @@ export default class Animation extends Phaser.Scene {
 		toAdds = [];
 		this.playerTurrent = new Pool(this, 10, 'Turret');
 		for (let i = 0; i < MAX; i++) {
-		 	let toAdd = new Turret(this, 0, 0, this.enemies);
+			let toAdd = new Turret(this, 0, 0, this.enemies);
 			toAdd.setPool(this.playerBullets);
-		 	toAdds.push(toAdd);
-		 }
-		 this.playerTurrent.addMultipleEntity(toAdds);
-		 this.player.registerTurrents(this.playerTurrent);
+			toAdds.push(toAdd);
+		}
+		this.playerTurrent.addMultipleEntity(toAdds);
+		this.player.registerTurrents(this.playerTurrent);
 		// #endregion
 
 		this.physics.add.overlap(this.player, this.area.getPhaserGroup(), (player, area) => {
@@ -362,10 +362,10 @@ export default class Animation extends Phaser.Scene {
 		this.physics.add.collider(this.player, this.Flush);
 
 		//colision player-enemigos
-		this.physics.add.overlap(this.player, this.enemies, (player, enemy) => {
+		this.physics.add.collider(this.player.collisionZone, this.enemies, (collisionZone,enemy) => {
 			if (enemy.visible) {
-				player.knockback(500, enemy);
-				player.onGotHit(enemy.getDamage());
+				this.player.knockback(500, enemy);
+				this.player.onGotHit(enemy.getDamage());
 				if (enemy.isMutum) enemy.createDamageArea();
 			}
 
@@ -384,18 +384,18 @@ export default class Animation extends Phaser.Scene {
 		});
 
 		//colision bala enemigos-player
-		this.physics.add.collider(this.enemyBullets.getPhaserGroup(), this.player, (enemyBullet, player) => {
-			player.knockback(200, enemyBullet);
-			player.onGotHit(enemyBullet.getDamage());
+		this.physics.add.collider(this.enemyBullets.getPhaserGroup(), this.player.collisionZone, (enemyBullet, collisionZone) => {
+			this.player.knockback(200, enemyBullet);
+			this.player.onGotHit(enemyBullet.getDamage());
 			// mandaria a la pool de las balas de los enemigos otra vez
 			enemyBullet.destroyBullet(this.enemyBullets);
 		});
 
 		//colision fichas-player
-		this.physics.add.collider(this.player, this.coins.getPhaserGroup(), (player, coin) => {
-			player.onPlayerCollectedXP(coin.getExp());
-			if (player.getXpAcu() >= player.getXpToLevelUp()) {
-				player.levelUp();
+		this.physics.add.collider(this.player.collisionZone, this.coins.getPhaserGroup(), (collisionZone, coin) => {
+			this.player.onPlayerCollectedXP(coin.getExp());
+			if (this.player.getXpAcu() >= player.getXpToLevelUp()) {
+				this.player.levelUp();
 			}
 			coin.destroyCoin(this.coins);
 			//console.log(this.expBar);

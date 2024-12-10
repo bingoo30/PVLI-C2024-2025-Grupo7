@@ -265,10 +265,9 @@ export default class Animation extends Phaser.Scene {
 
 		
 		//colision player-enemigos
-		this.physics.add.collider(this.player, this.enemies, (player, enemy) => {
-			player.knockback(500, enemy);
-			player.onGotHit(enemy.getDamage());
-			this.healthBar.updateHealth(this.player.life, this.player.maxLife);
+		this.physics.add.collider(this.player.collisionZone, this.enemies, (collisionZone, enemy) => {
+			this.player.knockback(500, enemy);
+			this.player.onGotHit(enemy.getDamage());
 
 		});
 
@@ -285,21 +284,19 @@ export default class Animation extends Phaser.Scene {
 		});
 
 		//colision bala enemigos-player
-		this.physics.add.collider(this.enemyBullets.getPhaserGroup(), this.player, (enemyBullet, player) => {
-			player.knockback(200, enemyBullet);
-			player.onGotHit(enemyBullet.getDamage());
-			this.healthBar.updateHealth(this.player.life, this.player.maxLife);
+		this.physics.add.collider(this.enemyBullets.getPhaserGroup(), this.player.collisionZone, (enemyBullet, collisionZone) => {
+			this.player.knockback(200, enemyBullet);
+			this.player.onGotHit(enemyBullet.getDamage());
 			// mandaria a la pool de las balas de los enemigos otra vez
 			enemyBullet.destroyBullet(this.enemyBullets);
 		});
 
 		//colision fichas-player
-		this.physics.add.collider(this.player, this.coins.getPhaserGroup(), (player, coin) => {
-			player.onPlayerCollectedXP(coin.getExp());
-			if (player.getXpAcu() >= player.getXpToLevelUp()) {
-				player.levelUp();
+		this.physics.add.collider(this.player.collisionZone, this.coins.getPhaserGroup(), (collisionZone, coin) => {
+			this.player.onPlayerCollectedXP(coin.getExp());
+			if (this.player.getXpAcu() >= player.getXpToLevelUp()) {
+				this.player.levelUp();
 			}
-			this.expBar.updateExp(player.getXpAcu(), player.getXpToLevelUp());
 			coin.destroyCoin(this.coins);
 			//console.log(this.expBar);
 		});
