@@ -13,7 +13,7 @@ import Estaka from '../../objects/enemies/estaka.js';
 import ExplosiveBullet from '../../objects/abilities/shooting/explosive_bullet.js';
 
 
-const SCALE = 4;
+const SCALE = 1;
 export default class BossScene extends Phaser.Scene {
     constructor() {
         super({ key: 'BossScene' });
@@ -25,12 +25,12 @@ export default class BossScene extends Phaser.Scene {
     preload() {
         // Load assets (e.g., boss sprite, animations, and sounds)
         this.load.image('boss', 'assets/enemies/joker/joker.png');
-        this.load.image('boss', 'assets/enemies/joker/joker_cut_scene.gif');
+        this.load.image('bossGif', 'assets/enemies/joker/joker_cut_scene.gif');
         this.load.image('projectile', 'assets/bullet/bullet_1.png');
 
 
-        this.load.tilemapTiledJSON('mapaBoss', 'assets/map/map_boss/map_boss2.json');
-        this.load.image('tileset4', 'assets/map/tileset/grass.png');
+        this.load.tilemapTiledJSON('mapaBoss', 'assets/map/map_boss/map_boss_1.json');
+        this.load.image('tileset4', 'assets/map/map_boss/tileSet_map_boss-export.png');
 
     }
 
@@ -46,7 +46,9 @@ export default class BossScene extends Phaser.Scene {
         console.log("tries: " + this._tries);
 
         this.mapBoss = this.make.tilemap({ key: 'mapaBoss' });
-        this.tileset = this.mapBoss.addTilesetImage('Grass', 'tileset4');
+        if (!this.mapBoss) console.error("La mapa no se ha creado correctamente.");
+
+        this.tileset = this.mapBoss.addTilesetImage('Glitch', 'tileset4');
         this.sueloLayer = this.mapBoss.createLayer('suelo', this.tileset);
         if (!this.sueloLayer) console.error("La capa 'suelo' no se ha creado correctamente.");
 
