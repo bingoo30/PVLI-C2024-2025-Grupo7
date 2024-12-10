@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="left-up" width="80" height="60" tilewidth="32" tileheight="32" infinite="0" nextlayerid="15" nextobjectid="262">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="left-up" width="80" height="60" tilewidth="32" tileheight="32" infinite="0" nextlayerid="15" nextobjectid="291">
  <editorsettings>
   <export target="mapa_1.json" format="json"/>
  </editorsettings>
@@ -776,6 +776,15 @@
   <object id="241" name="key" x="2440" y="1608">
    <point/>
   </object>
+  <object id="288" name="Memory1" x="424" y="688">
+   <point/>
+  </object>
+  <object id="289" name="Memory1" x="2168" y="80">
+   <point/>
+  </object>
+  <object id="290" name="Memory1" x="864" y="808">
+   <point/>
+  </object>
  </objectgroup>
  <objectgroup id="12" name="Door">
   <object id="209" name="verticalDoor" x="1000" y="1192" width="8" height="56"/>
@@ -838,6 +847,33 @@
   <object id="201" name="Letus" x="1002" y="548">
    <point/>
   </object>
+  <object id="267" name="Letus" x="1042" y="364">
+   <point/>
+  </object>
+  <object id="268" name="Letus" x="178" y="428">
+   <point/>
+  </object>
+  <object id="269" name="Letus" x="338" y="484">
+   <point/>
+  </object>
+  <object id="270" name="Letus" x="490" y="692">
+   <point/>
+  </object>
+  <object id="271" name="Letus" x="482" y="412">
+   <point/>
+  </object>
+  <object id="272" name="Letus" x="426" y="556">
+   <point/>
+  </object>
+  <object id="273" name="Letus" x="106" y="532">
+   <point/>
+  </object>
+  <object id="274" name="Letus" x="130" y="684">
+   <point/>
+  </object>
+  <object id="275" name="Letus" x="402" y="964">
+   <point/>
+  </object>
  </objectgroup>
  <objectgroup id="7" name="Bob">
   <object id="156" name="Bob" x="1358" y="814">
@@ -891,6 +927,21 @@
   <object id="198" name="Bob" x="433.333" y="1421.21">
    <point/>
   </object>
+  <object id="277" name="Bob" x="388" y="1576">
+   <point/>
+  </object>
+  <object id="284" name="Bob" x="2226" y="1054">
+   <point/>
+  </object>
+  <object id="285" name="Bob" x="2010" y="566">
+   <point/>
+  </object>
+  <object id="286" name="Bob" x="2074" y="430">
+   <point/>
+  </object>
+  <object id="287" name="Bob" x="1554" y="582">
+   <point/>
+  </object>
  </objectgroup>
  <objectgroup id="10" name="Crac">
   <object id="178" name="Crac" x="1053.67" y="790.5">
@@ -917,6 +968,21 @@
   <object id="186" name="Crac" x="1436.36" y="1772.73">
    <point/>
   </object>
+  <object id="278" name="Crac" x="732.36" y="1820.73">
+   <point/>
+  </object>
+  <object id="279" name="Crac" x="2284.36" y="1548.73">
+   <point/>
+  </object>
+  <object id="280" name="Crac" x="2292.36" y="1700.73">
+   <point/>
+  </object>
+  <object id="281" name="Crac" x="2060.36" y="1508.73">
+   <point/>
+  </object>
+  <object id="283" name="Crac" x="1972.36" y="1508.73">
+   <point/>
+  </object>
  </objectgroup>
  <objectgroup id="6" name="position">
   <object id="19" name="playerPosition" x="800" y="1248">
@@ -929,15 +995,16 @@
  </objectgroup>
  <objectgroup id="14" name="rectangle">
   <object id="250" x="2224" y="1464" width="320" height="368"/>
-  <object id="252" x="360" y="1056" width="352" height="448"/>
+  <object id="252" x="312" y="1024" width="256" height="96"/>
   <object id="253" x="816" y="728" width="136" height="240"/>
   <object id="254" x="1168" y="1496" width="352" height="336"/>
-  <object id="255" x="1840" y="1272" width="296" height="360"/>
-  <object id="256" x="1664" y="16" width="576" height="272"/>
+  <object id="255" x="1840" y="1280" width="296" height="352"/>
+  <object id="256" x="1664" y="16" width="144" height="272"/>
   <object id="257" x="816" y="272" width="448" height="344"/>
-  <object id="258" x="1424" y="1088" width="384" height="296"/>
-  <object id="259" x="48" y="312" width="520" height="744"/>
-  <object id="260" x="336" y="1504" width="264" height="328"/>
-  <object id="261" x="608" y="1592" width="552" height="328"/>
+  <object id="258" x="1432" y="1088" width="376" height="296"/>
+  <object id="259" x="48" y="312" width="520" height="712"/>
+  <object id="260" x="344" y="1472" width="240" height="360"/>
+  <object id="261" x="584" y="1592" width="584" height="328"/>
+  <object id="264" x="1808" y="16" width="416" height="336"/>
  </objectgroup>
 </map>
