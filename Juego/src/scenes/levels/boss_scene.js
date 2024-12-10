@@ -29,7 +29,7 @@ export default class BossScene extends Phaser.Scene {
         this.load.image('projectile', 'assets/bullet/bullet_1.png');
 
 
-        this.load.tilemapTiledJSON('mapaBoss', 'assets/map/map_boss/map_boss_1.json');
+        this.load.tilemapTiledJSON('mapaBoss', 'assets/map/map_boss/boss.json');
         this.load.image('tileset4', 'assets/map/map_boss/tileSet_map_boss.png');
         this.load.image('tileset5', 'assets/map/map_boss/tileSet_map_boss-export.png');
 
@@ -49,15 +49,12 @@ export default class BossScene extends Phaser.Scene {
         this.mapBoss = this.make.tilemap({ key: 'mapaBoss' });
         if (!this.mapBoss) console.error("La mapa no se ha creado correctamente.");
 
-        this.tileset = this.mapBoss.addTilesetImage('Glitch', 'tileset4');
-        this.tileset = this.mapBoss.addTilesetImage('tileSet_map_boss-export', 'tileset4');
-        this.sueloLayer = this.mapBoss.createLayer('suelo', this.tileset);
-        if (!this.sueloLayer) console.error("La capa 'suelo' no se ha creado correctamente.");
+        this.tileset = this.mapBoss.addTilesetImage('2', 'tileset4',50, 50 );
+        this.tileset = this.mapBoss.addTilesetImage('1', 'tileset5', 200, 200);
 
         this.paredLayer = this.mapBoss.createLayer('pared', this.tileset);
         if (!this.paredLayer) console.error("La capa 'pared' no se ha creado correctamente.");
 
-        this.sueloLayer.setScale(SCALE);
         this.paredLayer.setScale(SCALE);
         // #endregion
 
@@ -80,7 +77,7 @@ export default class BossScene extends Phaser.Scene {
         // #endregion
 
         this.player = new Player(this, playerX, playerY);
-        this.player.setScale(SCALE);
+        this.player.setScale(3);
         this.registry.set('player', this.player);
         // #endregion
 
@@ -222,7 +219,6 @@ export default class BossScene extends Phaser.Scene {
 
         // #region Camera Setup
         this.cameras.main.startFollow(this.player);
-        this.cameras.main.setBounds(this.sueloLayer);
         // #endregion
 
         // #region sonido
