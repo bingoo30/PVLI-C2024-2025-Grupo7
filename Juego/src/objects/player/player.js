@@ -38,9 +38,10 @@ export default class Player extends Character {
 
         // #region Sistema de experiencia
         this.level = 1; 
-        this.xpAcumulator = 0;
         this.xpToLevelUp = 5;
+        this.xpAcumulator = 0;
         // #endregion
+        
 
         // inventorios
         this.Inventory = new Inventory(this);
@@ -127,6 +128,40 @@ export default class Player extends Character {
 
     setTurretAvaliable(a) {
         this.turretAvaliable = a;
+    }
+    /*metodo para actualizar los atributos entre niveles*/
+    newLevelClone(player) {
+        this.init(player.speedFactor, player.shootSpeed, player.life, player.damage, player.prob);
+
+        // #region Medidor de tiempo para los disparos
+        this.cooldownCont = player.cooldownCont;
+        this.canShoot = player.canShoot;
+        this.bulletNumbers = player.bulletNumbers;
+        this.bulletScale = player.bulletScale;
+        // #endregion
+
+        // #region Sistema de experiencia
+        this.level = player.level;
+        this.xpToLevelUp = player.xpToLevelUp;
+        this.xpAcumulator = player.xpAcumulator;
+        // #endregion
+
+        // #region inventorios
+        this.Inventory = player.Inventory;
+        // #endregion
+
+        // #region puntos de control status
+        this.statusPoint = player.statusPoint; //status points restantes
+        this.abilityPoint = player.abilityPoint; //ability points restantes
+
+        this.turretAvaliable = player.turrentAvaliable;
+
+        this.speedFactorStatus = player.speedFactorStatus; //+15%
+        this.shootSpeedStatus = player.shootSpeedStatus; //+15%
+        this.maxLifeStatus = player.maxLifeStatus; //+n (siendo n maxLifeStatus)
+        this.probStatus = player.probStatus; //+5%
+        this.damageStatus = player.damageStatus; //+100%
+        // #endregion
     }
     onGotHit(damage) {
         super.onGotHit(damage); // Aplica daño al jugador

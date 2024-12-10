@@ -340,7 +340,7 @@
    <point/>
   </object>
  </objectgroup>
- <objectgroup id="10" name="RetractablesSpikes" visible="0">
+ <objectgroup id="10" name="RetractablesSpikes">
   <object id="69" name="retractableSpike" x="326.667" y="144.421">
    <point/>
   </object>

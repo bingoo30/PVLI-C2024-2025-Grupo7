@@ -85,8 +85,6 @@ export default class Animation extends Phaser.Scene {
 			// Añadir la puerta al grupo de puertas
 			this.doorGroup.add(door);
 		});
-
-
 		//#endregion
 
 		//#region Objetos
@@ -99,8 +97,6 @@ export default class Animation extends Phaser.Scene {
 			pickable.setScale(SCALE);
 			this.PickableObjects.add(pickable);
 		});
-
-		//#endregion
 
 		// #endregion
 
@@ -122,9 +118,6 @@ export default class Animation extends Phaser.Scene {
 
 		// #endregion
 
-
-		// #region Player
-
 		this.player = new Player(this, playerX, playerY);
 		this.player.setScale(SCALE);
 		// Guarda la referencia en el registry
@@ -139,7 +132,6 @@ export default class Animation extends Phaser.Scene {
 
 		// #endregion
 
-		// #endregion
 		// #region Pools
 
 		const MAX = 300;
@@ -267,10 +259,10 @@ export default class Animation extends Phaser.Scene {
 
 		//#region Traps
 
-		this.traps = this.add.group();
-		this.spikeTrap = new Retractable_Spike(this, this.player.x + 300, this.player.y);
-		this.spikeTrap.setScale(SCALE);
-		this.traps.add(this.spikeTrap);
+		//this.traps = this.add.group();
+		//this.spikeTrap = new Retractable_Spike(this, this.player.x + 300, this.player.y);
+		//this.spikeTrap.setScale(SCALE);
+		//this.traps.add(this.spikeTrap);
 
 		// this.traps = this.add.group();
 		// this.statue = new Statue(this, this.player.x + 300, this.player.y, 0);
@@ -295,32 +287,7 @@ export default class Animation extends Phaser.Scene {
 
 		this.Flush = new NPC(this, NPCX, NPCY, 'Flush', 'dialogues_Flush', "Caballero generoso");
 		this.Flush.setScale(SCALE);
-
-
-		const x = NPCpos.x * SCALE - 100;
-		const y = NPCpos.y * SCALE;
-
-		this.mutum = new Mutum(this, x, y, this.player, 1, this.area);
-		this.mutum.setScale(SCALE);
-		this.enemies.add(this.mutum);
-
-		this.estaka = new Estaka(this, x - 100, y, this.player, 1, this.areaEs);
-		this.estaka.setScale(SCALE);
-		this.enemies.add(this.estaka);
-
-		this.zaro = new Zaro(this, x - 200, y, this.player, 1);
-		this.zaro.setScale(SCALE);
-		this.zaro.setPool(this.enemyBullets);
-		this.enemies.add(this.zaro);
-
-		this.crac = new Crac(this, x - 300, y, this.player, 1);
-		this.crac.setScale(SCALE);
-		this.crac.setPool(this.enemyBullets);
-		this.enemies.add(this.crac);
-
-		// this.turret = new Turret(this, this.player.x + 500, this.player.y, this.enemies.getChildren());
-		// this.turret.setScale(SCALE);
-		// this.turret.setPool(this.playerBullets);
+		// #endregion
 
 		// #region torretas
 		toAdds = [];
@@ -332,18 +299,6 @@ export default class Animation extends Phaser.Scene {
 		}
 		this.playerTurrent.addMultipleEntity(toAdds);
 		this.player.registerTurrents(this.playerTurrent);
-		// #endregion
-
-		this.physics.add.overlap(this.player, this.area.getPhaserGroup(), (player, area) => {
-			player.onGotHit(area.getDamage());
-		});
-
-
-		this.physics.add.overlap(this.enemies, this.areaFE.getPhaserGroup(), (enemy, area) => {
-			enemy.onGotHit(area.getDamage());
-		});
-
-
 		// #endregion
 
 		// #region Collision
@@ -390,7 +345,15 @@ export default class Animation extends Phaser.Scene {
 			// mandaria a la pool de las balas de los enemigos otra vez
 			enemyBullet.destroyBullet(this.enemyBullets);
 		});
+		// colision areas
+		this.physics.add.overlap(this.player, this.area.getPhaserGroup(), (player, area) => {
+			player.onGotHit(area.getDamage());
+		});
 
+
+		this.physics.add.overlap(this.enemies, this.areaFE.getPhaserGroup(), (enemy, area) => {
+			enemy.onGotHit(area.getDamage());
+		});
 		//colision fichas-player
 		this.physics.add.collider(this.player.collisionZone, this.coins.getPhaserGroup(), (collisionZone, coin) => {
 			this.player.onPlayerCollectedXP(coin.getExp());
@@ -428,15 +391,6 @@ export default class Animation extends Phaser.Scene {
 			coin.body.setBounce(0);
 			bullet.body.setBounce(0);
 		});
-
-		//colision trampas-player
-		this.physics.add.collider(this.traps, this.player, (trap, player,) => {
-			player.knockback(200, trap);
-			player.onGotHit(trap.getDamage());
-		});
-
-
-
 		// #endregion
 
 		this.cameras.main.startFollow(this.player);

@@ -18,19 +18,13 @@ export default class Turret extends Phaser.GameObjects.Sprite{
     */
 
     constructor(scene, x, y, Enemies) {
-        //heredo de la clase character
         super(scene, x, y, 'Turret');
         this.scene = scene;
         this.scale = 4; 
         this.target = null;
         //this.navMesh = scene.navMesh;
         this.scene.physics.add.existing(this);
-
-        // ???????????????????????????
-        //this.currentPath = [];
-        //this.targetPoint = null;  // Próximo punto objetivo
-        //configurar los atributos correspondientes despues de llamar al constructor del character
-        //this.dead = false;
+        this.pool = null;
 
         this.shootCooldown = DEFAULT_TURRET_SHOOTING_SPEED;
         this.shootingRange = DEFAULT_TURRET_SHOOTING_RANGE;

@@ -13,7 +13,9 @@ import DialogueManager from '../../UI/dialog_manager.js';
 import DialogText from '../../UI/dialog_plugin.js';
 import NPC from '../../objects/interactable_objects/npc.js';
 import Door from '../../objects/interactable_objects/door.js';
-//import Coin from '../../objetos/Enemies/coin.js'
+import Spike from '../../objects/scenery/spike.js';
+import RetractableSpike from '../../objects/scenery/retractable_spike.js';
+
 //constante
 const SCALE = 4;
 /**
@@ -36,13 +38,7 @@ export default class Animation extends Phaser.Scene {
 	*/
 	create(data) {
 		this.sound.stopAll();
-		this.player = data.player;
-
 		this._tries = data.tries;
-
-		this.sound.stopAll(); // Detiene todos los sonidos en reproducci�n
-		//console.log("me he creado", this.scene.key);
-		//this.input.on('pointerup', this.handleClick, this);
 
 		// #region Entities
 		// #region Map
@@ -61,7 +57,7 @@ export default class Animation extends Phaser.Scene {
 		this.paredLayer.setScale(SCALE);
 
 		//#region puerta
-		/*
+		
 		this.doorGroup = this.add.group();
 		this.doorLayer = this.map.getObjectLayer('Door');
 		console.log(this.doorLayer);
@@ -74,14 +70,13 @@ export default class Animation extends Phaser.Scene {
 			// A�adir la puerta al grupo de puertas
 			this.doorGroup.add(door);
 		});
-		*/
+		
 		//#endregion
 
 		// #endregion
 
 		// #region Player
 		// #region Player Position
-
 		const objectLayer = this.map.getObjectLayer('position');
 
 		const playerPos = objectLayer.objects.find(obj => obj.name == 'playerPosition');
@@ -90,18 +85,24 @@ export default class Animation extends Phaser.Scene {
 		if (!playerPos) console.log('Position player no encontrado.');
 		const playerX = playerPos.x * SCALE;
 		const playerY = playerPos.y * SCALE;
-
 		// #endregion
-
-
-		// #region Player
-
 		this.player = new Player(this, playerX, playerY);
 		this.player.setScale(SCALE);
-
+		//copia profunda
+		this.player.newLevelClone(data.player);
+		// Sobreescribir la referencia en el registro
+		this.registry.set('player', this.player);
 		// #endregion
 
+		// #region rectangulos negros
+		this.rectGroup = this.add.group();
+		this.rectangleLayer = this.map.getObjectLayer('rectangle');
+		this.rectangleLayer.objects.forEach((obj) => {
+			const rect = new Rectangle(this, obj.x, obj.y, obj.width, obj.height, this.player);
+			this.rectGroup.add(rect);
+		});
 		// #endregion
+
 		// #region Pools
 
 		const MAX = 300;
@@ -128,7 +129,6 @@ export default class Animation extends Phaser.Scene {
 		}
 		this.playerBullets.addMultipleEntity(toAdds);
 		this.player.setPool(this.playerBullets);
-
 		// #endregion
 
 		// #region Enemy Bullets
@@ -141,9 +141,29 @@ export default class Animation extends Phaser.Scene {
 		}
 		this.enemyBullets.addMultipleEntity(toAdds);
 
+		// #endregion
 
+		//#region Enemy Area
+		///scene, x, y, radius, damage, duration, scale=4
+		toAdds = [];
+		this.area = new Pool(this, MAX, 'Area');
+		for (let i = 0; i < MAX; i++) {
+			let toAdd = new DamageArea(this, 0, 0, 100, 0, '08_expl_anim');
+			toAdds.push(toAdd);
+		}
+		this.area.addMultipleEntity(toAdds);
 
-		//pool balas explosivas (francotirador explosivo)
+		toAdds = [];
+		this.areaEs = new Pool(this, MAX, 'Area');
+		for (let i = 0; i < MAX; i++) {
+			let toAdd = new DamageArea(this, 0, 0, 100, 0, '03_expl_anim');
+			toAdds.push(toAdd);
+		}
+		this.areaEs.addMultipleEntity(toAdds);
+		// #endregion
+
+		// #region pool balas explosivas (francotirador explosivo)
+		toAdds = [];
 		this.areaFE = new Pool(this, MAX, 'Area');
 		for (let i = 0; i < MAX; i++) {
 			let toAdd = new DamageArea(this, 0, 0, 100, 0, '30_expl_anim');
@@ -158,18 +178,26 @@ export default class Animation extends Phaser.Scene {
 			toAdds.push(toAdd);
 		}
 		this.playerExplosiveBullets.addMultipleEntity(toAdds);
+		// #endregion
 
-
-		//this.Crac.setPool(this.enemyBullets);
-		//this.Zaro.setPool(this.enemyBullets);
-
+		// #region torretas
+		toAdds = [];
+		this.playerTurrent = new Pool(this, 10, 'Turret');
+		for (let i = 0; i < 10; i++) {
+			let toAdd = new Turret(this, 0, 0, this.enemies);
+			toAdd.setPool(this.playerBullets);
+			toAdds.push(toAdd);
+		}
+		this.playerTurrent.addMultipleEntity(toAdds);
+		this.player.registerTurrents(this.playerTurrent);
 		// #endregion
 
 		// #endregion
 
 		// #region Enemy
+		this.enemies = this.add.group();
 
-		/*
+		// #region Cracs
 		this.arrayCracs = [];
 		const cracLayer = this.map.getObjectLayer('Crac');
 		cracLayer.objects.forEach(obj => {
@@ -182,13 +210,10 @@ export default class Animation extends Phaser.Scene {
 				this.arrayCracs.push(crac);
 			}
 		});
-
-		//console.log(this.arrayCracs); // Depuraci�n: verificar el contenido del array
-
-		this.enemies = this.add.group();
 		this.enemies.addMultiple(this.arrayCracs);
+		// #endregion
 
-
+		// #region Bobs
 		this.arrayBobs = [];
 		const bobLayer = this.map.getObjectLayer('Bob');
 		bobLayer.objects.forEach(obj => {
@@ -200,8 +225,9 @@ export default class Animation extends Phaser.Scene {
 		});
 
 		this.enemies.addMultiple(this.arrayBobs);
+		// #endregion
 
-
+		// #region Letus
 		this.arrayLetus = [];
 		const letusLayer = this.map.getObjectLayer('Letus');
 		letusLayer.objects.forEach(obj => {
@@ -211,43 +237,68 @@ export default class Animation extends Phaser.Scene {
 				this.arrayLetus.push(letus);
 			}
 		});
-
 		this.enemies.addMultiple(this.arrayLetus);
-		
+		// #endregion
 
+		// #region Zaros
 		this.arrayZaros = [];
-		const zaroLayer = this.map.getObjectLayer('Letus');
+		const zaroLayer = this.map.getObjectLayer('Zaro');
 		zaroLayer.objects.forEach(obj => {
-			if (obj.name === 'Letus') { // Filtra por nombre
-				const zaros = new Letus(this, obj.x * SCALE, obj.y * SCALE, this.player, this.exp);
-				letus.setScale(SCALE);
-				this.arrayZaros.push(zaros);
+			if (obj.name === 'Zaro') { // Filtra por nombre
+				const zaro = new Zaro(this, obj.x * SCALE, obj.y * SCALE, this.player, this.exp);
+				zaro.setPool(this.enemyBullets);
+				zaro.setScale(SCALE);
+				this.arrayZaros.push(zaro);
 			}
 		});
-
 		this.enemies.addMultiple(this.arrayZaros);
-		*/
 		// #endregion
-
-		// #region Navmesh
-
-		
-
 
 		// #endregion
 
-		//#region UI
+		// #region UI
 
 		this.expBar = new ExpBar(this, 20, 30);
 
 		this.healthBar = new HealthBar(this, 20, 10, this.player);
-
-
-		//#endregion
+		// #endregion
 
 		// #region NPC
-	
+		const NPCpos = objectLayer.objects.find(obj => obj.name == 'WeiyoungPosition');
+		const NPCX = NPCpos.x * SCALE;
+		const NPCY = NPCpos.y * SCALE;
 
+		this.Weiyoung = new NPC(this, NPCX, NPCY, 'Weiyoung', 'dialogues_Weiyoung', "Choque cultural");
+		this.Weiyoung.setScale(SCALE);
+		// #endregion
+
+		//#region Traps
+		this.traps = this.add.group();
+		// #region Spikes
+		this.arraySpikes = [];
+		const spikeLayer = this.map.getObjectLayer('Spike');
+		cracLayer.objects.forEach(obj => {
+			if (obj.name === '	Spike') { // Filtra por nombre
+				const spike = new Spike(this, obj.x * SCALE, obj.y * SCALE);
+				spike.setScale(SCALE);
+				this.arraySpikes.push(spike);
+			}
+		});
+		this.traps.addMultiple(this.arraySpikes);
+		// #endregion
+
+		// #region Spikes
+		this.arrayRetractableSpikes = [];
+		const retractableSpikeLayer = this.map.getObjectLayer('RetractableSpike');
+		retractableSpikeLayer.objects.forEach(obj => {
+			if (obj.name === 'retractableSpike') { // Filtra por nombre
+				const retractableSpike = new RetractableSpike(this, obj.x * SCALE, obj.y * SCALE);
+				retractableSpike.setScale(SCALE);
+				this.arrayRetractableSpikes.push(retractableSpike);
+			}
+		});
+		this.traps.addMultiple(this.arrayRetractableSpikes);
+		// #endregion
 		// #endregion
 
 		// #region Collision
@@ -263,17 +314,21 @@ export default class Animation extends Phaser.Scene {
 
 		this.physics.add.collider(this.enemies, this.doorGroup);
 
-		
+		this.physics.add.collider(this.player, this.Flush);
+
 		//colision player-enemigos
 		this.physics.add.collider(this.player.collisionZone, this.enemies, (collisionZone, enemy) => {
-			this.player.knockback(500, enemy);
-			this.player.onGotHit(enemy.getDamage());
+			if (enemy.visible) {
+				this.player.knockback(500, enemy);
+				this.player.onGotHit(enemy.getDamage());
+				if (enemy.isMutum) enemy.createDamageArea();
+			}
 
 		});
 
 		//colision bala player-enemigos
 		this.physics.add.collider(this.playerBullets.getPhaserGroup(), this.enemies, (playerBullet, enemy) => {
-			enemy.onGotHit(this.player.getDamage(), this.coins);
+			enemy.onGotHit(playerBullet.getDamage(), this.coins);
 			// mandaria a la pool de las balas de player otra vez
 			playerBullet.destroyBullet(this.playerBullets);
 		});
@@ -290,7 +345,15 @@ export default class Animation extends Phaser.Scene {
 			// mandaria a la pool de las balas de los enemigos otra vez
 			enemyBullet.destroyBullet(this.enemyBullets);
 		});
+		// colision areas
+		this.physics.add.overlap(this.player, this.area.getPhaserGroup(), (player, area) => {
+			player.onGotHit(area.getDamage());
+		});
 
+
+		this.physics.add.overlap(this.enemies, this.areaFE.getPhaserGroup(), (enemy, area) => {
+			enemy.onGotHit(area.getDamage());
+		});
 		//colision fichas-player
 		this.physics.add.collider(this.player.collisionZone, this.coins.getPhaserGroup(), (collisionZone, coin) => {
 			this.player.onPlayerCollectedXP(coin.getExp());
@@ -305,11 +368,11 @@ export default class Animation extends Phaser.Scene {
 		this.physics.add.collider(this.playerBullets.getPhaserGroup(), this.paredLayer, (bullet, wall) => {
 			bullet.destroyBullet(this.playerBullets);
 		});
-		this.physics.add.collider(this.enemyBullets.getPhaserGroup(), this.paredLayer, (bullet, wall) => {
-			bullet.destroyBullet(this.enemyBullets);
-		});
 		this.physics.add.collider(this.playerExplosiveBullets.getPhaserGroup(), this.paredLayer, (bullet, wall) => {
 			bullet.destroyBullet(this.playerExplosiveBullets);
+		});
+		this.physics.add.collider(this.enemyBullets.getPhaserGroup(), this.paredLayer, (bullet, wall) => {
+			bullet.destroyBullet(this.enemyBullets);
 		});
 
 		//colision balas-puertas
@@ -323,7 +386,6 @@ export default class Animation extends Phaser.Scene {
 			bullet.destroyBullet(this.playerExplosiveBullets);
 		});
 
-
 		//colision balas-fichas
 		this.physics.add.collider(this.coins, this.playerBullets.getPhaserGroup(), (coin, bullet) => {
 			coin.body.setBounce(0);
@@ -335,15 +397,13 @@ export default class Animation extends Phaser.Scene {
 			player.knockback(200, trap);
 			player.onGotHit(trap.getDamage());
 		});
-
-
-
 		// #endregion
+
 
 		this.cameras.main.startFollow(this.player);
 
 		// #region sonido
-		this.MainSample = this.sound.add('MainSample');
+		this.MainSample = this.sound.add('level2Audio');
 		this.MainSample.play();
 		this.MainSample.setLoop(true);
 		// #endregion
