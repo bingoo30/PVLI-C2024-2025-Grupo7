@@ -325,7 +325,7 @@ export default class Animation extends Phaser.Scene {
 		// #region torretas
 		toAdds = [];
 		this.playerTurrent = new Pool(this, 10, 'Turret');
-		for (let i = 0; i < MAX; i++) {
+		for (let i = 0; i < 10; i++) {
 			let toAdd = new Turret(this, 0, 0, this.enemies);
 			toAdd.setPool(this.playerBullets);
 			toAdds.push(toAdd);
