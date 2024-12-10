@@ -126,7 +126,7 @@ export default class Animation extends Phaser.Scene {
 		this.rectGroup = this.add.group();
 		this.rectangleLayer = this.map.getObjectLayer('rectangle');
 		this.rectangleLayer.objects.forEach((obj) => {
-			const rect = new Rectangle(this, obj.x, obj.y, obj.width, obj.height, this.player);
+			const rect = new Rectangle(this, obj.x, obj.y, obj.width, obj.height, this.player).setDepth(4);
 			this.rectGroup.add(rect);
 		});
 
