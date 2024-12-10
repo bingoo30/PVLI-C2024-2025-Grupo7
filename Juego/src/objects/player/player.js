@@ -31,8 +31,6 @@ export default class Player extends Character {
 
         this.collisionZone = scene.add.zone(this.x, this.y, 16 * scale, 32 * scale);
         scene.physics.add.existing(this.collisionZone);
-        this.collisionZone.body.setAllowGravity(false);
-        this.collisionZone.body.setImmovable(true);
 
 
         // Establecer el estado de knockback
@@ -168,10 +166,12 @@ export default class Player extends Character {
         //console.log("Knockback speed: " + normalized.x + ", " + normalized.y);
         // Aplica velocidad inicial al cuerpo
         this.body.setVelocity(normalized.x * strength, normalized.y * strength);
+        this.collisionZone.body.setVelocity(normalized.x * strength, normalized.y * strength);
 
         // Detén el movimiento después de un corto tiempo
         this.scene.time.delayedCall(300, () => {
-            this.body.setVelocity(0, 0); // Detener después del knockback
+            this.collisionZone.body.setVelocity(0, 0);
+            this.body.setVelocity(0, 0); // Detener después del knockback 
             this.isKnockedBack = false;
         });
     }
@@ -361,12 +361,13 @@ export default class Player extends Character {
 
         this.speed.normalize();
 
-        this.collisionZone.setPosition(this.x, this.y);
-
         //calculo la velocidad teniendome en cuenta los status point de speed factor
         //cada punto de speed factor aumenta el 15% de velocidad
         let finalX = this.speed.x * this.speedFactor * (1 + this.speedFactorStatus*0.15);
         let finalY = this.speed.y * this.speedFactor * (1 + this.speedFactorStatus*0.15);
         this.body.setVelocity(finalX, finalY);
+
+        this.collisionZone.body.setVelocity(finalX, finalY);
+        if (this.collisionZone.x != this.x || this.collisionZone.y != this.y) this.collisionZone.setPosition(this.x, this.y);
     }
 }
