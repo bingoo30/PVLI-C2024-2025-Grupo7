@@ -34,7 +34,6 @@ export default class TutorialScene extends Phaser.Scene {
 		this.currentImage = this.add.image(0,0, this.tutorialImages[this.currentImageIndex]).setOrigin(0,0);
 
 		var nextButton = this.add.image(this.sys.game.canvas.width * 0.85, this.sys.game.canvas.height*0.9, 'tutorialNextButton').setOrigin(0,0);
-		nextButton.setScale(0.5);
 		nextButton.setInteractive(); 
 
 		nextButton.on('pointerup', pointer => {
@@ -54,7 +53,6 @@ export default class TutorialScene extends Phaser.Scene {
 		});
 
 		var skipButton = this.add.image(10,10, 'tutorialSkipButton').setOrigin(0,0);
-		skipButton.setScale(0.5);
 		skipButton.setInteractive();
 
 		skipButton.on('pointerup', pointer => {
