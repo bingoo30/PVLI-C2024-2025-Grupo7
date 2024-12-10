@@ -29,9 +29,10 @@ export default class BossScene extends Phaser.Scene {
         this.load.image('projectile', 'assets/bullet/bullet_1.png');
 
 
-        this.load.tilemapTiledJSON('mapaBoss', 'assets/map/map_boss/boss.json');
+        this.load.tilemapTiledJSON('mapaBoss', 'assets/map/map_boss/boss4444.json');
         this.load.image('tileset4', 'assets/map/map_boss/tileSet_map_boss.png');
         this.load.image('tileset5', 'assets/map/map_boss/tileSet_map_boss-export.png');
+        this.load.image('tileset6', 'assets/map/map_boss/3.png');
 
     }
 
@@ -49,8 +50,9 @@ export default class BossScene extends Phaser.Scene {
         this.mapBoss = this.make.tilemap({ key: 'mapaBoss' });
         if (!this.mapBoss) console.error("La mapa no se ha creado correctamente.");
 
-        this.tileset = this.mapBoss.addTilesetImage('2', 'tileset4',50, 50 );
-        this.tileset = this.mapBoss.addTilesetImage('1', 'tileset5', 200, 200);
+        this.tileset = this.mapBoss.addTilesetImage('2', 'tileset4');
+        this.tileset = this.mapBoss.addTilesetImage('3', 'tileset6');
+        this.tileset = this.mapBoss.addTilesetImage('1', 'tileset5');
 
         this.paredLayer = this.mapBoss.createLayer('pared', this.tileset);
         if (!this.paredLayer) console.error("La capa 'pared' no se ha creado correctamente.");
