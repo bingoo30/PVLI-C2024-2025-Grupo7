@@ -43,7 +43,9 @@ export default class Turret extends Phaser.GameObjects.Sprite{
 
         this.setDepth(2);
     }
-
+    setPool(pool) {
+        this.pool = pool;
+    }
     preUpdate(t, dt) {
 		super.preUpdate(t, dt);
 
