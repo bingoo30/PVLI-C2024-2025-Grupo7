@@ -435,7 +435,7 @@ export default class Animation extends Phaser.Scene {
 
 	changeToGameover() {
 		this.MainSample.stop();
-		this.scene.start("gameover", { tries: this._tries });
+		this.scene.start("gameover", { player: this.player, tries: this._tries });
 	}
 
 	changeToNextLevel() {

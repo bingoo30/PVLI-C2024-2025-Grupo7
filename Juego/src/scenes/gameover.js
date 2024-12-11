@@ -46,7 +46,7 @@ export default class Gameover extends Phaser.Scene {
 
 		// Escuchamos los eventos del ratón cuando interactual con nuestro sprite de "Start"
 	    sprite.on('pointerup', pointer => {
-			this.scene.start('title', { tries: this._tries }); //Cambiamos a la escena de juego
+			this.scene.start('title', { player: data.player, tries: this._tries }); //Cambiamos a la escena de juego
 	    });
 
 	}

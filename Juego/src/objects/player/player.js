@@ -46,14 +46,16 @@ export default class Player extends Character {
         // inventorios
         this.Inventory = new Inventory(this);
         // #region puntos de control status
-        this.statusPoint = 1; //status points restantes
-        this.abilityPoint = 2; //ability points restantes
+        this.statusPoint = 0; //status points restantes
+        this.abilityPoint = 0; //ability points restantes
 
         this.turretAvaliable = false;
         this.turretsPool = null;
 
         this.drone = null;
         this.droneActivated = false;
+
+        this.explosiveBulletsActivated = false;
 
         this.speedFactorStatus = 0; //+15%
         this.shootSpeedStatus = 0; //+15%
@@ -137,6 +139,11 @@ export default class Player extends Character {
     newLevelClone(player) {
         this.init(player.speedFactor, player.shootSpeed, player.life, player.damage, player.prob);
         this.maxLife = player.maxLife;
+
+        //caso cuando pasamos de la escena de muerte al nivel
+        if (this.life == 0) {
+            this.life = this.maxLife;
+        }
         // #region Medidor de tiempo para los disparos
         this.cooldownCont = player.cooldownCont;
         this.canShoot = player.canShoot;
@@ -158,8 +165,13 @@ export default class Player extends Character {
         this.statusPoint = player.statusPoint; //status points restantes
         this.abilityPoint = player.abilityPoint; //ability points restantes
 
-        this.turretAvaliable = player.turrentAvaliable;
+        this.turretAvaliable = player.turretAvaliable;
         this.droneActivated = player.droneActivated;
+        this.explosiveBulletsActivated = player.explosiveBulletsActivated;
+
+        if (this.explosiveBulletsActivated) {
+            this.changeToExplosive();
+        }
 
         this.speedFactorStatus = player.speedFactorStatus; //+15%
         this.shootSpeedStatus = player.shootSpeedStatus; //+15%
@@ -244,7 +256,8 @@ export default class Player extends Character {
             }
                 break;
             case 'Francotirador explosivo II': {
-                this.setPool(this.scene.playerExplosiveBullets);
+                this.explosiveBulletsActivated = true;
+                this.changeToExplosive();
             }
                 break;
             case 'Utilidad I': {
@@ -307,6 +320,9 @@ export default class Player extends Character {
     }
     setDroneActivated(s) {
         this.droneActivated = s;
+    }
+    changeToExplosive() {
+        this.setPool(this.scene.playerExplosiveBullets);
     }
     /**
      * Bucle principal del personaje, actualizamos su posici�n y ejecutamos acciones seg�n el Input
