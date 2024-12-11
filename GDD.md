@@ -22,7 +22,7 @@ Madness es un juego RPG en el que disfrutarás de una emocionante aventura junto
   - [1.2. Cámara](#12-cámara)
   - [1.3. Mecánicas del jugador](#13-mecánicas-del-jugador)
   - [1.4. Mecánicas de escenario](#14-mecánicas-de-escenario)
-  - [1.5. Otros](#15-otros)
+  - [1.5. Enemigos y Bosses](#15-enemigos-y-bosses)
 - [2. Diseño de nivel](#2-diseño-de-nivel)
   - [2.1. Descripción de partida típica](#21-descripción-de-partida-típica)
 - [3. HUD](#3-hud)
@@ -46,7 +46,7 @@ Al llegar allí, se olvida de su pasado y lo único que sabe es que, para recupe
 
 ## 1. Jugabilidad:
 
-### 1.1.	Movimiento del personaje
+### 1.1. Movimiento del personaje
 El movimiento será en un entorno 2D utilizando los controles estándar de WASD (W para arriba, D para la derecha, A para la izquierda y S para abajo) para desplazarse tanto de manera vertical como horizontal. Además, los controles podrán combinarse para moverse en diagonal. El personaje se moverá a una velocidad máxima uniforme. 
 
 ### 1.2. Cámara
@@ -141,18 +141,16 @@ Al derrotar a los enemigos, soltarán fichas (experiencia) que te permitirán su
 
 ## 2. Diseño de nivel
 
-El jugador deberá explorar el mapa y encontrar llaves en las salas para poder ascender de planta. Cada planta representará un nivel, y dentro de cada nivel habrá diferentes salas donde el jugador tendrá que explorar y enfrentarse a enemigos para obtener la llave.
-Dentro de cada planta, habrá una sala que contendrá un boss. Cada boss tendrá sus propias habilidades y formas de ataque, lo que aportará diversidad y evitará que las salas se vuelvan monótonas. Además, habrá puzles, salas grandes, entre otros elementos.
-(primero probamos si somos capaces de conseguirlo, en caso contrario, se quitan las salas grandes) 
+El jugador deberá explorar el mapa y encontrar llaves en las salas para poder ascender de planta. Cada planta representará un nivel, y dentro de cada nivel habrá diferentes salas donde el jugador tendrá que explorar y enfrentarse a enemigos para obtener la llave poder pasar a la siguiente sala.
 
 ![image](https://github.com/user-attachments/assets/4624c38b-4ee6-48d3-8b6b-20b1060210d5)
 
 	
 ### 2.1. Descripción de partida típica
 
-En una partida normal el jugador empezará en el hall del primer piso, donde se encontrará con un NPC que le dará una explicación sobre ese mundo. Al finalizar la explicación el jugador podrá salir del hall y empezar su busca por la puerta del próximo piso y derrotar el boss que tendrá la llave para abrirla. Al largo de los niveles, el jugador aprenderá sobre la historia de la protagonista mientras ella va recuperando sus recuerdos y también aprenderás mejor sobre como funciona ese mundo. Al llegar a último piso, el jugador tendrá que derrotar al joker para que se acabe el juego.
+En una partida normal el jugador empezará en el hall del primer piso, donde se encontrará con un NPC que le dará una explicación sobre ese mundo. Al finalizar la explicación el jugador podrá salir del hall y empezar su busca por la puerta del próximo piso y buscar la llave para abrirla. Al largo de los niveles, el jugador aprenderá sobre la historia de la protagonista mientras ella va recuperando sus recuerdos y también aprenderás mejor sobre como funciona ese mundo. Al llegar a último piso, el jugador tendrá que derrotar al Joker para que se acabe el juego.
 
-Si el jugador muere en el camino, volverá al checkpoint de cada piso, es decir, tendrá que reiniciar el nivel.
+Si el jugador muere en el camino, volverá al checkpoint de cada piso, es decir, se reinicia el nivel.
 
 
 ## 3. HUD
@@ -162,8 +160,6 @@ Si el jugador muere en el camino, volverá al checkpoint de cada piso, es decir,
 ![image](https://github.com/user-attachments/assets/55ed58f3-b8e6-4bdf-8d9d-3c21d3b4f4c0)
 
 ### 3.2. Explicación de los elementos del HUD y su funcionamiento.
-**Imagen de protagonista:** Función casi completamente estética, muestra un retrato del personaje jugado. 
-
 **Vida:** Barra que muestra el porcentaje de salud que le queda al jugador.
 
 **Experiencia:** Barra que muestra la cantidad de experiencia que tiene el personaje respecto a cuanto le queda para subir al siguiente nivel.
@@ -184,7 +180,7 @@ El apartado visual será bastante abstracto, cada nivel tendrá muchos elementos
 
 ## 5. Menús y flujo de juego
 
-En cuanto a los menús, se trata de una cosa bastante simple. Tendremos un botón de inicio y un botón de configuraciones (opcional) en la pantalla inicial. Para mostrar el menú de pausa hay que pulsar la tecla “P”. Aparecerán opciones como continuar el juego, volver a la pantalla y guardar el progreso (opcional).
+En cuanto a los menús, se trata de una cosa bastante simple. Tendremos un botón de jugar, logros y tutorial. Para mostrar el menú de pausa hay que pulsar la tecla “P”. Aparecerán opciones como continuar el juego, volver a la pantalla y guardar el progreso (opcional).
 
 ### 5.1. Flujo de juego
 
