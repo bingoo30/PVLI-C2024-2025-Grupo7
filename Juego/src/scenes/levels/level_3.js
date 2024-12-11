@@ -1,27 +1,31 @@
-﻿import Player from '../../objects/player/player.js';
-import Crac from '../../objects/enemies/crac.js'
-import HealthBar from '../../UI/health_bar.js';
-import ExpBar from '../../UI/exp_bar.js';
-import Coin from '../../objects/enemies/coin.js';
-import Bullet from '../../objects/abilities/shooting/bullet.js';
-
-import Pool from '../../objects/our_pool.js'
+﻿//sceneobjects
+import Player from '../../objects/player/player.js';
+import Crac from '../../objects/enemies/crac.js';
 import Bob from '../../objects/enemies/bob.js';
 import Letus from '../../objects/enemies/letus.js';
-import Turret from '../../objects/abilities/turret.js';
-
-import NPC from '../../objects/interactable_objects/npc.js';
-import Door from '../../objects/interactable_objects/door.js';
-import DamageArea from '../../objects/abilities/area_damage/damage_area.js';
-import PickableObjects from '../../objects/interactable_objects/pickable_objects.js';
-import ChangeLevelDoor from '../../objects/interactable_objects/change_level_door.js';
-import Rectangle from '../../objects/interactable_objects/rectangle.js';
 import Zaro from '../../objects/enemies/zaro.js';
+import Mutum from '../../objects/enemies/mutum.js';
+import Estaka from '../../objects/enemies/estaka.js';
+import NPC from '../../objects/interactable_objects/npc.js';
 import Spike from '../../objects/scenery/spike.js';
 import RetractableSpike from '../../objects/scenery/retractable_spike.js';
-import ExplosiveBullet from '../../objects/abilities/shooting/explosive_bullet.js';
+import Statue from '../../objects/scenery/statue.js';
 import Drone from '../../objects/abilities/drone.js';
+//pools 
+import Pool from '../../objects/our_pool.js';
+import Coin from '../../objects/enemies/coin.js';
+import Bullet from '../../objects/abilities/shooting/bullet.js';
+import ExplosiveBullet from '../../objects/abilities/shooting/explosive_bullet.js';
+import DamageArea from '../../objects/abilities/area_damage/damage_area.js';
+import PickableObjects from '../../objects/interactable_objects/pickable_objects.js';
+import Turret from '../../objects/abilities/turret.js';
 import Plant from '../../objects/enemies/plant.js';
+//static objects 
+import HealthBar from '../../UI/health_bar.js';
+import ExpBar from '../../UI/exp_bar.js';
+import Door from '../../objects/interactable_objects/door.js';
+import ChangeLevelDoor from '../../objects/interactable_objects/change_level_door.js';
+import Rectangle from '../../objects/interactable_objects/rectangle.js';
 
 //constante
 const SCALE = 4;
@@ -282,6 +286,33 @@ export default class Animation extends Phaser.Scene {
 		this.enemies.addMultiple(this.arrayZaros);
 		// #endregion
 
+		// #region Mutums
+		this.arrayMutums = [];
+		const mutumLayer = this.map.getObjectLayer('Mutum');
+		mutumLayer.objects.forEach(obj => {
+			if (obj.name === 'Mutum') { // Filtra por nombre
+				const mutum = new Mutum(this, obj.x * SCALE, obj.y * SCALE, this.player, this.exp);
+				mutum.setPool(this.area);
+				mutum.setScale(SCALE);
+				this.arrayMutums.push(mutum);
+			}
+		});
+		this.enemies.addMultiple(this.arrayMutums);
+		// #endregion
+
+		// #region Estakas
+		this.arrayEstakas = [];
+		const estakaLayer = this.map.getObjectLayer('Estaka');
+		estakaLayer.objects.forEach(obj => {
+			if (obj.name === 'Estaka') { // Filtra por nombre
+				const estaka = new Estaka(this, obj.x * SCALE, obj.y * SCALE, this.player, this.exp);
+				estaka.setPool(this.area);
+				estaka.setScale(SCALE);
+				this.arrayEstakas.push(estaka);
+			}
+		});
+		this.enemies.addMultiple(this.arrayEstakas);
+		// #endregion
 		// #endregion
 
 		// #region utilidades
@@ -307,12 +338,12 @@ export default class Animation extends Phaser.Scene {
 		// #endregion
 
 		// #region NPC
-		const NPCpos = objectLayer.objects.find(obj => obj.name == 'weiyoungPosition');
+		const NPCpos = objectLayer.objects.find(obj => obj.name == 'piuPosition');
 		const NPCX = NPCpos.x * SCALE;
 		const NPCY = NPCpos.y * SCALE;
 
-		this.Weiyoung = new NPC(this, NPCX, NPCY, 'Weiyoung', 'dialogues_Weiyoung', "Choque cultural");
-		this.Weiyoung.setScale(SCALE);
+		this.Piu = new NPC(this, NPCX, NPCY, 'Piu', 'dialogues_Piu', "gatitu!!!!");
+		this.Piu.setScale(SCALE);
 		// #endregion
 
 		//#region Traps
@@ -341,6 +372,21 @@ export default class Animation extends Phaser.Scene {
 			}
 		});
 		this.traps.addMultiple(this.arrayRetractableSpikes);
+
+		// #endregion
+
+		// #region statue
+		//se puede añadir la direccion en el archivo json?
+		this.arrayStatues = [];
+		const statueLayer = this.map.getObjectLayer('Statues');
+		statueLayer.objects.forEach(obj => {
+			if (obj.name === 'Statue') { // Filtra por nombre
+				const statue = new Statue(this, obj.x * SCALE, obj.y * SCALE);
+				statue.setScale(SCALE);
+				this.arrayStatues.push(spike);
+			}
+		});
+		this.traps.addMultiple(this.arrayStatues);
 		// #endregion
 
 		// #region rectangulos negros
@@ -350,8 +396,6 @@ export default class Animation extends Phaser.Scene {
 			const rect = new Rectangle(this, obj.x, obj.y, obj.width, obj.height, this.player).setDepth(4);
 			this.rectGroup.add(rect);
 		});
-		// #endregion
-
 		// #endregion
 
 		// #region Collision
