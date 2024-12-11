@@ -241,7 +241,8 @@ export default class Animation extends Phaser.Scene {
 		const cracLayer = this.map.getObjectLayer('Crac');
 		cracLayer.objects.forEach(obj => {
 			if (obj.name === 'Crac') { // Filtra por nombre
-				const crac = new Crac(this, obj.x * SCALE, obj.y * SCALE, this.player, this.exp, 2, 1, "Crac");
+				// scene, x, y, player, exp, life, damage, texture
+				const crac = new Crac(this, obj.x * SCALE, obj.y * SCALE, this.player, this.exp, 3, 1, "Crac");
 				crac.setScale(SCALE);
 				crac.setPool(this.enemyBullets);
 				// Agregar el Crac a la escena y al array
@@ -260,7 +261,7 @@ export default class Animation extends Phaser.Scene {
 		const bobLayer = this.map.getObjectLayer('Bob');
 		bobLayer.objects.forEach(obj => {
 			if (obj.name === 'Bob') { // Filtra por nombre
-				const bob = new Bob(this, obj.x * SCALE, obj.y * SCALE, this.player, this.exp, 2, 1, 'Bob');
+				const bob = new Bob(this, obj.x * SCALE, obj.y * SCALE, this.player, this.exp, 5, 1, 'Bob');
 				bob.setScale(SCALE);
 				this.arrayBobs.push(bob);
 			}
@@ -275,7 +276,7 @@ export default class Animation extends Phaser.Scene {
 
 		letusLayer.objects.forEach(obj => {
 			if (obj.name === 'Letus') { // Filtra por nombre
-				const letus = new Letus(this, obj.x * SCALE, obj.y * SCALE, this.player, this.exp, 2, 1, 'Letus');
+				const letus = new Letus(this, obj.x * SCALE, obj.y * SCALE, this.player, this.exp, 5, 1, 'Letus');
 				letus.setScale(SCALE);
 				this.arrayLetus.push(letus);
 			}
