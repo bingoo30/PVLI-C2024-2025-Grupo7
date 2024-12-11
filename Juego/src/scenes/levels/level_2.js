@@ -21,6 +21,8 @@ import Spike from '../../objects/scenery/spike.js';
 import RetractableSpike from '../../objects/scenery/retractable_spike.js';
 import ExplosiveBullet from '../../objects/abilities/shooting/explosive_bullet.js';
 import Drone from '../../objects/abilities/drone.js';
+import Plant from '../../objects/enemies/plant.js';
+
 
 //constante
 const SCALE = 4;
