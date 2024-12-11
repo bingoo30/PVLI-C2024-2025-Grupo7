@@ -52,7 +52,33 @@ export default class Joker extends Character {
     chasing() {
         this.isChasing = true;
     }
+    onGotHit(damage) {
+        super.onGotHit(damage);
+        console.log(`Joker golpeado. Vida restante: ${this.life}`);
 
+        const animationContainer = document.getElementById('fullscreen-animation');
+        const animationFrame = document.getElementById('animation-frame');
+
+        if (animationContainer && animationFrame) {
+            animationContainer.style.display = 'block';
+            let currentFrame = 0;
+            const frames = ['assets/map/map_boss/map_boss_1.png', 'assets/map/map_boss/map_boss_2.png'];
+
+            const interval = setInterval(() => {
+                animationFrame.src = frames[currentFrame];
+                currentFrame = (currentFrame + 1) % frames.length; // Alterna entre 0 y 1
+            }, 10); 
+
+            setTimeout(() => {
+                clearInterval(interval);
+                animationContainer.style.display = 'none';
+            }, 50); 
+        }
+
+        if (this.life <= 0) {
+            this.destroy();
+        }
+    }
     setDamageArea(area) {
         this.poolArea = area;
     }
