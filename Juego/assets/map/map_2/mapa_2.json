@@ -1169,6 +1169,18 @@
                  "width":0,
                  "x":875,
                  "y":730
+                }, 
+                {
+                 "height":0,
+                 "id":348,
+                 "name":"Letus",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":1331.33333333333,
+                 "y":680
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -2380,7 +2392,7 @@
          "y":0
         }],
  "nextlayerid":14,
- "nextobjectid":348,
+ "nextobjectid":349,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.0",

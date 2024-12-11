@@ -245,7 +245,7 @@ export default class Animation extends Phaser.Scene {
 		const cracLayer = this.map.getObjectLayer('Crac');
 		cracLayer.objects.forEach(obj => {
 			if (obj.name === 'Crac') { // Filtra por nombre
-				const crac = new Crac(this, obj.x * SCALE, obj.y * SCALE, this.player, this.exp, 2 ,1);
+				const crac = new Crac(this, obj.x * SCALE, obj.y * SCALE, this.player, this.exp, 2, 1, "Crac");
 				crac.setScale(SCALE);
 				crac.setPool(this.enemyBullets);
 				// Agregar el Crac a la escena y al array
@@ -253,19 +253,25 @@ export default class Animation extends Phaser.Scene {
 				this.arrayCracs.push(crac);
 			}
 		});
+		console.log(this.arrayCracs);
+
 		this.enemies.addMultiple(this.arrayCracs);
 		// #endregion
 
 		// #region Bobs
 		this.arrayBobs = [];
 		const bobLayer = this.map.getObjectLayer('Bob');
+		console.log('bob: ', bobLayer)
 		bobLayer.objects.forEach(obj => {
-			if (obj.name === 'Bob') { // Filtra por nombre
-				const bob = new Bob(this, obj.x * SCALE, obj.y * SCALE, this.player, this.exp, 2, 1);
+			//if (obj.name === 'Bob') { // Filtra por nombre
+				const bob = new Bob(this, obj.x * SCALE, obj.y * SCALE, this.player, this.exp, 2, 1, 'Bob');
 				bob.setScale(SCALE);
 				this.arrayBobs.push(bob);
-			}
+				console.log('a')
+
+			//}
 		});
+		console.log(this.arrayBobs);
 
 		this.enemies.addMultiple(this.arrayBobs);
 		// #endregion
@@ -275,11 +281,13 @@ export default class Animation extends Phaser.Scene {
 		const letusLayer = this.map.getObjectLayer('Letus');
 		letusLayer.objects.forEach(obj => {
 			if (obj.name === 'Letus') { // Filtra por nombre
-				const letus = new Letus(this, obj.x * SCALE, obj.y * SCALE, this.player, this.exp, 2, 1);
+				const letus = new Letus(this, obj.x * SCALE, obj.y * SCALE, this.player, this.exp, 2, 1, 'Letus');
 				letus.setScale(SCALE);
 				this.arrayLetus.push(letus);
 			}
 		});
+		console.log(this.arrayLetus);
+
 		this.enemies.addMultiple(this.arrayLetus);
 		// #endregion
 
@@ -288,12 +296,14 @@ export default class Animation extends Phaser.Scene {
 		const zaroLayer = this.map.getObjectLayer('Zaro');
 		zaroLayer.objects.forEach(obj => {
 			if (obj.name === 'Zaro') { // Filtra por nombre
-				const zaro = new Zaro(this, obj.x * SCALE, obj.y * SCALE, this.player, this.exp, 2, 1);
+				const zaro = new Zaro(this, obj.x * SCALE, obj.y * SCALE, this.player, this.exp, 2, 1, "Zaro");
 				zaro.setPool(this.enemyBullets);
 				zaro.setScale(SCALE);
 				this.arrayZaros.push(zaro);
 			}
 		});
+		console.log(this.arrayZaros);
+
 		this.enemies.addMultiple(this.arrayZaros);
 		// #endregion
 
@@ -302,12 +312,14 @@ export default class Animation extends Phaser.Scene {
 		const mutumLayer = this.map.getObjectLayer('Mutum');
 		mutumLayer.objects.forEach(obj => {
 			if (obj.name === 'Mutum') { // Filtra por nombre
-				const mutum = new Mutum(this, obj.x * SCALE, obj.y * SCALE, this.player, this.exp, 2 ,1);
+				const mutum = new Mutum(this, obj.x * SCALE, obj.y * SCALE, this.player, this.exp, 2, 1, 'Mutum');
 				mutum.setPool(this.area);
 				mutum.setScale(SCALE);
 				this.arrayMutums.push(mutum);
 			}
 		});
+		console.log(this.arrayMutums);
+
 		this.enemies.addMultiple(this.arrayMutums);
 		// #endregion
 
@@ -316,12 +328,14 @@ export default class Animation extends Phaser.Scene {
 		const estakaLayer = this.map.getObjectLayer('Estaka');
 		estakaLayer.objects.forEach(obj => {
 			if (obj.name === 'Estaka') { // Filtra por nombre
-				const estaka = new Estaka(this, obj.x * SCALE, obj.y * SCALE, this.player, this.exp, 2, 1);
+				const estaka = new Estaka(this, obj.x * SCALE, obj.y * SCALE, this.player, this.exp, 2, 1, 'Estaka');
 				estaka.setPool(this.area);
 				estaka.setScale(SCALE);
 				this.arrayEstakas.push(estaka);
 			}
 		});
+		console.log(this.arrayEstakas);
+
 		this.enemies.addMultiple(this.arrayEstakas);
 		// #endregion
 		// #endregion

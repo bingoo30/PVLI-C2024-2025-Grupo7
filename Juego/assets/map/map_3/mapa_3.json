@@ -209,7 +209,7 @@
                 {
                  "height":0,
                  "id":105,
-                 "name":"Bob ",
+                 "name":"Bob",
                  "point":true,
                  "rotation":0,
                  "type":"",
@@ -221,7 +221,7 @@
                 {
                  "height":0,
                  "id":107,
-                 "name":"Bob ",
+                 "name":"Bob",
                  "point":true,
                  "rotation":0,
                  "type":"",
@@ -233,7 +233,7 @@
                 {
                  "height":0,
                  "id":108,
-                 "name":"Bob ",
+                 "name":"Bob",
                  "point":true,
                  "rotation":0,
                  "type":"",
@@ -245,7 +245,7 @@
                 {
                  "height":0,
                  "id":109,
-                 "name":"Bob ",
+                 "name":"Bob",
                  "point":true,
                  "rotation":0,
                  "type":"",
@@ -257,7 +257,7 @@
                 {
                  "height":0,
                  "id":110,
-                 "name":"Bob ",
+                 "name":"Bob",
                  "point":true,
                  "rotation":0,
                  "type":"",
@@ -269,7 +269,7 @@
                 {
                  "height":0,
                  "id":111,
-                 "name":"Bob ",
+                 "name":"Bob",
                  "point":true,
                  "rotation":0,
                  "type":"",
@@ -281,7 +281,7 @@
                 {
                  "height":0,
                  "id":112,
-                 "name":"Bob ",
+                 "name":"Bob",
                  "point":true,
                  "rotation":0,
                  "type":"",
@@ -293,7 +293,7 @@
                 {
                  "height":0,
                  "id":113,
-                 "name":"Bob ",
+                 "name":"Bob",
                  "point":true,
                  "rotation":0,
                  "type":"",
@@ -305,7 +305,7 @@
                 {
                  "height":0,
                  "id":115,
-                 "name":"Bob ",
+                 "name":"Bob",
                  "point":true,
                  "rotation":0,
                  "type":"",
@@ -317,7 +317,7 @@
                 {
                  "height":0,
                  "id":116,
-                 "name":"Bob ",
+                 "name":"Bob",
                  "point":true,
                  "rotation":0,
                  "type":"",
@@ -856,6 +856,42 @@
                  "width":0,
                  "x":1472,
                  "y":176
+                }, 
+                {
+                 "height":0,
+                 "id":143,
+                 "name":"Zaro",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":704,
+                 "y":396
+                }, 
+                {
+                 "height":0,
+                 "id":144,
+                 "name":"Mutum",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":277.333333333333,
+                 "y":100
+                }, 
+                {
+                 "height":0,
+                 "id":145,
+                 "name":"Mutum",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":130.666666666667,
+                 "y":732
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1603,10 +1639,10 @@
          "y":0
         }],
  "nextlayerid":17,
- "nextobjectid":143,
+ "nextobjectid":146,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "tiledversion":"1.10.2",
+ "tiledversion":"1.11.0",
  "tileheight":32,
  "tilesets":[
         {
@@ -1620,6 +1656,133 @@
          "spacing":0,
          "tilecount":18,
          "tileheight":32,
+         "tiles":[
+                {
+                 "id":0,
+                 "properties":[
+                        {
+                         "name":"collides",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":1,
+                 "properties":[
+                        {
+                         "name":"collides",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":2,
+                 "properties":[
+                        {
+                         "name":"collides",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":3,
+                 "properties":[
+                        {
+                         "name":"collides",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":4,
+                 "properties":[
+                        {
+                         "name":"collides",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":5,
+                 "properties":[
+                        {
+                         "name":"collides",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":6,
+                 "properties":[
+                        {
+                         "name":"collides",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":7,
+                 "properties":[
+                        {
+                         "name":"collides",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":8,
+                 "properties":[
+                        {
+                         "name":"collides",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":9,
+                 "properties":[
+                        {
+                         "name":"collides",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":10,
+                 "properties":[
+                        {
+                         "name":"collides",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":11,
+                 "properties":[
+                        {
+                         "name":"collides",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":14,
+                 "properties":[
+                        {
+                         "name":"collides",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":15,
+                 "properties":[
+                        {
+                         "name":"collides",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }],
          "tilewidth":32,
          "transparentcolor":"#ff00ff"
         }],

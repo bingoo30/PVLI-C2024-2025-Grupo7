@@ -6,8 +6,8 @@ const SHOOTING_RANGE = 700;
 const SHOOTING_COOLDOWN = 2000;
 
 export default class Zaro extends Enemy {
-    constructor(scene, x, y, player, exp, life, damage) {
-        super(scene, x, y, player, "Zaro",exp);
+    constructor(scene, x, y, player, exp, life, damage, texture) {
+        super(scene, x, y, player, texture,exp);
         this.scene = scene;
         this.player = player;
         this.randomX = 0;

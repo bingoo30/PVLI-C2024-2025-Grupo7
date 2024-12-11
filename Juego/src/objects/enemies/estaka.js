@@ -12,8 +12,8 @@ import DamageArea from '../abilities/area_damage/damage_area.js'
  * @param {number} duration - duracion del area
  */
 export default class Estaka extends Enemy {
-    constructor(scene, x, y, player, exp, pool, life, damage) {
-        super(scene, x, y, player, 'Estaka', exp);
+    constructor(scene, x, y, player, exp, pool, life, damage, texture) {
+        super(scene, x, y, player, texture, exp);
         this.AreaDamageRange = 100;
         this.AreaDamage = 0.1;
         this.duration = 1;

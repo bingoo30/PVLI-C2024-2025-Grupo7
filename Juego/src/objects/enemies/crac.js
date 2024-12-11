@@ -10,8 +10,8 @@ import { fire } from '../abilities/shooting/fire.js';
 const SHOOTING_RANGE = 700;
 const SHOOTING_COOLDOWN = 2000;
 export default class Crac extends Enemy {
-	constructor(scene, x, y, player, exp, life, damage) {
-		super(scene, x, y, player, "Crac", exp);
+	constructor(scene, x, y, player, exp, life, damage, texture) {
+		super(scene, x, y, player, texture , exp);
 		this.cooldownCont = 0;
 		this.init(85, 500, life, damage, 0);
 
