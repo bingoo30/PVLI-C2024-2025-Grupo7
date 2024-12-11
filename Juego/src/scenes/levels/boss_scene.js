@@ -33,6 +33,9 @@ export default class BossScene extends Phaser.Scene {
         this.load.image('tapa1', 'assets/map/map_boss/map_boss_1.png');
         this.load.image('tapa2', 'assets/map/map_boss/map_boss_2.png');
 
+        this.load.image('jokerHealthBarBack', 'assets/GUI/healthbar_joker.png');
+        this.load.image('jokerHealthBar', 'assets/GUI/health_bar_joker.png');
+
         
         this.load.tilemapTiledJSON('mapaBoss', 'assets/map/map_boss/4.json');
         this.load.image('tileset4', 'assets/map/map_boss/tileSet_map_boss.png');
@@ -269,7 +272,8 @@ export default class BossScene extends Phaser.Scene {
         this.expBar = new ExpBar(this, 20, 30);
         this.healthBar = new HealthBar(this, 20, 10, this.player);
 
-        this.bossHealthBar = new HealthBar(this, 200, 10, this.joker);
+        this.bossHealthBar = new HealthBar(this, 250, 10, this.joker, 'jokerHealthBarBack', 'jokerHealthBar');
+        this.bossHealthBar.container.setScale(1.2);
 
         // #endregion
 
