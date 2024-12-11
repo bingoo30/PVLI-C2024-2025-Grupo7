@@ -183,10 +183,27 @@
                  "width":0,
                  "x":784,
                  "y":48
+                }, 
+                {
+                 "height":32,
+                 "id":141,
+                 "name":"Statua",
+                 "properties":[
+                        {
+                         "name":"direction",
+                         "type":"string",
+                         "value":"w"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":832,
+                 "y":640
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }, 
@@ -197,7 +214,7 @@
          "objects":[],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }, 
@@ -745,6 +762,17 @@
                  "x":1248,
                  "y":1280
                 }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":16,
+         "name":"Statue",
+         "objects":[],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
@@ -1569,12 +1597,12 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }],
- "nextlayerid":16,
- "nextobjectid":141,
+ "nextlayerid":17,
+ "nextobjectid":142,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.0",

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="60" height="60" tilewidth="32" tileheight="32" infinite="0" nextlayerid="16" nextobjectid="141">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="60" height="60" tilewidth="32" tileheight="32" infinite="0" nextlayerid="17" nextobjectid="142">
  <editorsettings>
   <export target="mapa_3.json" format="json"/>
  </editorsettings>
@@ -134,7 +134,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup id="3" name="position" visible="0">
+ <objectgroup id="3" name="position">
   <object id="28" name="playerPosition" x="784" y="656">
    <point/>
   </object>
@@ -142,8 +142,13 @@
   <object id="31" name="PiuPosition" x="784" y="48">
    <point/>
   </object>
+  <object id="141" name="Statua" x="832" y="640" width="32" height="32">
+   <properties>
+    <property name="direction" value="w"/>
+   </properties>
+  </object>
  </objectgroup>
- <objectgroup id="15" name="Objects" visible="0"/>
+ <objectgroup id="15" name="Objects"/>
  <objectgroup id="4" name="Bob">
   <object id="105" name="Bob " x="1192" y="1520">
    <point/>
@@ -261,6 +266,7 @@
   <object id="139" name="retractableSpike" x="1216" y="1280" width="32" height="32"/>
   <object id="140" name="retractableSpike" x="1248" y="1280" width="32" height="32"/>
  </objectgroup>
+ <objectgroup id="16" name="Statue"/>
  <objectgroup id="13" name="Zaro">
   <object id="90" name="Zaro" x="1824" y="1056">
    <point/>
