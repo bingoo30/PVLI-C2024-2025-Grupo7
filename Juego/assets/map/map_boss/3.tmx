@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="40" height="30" tilewidth="100" tileheight="100" infinite="0" nextlayerid="9" nextobjectid="1">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="40" height="30" tilewidth="100" tileheight="100" infinite="0" nextlayerid="9" nextobjectid="8">
+ <editorsettings>
+  <export target="4.json" format="json"/>
+ </editorsettings>
  <tileset firstgid="1" name="1" tilewidth="200" tileheight="200" tilecount="132" columns="11">
   <image source="tileSet_map_boss.png" trans="ff00ff" width="2200" height="2400"/>
  </tileset>
@@ -116,7 +119,29 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup id="3" name="position"/>
+ <objectgroup id="3" name="position" offsetx="-19.6143" offsety="0">
+  <object id="1" name="jokerPosition" x="2033.34" y="1104.94">
+   <point/>
+  </object>
+  <object id="2" name="playerPosition" x="2066.03" y="1719.52">
+   <point/>
+  </object>
+  <object id="3" name="card" x="1556.06" y="1144.16">
+   <point/>
+  </object>
+  <object id="4" name="card" x="1392.61" y="1745.67">
+   <point/>
+  </object>
+  <object id="5" name="card" x="2647.92" y="1712.98">
+   <point/>
+  </object>
+  <object id="6" name="card" x="2510.62" y="1085.32">
+   <point/>
+  </object>
+  <object id="7" name="card" x="2085.65" y="2092.19">
+   <point/>
+  </object>
+ </objectgroup>
  <layer id="5" name="deco" width="40" height="30" opacity="0.66">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,

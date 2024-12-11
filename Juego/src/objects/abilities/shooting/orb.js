@@ -40,7 +40,7 @@ export default class Orb extends Phaser.GameObjects.Sprite {
     move(xStart, yStart, xObj, yObj, pool) {
         this.setScale(1);
 
-        console.log('orb creada');
+        //console.log('orb creada');
 
         this.start = true; // empieza
 
@@ -104,7 +104,7 @@ export default class Orb extends Phaser.GameObjects.Sprite {
             this.rotate();
         } else if (this.follow) {
             if (!this.actTime) {
-                console.log('actTime')
+                //console.log('actTime')
                 this.timeToStop = time + 10000; // va a seguir el player por 2 segundos
                 this.actTime = true;
             }

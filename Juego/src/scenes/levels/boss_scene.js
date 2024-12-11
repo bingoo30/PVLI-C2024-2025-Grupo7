@@ -28,8 +28,12 @@ export default class BossScene extends Phaser.Scene {
         this.load.image('bossGif', 'assets/enemies/joker/joker_cut_scene.gif');
         this.load.image('projectile', 'assets/bullet/bullet_1.png');
 
+        this.load.image('mapFondo', 'assets/map/map_boss/map_boss_fondo.png');
+        this.load.image('tapa1', 'assets/map/map_boss/map_boss_1.png');
+        this.load.image('tapa2', 'assets/map/map_boss/map_boss_2.png');
 
-        this.load.tilemapTiledJSON('mapaBoss', 'assets/map/map_boss/boss4444.json');
+        
+        this.load.tilemapTiledJSON('mapaBoss', 'assets/map/map_boss/4.json');
         this.load.image('tileset4', 'assets/map/map_boss/tileSet_map_boss.png');
         this.load.image('tileset5', 'assets/map/map_boss/tileSet_map_boss-export.png');
         this.load.image('tileset6', 'assets/map/map_boss/3.png');
@@ -43,6 +47,11 @@ export default class BossScene extends Phaser.Scene {
         this.sound.stopAll(); // Detiene todos los sonidos en reproducción
 
         // #region Map Setup
+
+        const bg = this.add.image(0, 0, 'mapFondo');
+        bg.setOrigin(0, 0); 
+        bg.setDepth(-1);
+
 
         this._tries = data.tries;
         console.log("tries: " + this._tries);
@@ -249,7 +258,7 @@ export default class BossScene extends Phaser.Scene {
         const width = Math.abs(x2 - x1);
         const height = Math.abs(y2 - y1);
 
-        let wall = this.add.rectangle(x1, y1, width, height, 0x0000ff);
+        let wall = this.add.rectangle(x1, y1, width, height);
         this.wallsGroup.add(wall);
 
         // Añadir la colisión estática
