@@ -1,8 +1,8 @@
 import Obstacle from "./obstacle.js";
 
 const STATUE_SHOOT_DAMAGE = 3;
-const STATUE_SHOOT_COOLDOWN = 1000;
-const STATUE_BULLET_SPEED = 100;
+const STATUE_SHOOT_COOLDOWN = 3000;
+const STATUE_LASER_DURATION = 1000;
 /**
 * @extends Obstacle
 */
@@ -12,44 +12,44 @@ export default class Statue extends Obstacle {
         super(scene, x, y, "Statue");
         this.scene.physics.add.existing(this);
         this.setDirection(dir);
-        this.damage = STATUE_SHOOT_DAMAGE;
-        this.timer = STATUE_SHOOT_COOLDOWN;
-        this.shootSpeed = STATUE_BULLET_SPEED;
+        this.init(STATUE_SHOOT_DAMAGE);
+        this.cooldown = STATUE_SHOOT_COOLDOWN;
+        this.laserDuration = STATUE_LASER_DURATION;
+        this.spawnLaser = false;
         this.pool = null;
-        this.init(1);
+
+        this.scene.time.addEvent({
+            delay: this.cooldown, // Tiempo entre cada ciclo
+            callback: this.toggleLaser,
+            callbackScope: this,
+            loop: true
+        });
     }
 
     init(damage) {
         super.init(damage);
     }
     setDirection(dir) {
-        var x = 0; var y=0;
         switch (dir) {
             case 'a': {
-                x = -1;
-                y = 0;
+                this.direction = 3;
             }
                 break;
             case 'w': {
-                x = 0;
-                y = -1;
+                this.direction = 2;
             }
                 break;
             case 'd': {
-                x = 1; 
-                y = 0;
+                this.direction = 1;
             }
                 break;
             case 's': {
-                x = 0;
-                y = 1;
+                this.direction = 0;
             }
                 break;
         }
-        this.direction = new Phaser.Math.Vector2(-1, 0);
     }
-    fire(shooter, damage, speed, sprite, scale, pool, num, critChance = 0, critMultiplier = 2) {
-        for (let i = 0; i < num; i++) {
+    toogleLaser() {
             // Calcular la direcci髇 de la bala a partir del 醤gulo ajustado
             let dx;
             let dy;
@@ -79,28 +79,17 @@ export default class Statue extends Obstacle {
             }
 
             // Extrae la bala de la pool
-            let bullet = pool.spawn(shooter.x, shooter.y, sprite);
-            bullet.rotation = angle+90;
+            let laser = this.pool.spawn(this.x, this.y);
+            laser.rotation = angle+90;
 
             // Configurar la bala
-            bullet.setScale(scale);
-            bullet.setSpeed(speed);
-            bullet.setDamage(damage);
+            laser.setScale(4);
+            laser.setDamage(this.damage);
     
-            // Mover la bala hacia la posici髇 calculada
-            //uso dx y dy por el disparo en abanico si lo hay
-            bullet.move(shooter.x, shooter.y, shooter.x + dx * 1000, shooter.y + dy * 1000);
-        }
     }
 
     preUpdate(t, dt) {
-        if(this.timer < 0) {
-            this.fire(this, this.damage, this.shootSpeed, 'Bala', 4, this.pool, 1)
-            this.timer = STATUE_SHOOT_COOLDOWN;
-        }
-        this.timer = this.timer - dt;
-
-        this.body.setVelocity(0,0);
+        super.preUpdate(t,dt);
     }
 
     setPool(pool) {

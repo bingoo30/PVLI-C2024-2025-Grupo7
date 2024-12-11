@@ -217,7 +217,7 @@ export default class Animation extends Phaser.Scene {
 		}
 		this.playerExplosiveBullets.addMultipleEntity(toAdds);
 
-
+		/*
 		// #region statue laser
 		toAdds = [];
 		this.statusLaser = new Pool(this, MAX, "Laser");
@@ -227,6 +227,7 @@ export default class Animation extends Phaser.Scene {
 		}
 
 		// #endregion
+		*/
 
 		//comparo si hay otros datos de player, si es asi, actualizo, lo hago aqui porque player necesitara registrar del tipo de bala que es
 		if (data.player !== undefined) {
@@ -386,6 +387,7 @@ export default class Animation extends Phaser.Scene {
 
 		// #endregion
 
+		/*
 		// #region statue
 		this.arrayStatues = [];
 		const statueLayer = this.map.getObjectLayer('Statues');
@@ -400,6 +402,7 @@ export default class Animation extends Phaser.Scene {
 		});
 		this.traps.addMultiple(this.arrayStatues);
 		// #endregion
+		*/
 
 		// #region rectangulos negros
 		this.rectGroup = this.add.group();
