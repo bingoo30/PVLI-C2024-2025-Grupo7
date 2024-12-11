@@ -117,7 +117,7 @@ export default class BossScene extends Phaser.Scene {
 
 
         this.joker = new Joker(this, jokerX, jokerY, this.player);
-        console.log('joker:', this.joker.x, this.joker.y);
+        //console.log('joker:', this.joker.x, this.joker.y);
 
 
         // #region Enemy Bullets
@@ -141,13 +141,13 @@ export default class BossScene extends Phaser.Scene {
 
 
         toAdds = [];
-        this.area = new Pool(this, MAX, '03_expl_anim');
+        this.area = new Pool(this, MAX, '13_expl_anim');
         for (let i = 0; i < MAX; i++) {
-            let toAdd = new DamageArea(this, 0, 0, 100, 0, '03_expl_anim');
+            let toAdd = new DamageArea(this, 0, 0, 100, 0, '13_expl_anim');
             toAdds.push(toAdd);
         }
         this.area.addMultipleEntity(toAdds);
-        console.log(this.area);
+        //console.log(this.area);
 
         this.actOrbs = [];
         this.activeOrbsCount = 0;
@@ -230,13 +230,8 @@ export default class BossScene extends Phaser.Scene {
         this.MainSample.play();
         // #endregion
 
-        // Escucha el evento de destrucción
-        this.events.on('cardDestroyed', this.destroyCards, this);
-
     }
-    destroyCards() {
-        console.log('aaaaaaaaaaaaaaaa')
-    }
+   
     createCards() {
         this.cards = []; // Array para almacenar los pilares
 
@@ -264,7 +259,7 @@ export default class BossScene extends Phaser.Scene {
             this.cardsDestroyed++;
             if (this.cardsDestroyed === 5) {
                 this.joker.onGotHit(50); // Inflige daño al Joker
-                console.log("El Joker recibió daño por la destrucción de todos los pilares.");
+                //console.log("El Joker recibió daño por la destrucción de todos los pilares.");
             }
         });
     }
@@ -278,7 +273,7 @@ export default class BossScene extends Phaser.Scene {
                 if (this.cardsDestroyed < 5) {
                     // Si no se destruyen todos los pilares, el jugador recibe daño
                     this.player.onGotHit(20);
-                    console.log("El jugador recibió daño por no destruir todos los pilares.");
+                    //console.log("El jugador recibió daño por no destruir todos los pilares.");
                 }
             },
             callbackScope: this,

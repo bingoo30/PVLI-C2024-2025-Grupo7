@@ -29,7 +29,7 @@ export default class Card extends Phaser.GameObjects.Sprite {
         if (this.isDestroyed) return;
 
         this.life -= damage;
-        console.log(`Card golpeado. Vida restante: ${this.life}`);
+        //console.log(`Card golpeado. Vida restante: ${this.life}`);
 
         this.setTint(0xff0000);
         this.scene.time.delayedCall(100, () => this.clearTint());
@@ -42,8 +42,8 @@ export default class Card extends Phaser.GameObjects.Sprite {
     destroyCard() {
         if (this.scene && this.scene.events) {
             this.isDestroyed = true;
-            console.log('Scene:', this.scene);
-            console.log('Scene events:', this.scene?.events);
+            //console.log('Scene:', this.scene);
+            //console.log('Scene events:', this.scene?.events);
             this.scene.events.emit('cardDestroyed' ); // Notifica a la escena
         } else {
             console.error("Error: 'scene' o 'scene.events' no está definido.");

@@ -10,7 +10,7 @@ export default class Joker extends Character {
         this.minY = 10;
         this.maxX = this.scene.scale.width;
         this.maxY = this.scene.scale.width;
-
+        this.poolArea = null;
         scene.physics.add.existing(this);
         this.damageArea = null;
         this.shootSpeedStatus = 0;
@@ -67,8 +67,21 @@ export default class Joker extends Character {
         this.maxLife = life;
     }
     createDamageArea() {
-        
-        this.damageArea = this.poolArea.spawn(this.x, this.y);
+
+        const dx = this.target.x - this.x;
+        const dy = this.target.y - this.y;
+
+        // Calcular la distancia entre el Joker y el jugador
+        const distance = Math.sqrt(dx * dx + dy * dy);
+
+        // Normalizar la dirección
+        const directionX = dx / distance;
+        const directionY = dy / distance;
+
+        const areaX = this.x + directionX * 300; // 300 px
+        const areaY = this.y + directionY * 300;
+
+        this.damageArea = this.poolArea.spawn(areaX, areaY);
         this.damageArea.reset(this.AreaDamageRange, this.AreaDamage, this.duration);
         const sfx = this.scene.sound.add('enemyAreaAudio');
         sfx.play();
@@ -132,8 +145,8 @@ export default class Joker extends Character {
             const dx = this.target.x - newDistX;
             const dy = this.target.y - newDistY;
 
-            let distanceToPlayer = Math.sqrt(dx * dx + dy * dy);
-            if (distanceToPlayer>100) {
+            let distance = Math.sqrt(dx * dx + dy * dy);
+            if (distance >100) {
                 this.isTeleporting = true;
                 // Animación de teleportación
                 //this.play('joker_teleport');
@@ -203,7 +216,7 @@ export default class Joker extends Character {
 
         if (t > this.lastAttackTime + this.attackInterval) { // A cada dos segundos
             //this.phase = 2;
-            console.log(this.phase)
+            //console.log(this.phase)
             if (this.phase === 1) {
                 //console.log('disparando cartas');
                 this.createDamageArea();
