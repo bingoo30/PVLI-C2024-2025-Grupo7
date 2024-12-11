@@ -397,7 +397,7 @@ export default class Player extends Character {
                     animationKey = this.name + 'IdleDown';
                     break;
                 default:
-                    animationKey = this.texture + 'IdleDown';
+                    animationKey = this.name + 'IdleDown';
                     break;
             }
         }

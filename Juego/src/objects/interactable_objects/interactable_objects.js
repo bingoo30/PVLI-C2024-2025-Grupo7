@@ -19,7 +19,7 @@ export default class InteractableObjects extends Phaser.GameObjects.Sprite {
         this.playerInRange = false;
 
         // Texto de interacci��n inicialmente invisible
-        this.text = this.scene.add.text(this.x - 10, this.y - textDistance, ' ', {
+        this.text = this.scene.add.text(this.x - 10, this.y - textDistance, 'Presiona E', {
             fontFamily: 'PixelArt',
             fontSize: 18,
             fill: '#ffffff',
@@ -38,7 +38,6 @@ export default class InteractableObjects extends Phaser.GameObjects.Sprite {
         this.scene.events.on('Interact', () => {
             if (this.isWaitingInput) this.onInteract()
         });
-        this.text.setText('Presiona E');
     }
     preUpdate(t, dt) {
         super.preUpdate(t, dt);

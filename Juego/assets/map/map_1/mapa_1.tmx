@@ -1005,7 +1005,7 @@
  <objectgroup id="14" name="rectangle">
   <object id="250" x="2224" y="1464" width="320" height="368"/>
   <object id="252" x="312" y="1024" width="256" height="96"/>
-  <object id="253" x="816" y="728" width="136" height="240"/>
+  <object id="253" x="816" y="728" width="120" height="240"/>
   <object id="254" x="1168" y="1496" width="352" height="336"/>
   <object id="255" x="1840" y="1280" width="296" height="352"/>
   <object id="256" x="1664" y="16" width="144" height="272"/>
