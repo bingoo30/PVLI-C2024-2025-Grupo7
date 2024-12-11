@@ -375,6 +375,7 @@ export default class Animation extends Phaser.Scene {
 
 		// #endregion
 
+		/*
 		// #region statue
 		//se puede añadir la direccion en el archivo json?
 		this.arrayStatues = [];
@@ -388,6 +389,7 @@ export default class Animation extends Phaser.Scene {
 		});
 		this.traps.addMultiple(this.arrayStatues);
 		// #endregion
+		*/
 
 		// #region rectangulos negros
 		this.rectGroup = this.add.group();

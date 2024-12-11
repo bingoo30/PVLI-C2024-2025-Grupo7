@@ -173,6 +173,8 @@ export default class BossScene extends Phaser.Scene {
         this.joker.setPool(this.jokerBullets);
         this.joker.setPool2(this.jokerOrbs);
         this.joker.setDamageArea(this.area);
+        this.jokerGroup = this.add.group();
+        this.jokerGroup.add(this.joker);
         // #endregion
 
         // #endregion
@@ -238,7 +240,7 @@ export default class BossScene extends Phaser.Scene {
         this.playerTurret.addMultipleEntity(toAdds);
         this.player.registerTurrets(this.playerTurret);
 
-        let drone = new Drone(this, this.player.x, this.player.y, this.player, this.enemies, this.playerBullets);
+        let drone = new Drone(this, this.player.x, this.player.y, this.player, this.jokerGroup, this.playerBullets);
         this.player.registerDrone(drone);
 		// #endregion
 
