@@ -32,6 +32,8 @@ export default class Plant extends Phaser.GameObjects.Sprite {
     }
 
     destroyPlant(pool) {
+        const sfx = this.scene.sound.add('cureAudio');
+        sfx.play();
         pool.release(this);
     }
 }

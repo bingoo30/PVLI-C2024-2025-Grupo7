@@ -177,6 +177,10 @@ export default class Loading extends Phaser.Scene {
 		this.load.audio('levelUpAudio', 'assets/audio/SFX/level_up.wav');
 		this.load.audio('playerAttackAudio', 'assets/audio/SFX/player_attack.wav');
 		this.load.audio('playerHitAudio', 'assets/audio/SFX/player_hit.wav');
+		this.load.audio('exitButtonAudio', 'assets/audio/SFX/exit_button.wav');
+		this.load.audio('cureAudio', 'assets/audio/SFX/cure.wav');
+		this.load.audio('pointerOverAudio', 'assets/audio/SFX/pointer_over.wav');
+		this.load.audio('playerDeathAudio', 'assets/audio/SFX/player_death.wav');
 		// #endregion
 
 		// #region Explosion
