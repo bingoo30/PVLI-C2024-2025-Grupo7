@@ -1,5 +1,8 @@
 import Enemy from "./enemy.js";
-
+/** 
+ * Enemigo basico
+ * @extends Enemy
+ */
 export default class Bob extends Enemy{
     constructor(scene, x, y, player, exp){
         super(scene, x, y, player, 'Bob', exp);

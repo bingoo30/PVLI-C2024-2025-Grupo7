@@ -1,10 +1,10 @@
 /**
  * @extends Phaser.GameObjects.Sprite
- * Constructor de Player, nuestro caballero medieval con espada y escudo
+ * Constructor barra de experiencia
      * @param {Scene} scene - escena en la que aparece
-     * @param {number} x - coordenada x
-     * @param {number} y - coordenada y
-     * @param {number} depth - la capa que va a estar
+     * @param {Number} x - coordenada x
+     * @param {Number} y - coordenada y
+     * @param {Number} depth - la capa que va a estar
      * atributos
      * @param {container} container - un contenedor que tiene el bar y text
      * 

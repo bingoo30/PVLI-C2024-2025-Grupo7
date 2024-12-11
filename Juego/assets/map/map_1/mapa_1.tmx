@@ -997,7 +997,7 @@
   <object id="19" name="playerPosition" x="800" y="1248">
    <point/>
   </object>
-  <object id="240" name="FlushPosition" x="960" y="1160">
+  <object id="240" name="FlushPosition" x="856" y="1152">
    <point/>
   </object>
   <object id="249" name="changeLevel" x="824" y="400" width="8" height="104"/>

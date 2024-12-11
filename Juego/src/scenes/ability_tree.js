@@ -3,7 +3,7 @@ import StatusIcon from "../UI/statusIcon.js";
 
 
 /**
- * Escena de loading.
+ * Escena de arbol del player.
  * @extends Phaser.Scene
  */
 export default class AbilityTree extends Phaser.Scene {

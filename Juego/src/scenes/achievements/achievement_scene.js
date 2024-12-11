@@ -1,17 +1,12 @@
 import Achievement from "../../UI/achievements.js";
-
-
 export default class AchievementScene extends Phaser.Scene {
+    /**
+ * Escena de logros.
+ * @extends Phaser.Scene
+ */
 
     constructor() {
         super({ key: 'AchievementScene' });
-    }
-
-    /**
-     * Precarga de recursos.
-     */
-    preload() {
-      
     }
     /**
      * Creaci�n de los elementos de la escena.

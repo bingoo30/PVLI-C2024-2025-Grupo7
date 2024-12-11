@@ -28,11 +28,13 @@ export default class TutorialScene extends Phaser.Scene {
 	create(data) {
 		const _tries = data.tries || 1;
 
+		//crear un array de los imagenes del tutorial
 		this.tutorialImages = ['moveTutorial', 'attackTutorial', 'interactTutorial', 'pauseTutorial', 'levelUpTutorial'];
 		this.currentImageIndex = 0;
 
 		this.currentImage = this.add.image(0,0, this.tutorialImages[this.currentImageIndex]).setOrigin(0,0);
 
+		//boton de pasar al siguiente imagen
 		var nextButton = this.add.image(this.sys.game.canvas.width * 0.85, this.sys.game.canvas.height*0.9, 'tutorialNextButton').setOrigin(0,0);
 		nextButton.setInteractive(); 
 
@@ -52,6 +54,7 @@ export default class TutorialScene extends Phaser.Scene {
 
 		});
 
+		//boton de saltar
 		var skipButton = this.add.image(10,10, 'tutorialSkipButton').setOrigin(0,0);
 		skipButton.setInteractive();
 

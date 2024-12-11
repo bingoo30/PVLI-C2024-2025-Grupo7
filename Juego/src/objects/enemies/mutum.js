@@ -2,13 +2,15 @@ import Enemy from "./enemy.js";
 import DamageArea from '../abilities/area_damage/damage_area.js'
 
 /**
- * Constructor de Area de daño
+ * @extends Enemy
+ * Enemigo Mutum que se suicida al colisionar con player
  * @param {Scene} scene - escena en la que aparece
- * @param {number} damage - daño que hace la bala
- * @param {number} x - ejeX inicial
- * @param {number} y- ejeY inical
- * @param {number} damageRange - radio del area
- * @param {number} duration - duracion del area
+ * @param {Number} damage - daño que hace la bala
+ * @param {Number} x - ejeX inicial
+ * @param {Number} y- ejeY inical
+ * @param {Number} damageRange - radio del area
+ * @param {Number} duration - duracion del area
+ * @param {Boolean} isMutum - controla cuando se llama al onDeath
  */
 export default class Mutum extends Enemy {
     constructor(scene, x, y, player, exp, pool) {

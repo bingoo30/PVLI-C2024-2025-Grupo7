@@ -1,20 +1,11 @@
-/**
- * Escena de Título.
- * @extends Phaser.Scene
- */
+
 export default class Pause extends Phaser.Scene {
 	/**
-	 * Escena principal.
+	 * Escena de Pausa.
 	 * @extends Phaser.Scene
 	 */
 	constructor() {
 		super({ key: 'Pause' });
-	}
-	/**
-	 * Cargamos todos los assets que vamos a necesitar
-	 */
-	preload() {
-
 	}
 	/**
 	* Creación de los elementos de la escena principal de juego

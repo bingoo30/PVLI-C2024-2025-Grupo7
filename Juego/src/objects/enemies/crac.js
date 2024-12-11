@@ -1,6 +1,11 @@
 import Enemy from './enemy.js';
 import { fire } from '../abilities/shooting/fire.js';
 
+/** 
+ * Enemigo que dispara proyectiles
+ * @extends Enemy
+ * 
+ */
 
 const SHOOTING_RANGE = 700;
 const SHOOTING_COOLDOWN = 2000;

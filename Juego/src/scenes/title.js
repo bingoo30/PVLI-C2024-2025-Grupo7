@@ -1,10 +1,7 @@
-/**
- * Escena de Título.
- * @extends Phaser.Scene
- */
+
 export default class Title extends Phaser.Scene {
 	/**
-	 * Escena principal.
+	 * Escena de Título.
 	 * @extends Phaser.Scene
 	 */
 	constructor() {

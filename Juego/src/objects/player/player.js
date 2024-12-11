@@ -4,10 +4,13 @@ import Inventory from "./inventory.js";
 
 /**
  * @extends Character
- * Constructor de Player, nuestro caballero medieval con espada y escudo
+ * Constructor de Player
 	 * @param {Scene} scene - escena en la que aparece
 	 * @param {number} x - coordenada x
 	 * @param {number} y - coordenada y
+     * @param {String} texture - la textura que se va usar
+     *
+     * 
  */
 
 export default class Player extends Character {
@@ -15,8 +18,7 @@ export default class Player extends Character {
         //heredo de la clase character
         super(scene, x, y, texture);
         this.name = texture;
-        //this.texture = texture;
-        console.log(texture);
+
         //Medidor de tiempo para los disparos
         this.cooldownCont = 0;
         this.canShoot = true;
@@ -109,6 +111,7 @@ export default class Player extends Character {
         this.prob = prob;
         this.maxLife = life;
     }
+
     // #region getters para el inventario
     getLevel() {
         return this.level;
@@ -124,6 +127,7 @@ export default class Player extends Character {
     }
     // #endregion
 
+    //getters
     getDamage() {
         return this.damage;
     }
@@ -139,6 +143,7 @@ export default class Player extends Character {
     getXpToLevelUp() {
         return this.xpToLevelUp;
     }
+
 
     setTurretAvaliable(a) {
         this.turretAvaliable = a;
@@ -209,6 +214,7 @@ export default class Player extends Character {
         }
 
     }
+
     onPlayerCollectedXP(value) {
         this.xpAcumulator += value; 
     }
@@ -252,9 +258,6 @@ export default class Player extends Character {
 
         const sfx = this.scene.sound.add('levelUpAudio');
         sfx.play();
-
-        console.log("status points:" + this.statusPoint);
-        console.log("ability points:" + this.abilityPoint);
     }
     getANewAbility(ability) {
         switch (ability) {
@@ -275,19 +278,19 @@ export default class Player extends Character {
                 break;
             case 'Utilidad I': {
                 //invocar torreta
-                console.log("invocar torreta");
+               // console.log("invocar torreta");
                 this.setTurretAvaliable(true);
             }
                 break;
             case 'Utilidad II': {
                 //invocar torreta
-                console.log("invocar dron");
+               // console.log("invocar dron");
                 this.setDroneActivated(true);
                 this.drone.setVisible(true);
             }
                 break;
             default: {
-                console.warn(`Habilidad desconocida: ${ability}`);
+               // console.warn(`Habilidad desconocida: ${ability}`);
                 return; // Salir si la habilidad no es válida
             }
         }
@@ -373,6 +376,7 @@ export default class Player extends Character {
         }
         else this.speed.y = 0;
 
+        //animacion cuando estea parado
         if (this.speed.x === 0 && this.speed.y === 0) {
             switch (this.anims.currentAnim?.key) {
                 case this.name +'IdleLeft':
@@ -397,10 +401,10 @@ export default class Player extends Character {
             }
         }
 
-        if (animationKey && this.anims.currentAnim?.key !== animationKey) {
-            this.play(animationKey);
-        }
+        //empezar animacion
+        if (animationKey && this.anims.currentAnim?.key !== animationKey) this.play(animationKey);
 
+        //input 
         if (this.eKey.isDown) {
             this.scene.events.emit('Interact');
         }

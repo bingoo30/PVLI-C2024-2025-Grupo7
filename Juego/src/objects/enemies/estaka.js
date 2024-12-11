@@ -2,7 +2,8 @@ import Enemy from "./enemy.js";
 import DamageArea from '../abilities/area_damage/damage_area.js'
 
 /**
- * Constructor de Area de daño
+ * @extends Enemy
+ * Enemigo de ataque en area
  * @param {Scene} scene - escena en la que aparece
  * @param {number} damage - daño que hace la bala
  * @param {number} x - ejeX inicial

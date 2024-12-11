@@ -6,10 +6,10 @@ export default class Enemy extends Character {
     /**
      * Constructor de los enemigos
      * @param {Scene} scene - escena en la que aparece
-     * @param {number} x - coordenada x
-     * @param {number} y - coordenada y
+     * @param {Number} x - coordenada x
+     * @param {Number} y - coordenada y
      * @param {phaser.Character} type Tipo de character
-     * @param {phaser.player} player Jugador (target) a perseguir
+     * @param {Phaser.player} player Jugador (target) a perseguir
      * 
     */
     constructor(scene, x, y, player, typeEnemy, exp = 1) {

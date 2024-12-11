@@ -1,9 +1,13 @@
 /**
  * Clase para manejar el dialog_plugin cuando hay varios dialogos
- * 
- * 
+     * @param {Scene} scene - escena en la que aparece
+     * atributos
+     * @param {Number} currentDialogueIndex - indice del dialogo actual
+     * @param {Object} dialogues -dialogos que se va a mostrar
+     * @param {Boolean} isWaitingForInput - contralo si se va ignorar el input o no
+     * @param {Boolean} isDialogueActive
+     * 
  */
-
 export default class DialogueManager {
     constructor(scene) {
         this.scene = scene;

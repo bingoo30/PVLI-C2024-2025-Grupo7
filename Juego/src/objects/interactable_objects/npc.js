@@ -21,8 +21,6 @@ export default class NPC extends InteractableObjects {
 
         this.scene.physics.add.existing(this);
         this.scene.add.existing(this);
-        this.body.setSize(16, 10);
-        this.body.setOffset(10, 24);
         this.body.setImmovable(true);
         this.disappear = disappear;
     }

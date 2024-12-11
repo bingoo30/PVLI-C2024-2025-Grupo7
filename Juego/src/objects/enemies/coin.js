@@ -1,6 +1,6 @@
 export default class Coin extends Phaser.GameObjects.Sprite {
     /**
-     * Constructor de coin
+     * Coin, fichas que sueltan cuando muere un enemigo, aumenta experiencia
      * @param {Scene} scene - escena en la que aparece
      * @param {number} exp - experiancia que da la ficha
      * @param {number} active - al principio no esta activo
@@ -49,7 +49,7 @@ export default class Coin extends Phaser.GameObjects.Sprite {
         this.scene.tweens.add({
             targets: this,
             scaleX: 0,           // Escala X a 0 para simular la delgadez en el giro
-            duration: 700,       // Duración de la primera mitad del giro
+            duration: 900,       // Duración de la primera mitad del giro
             ease: 'Linear',
             yoyo: true,          // Revertir el giro
             repeat: -1,          // Repetir indefinidamente

@@ -283,6 +283,8 @@ export default class Animation extends Phaser.Scene {
 		
 		this.enemies.addMultiple(this.arrayLetus);
 
+		this.enemies.setDepth(10);
+
 		
 		//#endregion
 

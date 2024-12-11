@@ -2,7 +2,10 @@ import { showPopup } from "../UI/showPopUp.js";
 import { unlock } from "./achievements/unlock.js";
 
 export default class Gameover extends Phaser.Scene {
-	
+/**
+ * Escena de muerte
+ * @extends Phaser.Scene
+ */
 	constructor() {
 		super({ key: 'gameover' });
 	}

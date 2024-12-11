@@ -1,8 +1,9 @@
 export default class Plant extends Phaser.GameObjects.Sprite {
     /**
-     * Constructor Plant, recupera vida del jugador, es dropeado por el enemigo
+     * @extends Phaser.Sprite
+     * Plant, recupera vida del jugador, es dropeado por el enemigo
      * @param {Scene} scene - escena en la que aparece
-     * @param {number} lifeRec - el numero de vida que recupera la planta
+     * @param {Number} lifeRec - el numero de vida que recupera la planta
      */
     constructor(scene, x, y, lifeRec) {
         super(scene, x, y, 'plant', 0);
