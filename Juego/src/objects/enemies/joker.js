@@ -21,12 +21,13 @@ export default class Joker extends Character {
         this.AreaDamage = 0.1;
         this.duration = 1;
 
-        this.maxLife = 300;
+        this.maxLife = 5;
         //speedFactor,shootCardSpeed, shootSpeed, life, damage, prob
         this.init(100, 300, 500, this.maxLife, 3, 0);
         this.chaseSpeed = 100;
         this.isTeleporting = false;
         this.isChasing = false;
+        this.spawnCards = true;
         this.lastAttackTime = 0;
         this.attackInterval = 2000; 
         this.phase = 3;
@@ -194,6 +195,11 @@ export default class Joker extends Character {
 
     preUpdate(t,dt){
         super.preUpdate(t, dt);
+
+        if (this.life < this.maxLife / 2 && this.spawnCards) {
+            this.spawnCards = false;
+            this.scene.startCardChallenge();
+        }
 
         if (t > this.lastAttackTime + this.attackInterval) { // A cada dos segundos
             //this.phase = 2;

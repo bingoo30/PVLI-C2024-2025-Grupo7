@@ -5,11 +5,11 @@ import HealthBar from '../../UI/health_bar.js';
 import ExpBar from '../../UI/exp_bar.js';
 import Bullet from '../../objects/abilities/shooting/bullet.js';
 import Orb from '../../objects/abilities/shooting/orb.js';
+import Card from '../../objects/abilities/card.js';
 
 import Pool from '../../objects/our_pool.js';
 import DamageArea from '../../objects/abilities/area_damage/damage_area.js';
 import PickableObjects from '../../objects/interactable_objects/pickable_objects.js';
-import Estaka from '../../objects/enemies/estaka.js';
 import ExplosiveBullet from '../../objects/abilities/shooting/explosive_bullet.js';
 
 
@@ -209,6 +209,7 @@ export default class BossScene extends Phaser.Scene {
             this.player.onGotHit(orb.getDamage());
             orb.destroyBullet(this.jokerOrbs);
         });
+
         // #endregion
 
         // #region UI
@@ -227,8 +228,71 @@ export default class BossScene extends Phaser.Scene {
         this.MainSample = this.sound.add('jokerAudio');
         this.MainSample.setLoop(true);
         this.MainSample.play();
-		// #endregion
+        // #endregion
 
+        // Escucha el evento de destrucción
+        this.events.on('cardDestroyed', this.destroyCards, this);
+
+    }
+    destroyCards() {
+        console.log('aaaaaaaaaaaaaaaa')
+    }
+    createCards() {
+        this.cards = []; // Array para almacenar los pilares
+
+        const objectLayer = this.mapBoss.getObjectLayer('position');
+        if (!objectLayer) {
+            console.error('Object Layer no encontrado.');
+            return;
+        }
+
+        const cardPositions = objectLayer.objects.filter(obj => obj.name === 'card');
+        if (cardPositions.length < 5) {
+            console.warn('No se encontraron suficientes posiciones para los pilares.');
+            return;
+        }
+
+        cardPositions.forEach(pos => {
+            const card = new Card(this, pos.x * SCALE, pos.y * SCALE, 'Card', 1); 
+            this.cards.push(card);
+        });
+
+        this.cardsDestroyed = 0; // Contador de pilares destruidos
+
+        // Evento para contar los pilares destruidos
+        this.events.on('cardDestroyed', () => {
+            this.cardsDestroyed++;
+            if (this.cardsDestroyed === 5) {
+                this.joker.onGotHit(50); // Inflige daño al Joker
+                console.log("El Joker recibió daño por la destrucción de todos los pilares.");
+            }
+        });
+    }
+
+    startCardChallenge() {
+        this.createCards();
+
+        this.time.addEvent({
+            delay: 10000, // 10 segundos
+            callback: () => {
+                if (this.cardsDestroyed < 5) {
+                    // Si no se destruyen todos los pilares, el jugador recibe daño
+                    this.player.onGotHit(20);
+                    console.log("El jugador recibió daño por no destruir todos los pilares.");
+                }
+            },
+            callbackScope: this,
+            loop: false
+        });
+
+        // Balas en cards
+        this.physics.add.overlap(this.playerBullets.getPhaserGroup(), this.cards.map(p => p.body), (bullet, cardBody) => {
+            const ca = this.cards.find(c => c.body === cardBody); 
+            if (ca) {
+                bullet.destroyBullet(this.playerBullets); // Destruye la bala
+                ca.onGotHit(1);
+            }
+        });
     }
 
     checkActiveOrbs(orb) {
@@ -237,11 +301,21 @@ export default class BossScene extends Phaser.Scene {
 
         this.actOrbs.push(orb);
 
-        console.log('activeOrbsCount', this.activeOrbsCount)
+        //console.log('activeOrbsCount', this.activeOrbsCount)
         if (this.activeOrbsCount >= 3) {
             this.activeOrbsCount = 0;
             // Cuando haya 3 orbes empieza a moverlas
             this.startOrbsMovement();
+        }
+    }
+
+    checkActiveCards() {
+        this.activeCardsCount--;
+
+        if (this.activeOrbsCount <= 0) {
+            this.activeOrbsCount = 0;
+            this.joker.onGotHit(this.cardDamage);
+            this.activeOrbsCount = 5; // reset para que empiece otra vez
         }
     }
 
@@ -272,8 +346,8 @@ export default class BossScene extends Phaser.Scene {
 
     }
 
+
     onPlayerHit(player, boss) {
         console.log('Player hit by boss');
-        // Handle player damage or game over
     }
 }
