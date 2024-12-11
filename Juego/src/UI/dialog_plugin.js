@@ -186,8 +186,8 @@ export default class DialogText{
 		this.closeBtn = this.scene.make.text({
 			//se crea el boton con las posiciones x e y siguientes
 			// se calculan de forma dinámica para que funcione para diferentes tamaños de pantalla
-			x: this._getGameWidth() - this.padding - 55,
-			y: this._getGameHeight() - this.padding -30,
+			x: this._getGameWidth() - this.padding - 35,
+			y: 30,
 			
 			//el boton queda representado como una X con su estilo debajo
 			text: 'SKIP',
@@ -222,8 +222,8 @@ export default class DialogText{
 
 	// Se crea el borde del botón
 	_createCloseModalButtonBorder() {
-		var x = this._getGameWidth() - this.padding - 60;
-		var y = this._getGameHeight() - this.padding - 35;
+		var x = this._getGameWidth() - this.padding - 45;
+		var y = 25;
 
 		this.graphics.lineStyle(this.borderThickness, this.borderColor, this.borderAlpha);
 		//Se crea el borde del botón sin relleno
