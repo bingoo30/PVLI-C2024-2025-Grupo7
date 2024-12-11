@@ -245,7 +245,7 @@ export default class Animation extends Phaser.Scene {
 		const cracLayer = this.map.getObjectLayer('Crac');
 		cracLayer.objects.forEach(obj => {
 			if (obj.name === 'Crac') { // Filtra por nombre
-				const crac = new Crac(this, obj.x * SCALE, obj.y * SCALE, this.player, this.exp, 8, 8, "Crac");
+				const crac = new Crac(this, obj.x * SCALE, obj.y * SCALE, this.player, 3, 8, 8, "Crac");
 				crac.setScale(SCALE);
 				crac.setPool(this.enemyBullets);
 				// Agregar el Crac a la escena y al array
@@ -264,7 +264,7 @@ export default class Animation extends Phaser.Scene {
 		console.log('bob: ', bobLayer)
 		bobLayer.objects.forEach(obj => {
 			//if (obj.name === 'Bob') { // Filtra por nombre
-				const bob = new Bob(this, obj.x * SCALE, obj.y * SCALE, this.player, this.exp, 12, 4, 'Bob');
+				const bob = new Bob(this, obj.x * SCALE, obj.y * SCALE, this.player, 1, 12, 4, 'Bob');
 				bob.setScale(SCALE);
 				this.arrayBobs.push(bob);
 
@@ -280,7 +280,7 @@ export default class Animation extends Phaser.Scene {
 		const letusLayer = this.map.getObjectLayer('Letus');
 		letusLayer.objects.forEach(obj => {
 			if (obj.name === 'Letus') { // Filtra por nombre
-				const letus = new Letus(this, obj.x * SCALE, obj.y * SCALE, this.player, this.exp, 12, 8, 'Letus');
+				const letus = new Letus(this, obj.x * SCALE, obj.y * SCALE, this.player, 2, 12, 8, 'Letus');
 				letus.setScale(SCALE);
 				this.arrayLetus.push(letus);
 			}
@@ -295,7 +295,7 @@ export default class Animation extends Phaser.Scene {
 		const zaroLayer = this.map.getObjectLayer('Zaro');
 		zaroLayer.objects.forEach(obj => {
 			if (obj.name === 'Zaro') { // Filtra por nombre
-				const zaro = new Zaro(this, obj.x * SCALE, obj.y * SCALE, this.player, this.exp, 8, 12, "Zaro");
+				const zaro = new Zaro(this, obj.x * SCALE, obj.y * SCALE, this.player, 4, 8, 12, "Zaro");
 				zaro.setPool(this.enemyBullets);
 				zaro.setScale(SCALE);
 				this.arrayZaros.push(zaro);
@@ -312,7 +312,7 @@ export default class Animation extends Phaser.Scene {
 		const mutumLayer = this.map.getObjectLayer('Mutum');
 		mutumLayer.objects.forEach(obj => {
 			if (obj.name === 'Mutum') { // Filtra por nombre
-				const mutum = new Mutum(this, obj.x * SCALE, obj.y * SCALE, this.player, this.exp, 4, 16, 'Mutum');
+				const mutum = new Mutum(this, obj.x * SCALE, obj.y * SCALE, this.player, 1, 4, 16, 'Mutum');
 				mutum.setPool(this.area);
 				mutum.setScale(SCALE);
 				this.arrayMutums.push(mutum);
@@ -328,7 +328,7 @@ export default class Animation extends Phaser.Scene {
 		const estakaLayer = this.map.getObjectLayer('Estaka');
 		estakaLayer.objects.forEach(obj => {
 			if (obj.name === 'Estaka') { // Filtra por nombre
-				const estaka = new Estaka(this, obj.x * SCALE, obj.y * SCALE, this.player, this.exp, 12, 10, 'Estaka');
+				const estaka = new Estaka(this, obj.x * SCALE, obj.y * SCALE, this.player, 2, 12, 10, 'Estaka');
 				estaka.setPool(this.area);
 				estaka.setScale(SCALE);
 				this.arrayEstakas.push(estaka);

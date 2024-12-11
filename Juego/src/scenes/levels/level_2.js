@@ -237,7 +237,7 @@ export default class Animation extends Phaser.Scene {
 		const cracLayer = this.map.getObjectLayer('Crac');
 		cracLayer.objects.forEach(obj => {
 			if (obj.name === 'Crac') { // Filtra por nombre
-				const crac = new Crac(this, obj.x * SCALE, obj.y * SCALE, this.player, this.exp, 6, 4, "Crac");
+				const crac = new Crac(this, obj.x * SCALE, obj.y * SCALE, this.player, 2, 6, 4, "Crac");
 				crac.setScale(SCALE);
 				crac.setPool(this.enemyBullets);
 				// Agregar el Crac a la escena y al array
@@ -269,7 +269,7 @@ export default class Animation extends Phaser.Scene {
 		const letusLayer = this.map.getObjectLayer('Letus');
 		letusLayer.objects.forEach(obj => {
 			if (obj.name === 'Letus') { // Filtra por nombre
-				const letus = new Letus(this, obj.x * SCALE, obj.y * SCALE, this.player, this.exp, 8, 4, 'Letus');
+				const letus = new Letus(this, obj.x * SCALE, obj.y * SCALE, this.player, 2, 8, 4, 'Letus');
 				letus.setScale(SCALE);
 				this.arrayLetus.push(letus);
 			}
@@ -284,7 +284,7 @@ export default class Animation extends Phaser.Scene {
 		const zaroLayer = this.map.getObjectLayer('Zaro');
 		zaroLayer.objects.forEach(obj => {
 			if (obj.name === 'Zaro') { // Filtra por nombre
-				const zaro = new Zaro(this, obj.x * SCALE, obj.y * SCALE, this.player, this.exp, 4, 6, "Zaro");
+				const zaro = new Zaro(this, obj.x * SCALE, obj.y * SCALE, this.player, 3, 4, 6, "Zaro");
 				zaro.setPool(this.enemyBullets);
 				zaro.setScale(SCALE);
 				this.arrayZaros.push(zaro);
