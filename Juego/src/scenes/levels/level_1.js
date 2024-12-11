@@ -104,15 +104,16 @@ export default class Animation extends Phaser.Scene {
 		this.objectsLayer = this.map.getObjectLayer('Objects');
 
 		this.objectsLayer.objects.forEach((obj) => {
-			var pickable;
 			if (obj.name == 'key') {
-				pickable= new PickableObjects(this, obj.x * SCALE, obj.y * SCALE, obj.name, obj.name);
+				this.changeKey = new PickableObjects(this, obj.x * SCALE, obj.y * SCALE, obj.name, obj.name);
+				this.PickableObjects.add(this.changeKey);
 			}
 			else if (obj.properties) {
 				var dialogProp= obj.properties.find(prop => prop.name === 'dialog')
-				pickable = new PickableObjects(this, obj.x * SCALE, obj.y * SCALE, obj.name, dialogProp.value, dialogProp.value);
+				var pickable = new PickableObjects(this, obj.x * SCALE, obj.y * SCALE, obj.name, dialogProp.value, dialogProp.value);
+				this.PickableObjects.add(pickable);
 			}
-			this.PickableObjects.add(pickable);
+			
 		});
 
 		// #endregion
@@ -283,24 +284,7 @@ export default class Animation extends Phaser.Scene {
 		
 		this.enemies.addMultiple(this.arrayLetus);
 
-		this.enemies.setDepth(10);
-
-		
-		//#endregion
-
-		//#region Traps
-
-		//this.traps = this.add.group();
-		//this.spikeTrap = new Retractable_Spike(this, this.player.x + 300, this.player.y);
-		//this.spikeTrap.setScale(SCALE);
-		//this.traps.add(this.spikeTrap);
-
-		// this.traps = this.add.group();
-		// this.statue = new Statue(this, this.player.x + 300, this.player.y, 0);
-		// this.statue.setScale(SCALE);
-		// this.statue.setPool(this.enemyBullets);
-		// this.traps.add(this.statue);
-
+		this.enemies.setDepth(1);
 		//#endregion
 
 		//#region rectangles
@@ -347,7 +331,6 @@ export default class Animation extends Phaser.Scene {
 		//#endregion
 
 		// #region Collision
-
 		this.paredLayer.setCollisionByProperty({ collides: true });
 
 		this.physics.add.collider(this.enemies, this.paredLayer);
@@ -491,6 +474,20 @@ export default class Animation extends Phaser.Scene {
 	resumeGame() {
 		this.scene.resume(); // Reanudar la escena actual
 		this.scene.stop("Pause"); // Detener la escena de pausa
+	}
+	/**
+	 * metodo auxiliar para colocar el player en la posicion de la llave (para la presentacion)
+	 */
+	setPlayerToKey() {
+		this.player.x = this.changeKey.x - 25;
+		this.player.y = this.changeKey.y - 25;
+	}
+	/**
+	 * metodo auxiliar para colocar el player en la posicion de la puerta (para la presentacion)
+	 */
+	setPlayerToDoor() {
+		this.player.x = this.DoorLevel2.x +100;
+		this.player.y = this.DoorLevel2.y + 100;
 	}
 	update(t, dt) {
 	}

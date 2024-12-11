@@ -75,11 +75,15 @@ export default class Drone extends Phaser.GameObjects.Sprite {
 
         return this.res;
     }
+    setPosition(x, y) {
+        this.x = x;
+        this.y = y;
+    }
     setDamage(damage) {
         this.damage = damage;
     }
     setBulletSpeed(speed) {
-        this.bulletSpeed = speed - DEFAULT_DRONE_BULLET_SPEED;
+        this.bulletSpeed = speed;
     }
     /**
  * Método para mover al dron hacia el jugador si está fuera de rango.

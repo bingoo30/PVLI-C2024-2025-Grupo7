@@ -4,16 +4,15 @@ import Inventory from "./inventory.js";
 
 /**
  * @extends Character
- * Constructor de Player
-	 * @param {Scene} scene - escena en la que aparece
-	 * @param {number} x - coordenada x
-	 * @param {number} y - coordenada y
-     * @param {String} texture - la textura que se va usar
-     *
-     * 
  */
-
 export default class Player extends Character {
+    /**
+     * Constructor de Player
+     * @param {Scene} scene - escena en la que aparece
+     * @param {number} x - coordenada x
+     * @param {number} y - coordenada y
+     * @param {String} texture - la textura que se va usar
+ */
     constructor(scene, x, y, texture = 'player', scale = 4) {
         //heredo de la clase character
         super(scene, x, y, texture);
@@ -84,7 +83,9 @@ export default class Player extends Character {
         this.dKey = this.scene.input.keyboard.addKey('D'); //derecha
         this.eKey = this.scene.input.keyboard.addKey('E'); //interactuar
         this.pKey = this.scene.input.keyboard.addKey('P'); //pausar el juego
-        this.xKey = this.scene.input.keyboard.addKey('X'); //pausar el juego
+        this.xKey = this.scene.input.keyboard.addKey('X'); //saltar el nivel
+        this.numPad1 = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.NUMPAD_ONE); //teleportarte en donde la llave
+        this.numPad2 = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.NUMPAD_TWO); //teleportarte en donde la puerta
         // Seteamos mouse
         this.mouse = this.scene.input.activePointer;
 
@@ -416,7 +417,14 @@ export default class Player extends Character {
         if (this.xKey.isDown) {
             this.scene.changeToNextLevel();
         }
-
+        if (this.numPad1.isDown) {
+            this.scene.setPlayerToKey();
+            this.drone.setPosition(this.x-50, this.y-10);
+        }
+        if (this.numPad2.isDown) {
+            this.scene.setPlayerToDoor();
+            this.drone.setPosition(this.x + 50, this.y - 10);
+        }
        //Input de mouse
         if (this.mouse.leftButtonDown()) {
             // Todo esto se debería mover al Shooter
