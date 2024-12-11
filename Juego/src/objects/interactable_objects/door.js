@@ -38,10 +38,6 @@ export default class Door extends InteractableObjects {
     }
 
     onInteract() {
-        if (!this.body) {
-           // console.log("Error: 'this.body' no est¨¢ definido en 'onInteract'.");
-            return;
-        }
         if (this.canInteract && !this.isOpen) {
             this.isOpen = true;
         }
