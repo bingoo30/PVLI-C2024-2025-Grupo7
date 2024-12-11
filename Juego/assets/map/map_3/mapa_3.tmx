@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="60" height="60" tilewidth="32" tileheight="32" infinite="0" nextlayerid="17" nextobjectid="142">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="60" height="60" tilewidth="32" tileheight="32" infinite="0" nextlayerid="17" nextobjectid="143">
  <editorsettings>
   <export target="mapa_3.json" format="json"/>
  </editorsettings>
@@ -139,13 +139,8 @@
    <point/>
   </object>
   <object id="30" name="changeLevel" x="1888" y="416" width="8" height="96"/>
-  <object id="31" name="PiuPosition" x="784" y="48">
+  <object id="31" name="PiuPosition" x="732.333" y="114">
    <point/>
-  </object>
-  <object id="141" name="Statua" x="832" y="640" width="32" height="32">
-   <properties>
-    <property name="direction" value="w"/>
-   </properties>
   </object>
  </objectgroup>
  <objectgroup id="15" name="Objects"/>
@@ -254,7 +249,7 @@
    <point/>
   </object>
  </objectgroup>
- <objectgroup id="11" name="RetactableSpikes">
+ <objectgroup id="11" name="RetractablesSpikes">
   <object id="130" name="retractableSpike" x="832" y="864" width="32" height="32"/>
   <object id="131" name="retractableSpike" x="720" y="1136" width="32" height="32"/>
   <object id="132" name="retractableSpike" x="592" y="1040" width="32" height="32"/>
@@ -266,7 +261,14 @@
   <object id="139" name="retractableSpike" x="1216" y="1280" width="32" height="32"/>
   <object id="140" name="retractableSpike" x="1248" y="1280" width="32" height="32"/>
  </objectgroup>
- <objectgroup id="16" name="Statue"/>
+ <objectgroup id="16" name="Statues">
+  <object id="142" name="Statue" x="874.667" y="729.333">
+   <properties>
+    <property name="dir" value="a"/>
+   </properties>
+   <point/>
+  </object>
+ </objectgroup>
  <objectgroup id="13" name="Zaro">
   <object id="90" name="Zaro" x="1824" y="1056">
    <point/>
@@ -393,7 +395,7 @@
   <object id="27" name="verticalDoor" x="1472" y="1512" width="8" height="56"/>
   <object id="40" name="verticalDoor" x="1376" y="520" width="8" height="56"/>
  </objectgroup>
- <objectgroup id="5" name="rectangle" visible="0">
+ <objectgroup id="5" name="rectangle">
   <object id="35" x="632" y="0" width="280" height="192"/>
   <object id="39" x="1616" y="288" width="288" height="336"/>
   <object id="41" x="1384" y="472" width="232" height="160"/>

@@ -40,9 +40,9 @@ export default class Animation extends Phaser.Scene {
 	}
 	preload() {
 		// dialogos level2
-		this.load.tilemapTiledJSON('mapa3', 'assets/map/map_2/mapa_2.json');
+		this.load.tilemapTiledJSON('mapa3', 'assets/map/map_3/mapa_3.json');
 
-		this.load.image('tileset3', 'assets/map/map_2/map_tiles2.png');
+		this.load.image('tileset3', 'assets/map/map_3/map_tiles3.png');
 
 		this.load.json('dialogues_Piu', 'assets/dialogues/dialogues_piu.json');
 		this.load.image('Piu', 'assets/character/piu.png');
@@ -159,7 +159,6 @@ export default class Animation extends Phaser.Scene {
 
 
 		// #region Player Bullets
-
 		toAdds = [];
 		this.playerBullets = new Pool(this, MAX, 'Bullet');
 		for (let i = 0; i < MAX; i++) {
@@ -217,6 +216,17 @@ export default class Animation extends Phaser.Scene {
 			toAdds.push(toAdd);
 		}
 		this.playerExplosiveBullets.addMultipleEntity(toAdds);
+
+
+		// #region statue laser
+		toAdds = [];
+		this.statusLaser = new Pool(this, MAX, "Laser");
+		for (let i = 0; i < MAX; i++) {
+			let toAdd = new Laser(this, 0, 0, 'StatueLaser');
+			toAdds.push(toAdd);
+		}
+
+		// #endregion
 
 		//comparo si hay otros datos de player, si es asi, actualizo, lo hago aqui porque player necesitara registrar del tipo de bala que es
 		if (data.player !== undefined) {
@@ -338,7 +348,7 @@ export default class Animation extends Phaser.Scene {
 		// #endregion
 
 		// #region NPC
-		const NPCpos = objectLayer.objects.find(obj => obj.name == 'piuPosition');
+		const NPCpos = objectLayer.objects.find(obj => obj.name == 'PiuPosition');
 		const NPCX = NPCpos.x * SCALE;
 		const NPCY = NPCpos.y * SCALE;
 
@@ -348,6 +358,7 @@ export default class Animation extends Phaser.Scene {
 
 		//#region Traps
 		this.traps = this.add.group();
+		/*
 		// #region Spikes
 		this.arraySpikes = [];
 		const spikeLayer = this.map.getObjectLayer('Spikes');
@@ -360,7 +371,7 @@ export default class Animation extends Phaser.Scene {
 		});
 		this.traps.addMultiple(this.arraySpikes);
 		// #endregion
-
+		*/
 		// #region Retractables spikes
 		this.arrayRetractableSpikes = [];
 		const retractableSpikeLayer = this.map.getObjectLayer('RetractablesSpikes');
@@ -375,21 +386,20 @@ export default class Animation extends Phaser.Scene {
 
 		// #endregion
 
-		/*
 		// #region statue
-		//se puede añadir la direccion en el archivo json?
 		this.arrayStatues = [];
 		const statueLayer = this.map.getObjectLayer('Statues');
 		statueLayer.objects.forEach(obj => {
 			if (obj.name === 'Statue') { // Filtra por nombre
-				const statue = new Statue(this, obj.x * SCALE, obj.y * SCALE);
+				const dir = obj.properties.find(prop => prop.name === 'dir');
+				const statue = new Statue(this, obj.x * SCALE, obj.y * SCALE, dir);
 				statue.setScale(SCALE);
-				this.arrayStatues.push(spike);
+				statue.setPool();
+				this.arrayStatues.push(statue);
 			}
 		});
 		this.traps.addMultiple(this.arrayStatues);
 		// #endregion
-		*/
 
 		// #region rectangulos negros
 		this.rectGroup = this.add.group();
@@ -507,7 +517,7 @@ export default class Animation extends Phaser.Scene {
 		this.cameras.main.startFollow(this.player);
 
 		// #region sonido
-		this.MainSample = this.sound.add('level3Audio');
+		this.MainSample = this.sound.add('level2Audio');
 		this.MainSample.play();
 		this.MainSample.setLoop(true);
 		// #endregion

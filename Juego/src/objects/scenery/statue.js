@@ -11,17 +11,43 @@ export default class Statue extends Obstacle {
     constructor(scene, x, y, dir) {
         super(scene, x, y, "Statue");
         this.scene.physics.add.existing(this);
-        this.direction = dir;
+        this.setDirection(dir);
         this.damage = STATUE_SHOOT_DAMAGE;
         this.timer = STATUE_SHOOT_COOLDOWN;
         this.shootSpeed = STATUE_BULLET_SPEED;
+        this.pool = null;
         this.init(1);
     }
 
     init(damage) {
         super.init(damage);
     }
-
+    setDirection(dir) {
+        var x = 0; var y=0;
+        switch (dir) {
+            case 'a': {
+                x = -1;
+                y = 0;
+            }
+                break;
+            case 'w': {
+                x = 0;
+                y = -1;
+            }
+                break;
+            case 'd': {
+                x = 1; 
+                y = 0;
+            }
+                break;
+            case 's': {
+                x = 0;
+                y = 1;
+            }
+                break;
+        }
+        this.direction = new Phaser.Math.Vector2(-1, 0);
+    }
     fire(shooter, damage, speed, sprite, scale, pool, num, critChance = 0, critMultiplier = 2) {
         for (let i = 0; i < num; i++) {
             // Calcular la direcci髇 de la bala a partir del 醤gulo ajustado

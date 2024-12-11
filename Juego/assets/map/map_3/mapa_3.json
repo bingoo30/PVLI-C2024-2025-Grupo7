@@ -181,25 +181,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":784,
-                 "y":48
-                }, 
-                {
-                 "height":32,
-                 "id":141,
-                 "name":"Statua",
-                 "properties":[
-                        {
-                         "name":"direction",
-                         "type":"string",
-                         "value":"w"
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":32,
-                 "x":832,
-                 "y":640
+                 "x":732.333,
+                 "y":114
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -650,7 +633,7 @@
         {
          "draworder":"topdown",
          "id":11,
-         "name":"RetactableSpikes",
+         "name":"RetractablesSpikes",
          "objects":[
                 {
                  "height":32,
@@ -771,8 +754,26 @@
         {
          "draworder":"topdown",
          "id":16,
-         "name":"Statue",
-         "objects":[],
+         "name":"Statues",
+         "objects":[
+                {
+                 "height":0,
+                 "id":142,
+                 "name":"Statue",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"dir",
+                         "type":"string",
+                         "value":"a"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":874.667,
+                 "y":729.333
+                }],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
@@ -1597,15 +1598,15 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }],
  "nextlayerid":17,
- "nextobjectid":142,
+ "nextobjectid":143,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "tiledversion":"1.11.0",
+ "tiledversion":"1.10.2",
  "tileheight":32,
  "tilesets":[
         {

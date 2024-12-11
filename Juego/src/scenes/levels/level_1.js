@@ -237,7 +237,7 @@ export default class Animation extends Phaser.Scene {
 		// #endregion
 
 		// #region Enemy
-
+		this.exp = 1;
 		this.arrayCracs = [];
 		const cracLayer = this.map.getObjectLayer('Crac');
 		cracLayer.objects.forEach(obj => {
