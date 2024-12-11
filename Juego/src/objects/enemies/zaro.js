@@ -6,7 +6,7 @@ const SHOOTING_RANGE = 700;
 const SHOOTING_COOLDOWN = 2000;
 
 export default class Zaro extends Enemy {
-    constructor(scene, x, y, player, exp) {
+    constructor(scene, x, y, player, exp, life, damage) {
         super(scene, x, y, player, "Zaro",exp);
         this.scene = scene;
         this.player = player;
@@ -16,7 +16,7 @@ export default class Zaro extends Enemy {
 
         this.scene.add.existing(this);
 
-        this.init(150, 300, 2, 2, 0);
+        this.init(150, 300, life, damage, 0);
         let timer = this.scene.time.addEvent({
             delay: 2000,
             callback: this.changeVisible,

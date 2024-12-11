@@ -13,7 +13,7 @@ import DamageArea from '../abilities/area_damage/damage_area.js'
  * @param {Boolean} isMutum - controla cuando se llama al onDeath
  */
 export default class Mutum extends Enemy {
-    constructor(scene, x, y, player, exp, pool) {
+    constructor(scene, x, y, player, exp, pool, life, damage) {
         super(scene, x, y, player, 'Mutum', exp);
         this.AreaDamageRange = 100;
         this.AreaDamage = 0.3;  
@@ -23,7 +23,7 @@ export default class Mutum extends Enemy {
         this.pool = pool;
 
         this.isMutum = true;
-        this.init(50, 0, 2, 2, 0);
+        this.init(50, 0, life, damage, 0);
     }
     init(speedFactor, shootSpeed, life, damage, prob) {
         super.init(speedFactor, shootSpeed, life, damage, prob);

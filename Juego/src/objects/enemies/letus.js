@@ -4,10 +4,10 @@ import Enemy from "./enemy.js";
  * @extends Enemy
  */
 export default class Letus extends Enemy {
-    constructor(scene, x, y, player, exp) {
+    constructor(scene, x, y, player, exp, life, damage) {
         super(scene, x, y, player, 'Letus', exp);
         this.scene.add.existing(this);
-        this.init(100, 0, 5, 2, 0);
+        this.init(100, 0, life, damage, 0);
     }
     init(speedFactor, shootSpeed, life, damage, prob) {
         super.init(speedFactor, shootSpeed, life, damage, prob);
