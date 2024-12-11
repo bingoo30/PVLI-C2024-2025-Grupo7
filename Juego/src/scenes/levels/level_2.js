@@ -54,7 +54,7 @@ export default class Animation extends Phaser.Scene {
 	*/
 	create(data) {
 		this.sound.stopAll();
-		this._tries = data.tries;
+		this.tries = data.tries;
 
 		// #region Entities
 		// #region Map
@@ -78,7 +78,7 @@ export default class Animation extends Phaser.Scene {
 		const objectLayer = this.map.getObjectLayer('position');
 
 		const change = objectLayer.objects.find(obj => obj.name == 'changeLevel');
-		this.DoorLevel2 = new ChangeLevelDoor(this, change.x, change.y, change.width, change.height);
+		this.DoorLevel3 = new ChangeLevelDoor(this, change.x, change.y, change.width, change.height);
 
 		this.doorGroup = this.add.group();
 		this.doorLayer = this.map.getObjectLayer('Door');
@@ -487,15 +487,15 @@ export default class Animation extends Phaser.Scene {
 
 	changeToGameover() {
 		this.MainSample.stop();
-		this.scene.start("gameover", { player: this.player, tries: this._tries });
+		this.scene.start("gameover", { player: this.player, tries: this.tries, previousScene: this});
 	}
 
 	changeToNextLevel() {
 		this.MainSample.stop();
-		this.scene.start('level3', { player: this.player, tries: this._tries });
+		this.scene.start('level3', { player: this.player, tries: this.tries});
 	}
 	pauseGame() {
-		this.scene.launch("Pause", { previousScene: this.scene.key }); // Lanzar la escena de pausa
+		this.scene.launch("Pause", {previousScene: this.scene.key }); // Lanzar la escena de pausa
 		this.scene.pause(); // Pausar la escena actual
 	}
 	resumeGame() {

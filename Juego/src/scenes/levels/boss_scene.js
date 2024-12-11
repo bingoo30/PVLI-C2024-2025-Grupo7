@@ -49,6 +49,7 @@ export default class BossScene extends Phaser.Scene {
     */
     create(data) {
         this.sound.stopAll(); // Detiene todos los sonidos en reproducción
+        this.tries = data.tries;
 
         // #region Map Setup
 
@@ -78,9 +79,6 @@ export default class BossScene extends Phaser.Scene {
                 repeat
             });
         });
-
-        this._tries = data.tries;
-        console.log("tries: " + this._tries);
 
         this.mapBoss = this.make.tilemap({ key: 'mapaBoss' });
         if (!this.mapBoss) console.error("La mapa no se ha creado correctamente.");
@@ -409,7 +407,7 @@ export default class BossScene extends Phaser.Scene {
     }
 
     changeToGameover() {
-        this.scene.start("gameover", { tries: this._tries });
+        this.scene.start("gameover", { player: this.player, tries: this.tries, previousScene: this });
     }
     pauseGame() {
         this.scene.launch("Pause", { previousScene: this.scene.key }); // Lanzar la escena de pausa

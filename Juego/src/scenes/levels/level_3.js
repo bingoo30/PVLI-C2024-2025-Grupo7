@@ -57,7 +57,7 @@ export default class Animation extends Phaser.Scene {
 	*/
 	create(data) {
 		this.sound.stopAll();
-		this._tries = data.tries;
+		this.tries = data.tries;
 
 		// #region Entities
 		// #region Map
@@ -533,12 +533,12 @@ export default class Animation extends Phaser.Scene {
 
 	changeToGameover() {
 		this.MainSample.stop();
-		this.scene.start("gameover", { player: this.player, tries: this._tries });
+		this.scene.start("gameover", { player: this.player, tries: this.tries, previousScene: this});
 	}
 
 	changeToNextLevel() {
 		this.MainSample.stop();
-		this.scene.start('BossScene', { player: this.player, tries: this._tries });
+		this.scene.start('BossScene', { player: this.player, tries: this.tries});
 	}
 	pauseGame() {
 		this.scene.launch("Pause", { previousScene: this.scene.key }); // Lanzar la escena de pausa

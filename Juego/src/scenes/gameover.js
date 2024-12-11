@@ -44,13 +44,18 @@ export default class Gameover extends Phaser.Scene {
 		}
 		// #endregion
 
-		var sprite = this.add.image(this.sys.game.canvas.width/2, 20, 'end').setOrigin(0.5,0)
-		sprite.setInteractive(); // Hacemos el sprite interactivo para que lance eventos
+		var background = this.add.image(this.sys.game.canvas.width / 2, 20, 'end').setOrigin(0.5, 0);
+
+		let retryButton = this.add.image(this.sys.game.canvas.width / 5, 500, 'RetryButton').setScale(0.35).setInteractive();
+		let GameOverButton = this.add.image((this.sys.game.canvas.width/4 +200), 500, 'ExitToMainMenuButton').setScale(0.35).setInteractive();
+		
 
 		// Escuchamos los eventos del ratón cuando interactual con nuestro sprite de "Start"
-	    sprite.on('pointerup', pointer => {
+		GameOverButton.on('pointerup', () => {
 			this.scene.start('title', { player: data.player, tries: this._tries }); //Cambiamos a la escena de juego
 	    });
-
+		retryButton.on('pointerup', () => {
+			this.scene.start(data.previousScene, { player: data.player, tries: this._tries }); //Cambiamos a la escena de juego
+		});
 	}
 }

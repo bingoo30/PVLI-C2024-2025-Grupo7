@@ -63,9 +63,7 @@ export default class Animation extends Phaser.Scene {
 		// #region Map
 
 		this.sound.stopAll(); // Detiene todos los sonidos en reproducción
-
-		this._tries = data.tries;
-		console.log("tries: " + this._tries);
+		this.tries = data.tries;
 
 		this.map = this.make.tilemap({ key: 'mapa1', tileWidth: 32, tileHeight: 32 });
 		this.tileset = this.map.addTilesetImage('mapTiles', 'tileset1');
@@ -459,7 +457,7 @@ export default class Animation extends Phaser.Scene {
 		this.events.removeAllListeners('IKilledAnEnemy');
 		this.events.removeAllListeners('TurretTimeOVer');
 		this.events.removeAllListeners('playerRecuperaVida');
-		this.scene.start("gameover", { player: this.player, tries: this._tries });
+		this.scene.start("gameover", { player: this.player, tries: this.tries, previousScene: this});
 	}
 
 	changeToNextLevel() {
@@ -467,7 +465,7 @@ export default class Animation extends Phaser.Scene {
 		this.events.removeAllListeners('IKilledAnEnemy');
 		this.events.removeAllListeners('TurretTimeOVer');
 		this.events.removeAllListeners('playerRecuperaVida');
-		this.scene.start('level2', { player: this.player, tries: this._tries });
+		this.scene.start('level2', { player: this.player, tries: this.tries });
 	}
 	pauseGame() {
 		this.scene.launch("Pause", { previousScene: this.scene.key }); // Lanzar la escena de pausa

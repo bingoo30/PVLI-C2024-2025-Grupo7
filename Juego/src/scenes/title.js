@@ -44,19 +44,11 @@ export default class Title extends Phaser.Scene {
 		back.setOrigin(0, 0);  // Asegura que el fondo empieza desde la esquina superior izquierda
 		back.setDisplaySize(this.sys.game.config.width, this.sys.game.config.height);  // Redimensiona al tamaño del canvas
 
-
 		//Pintamos un botón de Empezar
 		var startButton = this.add.image(this.sys.game.canvas.width/2, this.sys.game.canvas.height/2+50, 'start')
 		startButton.setInteractive(); // Hacemos el sprite interactivo para que lance eventos
 
-		
-
-		// Escuchamos los eventos del ratón cuando interactual con nuestro sprite de "Start"
-		startButton.on('pointerdown', pointer => {
-	    	 //console.log("pulsando");
-	    });
-
-		startButton.on('pointerup', pointer => {
+		startButton.on('pointerup', () => {
 			TitleSample.stop(); // Detiene el audio de fondo
 
 			buttonSFX.play();
@@ -75,15 +67,8 @@ export default class Title extends Phaser.Scene {
 		var acvButton = this.add.image(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height / 2 + 140, 'logros');
 		acvButton.setInteractive(); // Hacemos el sprite interactivo para que lance eventos
 
-
-		// Escuchamos los eventos del ratón cuando interactual con nuestro sprite de "Start"
-		acvButton.on('pointerdown', pointer => {
-			//console.log("pulsando");
-		});
-
-		acvButton.on('pointerup', pointer => {
+		acvButton.on('pointerup', () => {
 			buttonSFX.play();
-
 			// Agregar un retraso de 250ms antes de cambiar de escena
 			this.time.addEvent({
 				delay: 250, // 250 ms
@@ -97,7 +82,7 @@ export default class Title extends Phaser.Scene {
 		var tutorialButton = this.add.image(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height / 2 + 210, 'tutorial');
 		tutorialButton.setInteractive(); // Hacemos el sprite interactivo para que lance eventos
 
-		tutorialButton.on('pointerup', pointer => {
+		tutorialButton.on('pointerup', () => {
 			TitleSample.stop(); // Detiene el audio de fondo
 
 			buttonSFX.play();

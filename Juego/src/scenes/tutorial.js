@@ -27,7 +27,7 @@ export default class TutorialScene extends Phaser.Scene {
 	*/
 	create(data) {
 		const _tries = data.tries || 1;
-
+		this.sound.pauseAll();
 		//crear un array de los imagenes del tutorial
 		this.tutorialImages = ['moveTutorial', 'attackTutorial', 'interactTutorial', 'pauseTutorial', 'levelUpTutorial'];
 		this.currentImageIndex = 0;
@@ -38,7 +38,7 @@ export default class TutorialScene extends Phaser.Scene {
 		var nextButton = this.add.image(this.sys.game.canvas.width * 0.85, this.sys.game.canvas.height*0.9, 'tutorialNextButton').setOrigin(0,0);
 		nextButton.setInteractive(); 
 
-		nextButton.on('pointerup', pointer => {
+		nextButton.on('pointerup', () => {
 			this.currentImageIndex++;
 			if (this.currentImageIndex < this.tutorialImages.length) {
 				this.currentImage.setTexture(this.tutorialImages[this.currentImageIndex]);
@@ -47,7 +47,7 @@ export default class TutorialScene extends Phaser.Scene {
 				this.time.addEvent({
 					delay: 250,
 					callback: () => {
-						this.scene.start('level1', { tries: _tries });
+						this.scene.start('level1', { tries: _tries, player: data.player});
 					}
 				});
 			}
