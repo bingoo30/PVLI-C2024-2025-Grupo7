@@ -243,7 +243,7 @@ export default class Animation extends Phaser.Scene {
 		const cracLayer = this.map.getObjectLayer('Crac');
 		cracLayer.objects.forEach(obj => {
 			if (obj.name === 'Crac') { // Filtra por nombre
-				const crac = new Crac(this, obj.x * SCALE, obj.y * SCALE, this.player, this.exp);
+				const crac = new Crac(this, obj.x * SCALE, obj.y * SCALE, this.player, this.exp, 2, 1);
 				crac.setScale(SCALE);
 				crac.setPool(this.enemyBullets);
 				// Agregar el Crac a la escena y al array
@@ -252,7 +252,7 @@ export default class Animation extends Phaser.Scene {
 			}
 		});
 
-		//console.log(this.arrayCracs); // Depuración: verificar el contenido del array
+		console.log(this.arrayCracs); // Depuración: verificar el contenido del array
 
 		this.enemies = this.add.group();
 		this.enemies.addMultiple(this.arrayCracs);
@@ -262,11 +262,12 @@ export default class Animation extends Phaser.Scene {
 		const bobLayer = this.map.getObjectLayer('Bob');
 		bobLayer.objects.forEach(obj => {
 			if (obj.name === 'Bob') { // Filtra por nombre
-				const bob = new Bob(this, obj.x * SCALE, obj.y * SCALE, this.player, this.exp);
+				const bob = new Bob(this, obj.x * SCALE, obj.y * SCALE, this.player, this.exp, 2, 1);
 				bob.setScale(SCALE);
 				this.arrayBobs.push(bob);
 			}
 		});
+		console.log(this.arrayBobs);
 
 		this.enemies.addMultiple(this.arrayBobs);
 
@@ -276,12 +277,13 @@ export default class Animation extends Phaser.Scene {
 
 		letusLayer.objects.forEach(obj => {
 			if (obj.name === 'Letus') { // Filtra por nombre
-				const letus = new Letus(this, obj.x * SCALE, obj.y * SCALE, this.player, this.exp);
+				const letus = new Letus(this, obj.x * SCALE, obj.y * SCALE, this.player, this.exp, 2, 1);
 				letus.setScale(SCALE);
 				this.arrayLetus.push(letus);
 			}
 		});
-		
+		console.log(this.arrayLetus);
+
 		this.enemies.addMultiple(this.arrayLetus);
 
 		this.enemies.setDepth(1);

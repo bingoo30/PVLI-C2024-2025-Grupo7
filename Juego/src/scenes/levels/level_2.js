@@ -232,11 +232,12 @@ export default class Animation extends Phaser.Scene {
 		this.enemies = this.add.group();
 
 		// #region Cracs
+		this.exp = 1;
 		this.arrayCracs = [];
 		const cracLayer = this.map.getObjectLayer('Crac');
 		cracLayer.objects.forEach(obj => {
 			if (obj.name === 'Crac') { // Filtra por nombre
-				const crac = new Crac(this, obj.x * SCALE, obj.y * SCALE, this.player, this.exp);
+				const crac = new Crac(this, obj.x * SCALE, obj.y * SCALE, this.player, this.exp, 2, 1);
 				crac.setScale(SCALE);
 				crac.setPool(this.enemyBullets);
 				// Agregar el Crac a la escena y al array
@@ -244,6 +245,7 @@ export default class Animation extends Phaser.Scene {
 				this.arrayCracs.push(crac);
 			}
 		});
+		console.log(this.arrayCracs);
 		this.enemies.addMultiple(this.arrayCracs);
 		// #endregion
 
@@ -252,11 +254,12 @@ export default class Animation extends Phaser.Scene {
 		const bobLayer = this.map.getObjectLayer('Bob');
 		bobLayer.objects.forEach(obj => {
 			if (obj.name === 'Bob') { // Filtra por nombre
-				const bob = new Bob(this, obj.x * SCALE, obj.y * SCALE, this.player, this.exp);
+				const bob = new Bob(this, obj.x * SCALE, obj.y * SCALE, this.player, this.exp, 2, 1);
 				bob.setScale(SCALE);
 				this.arrayBobs.push(bob);
 			}
 		});
+		console.log(this.arrayBobs);
 
 		this.enemies.addMultiple(this.arrayBobs);
 		// #endregion
@@ -266,11 +269,13 @@ export default class Animation extends Phaser.Scene {
 		const letusLayer = this.map.getObjectLayer('Letus');
 		letusLayer.objects.forEach(obj => {
 			if (obj.name === 'Letus') { // Filtra por nombre
-				const letus = new Letus(this, obj.x * SCALE, obj.y * SCALE, this.player, this.exp);
+				const letus = new Letus(this, obj.x * SCALE, obj.y * SCALE, this.player, this.exp, 2, 1);
 				letus.setScale(SCALE);
 				this.arrayLetus.push(letus);
 			}
 		});
+		console.log(this.arrayLetus);
+
 		this.enemies.addMultiple(this.arrayLetus);
 		// #endregion
 
@@ -279,12 +284,14 @@ export default class Animation extends Phaser.Scene {
 		const zaroLayer = this.map.getObjectLayer('Zaro');
 		zaroLayer.objects.forEach(obj => {
 			if (obj.name === 'Zaro') { // Filtra por nombre
-				const zaro = new Zaro(this, obj.x * SCALE, obj.y * SCALE, this.player, this.exp);
+				const zaro = new Zaro(this, obj.x * SCALE, obj.y * SCALE, this.player, this.exp, 2, 1);
 				zaro.setPool(this.enemyBullets);
 				zaro.setScale(SCALE);
 				this.arrayZaros.push(zaro);
 			}
 		});
+		console.log(this.arrayZaros);
+
 		this.enemies.addMultiple(this.arrayZaros);
 		// #endregion
 
