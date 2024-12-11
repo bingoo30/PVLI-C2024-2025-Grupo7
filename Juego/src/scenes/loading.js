@@ -21,7 +21,6 @@ export default class Loading extends Phaser.Scene {
 		// #region UI Assets
 		
 		this.load.image('start', 'assets/GUI/start_button.png');
-		//this.load.image('background', 'assets/GUI/fondoinicio1.png');
 		this.load.image('end', 'assets/GUI/gameover.png');
 		this.load.image('healthBarBackground', 'assets/GUI/health_bar_1.png');
 		this.load.image('healthBar', 'assets/GUI/health_bar_2_b.png');
@@ -36,7 +35,6 @@ export default class Loading extends Phaser.Scene {
 		this.load.image('logros', 'assets/GUI/achievements.png');
 		this.load.image('tutorial', 'assets/GUI/tutorial.png');
 		this.load.image('background', 'assets/GUI/background_start_1.jpg');
-		//this.load.image('achievement', 'assets/achievs/achievement.png');
 		this.load.image('LockedAchievement', 'assets/achievs/locked.png');
 		this.load.image('pauseBackground', 'assets/GUI/pause.png');
 		this.load.image('PrevButton', 'assets/achievs/previous.png');
@@ -106,9 +104,6 @@ export default class Loading extends Phaser.Scene {
 			frameHeight: 29,
 			endFrame: 5
 		});
-
-		//this.load.image('DamageArea', 'assets/bullet/damage_area.png');
-		//this.load.image('EstakaDamageArea', 'assets/bullet/estaka_damage_area.png');
 		// #endregion
 
 		// #region Tilemaps
@@ -116,14 +111,12 @@ export default class Loading extends Phaser.Scene {
 		this.load.tilemapTiledJSON('mapa1', 'assets/map/map_1/mapa_1.json');
 		this.load.image('tileset1', 'assets/map/map_1/map_tiles.png');
 
-		//this.load.tilemapTiledJSON('mapa2', 'assets/map/map_1/mapa_1.json');
-		//this.load.image('tileset2', 'assets/map/map_1/map_tiles.png');
 
-		//this.load.tilemapTiledJSON('mapa3', 'assets/map/map_1/mapa_1.json');
-		//this.load.image('tileset3', 'assets/map/map_1/map_tiles.png');
+		this.load.image('verticalDoor', 'assets/map/vertical_door_1.png');
+		this.load.image('horizontalDoor', 'assets/map/horizontal_door_1.png');
+		this.load.image('changeDoor', 'assets/map/verticalChangeDoor.png');
 
-
-		this.load.json('navmesh', 'assets/map/map_1/mapa_1.json');
+		//this.load.json('navmesh', 'assets/map/map_1/mapa_1.json');
 
 		// #endregion
 

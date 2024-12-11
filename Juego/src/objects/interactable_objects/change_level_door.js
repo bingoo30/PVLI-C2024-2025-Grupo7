@@ -12,7 +12,7 @@
 import InteractableObjects from './interactable_objects.js';
 export default class ChangeLevelDoor extends InteractableObjects {
     constructor(scene, x, y, sizeW = 32, sizeH = 32, scale = 4) {
-        super(scene, x * scale, y * scale,'verticalDoor', 200, 50);
+        super(scene, x * scale, y * scale,'changeDoor', 200, 50);
         
         this.isWaitingInput = true;
         this.setDisplaySize(sizeW * scale, sizeH * scale);
@@ -22,10 +22,9 @@ export default class ChangeLevelDoor extends InteractableObjects {
         this.body.setImmovable(true);
         this.body.setOffset(0, 0);
         this.setOrigin(0, 0);
-
         this.keyMissingText = this.scene.add.text(x*scale+20, y*scale, "Falta la llave", {
-            font: '15px PixelArt',
-            fill: '#ffffff',
+            fontFamily: 'PixelArt',
+            fontSize: 18,
             backgroundColor: '#000000',
             padding: 4,
         }).setOrigin(0.5).setVisible(false);
