@@ -89,7 +89,7 @@ export default class Title extends Phaser.Scene {
 			this.time.addEvent({
 				delay: 250,
 				callback: () => {
-					this.scene.start('Tutorial', { tries: _tries });
+					this.scene.start('Tutorial', { tries: _tries, player: data.player });
 				}
 			});
 
