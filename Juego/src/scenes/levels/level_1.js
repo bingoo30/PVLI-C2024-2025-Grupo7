@@ -121,11 +121,6 @@ export default class Animation extends Phaser.Scene {
 
 		this.player = new Player(this, playerX, playerY);
 		this.player.setScale(SCALE);
-		if (data.player !== undefined) {
-			this.player.newLevelClone(data.player);
-		}
-		// Guarda la referencia en el registry
-		this.registry.set('player', this.player);
 
 		this.rectGroup = this.add.group();
 		this.rectangleLayer = this.map.getObjectLayer('rectangle');
@@ -212,6 +207,12 @@ export default class Animation extends Phaser.Scene {
 		}
 		this.playerExplosiveBullets.addMultipleEntity(toAdds);
 
+		//comparo si hay otros datos de player, si es asi, actualizo, lo hago aqui porque player necesitara registrar del tipo de bala que es
+		if (data.player !== undefined) {
+			this.player.newLevelClone(data.player);
+		}
+		// Guarda la referencia en el registry
+		this.registry.set('player', this.player);
 		// #endregion
 
 		// #region Enemy
@@ -424,7 +425,7 @@ export default class Animation extends Phaser.Scene {
 	}
 
 	changeToGameover() {
-		this.scene.start("gameover", { tries: this._tries });
+		this.scene.start("gameover", { player: this.player, tries: this._tries });
 	}
 
 	changeToNextLevel() {
