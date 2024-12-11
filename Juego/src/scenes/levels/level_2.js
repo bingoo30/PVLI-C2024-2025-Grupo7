@@ -20,6 +20,7 @@ import Zaro from '../../objects/enemies/zaro.js';
 import Spike from '../../objects/scenery/spike.js';
 import RetractableSpike from '../../objects/scenery/retractable_spike.js';
 import ExplosiveBullet from '../../objects/abilities/shooting/explosive_bullet.js';
+import Drone from '../../objects/abilities/drone.js';
 
 //constante
 const SCALE = 4;
@@ -37,7 +38,7 @@ export default class Animation extends Phaser.Scene {
 		this.load.tilemapTiledJSON('mapa2', 'assets/map/map_2/mapa_2.json');
 		this.load.image('tileset2', 'assets/map/map_2/map_tiles2.png');
 		this.load.json('dialogues_Weiyoung', 'assets/dialogues/dialogues_Flush.json');
-		this.load.image('Flush', 'assets/character/weiyoung.png');
+		this.load.image('Weiyoung', 'assets/character/weiyoung.png');
 	}
 
 	/**  
@@ -110,7 +111,7 @@ export default class Animation extends Phaser.Scene {
 		// Sobreescribir la referencia en el registro
 		this.registry.set('player', this.player);
 		// #endregion
-
+		
 		// #region Pools
 
 		const MAX = 300;
@@ -188,20 +189,6 @@ export default class Animation extends Phaser.Scene {
 		this.playerExplosiveBullets.addMultipleEntity(toAdds);
 		// #endregion
 
-		// #region torretas
-		toAdds = [];
-		this.playerTurret = new Pool(this, 10, 'Turret');
-		for (let i = 0; i < 10; i++) {
-			let toAdd = new Turret(this, 0, 0, this.enemies);
-			toAdd.setPool(this.playerBullets);
-			toAdds.push(toAdd);
-		}
-		this.playerTurret.addMultipleEntity(toAdds);
-		this.player.registerTurrets(this.playerTurret);
-		// #endregion
-
-		// #endregion
-
 		// #region Enemy
 		this.enemies = this.add.group();
 
@@ -264,6 +251,21 @@ export default class Animation extends Phaser.Scene {
 
 		// #endregion
 
+		// #region utilidades
+		toAdds = [];
+		this.playerTurret = new Pool(this, 10, 'Turret');
+		for (let i = 0; i < 10; i++) {
+			let toAdd = new Turret(this, 0, 0, this.enemies);
+			toAdd.setPool(this.playerBullets);
+			toAdds.push(toAdd);
+		}
+		this.playerTurret.addMultipleEntity(toAdds);
+		this.player.registerTurrets(this.playerTurret);
+
+		let drone = new Drone(this, this.player.x, this.player.y, this.player, this.enemies, this.playerBullets);
+		this.player.registerDrone(drone);
+		// #endregion
+
 		// #region UI
 
 		this.expBar = new ExpBar(this, 20, 30);
@@ -285,7 +287,7 @@ export default class Animation extends Phaser.Scene {
 		// #region Spikes
 		this.arraySpikes = [];
 		const spikeLayer = this.map.getObjectLayer('Spikes');
-		cracLayer.objects.forEach(obj => {
+		spikeLayer.objects.forEach(obj => {
 			if (obj.name === 'Spike') { // Filtra por nombre
 				const spike = new Spike(this, obj.x * SCALE, obj.y * SCALE);
 				spike.setScale(SCALE);
@@ -317,12 +319,13 @@ export default class Animation extends Phaser.Scene {
 		});
 		// #endregion
 
+		// #endregion
+
 		// #region Collision
 
 		this.paredLayer.setCollisionByProperty({ collides: true });
 
 		this.physics.add.collider(this.enemies, this.paredLayer);
-
 		this.physics.add.collider(this.player, this.paredLayer);
 
 		//collisiones con la puerta
@@ -330,7 +333,7 @@ export default class Animation extends Phaser.Scene {
 
 		this.physics.add.collider(this.enemies, this.doorGroup);
 
-		this.physics.add.collider(this.player, this.Flush);
+		this.physics.add.collider(this.player, this.Weiyoung);
 
 		//colision player-enemigos
 		this.physics.add.collider(this.player.collisionZone, this.enemies, (collisionZone, enemy) => {
