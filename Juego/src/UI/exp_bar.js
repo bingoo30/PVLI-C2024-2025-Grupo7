@@ -24,10 +24,10 @@ export default class ExpBar extends Phaser.GameObjects.Sprite{
         this.bar = scene.add.sprite(this.x, this.y, 'expBar').setOrigin(0, 0);
         this.bar.setDisplaySize(0, this.height);
 
-        this.levelText = this.scene.add.text(this.x + this.maxWidth+10, this.y, '1', {
-            fontSize: 20,
+        this.levelText = this.scene.add.text(this.x + this.maxWidth + 10, this.y - 5, '0', {
+            fontSize: 24,
             fontFamily: "PixelArt",
-            fill: '#FFFFFF',
+            fill: '#00FFFF',
             align: 'left'
         }).setOrigin(0.5, 0);
 

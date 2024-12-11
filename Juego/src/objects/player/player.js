@@ -203,8 +203,13 @@ export default class Player extends Character {
     }
     onPlayerCollectedXP(value) {
         this.xpAcumulator += value; 
-        //console.log(this.xpAcumulator);
-        //console.log(this.xpToLevelUp);
+    }
+
+    //cuando colecta una planta recupera su vida
+    onPlayerCollectedPlant(value) {
+        this.scene.events.emit('playerRecuperaVida', value);
+        this.life += value;
+        if (this.life > this.maxLife) this.life = this.maxLife;
     }
 
     knockback(strength, attacker) {

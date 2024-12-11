@@ -25,14 +25,27 @@ export default class HealthBar extends Phaser.GameObjects.Sprite {
         this.bar = scene.add.sprite(this.x, this.y, barTexture).setOrigin(0, 0);
         this.bar.setDisplaySize(this.maxWidth, this.height); 
 
-        this.lifeText = this.scene.add.text(this.x + 10, this.y+5, '100%', {
+        this.lifeText = this.scene.add.text(this.x + 10, this.y + 5, ' ', {
             fontSize: 20,
             fontFamily: "PixelArt",
             fill: '#FFFFFF',
             align: 'left'
         }).setOrigin(0, 0);
 
-        this.container.add([this.bar, this, this.lifeText]);
+
+        this.lifeRecoverTexts = this.scene.add.text(this.x + this.maxWidth + 10, this.y + 5, ' ', {
+            fontSize: 24,
+            fontFamily: "PixelArt",
+            fill: '#99FF99',
+            align: 'left'
+        }).setOrigin(0, 0).setVisible(false);
+
+        this.scene.events.on('playerRecuperaVida', (value) => {
+            this.lifeRecoverTexts.setText(`+${value}`);
+            this.lifeRecoverTexts.setVisible(true);
+            this.scene.time.delayedCall(1500, () => { this.lifeRecoverTexts.setVisible(false); });
+        });
+        this.container.add([this.bar, this, this.lifeText, this.lifeRecoverTexts]);
         this.container.setScrollFactor(0);
         this.container.setDepth(depth);
     }

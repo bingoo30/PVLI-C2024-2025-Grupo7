@@ -24,6 +24,7 @@ export default class Enemy extends Character {
         this.followRange = DEFAULT_FOLLOW_RANGE;
 
         this.follow = false;
+        this.plantPool = null;
     }
 
 
@@ -44,14 +45,17 @@ export default class Enemy extends Character {
     stopMovement() {
         this.body.setVelocity(0, 0); // Detiene al enemigo
     }
+    setPlantsPool(pool) {
+        this.plantPool = pool;
+    }
 
-    onGotHit(damage, pool) {
+    onGotHit(damage, pool, pool2) { //pool= coins, pool2= plants
         super.onGotHit(damage);
         if (this.life == 0) {
             this.scene.events.emit("IKilledAnEnemy");
             const sfx = this.scene.sound.add('enemyDeadAudio');
             sfx.play();
-            drop(this.x, this.y, this.exp, pool);
+            drop(this.x, this.y, this.exp, this.player.getMaxLife() *0.1, pool, pool2);
             this.onDeath();
         }
         else {

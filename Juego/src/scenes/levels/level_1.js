@@ -23,6 +23,7 @@ import Spike from '../../objects/scenery/spike.js';
 import Retractable_Spike from '../../objects/scenery/retractable_spike.js';
 import ExplosiveBullet from '../../objects/abilities/shooting/explosive_bullet.js';
 import Drone from '../../objects/abilities/drone.js';
+import Plant from '../../objects/enemies/plant.js';
 
 //import Coin from '../../objetos/Enemies/coin.js'
 //constante
@@ -145,6 +146,18 @@ export default class Animation extends Phaser.Scene {
 		}
 		this.coins.addMultipleEntity(toAdds);
 
+		// #endregion
+
+		// #region Plants
+
+		toAdds = [];
+		this.plants = new Pool(this, MAX, 'Plant');
+		for (let i = 0; i < MAX; i++) {
+			let toAdd = new Plant(this, 0, 0, 1);
+			toAdds.push(toAdd);
+		}
+		this.plants.addMultipleEntity(toAdds);
+		
 		// #endregion
 
 		// #region Player Bullets
@@ -337,12 +350,12 @@ export default class Animation extends Phaser.Scene {
 
 		//colision bala player-enemigos
 		this.physics.add.collider(this.playerBullets.getPhaserGroup(), this.enemies, (playerBullet, enemy) => {
-			enemy.onGotHit(playerBullet.getDamage(), this.coins);
+			enemy.onGotHit(playerBullet.getDamage(), this.coins, this.plants);
 			// mandaria a la pool de las balas de player otra vez
 			playerBullet.destroyBullet(this.playerBullets);
 		});
 		this.physics.add.collider(this.playerExplosiveBullets.getPhaserGroup(), this.enemies, (playerBullet, enemy) => {
-			enemy.onGotHit(playerBullet.getDamage(), this.coins);
+			enemy.onGotHit(playerBullet.getDamage(), this.coins, this.plants);
 			// mandaria a la pool de las balas de player otra vez
 			playerBullet.destroyBullet(this.playerExplosiveBullets);
 		});
@@ -363,6 +376,7 @@ export default class Animation extends Phaser.Scene {
 		this.physics.add.overlap(this.enemies, this.areaFE.getPhaserGroup(), (enemy, area) => {
 			enemy.onGotHit(area.getDamage(), this.coins);
 		});
+
 		//colision fichas-player
 		this.physics.add.collider(this.player.collisionZone, this.coins.getPhaserGroup(), (zone, coin) => {
 			this.player.onPlayerCollectedXP(coin.getExp());
@@ -370,7 +384,12 @@ export default class Animation extends Phaser.Scene {
 				this.player.levelUp();
 			}
 			coin.destroyCoin(this.coins);
-			//console.log(this.expBar);
+		});
+		//colision planta-player
+		
+		this.physics.add.collider(this.player.collisionZone, this.plants.getPhaserGroup(), (zone, plant) => {
+			this.player.onPlayerCollectedPlant(plant.getLifeRec());
+			plant.destroyPlant(this.plants);
 		});
 
 		//colision balas-paredes

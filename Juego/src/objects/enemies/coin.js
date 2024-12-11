@@ -1,11 +1,9 @@
 export default class Coin extends Phaser.GameObjects.Sprite {
     /**
-     * Constructor de Bullet,las balas
+     * Constructor de coin
      * @param {Scene} scene - escena en la que aparece
-     * @param {number} damage - daño que hace la bala
-     * @param {number} range - alcance max
-     * @param {number} startX - ejeX inicial
-     * @param {number} startY - ejeY inical
+     * @param {number} exp - experiancia que da la ficha
+     * @param {number} active - al principio no esta activo
      */
     constructor(scene, x, y, exp) {
         super(scene, x, y, 'Coin');
@@ -24,7 +22,6 @@ export default class Coin extends Phaser.GameObjects.Sprite {
         super.preUpdate(t, dt);
 
     }
-   
 
     getExp() {
         return this.exp;

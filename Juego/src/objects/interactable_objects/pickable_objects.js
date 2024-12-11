@@ -8,11 +8,11 @@
      */
 import InteractableObjects from './interactable_objects.js';
 export default class PickableObjects extends InteractableObjects {
-    constructor(scene, x, y, texture, name) {
+    constructor(scene, x, y, texture, name, dialogue=null) {
         super(scene, x, y, [texture]);
         this.isPickable = false;
         this.name= name;
-
+        this.dialogue = dialogue;
         this.scene.add.existing(this);
     }
 
@@ -20,7 +20,13 @@ export default class PickableObjects extends InteractableObjects {
         if (this.canInteract && !this.isPickable) {
             this.isPickable = true;
             if (this.name == 'key') this.scene.player.Inventory.collectKey();
-            else this.scene.player.Inventory.addObject(this);
+            else {
+                this.scene.player.Inventory.addObject(this);
+                if (this.dialogue != null) {
+                    const dialogos = this.scene.cache.json.get(this.dialogue);
+                    this.scene.changeToDialogScene({ sceneKey: this.scene.scene.key, dialogos: dialogos });
+                }
+            }
 
             this.textActive = false;
             this.setVisible(false).setActive(false);

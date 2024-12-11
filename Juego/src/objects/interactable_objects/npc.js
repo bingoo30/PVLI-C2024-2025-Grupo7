@@ -12,7 +12,7 @@ import { showPopup } from '../../UI/showPopUp.js';
 import { unlock } from '../../scenes/achievements/unlock.js';
 import InteractableObjects from './interactable_objects.js';
 export default class NPC extends InteractableObjects {
-    constructor(scene, x, y, texture, dialogues, acv) {
+    constructor(scene, x, y, texture, dialogues, acv, disappear = false) {
         super(scene, x, y, [texture]);
     
         this.dialogues = dialogues;
@@ -24,6 +24,7 @@ export default class NPC extends InteractableObjects {
         this.body.setSize(16, 10);
         this.body.setOffset(10, 24);
         this.body.setImmovable(true);
+        this.disappear = disappear;
     }
 
     preUpdate(t, dt) {
@@ -40,6 +41,7 @@ export default class NPC extends InteractableObjects {
             showPopup(this.scene, `Logro <<${this.achievement}>> desloqueado!`, this.scene.scale.width - 175, this.scene.scale.height - 100);
 
             this.scene.changeToDialogScene({ sceneKey: this.scene.scene.key, dialogos: dialogos });
+            if (this.disappear) this.scene.time.delayedCall(500, () => { this.destroy(); });
         }
     }
 }

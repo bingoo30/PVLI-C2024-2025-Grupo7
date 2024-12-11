@@ -36,7 +36,7 @@ export default class Loading extends Phaser.Scene {
 		this.load.image('logros', 'assets/GUI/achievements.png');
 		this.load.image('tutorial', 'assets/GUI/tutorial.png');
 		this.load.image('background', 'assets/GUI/background_start_1.jpg');
-		this.load.image('achievement', 'assets/achievs/achievement.png');
+		//this.load.image('achievement', 'assets/achievs/achievement.png');
 		this.load.image('LockedAchievement', 'assets/achievs/locked.png');
 		this.load.image('pauseBackground', 'assets/GUI/pause.png');
 		this.load.image('PrevButton', 'assets/achievs/previous.png');
@@ -129,6 +129,19 @@ export default class Loading extends Phaser.Scene {
 
 		//#region Objects
 		this.load.image('key', 'assets/map/key.png');
+		this.load.spritesheet('memory', 'assets/objects/memory.png', {
+			frameWidth: 30,
+			frameHeight: 26,
+			endFrame: 5
+		});
+		this.load.spritesheet('plant', 'assets/objects/plant.png', {
+			frameWidth: 32,
+			frameHeight: 32,
+			endFrame: 4
+		});
+
+
+
 		//#endregion
 
 		//#region Traps
@@ -273,13 +286,13 @@ export default class Loading extends Phaser.Scene {
 		this.anims.create({
 			key: 'EstakaAttack',
 			frames: this.anims.generateFrameNumbers('EstakaAnim', { start: 0, end: 5 }),
-			frameRate: 2,
+			frameRate: 3,
 			repeat: -1
 		});
 		this.anims.create({
 			key: 'CracIdle',
 			frames: this.anims.generateFrameNumbers('CracAnim', { start: 0, end: 3 }),
-			frameRate: 2,
+			frameRate: 3,
 			repeat: -1
 		});
 
@@ -293,7 +306,7 @@ export default class Loading extends Phaser.Scene {
 		this.anims.create({
 			key: 'LetusIdle',
 			frames: this.anims.generateFrameNumbers('LetusAnim', { start: 0, end: 3 }),
-			frameRate: 3,
+			frameRate: 5,
 			repeat: -1
 		});
 
@@ -305,6 +318,23 @@ export default class Loading extends Phaser.Scene {
 				frameRate: 10, // Ajusta según la velocidad deseada
 				repeat: 0 // Reproducir una sola vez
 			});
+		});
+		//#endregion
+
+		//#region objects
+		this.anims.create({
+			key: 'memoryIdle',
+			frames: this.anims.generateFrameNumbers('memory', { start: 0, end: 5 }),
+			frameRate: 6,
+			repeat: -1
+
+		});
+		this.anims.create({
+			key: 'plantIdle',
+			frames: this.anims.generateFrameNumbers('plant', { start: 0, end: 4 }),
+			frameRate: 6,
+			repeat: -1
+
 		});
 		//#endregion
 
