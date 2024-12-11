@@ -14,6 +14,7 @@ export default class Coin extends Phaser.GameObjects.Sprite {
         this.scene.physics.add.existing(this);
         this.body.setImmovable(true);
         this.active = false;
+
         this.setDepth(1);
         
         this.createRotationTween(); // Crear la animación de giro

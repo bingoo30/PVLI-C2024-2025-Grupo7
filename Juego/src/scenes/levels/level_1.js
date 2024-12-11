@@ -42,10 +42,17 @@ export default class Animation extends Phaser.Scene {
 		this.load.tilemapTiledJSON('mapa1', 'assets/map/map_1/mapa_1.json');
 		this.load.image('tileset', 'assets/map/map_1/map_tiles.png');
 		this.load.json('dialogues', 'assets/dialogues/dialogues_intro.json');
-		this.load.json('dialogues_Flush', 'assets/dialogues/dialogues_Flush.json');
+		this.load.json('dialogues_Flush', 'assets/dialogues/dialogues_flush.json');
+
+		this.load.json('level1Memory1', 'assets/dialogues/level1_memory1.json');
+		this.load.json('level1Memory2', 'assets/dialogues/level1_memory2.json');
+		this.load.json('level1Memory3', 'assets/dialogues/level1_memory3.json');
+
 		this.load.image('Flush', 'assets/character/flush.png');
 		this.load.image('verticalDoor', 'assets/map/vertical_door_1.png');
 		this.load.image('horizontalDoor', 'assets/map/horizontal_door_1.png');
+
+
 	}
 
 	/**  
@@ -62,6 +69,7 @@ export default class Animation extends Phaser.Scene {
 
 		this.map = this.make.tilemap({ key: 'mapa1', tileWidth: 32, tileHeight: 32 });
 		this.tileset = this.map.addTilesetImage('mapTiles', 'tileset1');
+
 		this.sueloLayer = this.map.createLayer('suelo', this.tileset);
 		if (!this.sueloLayer) {
 			console.error("La capa 'suelo' no se ha creado correctamente.");
@@ -94,9 +102,16 @@ export default class Animation extends Phaser.Scene {
 		// la escala de la puerta lo hace en la constructora de la clase door
 		this.PickableObjects = this.add.group();
 		this.objectsLayer = this.map.getObjectLayer('Objects');
+
 		this.objectsLayer.objects.forEach((obj) => {
-			const pickable = new PickableObjects(this, obj.x * SCALE, obj.y * SCALE, obj.name, obj.name);
-			pickable.setScale(SCALE);
+			var pickable;
+			if (obj.name == 'key') {
+				pickable= new PickableObjects(this, obj.x * SCALE, obj.y * SCALE, obj.name, obj.name);
+			}
+			else if (obj.properties) {
+				var dialogProp= obj.properties.find(prop => prop.name === 'dialog')
+				pickable = new PickableObjects(this, obj.x * SCALE, obj.y * SCALE, obj.name, dialogProp.value, dialogProp.value);
+			}
 			this.PickableObjects.add(pickable);
 		});
 
@@ -122,13 +137,6 @@ export default class Animation extends Phaser.Scene {
 
 		this.player = new Player(this, playerX, playerY);
 		this.player.setScale(SCALE);
-
-		this.rectGroup = this.add.group();
-		this.rectangleLayer = this.map.getObjectLayer('rectangle');
-		this.rectangleLayer.objects.forEach((obj) => {
-			const rect = new Rectangle(this, obj.x, obj.y, obj.width, obj.height, this.player).setDepth(4);
-			this.rectGroup.add(rect);
-		});
 
 		// #endregion
 
@@ -290,12 +298,14 @@ export default class Animation extends Phaser.Scene {
 
 		//#endregion
 
-		//#region UI
-
-		this.expBar = new ExpBar(this, 20, 30);
-
-		this.healthBar = new HealthBar(this, 20, 10, this.player);
-
+		//#region rectangles
+		this.rectGroup = this.add.group();
+		this.rectangleLayer = this.map.getObjectLayer('rectangle');
+		this.rectangleLayer.objects.forEach((obj) => {
+			const rect = new Rectangle(this, obj.x, obj.y, obj.width, obj.height, this.player);
+			rect.setDepth(4); 
+			this.rectGroup.add(rect);
+		});
 		//#endregion
 
 		// #region NPC
@@ -321,6 +331,14 @@ export default class Animation extends Phaser.Scene {
 		let drone = new Drone(this, this.player.x, this.player.y, this.player, this.enemies, this.playerBullets);
 		this.player.registerDrone(drone);
 		// #endregion
+
+		//#region UI
+
+		this.expBar = new ExpBar(this, 20, 30);
+
+		this.healthBar = new HealthBar(this, 20, 10, this.player);
+
+		//#endregion
 
 		// #region Collision
 

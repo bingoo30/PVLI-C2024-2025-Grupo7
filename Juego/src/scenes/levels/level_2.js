@@ -36,9 +36,15 @@ export default class Animation extends Phaser.Scene {
 	preload() {
 		// dialogos level2
 		this.load.tilemapTiledJSON('mapa2', 'assets/map/map_2/mapa_2.json');
+
 		this.load.image('tileset2', 'assets/map/map_2/map_tiles2.png');
-		this.load.json('dialogues_Weiyoung', 'assets/dialogues/dialogues_Flush.json');
+
+		this.load.json('dialogues_Weiyoung', 'assets/dialogues/dialogues_weiyoung.json');
 		this.load.image('Weiyoung', 'assets/character/weiyoung.png');
+
+		this.load.json('level2Memory1', 'assets/dialogues/level2_memory1.json');
+		this.load.json('level2Memory2', 'assets/dialogues/level2_memory2.json');
+		this.load.json('level2Memory3', 'assets/dialogues/level2_memory3.json');
 	}
 
 	/**  
@@ -52,7 +58,9 @@ export default class Animation extends Phaser.Scene {
 		// #region Map
 
 		this.map = this.make.tilemap({ key: 'mapa2', tileWidth: 32, tileHeight: 32 });
+
 		this.tileset = this.map.addTilesetImage('map_tiles2', 'tileset2');
+
 		this.sueloLayer = this.map.createLayer('suelo', this.tileset);
 		if (!this.sueloLayer) {
 			console.error("La capa 'suelo' no se ha creado correctamente.");
@@ -87,9 +95,16 @@ export default class Animation extends Phaser.Scene {
 		// #region pickables
 		this.PickableObjects = this.add.group();
 		this.objectsLayer = this.map.getObjectLayer('Objects');
+
 		this.objectsLayer.objects.forEach((obj) => {
-			const pickable = new PickableObjects(this, obj.x * SCALE, obj.y * SCALE, obj.name, obj.name);
-			pickable.setScale(SCALE);
+			var pickable;
+			if (obj.name == 'key') {
+				pickable = new PickableObjects(this, obj.x * SCALE, obj.y * SCALE, obj.name, obj.name);
+			}
+			else if (obj.properties) {
+				var dialogProp = obj.properties.find(prop => prop.name === 'dialog')
+				pickable = new PickableObjects(this, obj.x * SCALE, obj.y * SCALE, obj.name, dialogProp.value, dialogProp.value);
+			}
 			this.PickableObjects.add(pickable);
 		});
 		// #endregion
@@ -103,11 +118,13 @@ export default class Animation extends Phaser.Scene {
 		if (!playerPos) console.log('Position player no encontrado.');
 		const playerX = playerPos.x * SCALE;
 		const playerY = playerPos.y * SCALE;
+
 		// #endregion
 		this.player = new Player(this, playerX, playerY);
 		this.player.setScale(SCALE);
 		//copia profunda
-		this.player.newLevelClone(data.player);
+
+		//this.player.newLevelClone(data.player);
 		// Sobreescribir la referencia en el registro
 		this.registry.set('player', this.player);
 		// #endregion
@@ -127,6 +144,19 @@ export default class Animation extends Phaser.Scene {
 		this.coins.addMultipleEntity(toAdds);
 
 		// #endregion
+
+		// #region Plants
+
+		toAdds = [];
+		this.plants = new Pool(this, MAX, 'Plant');
+		for (let i = 0; i < MAX; i++) {
+			let toAdd = new Plant(this, 0, 0, 1);
+			toAdds.push(toAdd);
+		}
+		this.plants.addMultipleEntity(toAdds);
+
+		// #endregion
+
 
 		// #region Player Bullets
 
@@ -347,7 +377,7 @@ export default class Animation extends Phaser.Scene {
 
 		//colision bala player-enemigos
 		this.physics.add.collider(this.playerBullets.getPhaserGroup(), this.enemies, (playerBullet, enemy) => {
-			enemy.onGotHit(playerBullet.getDamage(), this.coins);
+			enemy.onGotHit(playerBullet.getDamage(), this.coins, this.plants);
 			// mandaria a la pool de las balas de player otra vez
 			playerBullet.destroyBullet(this.playerBullets);
 		});
@@ -381,6 +411,12 @@ export default class Animation extends Phaser.Scene {
 			}
 			coin.destroyCoin(this.coins);
 			//console.log(this.expBar);
+		});
+
+		//colision planta-player
+		this.physics.add.collider(this.player.collisionZone, this.plants.getPhaserGroup(), (zone, plant) => {
+			this.player.onPlayerCollectedPlant(plant.getLifeRec());
+			plant.destroyPlant(this.plants);
 		});
 
 		//colision balas-paredes

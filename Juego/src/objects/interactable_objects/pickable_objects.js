@@ -8,12 +8,15 @@
      */
 import InteractableObjects from './interactable_objects.js';
 export default class PickableObjects extends InteractableObjects {
-    constructor(scene, x, y, texture, name, dialogue=null) {
-        super(scene, x, y, [texture]);
+    constructor(scene, x, y, texture, name, dialogue = null) {
+        super(scene, x, y, texture);
         this.isPickable = false;
-        this.name= name;
+        this.name = name;
         this.dialogue = dialogue;
         this.scene.add.existing(this);
+        this.setScale(4);
+        if (texture == 'memory') this.play('memoryIdle');
+
     }
 
     onInteract() {

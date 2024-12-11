@@ -4,7 +4,7 @@ export function drop(x, y, exp, lifeRec, pool, pool2) {
 
 	var value = Phaser.Math.Between(1, 2);
 	if (value==2) {
-		let plant = pool2.spawn(x + 20, y + 20);
+		let plant = pool2.spawn(x + 30, y + 20);
 		plant.setLifeRec(lifeRec);
 	}
 }

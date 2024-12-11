@@ -129,7 +129,8 @@ export default class Loading extends Phaser.Scene {
 
 		//#region Objects
 		this.load.image('key', 'assets/map/key.png');
-		this.load.spritesheet('memory', 'assets/objects/memory.png', {
+		this.load.image('memory', 'assets/map/key.png');
+		this.load.spritesheet('memoryAnim', 'assets/objects/memory-sheet.png', {
 			frameWidth: 30,
 			frameHeight: 26,
 			endFrame: 5
@@ -324,7 +325,7 @@ export default class Loading extends Phaser.Scene {
 		//#region objects
 		this.anims.create({
 			key: 'memoryIdle',
-			frames: this.anims.generateFrameNumbers('memory', { start: 0, end: 5 }),
+			frames: this.anims.generateFrameNumbers('memoryAnim', { start: 0, end: 5 }),
 			frameRate: 6,
 			repeat: -1
 

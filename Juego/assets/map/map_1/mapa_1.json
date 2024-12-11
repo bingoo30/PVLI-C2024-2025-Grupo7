@@ -170,8 +170,14 @@
                 {
                  "height":0,
                  "id":288,
-                 "name":"Memory1",
+                 "name":"memory",
                  "point":true,
+                 "properties":[
+                        {
+                         "name":"dialog",
+                         "type":"string",
+                         "value":"level1Memory1"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -182,8 +188,14 @@
                 {
                  "height":0,
                  "id":289,
-                 "name":"Memory1",
+                 "name":"memory",
                  "point":true,
+                 "properties":[
+                        {
+                         "name":"dialog",
+                         "type":"string",
+                         "value":"level1Memory3"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -194,8 +206,14 @@
                 {
                  "height":0,
                  "id":290,
-                 "name":"Memory1",
+                 "name":"memory",
                  "point":true,
+                 "properties":[
+                        {
+                         "name":"dialog",
+                         "type":"string",
+                         "value":"level1Memory2"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
