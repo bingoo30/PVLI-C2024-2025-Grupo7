@@ -139,8 +139,17 @@ export default class Loading extends Phaser.Scene {
 		//#endregion
 
 		//#region Traps
-		this.load.image('Retractable_Spikes', 'assets/traps/retractable_spilkes_placeholder.png');
-		this.load.image('Spike', 'assets/traps/retractable_spilkes_placeholder.png');
+		this.load.spritesheet('SpikeEnd', 'assets/traps/spikeEnd.png', {
+			frameWidth: 32,
+			frameHeight: 32,
+			endFrame: 0
+		})
+		this.load.spritesheet('Retractable_Spikes', 'assets/traps/spike.png', {
+			frameWidth: 32,
+			frameHeight: 32,
+			endFrame: 2
+		})
+		this.load.image('Spike', 'assets/traps/spike1.png');
 		this.load.image('Statue', 'assets/traps/retractable_spilkes_placeholder.png');
 		//#endregion
 
@@ -328,6 +337,21 @@ export default class Loading extends Phaser.Scene {
 			frames: this.anims.generateFrameNumbers('plant', { start: 0, end: 4 }),
 			frameRate: 6,
 			repeat: -1
+
+		});
+
+		this.anims.create({
+			key: 'recSpike',
+			frames: this.anims.generateFrameNumbers('Retractable_Spikes', { start: 0, end: 2 }),
+			frameRate: 6,
+			repeat: -1
+
+		});
+		this.anims.create({
+			key: 'spikeEnd',
+			frames: this.anims.generateFrameNumbers('SpikeEnd', { start: 0, end: 0 }),
+			frameRate: 6,
+			repeat: 0
 
 		});
 		//#endregion

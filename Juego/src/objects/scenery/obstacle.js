@@ -12,7 +12,7 @@
 const DEFAULT_DAMAGE = 1;
 export default class Obstacle extends Phaser.GameObjects.Sprite {
     constructor(scene, x, y, type) {
-        super(scene, x, y, [type]);
+        super(scene, x, y, [type], 0);
         this.scene = scene;
         this.scene.add.existing(this);
         this.scene.physics.add.existing(this);
@@ -20,8 +20,8 @@ export default class Obstacle extends Phaser.GameObjects.Sprite {
         this.type = type;
         this.damage = DEFAULT_DAMAGE;
         this.body.setImmovable(true);
-
-        this.setDepth(1);
+        this.setOrigin(0, 0);
+        this.setDepth(0);
     }
 
     init(damage) {

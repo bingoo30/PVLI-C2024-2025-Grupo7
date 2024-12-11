@@ -6,8 +6,9 @@ const SPIKE_DAMAGE = 5;
 */
 //pinchos estaticos
 export default class Spike extends Obstacle {
-    constructor(scene, x, y) {
+    constructor(scene, x, y, sizeW = 32, sizeH = 32, scale = 4) {
         super(scene, x, y, "Spike");
+        this.setDisplaySize(sizeW * scale, sizeW * scale)
         this.init(SPIKE_DAMAGE);
     }
 

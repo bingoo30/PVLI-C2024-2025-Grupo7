@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="60" height="60" tilewidth="32" tileheight="32" infinite="0" nextlayerid="16" nextobjectid="130">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="60" height="60" tilewidth="32" tileheight="32" infinite="0" nextlayerid="16" nextobjectid="141">
  <editorsettings>
   <export target="mapa_3.json" format="json"/>
  </editorsettings>
- <tileset firstgid="1" name="map_tiles3" tilewidth="32" tileheight="32" tilecount="63" columns="6">
+ <tileset firstgid="1" name="map_tiles3" tilewidth="32" tileheight="32" tilecount="18" columns="6">
   <image source="map_tiles3.png" trans="ff00ff" width="192" height="126"/>
  </tileset>
  <layer id="2" name="suelo" width="60" height="60">
@@ -134,7 +134,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup id="3" name="position">
+ <objectgroup id="3" name="position" visible="0">
   <object id="28" name="playerPosition" x="784" y="656">
    <point/>
   </object>
@@ -143,7 +143,7 @@
    <point/>
   </object>
  </objectgroup>
- <objectgroup id="15" name="Objects"/>
+ <objectgroup id="15" name="Objects" visible="0"/>
  <objectgroup id="4" name="Bob">
   <object id="105" name="Bob " x="1192" y="1520">
    <point/>
@@ -224,9 +224,6 @@
   <object id="74" name="Letus" x="184" y="704">
    <point/>
   </object>
-  <object id="75" name="Letus" x="616" y="1088">
-   <point/>
-  </object>
   <object id="76" name="Letus" x="1056" y="1008">
    <point/>
   </object>
@@ -253,24 +250,16 @@
   </object>
  </objectgroup>
  <objectgroup id="11" name="RetactableSpikes">
-  <object id="121" name="retractableSpike" x="1160" y="592">
-   <point/>
-  </object>
-  <object id="122" name="retractableSpike" x="830" y="882">
-   <point/>
-  </object>
-  <object id="123" name="retractableSpike" x="734" y="1154">
-   <point/>
-  </object>
-  <object id="124" name="retractableSpike" x="1118" y="130">
-   <point/>
-  </object>
-  <object id="125" name="retractableSpike" x="126" y="354">
-   <point/>
-  </object>
-  <object id="126" name="retractableSpike" x="326" y="346">
-   <point/>
-  </object>
+  <object id="130" name="retractableSpike" x="832" y="864" width="32" height="32"/>
+  <object id="131" name="retractableSpike" x="720" y="1136" width="32" height="32"/>
+  <object id="132" name="retractableSpike" x="592" y="1040" width="32" height="32"/>
+  <object id="133" name="retractableSpike" x="112" y="368" width="32" height="32"/>
+  <object id="134" name="retractableSpike" x="304" y="336" width="32" height="32"/>
+  <object id="135" name="retractableSpike" x="1024" y="96" width="32" height="32"/>
+  <object id="136" name="retractableSpike" x="1152" y="576" width="32" height="32"/>
+  <object id="138" name="retractableSpike" x="1184" y="1280" width="32" height="32"/>
+  <object id="139" name="retractableSpike" x="1216" y="1280" width="32" height="32"/>
+  <object id="140" name="retractableSpike" x="1248" y="1280" width="32" height="32"/>
  </objectgroup>
  <objectgroup id="13" name="Zaro">
   <object id="90" name="Zaro" x="1824" y="1056">
