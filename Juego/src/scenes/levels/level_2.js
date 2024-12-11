@@ -245,7 +245,7 @@ export default class Animation extends Phaser.Scene {
 				this.arrayCracs.push(crac);
 			}
 		});
-		console.log(this.arrayCracs);
+		//console.log(this.arrayCracs);
 		this.enemies.addMultiple(this.arrayCracs);
 		// #endregion
 
@@ -259,7 +259,7 @@ export default class Animation extends Phaser.Scene {
 				this.arrayBobs.push(bob);
 			}
 		});
-		console.log(this.arrayBobs);
+		//console.log(this.arrayBobs);
 
 		this.enemies.addMultiple(this.arrayBobs);
 		// #endregion
@@ -274,7 +274,7 @@ export default class Animation extends Phaser.Scene {
 				this.arrayLetus.push(letus);
 			}
 		});
-		console.log(this.arrayLetus);
+		//console.log(this.arrayLetus);
 
 		this.enemies.addMultiple(this.arrayLetus);
 		// #endregion
@@ -290,7 +290,7 @@ export default class Animation extends Phaser.Scene {
 				this.arrayZaros.push(zaro);
 			}
 		});
-		console.log(this.arrayZaros);
+		//console.log(this.arrayZaros);
 
 		this.enemies.addMultiple(this.arrayZaros);
 		// #endregion

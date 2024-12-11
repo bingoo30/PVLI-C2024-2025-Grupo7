@@ -40,7 +40,7 @@ export default class Animation extends Phaser.Scene {
 	}
 	preload() {
 		// dialogos level2
-		this.load.tilemapTiledJSON('mapa3', 'assets/map/map_3/mapa_3_1.json');
+		this.load.tilemapTiledJSON('mapa3', 'assets/map/map_3/mapa_3.json');
 
 		this.load.image('tileset3', 'assets/map/map_3/map_tiles3.png');
 
@@ -253,7 +253,7 @@ export default class Animation extends Phaser.Scene {
 				this.arrayCracs.push(crac);
 			}
 		});
-		console.log(this.arrayCracs);
+		//console.log(this.arrayCracs);
 
 		this.enemies.addMultiple(this.arrayCracs);
 		// #endregion
@@ -270,7 +270,7 @@ export default class Animation extends Phaser.Scene {
 
 			//}
 		});
-		console.log(this.arrayBobs);
+		//console.log(this.arrayBobs);
 
 		this.enemies.addMultiple(this.arrayBobs);
 		// #endregion
@@ -285,7 +285,7 @@ export default class Animation extends Phaser.Scene {
 				this.arrayLetus.push(letus);
 			}
 		});
-		console.log(this.arrayLetus);
+		//console.log(this.arrayLetus);
 
 		this.enemies.addMultiple(this.arrayLetus);
 		// #endregion
@@ -300,10 +300,9 @@ export default class Animation extends Phaser.Scene {
 				zaro.setScale(SCALE);
 				this.arrayZaros.push(zaro);
 			}
-			console.log('a')
 
 		});
-		console.log(this.arrayZaros);
+		//console.log(this.arrayZaros);
 
 		this.enemies.addMultiple(this.arrayZaros);
 		// #endregion
@@ -319,7 +318,7 @@ export default class Animation extends Phaser.Scene {
 				this.arrayMutums.push(mutum);
 			}
 		});
-		console.log(this.arrayMutums);
+		//console.log(this.arrayMutums);
 
 		this.enemies.addMultiple(this.arrayMutums);
 		// #endregion
@@ -335,7 +334,7 @@ export default class Animation extends Phaser.Scene {
 				this.arrayEstakas.push(estaka);
 			}
 		});
-		console.log(this.arrayEstakas);
+		//console.log(this.arrayEstakas);
 
 		this.enemies.addMultiple(this.arrayEstakas);
 		// #endregion

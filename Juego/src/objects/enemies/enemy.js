@@ -1,7 +1,7 @@
 import Character from '../../objects/player/character.js';
 import { drop } from './drop.js';
 
-const DEFAULT_FOLLOW_RANGE = 400;
+const DEFAULT_FOLLOW_RANGE = 500;
 export default class Enemy extends Character {
     /**
      * Constructor de los enemigos

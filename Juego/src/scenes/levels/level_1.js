@@ -251,7 +251,7 @@ export default class Animation extends Phaser.Scene {
 			}
 		});
 
-		console.log(this.arrayCracs); // Depuración: verificar el contenido del array
+		//console.log(this.arrayCracs); // Depuración
 
 		this.enemies = this.add.group();
 		this.enemies.addMultiple(this.arrayCracs);
@@ -266,7 +266,7 @@ export default class Animation extends Phaser.Scene {
 				this.arrayBobs.push(bob);
 			}
 		});
-		console.log(this.arrayBobs);
+		//console.log(this.arrayBobs);
 
 		this.enemies.addMultiple(this.arrayBobs);
 
@@ -281,7 +281,7 @@ export default class Animation extends Phaser.Scene {
 				this.arrayLetus.push(letus);
 			}
 		});
-		console.log(this.arrayLetus);
+		//console.log(this.arrayLetus);
 
 		this.enemies.addMultiple(this.arrayLetus);
 
