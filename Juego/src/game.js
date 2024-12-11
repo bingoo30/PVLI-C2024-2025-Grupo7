@@ -10,7 +10,7 @@ import AchievementScene from './scenes/achievements/achievement_scene.js';
 import AbilityTree from './scenes/ability_tree.js';
 import DialogScene from './scenes/dialog.js';
 import TutorialScene from './scenes/tutorial.js';
-
+import Victory from './scenes/victory.js';
 
 
 let config = {
@@ -35,8 +35,7 @@ let config = {
 		zoom: 1
 
 	},
-	//scene: [Loading, Inicio, Nivel1, Nivel2, Nivel3, Nivel4, Habilidad, Pausa, GameOver,Creditos],	// Decimos a Phaser cual es nuestra escena
-	scene: [Loading, Title,TutorialScene,DialogScene, Boss, Level1, Level2, Level3, GameOver, AchievementScene, AbilityTree, Pause],
+	scene: [Loading, Title, TutorialScene, DialogScene, Boss, Level1, Level2, Level3, GameOver, AchievementScene, AbilityTree, Pause, Victory],
 
 	physics: {
 		default: 'arcade',
