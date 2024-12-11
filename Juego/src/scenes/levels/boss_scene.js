@@ -50,14 +50,14 @@ export default class BossScene extends Phaser.Scene {
         this.mapBoss = this.make.tilemap({ key: 'mapaBoss' });
         if (!this.mapBoss) console.error("La mapa no se ha creado correctamente.");
 
-        this.tileset = this.mapBoss.addTilesetImage('2', 'tileset4');
-        this.tileset = this.mapBoss.addTilesetImage('3', 'tileset6');
-        this.tileset = this.mapBoss.addTilesetImage('1', 'tileset5');
+        //this.tileset = this.mapBoss.addTilesetImage('2', 'tileset4');
+        //this.tileset = this.mapBoss.addTilesetImage('3', 'tileset6');
+        //this.tileset = this.mapBoss.addTilesetImage('1', 'tileset5');
 
-        this.paredLayer = this.mapBoss.createLayer('pared', this.tileset);
-        if (!this.paredLayer) console.error("La capa 'pared' no se ha creado correctamente.");
+        //this.paredLayer = this.mapBoss.createLayer('pared', this.tileset);
+        //if (!this.paredLayer) console.error("La capa 'pared' no se ha creado correctamente.");
 
-        this.paredLayer.setScale(SCALE);
+        //this.paredLayer.setScale(SCALE);
         // #endregion
 
         // #region Player Setup
@@ -169,10 +169,10 @@ export default class BossScene extends Phaser.Scene {
         // #region Collisions and Interactions
         this.physics.add.collider(this.player.collisionZone, this.joker, this.onPlayerHit, null, this);
 
-        this.paredLayer.setCollisionByProperty({ collides: true });
+        //this.paredLayer.setCollisionByProperty({ collides: true });
 
-        this.physics.add.collider(this.joker, this.paredLayer);
-        this.physics.add.collider(this.player, this.paredLayer);
+        //this.physics.add.collider(this.joker, this.paredLayer);
+        //this.physics.add.collider(this.player, this.paredLayer);
 
         this.physics.add.collider(this.playerBullets.getPhaserGroup(), this.paredLayer, (bullet, wall) => {
             bullet.destroyBullet(this.playerBullets);
@@ -230,8 +230,33 @@ export default class BossScene extends Phaser.Scene {
         this.MainSample.play();
         // #endregion
 
+        //Paredes Mapa
+        this.wallsGroup = this.physics.add.staticGroup();
+        this.createWalls();
+
+        this.physics.add.collider(this.player, this.wallsGroup);
     }
-   
+
+    createWalls() {
+        // (x1, y1) a (x2, y2)
+        this.drawWall(1490, 500, 5500, 550); 
+        this.drawWall(490, 1500, 510, 3600);
+        this.drawWall(1490, 2550, 5500, 2600);
+        this.drawWall(3500, 1500, 3550, 3600);
+    }
+
+    drawWall(x1, y1, x2, y2) {
+        const width = Math.abs(x2 - x1);
+        const height = Math.abs(y2 - y1);
+
+        let wall = this.add.rectangle(x1, y1, width, height, 0x0000ff);
+        this.wallsGroup.add(wall);
+
+        // Añadir la colisión estática
+        this.physics.world.enable(wall);
+    }
+
+
     createCards() {
         this.cards = []; // Array para almacenar los pilares
 

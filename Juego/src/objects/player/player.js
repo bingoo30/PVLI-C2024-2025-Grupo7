@@ -336,6 +336,8 @@ export default class Player extends Character {
         // Input de teclas
         super.preUpdate(t, dt);
 
+        //console.log(this.x, this.y)
+
         let animationKey = null; // Clave de la animación actual
 
         // Lógica de movimiento horizontal
