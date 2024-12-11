@@ -213,10 +213,17 @@ export default class Animation extends Phaser.Scene {
 		toAdds = [];
 		this.playerExplosiveBullets = new Pool(this, MAX, 'Bullet');
 		for (let i = 0; i < MAX; i++) {
-			let toAdd = new ExplosiveBullet(this, 0, 0, 'Bala2', 75, this.areaFE);
+			let toAdd = new ExplosiveBullet(this, 0, 0, 'Bala2', 125, this.areaFE);
 			toAdds.push(toAdd);
 		}
 		this.playerExplosiveBullets.addMultipleEntity(toAdds);
+
+		//comparo si hay otros datos de player, si es asi, actualizo, lo hago aqui porque player necesitara registrar del tipo de bala que es
+		if (data.player !== undefined) {
+			this.player.newLevelClone(data.player);
+		}
+		// Guarda la referencia en el registry
+		this.registry.set('player', this.player);
 		// #endregion
 
 		// #region Enemy
@@ -476,7 +483,7 @@ export default class Animation extends Phaser.Scene {
 
 	changeToNextLevel() {
 		this.MainSample.stop();
-		this.scene.start('level2', { player: this.player, tries: this._tries });
+		this.scene.start('level3', { player: this.player, tries: this._tries });
 	}
 	pauseGame() {
 		this.scene.launch("Pause", { previousScene: this.scene.key }); // Lanzar la escena de pausa

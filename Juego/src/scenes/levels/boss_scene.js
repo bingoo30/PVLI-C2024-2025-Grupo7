@@ -11,6 +11,8 @@ import Pool from '../../objects/our_pool.js';
 import DamageArea from '../../objects/abilities/area_damage/damage_area.js';
 import PickableObjects from '../../objects/interactable_objects/pickable_objects.js';
 import ExplosiveBullet from '../../objects/abilities/shooting/explosive_bullet.js';
+import Drone from '../../objects/abilities/drone.js';
+import Turret from '../../objects/abilities/turret.js';
 
 
 const SCALE = 1;
@@ -89,7 +91,6 @@ export default class BossScene extends Phaser.Scene {
 
         this.player = new Player(this, playerX, playerY);
         this.player.setScale(3);
-        this.registry.set('player', this.player);
         // #endregion
 
 
@@ -123,7 +124,12 @@ export default class BossScene extends Phaser.Scene {
             toAdds.push(toAdd);
         }
         this.playerExplosiveBullets.addMultipleEntity(toAdds);
-
+        //comparo si hay otros datos de player, si es asi, actualizo, lo hago aqui porque player necesitara registrar del tipo de bala que es
+        if (data.player !== undefined) {
+            this.player.newLevelClone(data.player);
+        }
+        // Guarda la referencia en el registry
+        this.registry.set('player', this.player);
 
         this.joker = new Joker(this, jokerX, jokerY, this.player);
         //console.log('joker:', this.joker.x, this.joker.y);
@@ -220,6 +226,21 @@ export default class BossScene extends Phaser.Scene {
         });
 
         // #endregion
+
+        // #region utilidades
+        toAdds = [];
+        this.playerTurret = new Pool(this, 10, 'Turret');
+        for (let i = 0; i < 10; i++) {
+            let toAdd = new Turret(this, 0, 0, this.enemies);
+            toAdd.setPool(this.playerBullets);
+            toAdds.push(toAdd);
+        }
+        this.playerTurret.addMultipleEntity(toAdds);
+        this.player.registerTurrets(this.playerTurret);
+
+        let drone = new Drone(this, this.player.x, this.player.y, this.player, this.enemies, this.playerBullets);
+        this.player.registerDrone(drone);
+		// #endregion
 
         // #region UI
         this.expBar = new ExpBar(this, 20, 30);
