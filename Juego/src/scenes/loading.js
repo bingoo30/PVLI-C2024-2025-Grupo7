@@ -43,7 +43,9 @@ export default class Loading extends Phaser.Scene {
 		// #endregion
 
 		// #region Player Assets
-		this.load.image('Player', 'assets/character/player.png');
+		this.load.image('player', 'assets/character/player.png');
+		this.load.image('player2d', 'assets/character/player2d.png');
+
 		this.load.spritesheet('Orbs', 'assets/effects/particles_2_G.png', {
 			frameWidth: 55,
 			frameHeight: 55,
@@ -55,10 +57,16 @@ export default class Loading extends Phaser.Scene {
 			endFrame: 3      // Número de cuadros en el sprite sheet
 		});
 		this.load.image('Drone', 'assets/abilities/drone.png');
+
 		this.load.spritesheet('playerSheet', 'assets/character/player_sheet.png',{
 			frameWidth: 32,  // Ancho de cada cuadro
 			frameHeight: 32, // Altura de cada cuadro
 			endFrame: 13      // Número de cuadros en el sprite sheet
+		});
+		this.load.spritesheet('player2dSheet', 'assets/character/player2d_sheet.png', {
+			frameWidth:288,  // Ancho de cada cuadro
+			frameHeight: 480, // Altura de cada cuadro
+			endFrame: 15      // Número de cuadros en el sprite sheet
 		});
 
 		// #endregion

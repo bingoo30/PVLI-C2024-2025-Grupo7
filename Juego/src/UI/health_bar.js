@@ -40,13 +40,13 @@ export default class HealthBar extends Phaser.GameObjects.Sprite {
             align: 'left'
         }).setOrigin(0, 0).setVisible(false);
 
-        /*
-        this.time=30;
         this.scene.events.on('playerRecuperaVida', (value) => {
             this.lifeRecoverTexts.setText(`+${value}`);
             this.lifeRecoverTexts.setVisible(true);
+            this.scene.time.delayedCall(700, () => {
+                this.lifeRecoverTexts.setVisible(false);
+            });
         });
-        */
         this.container.add([this.bar, this, this.lifeText, this.lifeRecoverTexts]);
         this.container.setScrollFactor(0);
         this.container.setDepth(depth);
@@ -58,11 +58,6 @@ export default class HealthBar extends Phaser.GameObjects.Sprite {
 
         this.lifeText.setText(`${Phaser.Math.RoundTo(healthPer * 100, 0)}%`);
         this.bar.setDisplaySize(this.maxWidth * healthPer, this.height);
-        if (this.lifeRecoverTexts.visible) {
-            if (this.time > 0) this.time--;
-            else this.lifeRecoverTexts.setVisible(false);
-        }
-
 
     }
 }

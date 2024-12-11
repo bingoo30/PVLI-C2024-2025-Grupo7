@@ -50,6 +50,9 @@ export default class Animation extends Phaser.Scene {
 
 		this.load.image('Flush', 'assets/character/flush.png');
 
+		//para los dialogos del inicio
+		this.load.image('bossGif', 'assets/enemies/joker/joker_cut_scene.gif');
+
 	}
 
 	/**  
@@ -269,6 +272,7 @@ export default class Animation extends Phaser.Scene {
 
 		this.arrayLetus = [];
 		const letusLayer = this.map.getObjectLayer('Letus');
+
 		letusLayer.objects.forEach(obj => {
 			if (obj.name === 'Letus') { // Filtra por nombre
 				const letus = new Letus(this, obj.x * SCALE, obj.y * SCALE, this.player, this.exp);
@@ -276,8 +280,10 @@ export default class Animation extends Phaser.Scene {
 				this.arrayLetus.push(letus);
 			}
 		});
-
+		
 		this.enemies.addMultiple(this.arrayLetus);
+
+		
 		//#endregion
 
 		//#region Traps
@@ -303,6 +309,7 @@ export default class Animation extends Phaser.Scene {
 			rect.setDepth(4); 
 			this.rectGroup.add(rect);
 		});
+		this.rectGroup.setDepth(4);
 		//#endregion
 
 		// #region NPC
@@ -351,6 +358,7 @@ export default class Animation extends Phaser.Scene {
 
 		this.physics.add.collider(this.enemies, this.doorGroup);
 
+
 		this.physics.add.collider(this.player, this.Flush);
 
 		//colision player-enemigos
@@ -382,6 +390,7 @@ export default class Animation extends Phaser.Scene {
 			// mandaria a la pool de las balas de los enemigos otra vez
 			enemyBullet.destroyBullet(this.enemyBullets);
 		});
+
 		// colision areas
 		this.physics.add.overlap(this.player, this.area.getPhaserGroup(), (player, area) => {
 			player.onGotHit(area.getDamage());
@@ -400,8 +409,8 @@ export default class Animation extends Phaser.Scene {
 			}
 			coin.destroyCoin(this.coins);
 		});
+
 		//colision planta-player
-		
 		this.physics.add.collider(this.player.collisionZone, this.plants.getPhaserGroup(), (zone, plant) => {
 			this.player.onPlayerCollectedPlant(plant.getLifeRec());
 			plant.destroyPlant(this.plants);
@@ -441,7 +450,7 @@ export default class Animation extends Phaser.Scene {
 
 		if (this._tries == 1) {
 			const dialogos = this.cache.json.get('dialogues');
-			this.changeToDialogScene({ sceneKey: this.scene.key, backgroundType: 'dark', dialogos: dialogos });
+			this.changeToDialogScene({ sceneKey: this.scene.key, backgroundType: 'dark', dialogos: dialogos, image:'bossGif' });
 		}
 
 		// #region sonido
@@ -459,10 +468,18 @@ export default class Animation extends Phaser.Scene {
 	}
 
 	changeToGameover() {
+		this.events.removeAllListeners('Interact');
+		this.events.removeAllListeners('IKilledAnEnemy');
+		this.events.removeAllListeners('TurretTimeOVer');
+		this.events.removeAllListeners('playerRecuperaVida');
 		this.scene.start("gameover", { player: this.player, tries: this._tries });
 	}
 
 	changeToNextLevel() {
+		this.events.removeAllListeners('Interact');
+		this.events.removeAllListeners('IKilledAnEnemy');
+		this.events.removeAllListeners('TurretTimeOVer');
+		this.events.removeAllListeners('playerRecuperaVida');
 		this.scene.start('level2', { player: this.player, tries: this._tries });
 	}
 	pauseGame() {

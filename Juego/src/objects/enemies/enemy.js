@@ -25,7 +25,7 @@ export default class Enemy extends Character {
 
         this.follow = false;
         this.plantPool = null;
-        this.setDepth(1);
+        this.setDepth(10);
     }
 
 

@@ -27,7 +27,6 @@ export default class BossScene extends Phaser.Scene {
     preload() {
         // Load assets (e.g., boss sprite, animations, and sounds)
         this.load.image('boss', 'assets/enemies/joker/joker.png');
-        this.load.image('bossGif', 'assets/enemies/joker/joker_cut_scene.gif');
         this.load.image('projectile', 'assets/bullet/bullet_1.png');
 
         this.load.image('mapFondo', 'assets/map/map_boss/map_boss_fondo.png');
@@ -54,6 +53,28 @@ export default class BossScene extends Phaser.Scene {
         bg.setOrigin(0, 0); 
         bg.setDepth(-1);
 
+        //animacion 2d
+
+        const animations2d = [
+            { key: 'player2dIdleDown', start: 0, end: 0, frameRate: 5, repeat: 0 },
+            { key: 'player2dIdleRight', start: 8, end: 8, frameRate: 5, repeat: 0 },
+            { key: 'player2dIdleUp', start: 12, end: 12, frameRate: 5, repeat: 0 },
+            { key: 'player2dIdleLeft', start: 5, end: 5, frameRate: 5, repeat: 0 },
+
+            { key: 'player2dWalkDown', start: 0, end: 3, frameRate: 8, repeat: -1 },
+            { key: 'player2dWalkRight', start: 8, end: 11, frameRate: 8, repeat: -1 },
+            { key: 'player2dWalkUp', start: 12, end: 15, frameRate: 8, repeat: -1 },
+            { key: 'player2dWalkLeft', start: 4, end: 7, frameRate: 8, repeat: -1 }
+        ];
+
+        animations2d.forEach(({ key, start, end, frameRate, repeat }) => {
+            this.anims.create({
+                key,
+                frames: this.anims.generateFrameNumbers('player2dSheet', { start, end }),
+                frameRate,
+                repeat
+            });
+        });
 
         this._tries = data.tries;
         console.log("tries: " + this._tries);
@@ -89,8 +110,8 @@ export default class BossScene extends Phaser.Scene {
         const playerY = playerPos.y * SCALE;
         // #endregion
 
-        this.player = new Player(this, playerX, playerY);
-        this.player.setScale(3);
+        this.player = new Player(this, playerX, playerY, 'player2d');
+        this.player.setScale(0.3);
         // #endregion
 
 
@@ -316,7 +337,7 @@ export default class BossScene extends Phaser.Scene {
             this.cardsDestroyed++;
             if (this.cardsDestroyed === 5) {
                 this.joker.onGotHit(50); // Inflige daño al Joker
-                //console.log("El Joker recibió daño por la destrucción de todos los pilares.");
+                //console.log("El Joker recibi?daño por la destrucción de todos los pilares.");
             }
         });
     }
@@ -330,7 +351,7 @@ export default class BossScene extends Phaser.Scene {
                 if (this.cardsDestroyed < 5) {
                     // Si no se destruyen todos los pilares, el jugador recibe daño
                     this.player.onGotHit(20);
-                    //console.log("El jugador recibió daño por no destruir todos los pilares.");
+                    //console.log("El jugador recibi?daño por no destruir todos los pilares.");
                 }
             },
             callbackScope: this,

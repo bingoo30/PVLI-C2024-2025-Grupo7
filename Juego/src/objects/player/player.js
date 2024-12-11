@@ -11,10 +11,12 @@ import Inventory from "./inventory.js";
  */
 
 export default class Player extends Character {
-    constructor(scene, x, y, scale=4) {
+    constructor(scene, x, y, texture = 'player', scale = 4) {
         //heredo de la clase character
-        super(scene, x, y, 'Player');
-
+        super(scene, x, y, texture);
+        this.name = texture;
+        //this.texture = texture;
+        console.log(texture);
         //Medidor de tiempo para los disparos
         this.cooldownCont = 0;
         this.canShoot = true;
@@ -26,8 +28,14 @@ export default class Player extends Character {
 
         // Agregamos fisicas
         scene.physics.add.existing(this);
-        this.body.setSize(16, 8);
-        this.body.setOffset(8, 24);
+        if (this.name == 'player') {
+            this.body.setSize(16, 8);
+            this.body.setOffset(8, 24);
+        }
+        else {
+            this.body.setSize(288, 120);
+            this.body.setOffset(0, 360);
+        }
 
         this.collisionZone = scene.add.zone(this.x, this.y, 16 * scale, 32 * scale);
         scene.physics.add.existing(this.collisionZone);
@@ -348,43 +356,43 @@ export default class Player extends Character {
         // Lógica de movimiento horizontal
         if (this.aKey.isDown) {
             this.speed.x = -1;
-            animationKey = 'playerWalkLeft';
+            animationKey = this.name +'WalkLeft';
         } else if (this.dKey.isDown) {
             this.speed.x = 1;
-            animationKey = 'playerWalkRight';
+            animationKey = this.name +'WalkRight';
         }
         else this.speed.x = 0;
 
         // Lógica de movimiento vertical
         if (this.wKey.isDown) {
             this.speed.y = -1;
-            animationKey = 'playerWalkUp';
+            animationKey = this.name +'WalkUp';
         } else if (this.sKey.isDown) {
             this.speed.y = 1;
-            animationKey = 'playerWalkDown';
+            animationKey = this.name + 'WalkDown';
         }
         else this.speed.y = 0;
 
         if (this.speed.x === 0 && this.speed.y === 0) {
             switch (this.anims.currentAnim?.key) {
-                case 'playerIdleLeft':
-                case 'playerWalkLeft':
-                    animationKey = 'playerIdleLeft';
+                case this.name +'IdleLeft':
+                case this.name +'WalkLeft':
+                    animationKey = this.name + 'IdleLeft';
                     break;
-                case 'playerIdleRight':
-                case 'playerWalkRight':
-                    animationKey = 'playerIdleRight';
+                case this.name +'IdleRight':
+                case this.name +'WalkRight':
+                    animationKey = this.name + 'IdleRight';
                     break;
-                case 'playerIdleUp':
-                case 'playerWalkUp':
-                    animationKey = 'playerIdleUp';
+                case this.name +'IdleUp':
+                case this.name +'WalkUp':
+                    animationKey = this.name + 'IdleUp';
                     break;
-                case 'playerIdleDown':
-                case 'playerWalkDown':
-                    animationKey = 'playerIdleDown';
+                case this.name +'IdleDown':
+                case this.name +'WalkDown':
+                    animationKey = this.name + 'IdleDown';
                     break;
                 default:
-                    animationKey = 'playerIdleDown';
+                    animationKey = this.texture + 'IdleDown';
                     break;
             }
         }

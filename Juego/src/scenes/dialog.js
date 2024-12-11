@@ -9,7 +9,7 @@ export default class DialogScene extends Phaser.Scene {
 		super({ key: 'Dialog' });
 	}
     create(data) {
-        const { sceneKey, backgroundType = 'transparent', dialogos } = data;
+        const { sceneKey, backgroundType = 'transparent', dialogos, image} = data;
 
         this.previousSceneKey = sceneKey;
         const gameWidth = this.sys.game.config.width;
@@ -23,6 +23,9 @@ export default class DialogScene extends Phaser.Scene {
         this.background.fillStyle(bgColor, bgAlpha);
         this.background.fillRect(0, 0, gameWidth, gameHeight);
 
+        if (image) {
+            this.add.image(image);
+        }
         // Crear nueva instancia de DialogText y DialogueManager
         this.dialogPlugin = new DialogText(this, {
             borderThickness: 2,
