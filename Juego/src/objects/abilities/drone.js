@@ -7,6 +7,8 @@ const DEFAULT_DAMAGE = 1;
 
 
 export default class Drone extends Phaser.GameObjects.Sprite {
+    // Dron que sigue al jugador y lo defiende disparando a los enemigos.
+    // Siempre estÃ¡ en la escena pero inactivo en invisible hasta que sea activado 
     /**
      * Constructor de la torreta
      * @param {Scene} scene - escena en la que aparece
@@ -21,45 +23,43 @@ export default class Drone extends Phaser.GameObjects.Sprite {
         this.scene = scene;
         this.scene.add.existing(this);
         this.scene.physics.add.existing(this);
-
         this.setScale(0.05);
         this.target = null;
         this.player = player;
         this.pool = pool;
-
         this.shootCooldown = DEFAULT_DRONE_SHOOTING_SPEED;
         this.shootingRange = DEFAULT_DRONE_SHOOTING_RANGE;
         this.damage = DEFAULT_DAMAGE;
         this.enemies = Enemies
         this.cooldownCont = 0;
         this.bulletSpeed = DEFAULT_DRONE_BULLET_SPEED;
-
         this.setDepth(2);
     }
+
     preUpdate(t, dt) {
         super.preUpdate(t, dt);
         this.followPlayer();
-        //solo empieza a atacar cuando es visible
-        if (this.visible) {
+
+        if (this.visible) { // Solo empieza a atacar cuando esta 'activado'
             if (this.cooldownCont <= 0 && this.getClosestEnemy()) {
                 this.cooldownCont = this.shootCooldown;
                 fire(this, this.target, this.damage, this.bulletSpeed, 'Bala', 4, this.pool, 1, this.player.prob, 1.5);
                 const sfx = this.scene.sound.add('playerAttackAudio');
-                sfx.setVolume(0.35); // Cambiar el volumen dinámicamente
+                sfx.setVolume(0.35); // Cambia el volumen dinamicamente
                 sfx.play();
             }
             this.cooldownCont = this.cooldownCont - dt;
         }
     }
 
-    getDistance(targetToCheck) {
+    getDistance(targetToCheck) {    // Devuelve la distancia del objetivo respecto al dron
         var p1 = this.x - targetToCheck.x;
         var p2 = this.y - targetToCheck.y;
 
         return Math.sqrt(p1 * p1 + p2 * p2);
     }
 
-    getClosestEnemy() {
+    getClosestEnemy() { // Busca el enemigo mas cercano al dron
         this.currentBest = this.shootingRange;
         this.res = false;
 
@@ -75,29 +75,30 @@ export default class Drone extends Phaser.GameObjects.Sprite {
 
         return this.res;
     }
-    setPosition(x, y) {
+
+    setPosition(x, y) { // Cambia la posicion del dron
         this.x = x;
         this.y = y;
     }
-    setDamage(damage) {
+
+    setDamage(damage) { // Cambia el daÃ±o de las balas del dron
         this.damage = damage;
     }
-    setBulletSpeed(speed) {
+
+    setBulletSpeed(speed) { // Cambia la velocidad de las balas del dron
         this.bulletSpeed = speed;
     }
-    /**
- * Método para mover al dron hacia el jugador si está fuera de rango.
- */
-    followPlayer() {
+
+    followPlayer() {    // Metodo para mover al dron hacia el jugador si esta fuera de rango
         const distanceToPlayer = this.getDistance(this.player);
-        const minDistance = 100; // Distancia mínima para detenerse
+        const minDistance = 100; // Distancia minima para detenerse
 
         if (distanceToPlayer > minDistance) {
-            // Calcular dirección hacia el jugador
+            // Calcular direccion hacia el jugador
             const directionX = this.player.x - this.x;
             const directionY = this.player.y - this.y;
 
-            // Normalizar el vector de dirección
+            // Normalizar el vector de direccion
             const magnitude = Math.sqrt(directionX * directionX + directionY * directionY);
             const normalizedDirectionX = directionX / magnitude;
             const normalizedDirectionY = directionY / magnitude;
@@ -109,7 +110,7 @@ export default class Drone extends Phaser.GameObjects.Sprite {
                 normalizedDirectionY * speed
             );
         } else {
-            // Detener el movimiento si está dentro de la distancia mínima
+            // Detener el movimiento si esta dentro de la distancia minima
             this.body.setVelocity(0);
         }
     }

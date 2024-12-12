@@ -6,7 +6,9 @@
  * @param {number} y- ejeY inical
  * @param {number} radius - radio del area
  */
-export default class DamageArea extends Phaser.GameObjects.Sprite {
+
+export default class DamageArea extends Phaser.GameObjects.Sprite { 
+    // Area que provoca daño para las explosiones
     constructor(scene, x, y, radius, damage, texture) {
         super(scene, x, y, texture);
         this.scene = scene;

@@ -1,8 +1,8 @@
-
 const DEFAULT_MINE_COOLDOWN = 5000;
 const DEFAULT_STUNT_TIME = 5000;
 
 export default class Mine extends Phaser.GameObjects.Sprite {
+    // Mina que deja al enemigo con el que impacta stuneado una cantidad de tiempo determinada 
     /**
      * Constructor de la mina
      * @param {Scene} scene - escena en la que aparece
@@ -20,7 +20,7 @@ export default class Mine extends Phaser.GameObjects.Sprite {
         this.stuntTime = time;
     }
 
-    getStuntTime() {    // retorna el tiempo stuneado
+    getStuntTime() {    // Retorna el tiempo de stuneado
         return this.stuntTime;
     }
     onDeath() {

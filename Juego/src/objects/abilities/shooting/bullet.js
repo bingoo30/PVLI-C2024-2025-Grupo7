@@ -1,4 +1,5 @@
 export default class Bullet extends Phaser.GameObjects.Sprite {
+    // Bala basica que viaja en linea recta y hace daño al impactar
     /**
      * Constructor de Bullet,las balas
      * @param {Scene} scene - escena en la que aparece
@@ -17,13 +18,14 @@ export default class Bullet extends Phaser.GameObjects.Sprite {
         this.setDepth(1);
         this.particles = null;
     }
-    move(xStart, yStart, xObj, yObj) {
-        // direccion de disparo 
-        var pointSpeed = new Phaser.Math.Vector2(xObj - xStart, yObj - yStart);   // Usa como referencia el centro de la pantalla
-        pointSpeed.normalize();
 
+    move(xStart, yStart, xObj, yObj) {
+        // Direccion de disparo 
+        var pointSpeed = new Phaser.Math.Vector2(xObj - xStart, yObj - yStart);
+        pointSpeed.normalize();
         this.body.setVelocity(this.speed * pointSpeed.x, this.speed * pointSpeed.y);
 
+        // Particulas de las balas
         this.particles=this.scene.add.particles(0, 0, 'Particle', {
             x: () => {
                 return this.x;
@@ -37,19 +39,20 @@ export default class Bullet extends Phaser.GameObjects.Sprite {
         }); 
     }
 
-    setSpeed(s) {
+    setSpeed(s) {   // Cambia la velocidad de la Bala
         this.speed = s;
     }
-    setDamage(d) {
+
+    setDamage(d) {  // Cambia el daño de la bala
         this.damage = d;
     }
-    getDamage() {
+
+    getDamage() {   // Devuelve el daño de la bala
         return this.damage;
     }
 
-    destroyBullet(pool) {
+    destroyBullet(pool) {   // Destructor
         pool.release(this);
         this.particles.destroy();
-        //quitar el efecto de particulas
     }
 }

@@ -6,8 +6,8 @@ const DEFAULT_TURRET_BULLET_SPEED = 300;
 const DEFAULT_DAMAGE = 1;
 const DEFAULT_TURRET_LIFETIME = 10000; // Duración de vida en milisegundos
 
-
 export default class Turret extends Phaser.GameObjects.Sprite{
+    // Torreta estatica que ataca a su objectivo lanzando balas normales
     /**
      * Constructor de la torreta
      * @param {Scene} scene - escena en la que aparece
@@ -22,20 +22,16 @@ export default class Turret extends Phaser.GameObjects.Sprite{
         this.scene = scene;
         this.scale = 4; 
         this.target = null;
-        //this.navMesh = scene.navMesh;
         this.scene.add.existing(this);
         this.scene.physics.add.existing(this);
         this.pool = null;
-
-        this.shootCooldown = DEFAULT_TURRET_SHOOTING_SPEED;
-        this.shootingRange = DEFAULT_TURRET_SHOOTING_RANGE;
-        this.damage = DEFAULT_DAMAGE;
         this.enemies = Enemies
         this.cooldownCont = 0;
-        this.bulletSpeed = DEFAULT_TURRET_BULLET_SPEED;
-
-        this.lifetime = DEFAULT_TURRET_LIFETIME; // Tiempo de vida de la torreta
-
+        this.damage = DEFAULT_DAMAGE;                       // Daño de las balas de la torreta
+        this.shootCooldown = DEFAULT_TURRET_SHOOTING_SPEED; // Cooldown entre disparos de la torreta
+        this.shootingRange = DEFAULT_TURRET_SHOOTING_RANGE; // Rango de la torreta
+        this.bulletSpeed = DEFAULT_TURRET_BULLET_SPEED; // Velocidad de las balas de la torreta
+        this.lifetime = DEFAULT_TURRET_LIFETIME;        // Tiempo de vida de la torreta
         this.setDepth(2);
     }
     setPool(pool) {
@@ -54,7 +50,7 @@ export default class Turret extends Phaser.GameObjects.Sprite{
         }
         this.cooldownCont = this.cooldownCont - dt;
 
-        // Reducir tiempo de vida
+        // Reducir tiempo que le queda de vida
         this.lifetime -= dt;
         if (this.lifetime <= 0) {
             this.lifetime = DEFAULT_TURRET_LIFETIME;
@@ -62,7 +58,7 @@ export default class Turret extends Phaser.GameObjects.Sprite{
         }
 	}
 
-    getDistance(targetToCheck) {
+    getDistance(targetToCheck) {    // Devuelve la distancia del objetivo respecto a la torreta
 		var p1 = this.x - targetToCheck.x;
 		var p2 = this.y - targetToCheck.y;
 
@@ -86,10 +82,11 @@ export default class Turret extends Phaser.GameObjects.Sprite{
         return this.res;
     }
 
-    setDamage(damage) {
+    setDamage(damage) { // Cambia el daño de las balas de la torreta
         this.damage = damage;
     }
-    setBulletSpeed(speed) {
-        this.bulletSpeed = speed -DEFAULT_TURRET_BULLET_SPEED;
+
+    setBulletSpeed(speed) { // Cambia la velocidad de las balas de la torreta
+        this.bulletSpeed = speed - DEFAULT_TURRET_BULLET_SPEED;
     }
 }

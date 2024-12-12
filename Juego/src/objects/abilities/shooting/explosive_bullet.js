@@ -1,6 +1,7 @@
 import Bullet from "./bullet.js";
 
-export default class ExplosiveBullet extends Bullet {
+export default class ExplosiveBullet extends Bullet {   
+    // Bala que provoca una explosion al impactar
     /**
      * Constructor de Bullet,las balas
      * @param {Scene} scene - escena en la que aparece
@@ -16,12 +17,13 @@ export default class ExplosiveBullet extends Bullet {
         this.areaDamage = 0;
         this.duration = 1;  
     }
-    setDamage(d) {
+
+    setDamage(d) {  // Cambia el daño
         super.setDamage(d);
         this.areaDamage = d/2;
     }
-    destroyBullet(pool) {
-        //crear el area de daño
+
+    destroyBullet(pool) {   // Se destrulle provocando una area de daño que actua como explosion
         let damageArea = this.pool.spawn(this.x, this.y);
         damageArea.reset(this.areaRadius, this.areaDamage, this.duration);
         const sfx = this.scene.sound.add('enemyAreaAudio');
