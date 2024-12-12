@@ -211,7 +211,7 @@ export default class BossScene extends Phaser.Scene {
         
 
         // #region Collisions and Interactions
-        this.physics.add.collider(this.player.collisionZone, this.joker, this.onPlayerHit, null, this);
+        this.physics.add.overlap(this.player.collisionZone, this.joker, this.onPlayerHit, null, this);
 
         //this.paredLayer.setCollisionByProperty({ collides: true });
 
@@ -224,6 +224,10 @@ export default class BossScene extends Phaser.Scene {
 
         this.physics.add.collider(this.jokerBullets.getPhaserGroup(), this.paredLayer, (bullet, wall) => {
             bullet.destroyBullet(this.jokerBullets);
+        });
+
+        this.physics.add.collider(this.player, this.area.getPhaserGroup(), (player, area) => {
+            player.onGotHit(area.getDamage());
         });
 
         this.physics.add.overlap(this.player.collisionZone, this.joker, (collisionZone, enemy) => {
@@ -282,6 +286,7 @@ export default class BossScene extends Phaser.Scene {
 
         // #region Camera Setup
         this.cameras.main.startFollow(this.player);
+        this.cameras.main.setZoom(0.5);
         // #endregion
 
         // #region sonido
@@ -301,10 +306,10 @@ export default class BossScene extends Phaser.Scene {
 
     createWalls() {
         // (x1, y1) a (x2, y2)
-        this.drawWall(1490, 500, 5500, 550); // horizontal arriba
-        this.drawWall(490, 1500, 510, 3600); // vertical derecha
-        this.drawWall(1490, 2550, 5500, 2600); // horizontal abajo
-        this.drawWall(3500, 1500, 3550, 3600); // vertical izquierda
+        this.drawWall(1490, 500, 5500, 600); // horizontal arriba
+        this.drawWall(650, 1500, 700, 3600); // vertical izquierda
+        this.drawWall(1490, 2500, 5500, 2600); // vertical derecha
+        this.drawWall(3450, 1400, 3550, 3600); // horizontal abajo
     }
 
     drawWall(x1, y1, x2, y2) {

@@ -7,7 +7,7 @@ export default class Joker extends Character {
         this.scene.add.existing(this);
         this.target = player;
         this.minX = 1000;
-        this.minY = 500;
+        this.minY = 550;
         this.maxX = 3400; 
         this.maxY = 2400;
         scene.physics.add.existing(this);
@@ -19,7 +19,7 @@ export default class Joker extends Character {
         this.damageStatus = 0;
         this.bulletCardNumbers = 2;
 
-        this.AreaDamageRange = 100;
+        this.AreaDamageRange = 200;
         this.AreaDamage = 0.1;
         this.duration = 1;
         this.explNumber = 1;
@@ -31,8 +31,7 @@ export default class Joker extends Character {
 
         this.maxLife = 10; // 200
         //speedFactor,shootCardSpeed, shootSpeed, life, damage, prob
-        this.init(100, 300, 500, this.maxLife, 3, 0);
-        this.chaseSpeed = 100;
+        this.init(200, 300, 500, this.maxLife, 3, 0);
         this.isTeleporting = false;
         this.isChasing = false;
         this.spawnCards = true;
@@ -72,18 +71,19 @@ export default class Joker extends Character {
         } else {
             this.spawnOrbs();
         }
-        setTimeout(() => this.phase2(), 3000);
+        setTimeout(() => this.phase2(), this.timeP1);
     }
 
     phase2() {
         console.log('Fase 2')
 
         this.isChasing = true;
+  
         setTimeout(() => {
             this.createDamageArea();
             this.isChasing = false;
             this.phase3();
-        }, 3000);
+        }, this.timeP2);
     }
 
     phase3() {
@@ -97,7 +97,7 @@ export default class Joker extends Character {
             } else {
                 this.phase1()
             }
-        }, 3000);
+        }, this.timeP3);
     }
 
     phase4() {
@@ -153,7 +153,7 @@ export default class Joker extends Character {
         this.maxLife = life;
     }
     createDamageArea() {
-
+        console.log('DMG AREA')
         const dx = this.target.x - this.x;
         const dy = this.target.y - this.y;
 
@@ -164,7 +164,7 @@ export default class Joker extends Character {
         const directionX = dx / distance;
         const directionY = dy / distance;
         for (let i = 1; i <= this.explNumber; i++) {
-            const areaX = this.x + directionX * 300 * i; // 300 px
+            const areaX = this.x + directionX * 400 * i; // 300 px
             const areaY = this.y + directionY * 300 * i;
 
             this.damageArea = this.poolArea.spawn(areaX, areaY);
@@ -183,18 +183,6 @@ export default class Joker extends Character {
         //    repeat: -1,
         //});
 
-        //this.scene.anims.create({
-        //    key: 'joker_attack',
-        //    frames: this.scene.anims.generateFrameNumbers('boss', { start: 4, end: 7 }),
-        //    frameRate: 8,
-        //    repeat: 0,
-        //});
-        //this.scene.anims.create({
-        //    key: 'joker_teleport',
-        //    frames: this.scene.anims.generateFrameNumbers('boss', { start: 4, end: 7 }),
-        //    frameRate: 8,
-        //    repeat: 0,
-        //});
         //this.play('joker_idle');
     }
 
@@ -207,8 +195,8 @@ export default class Joker extends Character {
 
         if (distance > this.attackRange) {
 
-            const velocityX = (dx / distance) * this.chaseSpeed;
-            const velocityY = (dy / distance) * this.chaseSpeed;
+            const velocityX = (dx / distance) * this.speedFactor;
+            const velocityY = (dy / distance) * this.speedFactor;
 
             this.body.setVelocity(velocityX, velocityY);
 
@@ -294,6 +282,11 @@ export default class Joker extends Character {
     preUpdate(t,dt){
         super.preUpdate(t, dt);
         //console.log('Joker pos X: ', this.x, ' Y: ', this.y)
+        if (this.isChasing) {
+            this.chasePlayer();
+        } else {
+            this.body.setVelocity(0,0);
+        }
 
         if (this.life < this.maxLife / 2 && this.spawnCards) {
             this.spawnCards = false;
@@ -303,9 +296,10 @@ export default class Joker extends Character {
         if (this.life < this.maxLife * 0.25 && this.change) {
             console.log('Fase Joker 2');
             this.change = false;
+            this.speedFactor = 400;
             this.phase = 2;
             this.bulletCardNumbers = 3;
-            this.shootSpeedStatus = 25;
+            this.shootSpeedStatus = 2;
             this.explNumber = 3;
             this.timeP1 = 2000;
             this.timeP2 = 4000;
