@@ -92,10 +92,8 @@ Al derrotar a los enemigos, soltarán fichas (experiencia) que te permitirán su
     5. <ins>Más probabilidad de hacer un ataque crítico</ins> que inflige el doble de daño (hasta 5 veces, un 5% por cada mejora).
  
 ![image](https://github.com/user-attachments/assets/df453eeb-007c-4853-9314-436f30d2cc23)
-*Concept art del arbol de habilididades y mejoras de status*
 
-![image](https://github.com/user-attachments/assets/eesquemaarbol2)
-*Esquema del arbol de habilidades y mejoras de status*
+*Concept art del arbol de habilididades y mejoras de status*
 
 ### 1.4. Mecánicas de escenario
   En el escenario, el jugador se encontrará con objetos interactuables que estarán relacionados con la historia. También habrá algunos objetos que desbloquearán logros y que funcionarán como easter eggs.
