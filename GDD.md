@@ -111,27 +111,33 @@ Al derrotar a los enemigos, soltarán fichas (experiencia) que te permitirán su
   #### **Enemigos base**
   + **Bob** (enemigo de ataque cuerpo a cuerpo): Un enemigo sencillo que persigue al jugador. Tiene menor velocidad y tamaño que la protagonista.
     + Vida(1), Daño(1)
+
       ![image](https://github.com/bingoo30/PVLI-C2024-2025-Grupo7/blob/main/Juego/assets/GDD/bob_G.png)
       
   + **Crac** (enemigo que lanza proyectiles): Cuenta con un radio de visión que determina cuándo empieza a atacar. Tiene velocidad normal.
     + Vida (0.5), Daño (1.5)
+
       ![image](https://github.com/bingoo30/PVLI-C2024-2025-Grupo7/blob/main/Juego/assets/GDD/crac_G.png)
       
   + **Zaro** (enemigo que puede teletransportarse): Ataca a distancia, similar al enemigo que lanza proyectiles (fantasma).
     + Vida (0.5), Daño (1.5)
+
       ![Zarp](https://github.com/bingoo30/PVLI-C2024-2025-Grupo7/blob/main/Juego/assets/GDD/zaro_G.png)
       
   + **Letus** (enemigo que vuela y ataca cuerpo a cuerpo): Se asemeja a un murciélago.
     + Vida (0.5), Daño (1.5)
+
       ![image](https://github.com/bingoo30/PVLI-C2024-2025-Grupo7/blob/main/Juego/assets/GDD/letus_G.png)
 
   + **Mutum** (enemigo bomba): Un ataque de hit kill, pero explota y causa daño en área. Si el jugador entra en su campo de ataque, se suicida. Persigue al jugador.
     + Vida (0.5), Daño (1.5)
+
       ![Mutum](https://github.com/bingoo30/PVLI-C2024-2025-Grupo7/blob/main/Juego/assets/GDD/mutum_G.png)
 
   + **Estaka** (enemigo de daño en área): Si el jugador entra en su área, provoca una explosión.
     + Vida (0.5), Daño (1.5)
-      ![Estaka]([https://github.com/user-attachments/assets/enemies/mutum](https://github.com/bingoo30/PVLI-C2024-2025-Grupo7/blob/main/Juego/assets/GDD/estaka_G.png))
+
+      ![Estaka](https://github.com/bingoo30/PVLI-C2024-2025-Grupo7/blob/main/Juego/assets/GDD/estaka_G.png)
 
 #### **Boss**
   + **Joker**: Se teleporta y causa daño en área y cuerpo a cuerpo.
