@@ -1,3 +1,4 @@
+//funcion que se usa para dropear fichas y plantas cuando un enemigo muere
 export function drop(x, y, exp, lifeRec, pool, pool2) {
 	let coin = pool.spawn(x, y);
 	coin.setExp(exp);

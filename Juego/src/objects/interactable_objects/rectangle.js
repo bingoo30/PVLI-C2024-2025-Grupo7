@@ -1,15 +1,16 @@
 /**
+ * Rectangulos que ocultan algunas salas del tilemap
      * @extends Sprite
      Lo que recibe
      * @param {Scene} scene - la escena que esta
-     * @param {number} x - posicion x
-     * @param {number} y - posicion y
-     * @param {number} width - ancho del collider
-     * @param {number} height - altura del collider 
+     * @param {Number} x - posicion x
+     * @param {Number} y - posicion y
+     * @param {Number} width - ancho del collider
+     * @param {Number} height - altura del collider 
      * @param {Player} player - personaje al que esta comprobando si esta dentro
      Atributos
-     * @param {boolean} isPlayerInside  - booleano para saber si player esta o no
-     * @param {rectangle} rect- rectangulo que se pinta
+     * @param {Boolean} isPlayerInside  - booleano para saber si player esta o no
+     * @param {Rectangle} rect- rectangulo que se pinta
      */
 export default class Rectangle extends Phaser.GameObjects.Sprite {
     constructor(scene, x, y, width, height, player, scale = 4) {

@@ -1,6 +1,6 @@
 import Enemy from "./enemy.js";
 /** 
- * Enemigo basico
+ * Enemigo basico, ataca cuerpo a cuerpo, y persigue al jugador cuando entra en su area de vision
  * @extends Enemy
  */
 export default class Bob extends Enemy{

@@ -1,6 +1,6 @@
 import Enemy from "./enemy.js";
 /** 
- * Enemigo basico
+ * Enemigo basico, que persigue al jugador y ataca cuerpo a cuerpo
  * @extends Enemy
  */
 export default class Letus extends Enemy {

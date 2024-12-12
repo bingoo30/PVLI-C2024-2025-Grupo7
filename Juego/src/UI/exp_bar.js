@@ -6,7 +6,7 @@
      * @param {Number} y - coordenada y
      * @param {Number} depth - la capa que va a estar
      * atributos
-     * @param {container} container - un contenedor que tiene el bar y text
+     * @param {Container} container - un contenedor que tiene el bar y text
      * 
  */
 export default class ExpBar extends Phaser.GameObjects.Sprite{

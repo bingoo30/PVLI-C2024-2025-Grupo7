@@ -4,14 +4,25 @@ import Inventory from "./inventory.js";
 
 /**
  * @extends Character
+ * 
  */
 export default class Player extends Character {
     /**
      * Constructor de Player
      * @param {Scene} scene - escena en la que aparece
-     * @param {number} x - coordenada x
-     * @param {number} y - coordenada y
-     * @param {String} texture - la textura que se va usar
+     * @param {Number} x - coordenada x
+     * @param {Number} y - coordenada y
+     * @param {String} texture - la textura que se va usar, por defeto es el jugador pixelArt
+     * @param {String} scale - se usa para ajustar el body y el collider del player
+     * atributos
+     * @param {String} name - string que se usa para saber que animacion llamar segun la textura que esta usando 
+     * @param {Number} cooldownCont - tiempo de disparo
+     * @param {Boolean} canShoot - controla si se puede disparar el jugador
+     * @param {Number} bulletNumbers - constrola cuantos proyectiles lanza cada vez que dispara
+     * @param {Number} bulletScale - escala a que esta la bala
+     * @param {Phaser.GameObjects.Zone} collisionZone - otra zona de colision a parte del body
+     * @param {Number} xpToLevelUp - la experiencia que necesita para subir de nivel
+     * @param {Number} xpAcumulator - experiancia acumulado
  */
     constructor(scene, x, y, texture = 'player', scale = 4) {
         //heredo de la clase character
@@ -84,9 +95,11 @@ export default class Player extends Character {
         this.eKey = this.scene.input.keyboard.addKey('E'); //interactuar
         this.pKey = this.scene.input.keyboard.addKey('P'); //pausar el juego
 
+        //inputs para la presentacion
         this.xKey = this.scene.input.keyboard.addKey('X'); //saltar el nivel
         this.numPad1 = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.NUMPAD_ONE); //teleportarte en donde la llave
         this.numPad2 = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.NUMPAD_TWO); //teleportarte en donde la puerta
+
         // Seteamos mouse
         this.mouse = this.scene.input.activePointer;
 
@@ -150,6 +163,7 @@ export default class Player extends Character {
     setTurretAvaliable(a) {
         this.turretAvaliable = a;
     }
+
     /*metodo para actualizar los atributos entre niveles*/
     newLevelClone(player) {
         this.init(player.speedFactor, player.shootSpeed, player.life, player.damage, player.prob);
@@ -195,6 +209,8 @@ export default class Player extends Character {
         this.damageStatus = player.damageStatus; //+100%
         // #endregion
     }
+
+
     onGotHit(damage) {
         super.onGotHit(damage); // Aplica daño al jugador
         // Comprobar si el sonido está en cooldown
@@ -210,13 +226,14 @@ export default class Player extends Character {
                 this.hitSoundCooldown = false;
             });
         }
+        //cambia a escene de Game over
         if (this.life == 0) {
             this.scene.changeToGameover();
-            //this.onDeath();
         }
 
     }
 
+    //aumenta la experiencia conseguida cuando se colisiona con una ficha
     onPlayerCollectedXP(value) {
         this.xpAcumulator += value; 
     }
@@ -227,6 +244,7 @@ export default class Player extends Character {
         this.life += value;
         if (this.life > this.maxLife) this.life = this.maxLife;
     }
+
 
     knockback(strength, attacker) {
         this.isKnockedBack = true;
@@ -248,19 +266,24 @@ export default class Player extends Character {
             this.isKnockedBack = false;
         });
     }
+
     levelUp() {
+        //se aumenta la vida maxima, y se pone la vida a la maxima
         this.level++;
         this.xpAcumulator = this.xpAcumulator-this.xpToLevelUp;
         this.xpToLevelUp += 1;
         this.maxLife++;
-        this.statusPoint++;
         this.life = this.maxLife;
+        //consigue un punto de status
+        this.statusPoint++;
         this.Inventory.addLevel();
         if (this.level != 0 && (this.level % 3) - 1 == 0) this.abilityPoint++;
-        console.log(this.abilityPoint);
+        //console.log(this.abilityPoint);
         const sfx = this.scene.sound.add('levelUpAudio');
         sfx.play();
     }
+
+    
     getANewAbility(ability) {
         switch (ability) {
             case 'Juego de proyectiles I':
@@ -317,7 +340,7 @@ export default class Player extends Character {
             case 'maxLife': {
                 this.maxLifeStatus++;
                 this.maxLife += this.maxLifeStatus;
-                console.log('max life: '+ this.maxLife);
+                //console.log('max life: '+ this.maxLife);
             }
                 break;
             case 'prob': {
@@ -344,15 +367,13 @@ export default class Player extends Character {
     }
     /**
      * Bucle principal del personaje, actualizamos su posici�n y ejecutamos acciones seg�n el Input
-     * @param {number} t - Tiempo total
-     * @param {number} dt - Tiempo entre frames
+     * @param {Number} t - Tiempo total
+     * @param {Number} dt - Tiempo entre frames
      */
     preUpdate(t, dt) {
         if (this.isKnockedBack) {
             return;
         }
-
-
 
         // Input de teclas
         super.preUpdate(t, dt);
@@ -424,6 +445,7 @@ export default class Player extends Character {
             this.scene.pauseGame();
         }
 
+        //INPUT PARA LA PRESENTACION
         if (this.xKey.isDown) {
             this.scene.changeToNextLevel();
         }
@@ -435,6 +457,7 @@ export default class Player extends Character {
             this.scene.setPlayerToDoor();
             this.drone.setPosition(this.x + 50, this.y - 10);
         }
+
        //Input de mouse
         if (this.mouse.leftButtonDown()) {
             // Todo esto se debería mover al Shooter
@@ -478,7 +501,7 @@ export default class Player extends Character {
         let finalY = this.speed.y * this.speedFactor * (1 + this.speedFactorStatus*0.15);
         this.body.setVelocity(finalX, finalY);
 
-        this.collisionZone.body.setVelocity(finalX, finalY);
+        this.collisionZone.body.setVelocity(finalX, finalY); //MOVER LA ZONA DE COLISION CON EL JUGADOR
         if (this.collisionZone.x != this.x || this.collisionZone.y != this.y) this.collisionZone.setPosition(this.x, this.y);
     }
 }

@@ -1,6 +1,14 @@
 import Enemy from "./enemy.js";
 import { fire } from '../abilities/shooting/fire.js';
 
+/** 
+ * Enemigo que se "teleporta" y lanza proyectiles. Cada cierto tiempo se pone invisible y va a una direccion random
+ * @extends Enemy
+ * @param {Number} randoX - una direcion aleatoria en la ejex para moverse cuando esta invisible
+ * @param {Number} randoY - una direcion aleatoria en la ejey para moverse cuando esta invisible
+ * @param {Number} shootCont - intervalo de tiempo de espera patra disparar
+ */
+
 // Constantes shooter
 const SHOOTING_RANGE = 700;
 const SHOOTING_COOLDOWN = 2000;

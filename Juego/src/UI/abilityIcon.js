@@ -1,21 +1,22 @@
 import { showPopup } from "./showPopUp.js";
 
-
-
 //Icono de las habilidades (botones)
 export default class AbilityIcon extends Phaser.GameObjects.Sprite {
     /**
  * @extends Phaser.GameObjects.Sprite;
- *   //Atributos
+ *    //lo que recibe
      * @param {Scene} scene - escena en la que aparece
-     * @param {number} x - coordenada x
-     * @param {number} y - coordenada y
-     * @param {string} unlockedSprite - la palabra clave del sprite
-     * @param {string} title - titulo
-     * @param {string} info - descripcion de la habilidad
-     * @param {boolean} locked -booleano que indica que esta desbloquedo una habilidad
-     * @param {boolean} previousIsLocked -booleano que indica si la habilidad anterior esta desbloqueada o no
-     * @param {object} player -referencia del player
+     * @param {Number} x - coordenada x
+     * @param {Number} y - coordenada y
+     * @param {String} unlockedSprite - la palabra clave del sprite
+     * @param {String} title - titulo
+     * @param {String} info - descripcion de la habilidad
+     * @param {Boolean} locked - booleano que indica que esta desbloquedo una habilidad
+     * @param {Boolean} previousIsLocked - booleano que indica si la habilidad anterior esta desbloqueada o no
+     * @param {Object} player - referencia del player
+     * //atributos
+     * @param {Phaser.text} titleText - texto del titulo de la habilidad
+     * @param {Phaser.text} tooltip - texto de descripcion
  */
     constructor(scene, x, y, title, unlockedSprite, info, locked, previousIsLocked,player) {
         let key = "LockedAbility";

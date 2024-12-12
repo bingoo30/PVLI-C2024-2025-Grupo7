@@ -2,12 +2,14 @@
  * @extends Phaser.GameObjects.Sprite;
  *   //Atributos
      * @param {Scene} scene - escena en la que aparece
-     * @param {number} x - coordenada x
-     * @param {number} y - coordenada y
-     * @param {string} sprite - la palabra clave del sprite del logro
-     * @param {string} title - titulo del logro
-     * @param {string} info - informacion que aparece cuando dejo el curso encima de el
-     * @param {boolean} locked -booleano que indica que esta desbloquedo un logro
+     * @param {Number} x - coordenada x
+     * @param {Number} y - coordenada y
+     * @param {String} sprite - la palabra clave del sprite del logro
+     * @param {String} title - titulo del logro
+     * @param {String} info - informacion que aparece cuando dejo el curso encima de el
+     * @param {Boolean} locked -booleano que indica que esta desbloquedo un logro
+     * @param {Phaser.text} titleText - texto del titulo de la habilidad
+     * @param {Phaser.text} tooltip - texto de descripcion
  */
 export default class Achievement extends Phaser.GameObjects.Sprite {
     constructor(scene, x, y, unlockedSprite, title, info, locked) {

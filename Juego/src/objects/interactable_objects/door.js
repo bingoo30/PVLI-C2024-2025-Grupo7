@@ -2,14 +2,14 @@
      * @extends InteractableObjects
      Lo que recibe
      * @param {Scene} scene - la escena que esta
-     * @param {number} x - posicion x
-     * @param {number} y - posicion y
-     * @param {String} texture - key del sprite del objeto
-     * @param {number} sizeW - ancho del collider de la puerta
-     * @param {number} sizeH - altura del collider de la puerta
-     * @param {number} scale - escala de la mapa
+     * @param {Number} x - posicion x
+     * @param {Number} y - posicion y
+     * @param {String} doorclass - segun el tipo de puerta que sea usa un sprite u otro
+     * @param {Number} sizeW - ancho del collider de la puerta
+     * @param {Number} sizeH - altura del collider de la puerta
+     * @param {Number} scale - escala de la mapa
      Atributos
-     * @param {boolean} isOpen  - booleano para saber si la puerta esta abierto o no
+     * @param {Boolean} isOpen  - booleano para saber si la puerta esta abierto o no
      */
 import InteractableObjects from './interactable_objects.js';
 export default class Door extends InteractableObjects {

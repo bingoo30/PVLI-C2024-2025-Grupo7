@@ -4,7 +4,7 @@
      * @param {String} texture - key del sprite del objeto
      * @param {String} name - nombre o tipo de obj (si es llave tiene que poner key)
      Atributos
-     * @param {boolean} isPick  - booleano para saber si esta cogido o no
+     * @param {Boolean} isPickable  - booleano para saber si esta cogido o no
      */
 import InteractableObjects from './interactable_objects.js';
 export default class PickableObjects extends InteractableObjects {

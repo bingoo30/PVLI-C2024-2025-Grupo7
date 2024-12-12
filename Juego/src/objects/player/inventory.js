@@ -2,7 +2,7 @@ import { showPopup } from "../../UI/showPopUp.js";
 import { unlock } from "../../scenes/achievements/unlock.js";
 
 /**
- * Clase inventorio
+ * Clase inventorio, usada principalmente para emitir logros relacionados con el jugador
  */
 const MAX_STATUS = 25;
 const MAX_ABILITY = 9;

@@ -5,12 +5,15 @@ import { unlock } from "../../scenes/achievements/unlock.js";
      * @extends InteractableObjects
      Lo que recibe
      * @param {Scene} scene - la escena que esta
-     * @param {number} x - posicion x
-     * @param {number} y - posicion y
+     * @param {Number} x - posicion x
+     * @param {Number} y - posicion y
      * @param {String} texture - key del sprite del objeto
-     * @param {number} sizeW - ancho del collider de la puerta
-     * @param {number} sizeH - altura del collider de la puerta
-     * @param {number} scale - escala de la mapa
+     * @param {Number} sizeW - ancho del collider de la puerta
+     * @param {Number} sizeH - altura del collider de la puerta
+     * @param {Number} scale - escala de la mapa
+     * @param {String} achievement - parametro para el logro de pasar nivel
+     * atributo
+     * @param {Boolean} isWaitingInput - controla si se ignora el imput
      */
 import InteractableObjects from './interactable_objects.js';
 export default class ChangeLevelDoor extends InteractableObjects {

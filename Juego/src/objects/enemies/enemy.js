@@ -10,6 +10,7 @@ export default class Enemy extends Character {
      * @param {Number} y - coordenada y
      * @param {phaser.Character} type Tipo de character
      * @param {Phaser.player} player Jugador (target) a perseguir
+     * @param {Number} exp - experiencia que le da al juagdor
      * 
     */
     constructor(scene, x, y, player, typeEnemy, exp = 1) {
@@ -27,7 +28,7 @@ export default class Enemy extends Character {
 
         this.follow = false;
         this.plantPool = null;
-        this.setDepth(10);
+        this.setDepth(1);
     }
 
 
@@ -51,6 +52,7 @@ export default class Enemy extends Character {
     setPlantsPool(pool) {
         this.plantPool = pool;
     }
+
     getStunted(time) {
         this.stuntTime = time;
     }

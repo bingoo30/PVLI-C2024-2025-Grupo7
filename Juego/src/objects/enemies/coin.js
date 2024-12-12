@@ -1,6 +1,6 @@
 export default class Coin extends Phaser.GameObjects.Sprite {
     /**
-     * Coin, fichas que sueltan cuando muere un enemigo, aumenta experiencia
+     * Coin, fichas que sueltan cuando muere un enemigo, aumenta experiencia del jugador
      * @param {Scene} scene - escena en la que aparece
      * @param {number} exp - experiancia que da la ficha
      * @param {number} active - al principio no esta activo

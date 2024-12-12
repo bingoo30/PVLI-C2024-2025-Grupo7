@@ -5,7 +5,7 @@
      * @param {Number} currentDialogueIndex - indice del dialogo actual
      * @param {Object} dialogues -dialogos que se va a mostrar
      * @param {Boolean} isWaitingForInput - contralo si se va ignorar el input o no
-     * @param {Boolean} isDialogueActive
+     * @param {Boolean} isDialogueActive 
      * 
  */
 export default class DialogueManager {

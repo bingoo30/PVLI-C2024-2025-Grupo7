@@ -1,3 +1,6 @@
+import { showPopup } from '../../UI/showPopUp.js';
+import { unlock } from '../../scenes/achievements/unlock.js';
+import InteractableObjects from './interactable_objects.js';
 /**
      * @extends InteractableObjects
      Lo que recibe
@@ -5,12 +8,11 @@
      * @param {String} dialogues - key del dialogo del NPC
      * 
      Atributos
-     * @param {boolean} isDialogActive  - booleano para saber si esta en dialogo
-     * 
+     * @param {Boolean} isDialogActive  - booleano para saber si esta en dialogo
+     * @param {String} achievement - para desbloquear logro
+     * @param {Boolean} disappear - para saber si ese NPC se va desaparece o no
      */
-import { showPopup } from '../../UI/showPopUp.js';
-import { unlock } from '../../scenes/achievements/unlock.js';
-import InteractableObjects from './interactable_objects.js';
+
 export default class NPC extends InteractableObjects {
     constructor(scene, x, y, texture, dialogues, acv, disappear = false) {
         super(scene, x, y, [texture], 120);
