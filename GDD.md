@@ -30,7 +30,11 @@ Madness es un juego RPG en el que disfrutarás de una emocionante aventura junto
   - [3.2. Explicación de los elementos del HUD y su funcionamiento](#32-explicación-de-los-elementos-del-hud-y-su-funcionamiento)
 - [4. Moodboard](#4-moodboard)
 - [5. Menús y flujo de juego](#5-menús-y-flujo-de-juego)
-  - [5.1. Flujo de juego](#51-flujo-de-juego)
+  - [5.1. Menú inicial](#51-menú-inicial)
+  - [5.2. Menú pausa](#52-menú-pausa)
+  - [5.2. Menú logros](#53-menú-logros)
+  - [5.2. Menú habilidades](#54-menú-habilidades)
+  - [5.5. Flujo de juego](#55-flujo-de-juego)
 - [6. Contenido](#6-contenido)
   - [6.1. Historia](#61-historia)
   - [6.2. Personajes](#62-personajes)
@@ -77,7 +81,7 @@ Al derrotar a los enemigos, soltarán fichas (experiencia) que te permitirán su
     4. <ins>Más ataque</ins> (hasta 5 veces, +2 por cada mejora).
     5. <ins>Más probabilidad de hacer un ataque crítico</ins> que inflige el doble de daño (hasta 5 veces, un 5% por cada mejora).
  
-![image](https://github.com/user-attachments/assets/df453eeb-007c-4853-9314-436f30d2cc23)
+![Juego de proyectiles](https://github.com/user-attachments/assets/39f53189-3736-41c7-8299-423ee501844e)
 
 *Concept art del arbol de habilididades y mejoras de status*
 
@@ -96,32 +100,32 @@ Al derrotar a los enemigos, soltarán fichas (experiencia) que te permitirán su
   + **Bob** (enemigo de ataque cuerpo a cuerpo): Un enemigo sencillo que persigue al jugador. Tiene menor velocidad y tamaño que la protagonista.
     + Vida(5), Daño(1)
 
-      ![image](https://github.com/bingoo30/PVLI-C2024-2025-Grupo7/blob/main/Juego/assets/GDD/bob_G.png)
+      <img src="https://raw.githubusercontent.com/bingoo30/PVLI-C2024-2025-Grupo7/main/Juego/assets/GDD/bob_G.png" alt="Bob" width="100" />
       
   + **Crac** (enemigo que lanza proyectiles): Cuenta con un radio de visión que determina cuándo empieza a atacar. Tiene velocidad normal.
     + Vida (3), Daño (1)
 
-      ![image](https://github.com/bingoo30/PVLI-C2024-2025-Grupo7/blob/main/Juego/assets/GDD/crac_G.png)
+      <img src="https://raw.githubusercontent.com/bingoo30/PVLI-C2024-2025-Grupo7/main/Juego/assets/GDD/crac_G.png" alt="Bob" width="100"  />
+
+ + **Letus** (enemigo que vuela y ataca cuerpo a cuerpo): Se asemeja a un murciélago.
+    + Vida (5), Daño (2)
+
+      <img src="https://raw.githubusercontent.com/bingoo30/PVLI-C2024-2025-Grupo7/main/Juego/assets/GDD/letus_G.png" alt="Bob" width="100" />
       
   + **Zaro** (enemigo que puede teletransportarse): Ataca a distancia, similar al enemigo que lanza proyectiles (fantasma).
     + Vida (4), Daño (6)
 
-      ![Zarp](https://github.com/bingoo30/PVLI-C2024-2025-Grupo7/blob/main/Juego/assets/GDD/zaro_G.png)
-      
-  + **Letus** (enemigo que vuela y ataca cuerpo a cuerpo): Se asemeja a un murciélago.
-    + Vida (5), Daño (2)
-
-      ![image](https://github.com/bingoo30/PVLI-C2024-2025-Grupo7/blob/main/Juego/assets/GDD/letus_G.png)
+      <img src="https://raw.githubusercontent.com/bingoo30/PVLI-C2024-2025-Grupo7/main/Juego/assets/GDD/zaro_G.png" alt="Bob" width="100" />
 
   + **Mutum** (enemigo bomba): Un ataque de hit kill, pero explota y causa daño en área. Si el jugador entra en su campo de ataque, se suicida. Persigue al jugador.
     + Vida (4), Daño (16)
 
-      ![Mutum](https://github.com/bingoo30/PVLI-C2024-2025-Grupo7/blob/main/Juego/assets/GDD/mutum_G.png)
+      <img src="https://raw.githubusercontent.com/bingoo30/PVLI-C2024-2025-Grupo7/main/Juego/assets/GDD/mutum_G.png" alt="Bob" width="100" />
 
   + **Estaka** (enemigo de daño en área): Si el jugador entra en su área, provoca una explosión.
     + Vida (12), Daño (10)
 
-      ![Estaka](https://github.com/bingoo30/PVLI-C2024-2025-Grupo7/blob/main/Juego/assets/GDD/estaka_G.png)
+      <img src="https://raw.githubusercontent.com/bingoo30/PVLI-C2024-2025-Grupo7/main/Juego/assets/GDD/estaka_G.png" alt="Bob" width="100" />
   + **!** los enemigos que aparecen en el nivel anterior y vuelven a salir en el nuevo nivel son más fuertes
 
 #### **Boss**
@@ -130,15 +134,15 @@ Al derrotar a los enemigos, soltarán fichas (experiencia) que te permitirán su
     + **Mecánica 2**: Se activa cuando su vida llega a la mitda. Crea 5 cartas en el suelo. Por cada carta que destruyes, le haces daño al Joker. Si no las destruyes a tiempo, él te causará daño.
     + **Mecánica 3**: Se crean tres orbes que persiguen al jugador.
     + **Mecánica 4**: Se crea un daño en área.
-
+      
+      <img src="https://raw.githubusercontent.com/bingoo30/PVLI-C2024-2025-Grupo7/main/Juego/assets/enemies/joker/joker.png" alt="Joker" width="100" />
 
 ## 2. Diseño de nivel
 
 El jugador deberá explorar el mapa y encontrar llaves en las salas para poder ascender de planta. Cada planta representará un nivel, y dentro de cada nivel habrá diferentes salas donde el jugador tendrá que explorar y enfrentarse a enemigos para obtener la llave poder pasar a la siguiente sala.
 
-![image](https://github.com/user-attachments/assets/4624c38b-4ee6-48d3-8b6b-20b1060210d5)
+![image](https://github.com/user-attachments/assets/f02e9fd8-f368-4593-a62e-9eddb2a85add)
 
-	
 ### 2.1. Descripción de partida típica
 
 En una partida normal el jugador empezará en el hall del primer piso, donde se encontrará con un NPC que le dará una explicación sobre ese mundo. Al finalizar la explicación el jugador podrá salir del hall y empezar su busca por la puerta del próximo piso y buscar la llave para abrirla. Al largo de los niveles, el jugador aprenderá sobre la historia de la protagonista mientras ella va recuperando sus recuerdos y también aprenderás mejor sobre como funciona ese mundo. Al llegar a último piso, el jugador tendrá que derrotar al Joker para que se acabe el juego.
@@ -172,12 +176,22 @@ El apartado visual será bastante abstracto, cada nivel tendrá muchos elementos
 
 
 ## 5. Menús y flujo de juego
+En cuanto a los menús, se trata de una cosa bastante simple. Tendremos un botón de jugar, logros y tutorial. Para mostrar el menú de pausa hay que pulsar la tecla “P”. Aparecerán opciones como continuar el juego, volver a la pantalla y guardar el progreso (opcional) //(implementado).
 
-En cuanto a los menús, se trata de una cosa bastante simple. Tendremos un botón de jugar, logros y tutorial. Para mostrar el menú de pausa hay que pulsar la tecla “P”. Aparecerán opciones como continuar el juego, volver a la pantalla y guardar el progreso (opcional).
+### 5.1. Menú inicial
+![image](https://github.com/user-attachments/assets/6fda0409-ad94-4653-b42a-08055dc6600f)
 
-### 5.1. Flujo de juego
+### 5.2. Menú pausa
+![image](https://github.com/user-attachments/assets/0d6b8af2-0957-4ed7-ad1f-52f568e7dcbf)
 
-![image](https://github.com/user-attachments/assets/596f17ab-4388-43c9-afb0-1b0a162a6aac)
+### 5.3. Menú logros
+![image](https://github.com/user-attachments/assets/99227751-638c-4fca-ad4e-f2c5e450661b)
+
+### 5.4. Menú habilidades
+![image](https://github.com/user-attachments/assets/2b3e56ef-526c-4b35-8c57-f7ed8cbf0b7a)
+
+### 5.5. Flujo de juego
+![pdf](https://github.com/user-attachments/assets/596f17ab-4388-43c9-afb0-1b0a162a6aac)
 
 
 ## 6. Contenido
@@ -185,6 +199,8 @@ En cuanto a los menús, se trata de una cosa bastante simple. Tendremos un botó
 ### 6.1. Historia
 
 La protagonista se despierta en una sala donde un NPC le explica que se encuentra en el mundo creado por Joker, conocido como el mundo de las cartas. Gracias a la explicación del NPC, la protagonista comprende que está en la primera planta y que debe llegar hasta la cuarta planta para enfrentarse a Joker y así poder salir de ese mundo. Para lograrlo, necesita encontrar la escalera y la llave, las cuales están escondidas en las salas que pueden contener peligros. Además, se da cuenta de que no recuerda nada, ni siquiera quién es. Solo sabe que debe salir de este mundo tan abstracto. Siente que podría recuperar todos sus recuerdos cuando se enfrente a Joker. Durante su aventura, se encuentra con diferentes cartas que complican su camino.
+
+**Diálogos**: https://docs.google.com/document/d/1oQPfke9P-dSs6Ti84vxHJZ5maxgCPH4xZX8zxMSC6SQ/edit?tab=t.0
 
 ### 6.2. Personajes
 
@@ -197,7 +213,7 @@ La protagonista se despierta en una sala donde un NPC le explica que se encuentr
 
 ***Weiyoung:*** una amiga próxima de la protagonista que estará en el segundo piso y con ella la protagonista recordará de sus sueños y las esperanzas que tenía junto a su amiga.
 
-//***Romeo:*** El ex novio de Julie, al encontrarle, la protagonista se recordará de su adolescencia y todos los momentos bonitos que pasaron juntos . Estará en el tercer piso.
+//***Romeo:*** El ex novio de Julie, al encontrarle, la protagonista se recordará de su adolescencia y todos los momentos bonitos que pasaron juntos . Estará en el tercer piso. (no se va a hacer)
 
  ***Piu:*** Gato de Julie, estará en el cuarto piso y se recordará de los momentos felices antes de apostar.
 
