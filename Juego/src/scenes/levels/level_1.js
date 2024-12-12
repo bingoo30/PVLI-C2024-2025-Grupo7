@@ -452,20 +452,20 @@ export default class Animation extends Phaser.Scene {
 		this.scene.bringToTop('Dialog');
 		this.scene.pause();
 	}
-
 	changeToGameover() {
-		this.events.removeAllListeners('Interact');
-		this.events.removeAllListeners('IKilledAnEnemy');
-		this.events.removeAllListeners('TurretTimeOVer');
-		this.events.removeAllListeners('playerRecuperaVida');
+		this.removeListener();
+		this.MainSample.stop();
 		this.scene.start("gameover", { player: this.player, tries: this.tries, previousScene: this});
 	}
-
-	changeToNextLevel() {
+	removeListener() {
 		this.events.removeAllListeners('Interact');
 		this.events.removeAllListeners('IKilledAnEnemy');
 		this.events.removeAllListeners('TurretTimeOVer');
 		this.events.removeAllListeners('playerRecuperaVida');
+	}
+	changeToNextLevel() {
+		this.removeListener();
+		this.MainSample.stop();
 		this.scene.start('level2', { player: this.player, tries: this.tries });
 	}
 	pauseGame() {

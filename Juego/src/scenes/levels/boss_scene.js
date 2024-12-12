@@ -407,8 +407,15 @@ export default class BossScene extends Phaser.Scene {
 
         this.actOrbs = [];
     }
-
+    removeListener() {
+        this.events.removeAllListeners('Interact');
+        this.events.removeAllListeners('IKilledAnEnemy');
+        this.events.removeAllListeners('TurretTimeOVer');
+        this.events.removeAllListeners('playerRecuperaVida');
+    }
     changeToGameover() {
+        this.MainSample.stop();
+        this.removeListener();
         this.scene.start("gameover", { player: this.player, tries: this.tries, previousScene: this });
     }
     pauseGame() {
