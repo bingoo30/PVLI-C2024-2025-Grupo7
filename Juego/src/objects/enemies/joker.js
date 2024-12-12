@@ -280,6 +280,6 @@ export default class Joker extends Character {
 
     preUpdate(t,dt){
         super.preUpdate(t, dt);
-        console.log('Joker pos X: ', this.x, ' Y: ', this.y)
+        //console.log('Joker pos X: ', this.x, ' Y: ', this.y)
     }
 }

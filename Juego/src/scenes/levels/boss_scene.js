@@ -29,7 +29,7 @@ export default class BossScene extends Phaser.Scene {
         this.load.image('boss', 'assets/enemies/joker/joker.png');
         this.load.image('projectile', 'assets/bullet/bullet_1.png');
 
-        this.load.image('mapFondo', 'assets/map/map_boss/map_boss_fondo.png');
+        this.load.image('mapFondo', 'assets/map/map_boss/map_boss_fondo_2.png');
         this.load.image('tapa1', 'assets/map/map_boss/map_boss_1.png');
         this.load.image('tapa2', 'assets/map/map_boss/map_boss_2.png');
 

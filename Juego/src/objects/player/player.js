@@ -362,12 +362,12 @@ export default class Player extends Character {
         if (this.aKey.isDown) {
             this.speed.x = -1;
             animationKey = this.name + 'WalkLeft';
-            console.log('Player pos X: ', this.x, ' Y: ', this.y)
+            //console.log('Player pos X: ', this.x, ' Y: ', this.y)
 
         } else if (this.dKey.isDown) {
             this.speed.x = 1;
             animationKey = this.name + 'WalkRight';
-            console.log('Player pos X: ', this.x, ' Y: ', this.y)
+            //console.log('Player pos X: ', this.x, ' Y: ', this.y)
 
         }
         else this.speed.x = 0;
@@ -376,12 +376,12 @@ export default class Player extends Character {
         if (this.wKey.isDown) {
             this.speed.y = -1;
             animationKey = this.name + 'WalkUp';
-            console.log('Player pos X: ', this.x, ' Y: ', this.y)
+            //console.log('Player pos X: ', this.x, ' Y: ', this.y)
 
         } else if (this.sKey.isDown) {
             this.speed.y = 1;
             animationKey = this.name + 'WalkDown';
-            console.log('Player pos X: ', this.x, ' Y: ', this.y)
+            //console.log('Player pos X: ', this.x, ' Y: ', this.y)
 
         }
         else this.speed.y = 0;
