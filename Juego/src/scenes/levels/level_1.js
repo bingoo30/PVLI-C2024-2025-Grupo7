@@ -437,7 +437,7 @@ export default class Animation extends Phaser.Scene {
 
 		if (this.tries == 1) {
 			const dialogos = this.cache.json.get('dialogues');
-			this.changeToDialogScene({ sceneKey: this.scene.key, backgroundType: 'dark', dialogos: dialogos, image:'bossGif' });
+			this.changeToDialogScene({ sceneKey: this.scene.key, backgroundType: 'dark', dialogos: dialogos, image:'boss' });
 		}
 
 		// #region sonido

@@ -115,6 +115,12 @@ export default class Loading extends Phaser.Scene {
 			frameHeight: 29,
 			endFrame: 5
 		});
+
+		this.load.spritesheet('jokerIniAnim', 'assets/enemies/joker/joker_ocult_anim.png', {
+			frameWidth: 944,
+			frameHeight: 908,
+			endFrame: 2
+		});
 		// #endregion
 
 		// #region Tilemaps
@@ -324,6 +330,13 @@ export default class Loading extends Phaser.Scene {
 		this.anims.create({
 			key: 'LetusIdle',
 			frames: this.anims.generateFrameNumbers('LetusAnim', { start: 0, end: 3 }),
+			frameRate: 5,
+			repeat: -1
+		});
+
+		this.anims.create({
+			key: 'JokerIni',
+			frames: this.anims.generateFrameNumbers('jokerIniAnim', { start: 0, end: 2 }),
 			frameRate: 5,
 			repeat: -1
 		});

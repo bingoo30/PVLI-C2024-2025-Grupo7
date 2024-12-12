@@ -24,7 +24,8 @@ export default class DialogScene extends Phaser.Scene {
         this.background.fillRect(0, 0, gameWidth, gameHeight);
 
         if (image) {
-            this.add.image(this.sys.game.canvas.width * 0.5, this.sys.game.canvas.height * 0.5, image).setOrigin(0.5, 0.5);
+           const img= this.add.sprite(this.sys.game.canvas.width * 0.5, this.sys.game.canvas.height * 0.5, image).setOrigin(0.5, 0.5);
+           img.play('JokerIni');
         }
         // Crear nueva instancia de DialogText y DialogueManager
         this.dialogPlugin = new DialogText(this, {
