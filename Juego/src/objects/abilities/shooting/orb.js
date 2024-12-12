@@ -1,7 +1,6 @@
 export default class Orb extends Phaser.GameObjects.Sprite {
     constructor(scene, joker, index, color, damage, scale, target) {
         super(scene, 0, 0, 'Orbs');
-
         this.scene = scene;
         this.joker = joker;
         this.index = index;
@@ -17,6 +16,7 @@ export default class Orb extends Phaser.GameObjects.Sprite {
         this.scene.physics.add.existing(this);
 
         this.isActive = false;
+        this.setDepth(3);
 
         const animKey = `orb_charge_color_${color}`;
         if (!this.scene.anims.exists(animKey)) {

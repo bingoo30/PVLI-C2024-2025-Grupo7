@@ -446,7 +446,6 @@ export default class Animation extends Phaser.Scene {
 		this.MainSample.play();
 		// #endregion
 		
-		this.cameras.main.setZoom(0.1);
 
 	}
 	changeToDialogScene(data) {

@@ -1,3 +1,4 @@
+import { showPopup } from '../../UI/showPopUp.js';
 import Character from '../../objects/player/character.js';
 import { fire } from "../abilities/shooting/fire.js";
 
@@ -20,7 +21,7 @@ export default class Joker extends Character {
         this.bulletCardNumbers = 2;
 
         this.AreaDamageRange = 200;
-        this.AreaDamage = 0.1;
+        this.AreaDamage = 1; // daño area
         this.duration = 1;
         this.explNumber = 1;
         this.timeP1 = 3000;
@@ -29,9 +30,9 @@ export default class Joker extends Character {
         this.change = true;
 
 
-        this.maxLife = 10; // 200
+        this.maxLife = 300; // 300
         //speedFactor,shootCardSpeed, shootSpeed, life, damage, prob
-        this.init(200, 300, 500, this.maxLife, 3, 0);
+        this.init(200, 300, 500, this.maxLife, 5, 0);
         this.isTeleporting = false;
         this.isChasing = false;
         this.spawnCards = true;
@@ -64,18 +65,18 @@ export default class Joker extends Character {
 
 
     phase1() {
-        console.log('Fase 1')
+        //console.log('Fase 1')
         this.teleport();
         if (Math.random() < 0.5 && this.phase == 1) {
             this.spawnOrbs();
-        } else {
+        } else if(this.phase == 2){
             this.spawnOrbs();
         }
         setTimeout(() => this.phase2(), this.timeP1);
     }
 
     phase2() {
-        console.log('Fase 2')
+        //console.log('Fase 2')
 
         this.isChasing = true;
   
@@ -87,7 +88,7 @@ export default class Joker extends Character {
     }
 
     phase3() {
-        console.log('Fase 3')
+        //console.log('Fase 3')
 
         this.teleport();
         this.shootCards();
@@ -101,7 +102,7 @@ export default class Joker extends Character {
     }
 
     phase4() {
-        console.log('Fase 4')
+        //console.log('Fase 4')
 
         setTimeout(() => this.phase1(), 4000); // Regresa a phase1 después de 4 segundos
     }
@@ -113,7 +114,7 @@ export default class Joker extends Character {
 
     onGotHit(damage) {
         super.onGotHit(damage);
-        console.log(`Joker golpeado. Vida restante: ${this.life}`);
+        //console.log(`Joker golpeado. Vida restante: ${this.life}`);
 
         // Modificaciones en el DOM
         const animationContainer = document.getElementById('fullscreen-animation');
@@ -154,7 +155,7 @@ export default class Joker extends Character {
         this.maxLife = life;
     }
     createDamageArea() {
-        console.log('DMG AREA')
+        //console.log('DMG AREA')
         const dx = this.target.x - this.x;
         const dy = this.target.y - this.y;
 
@@ -292,7 +293,7 @@ export default class Joker extends Character {
         }
 
         if (this.life < this.maxLife * 0.25 && this.change) {
-            console.log('Fase Joker 2');
+            showPopup(this.scene, 'Fase Joker 2');
             this.change = false;
             this.speedFactor = 400;
             this.phase = 2;

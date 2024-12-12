@@ -84,7 +84,7 @@ export default class Animation extends Phaser.Scene {
 
 		this.doorGroup = this.add.group();
 		this.doorLayer = this.map.getObjectLayer('Door');
-		console.log(this.doorLayer);
+		//console.log(this.doorLayer);
 		this.doorLayer.objects.forEach((objD) => {
 			const door = new Door(this, objD.x, objD.y,
 				objD.name,  // El tipo de puerta ('verticalDoor' o 'horizontalDoor')
@@ -262,7 +262,7 @@ export default class Animation extends Phaser.Scene {
 		// #region Bobs
 		this.arrayBobs = [];
 		const bobLayer = this.map.getObjectLayer('Bob');
-		console.log('bob: ', bobLayer)
+		//console.log('bob: ', bobLayer)
 		bobLayer.objects.forEach(obj => {
 			//if (obj.name === 'Bob') { // Filtra por nombre
 				const bob = new Bob(this, obj.x * SCALE, obj.y * SCALE, this.player, 1, 12, 4, 'Bob');
