@@ -25,8 +25,8 @@ let config = {
 
 		mode: Phaser.Scale.FIT,
 		min: {
-			width: 400,
-			height: 300
+			width: 800,
+			height: 600
 		},
 		max: {
 			width: 1600,
