@@ -6,13 +6,15 @@ export default class Joker extends Character {
         super(scene, x, y, 'boss');
         this.scene.add.existing(this);
         this.target = player;
-        this.minX = 10;
-        this.minY = 10;
-        this.maxX = this.scene.scale.width;
-        this.maxY = this.scene.scale.width;
-        this.poolArea = null;
+        this.minX = 1000;
+        this.minY = 500;
+        this.maxX = 3400; 
+        this.maxY = 2400;
         scene.physics.add.existing(this);
+
+        this.poolArea = null;
         this.damageArea = null;
+
         this.shootSpeedStatus = 0;
         this.damageStatus = 0;
         this.bulletCardNumbers = 2;
@@ -21,7 +23,7 @@ export default class Joker extends Character {
         this.AreaDamage = 0.1;
         this.duration = 1;
 
-        this.maxLife = 5;
+        this.maxLife = 200;
         //speedFactor,shootCardSpeed, shootSpeed, life, damage, prob
         this.init(100, 300, 500, this.maxLife, 3, 0);
         this.chaseSpeed = 100;
@@ -49,13 +51,57 @@ export default class Joker extends Character {
     getMaxLife() {
         return this.maxLife;
     }
+
+    startBehavior() {
+        this.shootCards(); // Inicial 
+        setTimeout(() => this.phase1(), 3000);
+    }
+
+
+    phase1() {
+        console.log('Fase 1')
+        this.teleport();
+        if (Math.random() < 0.5) {
+            this.spawnOrbs();
+        }
+        setTimeout(() => this.phase2(), 3000);
+    }
+
+    phase2() {
+        console.log('Fase 2')
+
+        this.isChasing = true;
+        setTimeout(() => {
+            this.createDamageArea();
+            this.isChasing = false;
+            this.phase3();
+        }, 3000);
+    }
+
+    phase3() {
+        console.log('Fase 3')
+
+        this.teleport();
+        this.shootCards();
+        setTimeout(() => this.phase4(), 3000);
+    }
+
+    phase4() {
+        console.log('Fase 4')
+
+        setTimeout(() => this.phase1(), 4000); // Regresa a phase1 después de 4 segundos
+    }
+
+
     chasing() {
         this.isChasing = true;
     }
+
     onGotHit(damage) {
         super.onGotHit(damage);
         console.log(`Joker golpeado. Vida restante: ${this.life}`);
 
+        // Modificaciones en el DOM
         const animationContainer = document.getElementById('fullscreen-animation');
         const animationFrame = document.getElementById('animation-frame');
 
@@ -152,7 +198,7 @@ export default class Joker extends Character {
             this.body.setVelocity(velocityX, velocityY);
 
         } else {
-            // Si est?lo suficientemente cerca, detén el movimiento
+            // Si esta lo suficientemente cerca, detén el movimiento
             this.body.setVelocity(0, 0);
 
             // Realiza el ataque en área
@@ -234,33 +280,6 @@ export default class Joker extends Character {
 
     preUpdate(t,dt){
         super.preUpdate(t, dt);
-
-        if (this.life < this.maxLife / 2 && this.spawnCards) {
-            this.spawnCards = false;
-            this.scene.startCardChallenge();
-        }
-
-        if (t > this.lastAttackTime + this.attackInterval) { // A cada dos segundos
-            //this.phase = 2;
-            //console.log(this.phase)
-            if (this.phase === 1) {
-                //console.log('disparando cartas');
-                this.createDamageArea();
-
-                this.shootCards();
-            } else if (this.phase === 2) {
-                //console.log('x: ', this.x, ' y: ', this.y);
-                this.teleport();
-            } else if (this.phase === 3) {
-                //console.log('preparando orb');
-
-                this.spawnOrbs(); // Incio del las orbs
-            }
-            this.lastAttackTime = t;
-        }
-        if (this.isChasing) {
-            this.chasePlayer();
-        }
-        
+        console.log('Joker pos X: ', this.x, ' Y: ', this.y)
     }
 }

@@ -290,14 +290,16 @@ export default class BossScene extends Phaser.Scene {
         this.createWalls();
 
         this.physics.add.collider(this.player, this.wallsGroup);
+
+        setTimeout(() => this.joker.startBehavior(), 3000);
     }
 
     createWalls() {
         // (x1, y1) a (x2, y2)
-        this.drawWall(1490, 500, 5500, 550); 
-        this.drawWall(490, 1500, 510, 3600);
-        this.drawWall(1490, 2550, 5500, 2600);
-        this.drawWall(3500, 1500, 3550, 3600);
+        this.drawWall(1490, 500, 5500, 550); // horizontal arriba
+        this.drawWall(490, 1500, 510, 3600); // vertical derecha
+        this.drawWall(1490, 2550, 5500, 2600); // horizontal abajo
+        this.drawWall(3500, 1500, 3550, 3600); // vertical izquierda
     }
 
     drawWall(x1, y1, x2, y2) {
