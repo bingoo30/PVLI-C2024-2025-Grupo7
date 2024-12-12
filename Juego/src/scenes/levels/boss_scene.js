@@ -286,7 +286,7 @@ export default class BossScene extends Phaser.Scene {
 
         // #region Camera Setup
         this.cameras.main.startFollow(this.player);
-        this.cameras.main.setZoom(0.5);
+        this.cameras.main.setZoom(0.75);
         // #endregion
 
         // #region sonido

@@ -38,7 +38,7 @@ export default class Joker extends Character {
         this.lastAttackTime = 0;
         this.attackInterval = 2000; 
         this.phase = 3;
-        this.attackRange = 50; 
+        this.attackRange = 300; 
 
         this.timer = this.scene.time.addEvent({
             delay: 3000,
@@ -136,6 +136,7 @@ export default class Joker extends Character {
         }
 
         if (this.life <= 0) {
+            this.scene.changeToVictory();
             this.destroy();
         }
     }
@@ -203,9 +204,6 @@ export default class Joker extends Character {
         } else {
             // Si esta lo suficientemente cerca, detén el movimiento
             this.body.setVelocity(0, 0);
-
-            // Realiza el ataque en área
-            this.createDamageArea();
         }
     }
 
