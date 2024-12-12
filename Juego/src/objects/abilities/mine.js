@@ -1,5 +1,4 @@
 
-const DEFAULT_MINE_DAMAGE = 1;
 const DEFAULT_MINE_COOLDOWN = 5000;
 const DEFAULT_STUNT_TIME = 5000;
 
@@ -18,11 +17,10 @@ export default class Mine extends Phaser.GameObjects.Sprite {
         this.scene = scene;
         this.scene.add.existing(this);
         this.scene.physics.add.existing(this);
-        this.damage = damage;
         this.stuntTime = time;
     }
 
-    getStuntTime() {
+    getStuntTime() {    // retorna el tiempo stuneado
         return this.stuntTime;
     }
     onDeath() {
