@@ -67,7 +67,7 @@ export default class Player extends Character {
         this.Inventory = new Inventory(this);
         // #region puntos de control status
         this.statusPoint = 0; //status points restantes
-        this.abilityPoint = 2; //ability points restantes
+        this.abilityPoint = 0; //ability points restantes
 
         this.turretAvaliable = false;
         this.turretsPool = null;
