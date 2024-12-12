@@ -62,33 +62,19 @@ Al derrotar a los enemigos, soltarán fichas (experiencia) que te permitirán su
     1. Disparar dos proyectiles
     2. Disparar tres proyectiles
     3. Disparar cuatro proyectiles
-    4. Disparar cinco proyectiles
    
   - **<ins>Francotirador explosivo</ins>:**
-    1. Aumentar un 50% la distancia que puede alcanzar un proyectil.
-    2. Si un proyectil de la protagonista se choca contra otro, se explotan las dos balas.
-    3. Si mantenemos pulsado la tecla derecha del ratón y luego lo soltamos, se lanza a un ataque cargado con más potencia (daño).
-    4. Cuando un proyectil llega al final de su trayecto o se choca con un enemigo, se explota e inflige más daño.
+    1. Aumentar el 50% de tamaño del proyectil.
+    2. Cuando un proyectil llega al final de su trayecto o se choca con un enemigo, se explota e inflige más daño.
   
   - **<ins>Utilidad</ins>:**
-    1. Tener un dron que te persigue y ataca automáticamente a los enemigos.
-       1. Mejorar el daño que inflige el dron (hasta 3 veces).
-       2. Aumentar la velocidad del dron (hasta 3 veces).
-    3. Desbloquear nuevo control: “Q”: generar una torreta con vida que no se mueve y dispara los enemigos que están dentro de su rango de ataque. Puede ser destruido por los enemigos. Se destruye si después de un tiempo no haya sido destruida. Después de destruirse, esta habilidad se pondrá inactiva. Después de un tiempo de cooldown, volverá a activarse.
-       1. Aumentar la vida de la torreta (hasta 3 veces).
-       2. Aumentar el daño que inflige (hasta 3 veces).
-       3. Alargar el tiempo que permanece activo (hasta 3 veces).
-       4. Reducir el tiempo de cooldown (hasta 3 veces).
-    4. Desbloquear nuevo control: “B”: generar una trampa que paraliza los enemigos al chocar con ella.
-       1. Aumentar el tiempo de parálisis de los enemigos (hasta 3 veces).
-       2. Aumentar el daño que inflige (hasta 3 veces).
-       3. Reducir el tiempo de cooldown (hasta 3 veces).
-       4. 
+    1. Desbloquear nuevo control: “clic derecho ratón”: generar una torreta que no se mueve y dispara los enemigos que están dentro de su rango de ataque. Se destruye si después de un intervalo de tiempo. No puede coexistir 2 torretas a la vez;
+    2. Tener un dron que te persigue y ataca automáticamente a los enemigos.
   - **<ins>Mejorar status</ins>:**
-    1. <ins>Más vida</ins> (hasta 6 veces, 1 vida más por cada mejora)
-    2. <ins>Más velocidad de movimiento</ins> (hasta 5 veces, un 20% por cada mejora).
+    1. <ins>Más vida</ins> (hasta 5 veces, n vida más por cada mejora, siendo n el número de veces que has mejorado este status)
+    2. <ins>Más velocidad de movimiento</ins> (hasta 5 veces, un 15% por cada mejora).
     3. <ins>Más velocidad de disparo</ins> (hasta 5 veces, un 20% por cada mejora).
-    4. <ins>Más ataque</ins> (hasta 6 veces, un 0,5 por cada mejora).
+    4. <ins>Más ataque</ins> (hasta 5 veces, +2 por cada mejora).
     5. <ins>Más probabilidad de hacer un ataque crítico</ins> que inflige el doble de daño (hasta 5 veces, un 5% por cada mejora).
  
 ![image](https://github.com/user-attachments/assets/df453eeb-007c-4853-9314-436f30d2cc23)
@@ -108,40 +94,43 @@ Al derrotar a los enemigos, soltarán fichas (experiencia) que te permitirán su
 
   #### **Enemigos base**
   + **Bob** (enemigo de ataque cuerpo a cuerpo): Un enemigo sencillo que persigue al jugador. Tiene menor velocidad y tamaño que la protagonista.
-    + Vida(1), Daño(1)
+    + Vida(5), Daño(1)
 
       ![image](https://github.com/bingoo30/PVLI-C2024-2025-Grupo7/blob/main/Juego/assets/GDD/bob_G.png)
       
   + **Crac** (enemigo que lanza proyectiles): Cuenta con un radio de visión que determina cuándo empieza a atacar. Tiene velocidad normal.
-    + Vida (0.5), Daño (1.5)
+    + Vida (3), Daño (1)
 
       ![image](https://github.com/bingoo30/PVLI-C2024-2025-Grupo7/blob/main/Juego/assets/GDD/crac_G.png)
       
   + **Zaro** (enemigo que puede teletransportarse): Ataca a distancia, similar al enemigo que lanza proyectiles (fantasma).
-    + Vida (0.5), Daño (1.5)
+    + Vida (4), Daño (6)
 
       ![Zarp](https://github.com/bingoo30/PVLI-C2024-2025-Grupo7/blob/main/Juego/assets/GDD/zaro_G.png)
       
   + **Letus** (enemigo que vuela y ataca cuerpo a cuerpo): Se asemeja a un murciélago.
-    + Vida (0.5), Daño (1.5)
+    + Vida (5), Daño (2)
 
       ![image](https://github.com/bingoo30/PVLI-C2024-2025-Grupo7/blob/main/Juego/assets/GDD/letus_G.png)
 
   + **Mutum** (enemigo bomba): Un ataque de hit kill, pero explota y causa daño en área. Si el jugador entra en su campo de ataque, se suicida. Persigue al jugador.
-    + Vida (0.5), Daño (1.5)
+    + Vida (4), Daño (16)
 
       ![Mutum](https://github.com/bingoo30/PVLI-C2024-2025-Grupo7/blob/main/Juego/assets/GDD/mutum_G.png)
 
   + **Estaka** (enemigo de daño en área): Si el jugador entra en su área, provoca una explosión.
-    + Vida (0.5), Daño (1.5)
+    + Vida (12), Daño (10)
 
       ![Estaka](https://github.com/bingoo30/PVLI-C2024-2025-Grupo7/blob/main/Juego/assets/GDD/estaka_G.png)
+  + **!** los enemigos que aparecen en el nivel anterior y vuelven a salir en el nuevo nivel son más fuertes
 
 #### **Boss**
   + **Joker**: Se teleporta y causa daño en área y cuerpo a cuerpo.
     + **Mecánica 1**: Dispara 2 cartas.
     + **Mecánica 2**: Se activa cuando su vida llega a la mitda. Crea 5 cartas en el suelo. Por cada carta que destruyes, le haces daño al Joker. Si no las destruyes a tiempo, él te causará daño.
-    + **Mecánica 3**: Se crean tres orbes durante la batalla. Cuando las tres estén listas, las dispara hacia la protagonista, y comienza a crear las orbes nuevamente.
+    + **Mecánica 3**: Se crean tres orbes que persiguen al jugador.
+    + **Mecánica 4**: Se crea un daño en área.
+
 
 ## 2. Diseño de nivel
 
@@ -170,7 +159,7 @@ Si el jugador muere en el camino, volverá al checkpoint de cada piso, es decir,
 
 **Habilidades que se puede usar:** Lista de las Habilidades de Utilidad desbloqueadas, con sus cooldowns y una letra en el canto inferior indicando cual es la tecla para activar la habilidad.
 
-**Mapa:** Minimapa que muestra de forma esquemática la ubicación del personaje. Solo indica la habitación en la que está el personaje y las habitaciones que ha visitado en forma de cuadrados conectados por líneas. Los cuadrados serán rellenados con diferentes colores dependiendo de si el personaje está ahí o no.
+//**Mapa:** Minimapa que muestra de forma esquemática la ubicación del personaje. Solo indica la habitación en la que está el personaje y las habitaciones que ha visitado en forma de cuadrados conectados por líneas. Los cuadrados serán rellenados con diferentes colores dependiendo de si el personaje está ahí o no. (no implementado)
 
 **Imagen de quién está hablando:** Autodescriptivo, muestra un retrato del personaje que está hablando en ese momento.
 
@@ -208,7 +197,7 @@ La protagonista se despierta en una sala donde un NPC le explica que se encuentr
 
 ***Weiyoung:*** una amiga próxima de la protagonista que estará en el segundo piso y con ella la protagonista recordará de sus sueños y las esperanzas que tenía junto a su amiga.
 
-***Romeo:*** El ex novio de Julie, al encontrarle, la protagonista se recordará de su adolescencia y todos los momentos bonitos que pasaron juntos . Estará en el tercer piso.
+//***Romeo:*** El ex novio de Julie, al encontrarle, la protagonista se recordará de su adolescencia y todos los momentos bonitos que pasaron juntos . Estará en el tercer piso.
 
  ***Piu:*** Gato de Julie, estará en el cuarto piso y se recordará de los momentos felices antes de apostar.
 
@@ -218,13 +207,6 @@ La protagonista se despierta en una sala donde un NPC le explica que se encuentr
 **Bosses:**
 ***Joker:*** Personaje que secuestra a la protagonista y es el amo del mundo de las cartas y actúa como jefe final. (Es la parte de culpa de la prota, quien le dice las cosas malas que ha hecho, y se entera de está intentando cambiar)
 
-**Posiblemente la parte narrativa relacionado con los bosses se cambie a objetos**
-K: Boss del tercer piso, se entera que perdió a la única persona que ella amaba por su culpa.
-
-Q: Boss del segundo piso, se entera de varias discusiones que hubo con alguien por estar apostando.
-
-J: Boss del primer piso, se entera de que apuesta.
-
 **Enemigos normales:** Criaturas inspiradas en cartas de poker.
 
 ### 6.4. Objetos
@@ -232,6 +214,10 @@ J: Boss del primer piso, se entera de que apuesta.
 **Llave:** Es esencial para poder subir de piso y estará escondida en alguna sala.
 
 **Fichas de póker:** Actúan como puntos de experiencia que se obtendrán al derrotar enemigos.
+
+**Hierbas:** Sirven como cura para recuperar la vida del jugador.
+
+**Memorias:** Los recuerdos de la protagonista.
 
 **Objetos relacionados con los logros:** Estarán distribuidos en diferentes lugares del mapa.
 
@@ -249,17 +235,15 @@ Salir del segundo piso.
 
 Salir del tercer piso.
 
-Salir del cuarto piso.
-
-Desbloquear una rama entera del árbol.
+Desbloquear el árbol entero.
 
 Encontrar a Joker.
 
-Matar a 20/40/80/100/200 enemigos.
+Matar a x enemigos.
 
-Llegar al nivel 5/10/15.
+Llegar al nivel x.
 
-Morir 5/10 veces.
+Morir x veces.
 
 Derrotar a J/Q/K/Joker.
 
@@ -273,11 +257,7 @@ Hablar con Flush: Has conocido al señor Flush, un señor amable que te explicó
 
 Hablar con Weiyoung: Has encontrado a tu amiga.
 
-Hablar con Romeo: Has encontrado a Romeo.
-
 Encontrar a Piu.
-
-(opcional) Trampar a un mimic.
 
 ## 7. Referencias
 Mecánicas: The Binding of isaac, Darkest Dungeon.
