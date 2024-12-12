@@ -16,6 +16,8 @@ export default class Victory extends Phaser.Scene {
 
 		const victory = this.add.image(this.sys.game.canvas.width / 2, 20, 'victoryImage').setOrigin(0.5, 0).setScale(1.2);
 
+		let GameOverButton = this.add.image(this.sys.game.canvas.width * 0.5, this.sys.game.canvas.height * 0.6, 'ExitToMainMenuButton').setScale(0.35).setInteractive().setVisible(false);
+
 		const dialogos = this.cache.json.get('VictoryDialog');
 		this.time.delayedCall(2000, () => {
 			this.changeToDialogScene({ sceneKey: this.scene.key, backgroundType: 'dark', dialogos: dialogos});
@@ -27,7 +29,14 @@ export default class Victory extends Phaser.Scene {
 				fill: '#FFFFFF',
 				align: 'left'
 			}).setOrigin(0.5, 0.5);
+
+			GameOverButton.setVisible(true);
 		});
+
+		GameOverButton.on('pointerup', () => {
+			this.scene.start('title', { player: data.player, tries: this._tries }); //Cambiamos a la escena de juego
+		});
+
 
 	}
 	changeToDialogScene(data) {

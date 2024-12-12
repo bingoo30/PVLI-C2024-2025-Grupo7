@@ -418,8 +418,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":768,
-                 "y":376
+                 "x":704,
+                 "y":344
                 }, 
                 {
                  "height":0,
@@ -866,8 +866,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":704,
-                 "y":396
+                 "x":656,
+                 "y":400
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1188,8 +1188,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":283.999333333333,
-                 "y":142.666666666667
+                 "x":283.999,
+                 "y":142.667
                 }, 
                 {
                  "height":0,
@@ -1200,8 +1200,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":137.333333333333,
-                 "y":774.666666666667
+                 "x":137.333,
+                 "y":774.667
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1453,7 +1453,7 @@
                  "type":"",
                  "visible":true,
                  "width":8,
-                 "x":632,
+                 "x":616,
                  "y":40
                 }, 
                 {
@@ -1540,8 +1540,8 @@
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":280,
-                 "x":632,
+                 "width":288,
+                 "x":624,
                  "y":0
                 }, 
                 {
@@ -1611,18 +1611,7 @@
                  "y":544
                 }, 
                 {
-                 "height":352,
-                 "id":46,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":240,
-                 "x":344,
-                 "y":448
-                }, 
-                {
-                 "height":288,
+                 "height":192,
                  "id":47,
                  "name":"",
                  "rotation":0,

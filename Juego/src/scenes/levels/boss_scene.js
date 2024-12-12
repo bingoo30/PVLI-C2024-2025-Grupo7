@@ -418,6 +418,11 @@ export default class BossScene extends Phaser.Scene {
         this.removeListener();
         this.scene.start("gameover", { player: this.player, tries: this.tries, previousScene: this });
     }
+    changeToVictory() {
+        this.MainSample.stop();
+        this.removeListener();
+        this.scene.start("victory", { player: this.player, tries: this.tries, previousScene: this });
+    }
     pauseGame() {
         this.scene.launch("Pause", { previousScene: this.scene.key }); // Lanzar la escena de pausa
         this.scene.pause(); // Pausar la escena actual

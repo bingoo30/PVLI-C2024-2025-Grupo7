@@ -16,7 +16,7 @@ export default class Achievement extends Phaser.GameObjects.Sprite {
         super(scene, x, y, key);
         // #region atributos
         this.scene = scene;
-        this.scale = 0.25;
+        this.scale = 0.45;
         this.unlockedSprite = unlockedSprite;
         this.locked = locked;
         this.title = title;
@@ -30,7 +30,8 @@ export default class Achievement extends Phaser.GameObjects.Sprite {
 
         // Texto del título.
         this.titleText = this.scene.add.text(x, y - 50, title, {
-            font: "14px Arial",
+            fontFamily: "PixelArt",
+            fontSize: 16,
             color: "#ffffff",
             align: "center",
             wordWrap: {
@@ -42,7 +43,8 @@ export default class Achievement extends Phaser.GameObjects.Sprite {
 
         // Tooltip
         this.tooltip = this.scene.add.text(x, y + 40, "", {
-            font: "16px Arial",
+            fontFamily: "PixelArt",
+            fontSize: 16,
             color: "#ffffff",
             backgroundColor: "#000000",
             padding: { x: 5, y: 5 },

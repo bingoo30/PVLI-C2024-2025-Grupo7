@@ -19,7 +19,7 @@ export default class Gameover extends Phaser.Scene {
 		//aumentar el numero de veces que me he muerto
 		this._tries = data.tries;
 		this._tries++;
-		console.log("tries: " + this._tries);
+		//console.log("tries: " + this._tries);
 
 		// #region logros muertes-intentos
 		//logro morirse 1 vez
@@ -50,7 +50,7 @@ export default class Gameover extends Phaser.Scene {
 		let GameOverButton = this.add.image((this.sys.game.canvas.width/4 +200), 500, 'ExitToMainMenuButton').setScale(0.35).setInteractive();
 		
 
-		// Escuchamos los eventos del ratón cuando interactual con nuestro sprite de "Start"
+		// Escuchamos los eventos del ratón cuando interactual con nuestro sprite
 		GameOverButton.on('pointerup', () => {
 			this.scene.start('title', { player: data.player, tries: this._tries }); //Cambiamos a la escena de juego
 	    });

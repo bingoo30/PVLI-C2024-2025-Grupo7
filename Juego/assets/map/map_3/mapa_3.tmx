@@ -265,7 +265,7 @@
   <object id="97" name="Crac" x="576" y="976">
    <point/>
   </object>
-  <object id="98" name="Crac" x="768" y="376">
+  <object id="98" name="Crac" x="704" y="344">
    <point/>
   </object>
   <object id="99" name="Crac" x="1200" y="496">
@@ -358,7 +358,7 @@
   <object id="117" name="Zaro" x="1472" y="176">
    <point/>
   </object>
-  <object id="143" name="Zaro" x="704" y="396">
+  <object id="143" name="Zaro" x="656" y="400">
    <point/>
   </object>
  </objectgroup>
@@ -466,7 +466,7 @@
   <object id="19" name="horizontalDoor" x="864" y="928" width="32" height="32"/>
   <object id="20" name="horizontalDoor" x="1632" y="1152" width="32" height="32"/>
   <object id="21" name="horizontalDoor" x="1632" y="1440" width="32" height="32"/>
-  <object id="22" name="verticalDoor" x="632" y="40" width="8" height="56"/>
+  <object id="22" name="verticalDoor" x="616" y="40" width="8" height="56"/>
   <object id="23" name="verticalDoor" x="904" y="72" width="8" height="56"/>
   <object id="24" name="verticalDoor" x="1304" y="968" width="8" height="56"/>
   <object id="25" name="verticalDoor" x="856" y="1160" width="8" height="56"/>
@@ -475,14 +475,13 @@
   <object id="40" name="verticalDoor" x="1376" y="520" width="8" height="56"/>
  </objectgroup>
  <objectgroup id="5" name="rectangle">
-  <object id="35" x="632" y="0" width="280" height="192"/>
+  <object id="35" x="624" y="0" width="288" height="192"/>
   <object id="39" x="1616" y="288" width="288" height="336"/>
   <object id="41" x="1384" y="472" width="232" height="160"/>
   <object id="42" x="1480" y="1440" width="408" height="368"/>
   <object id="43" x="168" y="1312" width="360" height="320"/>
   <object id="44" x="8" y="224" width="232" height="320"/>
   <object id="45" x="8" y="544" width="312" height="288"/>
-  <object id="46" x="344" y="448" width="240" height="352"/>
-  <object id="47" x="248" y="224" width="136" height="288"/>
+  <object id="47" x="248" y="224" width="136" height="192"/>
  </objectgroup>
 </map>
