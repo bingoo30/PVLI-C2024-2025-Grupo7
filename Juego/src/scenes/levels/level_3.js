@@ -45,7 +45,6 @@ export default class Animation extends Phaser.Scene {
 		this.load.image('tileset3', 'assets/map/map_3/map_tiles3.png');
 
 		this.load.json('dialogues_Piu', 'assets/dialogues/dialogues_piu.json');
-		this.load.image('Piu', 'assets/character/piu.png');
 
 		this.load.json('level3Memory1', 'assets/dialogues/level3_memory1.json');
 		this.load.json('level3Memory2', 'assets/dialogues/level3_memory2.json');
@@ -112,6 +111,7 @@ export default class Animation extends Phaser.Scene {
 			}
 			this.PickableObjects.add(pickable);
 		});
+
 		// #endregion
 		// #endregion
 
@@ -368,8 +368,9 @@ export default class Animation extends Phaser.Scene {
 		const NPCX = NPCpos.x * SCALE;
 		const NPCY = NPCpos.y * SCALE;
 
-		this.Piu = new NPC(this, NPCX, NPCY, 'Piu', 'dialogues_Piu', "gatitu!!!!");
+		this.Piu = new NPC(this, NPCX, NPCY, 'PiuAnim', 'dialogues_Piu', "gatitu!!!!", true);
 		this.Piu.setScale(SCALE);
+		this.Piu.play('PiuLoad');
 		// #endregion
 
 		//#region Traps

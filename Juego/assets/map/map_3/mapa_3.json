@@ -194,7 +194,61 @@
          "draworder":"topdown",
          "id":15,
          "name":"Objects",
-         "objects":[],
+         "objects":[
+                {
+                 "height":0,
+                 "id":158,
+                 "name":"memory",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"dialog",
+                         "type":"string",
+                         "value":"level3Memory1"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":480,
+                 "y":1472
+                }, 
+                {
+                 "height":0,
+                 "id":159,
+                 "name":"memory",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"dialog",
+                         "type":"string",
+                         "value":"level3Memory3"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":1568,
+                 "y":1744
+                }, 
+                {
+                 "height":0,
+                 "id":160,
+                 "name":"memory",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"dialog",
+                         "type":"string",
+                         "value":"level3Memory2"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":1656,
+                 "y":112
+                }],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
@@ -1628,7 +1682,7 @@
          "y":0
         }],
  "nextlayerid":17,
- "nextobjectid":150,
+ "nextobjectid":161,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.0",
@@ -1638,12 +1692,12 @@
          "columns":6,
          "firstgid":1,
          "image":"map_tiles3.png",
-         "imageheight":126,
+         "imageheight":192,
          "imagewidth":192,
          "margin":0,
          "name":"map_tiles3",
          "spacing":0,
-         "tilecount":18,
+         "tilecount":36,
          "tileheight":32,
          "tiles":[
                 {

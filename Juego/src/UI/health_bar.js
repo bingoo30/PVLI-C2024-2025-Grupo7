@@ -15,7 +15,7 @@
      * 
  */
 export default class HealthBar extends Phaser.GameObjects.Sprite {
-    constructor(scene, x, y, character, texture = 'healthBarBackground', barTexture ='healthBar',depth = 3) {
+    constructor(scene, x, y, character, texture = 'healthBarBackground', barTexture ='healthBar',depth = 5) {
         super(scene, x, y, texture);
         this.scene = scene;
         this.maxWidth = 300;

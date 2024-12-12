@@ -10,7 +10,7 @@
      * 
  */
 export default class ExpBar extends Phaser.GameObjects.Sprite{
-    constructor(scene, x, y, depth = 3) {
+    constructor(scene, x, y, depth = 5) {
         super(scene, x, y, 'expBarBackground');
         this.scene = scene;
         this.maxWidth = 150;

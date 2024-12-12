@@ -12,7 +12,7 @@
      */
 export default class InteractableObjects extends Phaser.GameObjects.Sprite {
     constructor(scene, x, y, texture, range = 80, textDistance=100) {
-        super(scene, x, y, [texture]);
+        super(scene, x, y, [texture],0);
 
         this.scene = scene;
         this.canInteract = false;

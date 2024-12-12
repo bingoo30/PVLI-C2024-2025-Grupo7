@@ -324,7 +324,7 @@ export default class Animation extends Phaser.Scene {
 		const NPCX = NPCpos.x * SCALE;
 		const NPCY = NPCpos.y * SCALE;
 
-		this.Weiyoung = new NPC(this, NPCX, NPCY, 'Weiyoung', 'dialogues_Weiyoung', "Choque cultural");
+		this.Weiyoung = new NPC(this, NPCX, NPCY, 'Weiyoung', 'dialogues_Weiyoung', "Choque cultural", true);
 		this.Weiyoung.setScale(SCALE);
 		// #endregion
 
@@ -509,7 +509,17 @@ export default class Animation extends Phaser.Scene {
 		this.scene.resume(); // Reanudar la escena actual
 		this.scene.stop("Pause"); // Detener la escena de pausa
 	}
-
+	setPlayerToKey() {
+		this.player.x = this.changeKey.x - 25;
+		this.player.y = this.changeKey.y - 25;
+	}
+	/**
+	 * metodo auxiliar para colocar el player en la posicion de la puerta (para la presentacion)
+	 */
+	setPlayerToDoor() {
+		this.player.x = this.DoorLevel2.x + 100;
+		this.player.y = this.DoorLevel2.y + 100;
+	}
 	update(t, dt) {
 	}
 }

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="60" height="60" tilewidth="32" tileheight="32" infinite="0" nextlayerid="17" nextobjectid="150">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="60" height="60" tilewidth="32" tileheight="32" infinite="0" nextlayerid="17" nextobjectid="161">
  <editorsettings>
   <export target="mapa_3.json" format="json"/>
  </editorsettings>
- <tileset firstgid="1" name="map_tiles3" tilewidth="32" tileheight="32" tilecount="18" columns="6">
-  <image source="map_tiles3.png" trans="ff00ff" width="192" height="126"/>
+ <tileset firstgid="1" name="map_tiles3" tilewidth="32" tileheight="32" tilecount="36" columns="6">
+  <image source="map_tiles3.png" trans="ff00ff" width="192" height="192"/>
   <tile id="0">
    <properties>
     <property name="collides" type="bool" value="true"/>
@@ -213,7 +213,26 @@
    <point/>
   </object>
  </objectgroup>
- <objectgroup id="15" name="Objects"/>
+ <objectgroup id="15" name="Objects">
+  <object id="158" name="memory" x="480" y="1472">
+   <properties>
+    <property name="dialog" value="level3Memory1"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="159" name="memory" x="1568" y="1744">
+   <properties>
+    <property name="dialog" value="level3Memory3"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="160" name="memory" x="1656" y="112">
+   <properties>
+    <property name="dialog" value="level3Memory2"/>
+   </properties>
+   <point/>
+  </object>
+ </objectgroup>
  <objectgroup id="4" name="Bob">
   <object id="105" name="Bob" x="1192" y="1520">
    <point/>
