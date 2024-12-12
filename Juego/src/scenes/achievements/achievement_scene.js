@@ -48,35 +48,74 @@ export default class AchievementScene extends Phaser.Scene {
         this.totalPages = Math.ceil(this.achievements.length / this.acvPerPage);
         this.updatePage();
 
+        this.exitSound = this.sound.add('exitButtonAudio');
+        this.exitSound.setVolume(0.5);
+
+        // efecto de sonido del botón
+        this.buttonSFX = this.sound.add('buttonPressedAudio');
+        this.buttonSFX.setVolume(0.5);
+
+        // efecto de sonido del botón
+        this.pointerOver = this.sound.add('pointerOverAudio');
+        this.pointerOver.setVolume(0.5);
+
         //botones para pasar pagina
-        var prevButton = this.add.image(100, 100, 'PrevButton').setScale(0.35);
+        let prevButton = this.add.image(100, 100, 'PrevButton').setScale(0.35);
         prevButton.setInteractive(); // Hacemos el sprite interactivo para que lance eventos
 
 
         // Escuchamos los eventos del rat�n cuando interactual con nuestro sprite de "Start"
-        prevButton.on('pointerdown', pointer => {
+        prevButton.on('pointerdown', () => {
             this.previousPage();
         });
+        // Sonidos de cuando el cursor esta sobre el boton
+        prevButton.on('pointerover', () => {
+            this.pointerOver.play();
+            prevButton.setTint(0x999999); // Oscurecer el sprite
+        });
+        prevButton.on('pointerout', () => {
+            prevButton.clearTint(); // Restaurar el color original
+        });
 
-        var nextButton = this.add.image(925, 100, 'NextButton').setScale(0.35);
+        let nextButton = this.add.image(925, 100, 'NextButton').setScale(0.35);
         nextButton.setInteractive(); // Hacemos el sprite interactivo para que lance eventos
 
 
-        // Escuchamos los eventos del rat�n cuando interactual con nuestro sprite de "Start"
-        nextButton.on('pointerdown', pointer => {
+        nextButton.on('pointerdown', () => {
             this.nextPage();
+        });
+        // Sonidos de cuando el cursor esta sobre el boton
+        nextButton.on('pointerover', () => {
+            this.pointerOver.play();
+            nextButton.setTint(0x999999); // Oscurecer el sprite
+        });
+        nextButton.on('pointerout', () => {
+            nextButton.clearTint(); // Restaurar el color original
         });
 
         var exitButton = this.add.image(50, 50, 'ExitButton').setScale(0.25);
         exitButton.setRotation(0.75);
         exitButton.setInteractive(); // Hacemos el sprite interactivo para que lance eventos
 
-
-        //para salir //problema, cuando solo cuando quito la escena en title, no queda ninguna 
-        exitButton.on('pointerdown', pointer => {
-            this.scene.stop(); // Detiene la escena actual.
-            this.sound.resumeAll(); // Reanuda todos los sonidos pausados
-            this.scene.start(previousSceneKey);
+        // Sonidos de cuando el cursor esta sobre el boton
+        exitButton.on('pointerover', () => {
+            this.pointerOver.play();
+            exitButton.setTint(0x999999); // Oscurecer el sprite
+        });
+        exitButton.on('pointerout', () => {
+            exitButton.clearTint(); // Restaurar el color original
+        });
+        //para salir
+        exitButton.on('pointerdown', () => {
+            this.exitSound.play();
+            this.time.addEvent({
+                delay: 500,
+                callback: () => {
+                    this.scene.stop(); // Detiene la escena actual.
+                    this.sound.resumeAll(); // Reanuda todos los sonidos pausados
+                    this.scene.start(previousSceneKey);
+                }
+            });
         });
     }
 
@@ -137,7 +176,8 @@ export default class AchievementScene extends Phaser.Scene {
      * Cambia a la p�gina siguiente.
      */
     nextPage() {
-        if (this.currentPage < this.totalPages-1) {
+        if (this.currentPage < this.totalPages - 1) {
+            this.buttonSFX.play();
             this.currentPage++;
             this.updatePage();
         }
@@ -148,6 +188,7 @@ export default class AchievementScene extends Phaser.Scene {
      */
     previousPage() {
         if (this.currentPage > 0) {
+            this.buttonSFX.play();
             this.currentPage--;
             this.updatePage();
         }

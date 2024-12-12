@@ -8,6 +8,6 @@ export function unlock(scene, achievement) {
     achievementObj.locked = false;
     // Guardar los datos actualizados en localStorage.
     localStorage.setItem('achievementData', JSON.stringify(achievementData));
-    console.log(`Desbloqueando logro: ${achievement}, cambiando sprite a ${achievementObj.unlockedSprite}`);
-    console.log(achievementObj); // Verifica el cambio.
+    //console.log(`Desbloqueando logro: ${achievement}, cambiando sprite a ${achievementObj.unlockedSprite}`);
+    //console.log(achievementObj); // Verifica el cambio.
 }

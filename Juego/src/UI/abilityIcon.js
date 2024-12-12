@@ -58,11 +58,24 @@ export default class AbilityIcon extends Phaser.GameObjects.Sprite {
         }).setOrigin(0.5);
         this.tooltip.setVisible(false);
 
+        // efecto de sonido del botón
+        const buttonSFX = this.scene.sound.add('buttonPressedAudio');
+        buttonSFX.setVolume(0.5);
+
+        // efecto de sonido del botón
+        const pointerOverSFX = this.scene.sound.add('pointerOverAudio');
+        pointerOverSFX.setVolume(0.5);
+
         // Eventos de interacción
-        this.on('pointerover', () => this.showTooltip());
+        this.on('pointerover', () => {
+            this.showTooltip();
+            pointerOverSFX.play();
+
+        });
         this.on('pointerout', () => this.hideTooltip());
 
         this.on('pointerdown', () => {
+            buttonSFX.play();
             if (this.locked) {
                 let avaliablePoints = this.player.getAbilityPoints();
                 this.unlockAbility(avaliablePoints);

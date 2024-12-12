@@ -45,9 +45,20 @@ export default class Title extends Phaser.Scene {
 		back.setDisplaySize(this.sys.game.config.width, this.sys.game.config.height);  // Redimensiona al tamaño del canvas
 
 		//Pintamos un botón de Empezar
-		var startButton = this.add.image(this.sys.game.canvas.width/2, this.sys.game.canvas.height/2+50, 'start')
+		let startButton = this.add.image(this.sys.game.canvas.width/2, this.sys.game.canvas.height/2+50, 'start')
 		startButton.setInteractive(); // Hacemos el sprite interactivo para que lance eventos
 
+		const pointerOver = this.sound.add('pointerOverAudio');
+		pointerOver.setVolume(0.5);
+
+		// Sonidos de cuando el cursor esta sobre el boton
+		startButton.on('pointerover', () => {
+			pointerOver.play();
+			startButton.setTint(0x999999); // Oscurecer el sprite
+		});
+		startButton.on('pointerout', () => {
+			startButton.clearTint(); // Restaurar el color original
+		});
 		startButton.on('pointerup', () => {
 			TitleSample.stop(); // Detiene el audio de fondo
 
@@ -63,10 +74,17 @@ export default class Title extends Phaser.Scene {
 
 		});
 
-		//Pintamos un botón de Empezar
-		var acvButton = this.add.image(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height / 2 + 140, 'logros');
+		let acvButton = this.add.image(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height / 2 + 140, 'logros');
 		acvButton.setInteractive(); // Hacemos el sprite interactivo para que lance eventos
 
+		// Sonidos de cuando el cursor esta sobre el boton
+		acvButton.on('pointerover', () => {
+			pointerOver.play();
+			acvButton.setTint(0x999999); // Oscurecer el sprite
+		});
+		acvButton.on('pointerout', () => {
+			acvButton.clearTint(); // Restaurar el color original
+		});
 		acvButton.on('pointerup', () => {
 			buttonSFX.play();
 			// Agregar un retraso de 250ms antes de cambiar de escena
@@ -79,9 +97,17 @@ export default class Title extends Phaser.Scene {
 
 		});
 
-		var tutorialButton = this.add.image(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height / 2 + 210, 'tutorial');
+		let tutorialButton = this.add.image(this.sys.game.canvas.width*0.5, this.sys.game.canvas.height / 2 + 210, 'tutorial');
 		tutorialButton.setInteractive(); // Hacemos el sprite interactivo para que lance eventos
 
+		// Sonidos de cuando el cursor esta sobre el boton
+		tutorialButton.on('pointerover', () => {
+			pointerOver.play();
+			tutorialButton.setTint(0x999999); // Oscurecer el sprite
+		});
+		tutorialButton.on('pointerout', () => {
+			tutorialButton.clearTint(); // Restaurar el color original
+		});
 		tutorialButton.on('pointerup', () => {
 			TitleSample.stop(); // Detiene el audio de fondo
 

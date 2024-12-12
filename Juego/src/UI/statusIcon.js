@@ -52,8 +52,12 @@ export default class StatusIcon extends Phaser.GameObjects.Sprite {
             posX += radius;
         }
 
+        // efecto de sonido del botón
+        const buttonSFX = this.scene.sound.add('pointerOverAudio');
+        buttonSFX.setVolume(0.5);
 
         this.on('pointerdown', () => {
+            buttonSFX.play();
             if (this.count < MAX_STATUS) {
                 let avaliablePoints = this.player.getStatusPoints();
                 this.upgrateStatus(avaliablePoints);

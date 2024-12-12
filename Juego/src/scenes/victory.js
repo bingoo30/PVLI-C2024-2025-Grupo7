@@ -34,7 +34,7 @@ export default class Victory extends Phaser.Scene {
 		});
 
 		GameOverButton.on('pointerup', () => {
-			this.scene.start('title', { player: data.player, tries: this._tries }); //Cambiamos a la escena de juego
+			this.scene.start('title', { player: data.player, tries: data.tries }); //Cambiamos a la escena de juego
 		});
 
 

@@ -28,6 +28,10 @@ export default class Achievement extends Phaser.GameObjects.Sprite {
 
         // #endregion
 
+        // efecto de sonido del botón
+        const pointerOverSFX = this.scene.sound.add('pointerOverAudio');
+        pointerOverSFX.setVolume(0.5);
+
         // Texto del título.
         this.titleText = this.scene.add.text(x, y - 50, title, {
             fontFamily: "PixelArt",
@@ -56,8 +60,13 @@ export default class Achievement extends Phaser.GameObjects.Sprite {
 
 
         // Eventos de interacción
-        this.on('pointerover', () => this.showTooltip());
-        this.on('pointerout', () => this.hideTooltip());
+        this.on('pointerover', () => {
+            pointerOverSFX.play();
+            this.showTooltip()
+        });
+        this.on('pointerout', () => {
+            this.hideTooltip()
+        });
     }
     /**
      * Setters de posicion.

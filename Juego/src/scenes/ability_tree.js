@@ -100,15 +100,22 @@ export default class AbilityTree extends Phaser.Scene {
 		}
 		// #endregion
 
-		var exitButton = this.add.image(50, 50, 'ExitButton').setScale(0.25);
+		let exitButton = this.add.image(50, 50, 'ExitButton').setScale(0.25);
 		exitButton.setRotation(0.75);
 		exitButton.setInteractive(); // Hacemos el sprite interactivo para que lance eventos
 
-
+		const exitSound = this.sound.add('exitButtonAudio');
+		exitSound.setVolume(0.5);
 		//para salir //problema, cuando solo cuando quito la escena en title, no queda ninguna 
-		exitButton.on('pointerdown', pointer => {
-			this.scene.stop(); // Detiene la escena actual.
-			this.scene.start(previousSceneKey);
+		exitButton.on('pointerdown', () => {
+			exitSound.play();
+			this.time.addEvent({
+				delay: 500, 
+				callback: () => {
+					this.scene.stop(); // Detiene la escena actual.
+					this.scene.start(previousSceneKey);
+				}
+			});
 		});
 	}
 	update(time, dt) {

@@ -16,8 +16,11 @@ export default class Pause extends Phaser.Scene {
 		const previousSceneKey = data.previousScene;
 
 		// efecto de sonido del botón
-		var buttonSFX = this.sound.add('buttonPressedAudio');
+		const buttonSFX = this.sound.add('buttonPressedAudio');
 		buttonSFX.setVolume(0.5);
+
+		const pointerOver = this.sound.add('pointerOverAudio');
+		pointerOver.setVolume(0.5);
 
 		// Obtener la instancia de la escena previa
 		this.previousScene = this.scene.get(previousSceneKey);
@@ -45,6 +48,14 @@ export default class Pause extends Phaser.Scene {
 		}).setOrigin(0.5, 0.5);
 		acvs.setInteractive();
 
+		// Sonidos de cuando el cursor esta sobre el boton
+		resume.on('pointerover', () => {
+			pointerOver.play();
+			resume.setTint(0x999999); // Oscurecer el sprite
+		});
+		resume.on('pointerout', () => {
+			resume.clearTint(); // Restaurar el color original
+		});
 		resume.on('pointerdown', () => {
 			
 			if (this.previousScene && typeof this.previousScene.resumeGame === 'function') {
@@ -59,10 +70,26 @@ export default class Pause extends Phaser.Scene {
 			
 			
 		});
+		// Sonidos de cuando el cursor esta sobre el boton
+		acvs.on('pointerover', () => {
+			pointerOver.play();
+			acvs.setTint(0x999999); // Oscurecer el sprite
+		});
+		acvs.on('pointerout', () => {
+			acvs.clearTint(); // Restaurar el color original
+		});
 		acvs.on('pointerdown', () => {
 			buttonSFX.play();
 			this.scene.start('AchievementScene', { previousScene: this.scene.key });
 
+		});
+		// Sonidos de cuando el cursor esta sobre el boton
+		tree.on('pointerover', () => {
+			pointerOver.play();
+			tree.setTint(0x999999); // Oscurecer el sprite
+		});
+		tree.on('pointerout', () => {
+			tree.clearTint(); // Restaurar el color original
 		});
 		tree.on('pointerdown', () => {
 			buttonSFX.play();
