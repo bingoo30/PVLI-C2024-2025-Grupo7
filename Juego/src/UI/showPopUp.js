@@ -33,7 +33,7 @@ export function showPopup(scene, message, x = undefined, y = undefined) {
     scene.tweens.add({
         targets: popupContainer,
         alpha: 1,
-        duration: 1000, // Duración de la animación de aparición
+        duration: 1500, // Duración de la animación de aparición
         ease: 'Power2',
         onComplete: () => {
             popupContainer.destroy();

@@ -83,6 +83,7 @@ export default class Player extends Character {
         this.dKey = this.scene.input.keyboard.addKey('D'); //derecha
         this.eKey = this.scene.input.keyboard.addKey('E'); //interactuar
         this.pKey = this.scene.input.keyboard.addKey('P'); //pausar el juego
+
         this.xKey = this.scene.input.keyboard.addKey('X'); //saltar el nivel
         this.numPad1 = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.NUMPAD_ONE); //teleportarte en donde la llave
         this.numPad2 = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.NUMPAD_TWO); //teleportarte en donde la puerta
@@ -256,7 +257,7 @@ export default class Player extends Character {
         this.life = this.maxLife;
         this.Inventory.addLevel();
         if (this.level != 0 && (this.level % 3) - 1 == 0) this.abilityPoint++;
-
+        console.log(this.abilityPoint);
         const sfx = this.scene.sound.add('levelUpAudio');
         sfx.play();
     }

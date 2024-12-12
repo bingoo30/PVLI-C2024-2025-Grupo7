@@ -59,6 +59,8 @@ export default class Animation extends Phaser.Scene {
 	* Creación de los elementos de la escena principal de juego
 	*/
 	create(data) {
+		this.sound.stopAll();
+		this.tries = data.tries;
 		// #region Entities
 		// #region Map
 
@@ -350,9 +352,9 @@ export default class Animation extends Phaser.Scene {
 		//colision player-enemigos
 		this.physics.add.collider(this.player.collisionZone, this.enemies, (collisionZone,enemy) => {
 			if (enemy.visible) {
-				this.player.knockback(500, enemy);
-				this.player.onGotHit(enemy.getDamage());
 				if (enemy.isMutum) enemy.createDamageArea();
+				else this.player.knockback(500, enemy);
+				this.player.onGotHit(enemy.getDamage());
 			}
 
 		});
@@ -433,8 +435,7 @@ export default class Animation extends Phaser.Scene {
 
 		this.cameras.main.startFollow(this.player);
 
-
-		if (this._tries == 1) {
+		if (this.tries == 1) {
 			const dialogos = this.cache.json.get('dialogues');
 			this.changeToDialogScene({ sceneKey: this.scene.key, backgroundType: 'dark', dialogos: dialogos, image:'bossGif' });
 		}

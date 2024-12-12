@@ -1000,20 +1000,18 @@
   <object id="240" name="FlushPosition" x="856" y="1152">
    <point/>
   </object>
-  <object id="249" name="changeLevel" x="824" y="400" width="8" height="104"/>
+  <object id="249" name="changeLevel" x="824" y="416" width="8" height="80"/>
  </objectgroup>
  <objectgroup id="14" name="rectangle">
   <object id="250" x="2224" y="1464" width="320" height="368"/>
-  <object id="252" x="312" y="1024" width="256" height="96"/>
   <object id="253" x="816" y="728" width="120" height="240"/>
-  <object id="254" x="1168" y="1496" width="352" height="336"/>
+  <object id="254" x="1176" y="1496" width="336" height="336"/>
   <object id="255" x="1840" y="1280" width="296" height="352"/>
   <object id="256" x="1664" y="16" width="144" height="272"/>
   <object id="257" x="816" y="272" width="448" height="344"/>
   <object id="258" x="1432" y="1088" width="376" height="296"/>
   <object id="259" x="48" y="312" width="520" height="712"/>
-  <object id="260" x="344" y="1472" width="240" height="360"/>
-  <object id="261" x="584" y="1592" width="584" height="328"/>
+  <object id="261" x="608" y="1592" width="568" height="328"/>
   <object id="264" x="1808" y="16" width="416" height="336"/>
  </objectgroup>
 </map>

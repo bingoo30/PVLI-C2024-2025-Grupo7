@@ -409,7 +409,18 @@ export default class BossScene extends Phaser.Scene {
     }
 
     changeToGameover() {
+        this.events.removeAllListeners('Interact');
+        this.events.removeAllListeners('IKilledAnEnemy');
+        this.events.removeAllListeners('TurretTimeOVer');
+        this.events.removeAllListeners('playerRecuperaVida');
         this.scene.start("gameover", { player: this.player, tries: this.tries, previousScene: this });
+    }
+    changeToVictory() {
+        this.events.removeAllListeners('Interact');
+        this.events.removeAllListeners('IKilledAnEnemy');
+        this.events.removeAllListeners('TurretTimeOVer');
+        this.events.removeAllListeners('playerRecuperaVida');
+        this.scene.start("victory", { player: this.player, tries: this.tries, previousScene: this });
     }
     pauseGame() {
         this.scene.launch("Pause", { previousScene: this.scene.key }); // Lanzar la escena de pausa

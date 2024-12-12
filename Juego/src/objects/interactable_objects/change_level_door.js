@@ -1,3 +1,4 @@
+import { showPopup } from "../../UI/showPopUp.js";
 /**
      * @extends InteractableObjects
      Lo que recibe
@@ -22,21 +23,13 @@ export default class ChangeLevelDoor extends InteractableObjects {
         this.body.setImmovable(true);
         this.body.setOffset(0, 0);
         this.setOrigin(0, 0);
-        this.keyMissingText = this.scene.add.text(x*scale+20, y*scale, "Falta la llave", {
-            fontFamily: 'PixelArt',
-            fontSize: 18,
-            backgroundColor: '#000000',
-            padding: 4,
-        }).setOrigin(0.5).setVisible(false);
-
     }
 
     onInteract() {
         if (this.canInteract) {
             if (this.scene.player.Inventory.key) this.scene.changeToNextLevel();
             else {
-                this.keyMissingText.setVisible(true);
-                this.scene.time.delayedCall(2000, () => { this.keyMissingText.setVisible(false); });
+                showPopup(this.scene, "Necesitas una llave para abrir esta puerta.", this.scene.sys.game.canvas.width / 2, 100);
             }
         }
     }

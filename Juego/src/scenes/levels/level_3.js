@@ -182,7 +182,7 @@ export default class Animation extends Phaser.Scene {
 		// #endregion
 
 		//#region Enemy Area
-		///scene, x, y, radius, damage, duration, scale=4
+		//area de mutum
 		toAdds = [];
 		this.area = new Pool(this, MAX, 'Area');
 		for (let i = 0; i < MAX; i++) {
@@ -191,6 +191,7 @@ export default class Animation extends Phaser.Scene {
 		}
 		this.area.addMultipleEntity(toAdds);
 
+		//area de estaka
 		toAdds = [];
 		this.areaEs = new Pool(this, MAX, 'Area');
 		for (let i = 0; i < MAX; i++) {
@@ -312,7 +313,7 @@ export default class Animation extends Phaser.Scene {
 		const mutumLayer = this.map.getObjectLayer('Mutum');
 		mutumLayer.objects.forEach(obj => {
 			if (obj.name === 'Mutum') { // Filtra por nombre
-				const mutum = new Mutum(this, obj.x * SCALE, obj.y * SCALE, this.player, 1, 4, 16, 'Mutum');
+				const mutum = new Mutum(this, obj.x * SCALE, obj.y * SCALE, this.player, 1,this.area, 4, 16, 'Mutum');
 				mutum.setPool(this.area);
 				mutum.setScale(SCALE);
 				this.arrayMutums.push(mutum);
@@ -328,7 +329,7 @@ export default class Animation extends Phaser.Scene {
 		const estakaLayer = this.map.getObjectLayer('Estaka');
 		estakaLayer.objects.forEach(obj => {
 			if (obj.name === 'Estaka') { // Filtra por nombre
-				const estaka = new Estaka(this, obj.x * SCALE, obj.y * SCALE, this.player, 2, 12, 10, 'Estaka');
+				const estaka = new Estaka(this, obj.x * SCALE, obj.y * SCALE, this.player, 2, this.areaEs, 12, 10, 'Estaka');
 				estaka.setPool(this.area);
 				estaka.setScale(SCALE);
 				this.arrayEstakas.push(estaka);
@@ -546,11 +547,19 @@ export default class Animation extends Phaser.Scene {
 	}
 
 	changeToGameover() {
+		this.events.removeAllListeners('Interact');
+		this.events.removeAllListeners('IKilledAnEnemy');
+		this.events.removeAllListeners('TurretTimeOVer');
+		this.events.removeAllListeners('playerRecuperaVida');
 		this.MainSample.stop();
 		this.scene.start("gameover", { player: this.player, tries: this.tries, previousScene: this});
 	}
 
 	changeToNextLevel() {
+		this.events.removeAllListeners('Interact');
+		this.events.removeAllListeners('IKilledAnEnemy');
+		this.events.removeAllListeners('TurretTimeOVer');
+		this.events.removeAllListeners('playerRecuperaVida');
 		this.MainSample.stop();
 		this.scene.start('BossScene', { player: this.player, tries: this.tries});
 	}

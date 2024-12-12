@@ -48,7 +48,7 @@ export default class HealthBar extends Phaser.GameObjects.Sprite {
 
 
         this.scene.events.on('playerRecuperaVida', (value) => {
-            this.lifeRecoverTexts.setText(`+${value}`);
+            this.lifeRecoverTexts.setText(`+${Phaser.Math.RoundTo(value)}`);
             this.lifeRecoverTexts.setVisible(true);
             this.scene.time.delayedCall(700, () => {
                 this.lifeRecoverTexts.setVisible(false);
