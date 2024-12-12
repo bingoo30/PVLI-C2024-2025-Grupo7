@@ -80,49 +80,87 @@ export default class Joker extends Character {
     }
 
     startBehavior() {
-        this.shootCards(); // Inicial 
-        setTimeout(() => this.phase1(), 3000);
+        this.shootCards(); // Inicial
+        this.startPhaseTimer(1); // Inicia la primera fase con el temporizador
+    }
+
+    startPhaseTimer(phase) {
+        switch (phase) {
+            case 1:
+                this.phase1();
+                break;
+            case 2:
+                this.phase2();
+                break;
+            case 3:
+                this.phase3();
+                break;
+            case 4:
+                this.phase4();
+                break;
+        }
     }
 
     phase1() {
-        //console.log('Fase 1')
+        //console.log('Fase 1');
         this.teleport();
         if (Math.random() < 0.5 || this.phase == 2) {
-            console.log('Orb fase')
-
+            console.log('Orb fase');
             this.spawnOrbs();
         }
-        setTimeout(() => this.phase2(), this.timeP1);
+
+        // Configura un temporizador para la siguiente fase
+        this.scene.time.addEvent({
+            delay: this.timeP1,
+            callback: () => this.startPhaseTimer(2), // Pasa a la fase 2
+            callbackScope: this
+        });
     }
 
     phase2() {
-        //console.log('Fase 2')
+        //console.log('Fase 2');
         this.isChasing = true;
-        setTimeout(() => {
-            this.createDamageArea();
-            this.isChasing = false;
-            this.phase3();
-        }, this.timeP2);
+
+        // Temporizador para manejar el final de esta fase y transición a la fase 3
+        this.scene.time.addEvent({
+            delay: this.timeP2,
+            callback: () => {
+                this.createDamageArea();
+                this.isChasing = false;
+                this.startPhaseTimer(3); // Pasa a la fase 3
+            },
+            callbackScope: this
+        });
     }
 
     phase3() {
-        //console.log('Fase 3')
-
+        //console.log('Fase 3');
         this.teleport();
         this.shootCards();
-        setTimeout(() => {
-            if (this.phase == 1) {
-                this.phase4()
-            } else {
-                this.phase1()
-            }
-        }, this.timeP3);
+
+        // Temporizador para decidir la siguiente fase
+        this.scene.time.addEvent({
+            delay: this.timeP3,
+            callback: () => {
+                if (this.phase == 1) {
+                    this.startPhaseTimer(4); // Si está en fase 1, pasa a fase 4
+                } else {
+                    this.startPhaseTimer(1); // Si está en fase 2, regresa a fase 1
+                }
+            },
+            callbackScope: this
+        });
     }
 
     phase4() {
-        //console.log('Fase 4')
+        //console.log('Fase 4');
 
-        setTimeout(() => this.phase1(), 4000); // Regresa a phase1 después de 4 segundos
+        // Temporizador para regresar a la fase 1 después de 4 segundos
+        this.scene.time.addEvent({
+            delay: 4000,
+            callback: () => this.startPhaseTimer(1), // Regresa a fase 1
+            callbackScope: this
+        });
     }
 
     onGotHit(damage) {
@@ -227,11 +265,8 @@ export default class Joker extends Character {
 
                 //  this.play('joker_idle');
                 //});
-
             }
-           
         }
-
     }
 
     chasing() {
@@ -270,9 +305,6 @@ export default class Joker extends Character {
             this.pool2,
             1,
             this.prob + this.prob * this.probStatus);
-
-     
-
     }
 
     preUpdate(t,dt){

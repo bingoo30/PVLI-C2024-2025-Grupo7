@@ -203,6 +203,8 @@ export default class BossScene extends Phaser.Scene {
         this.joker.setDamageArea(this.area);
         this.jokerGroup = this.add.group();
         this.jokerGroup.add(this.joker);
+
+        this.cardDamage = 20;
         // #endregion
 
         // #endregion
@@ -342,7 +344,7 @@ export default class BossScene extends Phaser.Scene {
 
         const cardPositions = objectLayer.objects.filter(obj => obj.name === 'card');
         if (cardPositions.length < 5) {
-            console.warn('No se encontraron suficientes posiciones para los pilares.');
+            //console.warn('No se encontraron suficientes posiciones para los pilares.');
             return;
         }
 
@@ -395,7 +397,7 @@ export default class BossScene extends Phaser.Scene {
 
         this.actOrbs.push(orb);
 
-        console.log('activeOrbsCount', this.activeOrbsCount)
+        //console.log('activeOrbsCount', this.activeOrbsCount)
         if (this.activeOrbsCount >= 3) {
             this.activeOrbsCount = 0;
             // Cuando haya 3 orbes empieza a moverlas
