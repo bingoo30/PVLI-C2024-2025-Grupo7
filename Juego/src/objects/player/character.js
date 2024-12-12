@@ -60,7 +60,6 @@ export default class Character extends Phaser.GameObjects.Sprite {
         });
     }
     onDeath() {
-        //console.log(`${this.texture.key} ha muerto`);
         this.destroy(); // Elimina el objeto de la escena
     }
 

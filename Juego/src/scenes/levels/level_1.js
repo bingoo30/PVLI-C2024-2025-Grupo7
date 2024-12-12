@@ -24,6 +24,7 @@ import Retractable_Spike from '../../objects/scenery/retractable_spike.js';
 import ExplosiveBullet from '../../objects/abilities/shooting/explosive_bullet.js';
 import Drone from '../../objects/abilities/drone.js';
 import Plant from '../../objects/enemies/plant.js';
+import Mine from '../../objects/abilities/mine.js';
 
 //import Coin from '../../objetos/Enemies/coin.js'
 //constante
@@ -323,6 +324,11 @@ export default class Animation extends Phaser.Scene {
 
 		let drone = new Drone(this, this.player.x, this.player.y, this.player, this.enemies, this.playerBullets);
 		this.player.registerDrone(drone);
+
+		// this.mines = this.add.group();
+		// this.mine = new Mine(this, this.player.x + 1000, this.player.y, 1, 5000);
+		// this.mine.setScale(SCALE);
+		// this.mines.add(this.mine);
 		// #endregion
 
 		//#region UI
@@ -431,6 +437,13 @@ export default class Animation extends Phaser.Scene {
 			coin.body.setBounce(0);
 			bullet.body.setBounce(0);
 		});
+
+		//colision mina-enemigo
+		this.physics.add.collider(this.mines, this.enemies, (mine, enemy) => {
+			enemy.getStunted(mine.getStuntTime());
+			mine.onDeath();
+		});
+
 		// #endregion
 
 		this.cameras.main.startFollow(this.player);

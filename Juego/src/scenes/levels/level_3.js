@@ -530,6 +530,12 @@ export default class Animation extends Phaser.Scene {
 			player.knockback(200, trap);
 			player.onGotHit(trap.getDamage());
 		});
+
+		//colision mina-enemigo
+		this.physics.add.collider(this.mines, this.enemies, (mine, enemy) => {
+			enemy.getStunted(mine.getStuntTime());
+			mine.onDeath();
+		});
 		// #endregion
 
 

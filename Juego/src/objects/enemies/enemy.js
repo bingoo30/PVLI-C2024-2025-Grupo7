@@ -23,6 +23,8 @@ export default class Enemy extends Character {
         this.dead = false;
         this.followRange = DEFAULT_FOLLOW_RANGE;
 
+        this.stuntTime = 0;
+
         this.follow = false;
         this.plantPool = null;
         this.setDepth(10);
@@ -49,6 +51,9 @@ export default class Enemy extends Character {
     setPlantsPool(pool) {
         this.plantPool = pool;
     }
+    getStunted(time) {
+        this.stuntTime = time;
+    }
 
     onGotHit(damage, pool, pool2) { //pool= coins, pool2= plants
         super.onGotHit(damage);
@@ -72,13 +77,7 @@ export default class Enemy extends Character {
      */
     preUpdate(t, dt) {
         super.preUpdate(t, dt);
-        //if (!this.targetPoint) return;
-        //console.log("a");
-        // Comprobar si ha alcanzado el próximo punto
-        //const distanceToTarget = Phaser.Math.Distance.Between(this.x, this.y, this.targetPoint.x, this.targetPoint.y);
-        //if (distanceToTarget < 4) {  // Precisión al llegar al punto
-        //    this.moveToNextPoint();  // Mover al siguiente punto
-        //}
+
         const distanceToPlayer = Phaser.Math.Distance.Between(this.x, this.y, this.player.x, this.player.y);
         if (distanceToPlayer <= this.followRange) {
             this.moveTowards(this.player.x, this.player.y);
@@ -90,6 +89,12 @@ export default class Enemy extends Character {
             this.stopMovement();
             this.follow = false;
         }
+
+        if(this.stuntTime >= 0) {
+            this.stopMovement();
+            this.stuntTime = this.stuntTime - dt;
+        }
+        
     }
 
 }
