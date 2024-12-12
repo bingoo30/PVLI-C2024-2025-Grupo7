@@ -8,15 +8,17 @@ const STATUE_LASER_DURATION = 1000;
 */
 //estatua tiradora
 export default class Statue extends Obstacle {
+    // Estatua estatica que dispara balas en una direccion en concreto periodicamente
     constructor(scene, x, y, dir) {
         super(scene, x, y, "Statue");
         this.scene.physics.add.existing(this);
         this.setDirection(dir);
         this.init(STATUE_SHOOT_DAMAGE);
-        this.cooldown = STATUE_SHOOT_COOLDOWN;
-        this.laserDuration = STATUE_LASER_DURATION;
-        this.spawnLaser = false;
-        this.pool = null;
+
+        this.cooldown = STATUE_SHOOT_COOLDOWN;      // Tiempo entre disparos
+        this.laserDuration = STATUE_LASER_DURATION; // Duracion del laser de la estatua
+        this.spawnLaser = false;                    // Bool que indica si el laser esta siendo disparado
+        this.pool = null;                           // Pool de las balas (se asigna externamente)
 
         this.scene.time.addEvent({
             delay: this.cooldown, // Tiempo entre cada ciclo
@@ -26,10 +28,11 @@ export default class Statue extends Obstacle {
         });
     }
 
-    init(damage) {
+    init(damage) {  // Inicializa el daño
         super.init(damage);
     }
-    setDirection(dir) {
+
+    setDirection(dir) { // Inicializa la direcion de disparo
         switch (dir) {
             case 'a': {
                 this.direction = 3;
@@ -49,8 +52,9 @@ export default class Statue extends Obstacle {
                 break;
         }
     }
+
     toogleLaser() {
-            // Calcular la direcci髇 de la bala a partir del 醤gulo ajustado
+            // Calcular la direccion de la bala a partir del angulo ajustado
             let dx;
             let dy;
             let angle;
@@ -92,7 +96,7 @@ export default class Statue extends Obstacle {
         super.preUpdate(t,dt);
     }
 
-    setPool(pool) {
+    setPool(pool) { // Cambia la pool de las balas
         this.pool = pool;
 
     }

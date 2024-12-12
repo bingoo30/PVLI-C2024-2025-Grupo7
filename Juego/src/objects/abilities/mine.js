@@ -13,11 +13,13 @@ export default class Mine extends Phaser.GameObjects.Sprite {
      * 
     */
     constructor(scene, x, y, damage, time) {
-        super(scene, x-50, y-10, 'Mine');
-        this.scene = scene;
+        super(scene, x, y, 'Mine');
+        this.scene = scene;               
         this.scene.add.existing(this);
         this.scene.physics.add.existing(this);
-        this.stuntTime = time;
+
+        this.damage = damage;                   // Daño que hace la mina al contacto
+        this.stuntTime = time;                  // Tiempo que dura el stunt
     }
 
     getStuntTime() {    // Retorna el tiempo de stuneado

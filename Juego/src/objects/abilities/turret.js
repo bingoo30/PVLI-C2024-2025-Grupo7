@@ -24,15 +24,17 @@ export default class Turret extends Phaser.GameObjects.Sprite{
         this.target = null;
         this.scene.add.existing(this);
         this.scene.physics.add.existing(this);
-        this.pool = null;
-        this.enemies = Enemies
-        this.cooldownCont = 0;
+        this.pool = null;                                   // Pool de las balas (se añade externamente)
+        this.enemies = Enemies;                             // Puntero al grupo de enemigos
+
+        this.cooldownCont = 0;                              // Contador para el cooldown de disparo
         this.damage = DEFAULT_DAMAGE;                       // Daño de las balas de la torreta
         this.shootCooldown = DEFAULT_TURRET_SHOOTING_SPEED; // Cooldown entre disparos de la torreta
         this.shootingRange = DEFAULT_TURRET_SHOOTING_RANGE; // Rango de la torreta
-        this.bulletSpeed = DEFAULT_TURRET_BULLET_SPEED; // Velocidad de las balas de la torreta
-        this.lifetime = DEFAULT_TURRET_LIFETIME;        // Tiempo de vida de la torreta
-        this.setDepth(2);
+        this.bulletSpeed = DEFAULT_TURRET_BULLET_SPEED;     // Velocidad de las balas de la torreta
+        this.lifetime = DEFAULT_TURRET_LIFETIME;            // Tiempo de vida de la torreta
+        
+        this.setDepth(2);                                   // Orden de renderizado
     }
     setPool(pool) {
         this.pool = pool;

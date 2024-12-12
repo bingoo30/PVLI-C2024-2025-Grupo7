@@ -1,9 +1,9 @@
 import { fire } from "../abilities/shooting/fire.js";
 
-const DEFAULT_DRONE_SHOOTING_SPEED = 1500;
-const DEFAULT_DRONE_SHOOTING_RANGE = 400;
-const DEFAULT_DRONE_BULLET_SPEED = 1000;
-const DEFAULT_DAMAGE = 1;
+const DEFAULT_DRONE_SHOOTING_SPEED = 1500;  // Velocidad de disparo del dron
+const DEFAULT_DRONE_SHOOTING_RANGE = 400;   // Rango de disparo del dron
+const DEFAULT_DRONE_BULLET_SPEED = 1000;    // Velocidad de las balas del dron 
+const DEFAULT_DAMAGE = 1;                   // Daño de las balas del dron
 
 
 export default class Drone extends Phaser.GameObjects.Sprite {
@@ -24,16 +24,19 @@ export default class Drone extends Phaser.GameObjects.Sprite {
         this.scene.add.existing(this);
         this.scene.physics.add.existing(this);
         this.setScale(0.05);
-        this.target = null;
-        this.player = player;
-        this.pool = pool;
-        this.shootCooldown = DEFAULT_DRONE_SHOOTING_SPEED;
-        this.shootingRange = DEFAULT_DRONE_SHOOTING_RANGE;
-        this.damage = DEFAULT_DAMAGE;
-        this.enemies = Enemies
-        this.cooldownCont = 0;
-        this.bulletSpeed = DEFAULT_DRONE_BULLET_SPEED;
-        this.setDepth(2);
+        
+        this.target = null;                                 // Objetivo a atacar del dron
+        this.player = player;                               // Puntero al jugador
+        this.pool = pool;                                   // Pool de las balas del dron
+        this.enemies = Enemies                              // Puntero al grupo de los enemigos
+
+        this.shootCooldown = DEFAULT_DRONE_SHOOTING_SPEED;  // Velocidad de disparo del dron
+        this.shootingRange = DEFAULT_DRONE_SHOOTING_RANGE;  // Rango de disparo del dron
+        this.damage = DEFAULT_DAMAGE;                       // Daño de las balas del dron
+        this.cooldownCont = 0;                              // Contador del cooldown del dron
+        this.bulletSpeed = DEFAULT_DRONE_BULLET_SPEED;      // Velocidad de las balas del dron 
+
+        this.setDepth(2);                                   // Orden de renderizado del dron
     }
 
     preUpdate(t, dt) {

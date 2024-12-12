@@ -8,14 +8,14 @@
  */
 
 export default class DamageArea extends Phaser.GameObjects.Sprite { 
-    // Area que provoca daño para las explosiones
+    // Area circular que provoca daño para las explosiones
     constructor(scene, x, y, radius, damage, texture) {
         super(scene, x, y, texture);
         this.scene = scene;
 
         this.damage = damage; 
-        this.radius = radius;
-        this.getRealDamage = false;
+        this.radius = radius;                   // Radio del area
+        this.getRealDamage = false;             // Daño que provoca el area
         this.setDepth(1);
         scene.add.existing(this);
 
@@ -35,6 +35,7 @@ export default class DamageArea extends Phaser.GameObjects.Sprite {
         this.play(texture);
 
     }
+
     changeDamage() {
         this.getRealDamage = true
     }
@@ -49,7 +50,7 @@ export default class DamageArea extends Phaser.GameObjects.Sprite {
         this.setActive(true);
     }
 
-    getDamage() {
+    getDamage() {   // Devuelve el daño del area
         if (this.getRealDamage) {
             this.getRealDamage = false;
             return this.damage;    
@@ -57,7 +58,7 @@ export default class DamageArea extends Phaser.GameObjects.Sprite {
         else return 0;
     }
 
-    destroyArea(pool = null) {
+    destroyArea(pool = null) {  // Destructor
         if (pool != null) {
             pool.release(this);
         } else {
