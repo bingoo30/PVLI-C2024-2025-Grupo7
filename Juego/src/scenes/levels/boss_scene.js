@@ -176,7 +176,8 @@ export default class BossScene extends Phaser.Scene {
         toAdds = [];
         this.jokerOrbs = new Pool(this, MAXOrbs, 'Orbs');
         for (let i = 0; i < MAXOrbs; i++) {
-            const orb = new Orb(this, this.joker, i, i % 3, 0, SCALE, this.player);
+            const orb = new Orb(this, this.joker, i % 3, 0, this.player);
+            orb.setPool(this.jokerOrbs);
             toAdds.push(orb);
         }
         this.jokerOrbs.addMultipleEntity(toAdds);
@@ -207,8 +208,6 @@ export default class BossScene extends Phaser.Scene {
         // #endregion
 
         // #endregion
-
-
 
         // #region Collisions and Interactions
         // Player - Joker
@@ -242,10 +241,7 @@ export default class BossScene extends Phaser.Scene {
             }
         });
 
-        // Joker Orbs - pared
-        this.physics.add.collider(this.jokerOrbs.getPhaserGroup(), this.paredLayer, (bullet, wall) => {
-            bullet.destroyBullet(this.jokerOrbs);
-        });
+        
 
         // Joker Bullets - Player
         this.physics.add.collider(this.jokerBullets.getPhaserGroup(), this.player.collisionZone, (bullet, collisionZone) => {
@@ -262,9 +258,11 @@ export default class BossScene extends Phaser.Scene {
 
         // Player - Joker Orbs
         this.physics.add.overlap(this.player.collisionZone, this.jokerOrbs.getPhaserGroup(), (collisionZone, orb) => {
+            if (this.activeOrbsCount < 0) this.activeOrbsCount = 0;
+
             this.player.knockback(200, orb);
             this.player.onGotHit(orb.getDamage());
-            orb.destroyBullet(this.jokerOrbs);
+            orb.destroyBullet();
         });
 
         // #endregion
@@ -397,7 +395,7 @@ export default class BossScene extends Phaser.Scene {
 
         this.actOrbs.push(orb);
 
-        //console.log('activeOrbsCount', this.activeOrbsCount)
+        console.log('activeOrbsCount', this.activeOrbsCount)
         if (this.activeOrbsCount >= 3) {
             this.activeOrbsCount = 0;
             // Cuando haya 3 orbes empieza a moverlas

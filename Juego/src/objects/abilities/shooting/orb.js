@@ -1,21 +1,45 @@
+/**
+ * @extends Phaser.GameObjects.Sprite
+ * Clase Orb
+ * Ataque de Joker
+ */
 export default class Orb extends Phaser.GameObjects.Sprite {
-    constructor(scene, joker, index, color, damage, scale, target) {
+    /**
+     * Constructor de Orb
+     * @param {Scene} scene - escena en la que aparece
+     * @param {Joker} joker - referencia al Joker
+     * @param {number} color - color de la Orb
+     * @param {number} damage - daño de la Orb
+     * @param {Player} target - referencia al Player
+    */
+    constructor(scene, joker, color, damage, target) {
         super(scene, 0, 0, 'Orbs');
+
         this.scene = scene;
         this.joker = joker;
-        this.index = index;
-        this.target = target;
-        this.color = color;
+        this.target = target; // referencia al player
+
+        this.color = color; // guardar el indice del color
+
+        // booleanos para el funcionamento de la Orb
         this.start = false;
         this.actTime = false;
         this.follow = false;
+
+        // Pool a la cual pertenece la Orb
+        this.pool = null;
+
+        // Tiempo de persecucion al player
         this.timeToStop = 0;
+
         this.damage = damage;
+
+        // Angulo de rotacion
         this.angle = 0; 
+
         this.scene.add.existing(this);
         this.scene.physics.add.existing(this);
-
-        this.isActive = false;
+        
         this.setDepth(3);
 
         const animKey = `orb_charge_color_${color}`;
@@ -33,33 +57,31 @@ export default class Orb extends Phaser.GameObjects.Sprite {
         this.speed = s;
     }
 
+    setPool(pool) {
+        this.pool = pool;
+    }
+
     setDamage(d) {
         this.damage = d;
     }
 
+    // Metodo llamado por la funcion fire para spawnear la Orb
     move(xStart, yStart, xObj, yObj, pool) {
         this.setScale(1);
-
-        //console.log('orb creada');
-
+        console.log('orb creada');
         this.start = true; // empieza
-
-        //this.xStart = xStart;
-        //this.yStart = yStart;
-
-        //console.log('Posición inicial xStart:', this.xStart, 'yStart:', this.yStart);
-
         const animKey = `orb_charge_color_${this.color}`;
         this.play(animKey);
 
         this.once('animationcomplete', () => {
-            this.isActive = true;
+            
             this.scene.checkActiveOrbs(this);
         });
     }
 
+    // Rotar 
     rotate() {
-        const radius = 50; // Distancia del orbe al centro
+        const radius = 100; // Distancia del orbe al centro
         const radians = Phaser.Math.DegToRad(this.angle);
 
         // Calcula las coordenadas de rotación
@@ -70,9 +92,10 @@ export default class Orb extends Phaser.GameObjects.Sprite {
         this.angle += 2; 
     }
 
+    // Mover la Orb hacia donde esta el player
     startMovingToTarget() {
+        setTimeout(() => this.destroyBullet(), 10000);
         //console.log('Yendo al player: ', this.x);
-
         // direccion de disparo 
         var pointSpeed = new Phaser.Math.Vector2(this.target.x - this.x, this.target.y - this.y);
         pointSpeed.normalize();
@@ -85,14 +108,15 @@ export default class Orb extends Phaser.GameObjects.Sprite {
         return this.damage;
     }
 
-    destroyBullet(pool) {
-        this.isActive = false;
-
+    destroyBullet() {
+        // Resetar los booleanos
         this.actTime = false;
         this.start = false;
         this.follow = false;
 
-        pool.release(this);
+        // Se libera de la pool
+        this.pool.release(this);
+
         this.body.setVelocity(0, 0);
     }
 
@@ -105,10 +129,10 @@ export default class Orb extends Phaser.GameObjects.Sprite {
         } else if (this.follow) {
             if (!this.actTime) {
                 //console.log('actTime')
-                this.timeToStop = time + 10000; // va a seguir el player por 2 segundos
+                this.timeToStop = time + 15000; // va a seguir el player por 2 segundos
                 this.actTime = true;
             }
-            if (this.timeToStop > time) {
+            if (this.timeToStop > time) { // Mientras el timeToStop sea mayor que time sigue al player
                 this.startMovingToTarget();
             }
         }

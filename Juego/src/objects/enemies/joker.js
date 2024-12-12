@@ -1,45 +1,66 @@
 import { showPopup } from '../../UI/showPopUp.js';
 import Character from '../../objects/player/character.js';
 import { fire } from "../abilities/shooting/fire.js";
-
+/**
+ * @extends Character
+ * Clase Joker que hereda de Character
+ */
 export default class Joker extends Character {
+    /**
+     * Constructor de Joker
+     * @param {Scene} scene - escena en la que aparece
+     * @param {number} x - ejeX inicial
+     * @param {number} y - ejeY inical
+     * @param {Player} player - referencia del player
+     */
     constructor(scene, x, y, player){
         super(scene, x, y, 'boss');
         this.scene.add.existing(this);
+
+        // Target para el damageArea y los disparos
         this.target = player;
+
+        //Limites que puede Teletransportar el Joker
         this.minX = 1000;
-        this.minY = 550;
         this.maxX = 3400; 
+
+        this.minY = 550;
         this.maxY = 2400;
+
         scene.physics.add.existing(this);
 
+        // Pool de la DamegeArea
         this.poolArea = null;
         this.damageArea = null;
 
+        // Incremento para la velocidad de disparo
         this.shootSpeedStatus = 0;
-        this.damageStatus = 0;
+
+        // Numero de cartas que puede disparar
         this.bulletCardNumbers = 2;
 
-        this.AreaDamageRange = 200;
-        this.AreaDamage = 1; // daño area
-        this.duration = 1;
-        this.explNumber = 1;
-        this.timeP1 = 3000;
-        this.timeP2 = 3000;
-        this.timeP3 = 3000;
-        this.change = true;
+        this.AreaDamageRange = 200; // Area del DamageArea
+        this.AreaDamage = 1; // Daño del DamageArea
+        this.duration = 1; // Duracion del DamageArea
+        this.explNumber = 1; // El numero de explosiones que hara
 
+        // Tiempo que esta en cada fase
+        this.timeP1 = 3000; // 3 segundos
+        this.timeP2 = 3000; // 3 segundos
+        this.timeP3 = 3000; // 3 segundos
 
-        this.maxLife = 300; // 300
+        this.change = true; // Cambiar de fase 1 a la fase 2
+
+        this.maxLife = 300; // Vida maxima del Joker
+
         //speedFactor,shootCardSpeed, shootSpeed, life, damage, prob
         this.init(200, 300, 500, this.maxLife, 5, 0);
+
         this.isTeleporting = false;
         this.isChasing = false;
         this.spawnCards = true;
-        this.lastAttackTime = 0;
-        this.attackInterval = 2000; 
-        this.phase = 3;
-        this.attackRange = 300; 
+
+        this.phase = 1; // Fase inicial
 
         this.timer = this.scene.time.addEvent({
             delay: 3000,
@@ -48,12 +69,12 @@ export default class Joker extends Character {
             loop: true
         });
 
-
-        this.createAnimations();
     }
+
     getLife() {
         return this.life;
     }
+
     getMaxLife() {
         return this.maxLife;
     }
@@ -63,13 +84,12 @@ export default class Joker extends Character {
         setTimeout(() => this.phase1(), 3000);
     }
 
-
     phase1() {
         //console.log('Fase 1')
         this.teleport();
-        if (Math.random() < 0.5 && this.phase == 1) {
-            this.spawnOrbs();
-        } else if(this.phase == 2){
+        if (Math.random() < 0.5 || this.phase == 2) {
+            console.log('Orb fase')
+
             this.spawnOrbs();
         }
         setTimeout(() => this.phase2(), this.timeP1);
@@ -77,9 +97,7 @@ export default class Joker extends Character {
 
     phase2() {
         //console.log('Fase 2')
-
         this.isChasing = true;
-  
         setTimeout(() => {
             this.createDamageArea();
             this.isChasing = false;
@@ -105,11 +123,6 @@ export default class Joker extends Character {
         //console.log('Fase 4')
 
         setTimeout(() => this.phase1(), 4000); // Regresa a phase1 después de 4 segundos
-    }
-
-
-    chasing() {
-        this.isChasing = true;
     }
 
     onGotHit(damage) {
@@ -175,18 +188,7 @@ export default class Joker extends Character {
             sfx.play();
         }
     }
-
-    createAnimations() {
-
-        //this.scene.anims.create({
-        //    key: 'joker_idle',
-        //    frames: this.scene.anims.generateFrameNumbers('boss', { start: 0, end: 3 }),
-        //    frameRate: 8,
-        //    repeat: -1,
-        //});
-
-        //this.play('joker_idle');
-    }
+ 
 
     chasePlayer() {
 
@@ -195,17 +197,9 @@ export default class Joker extends Character {
 
         const distance = Math.sqrt(dx * dx + dy * dy);
 
-        if (distance > this.attackRange) {
-
-            const velocityX = (dx / distance) * this.speedFactor;
-            const velocityY = (dy / distance) * this.speedFactor;
-
-            this.body.setVelocity(velocityX, velocityY);
-
-        } else {
-            // Si esta lo suficientemente cerca, detén el movimiento
-            this.body.setVelocity(0, 0);
-        }
+        const velocityX = (dx / distance) * this.speedFactor;
+        const velocityY = (dy / distance) * this.speedFactor;
+        this.body.setVelocity(velocityX, velocityY);
     }
 
     teleport() {
@@ -240,16 +234,18 @@ export default class Joker extends Character {
 
     }
 
-    shootCards() {
-        this.isChasing = false;
+    chasing() {
+        this.isChasing = true;
+    }
 
-        // Dispara 2 cartas hacia el jugador
+    // Dispara 2 o mas cartas hacia el jugador
+    shootCards() {
         //console.log('disparo joker');
         for (let i = 0; i < 2; i++) {
             //shooter, target, damage, speed, sprite, scale, pool, num, critChance = 0, critMultiplier = 2
             fire(this,
                 this.target,
-                this.damage + this.damageStatus * this.damage * 0.2,
+                this.damage + this.damage * 0.2,
                 this.shootCardSpeed + this.shootSpeedStatus * this.shootSpeed * 0.2,
                 'Card',
                 0.5,
@@ -260,13 +256,14 @@ export default class Joker extends Character {
 
     }
 
-    spawnOrbs() {// fase 3
+    // Creacion de Orbs
+    spawnOrbs() { // fase 3
         this.isChasing = false;
         
         // shooter, target, damage, speed, sprite, scale, pool, num, critChance = 0, critMultiplier = 2
         fire(this,
             this.target,
-            this.damage + this.damageStatus * this.damage * 0.2,
+            this.damage + this.damage * 0.2,
             this.shootSpeed + this.shootSpeedStatus * this.shootSpeed * 0.2,
             'Orbs',
             4,

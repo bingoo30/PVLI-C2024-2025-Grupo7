@@ -36,7 +36,7 @@ export default class Player extends Character {
         this.bulletScale = 4;
 
         //configurar los atributos correspondientes despues de llamar al constructor del character
-        this.init(400, 1250, 20, 2, 0.05);
+        this.init(400, 1250, 2000, 2, 0.05);
 
         // Agregamos fisicas
         scene.physics.add.existing(this);
