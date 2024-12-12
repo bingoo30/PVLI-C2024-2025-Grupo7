@@ -32,9 +32,9 @@ export function fire(shooter, target, damage, speed, sprite, scale, pool, num, c
         bullet.move(shooter.x, shooter.y, shooter.x + dx * 1000, shooter.y + dy * 1000);
 
         // Mensaje de ataque cr韙ico (opcional)
-        if (isCritical) {
-            console.log(`Ataque criico! Daño: ${finalDamage}`);
-        }
-        else console.log(`Daño: ${finalDamage}`);
+        //if (isCritical) {
+        //    console.log(`Ataque criico! Daño: ${finalDamage}`);
+        //}
+        //else console.log(`Daño: ${finalDamage}`);
     }
 }

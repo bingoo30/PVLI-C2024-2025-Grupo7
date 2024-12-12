@@ -208,9 +208,10 @@ export default class BossScene extends Phaser.Scene {
 
         // #endregion
 
-        
+
 
         // #region Collisions and Interactions
+        // Player - Joker
         this.physics.add.overlap(this.player.collisionZone, this.joker, this.onPlayerHit, null, this);
 
         //this.paredLayer.setCollisionByProperty({ collides: true });
@@ -218,18 +219,22 @@ export default class BossScene extends Phaser.Scene {
         //this.physics.add.collider(this.joker, this.paredLayer);
         //this.physics.add.collider(this.player, this.paredLayer);
 
+        // Player Bullets - pared
         this.physics.add.collider(this.playerBullets.getPhaserGroup(), this.paredLayer, (bullet, wall) => {
             bullet.destroyBullet(this.playerBullets);
         });
 
+        // Joker Bullets - pared
         this.physics.add.collider(this.jokerBullets.getPhaserGroup(), this.paredLayer, (bullet, wall) => {
             bullet.destroyBullet(this.jokerBullets);
         });
 
+        // Player - Joker DamageArea
         this.physics.add.collider(this.player, this.area.getPhaserGroup(), (player, area) => {
             player.onGotHit(area.getDamage());
         });
 
+        // Joker - Player
         this.physics.add.overlap(this.player.collisionZone, this.joker, (collisionZone, enemy) => {
             if (enemy.visible) {
                 this.player.knockback(500, enemy);
@@ -237,21 +242,25 @@ export default class BossScene extends Phaser.Scene {
             }
         });
 
+        // Joker Orbs - pared
         this.physics.add.collider(this.jokerOrbs.getPhaserGroup(), this.paredLayer, (bullet, wall) => {
             bullet.destroyBullet(this.jokerOrbs);
         });
 
+        // Joker Bullets - Player
         this.physics.add.collider(this.jokerBullets.getPhaserGroup(), this.player.collisionZone, (bullet, collisionZone) => {
             this.player.knockback(200, bullet);
             this.player.onGotHit(bullet.getDamage());
             bullet.destroyBullet(this.jokerBullets);
         });
 
+        // Player Bullets - Joker
         this.physics.add.overlap(this.playerBullets.getPhaserGroup(), this.joker, (playerBullet, joker) => {
             joker.onGotHit(playerBullet.getDamage());
             playerBullet.destroyBullet(this.playerBullets);
         });
 
+        // Player - Joker Orbs
         this.physics.add.overlap(this.player.collisionZone, this.jokerOrbs.getPhaserGroup(), (collisionZone, orb) => {
             this.player.knockback(200, orb);
             this.player.onGotHit(orb.getDamage());
@@ -276,17 +285,17 @@ export default class BossScene extends Phaser.Scene {
 		// #endregion
 
         // #region UI
-        this.expBar = new ExpBar(this, 20, 30);
-        this.healthBar = new HealthBar(this, 20, 10, this.player);
+        this.expBar = new ExpBar(this, 0, 30);
+        this.healthBar = new HealthBar(this, 0, 10, this.player);
 
-        this.bossHealthBar = new HealthBar(this, 250, 10, this.joker, 'jokerHealthBarBack', 'jokerHealthBar');
+        this.bossHealthBar = new HealthBar(this, 300, 10, this.joker, 'jokerHealthBarBack', 'jokerHealthBar');
         this.bossHealthBar.container.setScale(1.2);
-
         // #endregion
 
         // #region Camera Setup
         this.cameras.main.startFollow(this.player);
-        this.cameras.main.setZoom(0.75);
+        this.cameras.main.setZoom(0.85);
+       
         // #endregion
 
         // #region sonido

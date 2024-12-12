@@ -26,7 +26,7 @@ export function showPopup(scene, message, x = undefined, y = undefined) {
     }).setOrigin(0.5);
 
     // Crear un contenedor para agrupar los elementos
-    const popupContainer = scene.add.container(x, y, [popupBackground, popupText]).setScrollFactor(0);
+    const popupContainer = scene.add.container(x, y, [popupBackground, popupText]).setScrollFactor(0).setDepth(5);
 
     // Animación de aparición
     popupContainer.setAlpha(0); // Invisible al inicio
