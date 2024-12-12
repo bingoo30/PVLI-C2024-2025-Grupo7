@@ -131,7 +131,7 @@ export default class Animation extends Phaser.Scene {
 		const playerY = playerPos.y * SCALE;
 
 		const change = objectLayer.objects.find(obj => obj.name == 'changeLevel');
-		this.DoorLevel2 = new ChangeLevelDoor(this, change.x, change.y, change.width, change.height);
+		this.DoorLevel2 = new ChangeLevelDoor(this, change.x, change.y, 'El comienzo de todo',change.width, change.height);
 
 
 		// #endregion

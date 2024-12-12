@@ -1,4 +1,6 @@
+
 import { showPopup } from "../../UI/showPopUp.js";
+import { unlock } from "../../scenes/achievements/unlock.js";
 /**
      * @extends InteractableObjects
      Lo que recibe
@@ -12,10 +14,11 @@ import { showPopup } from "../../UI/showPopUp.js";
      */
 import InteractableObjects from './interactable_objects.js';
 export default class ChangeLevelDoor extends InteractableObjects {
-    constructor(scene, x, y, sizeW = 32, sizeH = 32, scale = 4) {
+    constructor(scene, x, y, achievement, sizeW = 32, sizeH = 32, scale = 4) {
         super(scene, x * scale, y * scale,'changeDoor', 200, 50);
         
         this.isWaitingInput = true;
+        this.achievement = achievement;
         this.setDisplaySize(sizeW * scale, sizeH * scale);
         this.scene.add.existing(this);
 
@@ -27,7 +30,17 @@ export default class ChangeLevelDoor extends InteractableObjects {
 
     onInteract() {
         if (this.canInteract) {
-            if (this.scene.player.Inventory.key) this.scene.changeToNextLevel();
+            if (this.scene.player.Inventory.key) {
+                unlock(this.scene, this.achievement);
+                showPopup(this.scene, `Logro <<${this.achievement}>> desloqueado!`, this.scene.scale.width - 175, this.scene.scale.height - 100);
+                // Agregar un retraso de 250ms antes de cambiar de escena
+                this.scene.time.addEvent({
+                    delay: 500, 
+                    callback: () => {
+                        this.scene.changeToNextLevel();
+                    }
+                });
+            }
             else {
                 showPopup(this.scene, "Necesitas una llave para abrir esta puerta.", this.scene.sys.game.canvas.width / 2, 100);
             }

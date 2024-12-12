@@ -13,6 +13,8 @@ import PickableObjects from '../../objects/interactable_objects/pickable_objects
 import ExplosiveBullet from '../../objects/abilities/shooting/explosive_bullet.js';
 import Drone from '../../objects/abilities/drone.js';
 import Turret from '../../objects/abilities/turret.js';
+import { unlock } from '../achievements/unlock.js';
+import { showPopup } from '../../UI/showPopUp.js';
 
 
 const SCALE = 1;
@@ -50,6 +52,9 @@ export default class BossScene extends Phaser.Scene {
     create(data) {
         this.sound.stopAll(); // Detiene todos los sonidos en reproducción
         this.tries = data.tries;
+
+        unlock(this, 'Amigo o enemigo?');
+        showPopup(this, `Logro <<Amigo o enemigo?>> desloqueado!`, this.scale.width - 175, this.scale.height - 100);
 
         // #region Map Setup
 

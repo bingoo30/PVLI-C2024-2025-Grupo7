@@ -80,7 +80,7 @@ export default class Animation extends Phaser.Scene {
 		const objectLayer = this.map.getObjectLayer('position');
 
 		const change = objectLayer.objects.find(obj => obj.name == 'changeLevel');
-		this.DoorBoss = new ChangeLevelDoor(this, change.x, change.y, change.width, change.height);
+		this.DoorBoss = new ChangeLevelDoor(this, change.x, change.y, 'Vamos por el buen camino',change.width, change.height);
 
 		this.doorGroup = this.add.group();
 		this.doorLayer = this.map.getObjectLayer('Door');

@@ -18,12 +18,6 @@
     "locked": true
   },
   {
-    "title": "Desafio superado! ...seguro?",
-    "unlockedSprite": "nivel4_icon",
-    "info": "Salir del cuarto piso",
-    "locked": true
-  },
-  {
     "title": "Amigo o enemigo?",
     "unlockedSprite": "joker_icon",
     "info": "Encontrar a Joker",
@@ -31,12 +25,12 @@
   },
   {
     "title": "La Batalla Comienza",
-    "unlockedSprite": "50enemigos_icon",
-    "info": "Matar a 50 enemigos",
-    "locked": true
+    "unlockedSprite": "50enemigos_icon", 
+    "info": "Matar a 50 enemigos", 
+    "locked": true 
   },
   {
-    "title": "Asaltante Feroz",
+    "title": "Asaltante Feroz", 
     "unlockedSprite": "100enemigos_icon",
     "info": "Matar a 100 enemigos",
     "locked": true
