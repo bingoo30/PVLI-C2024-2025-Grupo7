@@ -22,8 +22,14 @@ export default class Joker extends Character {
         this.AreaDamageRange = 100;
         this.AreaDamage = 0.1;
         this.duration = 1;
+        this.explNumber = 1;
+        this.timeP1 = 3000;
+        this.timeP2 = 3000;
+        this.timeP3 = 3000;
+        this.change = true;
 
-        this.maxLife = 200;
+
+        this.maxLife = 10; // 200
         //speedFactor,shootCardSpeed, shootSpeed, life, damage, prob
         this.init(100, 300, 500, this.maxLife, 3, 0);
         this.chaseSpeed = 100;
@@ -61,7 +67,9 @@ export default class Joker extends Character {
     phase1() {
         console.log('Fase 1')
         this.teleport();
-        if (Math.random() < 0.5) {
+        if (Math.random() < 0.5 && this.phase == 1) {
+            this.spawnOrbs();
+        } else {
             this.spawnOrbs();
         }
         setTimeout(() => this.phase2(), 3000);
@@ -83,7 +91,13 @@ export default class Joker extends Character {
 
         this.teleport();
         this.shootCards();
-        setTimeout(() => this.phase4(), 3000);
+        setTimeout(() => {
+            if (this.phase == 1) {
+                this.phase4()
+            } else {
+                this.phase1()
+            }
+        }, 3000);
     }
 
     phase4() {
@@ -149,14 +163,15 @@ export default class Joker extends Character {
         // Normalizar la dirección
         const directionX = dx / distance;
         const directionY = dy / distance;
+        for (let i = 1; i <= this.explNumber; i++) {
+            const areaX = this.x + directionX * 300 * i; // 300 px
+            const areaY = this.y + directionY * 300 * i;
 
-        const areaX = this.x + directionX * 300; // 300 px
-        const areaY = this.y + directionY * 300;
-
-        this.damageArea = this.poolArea.spawn(areaX, areaY);
-        this.damageArea.reset(this.AreaDamageRange, this.AreaDamage, this.duration);
-        const sfx = this.scene.sound.add('enemyAreaAudio');
-        sfx.play();
+            this.damageArea = this.poolArea.spawn(areaX, areaY);
+            this.damageArea.reset(this.AreaDamageRange, this.AreaDamage, this.duration);
+            const sfx = this.scene.sound.add('enemyAreaAudio');
+            sfx.play();
+        }
     }
 
     createAnimations() {
@@ -235,7 +250,6 @@ export default class Joker extends Character {
             }
            
         }
-        this.phase = 3;
 
     }
 
@@ -257,7 +271,6 @@ export default class Joker extends Character {
                 this.prob + this.prob * this.probStatus);
         }
 
-        this.phase = 2;
     }
 
     spawnOrbs() {// fase 3
@@ -274,12 +287,29 @@ export default class Joker extends Character {
             1,
             this.prob + this.prob * this.probStatus);
 
-        this.phase = 1;
+     
 
     }
 
     preUpdate(t,dt){
         super.preUpdate(t, dt);
         //console.log('Joker pos X: ', this.x, ' Y: ', this.y)
+
+        if (this.life < this.maxLife / 2 && this.spawnCards) {
+            this.spawnCards = false;
+            this.scene.startCardChallenge();
+        }
+
+        if (this.life < this.maxLife * 0.25 && this.change) {
+            console.log('Fase Joker 2');
+            this.change = false;
+            this.phase = 2;
+            this.bulletCardNumbers = 3;
+            this.shootSpeedStatus = 25;
+            this.explNumber = 3;
+            this.timeP1 = 2000;
+            this.timeP2 = 4000;
+            this.timeP3 = 2000;
+        }
     }
 }
