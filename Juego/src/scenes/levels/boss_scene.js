@@ -39,7 +39,7 @@ export default class BossScene extends Phaser.Scene {
         this.load.image('jokerHealthBar', '/PVLI-C2024-2025-Grupo7/Juego/assets/GUI/health_bar_joker.png');
 
         
-        this.load.tilemapTiledJSON('mapaBoss', '/PVLI-C2024-2025-Grupo7/Juego/assets/map/map_boss/4.json');
+        this.load.tilemapTiledJSON('mapaBoss', '/PVLI-C2024-2025-Grupo7/Juego/assets/map/map_boss/boss_map.json');
         this.load.image('tileset4', '/PVLI-C2024-2025-Grupo7/Juego/assets/map/map_boss/tileSet_map_boss.png');
         this.load.image('tileset5', '/PVLI-C2024-2025-Grupo7/Juego/assets/map/map_boss/tileSet_map_boss-export.png');
         this.load.image('tileset6', '/PVLI-C2024-2025-Grupo7/Juego/assets/map/map_boss/3.png');
