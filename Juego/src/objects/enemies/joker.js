@@ -54,7 +54,7 @@ export default class Joker extends Character {
         this.maxLife = 700; // Vida maxima del Joker
 
         //speedFactor,shootCardSpeed, shootSpeed, life, damage, prob
-        this.init(200, 300, 500, this.maxLife, 5, 0);
+        this.init(200, 300, 500, this.maxLife, 10, 0);
 
         this.isTeleporting = false;
         this.isChasing = false;
@@ -174,7 +174,7 @@ export default class Joker extends Character {
         if (animationContainer && animationFrame) {
             animationContainer.style.display = 'block';
             let currentFrame = 0;
-            const frames = ['/PVLI-C2024-2025-Grupo7/Juego/assets/map/map_boss/map_boss_1.png', '/PVLI-C2024-2025-Grupo7/Juego/assets/map/map_boss/map_boss_2.png'];
+            const frames = ['/PVLI-C2024-2025-Grupo7/assets/map/map_boss/map_boss_1.png', '/PVLI-C2024-2025-Grupo7/Juego/assets/map/map_boss/map_boss_2.png'];
 
             const interval = setInterval(() => {
                 animationFrame.src = frames[currentFrame];
