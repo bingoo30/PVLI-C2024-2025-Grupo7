@@ -21,13 +21,6 @@ export default class AbilityTree extends Phaser.Scene {
 			this.load.image(data.unlockedSprite, `/PVLI-C2024-2025-Grupo7/Juego/assets/tree/${data.unlockedSprite}.png`);
 		});
 		
-
-		this.load.on('complete', function (f) {
-			this.scene.time.addEvent({
-				delay: 200,
-				callback: () => { console.log("cargado"); }
-			})
-		});
 	}
 	create(data) {
 
