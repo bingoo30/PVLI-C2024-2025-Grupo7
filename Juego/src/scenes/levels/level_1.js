@@ -386,7 +386,7 @@ export default class Animation extends Phaser.Scene {
 
 
 		this.physics.add.overlap(this.enemies, this.areaFE.getPhaserGroup(), (enemy, area) => {
-			enemy.onGotHit(area.getDamage(), this.coins);
+			enemy.onGotHit(area.getDamage(), this.coins, this.plants);
 		});
 
 		//colision fichas-player
