@@ -17,14 +17,19 @@ Al llegar allí, se olvida de su pasado y lo único que sabe es que, para recupe
 *Loading*
 
 
-![image](https://github.com/user-attachments/assets/dde17858-2933-49a0-b948-e9c4088c6830)
+![image](https://github.com/user-attachments/assets/59db6ff4-3755-4d19-8f88-3a4a0f334f8e)
 *Pantalla de inicio*
 
 
-![image](https://github.com/user-attachments/assets/f0466ae0-ad26-4812-bb29-57b1b27146c0)
+![image](https://github.com/user-attachments/assets/ffbfdba8-b05f-46ae-a9f4-2a0eb72fe861)
+*Pantalla de dialogo*
+
+
+![image](https://github.com/user-attachments/assets/f15da5a4-54f4-4ccb-bc4d-09cdb74412e6)
 *Juego*
 
-![image](https://github.com/user-attachments/assets/8532efb9-7a79-4dbd-8a50-fc6ddb138622)
+
+![image](https://github.com/user-attachments/assets/b56fb41e-4511-4c38-bf5d-3de7def072ce)
 *GameOver*
 
 ## Web: 
