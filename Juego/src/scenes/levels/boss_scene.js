@@ -216,12 +216,12 @@ export default class BossScene extends Phaser.Scene {
         });
         // Joker - Player DamageArea
         this.physics.add.overlap(this.joker, this.playerExplosiveBullets.getPhaserGroup(), (joker, area) => {
-            joker.onGotHit(area.getDamage(), this.coins, this.plants);
+            joker.onGotHit(area.getDamage());
         });
 
         // Joker - player explosive bullets
         this.physics.add.overlap(this.joker, this.playerExplosiveBullets.getPhaserGroup(), (joker, bullet) => {
-            joker.onGotHit(bullet.getDamage(), this.coins, this.plants);
+            joker.onGotHit(bullet.getDamage());
             bullet.destroyBullet(this.playerExplosiveBullets);
         });
 
@@ -232,7 +232,6 @@ export default class BossScene extends Phaser.Scene {
                 this.player.onGotHit(enemy.getDamage());
             }
         });
-
         
 
         // Joker Bullets - Player

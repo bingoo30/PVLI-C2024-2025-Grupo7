@@ -460,11 +460,8 @@ export default class Player extends Character {
             this.drone.setPosition(this.x + 50, this.y - 10);
         }
         if (this.numPad3.isDown) {
-            console.log('3')
             this.statusPoint++;
         } if (this.numPad4.isDown) {
-            console.log('4')
-
             this.abilityPoint++;
         }
        //Input de mouse
