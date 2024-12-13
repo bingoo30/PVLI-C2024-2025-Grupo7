@@ -201,7 +201,10 @@ export default class BossScene extends Phaser.Scene {
         this.physics.add.collider(this.playerBullets.getPhaserGroup(), this.paredLayer, (bullet, wall) => {
             bullet.destroyBullet(this.playerBullets);
         });
-
+         // Player explosive Bullets - pared
+        this.physics.add.collider(this.playerExplosiveBullets.getPhaserGroup(), this.paredLayer, (bullet, wall) => {
+            bullet.destroyBullet(this.playerExplosiveBullets);
+        });
         // Joker Bullets - pared
         this.physics.add.collider(this.jokerBullets.getPhaserGroup(), this.paredLayer, (bullet, wall) => {
             bullet.destroyBullet(this.jokerBullets);
@@ -210,6 +213,15 @@ export default class BossScene extends Phaser.Scene {
         // Player - Joker DamageArea
         this.physics.add.collider(this.player, this.area.getPhaserGroup(), (player, area) => {
             player.onGotHit(area.getDamage());
+        });
+        // Joker - Player DamageArea
+        this.physics.add.overlap(this.joker, this.playerExplosiveBullets.getPhaserGroup(), (joker, area) => {
+            joker.onGotHit(area.getDamage(), this.coins, this.plants);
+        });
+        // Joker - player explosive bullets
+        this.physics.add.overlap(this.joker, this.playerExplosiveBullets.getPhaserGroup(), (joker, bullet) => {
+            joker.onGotHit(area.getDamage(), this.coins, this.plants);
+            bullet.destroyBullet(this.playerExplosiveBullets);
         });
 
         // Joker - Player
@@ -363,6 +375,20 @@ export default class BossScene extends Phaser.Scene {
             const ca = this.cards.find(c => c.body === cardBody); 
             if (ca) {
                 bullet.destroyBullet(this.playerBullets); // Destruye la bala
+                ca.onGotHit(1);
+            }
+        });
+        this.physics.add.overlap(this.playerExplosiveBullets.getPhaserGroup(), this.cards.map(p => p.body), (bullet, cardBody) => {
+            const ca = this.cards.find(c => c.body === cardBody);
+            if (ca) {
+                bullet.destroyBullet(this.playerBullets); // Destruye la bala
+                ca.onGotHit(1);
+            }
+        });
+        this.physics.add.overlap(this.areaFE.getPhaserGroup(), this.cards.map(p => p.body), (area, cardBody) => {
+            const ca = this.cards.find(c => c.body === cardBody);
+            if (ca) {
+                area.destroyArea(this.areaFE); // Destruye la bala
                 ca.onGotHit(1);
             }
         });
