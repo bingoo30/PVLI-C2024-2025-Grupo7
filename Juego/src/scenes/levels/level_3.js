@@ -330,7 +330,6 @@ export default class Animation extends Phaser.Scene {
 		estakaLayer.objects.forEach(obj => {
 			if (obj.name === 'Estaka') { // Filtra por nombre
 				const estaka = new Estaka(this, obj.x * SCALE, obj.y * SCALE, this.player, 2, this.areaEs, 12, 10, 'Estaka');
-				estaka.setPool(this.area);
 				estaka.setScale(SCALE);
 				this.arrayEstakas.push(estaka);
 			}
