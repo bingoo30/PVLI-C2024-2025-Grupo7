@@ -1,6 +1,6 @@
 import { fire } from "../abilities/shooting/fire.js";
 
-const DEFAULT_TURRET_SHOOTING_SPEED = 2000;
+const DEFAULT_TURRET_SHOOTING_SPEED = 500;
 const DEFAULT_TURRET_SHOOTING_RANGE = 500;
 const DEFAULT_TURRET_BULLET_SPEED = 300;
 const DEFAULT_DAMAGE = 1;
@@ -48,7 +48,7 @@ export default class Turret extends Phaser.GameObjects.Sprite{
             const sfx = this.scene.sound.add('playerAttackAudio');
             sfx.setVolume(0.35); // Cambiar el volumen dinámicamente
             sfx.play();
-            console.log('pium');
+            //console.log('pium');
         }
         this.cooldownCont = this.cooldownCont - dt;
 
