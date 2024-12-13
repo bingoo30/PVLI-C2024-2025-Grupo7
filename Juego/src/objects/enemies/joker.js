@@ -51,7 +51,7 @@ export default class Joker extends Character {
 
         this.change = true; // Cambiar de fase 1 a la fase 2
 
-        this.maxLife = 300; // Vida maxima del Joker
+        this.maxLife = 700; // Vida maxima del Joker
 
         //speedFactor,shootCardSpeed, shootSpeed, life, damage, prob
         this.init(200, 300, 500, this.maxLife, 5, 0);
