@@ -11,23 +11,16 @@ export default class AbilityTree extends Phaser.Scene {
 		super({ key: 'AbilityTree' });
 	}
 	preload() {
-		this.load.image('titleHeader', 'assets/tree/titleHeader.png');
-		this.load.image('LockedAbility', 'assets/tree/locked.png');
-		this.load.image('statusBall', 'assets/tree/statusBall.png');
-		this.load.image('statusBackground', 'assets/tree/statusBackground.png');
+		this.load.image('titleHeader', '/PVLI-C2024-2025-Grupo7/Juego/assets/tree/titleHeader.png');
+		this.load.image('LockedAbility', '/PVLI-C2024-2025-Grupo7/Juego/assets/tree/locked.png');
+		this.load.image('statusBall', '/PVLI-C2024-2025-Grupo7/Juego/assets/tree/statusBall.png');
+		this.load.image('statusBackground', '/PVLI-C2024-2025-Grupo7/Juego/assets/tree/statusBackground.png');
 		const treeDatas = this.cache.json.get('treeData');
 		// Precargar los sprites de las habilidades
 		treeDatas.forEach(data => {
-			this.load.image(data.unlockedSprite, `assets/tree/${data.unlockedSprite}.png`);
+			this.load.image(data.unlockedSprite, `/PVLI-C2024-2025-Grupo7/Juego/assets/tree/${data.unlockedSprite}.png`);
 		});
 		
-
-		this.load.on('complete', function (f) {
-			this.scene.time.addEvent({
-				delay: 200,
-				callback: () => { console.log("cargado"); }
-			})
-		});
 	}
 	create(data) {
 

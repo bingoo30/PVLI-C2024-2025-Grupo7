@@ -40,15 +40,15 @@ export default class Animation extends Phaser.Scene {
 	}
 	preload() {
 		// dialogos level2
-		this.load.tilemapTiledJSON('mapa3', 'assets/map/map_3/mapa_3.json');
+		this.load.tilemapTiledJSON('mapa3', '/PVLI-C2024-2025-Grupo7/Juego/assets/map/map_3/mapa_3.json');
 
-		this.load.image('tileset3', 'assets/map/map_3/map_tiles3.png');
+		this.load.image('tileset3', '/PVLI-C2024-2025-Grupo7/Juego/assets/map/map_3/map_tiles3.png');
 
-		this.load.json('dialogues_Piu', 'assets/dialogues/dialogues_piu.json');
+		this.load.json('dialogues_Piu', '/PVLI-C2024-2025-Grupo7/Juego/assets/dialogues/dialogues_piu.json');
 
-		this.load.json('level3Memory1', 'assets/dialogues/level3_memory1.json');
-		this.load.json('level3Memory2', 'assets/dialogues/level3_memory2.json');
-		this.load.json('level3Memory3', 'assets/dialogues/level3_memory3.json');
+		this.load.json('level3Memory1', '/PVLI-C2024-2025-Grupo7/Juego/assets/dialogues/level3_memory1.json');
+		this.load.json('level3Memory2', '/PVLI-C2024-2025-Grupo7/Juego/assets/dialogues/level3_memory2.json');
+		this.load.json('level3Memory3', '/PVLI-C2024-2025-Grupo7/Juego/assets/dialogues/level3_memory3.json');
 	}
 
 	/**  
@@ -186,7 +186,7 @@ export default class Animation extends Phaser.Scene {
 		toAdds = [];
 		this.area = new Pool(this, MAX, 'Area');
 		for (let i = 0; i < MAX; i++) {
-			let toAdd = new DamageArea(this, 0, 0, 100, 0, '08_expl_anim');
+			let toAdd = new DamageArea(this, 0, 0, 100, 0, '34_expl_anim');
 			toAdds.push(toAdd);
 		}
 		this.area.addMultipleEntity(toAdds);
@@ -330,7 +330,6 @@ export default class Animation extends Phaser.Scene {
 		estakaLayer.objects.forEach(obj => {
 			if (obj.name === 'Estaka') { // Filtra por nombre
 				const estaka = new Estaka(this, obj.x * SCALE, obj.y * SCALE, this.player, 2, this.areaEs, 12, 10, 'Estaka');
-				estaka.setPool(this.area);
 				estaka.setScale(SCALE);
 				this.arrayEstakas.push(estaka);
 			}
@@ -460,7 +459,7 @@ export default class Animation extends Phaser.Scene {
 			playerBullet.destroyBullet(this.playerBullets);
 		});
 		this.physics.add.collider(this.playerExplosiveBullets.getPhaserGroup(), this.enemies, (playerBullet, enemy) => {
-			enemy.onGotHit(playerBullet.getDamage(), this.coins);
+			enemy.onGotHit(playerBullet.getDamage(), this.coins, this.plants);
 			// mandaria a la pool de las balas de player otra vez
 			playerBullet.destroyBullet(this.playerBullets);
 		});
@@ -479,7 +478,7 @@ export default class Animation extends Phaser.Scene {
 
 
 		this.physics.add.overlap(this.enemies, this.areaFE.getPhaserGroup(), (enemy, area) => {
-			enemy.onGotHit(area.getDamage());
+			enemy.onGotHit(area.getDamage(), this.coins, this.plants );
 		});
 		//colision fichas-player
 		this.physics.add.collider(this.player.collisionZone, this.coins.getPhaserGroup(), (collisionZone, coin) => {

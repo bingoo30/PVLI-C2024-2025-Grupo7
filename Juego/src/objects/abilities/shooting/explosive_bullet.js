@@ -1,3 +1,4 @@
+import OurPool from "../../our_pool.js";
 import Bullet from "./bullet.js";
 
 export default class ExplosiveBullet extends Bullet {   
@@ -6,9 +7,9 @@ export default class ExplosiveBullet extends Bullet {
      * Constructor de Bullet,las balas
      * @param {Scene} scene - escena en la que aparece
      * @param {number} damage - daño que hace la bala
-     * @param {number} startX - ejeX inicial
-     * @param {number} startY - ejeY inical
-     * @param {number} scale - escala
+     * @param {number} Speed - velocidad
+     * @param {number} areaRadius - radio de la area
+     * @param {OurPool} pool - pool de la area
      */
     constructor(scene, damage, speed, bala, areaRadius, pool) {
         super(scene, damage, speed, bala);

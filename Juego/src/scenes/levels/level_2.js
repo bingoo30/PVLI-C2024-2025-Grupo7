@@ -37,16 +37,16 @@ export default class Animation extends Phaser.Scene {
 	}
 	preload() {
 		// dialogos level2
-		this.load.tilemapTiledJSON('mapa2', 'assets/map/map_2/mapa_2.json');
+		this.load.tilemapTiledJSON('mapa2', '/PVLI-C2024-2025-Grupo7/Juego/assets/map/map_2/mapa_2.json');
 
-		this.load.image('tileset2', 'assets/map/map_2/map_tiles2.png');
+		this.load.image('tileset2', '/PVLI-C2024-2025-Grupo7/Juego/assets/map/map_2/map_tiles2.png');
 
-		this.load.json('dialogues_Weiyoung', 'assets/dialogues/dialogues_weiyoung.json');
-		this.load.image('Weiyoung', 'assets/character/weiyoung.png');
+		this.load.json('dialogues_Weiyoung', '/PVLI-C2024-2025-Grupo7/Juego/assets/dialogues/dialogues_weiyoung.json');
+		this.load.image('Weiyoung', '/PVLI-C2024-2025-Grupo7/Juego/assets/character/weiyoung.png');
 
-		this.load.json('level2Memory1', 'assets/dialogues/level2_memory1.json');
-		this.load.json('level2Memory2', 'assets/dialogues/level2_memory2.json');
-		this.load.json('level2Memory3', 'assets/dialogues/level2_memory3.json');
+		this.load.json('level2Memory1', '/PVLI-C2024-2025-Grupo7/Juego/assets/dialogues/level2_memory1.json');
+		this.load.json('level2Memory2', '/PVLI-C2024-2025-Grupo7/Juego/assets/dialogues/level2_memory2.json');
+		this.load.json('level2Memory3', '/PVLI-C2024-2025-Grupo7/Juego/assets/dialogues/level2_memory3.json');
 	}
 
 	/**  
@@ -398,9 +398,9 @@ export default class Animation extends Phaser.Scene {
 			playerBullet.destroyBullet(this.playerBullets);
 		});
 		this.physics.add.collider(this.playerExplosiveBullets.getPhaserGroup(), this.enemies, (playerBullet, enemy) => {
-			enemy.onGotHit(playerBullet.getDamage(), this.coins);
+			enemy.onGotHit(playerBullet.getDamage(), this.coins, this.plants);
 			// mandaria a la pool de las balas de player otra vez
-			playerBullet.destroyBullet(this.playerBullets);
+			playerBullet.destroyBullet(this.playerExplosiveBullets);
 		});
 
 		//colision bala enemigos-player
@@ -417,7 +417,7 @@ export default class Animation extends Phaser.Scene {
 
 
 		this.physics.add.overlap(this.enemies, this.areaFE.getPhaserGroup(), (enemy, area) => {
-			enemy.onGotHit(area.getDamage());
+			enemy.onGotHit(area.getDamage(),this.coins, this.plants);
 		});
 		//colision fichas-player
 		this.physics.add.collider(this.player.collisionZone, this.coins.getPhaserGroup(), (collisionZone, coin) => {

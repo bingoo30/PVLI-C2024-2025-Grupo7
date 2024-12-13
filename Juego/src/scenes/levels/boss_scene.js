@@ -28,21 +28,21 @@ export default class BossScene extends Phaser.Scene {
     */
     preload() {
         // Load assets (e.g., boss sprite, animations, and sounds)
-        this.load.image('boss', 'assets/enemies/joker/joker.png');
-        this.load.image('projectile', 'assets/bullet/bullet_1.png');
+        this.load.image('boss', '/PVLI-C2024-2025-Grupo7/Juego/assets/enemies/joker/joker.png');
+        this.load.image('projectile', '/PVLI-C2024-2025-Grupo7/Juego/assets/bullet/bullet_1.png');
 
-        this.load.image('mapFondo', 'assets/map/map_boss/map_boss_fondo_2.png');
-        this.load.image('tapa1', 'assets/map/map_boss/map_boss_1.png');
-        this.load.image('tapa2', 'assets/map/map_boss/map_boss_2.png');
+        this.load.image('mapFondo', '/PVLI-C2024-2025-Grupo7/Juego/assets/map/map_boss/map_boss_fondo_2.png');
+        this.load.image('tapa1', '/PVLI-C2024-2025-Grupo7/Juego/assets/map/map_boss/map_boss_1.png');
+        this.load.image('tapa2', '/PVLI-C2024-2025-Grupo7/Juego/assets/map/map_boss/map_boss_2.png');
 
-        this.load.image('jokerHealthBarBack', 'assets/GUI/healthbar_joker.png');
-        this.load.image('jokerHealthBar', 'assets/GUI/health_bar_joker.png');
+        this.load.image('jokerHealthBarBack', '/PVLI-C2024-2025-Grupo7/Juego/assets/GUI/healthbar_joker.png');
+        this.load.image('jokerHealthBar', '/PVLI-C2024-2025-Grupo7/Juego/assets/GUI/health_bar_joker.png');
 
         
-        this.load.tilemapTiledJSON('mapaBoss', 'assets/map/map_boss/4.json');
-        this.load.image('tileset4', 'assets/map/map_boss/tileSet_map_boss.png');
-        this.load.image('tileset5', 'assets/map/map_boss/tileSet_map_boss-export.png');
-        this.load.image('tileset6', 'assets/map/map_boss/3.png');
+        this.load.tilemapTiledJSON('mapaBoss', '/PVLI-C2024-2025-Grupo7/Juego/assets/map/map_boss/boss_map.json');
+        this.load.image('tileset4', '/PVLI-C2024-2025-Grupo7/Juego/assets/map/map_boss/tileSet_map_boss.png');
+        this.load.image('tileset5', '/PVLI-C2024-2025-Grupo7/Juego/assets/map/map_boss/tileSet_map_boss-export.png');
+        this.load.image('tileset6', '/PVLI-C2024-2025-Grupo7/Juego/assets/map/map_boss/3.png');
 
     }
 
@@ -61,29 +61,6 @@ export default class BossScene extends Phaser.Scene {
         const bg = this.add.image(0, 0, 'mapFondo');
         bg.setOrigin(0, 0); 
         bg.setDepth(-1);
-
-        //animacion 2d
-
-        const animations2d = [
-            { key: 'player2dIdleDown', start: 0, end: 0, frameRate: 5, repeat: 0 },
-            { key: 'player2dIdleRight', start: 8, end: 8, frameRate: 5, repeat: 0 },
-            { key: 'player2dIdleUp', start: 12, end: 12, frameRate: 5, repeat: 0 },
-            { key: 'player2dIdleLeft', start: 5, end: 5, frameRate: 5, repeat: 0 },
-
-            { key: 'player2dWalkDown', start: 0, end: 3, frameRate: 8, repeat: -1 },
-            { key: 'player2dWalkRight', start: 8, end: 11, frameRate: 8, repeat: -1 },
-            { key: 'player2dWalkUp', start: 12, end: 15, frameRate: 8, repeat: -1 },
-            { key: 'player2dWalkLeft', start: 4, end: 7, frameRate: 8, repeat: -1 }
-        ];
-
-        animations2d.forEach(({ key, start, end, frameRate, repeat }) => {
-            this.anims.create({
-                key,
-                frames: this.anims.generateFrameNumbers('player2dSheet', { start, end }),
-                frameRate,
-                repeat
-            });
-        });
 
         this.mapBoss = this.make.tilemap({ key: 'mapaBoss' });
         if (!this.mapBoss) console.error("La mapa no se ha creado correctamente.");
@@ -224,7 +201,10 @@ export default class BossScene extends Phaser.Scene {
         this.physics.add.collider(this.playerBullets.getPhaserGroup(), this.paredLayer, (bullet, wall) => {
             bullet.destroyBullet(this.playerBullets);
         });
-
+         // Player explosive Bullets - pared
+        this.physics.add.collider(this.playerExplosiveBullets.getPhaserGroup(), this.paredLayer, (bullet, wall) => {
+            bullet.destroyBullet(this.playerExplosiveBullets);
+        });
         // Joker Bullets - pared
         this.physics.add.collider(this.jokerBullets.getPhaserGroup(), this.paredLayer, (bullet, wall) => {
             bullet.destroyBullet(this.jokerBullets);
@@ -234,6 +214,16 @@ export default class BossScene extends Phaser.Scene {
         this.physics.add.collider(this.player, this.area.getPhaserGroup(), (player, area) => {
             player.onGotHit(area.getDamage());
         });
+        // Joker - Player DamageArea
+        this.physics.add.overlap(this.joker, this.areaFE.getPhaserGroup(), (joker, area) => {
+            joker.onGotHit(area.getDamage());
+        });
+
+        // Joker - player explosive bullets
+        this.physics.add.overlap(this.joker, this.playerExplosiveBullets.getPhaserGroup(), (joker, bullet) => {
+            joker.onGotHit(bullet.getDamage());
+            bullet.destroyBullet(this.playerExplosiveBullets);
+        });
 
         // Joker - Player
         this.physics.add.overlap(this.player.collisionZone, this.joker, (collisionZone, enemy) => {
@@ -242,7 +232,6 @@ export default class BossScene extends Phaser.Scene {
                 this.player.onGotHit(enemy.getDamage());
             }
         });
-
         
 
         // Joker Bullets - Player
@@ -386,6 +375,20 @@ export default class BossScene extends Phaser.Scene {
             const ca = this.cards.find(c => c.body === cardBody); 
             if (ca) {
                 bullet.destroyBullet(this.playerBullets); // Destruye la bala
+                ca.onGotHit(1);
+            }
+        });
+        this.physics.add.overlap(this.playerExplosiveBullets.getPhaserGroup(), this.cards.map(p => p.body), (bullet, cardBody) => {
+            const ca = this.cards.find(c => c.body === cardBody);
+            if (ca) {
+                bullet.destroyBullet(this.playerBullets); // Destruye la bala
+                ca.onGotHit(1);
+            }
+        });
+        this.physics.add.overlap(this.areaFE.getPhaserGroup(), this.cards.map(p => p.body), (area, cardBody) => {
+            const ca = this.cards.find(c => c.body === cardBody);
+            if (ca) {
+                area.destroyArea(this.areaFE); // Destruye la bala
                 ca.onGotHit(1);
             }
         });

@@ -16,7 +16,7 @@ export default class Title extends Phaser.Scene {
 
 		// Precargar dinámicamente los sprites de logros
 		achievementDatas.forEach(data => {
-			this.load.image(data.unlockedSprite, `assets/achievs/${data.unlockedSprite}.png`);
+			this.load.image(data.unlockedSprite, `/PVLI-C2024-2025-Grupo7/Juego/assets/achievs/${data.unlockedSprite}.png`);
 		});
 	}
 
