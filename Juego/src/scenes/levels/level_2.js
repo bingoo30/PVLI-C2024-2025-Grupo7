@@ -398,7 +398,7 @@ export default class Animation extends Phaser.Scene {
 			playerBullet.destroyBullet(this.playerBullets);
 		});
 		this.physics.add.collider(this.playerExplosiveBullets.getPhaserGroup(), this.enemies, (playerBullet, enemy) => {
-			enemy.onGotHit(playerBullet.getDamage(), this.coins);
+			enemy.onGotHit(playerBullet.getDamage(), this.coins, this.plants);
 			// mandaria a la pool de las balas de player otra vez
 			playerBullet.destroyBullet(this.playerBullets);
 		});
