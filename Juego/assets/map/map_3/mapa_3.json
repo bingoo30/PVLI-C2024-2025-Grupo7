@@ -1588,13 +1588,13 @@
          "name":"rectangle",
          "objects":[
                 {
-                 "height":192,
+                 "height":160,
                  "id":35,
                  "name":"",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":288,
+                 "width":280,
                  "x":624,
                  "y":0
                 }, 
@@ -1621,7 +1621,7 @@
                  "y":472
                 }, 
                 {
-                 "height":368,
+                 "height":336,
                  "id":42,
                  "name":"",
                  "rotation":0,
@@ -1629,10 +1629,10 @@
                  "visible":true,
                  "width":408,
                  "x":1480,
-                 "y":1440
+                 "y":1472
                 }, 
                 {
-                 "height":320,
+                 "height":256,
                  "id":43,
                  "name":"",
                  "rotation":0,
@@ -1640,7 +1640,7 @@
                  "visible":true,
                  "width":360,
                  "x":168,
-                 "y":1312
+                 "y":1344
                 }, 
                 {
                  "height":320,
@@ -1654,7 +1654,7 @@
                  "y":224
                 }, 
                 {
-                 "height":288,
+                 "height":256,
                  "id":45,
                  "name":"",
                  "rotation":0,
