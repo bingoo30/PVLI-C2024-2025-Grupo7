@@ -174,7 +174,7 @@ export default class Joker extends Character {
         if (animationContainer && animationFrame) {
             animationContainer.style.display = 'block';
             let currentFrame = 0;
-            const frames = ['assets/map/map_boss/map_boss_1.png', 'assets/map/map_boss/map_boss_2.png'];
+            const frames = ['/PVLI-C2024-2025-Grupo7/Juego/assets/map/map_boss/map_boss_1.png', '/PVLI-C2024-2025-Grupo7/Juego/assets/map/map_boss/map_boss_2.png'];
 
             const interval = setInterval(() => {
                 animationFrame.src = frames[currentFrame];
