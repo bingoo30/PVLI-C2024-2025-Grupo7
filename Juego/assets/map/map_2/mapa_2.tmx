@@ -171,7 +171,7 @@
   <object id="7" name="weiyoungPosition" x="581.123" y="718.667">
    <point/>
   </object>
-  <object id="10" name="changeLevel" x="2744" y="816" width="16" height="80"/>
+  <object id="10" name="changeLevel" x="2744" y="832" width="8" height="64"/>
  </objectgroup>
  <objectgroup id="12" name="Door">
   <object id="95" name="verticalDoor" x="256" y="104" width="8" height="56"/>
@@ -510,7 +510,7 @@
  </objectgroup>
  <objectgroup id="13" name="rectangle">
   <object id="109" x="544" y="-10.7018" width="608" height="586.702"/>
-  <object id="112" x="1413.82" y="717.72" width="254.456" height="267.789"/>
+  <object id="112" x="1413.82" y="736" width="254.456" height="256"/>
   <object id="116" x="2672" y="776" width="400.211" height="221.263"/>
   <object id="120" x="480" y="615.299" width="212.877" height="189.123"/>
   <object id="200" x="1800" y="81.0878" width="536" height="334.912"/>

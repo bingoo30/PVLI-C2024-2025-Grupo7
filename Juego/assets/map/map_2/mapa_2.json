@@ -134,15 +134,15 @@
                  "y":718.667
                 }, 
                 {
-                 "height":80,
+                 "height":64,
                  "id":10,
                  "name":"changeLevel",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":16,
+                 "width":8,
                  "x":2744,
-                 "y":816
+                 "y":832
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -2093,7 +2093,7 @@
                  "y":-10.7018
                 }, 
                 {
-                 "height":267.789,
+                 "height":256,
                  "id":112,
                  "name":"",
                  "rotation":0,
@@ -2101,7 +2101,7 @@
                  "visible":true,
                  "width":254.456,
                  "x":1413.82,
-                 "y":717.72
+                 "y":736
                 }, 
                 {
                  "height":221.263,
