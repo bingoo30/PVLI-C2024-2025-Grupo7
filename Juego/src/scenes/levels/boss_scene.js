@@ -218,9 +218,10 @@ export default class BossScene extends Phaser.Scene {
         this.physics.add.overlap(this.joker, this.playerExplosiveBullets.getPhaserGroup(), (joker, area) => {
             joker.onGotHit(area.getDamage(), this.coins, this.plants);
         });
+
         // Joker - player explosive bullets
         this.physics.add.overlap(this.joker, this.playerExplosiveBullets.getPhaserGroup(), (joker, bullet) => {
-            joker.onGotHit(area.getDamage(), this.coins, this.plants);
+            joker.onGotHit(bullet.getDamage(), this.coins, this.plants);
             bullet.destroyBullet(this.playerExplosiveBullets);
         });
 
