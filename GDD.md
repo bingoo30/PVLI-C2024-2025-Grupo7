@@ -153,8 +153,7 @@ Si el jugador muere en el camino, volverá al checkpoint de cada piso, es decir,
 ## 3. HUD
 
 ### 3.1. Mockup del HUD
-
-![image](https://github.com/user-attachments/assets/55ed58f3-b8e6-4bdf-8d9d-3c21d3b4f4c0)
+![image](https://github.com/user-attachments/assets/7e38b5b6-474b-423f-81dd-6844a75d8549)
 
 ### 3.2. Explicación de los elementos del HUD y su funcionamiento.
 **Vida:** Barra que muestra el porcentaje de salud que le queda al jugador.
