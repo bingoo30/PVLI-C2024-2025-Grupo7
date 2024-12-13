@@ -40,7 +40,7 @@ export default class Joker extends Character {
         this.bulletCardNumbers = 2;
 
         this.AreaDamageRange = 200; // Area del DamageArea
-        this.AreaDamage = 1; // Daño del DamageArea
+        this.AreaDamage = 3; // Daño del DamageArea
         this.duration = 1; // Duracion del DamageArea
         this.explNumber = 1; // El numero de explosiones que hara
 
