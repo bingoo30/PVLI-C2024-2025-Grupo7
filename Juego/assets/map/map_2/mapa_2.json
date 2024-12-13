@@ -2082,7 +2082,7 @@
          "name":"rectangle",
          "objects":[
                 {
-                 "height":586.7018,
+                 "height":586.702,
                  "id":109,
                  "name":"",
                  "rotation":0,
@@ -2124,28 +2124,6 @@
                  "width":212.877,
                  "x":480,
                  "y":615.299
-                }, 
-                {
-                 "height":235.6493,
-                 "id":175,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":232,
-                 "x":1568,
-                 "y":20.3507
-                }, 
-                {
-                 "height":488.983,
-                 "id":188,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":160,
-                 "x":1632,
-                 "y":256
                 }, 
                 {
                  "height":334.912,
