@@ -62,29 +62,6 @@ export default class BossScene extends Phaser.Scene {
         bg.setOrigin(0, 0); 
         bg.setDepth(-1);
 
-        //animacion 2d
-
-        const animations2d = [
-            { key: 'player2dIdleDown', start: 0, end: 0, frameRate: 5, repeat: 0 },
-            { key: 'player2dIdleRight', start: 8, end: 8, frameRate: 5, repeat: 0 },
-            { key: 'player2dIdleUp', start: 12, end: 12, frameRate: 5, repeat: 0 },
-            { key: 'player2dIdleLeft', start: 5, end: 5, frameRate: 5, repeat: 0 },
-
-            { key: 'player2dWalkDown', start: 0, end: 3, frameRate: 8, repeat: -1 },
-            { key: 'player2dWalkRight', start: 8, end: 11, frameRate: 8, repeat: -1 },
-            { key: 'player2dWalkUp', start: 12, end: 15, frameRate: 8, repeat: -1 },
-            { key: 'player2dWalkLeft', start: 4, end: 7, frameRate: 8, repeat: -1 }
-        ];
-
-        animations2d.forEach(({ key, start, end, frameRate, repeat }) => {
-            this.anims.create({
-                key,
-                frames: this.anims.generateFrameNumbers('player2dSheet', { start, end }),
-                frameRate,
-                repeat
-            });
-        });
-
         this.mapBoss = this.make.tilemap({ key: 'mapaBoss' });
         if (!this.mapBoss) console.error("La mapa no se ha creado correctamente.");
 
