@@ -9,4 +9,5 @@
 ![image](https://github.com/user-attachments/assets/8976b73a-0000-49ee-af8a-a528101721dc)
 ![image](https://github.com/user-attachments/assets/e7c2b3fa-7db1-42ad-baa9-3230b6e041ff)
 ![image](https://github.com/user-attachments/assets/65840041-b7e5-4fc5-bc7f-b63a61bbf711)
-**Enlace Arquitectura completa:** https://miro.com/app/board/uXjVL5zTGyM=/?share_link_id=714332612878
+**Enlace Arquitectura completa:**
+https://miro.com/welcomeonboard/T1hMaFl2d3lTR0kwNDNUaTBYV0FCZFgvVGt0VVFDTVpDdktSN0liSGVhS2puaUZmeENXNHd1S0RSeVJka2YwZHY2UlRzOWhmRUNoZjI5WVJsOTQxTVhRYWpnbWdydjhLVTc3M3pzR2FmNzFQNmxwVVJwaGtUa0lOMjdmRnAwY3ghZQ==?share_link_id=479312669632
