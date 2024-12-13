@@ -40,15 +40,15 @@ export default class Animation extends Phaser.Scene {
 	}
 	preload() {
 		// dialogos level2
-		this.load.tilemapTiledJSON('mapa3', '/PVLI-C2024-2025-Grupo7/Juego/assets/map/map_3/mapa_3.json');
+		this.load.tilemapTiledJSON('mapa3', '/assets/map/map_3/mapa_3.json');
 
-		this.load.image('tileset3', '/PVLI-C2024-2025-Grupo7/Juego/assets/map/map_3/map_tiles3.png');
+		this.load.image('tileset3', '/assets/map/map_3/map_tiles3.png');
 
-		this.load.json('dialogues_Piu', '/PVLI-C2024-2025-Grupo7/Juego/assets/dialogues/dialogues_piu.json');
+		this.load.json('dialogues_Piu', 'assets/dialogues/dialogues_piu.json');
 
-		this.load.json('level3Memory1', '/PVLI-C2024-2025-Grupo7/Juego/assets/dialogues/level3_memory1.json');
-		this.load.json('level3Memory2', '/PVLI-C2024-2025-Grupo7/Juego/assets/dialogues/level3_memory2.json');
-		this.load.json('level3Memory3', '/PVLI-C2024-2025-Grupo7/Juego/assets/dialogues/level3_memory3.json');
+		this.load.json('level3Memory1', 'assets/dialogues/level3_memory1.json');
+		this.load.json('level3Memory2', 'assets/dialogues/level3_memory2.json');
+		this.load.json('level3Memory3', 'assets/dialogues/level3_memory3.json');
 	}
 
 	/**  

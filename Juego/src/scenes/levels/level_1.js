@@ -39,19 +39,19 @@ export default class Animation extends Phaser.Scene {
 	}
 	preload() {
 
-		this.load.tilemapTiledJSON('mapa1', '/PVLI-C2024-2025-Grupo7/Juego/assets/map/map_1/mapa_1.json');
-		this.load.image('tileset', '/PVLI-C2024-2025-Grupo7/Juego/assets/map/map_1/map_tiles.png');
-		this.load.json('dialogues', '/PVLI-C2024-2025-Grupo7/Juego/assets/dialogues/dialogues_intro.json');
-		this.load.json('dialogues_Flush', '/PVLI-C2024-2025-Grupo7/Juego/assets/dialogues/dialogues_flush.json');
+		this.load.tilemapTiledJSON('mapa1', 'assets/map/map_1/mapa_1.json');
+		this.load.image('tileset', 'assets/map/map_1/map_tiles.png');
+		this.load.json('dialogues', 'assets/dialogues/dialogues_intro.json');
+		this.load.json('dialogues_Flush', 'assets/dialogues/dialogues_flush.json');
 
-		this.load.json('level1Memory1', '/PVLI-C2024-2025-Grupo7/Juego/assets/dialogues/level1_memory1.json');
-		this.load.json('level1Memory2', '/PVLI-C2024-2025-Grupo7/Juego/assets/dialogues/level1_memory2.json');
-		this.load.json('level1Memory3', '/PVLI-C2024-2025-Grupo7/Juego/assets/dialogues/level1_memory3.json');
+		this.load.json('level1Memory1', 'assets/dialogues/level1_memory1.json');
+		this.load.json('level1Memory2', 'assets/dialogues/level1_memory2.json');
+		this.load.json('level1Memory3', 'assets/dialogues/level1_memory3.json');
 
-		this.load.image('Flush', '/PVLI-C2024-2025-Grupo7/Juego/assets/character/flush.png');
+		this.load.image('Flush', 'assets/character/flush.png');
 
 		//para los dialogos del inicio
-		this.load.image('bossGif', '/PVLI-C2024-2025-Grupo7/Juego/assets/enemies/joker/joker_cut_scene.gif');
+		this.load.image('bossGif', 'assets/enemies/joker/joker_cut_scene.gif');
 
 	}
 

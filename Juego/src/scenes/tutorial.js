@@ -14,13 +14,13 @@ export default class TutorialScene extends Phaser.Scene {
 	 * Cargamos todos los assets que vamos a necesitar
 	 */
 	preload() {
-		this.load.image('moveTutorial', '/PVLI-C2024-2025-Grupo7/Juego/assets/tutorial/move.jpg');
-		this.load.image('attackTutorial', '/PVLI-C2024-2025-Grupo7/Juego/assets/tutorial/attack.jpg');
-		this.load.image('interactTutorial', '/PVLI-C2024-2025-Grupo7/Juego/assets/tutorial/interact.jpg');
-		this.load.image('pauseTutorial', '/PVLI-C2024-2025-Grupo7/Juego/assets/tutorial/pause.jpg');
-		this.load.image('levelUpTutorial', '/PVLI-C2024-2025-Grupo7/Juego/assets/tutorial/levelUp.jpg');
-		this.load.image('tutorialSkipButton', '/PVLI-C2024-2025-Grupo7/Juego/assets/tutorial/skip.png');
-		this.load.image('tutorialNextButton', '/PVLI-C2024-2025-Grupo7/Juego/assets/tutorial/next.png');
+		this.load.image('moveTutorial', 'assets/tutorial/move.jpg');
+		this.load.image('attackTutorial', 'assets/tutorial/attack.jpg');
+		this.load.image('interactTutorial', 'assets/tutorial/interact.jpg');
+		this.load.image('pauseTutorial', 'assets/tutorial/pause.jpg');
+		this.load.image('levelUpTutorial', 'assets/tutorial/levelUp.jpg');
+		this.load.image('tutorialSkipButton', 'assets/tutorial/skip.png');
+		this.load.image('tutorialNextButton', 'assets/tutorial/next.png');
 	}
 	/**
 	* Creación de los elementos de la escena principal de juego
