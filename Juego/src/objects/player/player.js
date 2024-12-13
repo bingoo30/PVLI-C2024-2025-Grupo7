@@ -188,6 +188,7 @@ export default class Player extends Character {
 
         // #region inventorios
         this.Inventory = player.Inventory;
+        this.Inventory.key = false;
         // #endregion
 
         // #region puntos de control status
