@@ -97,6 +97,8 @@ export default class Player extends Character {
 
         //inputs para la presentacion
         this.xKey = this.scene.input.keyboard.addKey('X'); //saltar el nivel
+        this.numPad4 = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.NUMPAD_FOUR); //dar xp
+        this.numPad3 = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.NUMPAD_THREE); //dar hp
         this.numPad1 = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.NUMPAD_ONE); //teleportarte en donde la llave
         this.numPad2 = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.NUMPAD_TWO); //teleportarte en donde la puerta
 
@@ -456,6 +458,12 @@ export default class Player extends Character {
         if (this.numPad2.isDown) {
             this.scene.setPlayerToDoor();
             this.drone.setPosition(this.x + 50, this.y - 10);
+        }
+        if (this.numPad3.isDown) {
+            this.abilityPoint++;
+        }
+        if (this.numPad4.isDown) {
+            this.statusPoint++;
         }
 
        //Input de mouse
