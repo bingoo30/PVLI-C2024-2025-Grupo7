@@ -105,7 +105,7 @@ export default class Joker extends Character {
         //console.log('Fase 1');
         this.teleport();
         if (Math.random() < 0.5 || this.phase == 2) {
-            console.log('Orb fase');
+            //console.log('Orb fase');
             this.spawnOrbs();
         }
 
@@ -227,7 +227,7 @@ export default class Joker extends Character {
         }
     }
  
-
+    // Caminar hacia el jugador
     chasePlayer() {
 
         const dx = this.target.x - this.x;
@@ -240,6 +240,7 @@ export default class Joker extends Character {
         this.body.setVelocity(velocityX, velocityY);
     }
 
+    // Teleporta a una posicion aleatoria
     teleport() {
         this.isChasing = false;
 

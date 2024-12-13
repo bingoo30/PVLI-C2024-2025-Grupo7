@@ -23,7 +23,7 @@ export default class Victory extends Phaser.Scene {
         const animationContainer = document.getElementById('fullscreen-animation');
         const animationFrame = document.getElementById('animation-frame');
         let currentFrame = 0;
-        const frames = ['/PVLI-C2024-2025-Grupo7/assets/map/map_boss/map_boss_1.png', '/PVLI-C2024-2025-Grupo7/assets/map/map_boss/map_boss_2.png'];
+        const frames = ['/PVLI-C2024-2025-Grupo7/Juego/assets/map/map_boss/map_boss_1.png', '/PVLI-C2024-2025-Grupo7/Juego/assets/map/map_boss/map_boss_2.png'];
 
         this.time.delayedCall(2500, () => {
             animationContainer.style.display = 'block';
