@@ -186,7 +186,7 @@ export default class Animation extends Phaser.Scene {
 		toAdds = [];
 		this.area = new Pool(this, MAX, 'Area');
 		for (let i = 0; i < MAX; i++) {
-			let toAdd = new DamageArea(this, 0, 0, 100, 0, '08_expl_anim');
+			let toAdd = new DamageArea(this, 0, 0, 100, 0, '34_expl_anim');
 			toAdds.push(toAdd);
 		}
 		this.area.addMultipleEntity(toAdds);
