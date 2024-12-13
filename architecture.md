@@ -9,4 +9,4 @@
 ![image](https://github.com/user-attachments/assets/8976b73a-0000-49ee-af8a-a528101721dc)
 ![image](https://github.com/user-attachments/assets/e7c2b3fa-7db1-42ad-baa9-3230b6e041ff)
 ![image](https://github.com/user-attachments/assets/65840041-b7e5-4fc5-bc7f-b63a61bbf711)
-**Enlace Arquitectura completa:** https://miro.com/app/board/uXjVL5zTGyM=/?share_link_id=470505282010
+**Enlace Arquitectura completa:** https://miro.com/app/board/uXjVL5zTGyM=/?share_link_id=714332612878
