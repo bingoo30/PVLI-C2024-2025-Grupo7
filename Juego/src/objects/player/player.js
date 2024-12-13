@@ -99,7 +99,8 @@ export default class Player extends Character {
         this.xKey = this.scene.input.keyboard.addKey('X'); //saltar el nivel
         this.numPad1 = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.NUMPAD_ONE); //teleportarte en donde la llave
         this.numPad2 = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.NUMPAD_TWO); //teleportarte en donde la puerta
-
+        this.numPad4 = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.NUMPAD_FOUR); //dar xp
+        this.numPad3 = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.NUMPAD_THREE); //dar hp
         // Seteamos mouse
         this.mouse = this.scene.input.activePointer;
 
@@ -458,7 +459,11 @@ export default class Player extends Character {
             this.scene.setPlayerToDoor();
             this.drone.setPosition(this.x + 50, this.y - 10);
         }
-
+        if (this.numPad3.isDown) {
+            this.statusPoint++;
+        } if (this.numPad4.isDown) {
+            this.abilityPoint++;
+        }
        //Input de mouse
         if (this.mouse.leftButtonDown()) {
             // Todo esto se debería mover al Shooter
