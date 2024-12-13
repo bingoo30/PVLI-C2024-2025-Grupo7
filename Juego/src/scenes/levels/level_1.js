@@ -42,7 +42,7 @@ export default class Animation extends Phaser.Scene {
 		this.load.tilemapTiledJSON('mapa1', '/PVLI-C2024-2025-Grupo7/Juego/assets/map/map_1/mapa_1.json');
 		this.load.image('tileset', '/PVLI-C2024-2025-Grupo7/Juego/assets/map/map_1/map_tiles.png');
 		this.load.json('dialogues', '/PVLI-C2024-2025-Grupo7/Juego/assets/dialogues/dialogues_intro.json');
-		this.load.json('dialogues_Flush', 'assets/dialogues/dialogues_flush.json');
+		this.load.json('dialogues_Flush', '/PVLI-C2024-2025-Grupo7/Juego/assets/dialogues/dialogues_flush.json');
 
 		this.load.json('level1Memory1', '/PVLI-C2024-2025-Grupo7/Juego/assets/dialogues/level1_memory1.json');
 		this.load.json('level1Memory2', '/PVLI-C2024-2025-Grupo7/Juego/assets/dialogues/level1_memory2.json');
