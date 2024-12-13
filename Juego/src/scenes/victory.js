@@ -4,8 +4,8 @@ export default class Victory extends Phaser.Scene {
 	 * @extends Phaser.Scene
 	 */
 	preload() {
-		this.load.image('victoryImage', 'assets/GUI/victory.png');
-		this.load.json('VictoryDialog', 'assets/dialogues/dialogues_victory.json');
+        this.load.image('victoryImage', '/PVLI-C2024-2025-Grupo7/Juego/assets/GUI/victory.png');
+        this.load.json('VictoryDialog', '/PVLI-C2024-2025-Grupo7/Juego/assets/dialogues/dialogues_victory.json');
 	}
 	constructor() {
 		super({ key: 'victory' });

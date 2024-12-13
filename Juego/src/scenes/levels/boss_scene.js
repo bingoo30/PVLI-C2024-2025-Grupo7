@@ -28,21 +28,21 @@ export default class BossScene extends Phaser.Scene {
     */
     preload() {
         // Load assets (e.g., boss sprite, animations, and sounds)
-        this.load.image('boss', 'assets/enemies/joker/joker.png');
-        this.load.image('projectile', 'assets/bullet/bullet_1.png');
+        this.load.image('boss', '/PVLI-C2024-2025-Grupo7/Juego/assets/enemies/joker/joker.png');
+        this.load.image('projectile', '/PVLI-C2024-2025-Grupo7/Juego/assets/bullet/bullet_1.png');
 
-        this.load.image('mapFondo', 'assets/map/map_boss/map_boss_fondo_2.png');
-        this.load.image('tapa1', 'assets/map/map_boss/map_boss_1.png');
-        this.load.image('tapa2', 'assets/map/map_boss/map_boss_2.png');
+        this.load.image('mapFondo', '/PVLI-C2024-2025-Grupo7/Juego/assets/map/map_boss/map_boss_fondo_2.png');
+        this.load.image('tapa1', '/PVLI-C2024-2025-Grupo7/Juego/assets/map/map_boss/map_boss_1.png');
+        this.load.image('tapa2', '/PVLI-C2024-2025-Grupo7/Juego/assets/map/map_boss/map_boss_2.png');
 
-        this.load.image('jokerHealthBarBack', 'assets/GUI/healthbar_joker.png');
-        this.load.image('jokerHealthBar', 'assets/GUI/health_bar_joker.png');
+        this.load.image('jokerHealthBarBack', '/PVLI-C2024-2025-Grupo7/Juego/assets/GUI/healthbar_joker.png');
+        this.load.image('jokerHealthBar', '/PVLI-C2024-2025-Grupo7/Juego/assets/GUI/health_bar_joker.png');
 
         
-        this.load.tilemapTiledJSON('mapaBoss', 'assets/map/map_boss/4.json');
-        this.load.image('tileset4', 'assets/map/map_boss/tileSet_map_boss.png');
-        this.load.image('tileset5', 'assets/map/map_boss/tileSet_map_boss-export.png');
-        this.load.image('tileset6', 'assets/map/map_boss/3.png');
+        this.load.tilemapTiledJSON('mapaBoss', '/PVLI-C2024-2025-Grupo7/Juego/assets/map/map_boss/4.json');
+        this.load.image('tileset4', '/PVLI-C2024-2025-Grupo7/Juego/assets/map/map_boss/tileSet_map_boss.png');
+        this.load.image('tileset5', '/PVLI-C2024-2025-Grupo7/Juego/assets/map/map_boss/tileSet_map_boss-export.png');
+        this.load.image('tileset6', '/PVLI-C2024-2025-Grupo7/Juego/assets/map/map_boss/3.png');
 
     }
 
