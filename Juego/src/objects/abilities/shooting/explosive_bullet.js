@@ -24,7 +24,7 @@ export default class ExplosiveBullet extends Bullet {
         this.areaDamage = d/2;
     }
 
-    destroyBullet(pool) {   // Se destrulle provocando una area de daño que actua como explosion
+    destroyBullet(pool) {   // Se destruye provocando una area de daño que actua como explosion
         let damageArea = this.pool.spawn(this.x, this.y);
         damageArea.reset(this.areaRadius, this.areaDamage, this.duration);
         const sfx = this.scene.sound.add('enemyAreaAudio');

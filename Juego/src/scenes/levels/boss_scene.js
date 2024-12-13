@@ -102,7 +102,7 @@ export default class BossScene extends Phaser.Scene {
         const MAX = 300;
 
         // #region Player Bullets
-        let toAdds = [];
+        let toAdds = [];;
 
         this.playerBullets = new Pool(this, MAX, 'Bullet');
         for (let i = 0; i < MAX; i++) {
@@ -114,6 +114,7 @@ export default class BossScene extends Phaser.Scene {
         // #endregion
 
         //pool balas explosivas (francotirador explosivo)
+        toAdds = [];
         this.areaFE = new Pool(this, MAX, 'Area');
         for (let i = 0; i < MAX; i++) {
             let toAdd = new DamageArea(this, 0, 0, 100, 0, '30_expl_anim');
@@ -232,7 +233,6 @@ export default class BossScene extends Phaser.Scene {
                 this.player.onGotHit(enemy.getDamage());
             }
         });
-        
 
         // Joker Bullets - Player
         this.physics.add.collider(this.jokerBullets.getPhaserGroup(), this.player.collisionZone, (bullet, collisionZone) => {
