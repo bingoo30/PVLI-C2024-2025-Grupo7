@@ -400,6 +400,24 @@
                  "width":0,
                  "x":2840,
                  "y":176
+                }, 
+                {
+                 "height":0,
+                 "id":354,
+                 "name":"memory",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"dialog",
+                         "type":"string",
+                         "value":"level2Memory1"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":1568,
+                 "y":912
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -2143,7 +2161,7 @@
          "y":0
         }],
  "nextlayerid":14,
- "nextobjectid":354,
+ "nextobjectid":355,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.0",
