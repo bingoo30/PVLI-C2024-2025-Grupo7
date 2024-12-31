@@ -59,6 +59,7 @@ export default class Joker extends Character {
         this.isTeleporting = false;
         this.isChasing = false;
         this.spawnCards = true;
+        this.playImg = true;
 
         this.phase = 1; // Fase inicial
 
@@ -163,6 +164,10 @@ export default class Joker extends Character {
         });
     }
 
+    changeplayImg() {
+        this.playImg = true;
+    }
+
     onGotHit(damage) {
         super.onGotHit(damage);
         //console.log(`Joker golpeado. Vida restante: ${this.life}`);
@@ -171,7 +176,8 @@ export default class Joker extends Character {
         const animationContainer = document.getElementById('fullscreen-animation');
         const animationFrame = document.getElementById('animation-frame');
 
-        if (animationContainer && animationFrame) {
+        if (animationContainer && animationFrame && this.playImg) {
+            this.playImg = false;
             animationContainer.style.display = 'block';
             let currentFrame = 0;
             const frames = ['/PVLI-C2024-2025-Grupo7/Juego/assets/map/map_boss/map_boss_1.png', '/PVLI-C2024-2025-Grupo7/Juego/assets/map/map_boss/map_boss_2.png'];
@@ -185,6 +191,13 @@ export default class Joker extends Character {
                 clearInterval(interval);
                 animationContainer.style.display = 'none';
             }, 50); 
+
+            // Para que no se repita la imagen
+            this.scene.time.addEvent({
+                delay: 1000,
+                callback: () => this.changeplayImg(),
+                callbackScope: this
+            });
         }
 
         if (this.life <= 0) {
