@@ -60,17 +60,17 @@ export default class AbilityTree extends Phaser.Scene {
 
 
 		//puntos de habilidad
-		this.abilityPointText = this.add.text(this.sys.game.canvas.width * 0.60, this.sys.game.canvas.height * 0.1, `AbilityPoints: ${this.player.abilityPoint}`, {
+		this.abilityPointText = this.add.text(this.sys.game.canvas.width * 0.75, this.sys.game.canvas.height * 0.05, `AbilityPoints: ${this.player.abilityPoint}`, {
 			fontFamily: 'PixelArt',
-			color: '#4A9969',
-			fontSize: 18
+			color: '#E0FFFF',
+			fontSize: 20
 
 		}).setOrigin(0.5, 0.5);
 
-		this.statusPointText = this.add.text(this.sys.game.canvas.width * 0.60, this.sys.game.canvas.height * 0.15, `StatusPoints: ${this.player.statusPoint}`, {
+		this.statusPointText = this.add.text(this.sys.game.canvas.width * 0.75, this.sys.game.canvas.height * 0.1, `StatusPoints: ${this.player.statusPoint}`, {
 			fontFamily: 'PixelArt',
-			color: '#4A9969',
-			fontSize: 18
+			color: '#E0FFFF',
+			fontSize: 20
 
 		}).setOrigin(0.5, 0.5);
 
