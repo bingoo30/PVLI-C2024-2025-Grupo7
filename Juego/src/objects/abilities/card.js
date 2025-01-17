@@ -1,6 +1,6 @@
 const DEFAULT_DAMAGE = 1;
 const DEFAULT_LIFE = 1;
-
+//carta que crea Joker en un determinado momento
 /** 
 * Constructor del Card
 * @param {Scene} scene scene Escena en la que aparece
@@ -46,7 +46,7 @@ export default class Card extends Phaser.GameObjects.Sprite {
             //console.log('Scene events:', this.scene?.events);
             this.scene.events.emit('cardDestroyed' ); // Notifica a la escena
         } else {
-            console.error("Error: 'scene' o 'scene.events' no está definido.");
+            console.error("Error: 'scene' o 'scene.events' no est?definido.");
         }
         this.destroy();
 

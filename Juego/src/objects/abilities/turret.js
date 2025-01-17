@@ -36,7 +36,8 @@ export default class Turret extends Phaser.GameObjects.Sprite{
         
         this.setDepth(2);                                   // Orden de renderizado
     }
-    setPool(pool) {
+
+    setPool(pool) {//asignar un pool de balas
         this.pool = pool;
     }
     preUpdate(t, dt) {

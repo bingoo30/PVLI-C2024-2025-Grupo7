@@ -38,7 +38,7 @@ export default class Crac extends Enemy {
         
 	}
 
-	getDistance(){
+	getDistance(){ //obtener la distancia entre el enemigo y el player
 		var p1 = this.x - this.player.x;
 		var p2 = this.y - this.player.y;
 

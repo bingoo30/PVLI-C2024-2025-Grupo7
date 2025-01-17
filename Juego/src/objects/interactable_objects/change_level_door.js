@@ -31,7 +31,7 @@ export default class ChangeLevelDoor extends InteractableObjects {
         this.setOrigin(0, 0);
     }
 
-    onInteract() {
+    onInteract() { //cuando intenta interactuar
         if (this.canInteract) {
             if (this.scene.player.Inventory.key) {
                 unlock(this.scene, this.achievement);

@@ -24,11 +24,11 @@ export default class Coin extends Phaser.GameObjects.Sprite {
 
     }
 
-    getExp() {
+    getExp() { //obtener las experiencia que dan esta moneda
         return this.exp;
     }
 
-    setExp(value) {
+    setExp(value) { //setear las experiencia que dan esta moneda
         this.exp = value;
     }
 

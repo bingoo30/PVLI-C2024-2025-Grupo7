@@ -36,10 +36,12 @@ export default class DamageArea extends Phaser.GameObjects.Sprite {
 
     }
 
+    //si obtener el damage real
     changeDamage() {
         this.getRealDamage = true
     }
 
+    //resetear el area com los parametros enviados
     reset(radius, damage, duration) {
         this.radius = radius;
         this.damage = damage;

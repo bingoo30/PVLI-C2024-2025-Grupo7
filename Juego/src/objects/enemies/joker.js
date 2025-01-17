@@ -144,9 +144,9 @@ export default class Joker extends Character {
             delay: this.timeP3,
             callback: () => {
                 if (this.phase == 1) {
-                    this.startPhaseTimer(4); // Si está en fase 1, pasa a fase 4
+                    this.startPhaseTimer(4); // Si est?en fase 1, pasa a fase 4
                 } else {
-                    this.startPhaseTimer(1); // Si está en fase 2, regresa a fase 1
+                    this.startPhaseTimer(1); // Si est?en fase 2, regresa a fase 1
                 }
             },
             callbackScope: this

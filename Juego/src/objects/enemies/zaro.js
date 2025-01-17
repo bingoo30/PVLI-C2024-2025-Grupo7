@@ -25,7 +25,7 @@ export default class Zaro extends Enemy {
         this.scene.add.existing(this);
 
         this.init(150, 300, life, damage, 0);
-        let timer = this.scene.time.addEvent({
+        let timer = this.scene.time.addEvent({ //timer para cambia su visibilidad
             delay: 2000,
             callback: this.changeVisible,
             callbackScope: this,
@@ -33,7 +33,7 @@ export default class Zaro extends Enemy {
         });
 
     }
-    init(speedFactor, shootSpeed, life, damage, prob) {
+    init(speedFactor, shootSpeed, life, damage, prob) { //inicialoizar los atributos de enemy
         super.init(speedFactor, shootSpeed, life, damage, prob);
         this.play('ZaroIdle');
     }
@@ -63,7 +63,7 @@ export default class Zaro extends Enemy {
         else this.setVisible(true);
     }
     
-    getDistance(){
+    getDistance(){ //obtener la diastancia con el player
 		var p1 = this.x - this.player.x;
 		var p2 = this.y - this.player.y;
 

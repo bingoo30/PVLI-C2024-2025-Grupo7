@@ -18,11 +18,11 @@ export default class Plant extends Phaser.GameObjects.Sprite {
         
     }
 
-    getLifeRec() {
+    getLifeRec() {//obtener el valor de vida que va a recuperar
         return this.lifeRec;
     }
 
-    setLifeRec(value) {
+    setLifeRec(value) { //dar el valor de vida que va a recuperar
         this.lifeRec = value;
     }
 

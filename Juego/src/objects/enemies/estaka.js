@@ -22,7 +22,7 @@ export default class Estaka extends Enemy {
         this.pool = pool;
 
         this.init(25, 0, life, damage, 0);
-        this.timer = this.scene.time.addEvent({
+        this.timer = this.scene.time.addEvent({ //en cada cierto tiempo se crea una area de ataque
             delay: 3000,
             callback: this.createDamageArea,
             callbackScope: this,
@@ -41,7 +41,7 @@ export default class Estaka extends Enemy {
         super.onDeath();
     }
 
-    createDamageArea() {
+    createDamageArea() { //crear area de ataque 
         if (this.follow) {
             const velocity = this.body.velocity;
             velocity.normalize();

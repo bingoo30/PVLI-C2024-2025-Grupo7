@@ -32,7 +32,7 @@ export default class NPC extends InteractableObjects {
 
     }
 
-    onInteract() {
+    onInteract() { //cuando hay input de interaction, reacciona segun la situacion
         if (this.canInteract && !this.isDialogActive) {
             this.isDialogActive = true;
             const dialogos = this.scene.cache.json.get(this.dialogues);

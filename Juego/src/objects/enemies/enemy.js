@@ -40,7 +40,7 @@ export default class Enemy extends Character {
         this.prob = prob;
     }
 
-    moveTowards(targetX, targetY) {
+    moveTowards(targetX, targetY) { //mover hacia el target
         const angle = Phaser.Math.Angle.Between(this.x, this.y, targetX, targetY);
         const velocity = this.speedFactor * this.scene.physics.world.timeScale;
 

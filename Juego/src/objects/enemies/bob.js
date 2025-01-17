@@ -10,7 +10,7 @@ export default class Bob extends Enemy{
         this.init(100, 0, life, damage, 0);
 
     }
-    init(speedFactor, shootSpeed, life, damage, prob) {
+    init(speedFactor, shootSpeed, life, damage, prob) { //iniciar los atributos del enemigo
         super.init(speedFactor, shootSpeed, life, damage, prob);
         this.play('BobIdle');
     }

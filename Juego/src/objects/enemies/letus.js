@@ -9,7 +9,7 @@ export default class Letus extends Enemy {
         this.scene.add.existing(this);
         this.init(100, 0, life, damage, 0);
     }
-    init(speedFactor, shootSpeed, life, damage, prob) {
+    init(speedFactor, shootSpeed, life, damage, prob) { //inicializar lo atributos
         super.init(speedFactor, shootSpeed, life, damage, prob);
         this.play('LetusIdle');
     }

@@ -11,7 +11,7 @@ export default class PickableObjects extends InteractableObjects {
     constructor(scene, x, y, texture, name, dialogue = null) {
         super(scene, x, y, texture);
         this.isPickable = false;
-        this.name = name;
+        this.name = name; 
         this.dialogue = dialogue;
         this.scene.add.existing(this);
         this.setScale(4);
@@ -19,7 +19,7 @@ export default class PickableObjects extends InteractableObjects {
 
     }
 
-    onInteract() {
+    onInteract() { //cuando se intenta interactuar
         if (this.canInteract && !this.isPickable) {
             this.isPickable = true;
             if (this.name == 'key') this.scene.player.Inventory.collectKey();

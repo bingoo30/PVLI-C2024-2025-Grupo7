@@ -37,7 +37,7 @@ export default class Door extends InteractableObjects {
         }   
     }
 
-    onInteract() {
+    onInteract() { //cuando hya input de interacion 
         if (this.canInteract && !this.isOpen) {
             this.isOpen = true;
         }

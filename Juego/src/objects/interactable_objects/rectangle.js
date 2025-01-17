@@ -36,7 +36,7 @@ export default class Rectangle extends Phaser.GameObjects.Sprite {
         this.rect.setDepth(3);
     }
 
-    onOverlap() {
+    onOverlap() { //cuando entra en en rectangulo
         if (!this.isPlayerInside) {
             this.isPlayerInside = true;
             this.rect.setVisible(false);
