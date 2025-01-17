@@ -59,6 +59,23 @@ export default class AbilityTree extends Phaser.Scene {
 		}).setOrigin(0.5, 0.5);
 
 
+		//puntos de habilidad
+		this.abilityPointText = this.add.text(this.sys.game.canvas.width * 0.60, this.sys.game.canvas.height * 0.1, `AbilityPoints: ${this.player.abilityPoint}`, {
+			fontFamily: 'PixelArt',
+			color: '#4A9969',
+			fontSize: 18
+
+		}).setOrigin(0.5, 0.5);
+
+		this.statusPointText = this.add.text(this.sys.game.canvas.width * 0.60, this.sys.game.canvas.height * 0.15, `StatusPoints: ${this.player.statusPoint}`, {
+			fontFamily: 'PixelArt',
+			color: '#4A9969',
+			fontSize: 18
+
+		}).setOrigin(0.5, 0.5);
+
+
+		//habilidades
 		this.abilities = [];
 		const treeData = this.cache.json.get('treeData');
 		for (let i = 0; i < treeData.length; i++) {
@@ -77,6 +94,7 @@ export default class AbilityTree extends Phaser.Scene {
 			this.abilities.push(ability);
 		}
 
+		//status
 		this.status = [];
 		const statusData = this.cache.json.get('statusData');
 		for (let i = 0; i < statusData.length; i++) {
@@ -113,5 +131,8 @@ export default class AbilityTree extends Phaser.Scene {
 	}
 	update(time, dt) {
 		super.update(time, dt);
+
+		this.statusPointText.setText(`AbilityPoints: ${this.player.abilityPoint}`);
+		this.abilityPointText.setText(`StatusPoints: ${this.player.statusPoint}`);
 	}
 }
