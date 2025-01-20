@@ -392,7 +392,6 @@ export default class Player extends Character {
             this.speed.x = 1;
             animationKey = this.name + 'WalkRight';
             //console.log('Player pos X: ', this.x, ' Y: ', this.y)
-
         }
         else this.speed.x = 0;
 
