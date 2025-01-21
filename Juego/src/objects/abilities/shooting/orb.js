@@ -12,14 +12,12 @@ export default class Orb extends Phaser.GameObjects.Sprite {
      * @param {number} damage - daño de la Orb
      * @param {Player} target - referencia al Player
     */
-    constructor(scene, joker, color, damage, target) {
-        super(scene, 0, 0, 'Orbs');
+    constructor(scene, joker, damage, target) {
+        super(scene, 0, 0, '17glitch');
 
         this.scene = scene;
         this.joker = joker;
         this.target = target; // referencia al player
-
-        this.color = color; // guardar el indice del color
 
         // booleanos para el funcionamento de la Orb
         this.start = false;
@@ -42,13 +40,30 @@ export default class Orb extends Phaser.GameObjects.Sprite {
         
         this.setDepth(3);
 
-        const animKey = `orb_charge_color_${color}`;
-        if (!this.scene.anims.exists(animKey)) {
+        if (!this.scene.anims.exists('orb_start')) {
             this.scene.anims.create({
-                key: animKey,
-                frames: this.scene.anims.generateFrameNumbers('Orbs', { start: color * 4, end: color * 4 + 3 }),
+                key: 'orb_start',
+                frames: this.scene.anims.generateFrameNumbers('17glitch', { start: 0, end:11 }),
                 frameRate: 3,
                 repeat: 0,
+            });
+        }
+
+        if (!this.scene.anims.exists('orb_move')) {
+            this.scene.anims.create({
+                key: 'orb_move',
+                frames: this.scene.anims.generateFrameNumbers('17glitch', { start: 12, end: 13 }),
+                frameRate: 8,
+                repeat: -1
+            });
+        }
+
+        if (!this.scene.anims.exists('orb_die')) {
+            this.scene.anims.create({
+                key: 'orb_die',
+                frames: this.scene.anims.generateFrameNumbers('17glitch', { start: 14, end: 19 }),
+                frameRate: 10,
+                repeat: 0
             });
         }
     }
@@ -70,11 +85,10 @@ export default class Orb extends Phaser.GameObjects.Sprite {
         this.setScale(1);
         //console.log('orb creada');
         this.start = true; // empieza
-        const animKey = `orb_charge_color_${this.color}`;
-        this.play(animKey);
+        this.play('orb_start');
 
         this.once('animationcomplete', () => {
-            
+            this.play('orb_move');
             this.scene.checkActiveOrbs(this);
         });
     }
@@ -115,9 +129,13 @@ export default class Orb extends Phaser.GameObjects.Sprite {
         this.follow = false;
 
         // Se libera de la pool
-        this.pool.release(this);
 
-        this.body.setVelocity(0, 0);
+        this.play('orb_die'); 
+
+        this.once('animationcomplete', () => {
+            this.pool.release(this);
+            this.body.setVelocity(0, 0);
+        });
     }
 
 
