@@ -49,6 +49,9 @@ export default class Level extends Phaser.Scene {
 		this.sound.stopAll();
 		this.tries = data.tries;
 		this.playerStart = data.player;
+
+		this.input.mouse.disableContextMenu();
+
 		// #region Mapa 
 		this.map = this.make.tilemap({ key: `mapa${this.number}`, tileWidth: 32, tileHeight: 32 });
 		this.tileset = this.map.addTilesetImage('mapTiles', `tileset${this.number}`);

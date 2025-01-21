@@ -56,6 +56,8 @@ export default class BossScene extends Phaser.Scene {
         unlock(this, 'Amigo o enemigo?');
         showPopup(this, `Logro <<Amigo o enemigo?>> desloqueado!`, this.scale.width - 175, this.scale.height - 100);
 
+        this.input.mouse.disableContextMenu();
+
         // #region Map Setup
 
         const bg = this.add.image(0, 0, 'mapFondo');
