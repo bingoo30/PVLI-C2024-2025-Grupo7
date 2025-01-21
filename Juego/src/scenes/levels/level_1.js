@@ -5,8 +5,8 @@ import Level from './level.js';
  * Escena principal de juego.
  * @extends Level
  */
-//constante
 const SCALE = 4;
+
 export default class Animation extends Level {
 
 	constructor() {
