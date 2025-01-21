@@ -152,7 +152,7 @@ export default class BossScene extends Phaser.Scene {
 
         const MAXOrbs = 60;
         toAdds = [];
-        this.jokerOrbs = new Pool(this, MAXOrbs, 'Orbs');
+        this.jokerOrbs = new Pool(this, MAXOrbs, '17glitch');
         for (let i = 0; i < MAXOrbs; i++) {
             const orb = new Orb(this, this.joker, 0, this.player);
             orb.setPool(this.jokerOrbs);

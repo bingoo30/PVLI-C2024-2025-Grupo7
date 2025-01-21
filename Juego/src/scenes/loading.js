@@ -253,25 +253,7 @@ export default class Loading extends Phaser.Scene {
 			{ key: '14', frameCount: 11 },
 			{ key: '15', frameCount: 10 },
 			{ key: '16', frameCount: 11 },
-			{ key: '17', frameCount: 19 }, //
-			{ key: '18', frameCount: 10 },
-			{ key: '19', frameCount: 10 },
-			{ key: '20', frameCount: 12 },
-			{ key: '21', frameCount: 10 },
-			{ key: '22', frameCount: 11 },
-			{ key: '23', frameCount: 12 },
-			{ key: '24', frameCount: 10 },
-			{ key: '25', frameCount: 12 },
-			{ key: '26', frameCount: 10 },
-			{ key: '27', frameCount: 12 },
-			{ key: '28', frameCount: 10 },
-			{ key: '29', frameCount: 9 },
-			{ key: '30', frameCount: 12 },
-			{ key: '31', frameCount: 12 },
-			{ key: '32', frameCount: 11 },
-			{ key: '33', frameCount: 10 },
-			{ key: '34', frameCount: 10 },
-			{ key: '35', frameCount: 10 },
+			{ key: '17', frameCount: 19 }//
 		];
 
 		this.load.image('Bala', '/PVLI-C2024-2025-Grupo7/Juego/assets/bullet/bullet_1.png');
