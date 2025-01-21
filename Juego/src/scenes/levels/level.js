@@ -384,7 +384,7 @@ export default class Level extends Phaser.Scene {
 		// #region Retractables spikes
 		this.arrayRetractableSpikes = [];
 		const retractableSpikeLayer = this.map.getObjectLayer('RetractablesSpikes');
-		if (retractableSpikeLayer !== undefined) {
+		if (retractableSpikeLayer !== undefined && retractableSpikeLayer !== null) {
 			retractableSpikeLayer.objects.forEach(obj => {
 				if (obj.name === 'retractableSpike') { // Filtra por nombre
 					const retractableSpike = new Retractable_Spike(this, obj.x * SCALE, obj.y * SCALE);
