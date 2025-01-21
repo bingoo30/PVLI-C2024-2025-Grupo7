@@ -4,7 +4,7 @@
   <export target="mapa_2.json" format="json"/>
  </editorsettings>
  <tileset firstgid="1" name="map_tiles2" tilewidth="32" tileheight="32" tilecount="100" columns="10">
-  <image source="map_tiles2.png" trans="ff00ff" width="320" height="320"/>
+  <image source="map_tiles.png" trans="ff00ff" width="320" height="320"/>
   <tile id="0">
    <properties>
     <property name="collides" type="bool" value="true"/>
