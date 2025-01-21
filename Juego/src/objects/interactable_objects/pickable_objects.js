@@ -7,6 +7,8 @@
      * @param {Boolean} isPickable  - booleano para saber si esta cogido o no
      */
 import InteractableObjects from './interactable_objects.js';
+import { showPopup } from '../../UI/showPopUp.js';
+import { unlock } from '../../scenes/achievements/unlock.js';
 export default class PickableObjects extends InteractableObjects {
     constructor(scene, x, y, texture, name, dialogue = null) {
         super(scene, x, y, texture);
