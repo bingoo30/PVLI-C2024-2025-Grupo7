@@ -38,6 +38,10 @@ export default class Animation extends Level {
 		this.Flush.setScale(SCALE);
 		// #endregion
 
+		//objeto
+		this.easterEgg.setAchievement("teclados machacados");
+		//
+
 		this.physics.add.collider(this.player, this.Flush);
 		if (this.tries == 1) {
 			const dialogos = this.cache.json.get('dialogues');

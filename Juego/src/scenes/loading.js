@@ -139,8 +139,13 @@ export default class Loading extends Phaser.Scene {
 		// #endregion
 
 		//#region Objects
-		this.load.image('key', '/PVLI-C2024-2025-Grupo7/Juego/assets//map/key.png');
-		this.load.image('memory', '/PVLI-C2024-2025-Grupo7/Juego/assets//map/key.png');
+		this.load.image('key', '/PVLI-C2024-2025-Grupo7/Juego/assets/map/key.png');
+
+		this.load.image('casco', '/PVLI-C2024-2025-Grupo7/Juego/assets/objects/casco.png');
+		this.load.image('paleta', '/PVLI-C2024-2025-Grupo7/Juego/assets/objects/paleta.png');
+		this.load.image('teclado', '/PVLI-C2024-2025-Grupo7/Juego/assets/objects/teclado.png');
+
+		this.load.image('memory', '/PVLI-C2024-2025-Grupo7/Juego/assets//map/memory.png');
 		this.load.spritesheet('memoryAnim', '/PVLI-C2024-2025-Grupo7/Juego/assets//objects/memory-sheet.png', {
 			frameWidth: 30,
 			frameHeight: 26,
@@ -377,6 +382,8 @@ export default class Loading extends Phaser.Scene {
 		//#endregion
 
 		//#region objects
+
+
 		this.anims.create({
 			key: 'memoryIdle',
 			frames: this.anims.generateFrameNumbers('memoryAnim', { start: 0, end: 5 }),

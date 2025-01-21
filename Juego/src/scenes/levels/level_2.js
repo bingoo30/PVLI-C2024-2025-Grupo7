@@ -39,6 +39,9 @@ export default class Animation extends Level {
 		this.Weiyoung.setScale(SCALE);
 		// #endregion
 
+		//objeto
+		this.easterEgg.setAchievement("Paleta de Color");
+		//
 
 		this.physics.add.collider(this.player, this.Weiyoung);
 

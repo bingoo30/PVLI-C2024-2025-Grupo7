@@ -135,19 +135,19 @@
   {
     "title": "Cascos de un lloron",
     "unlockedSprite": "bing_icon",
-    "info": "Encontrar los cascos que reproducen en bucle llorerias (easter egg)",
+    "info": "Encontrar los cascos que reproducen en bucle llorerias",
     "locked": true
   },
   {
-    "title": "lapiz en tiles",
+    "title": "Paleta de Color",
     "unlockedSprite": "haoshuang_icon",
-    "info": "Encontrar un lapiz roto, el cual te hace recordar los malos recuerdos con animar en pixel-art (easter egg)",
+    "info": "Encontrar una paleta de pintura, el cual te hace recordar los malos recuerdos de combinar los colores",
     "locked": true
   },
   {
     "title": "teclados machacados",
     "unlockedSprite": "mauro_icon",
-    "info": "Encontrar un teclado sin algunas teclas. Faltan: p,h,a,s,e,r (easter egg)",
+    "info": "Encontrar un teclado sin algunas teclas. Faltan: p,h,a,s,e,r",
     "locked": true
   },
   {

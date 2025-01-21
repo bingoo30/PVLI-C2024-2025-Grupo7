@@ -31,8 +31,8 @@ const SCALE = 4;
 export default class Level extends Phaser.Scene {
 
 	constructor(k) {
-		this.number = k;
 		super({ key: `level${k}` });
+		this.number = k;
 	}
 	preload() {
 		this.load.tilemapTiledJSON(`mapa${this.number}`, `/PVLI-C2024-2025-Grupo7/Juego/assets/map/map_${this.number}/mapa_${this.number}.json`);
@@ -95,6 +95,9 @@ export default class Level extends Phaser.Scene {
 				var dialogProp = obj.properties.find(prop => prop.name === 'dialog')
 				var pickable = new PickableObjects(this, obj.x * SCALE, obj.y * SCALE, obj.name, dialogProp.value, dialogProp.value);
 				this.PickableObjects.add(pickable);
+			}
+			else {
+				this.easterEgg = new PickableObjects(this, obj.x * SCALE, obj.y * SCALE, obj.name, obj.name);
 			}
 
 		});

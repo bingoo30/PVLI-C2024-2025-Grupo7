@@ -15,7 +15,7 @@ export default class DialogueManager {
         this.isDialogueActive = false;
         this.isWaitingForInput = false; 
     }
-    initialize(dialogPlugin, dialogues) {
+    initialize(dialogPlugin, dialogues) { //inicializar los dialogos y el cuadro de dialogo
 
         this.currentDialogueIndex = 0; 
         this.dialogPlugin = dialogPlugin;
@@ -58,7 +58,7 @@ export default class DialogueManager {
         });
     }
     
-    advanceDialogue() {
+    advanceDialogue() { //avanza el indice de dialogos
         if (this.currentDialogueIndex < this.dialogues.length) {
             this.currentDialogueIndex++;
             this.showDialogue();

@@ -31,6 +31,10 @@ export default class Animation extends Level {
 		this.Piu.setScale(SCALE);
 		this.Piu.play('PiuLoad');
 		// #endregion
+
+		//objeto
+		this.easterEgg.setAchievement("Cascos de un lloron");
+		//
 		
 		// #region sonido
 		this.MainSample = this.sound.add('level2Audio');
