@@ -107,9 +107,9 @@ export default class Level extends Phaser.Scene {
 		// #region Player
 		// #region Player Position
 
-		const objectLayer = this.map.getObjectLayer('position');
+		this.positionLayer = this.map.getObjectLayer('position');
 
-		const playerPos = objectLayer.objects.find(obj => obj.name == 'playerPosition');
+		const playerPos = this.positionLayer.objects.find(obj => obj.name == 'playerPosition');
 
 		// Verificar si el objeto fue encontrado
 		if (!playerPos) console.log('Position player no encontrado.');

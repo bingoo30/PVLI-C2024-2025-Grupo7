@@ -26,11 +26,11 @@ export default class Animation extends Level {
 		super.create(data); // Llama al create de la clase base
 		
 		//puerta para cambiar de nivel
-		const change = objectLayer.objects.find(obj => obj.name == 'changeLevel');
+		const change = this.positionLayer.objects.find(obj => obj.name == 'changeLevel');
 		this.DoorLevel2 = new ChangeLevelDoor(this, change.x, change.y, 'El comienzo de todo',change.width, change.height);
 
 		// #region NPC
-		const NPCpos = objectLayer.objects.find(obj => obj.name == 'FlushPosition');
+		const NPCpos = this.positionLayer.objects.find(obj => obj.name == 'FlushPosition');
 		const NPCX = NPCpos.x * SCALE;
 		const NPCY = NPCpos.y * SCALE;
 

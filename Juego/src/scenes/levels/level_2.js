@@ -27,11 +27,11 @@ export default class Animation extends Level {
 	create(data) {
 		super.create(data);
 
-		const change = objectLayer.objects.find(obj => obj.name == 'changeLevel');
+		const change = this.positionLayer.objects.find(obj => obj.name == 'changeLevel');
 		this.DoorLevel3 = new ChangeLevelDoor(this, change.x, change.y, 'Si, hay mas...',change.width, change.height);
 
 		// #region NPC
-		const NPCpos = objectLayer.objects.find(obj => obj.name == 'weiyoungPosition');
+		const NPCpos = this.positionLayer.objects.find(obj => obj.name == 'weiyoungPosition');
 		const NPCX = NPCpos.x * SCALE;
 		const NPCY = NPCpos.y * SCALE;
 
