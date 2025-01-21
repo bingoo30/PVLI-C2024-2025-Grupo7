@@ -297,7 +297,7 @@ export default class Level extends Phaser.Scene {
 		// #region Mutums
 		this.arrayMutums = [];
 		const mutumLayer = this.map.getObjectLayer('Mutum');
-		if (mutumLayer !== undefined && mutum !== null) {
+		if (mutumLayer !== undefined && mutumLayer !== null) {
 			mutumLayer.objects.forEach(obj => {
 				if (obj.name === 'Mutum') { // Filtra por nombre
 					const mutum = new Mutum(this, obj.x * SCALE, obj.y * SCALE, this.player, 1, this.area, 4, 16, 'Mutum');
