@@ -369,7 +369,7 @@ export default class Level extends Phaser.Scene {
 		// #region Spikes
 		this.arraySpikes = [];
 		const spikeLayer = this.map.getObjectLayer('Spikes');
-		if (spikeLayer !== undefined) {
+		if (spikeLayer !== undefined && spikeLayer !== null) {
 			spikeLayer.objects.forEach(obj => {
 				if (obj.name === 'Spike') { // Filtra por nombre
 					const spike = new Spike(this, obj.x * SCALE, obj.y * SCALE);

@@ -145,7 +145,7 @@ export default class Loading extends Phaser.Scene {
 		this.load.image('paleta', '/PVLI-C2024-2025-Grupo7/Juego/assets/objects/paleta.png');
 		this.load.image('teclado', '/PVLI-C2024-2025-Grupo7/Juego/assets/objects/teclado.png');
 
-		this.load.image('memory', '/PVLI-C2024-2025-Grupo7/Juego/assets/map/memory.png');
+		this.load.image('memory', '/PVLI-C2024-2025-Grupo7/Juego/assets/objects/memory.png');
 		this.load.spritesheet('memoryAnim', '/PVLI-C2024-2025-Grupo7/Juego/assets/objects/memory-sheet.png', {
 			frameWidth: 30,
 			frameHeight: 26,
