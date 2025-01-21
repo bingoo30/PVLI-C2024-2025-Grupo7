@@ -238,21 +238,21 @@ export default class Loading extends Phaser.Scene {
 		];
 
 		this.glitchData_1 = [
-			{ key: '01', frameCount: 14 },
-			{ key: '02', frameCount: 16 },
-			{ key: '03', frameCount: 16 },
-			{ key: '04', frameCount: 17 },
-			{ key: '05', frameCount: 17 },
-			{ key: '06', frameCount: 17 },
-			{ key: '07', frameCount: 17 },
-			{ key: '08', frameCount: 17 },
-			{ key: '10', frameCount: 17 },
-			{ key: '11', frameCount: 10 },
-			{ key: '12', frameCount: 12 },
-			{ key: '13', frameCount: 12 },
-			{ key: '14', frameCount: 11 },
-			{ key: '15', frameCount: 10 },
-			{ key: '16', frameCount: 11 },
+			//{ key: '01', frameCount: 15 },
+			//{ key: '02', frameCount: 16 },
+			//{ key: '03', frameCount: 16 },
+			//{ key: '04', frameCount: 17 },
+			//{ key: '05', frameCount: 17 },
+			//{ key: '06', frameCount: 17 },
+			//{ key: '07', frameCount: 17 },
+			//{ key: '08', frameCount: 17 },
+			//{ key: '10', frameCount: 17 },
+			//{ key: '11', frameCount: 10 },
+			//{ key: '12', frameCount: 12 },
+			//{ key: '13', frameCount: 12 },
+			//{ key: '14', frameCount: 11 },
+			//{ key: '15', frameCount: 10 },
+			//{ key: '16', frameCount: 11 },
 			{ key: '17', frameCount: 19 }//
 		];
 
@@ -264,8 +264,8 @@ export default class Loading extends Phaser.Scene {
 		// SpriteSheets
 		this.explosionData_1.forEach(({ key, frameWidth, frameHeight, frameCount }) => {
 			this.load.spritesheet(key, `/PVLI-C2024-2025-Grupo7/Juego/assets/effects/explosions/${key}.png`, {
-				frameWidth: 64,
-				frameHeight: 64,
+				frameWidth: 32,
+				frameHeight: 32,
 				endFrame: frameCount - 1,
 				repeat: 0
 			});
@@ -274,8 +274,8 @@ export default class Loading extends Phaser.Scene {
 
 		this.glitchData_1.forEach(({ key, frameWidth, frameHeight, frameCount }) => {
 			this.load.spritesheet(`${key}glitch`, `/PVLI-C2024-2025-Grupo7/Juego/assets/effects/glitch/${key}.png`, {
-				frameWidth: 32,
-				frameHeight: 32,
+				frameWidth: 64,
+				frameHeight: 64,
 				endFrame: frameCount - 1,
 				repeat: 0
 			});
