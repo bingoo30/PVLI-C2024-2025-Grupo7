@@ -68,7 +68,7 @@ export default class Orb extends Phaser.GameObjects.Sprite {
     // Metodo llamado por la funcion fire para spawnear la Orb
     move(xStart, yStart, xObj, yObj, pool) {
         this.setScale(1);
-        console.log('orb creada');
+        //console.log('orb creada');
         this.start = true; // empieza
         const animKey = `orb_charge_color_${this.color}`;
         this.play(animKey);

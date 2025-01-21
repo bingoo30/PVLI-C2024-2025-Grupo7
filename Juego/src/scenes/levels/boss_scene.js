@@ -462,6 +462,6 @@ export default class BossScene extends Phaser.Scene {
 
 
     onPlayerHit(player, boss) {
-        console.log('Player hit by boss');
+        //console.log('Player hit by boss');
     }
 }
