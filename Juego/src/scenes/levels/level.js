@@ -226,7 +226,7 @@ export default class Level extends Phaser.Scene {
 		//#region Cracs
 		this.arrayCracs = [];
 		const cracLayer = this.map.getObjectLayer('Crac');
-		if (cracLayer !== undefined) {
+		if (cracLayer !== undefined && cracLayer !== null) {
 			cracLayer.objects.forEach(obj => {
 				if (obj.name === 'Crac') { // Filtra por nombre
 					// scene, x, y, player, exp, life, damage, texture
@@ -246,7 +246,7 @@ export default class Level extends Phaser.Scene {
 		//#region Bob
 		this.arrayBobs = [];
 		const bobLayer = this.map.getObjectLayer('Bob');
-		if (bobLayer !== undefined) {
+		if (bobLayer !== undefined && bobLayer !== null) {
 			bobLayer.objects.forEach(obj => {
 				if (obj.name === 'Bob') { // Filtra por nombre
 					const bob = new Bob(this, obj.x * SCALE, obj.y * SCALE, this.player, this.exp, 5, 1, 'Bob');
@@ -262,7 +262,7 @@ export default class Level extends Phaser.Scene {
 		//#region Letus 
 		this.arrayLetus = [];
 		const letusLayer = this.map.getObjectLayer('Letus');
-		if (letusLayer !== undefined) {
+		if (letusLayer !== undefined && letusLayer !== null) {
 			letusLayer.objects.forEach(obj => {
 				if (obj.name === 'Letus') { // Filtra por nombre
 					const letus = new Letus(this, obj.x * SCALE, obj.y * SCALE, this.player, this.exp, 5, 1, 'Letus');
@@ -278,7 +278,7 @@ export default class Level extends Phaser.Scene {
 		// #region Zaros
 		this.arrayZaros = [];
 		const zaroLayer = this.map.getObjectLayer('Zaro');
-		if (zaroLayer !== undefined) {
+		if (zaroLayer !== undefined && zaroLayer !== null) {
 			zaroLayer.objects.forEach(obj => {
 				if (obj.name === 'Zaro') { // Filtra por nombre
 					const zaro = new Zaro(this, obj.x * SCALE, obj.y * SCALE, this.player, 4, 8, 12, "Zaro");
@@ -297,7 +297,7 @@ export default class Level extends Phaser.Scene {
 		// #region Mutums
 		this.arrayMutums = [];
 		const mutumLayer = this.map.getObjectLayer('Mutum');
-		if (mutumLayer !== undefined) {
+		if (mutumLayer !== undefined && mutum !== null) {
 			mutumLayer.objects.forEach(obj => {
 				if (obj.name === 'Mutum') { // Filtra por nombre
 					const mutum = new Mutum(this, obj.x * SCALE, obj.y * SCALE, this.player, 1, this.area, 4, 16, 'Mutum');
@@ -315,7 +315,7 @@ export default class Level extends Phaser.Scene {
 		// #region Estakas
 		this.arrayEstakas = [];
 		const estakaLayer = this.map.getObjectLayer('Estaka');
-		if (estakaLayer !== undefined) {
+		if (estakaLayer !== undefined && estakaLayer !== null) {
 			estakaLayer.objects.forEach(obj => {
 				if (obj.name === 'Estaka') { // Filtra por nombre
 					const estaka = new Estaka(this, obj.x * SCALE, obj.y * SCALE, this.player, 2, this.areaEs, 12, 10, 'Estaka');
