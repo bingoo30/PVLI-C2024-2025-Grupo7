@@ -264,8 +264,8 @@ export default class Loading extends Phaser.Scene {
 		// SpriteSheets
 		this.explosionData_1.forEach(({ key, frameWidth, frameHeight, frameCount }) => {
 			this.load.spritesheet(key, `/PVLI-C2024-2025-Grupo7/Juego/assets/effects/explosions/${key}.png`, {
-				frameWidth: 64,
-				frameHeight: 64,
+				frameWidth: 32,
+				frameHeight: 32,
 				endFrame: frameCount - 1,
 				repeat: 0
 			});
@@ -274,8 +274,8 @@ export default class Loading extends Phaser.Scene {
 
 		this.glitchData_1.forEach(({ key, frameWidth, frameHeight, frameCount }) => {
 			this.load.spritesheet(`${key}glitch`, `/PVLI-C2024-2025-Grupo7/Juego/assets/effects/glitch/${key}.png`, {
-				frameWidth: 32,
-				frameHeight: 32,
+				frameWidth: 64,
+				frameHeight: 64,
 				endFrame: frameCount - 1,
 				repeat: 0
 			});
