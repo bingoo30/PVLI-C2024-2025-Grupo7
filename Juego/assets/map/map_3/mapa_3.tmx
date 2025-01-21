@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="60" height="60" tilewidth="32" tileheight="32" infinite="0" nextlayerid="17" nextobjectid="164">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="60" height="60" tilewidth="32" tileheight="32" infinite="0" nextlayerid="17" nextobjectid="165">
  <editorsettings>
   <export target="mapa_3.json" format="json"/>
  </editorsettings>
@@ -235,8 +235,11 @@
   <object id="163" name="key" x="632" y="1464">
    <point/>
   </object>
+  <object id="164" name="casco" x="56" y="112">
+   <point/>
+  </object>
  </objectgroup>
- <objectgroup id="4" name="Bob" visible="0">
+ <objectgroup id="4" name="Bob">
   <object id="105" name="Bob" x="1192" y="1520">
    <point/>
   </object>
@@ -270,14 +273,11 @@
   <object id="127" name="key" x="216" y="600">
    <point/>
   </object>
-  <object id="128" name="memory3" x="104" y="136">
-   <point/>
-  </object>
   <object id="129" name="memory3" x="1656" y="200">
    <point/>
   </object>
  </objectgroup>
- <objectgroup id="6" name="Crac" visible="0">
+ <objectgroup id="6" name="Crac">
   <object id="95" name="Crac" x="400" y="1496">
    <point/>
   </object>
@@ -312,7 +312,7 @@
    <point/>
   </object>
  </objectgroup>
- <objectgroup id="7" name="Letus" visible="0">
+ <objectgroup id="7" name="Letus">
   <object id="74" name="Letus" x="184" y="704">
    <point/>
   </object>
@@ -341,7 +341,7 @@
    <point/>
   </object>
  </objectgroup>
- <objectgroup id="11" name="RetractablesSpikes" visible="0">
+ <objectgroup id="11" name="RetractablesSpikes">
   <object id="130" name="retractableSpike" x="832" y="864" width="32" height="32"/>
   <object id="131" name="retractableSpike" x="720" y="1136" width="32" height="32"/>
   <object id="132" name="retractableSpike" x="592" y="1040" width="32" height="32"/>
@@ -361,7 +361,7 @@
    <point/>
   </object>
  </objectgroup>
- <objectgroup id="13" name="Zaro" visible="0">
+ <objectgroup id="13" name="Zaro">
   <object id="90" name="Zaro" x="1824" y="1056">
    <point/>
   </object>
@@ -384,7 +384,7 @@
    <point/>
   </object>
  </objectgroup>
- <objectgroup id="8" name="Estaka" visible="0">
+ <objectgroup id="8" name="Estaka">
   <object id="68" name="Estaka" x="208" y="136">
    <point/>
   </object>
@@ -404,7 +404,7 @@
    <point/>
   </object>
  </objectgroup>
- <objectgroup id="9" name="Mutum" visible="0">
+ <objectgroup id="9" name="Mutum">
   <object id="48" name="Mutum" x="384" y="536">
    <point/>
   </object>
@@ -466,7 +466,7 @@
    <point/>
   </object>
  </objectgroup>
- <objectgroup id="10" name="Door" visible="0">
+ <objectgroup id="10" name="Door">
   <object id="1" name="horizontalDoor" x="800" y="736" width="32" height="32"/>
   <object id="2" name="verticalDoor" x="896" y="648" width="8" height="56"/>
   <object id="3" name="horizontalDoor" x="800" y="576" width="32" height="32"/>
@@ -496,7 +496,7 @@
   <object id="27" name="verticalDoor" x="1472" y="1512" width="8" height="56"/>
   <object id="40" name="verticalDoor" x="1376" y="520" width="8" height="56"/>
  </objectgroup>
- <objectgroup id="5" name="rectangle" visible="0">
+ <objectgroup id="5" name="rectangle">
   <object id="35" x="624" y="0" width="280" height="160"/>
   <object id="39" x="1616" y="288" width="288" height="336"/>
   <object id="41" x="1384" y="472" width="232" height="160"/>

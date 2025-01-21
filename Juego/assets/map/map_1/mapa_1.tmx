@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="left-up" width="80" height="60" tilewidth="32" tileheight="32" infinite="0" nextlayerid="15" nextobjectid="291">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="left-up" width="80" height="60" tilewidth="32" tileheight="32" infinite="0" nextlayerid="15" nextobjectid="292">
  <editorsettings>
   <export target="mapa_1.json" format="json"/>
  </editorsettings>
@@ -792,6 +792,9 @@
    <properties>
     <property name="dialog" value="level1Memory2"/>
    </properties>
+   <point/>
+  </object>
+  <object id="291" name="teclado" x="2184" y="448">
    <point/>
   </object>
  </objectgroup>

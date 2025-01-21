@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="96" height="40" tilewidth="32" tileheight="32" infinite="0" nextlayerid="14" nextobjectid="355">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="96" height="40" tilewidth="32" tileheight="32" infinite="0" nextlayerid="14" nextobjectid="356">
  <editorsettings>
   <export target="mapa_2.json" format="json"/>
  </editorsettings>
@@ -212,6 +212,9 @@
    <properties>
     <property name="dialog" value="level2Memory1"/>
    </properties>
+   <point/>
+  </object>
+  <object id="355" name="paleta" x="424" y="552">
    <point/>
   </object>
  </objectgroup>

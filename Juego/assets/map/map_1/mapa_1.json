@@ -220,6 +220,18 @@
                  "width":0,
                  "x":864,
                  "y":808
+                }, 
+                {
+                 "height":0,
+                 "id":291,
+                 "name":"teclado",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":2184,
+                 "y":448
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1332,7 +1344,7 @@
          "y":0
         }],
  "nextlayerid":15,
- "nextobjectid":291,
+ "nextobjectid":292,
  "orientation":"orthogonal",
  "renderorder":"left-up",
  "tiledversion":"1.11.0",
