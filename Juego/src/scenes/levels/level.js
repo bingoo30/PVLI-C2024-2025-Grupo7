@@ -49,8 +49,26 @@ export default class Level extends Phaser.Scene {
 		this.sound.stopAll();
 		this.tries = data.tries;
 		this.playerStart = data.player;
+		this.Start = data;
 
 		this.input.mouse.disableContextMenu();
+
+		if (!this.registry.has('initialSkillTree')) {
+			const skillTreeJson = this.cache.json.get('treeData'); // Cargar JSON inicial
+			this.registry.set('initialSkillTree', Phaser.Utils.Objects.DeepCopy(skillTreeJson));
+		}
+		this.skillTree = this.cache.json.get('treeData');
+
+
+		//this.initialSkillTree = JSON.parse(JSON.stringify(this.skillTree));
+		//if (data.skillTree) {
+		//	this.skillTree = data.skillTree;
+		//}
+
+		//this.statusPlayer = this.cache.json.get('statusData');
+
+		//this.initialStatusPlayer = JSON.parse(JSON.stringify(this.statusPlayer));
+
 
 		// #region Mapa 
 		this.map = this.make.tilemap({ key: `mapa${this.number}`, tileWidth: 32, tileHeight: 32 });
@@ -516,7 +534,11 @@ export default class Level extends Phaser.Scene {
 	changeToGameover() {
 		this.removeListener();
 		this.MainSample.stop();
-		this.scene.start("gameover", { player: this.playerStart, tries: this.tries, previousScene: this });
+		const initialSkillTree = this.registry.get('initialSkillTree');
+		if (initialSkillTree) {
+			this.skillTree = Phaser.Utils.Objects.DeepCopy(initialSkillTree);
+		}
+		this.scene.start("gameover", { player: this.playerStart, tries: this.tries, previousScene: this});
 	}
 	removeListener() {
 		this.events.removeAllListeners('Interact');

@@ -21,6 +21,13 @@ export default class Gameover extends Phaser.Scene {
 		this._tries++;
 		//console.log("tries: " + this._tries);
 
+		// reustarar arbol
+		if (this.registry.has('initialSkillTree')) {
+			this.skillTree = Phaser.Utils.Objects.DeepCopy(this.registry.get('initialSkillTree'));
+		} else {
+			this.skillTree = this.cache.json.get('levelSkillTree');
+		}
+
 		// #region logros muertes-intentos
 		//logro morirse 1 vez
 		if (this._tries - 1 == 1) {

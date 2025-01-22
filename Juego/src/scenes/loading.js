@@ -446,8 +446,8 @@ export default class Loading extends Phaser.Scene {
 		this.anims.create({
 			key: 'PiuLoad',
 			frames: this.anims.generateFrameNumbers('PiuAnim', { start: 0, end: 16 }),
-			frameRate: 8,  // Velocidad de animación
-			repeat: -1      // -1 para repetir indefinidamente
+			frameRate: 8,  
+			repeat: -1     
 		});
 
 		// Añadir el sprite animado al centro de la pantalla
