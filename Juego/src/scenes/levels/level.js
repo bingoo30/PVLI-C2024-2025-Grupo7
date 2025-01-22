@@ -53,9 +53,10 @@ export default class Level extends Phaser.Scene {
 
 		this.input.mouse.disableContextMenu();
 
-		this.skillTree = this.cache.json.get('treeData'); // Cargar JSON inicial
-		this.registry.set('initialSkillTree', Phaser.Utils.Objects.DeepCopy(this.skillTree));
-		
+		this.original = this.cache.json.get('treeData'); // Cargar JSON inicial
+
+
+		this.copiaJson = JSON.parse(JSON.stringify(this.original));
 
 
 		//this.initialSkillTree = JSON.parse(JSON.stringify(this.skillTree));
@@ -534,11 +535,8 @@ export default class Level extends Phaser.Scene {
 		this.MainSample.stop();
 
 		// reustarar arbol
-		if (this.registry.has('initialSkillTree')) {
-			this.skillTree = Phaser.Utils.Objects.DeepCopy(this.registry.get('initialSkillTree'));
-		} else {
-			this.skillTree = this.cache.json.get('treeData');
-		}
+		this.cache.json.add('treeData', this.copiaJson);
+		
 
 		this.scene.start("gameover", { player: this.playerStart, tries: this.tries, previousScene: this});
 	}
