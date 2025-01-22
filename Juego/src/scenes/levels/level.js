@@ -534,10 +534,14 @@ export default class Level extends Phaser.Scene {
 	changeToGameover() {
 		this.removeListener();
 		this.MainSample.stop();
-		const initialSkillTree = this.registry.get('initialSkillTree');
-		if (initialSkillTree) {
-			this.skillTree = Phaser.Utils.Objects.DeepCopy(initialSkillTree);
+
+		// reustarar arbol
+		if (this.registry.has('initialSkillTree')) {
+			this.skillTree = Phaser.Utils.Objects.DeepCopy(this.registry.get('initialSkillTree'));
+		} else {
+			this.skillTree = this.cache.json.get('levelSkillTree');
 		}
+
 		this.scene.start("gameover", { player: this.playerStart, tries: this.tries, previousScene: this});
 	}
 	removeListener() {
